@@ -12,6 +12,10 @@ export interface PriceProduct {
   emoji: string;
   description: string;
   price: number;
+  /** CC-licensed product photo (M10); emoji is the fallback when absent. */
+  image?: string;
+  /** Attribution for CC-BY/CC-BY-SA photos (CC0/PDM need none). */
+  credit?: { creator: string | null; license: string };
 }
 
 export const PRICE_MIN = 1;
