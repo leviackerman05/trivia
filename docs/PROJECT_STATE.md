@@ -451,5 +451,5 @@ trivia dataset expansion, Playwright E2E).
 ## Next Recommended Prompt
 
 > **Next recommended prompt:** M11 deployment is deferred by the owner.
-> Suggested: *"Continue with the backlog"* (word-bank curation, trivia
+> Suggested: _"Continue with the backlog"_ (word-bank curation, trivia
 > dataset expansion to 500+, Playwright E2E) — or ask to start M11.
