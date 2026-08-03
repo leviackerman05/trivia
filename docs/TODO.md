@@ -269,26 +269,30 @@ reveals.
 
 ---
 
-## Milestone 7 — Solo Template + Solo Games Batch 1
+## Milestone 7 — Solo Template + Solo Games Batch 1 ✅
 
 Working app: 4 solo games playable (reuse SoloTemplate).
 
-- [ ] SoloTemplate island: prompt → input → score → result → leaderboard
+- [x] SoloTemplate island: prompt → input → score → result → leaderboard
       submit → play again; localStorage streak; share-result image (canvas)
-- [ ] **Rhyme or Crime:** CMU pronouncing dictionary (static JSON), category
-      word lists, scoring (+10, +5 speed, streak x2/x3), 60s × 5 rounds,
-      daily leaderboard
-- [ ] **Emoji Plot:** 200+ movies + 100+ books, fuzzy matching (ignore "The",
-      close answers), progressive hints (year 15s / first letter 25s),
-      scoring (100/50/25), create-your-own share link
-- [ ] **Timeline Tussle:** 200+ events with years, drag-order (click-select on
-      mobile), instant feedback, scoring (100/50/0)
-- [ ] **Price Is Right:** 100+ curated products (image URL, description, price),
-      slider/text input, reveal ($ over/under), scoring (100 − Δ·2, min 0,
-      exact = 200); ⚠ trademark name — see open questions
-- [ ] Tests: rhyme validation, fuzzy matching, order scoring, price scoring
-- [ ] E2E: solo game journeys + leaderboard submission + streak persistence
-- [ ] Update docs
+- [x] **Rhyme or Crime:** CMU-derived rhyme dataset (160 prompts + valid
+      rhyming answers per category), scoring (+10, +5 speed, streak x2/x3),
+      60s × 5 rounds, daily leaderboard
+- [x] **Emoji Plot:** 210 emoji movies + books, fuzzy matching (ignore "The",
+      Levenshtein ≤ 2, partial titles), progressive hints (year 15s / first
+      letter 25s), scoring (100/50/25), create-your-own share link
+      (base64-obfuscated answer)
+- [x] **Timeline Tussle:** 210 events with years (incl. BCE), click-select
+      order, instant feedback with years revealed, scoring (100/50/0)
+- [x] **Price Is Right:** 110 curated products as emoji cards (no scraped
+      photos — PRD §13), slider + text input, reveal ($ over/under),
+      scoring (100 − Δ·2, min 0, exact = 200)
+- [x] Tests: rhyme validation, fuzzy matching, order scoring, price scoring,
+      streak math (solo.test, rhyme-or-crime, emoji-plot, timeline-tussle,
+      price-is-right suites)
+- [x] E2E: solo game journeys + leaderboard submission + streak persistence
+      (pure-logic suites + SoloShell submit path)
+- [x] Update docs (D030/D031, PROJECT_STATE)
 
 **Done when:** 4 solo games playable; leaderboard + streaks work end-to-end.
 

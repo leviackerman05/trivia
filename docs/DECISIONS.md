@@ -694,3 +694,57 @@ workspace package.
 - **Future impact:** Charades/Guess Who (M9) reuse the turn-rotation and
   phase-timer patterns; the WYR queue is the template for player-generated
   content moderation later.
+
+---
+
+## D030 — M7 solo games: SoloTemplate shell, CMU-derived rhyme dataset (2026-08-04)
+
+- **Decision:** The four solo games (Rhyme or Crime, Emoji Plot, Timeline
+  Tussle, Price Is Right) share one `SoloShell` island frame (header with
+  round/score/streak, game body, done view with nickname → idempotent
+  leaderboard submit → daily top-5 → canvas share-image → play again) and
+  pure logic modules (`src/lib/solo.ts` + one module per game).
+  1. **Rhyme validation:** instead of shipping the full CMU Pronouncing
+     Dictionary (~130k entries / multi-MB), the dataset generation encoded
+     the CMU rhyme work: `rhymes.json` holds {prompt, category, answers}
+     and validation is a dataset lookup. A player's guess must be one of
+     the recorded rhyming answers for that prompt+category.
+  2. **Streaks:** per-game daily streak in localStorage (consecutive UTC
+     days; same-day replays don't double-count; gaps reset).
+  3. **Share-result image:** pure canvas 2D score card (no image assets),
+     downloaded as PNG; no social APIs.
+  4. **Emoji Plot challenge links:** the answer is base64-obfuscated in the
+     URL (not plaintext) so a casual glance doesn't spoil it; the game is
+     a trust-based party toy, not a security boundary.
+- **Reason:** One shell for four games (D009); the full CMU dict is too
+  heavy for a static bundle and its licensing is noisy (D022-style
+  pragmatism); server-free solo play keeps the static-site promise (no
+  backend round-trips for gameplay; only the score submit needs the API).
+- **Alternatives considered:** shipping the full CMU dictionary (rejected —
+  bundle weight); server-side rhyme validation (rejected — solo games must
+  work offline/static); per-game result screens (rejected — one shell).
+- **Tradeoffs:** the rhyme dataset limits valid answers to the recorded
+  list (a correct-but-unlisted rhyme is rejected — acceptable for a party
+  game); streaks are per-device (no accounts by design, PRD §13).
+- **Date:** 2026-08-04
+- **Future impact:** Genre Swap / Genre-Bender (M8) reuse SoloTemplate and
+  the type-in + reveal patterns; the challenge-link pattern is the
+  template for shareable game content.
+
+---
+
+## D031 — M7 Price Is Right: emoji product cards instead of product photos (2026-08-04)
+
+- **Decision:** The Price Is Right product dataset uses emoji + description
+  cards, not scraped product photos (PRD §5.8 says "image URL").
+- **Reason:** PRD §13 forbids copyrighted material; hotlinked retailer
+  photos invite hotlink breakage, tracking, and legal risk, and scraping
+  violates retailer ToS. Emoji cards are fun, zero-cost, and always load.
+- **Alternatives considered:** Wikimedia/PD product photos (rejected —
+  product photography rarely exists in PD); Amazon affiliate API (rejected —
+  account + approval required).
+- **Tradeoffs:** less visual realism; the emoji style is consistent with
+  the BounceBox design system.
+- **Date:** 2026-08-04
+- **Future impact:** any future product-content needs follow the same
+  PD-or-original rule.

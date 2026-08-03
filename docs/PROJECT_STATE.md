@@ -11,13 +11,39 @@
 
 ## Current Milestone
 
-**M7 — Solo Template + Solo Games Batch 1** (next up).
+**M8 — Solo Batch 2 + Trivia + Daily Challenge** (next up).
 
-M6 — Voting games is ✅ **complete** (verified below).
+M7 — Solo games batch 1 is ✅ **complete** (verified below).
 
 ---
 
 ## Completed Work
+
+### Milestone 7 — Solo Template + Solo Games Batch 1 ✅ (verified 2026-08-04)
+
+- [x] `SoloShell` island (`src/islands/solo/SoloShell.tsx`) + shared solo
+      lib (`src/lib/solo.ts`): round/score/streak header, done view with
+      nickname → idempotent `submitScore` (clientKey per game+day) → daily
+      top-5 fetch → canvas share-score image (download PNG) → play again;
+      per-game localStorage daily streak (D030)
+- [x] **Rhyme or Crime** (`RhymeOrCrime.tsx`): 160 CMU-derived prompts,
+      60s × 5 rounds, +10 (+5 speed < 10s), streak multiplier ×2/×3,
+      timeouts reveal a valid rhyme
+- [x] **Emoji Plot** (`EmojiPlot.tsx`): 210 entries, 30s × 10, hints (year
+      15s / first letter 25s), 100/50/25 scoring, fuzzy acceptance
+      (ignore "The", Levenshtein ≤ 2, partial titles), create-your-own
+      share link with base64-obfuscated answer
+- [x] **Timeline Tussle** (`TimelineTussle.tsx`): 210 events (BCE-aware),
+      5 rounds, tap-to-order cards, instant feedback with years, 100/50/0
+- [x] **Price Is Right** (`PriceIsRight.tsx`): 110 emoji products (D031),
+      slider + numeric input ($1–$1000), over/under reveal, 100 − Δ·2
+      (min 0), exact = 200
+- [x] Game page: solo games render their islands (coming-soon slot only
+      for the not-yet-shipped genre games); multi- and voting families
+      unchanged
+- [x] **Verification:** `pnpm verify` green — **102 client + 105 server tests**
+      (new suites: solo, rhyme-or-crime, emoji-plot, timeline-tussle,
+      price-is-right)
 
 ### Milestone 6 — Voting Component + Voting Games ✅ (verified 2026-08-04)
 
@@ -234,8 +260,8 @@ M6 — Voting games is ✅ **complete** (verified below).
 
 ## In Progress
 
-- **M7 — Solo Template + Solo Games Batch 1** (Rhyme or Crime, Emoji Plot,
-  Timeline Tussle, Price Is Right — reusing one SoloTemplate island).
+- **M8 — Solo Batch 2 + Trivia + Daily Challenge** (Genre Swap,
+  Genre-Bender, Trivia room mode, daily challenge generation).
 
 ---
 
@@ -243,7 +269,6 @@ M6 — Voting games is ✅ **complete** (verified below).
 
 Full roadmap: [TODO.md](TODO.md). Highlights:
 
-- **M7** Solo template + 4 solo games
 - **M8** Genre Swap + Genre-Bender + Trivia room mode (solo already live
   via instant play) + daily challenge
 - **M9** Charades + Guess Who (all 18 games playable)
@@ -255,7 +280,7 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Known Bugs
 
-- None known. All suites green (81 client + 105 server).
+- None known. All suites green (102 client + 105 server).
 
 ---
 
@@ -319,28 +344,26 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Upcoming Milestone
 
-**M7 — Solo Template + Solo Games Batch 1** (working app: 4 solo games
-playable — reusing one SoloTemplate island)
+**M8 — Solo Batch 2 + Trivia + Daily Challenge** (working app: remaining
+solo games + Trivia solo & room + daily challenges)
 
-- **SoloTemplate island:** prompt → input → score → result → leaderboard
-  submit → play again; localStorage streak; share-result image (canvas)
-- **Rhyme or Crime:** CMU pronouncing dictionary (static JSON), category
-  word lists, scoring (+10, +5 speed, streak x2/x3), 60s × 5 rounds,
-  daily leaderboard
-- **Emoji Plot:** 210 emoji movies + books, fuzzy matching, progressive
-  hints (year 15s / first letter 25s), scoring (100/50/25),
-  create-your-own share link
-- **Timeline Tussle:** 210 events with years, click-select order,
-  instant feedback, scoring (100/50/0)
-- **Price Is Right:** 110 curated products, slider/text input, reveal
-  ($ over/under), scoring (100 − Δ·2, min 0, exact = 200)
-- Tests: rhyme validation, fuzzy matching, order scoring, price scoring;
-  docs update
+- **Genre Swap:** 150+ swapped movie plots, 4-option MC or type-in, 20s
+  timer, speed bonus
+- **Genre-Bender:** 70+ "bended" lyrics (paraphrased/original only — open
+  question #2), MC/type-in, optional BPM/year clue
+- **Trivia:** 210 questions (5 categories), 4 options; solo mode (15s/q,
+  daily challenge + leaderboard); room mode (10 questions, 10s race,
+  podium); "Wrong Answers Only" comedy mode
+- Daily challenge generation: 10 new questions/day seeded into
+  `DailyChallenge` (upsert `(gameId, date)`), `GET /api/daily-challenge`
+- Tests: question pool sampling, daily rollover at TZ boundaries,
+  race-mode scoring
 
 ---
 
 ## Next Recommended Prompt
 
-> **"Continue with M7–M10"** — solo games (M7–M8), Charades + Guess Who
-> (M9), and the SEO/perf pass (M10) per `docs/TODO.md`. M11 deployment
-> stays deprioritized until the owner asks.
+> **"Continue with M8–M10"** — Genre Swap + Genre-Bender + Trivia room mode
+>
+> - daily challenge (M8), Charades + Guess Who (M9), and the SEO/perf pass
+>   (M10) per `docs/TODO.md`. M11 deployment stays deprioritized.

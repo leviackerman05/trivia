@@ -8,6 +8,10 @@ import CopycatArena from '../../islands/CopycatArena.tsx';
 import VotingArena from '../../islands/VotingArena.tsx';
 import TriviaSolo from '../../islands/TriviaSolo.tsx';
 import WouldYouRatherOneScreen from '../../islands/WouldYouRatherOneScreen.tsx';
+import RhymeOrCrime from '../../islands/solo/RhymeOrCrime.tsx';
+import EmojiPlot from '../../islands/solo/EmojiPlot.tsx';
+import TimelineTussle from '../../islands/solo/TimelineTussle.tsx';
+import PriceIsRight from '../../islands/solo/PriceIsRight.tsx';
 import { games, getGame, getRelatedGames } from '../../lib/games';
 
 export function getStaticPaths() {
@@ -82,16 +86,24 @@ const isMultiplayer = game.type !== 'solo';
         !isMultiplayer && !game.instantPlay && (
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-3">
-              <Chip variant="status" status="warning">
-                Coming soon
+              <Chip variant="status" status="success">
+                Solo play
               </Chip>
               <h2 class="font-display text-h3 text-ink">Play {game.name}</h2>
             </div>
             <Card>
-              <p class="max-w-2xl text-body text-ink-muted">
-                {game.name} is being built right now. The playable game lands in a coming milestone
-                — this is where it will live.
-              </p>
+              {game.slug === 'rhyme-or-crime' && <RhymeOrCrime client:load />}
+              {game.slug === 'emoji-plot' && <EmojiPlot client:load />}
+              {game.slug === 'timeline-tussle' && <TimelineTussle client:load />}
+              {game.slug === 'price-is-right' && <PriceIsRight client:load />}
+              {game.slug !== 'rhyme-or-crime' &&
+                game.slug !== 'emoji-plot' &&
+                game.slug !== 'timeline-tussle' &&
+                game.slug !== 'price-is-right' && (
+                  <p class="max-w-2xl text-body text-ink-muted">
+                    {game.name} is being built right now — this is where it will live.
+                  </p>
+                )}
             </Card>
           </div>
         )
