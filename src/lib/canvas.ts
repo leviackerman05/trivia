@@ -133,13 +133,155 @@ export function applyStroke(ctx: CanvasRenderingContext2D, stroke: Stroke): void
 }
 
 /** Full repaint from the authoritative stroke log (white canvas first). */
-export function replayStrokes(ctx: CanvasRenderingContext2D, strokes: Stroke[]): void {
+export function replayStrokes(
+  ctx: CanvasRenderingContext2D,
+  strokes: Stroke[],
+  background?: string
+): void {
   ctx.globalCompositeOperation = 'source-over';
   ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  if (background) {
+    drawSilhouette(ctx, background);
+  }
   for (const stroke of strokes) {
     applyStroke(ctx, stroke);
   }
+}
+
+interface PathBox {
+  minX: number;
+  minY: number;
+  maxX: number;
+  maxY: number;
+}
+
+/**
+ * Approximate bounding box of an uppercase-only SVG path (the silhouette
+ * dataset is normalized to a 0–100 coordinate space). Control points are
+ * included, which only adds a small margin to the fit. Lowercase commands
+ * (relative) are not part of the dataset and are skipped defensively.
+ */
+export function pathBBox(path: string): PathBox | null {
+  const tokens = path.match(/[A-Z]|-?\d*\.?\d+(?:[eE][+-]?\d+)?/g) ?? [];
+  let index = 0;
+  const next = (): number => {
+    const value = parseFloat(tokens[index]);
+    index += 1;
+    return value;
+  };
+  let x = 0;
+  let y = 0;
+  let box: PathBox | null = null;
+  const point = (px: number, py: number): void => {
+    x = px;
+    y = py;
+    if (!box) {
+      box = { minX: px, minY: py, maxX: px, maxY: py };
+    } else {
+      box.minX = Math.min(box.minX, px);
+      box.minY = Math.min(box.minY, py);
+      box.maxX = Math.max(box.maxX, px);
+      box.maxY = Math.max(box.maxY, py);
+    }
+  };
+  while (index < tokens.length) {
+    const command = tokens[index];
+    index += 1;
+    switch (command) {
+      case 'M': {
+        point(next(), next());
+        break;
+      }
+      case 'L':
+      case 'T': {
+        point(next(), next());
+        break;
+      }
+      case 'H': {
+        point(next(), y);
+        break;
+      }
+      case 'V': {
+        point(x, next());
+        break;
+      }
+      case 'C':
+      case 'S': {
+        const c1x = next();
+        const c1y = next();
+        const c2x = next();
+        const c2y = next();
+        point(c1x, c1y);
+        point(c2x, c2y);
+        point(next(), next());
+        break;
+      }
+      case 'Q': {
+        point(next(), next());
+        point(next(), next());
+        break;
+      }
+      case 'A': {
+        next();
+        next();
+        next();
+        next();
+        next();
+        point(next(), next());
+        break;
+      }
+      case 'Z': {
+        break;
+      }
+      default: {
+        // Unknown/lowercase command — stop parsing defensively.
+        index = tokens.length;
+      }
+    }
+  }
+  return box;
+}
+
+/**
+ * Shadow Sketch: render a faint silhouette behind the strokes. The SVG path
+ * is scaled to fit the logical canvas (aspect-preserving, centered) so the
+ * same path renders identically on every device.
+ */
+export function drawSilhouette(ctx: CanvasRenderingContext2D, path: string): void {
+  // Path2D is a browser API — SSR and Node test envs skip the rendering.
+  if (typeof Path2D === 'undefined') {
+    return;
+  }
+  let path2d: Path2D;
+  try {
+    path2d = new Path2D(path);
+  } catch {
+    return; // Unparsable path — draw nothing.
+  }
+  const box = pathBBox(path);
+  if (!box || box.maxX - box.minX <= 0 || box.maxY - box.minY <= 0) {
+    return;
+  }
+  const pad = 8;
+  const boxWidth = box.maxX - box.minX;
+  const boxHeight = box.maxY - box.minY;
+  const scale = Math.min(
+    (CANVAS_WIDTH - pad * 2) / boxWidth,
+    (CANVAS_HEIGHT - pad * 2) / boxHeight
+  );
+  const offsetX = (CANVAS_WIDTH - boxWidth * scale) / 2 - box.minX * scale;
+  const offsetY = (CANVAS_HEIGHT - boxHeight * scale) / 2 - box.minY * scale;
+  ctx.save();
+  ctx.translate(offsetX, offsetY);
+  ctx.scale(scale, scale);
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.09)';
+  ctx.fill(path2d);
+  ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+  ctx.lineWidth = 1.5 / scale;
+  ctx.lineJoin = 'round';
+  ctx.stroke(path2d);
+  ctx.restore();
 }
 
 /** Remove every segment of one stroke (undo). */

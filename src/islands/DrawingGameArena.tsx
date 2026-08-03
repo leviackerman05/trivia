@@ -1,29 +1,48 @@
 import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import { useRoom } from './room/useRoom';
 import RoomLobbyPanel from './room/RoomLobbyPanel';
-import { useSkribblGame } from './useSkribblGame';
+import { useDrawingGame } from './useDrawingGame';
 import DrawingCanvas from '../components/DrawingCanvas';
 import { getGame } from '../lib/games';
 import { COLOR_PALETTE, DEFAULT_BRUSH_SIZE, DEFAULT_COLOR, type CanvasTool } from '../lib/canvas';
 import type { SkribblRoundSummary, SkribblScoreEntry } from '../lib/skribbl';
 
 /**
- * Skribbl Arena (PRD §5.1, M4) — the first fully playable room game.
- * Composes the shared room lobby (RoomLobbyPanel) with the round views:
- * word select (drawer only) → drawing canvas + chat → round results → podium.
- * All game state is server-authoritative via useSkribblGame.
+ * Shared-canvas drawing game arena (M5) — powers Skribbl Arena, One Line One
+ * Shape, Shadow Sketch, and Draw the Lyric from one island. The lobby is the
+ * shared RoomLobbyPanel; round views differ per game via ARENA_CONFIGS.
+ * All game state is server-authoritative via useDrawingGame.
  */
 
 interface Props {
   gameSlug: string;
 }
 
+interface ArenaConfig {
+  /** Skribbl: drawer picks 1 of 3 words. */
+  wordSelect: boolean;
+  /** Skribbl: host-pasted custom word list. */
+  customWords: boolean;
+  /** Drawer prompt presentation. */
+  banner: 'lyric' | 'object' | 'silhouette' | null;
+  /** One Line, One Shape: pen lifts deduct time. */
+  liftWarn: boolean;
+}
+
+const ARENA_CONFIGS: Record<string, ArenaConfig> = {
+  'skribbl-arena': { wordSelect: true, customWords: true, banner: null, liftWarn: false },
+  'one-line-one-shape': { wordSelect: false, customWords: false, banner: 'object', liftWarn: true },
+  'shadow-sketch': { wordSelect: false, customWords: false, banner: 'silhouette', liftWarn: false },
+  'draw-the-lyric': { wordSelect: false, customWords: false, banner: 'lyric', liftWarn: false },
+};
+
 const BRUSH_SIZES = [2, 6, 12, 24] as const;
 
-export default function SkribblArena({ gameSlug }: Props) {
+export default function DrawingGameArena({ gameSlug }: Props) {
   const game = getGame(gameSlug);
+  const config = ARENA_CONFIGS[gameSlug] ?? ARENA_CONFIGS['skribbl-arena']!;
   const { status, error, room, messages, actions: roomActions, myName } = useRoom();
-  const { game: skribbl, actions: gameActions } = useSkribblGame(
+  const { game: drawing, actions: gameActions } = useDrawingGame(
     room?.code ?? null,
     myName ?? null
   );
@@ -31,7 +50,6 @@ export default function SkribblArena({ gameSlug }: Props) {
   const [color, setColor] = useState<string>(DEFAULT_COLOR);
   const [brushSize, setBrushSize] = useState<number>(DEFAULT_BRUSH_SIZE);
   const [tool, setTool] = useState<CanvasTool>('pen');
-  /** Color applied by the fill tool (white when the eraser is armed). */
   const [fillColor, setFillColor] = useState<string>(DEFAULT_COLOR);
   const [chatDraft, setChatDraft] = useState('');
   const [now, setNow] = useState(() => Date.now());
@@ -40,20 +58,20 @@ export default function SkribblArena({ gameSlug }: Props) {
     () => room?.players.some((player) => player.isHost && player.connected) ?? false,
     [room]
   );
-  const isDrawer = skribbl.drawerName !== null && skribbl.drawerName === myName;
+  const isDrawer = drawing.drawerName !== null && drawing.drawerName === myName;
   const inGame = room !== null && room.phase !== 'lobby';
 
   // Drawing-phase countdown (server deadline).
   useEffect(() => {
-    if (skribbl.view !== 'drawing' || skribbl.endsAt === null) {
+    if (drawing.view !== 'drawing' || drawing.endsAt === null) {
       return;
     }
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
-  }, [skribbl.view, skribbl.endsAt]);
+  }, [drawing.view, drawing.endsAt]);
   const secondsLeft =
-    skribbl.view === 'drawing' && skribbl.endsAt !== null
-      ? Math.max(0, Math.ceil((skribbl.endsAt - now) / 1000))
+    drawing.view === 'drawing' && drawing.endsAt !== null
+      ? Math.max(0, Math.ceil((drawing.endsAt - now) / 1000))
       : 0;
 
   const sendChatOrGuess = (event: SyntheticEvent<HTMLFormElement>) => {
@@ -63,9 +81,7 @@ export default function SkribblArena({ gameSlug }: Props) {
     if (!text.trim()) {
       return;
     }
-    // During the drawing phase short messages are guesses (server decides
-    // match vs chat); everything else goes through the room chat.
-    if (skribbl.view === 'drawing' && text.length <= 60) {
+    if (drawing.view === 'drawing' && text.length <= 60) {
       void gameActions.sendGuess(text);
     } else {
       void roomActions.sendMessage(text);
@@ -99,17 +115,19 @@ export default function SkribblArena({ gameSlug }: Props) {
         isHost={isHost}
         gamePlayable={game?.playable === true}
         lobbyExtras={
-          <CustomWordsBlock
-            isHost={isHost}
-            onApply={(words) => gameActions.setCustomWords(words)}
-          />
+          config.customWords ? (
+            <CustomWordsBlock
+              isHost={isHost}
+              onApply={(words) => gameActions.setCustomWords(words)}
+            />
+          ) : undefined
         }
       />
     );
   }
 
   const sortedScores = [...room.players]
-    .map((player) => ({ name: player.name, score: skribbl.scores[player.name] ?? 0 }))
+    .map((player) => ({ name: player.name, score: drawing.scores[player.name] ?? 0 }))
     .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
 
   return (
@@ -119,9 +137,9 @@ export default function SkribblArena({ gameSlug }: Props) {
           {room.code}
         </span>
         <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
-          Round {skribbl.round} of {skribbl.totalRounds}
+          Round {drawing.round} of {drawing.totalRounds}
         </span>
-        {skribbl.view === 'drawing' && (
+        {drawing.view === 'drawing' && (
           <span
             aria-live="polite"
             className={`rounded-pill px-4 py-1.5 font-mono text-sm font-semibold ${
@@ -132,7 +150,7 @@ export default function SkribblArena({ gameSlug }: Props) {
           </span>
         )}
         <span className="rounded-pill bg-tertiary/40 px-4 py-1.5 text-xs font-semibold text-ink">
-          {isDrawer ? `You're drawing — ${game?.name ?? ''}` : `Drawing: ${skribbl.drawerName}`}
+          {isDrawer ? `You're drawing — ${game?.name ?? ''}` : `Drawing: ${drawing.drawerName}`}
         </span>
         <button
           type="button"
@@ -145,16 +163,22 @@ export default function SkribblArena({ gameSlug }: Props) {
 
       <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div className="flex flex-col gap-4">
-          {skribbl.view === 'word-select' && (
+          {config.wordSelect && drawing.view === 'word-select' && (
             <WordSelectView
-              choices={skribbl.choices}
-              drawerName={skribbl.drawerName}
+              choices={drawing.choices}
+              drawerName={drawing.drawerName}
               isDrawer={isDrawer}
               onChoose={(word) => void gameActions.chooseWord(word)}
             />
           )}
 
-          {skribbl.view === 'drawing' && (
+          {!config.wordSelect && drawing.view === 'word-select' && (
+            <div className="flex flex-col items-center gap-3 rounded-lg border-2 border-dashed border-gray-300 bg-white p-10 text-center shadow-sm">
+              <p className="font-display text-h3 text-ink">Setting up the round…</p>
+            </div>
+          )}
+
+          {drawing.view === 'drawing' && (
             <div className="flex flex-col gap-3">
               <div className="flex flex-wrap items-center gap-2">
                 {COLOR_PALETTE.map((swatch) => (
@@ -193,7 +217,6 @@ export default function SkribblArena({ gameSlug }: Props) {
                   aria-label="Fill (bucket) — tap the canvas to flood-fill"
                   aria-pressed={tool === 'fill'}
                   onClick={() => {
-                    // Filling with the eraser armed paints white (patch holes).
                     setFillColor(tool === 'eraser' ? '#ffffff' : color);
                     setTool('fill');
                   }}
@@ -252,54 +275,59 @@ export default function SkribblArena({ gameSlug }: Props) {
                 )}
               </div>
 
+              <DrawerPrompt config={config} isDrawer={isDrawer} drawing={drawing} />
+
               <DrawingCanvas
-                strokes={skribbl.strokes}
+                strokes={drawing.strokes}
                 onStroke={(stroke) => void gameActions.sendStroke(stroke)}
                 onFill={(x, y) => {
                   void gameActions.sendFill(x, y, fillColor);
-                  // One tap = one fill; return to the pen for the next stroke.
                   setTool('pen');
                 }}
+                onLift={
+                  config.liftWarn && isDrawer ? () => void gameActions.strokeLift() : undefined
+                }
+                background={
+                  config.banner === 'silhouette'
+                    ? isDrawer
+                      ? (drawing.drawerData.silhouette ?? undefined)
+                      : (drawing.revealedSilhouette ?? undefined)
+                    : undefined
+                }
                 enabled={isDrawer}
                 color={color}
                 brushSize={brushSize}
                 tool={tool}
-                ariaLabel={`Shared drawing canvas — ${isDrawer ? 'you are the drawer' : `waiting for ${skribbl.drawerName} to draw`}`}
+                ariaLabel={`Shared drawing canvas — ${isDrawer ? 'you are the drawer' : `waiting for ${drawing.drawerName} to draw`}`}
               />
 
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="flex gap-1 font-mono text-2xl font-semibold tracking-[0.35em] text-ink">
-                  {Array.from({ length: skribbl.wordLength ?? 0 }, (_, index) => {
-                    const last = (skribbl.wordLength ?? 1) - 1;
-                    if (skribbl.firstLetter && index === 0) {
-                      return <span key={index}>{skribbl.firstLetter}</span>;
-                    }
-                    if (skribbl.lastLetter && index === last && last > 0) {
-                      return <span key={index}>{skribbl.lastLetter}</span>;
-                    }
-                    return <span key={index}>•</span>;
-                  })}
-                </span>
-                <span aria-live="polite" className="text-small text-ink-muted">
-                  {skribbl.guessFeedback ?? 'First letter at 30s, last letter at 45s.'}
-                </span>
-              </div>
+              <HintRow config={config} drawing={drawing} />
+
+              {config.liftWarn && isDrawer && drawing.liftWarnings > 0 && (
+                <p
+                  role="status"
+                  className="rounded-md border-2 border-red-300 bg-red-50 px-4 py-2 text-small font-semibold text-red-700"
+                >
+                  Pen lifted {drawing.liftWarnings}× — 10 seconds deducted each time. Keep the line
+                  continuous!
+                </p>
+              )}
             </div>
           )}
 
-          {skribbl.view === 'round-results' && (
+          {drawing.view === 'round-results' && (
             <RoundResultsView
-              summary={skribbl.summary}
-              round={skribbl.round}
-              totalRounds={skribbl.totalRounds}
+              summary={drawing.summary}
+              round={drawing.round}
+              totalRounds={drawing.totalRounds}
               isHost={isHost}
               onNext={() => void gameActions.nextRound()}
             />
           )}
 
-          {skribbl.view === 'game-end' && (
+          {drawing.view === 'game-end' && (
             <GameEndView
-              finalScores={skribbl.finalScores}
+              finalScores={drawing.finalScores}
               myName={myName}
               isHost={isHost}
               onRestart={() => void gameActions.restartGame()}
@@ -354,8 +382,8 @@ export default function SkribblArena({ gameSlug }: Props) {
                 value={chatDraft}
                 onChange={(event) => setChatDraft(event.target.value)}
                 maxLength={300}
-                placeholder={skribbl.view === 'drawing' ? 'Type your guess…' : 'Type a message…'}
-                aria-label={skribbl.view === 'drawing' ? 'Guess' : 'Chat message'}
+                placeholder={drawing.view === 'drawing' ? 'Type your guess…' : 'Type a message…'}
+                aria-label={drawing.view === 'drawing' ? 'Guess' : 'Chat message'}
                 className="min-w-0 flex-1 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
               />
               <button
@@ -382,7 +410,126 @@ export default function SkribblArena({ gameSlug }: Props) {
   );
 }
 
-/** Drawer-only word pick (PRD §5.1: 3 choices, drawer picks one). */
+/** Drawer-only prompt: lyric banner, object banner, or silhouette hint. */
+function DrawerPrompt({
+  config,
+  isDrawer,
+  drawing,
+}: {
+  config: ArenaConfig;
+  isDrawer: boolean;
+  drawing: SkribblGameStateLike;
+}) {
+  if (config.banner === 'lyric') {
+    return isDrawer ? (
+      <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 px-5 py-3">
+        <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
+          Draw this lyric — the song title is the answer
+        </p>
+        <p className="mt-1 font-display text-h3 text-ink">“{drawing.drawerData.lyric}”</p>
+        {drawing.drawerData.artist && (
+          <p className="text-small text-ink-muted">Artist hint appears at 45s.</p>
+        )}
+      </div>
+    ) : (
+      <p className="text-small text-ink-muted">
+        {drawing.drawerName} is drawing a lyric — guess the song title!
+      </p>
+    );
+  }
+  if (config.banner === 'object') {
+    return isDrawer ? (
+      <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 px-5 py-3">
+        <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
+          One continuous line — don't lift the pen!
+        </p>
+        <p className="mt-1 font-display text-h3 text-ink">{drawing.drawerData.object}</p>
+      </div>
+    ) : (
+      <p className="text-small text-ink-muted">
+        {drawing.drawerName} is drawing with one continuous line.
+      </p>
+    );
+  }
+  if (config.banner === 'silhouette') {
+    return isDrawer ? (
+      <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 px-5 py-3">
+        <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
+          Draw the details INSIDE the shadow to make it recognizable
+        </p>
+      </div>
+    ) : (
+      <p className="text-small text-ink-muted">
+        {drawing.drawerName} is filling in a shadow — the silhouette is revealed at 60s.
+      </p>
+    );
+  }
+  return null;
+}
+
+type SkribblGameStateLike = {
+  drawerData: {
+    object: string | null;
+    silhouette: string | null;
+    lyric: string | null;
+    artist: string | null;
+  };
+  drawerName: string | null;
+};
+
+/** Word-length dots + letters (skribbl), artist hint (lyric), or reveal note. */
+function HintRow({
+  config,
+  drawing,
+}: {
+  config: ArenaConfig;
+  drawing: SkribblGameStateLike & {
+    firstLetter: string | null;
+    lastLetter: string | null;
+    artistHint: string | null;
+    revealedSilhouette: string | null;
+    guessFeedback: string | null;
+    wordLength: number | null;
+  };
+}) {
+  if (config.banner === 'lyric' && drawing.artistHint) {
+    return (
+      <p aria-live="polite" className="text-body font-semibold text-ink">
+        Artist hint: {drawing.artistHint}
+      </p>
+    );
+  }
+  if (config.banner === 'silhouette' && drawing.revealedSilhouette) {
+    return (
+      <p aria-live="polite" className="text-body font-semibold text-ink">
+        Silhouette revealed — everyone can see the shadow now!
+      </p>
+    );
+  }
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      {config.banner === null && (
+        <span className="flex gap-1 font-mono text-2xl font-semibold tracking-[0.35em] text-ink">
+          {Array.from({ length: drawing.wordLength ?? 0 }, (_, index) => {
+            const last = (drawing.wordLength ?? 1) - 1;
+            if (drawing.firstLetter && index === 0) {
+              return <span key={index}>{drawing.firstLetter}</span>;
+            }
+            if (drawing.lastLetter && index === last && last > 0) {
+              return <span key={index}>{drawing.lastLetter}</span>;
+            }
+            return <span key={index}>•</span>;
+          })}
+        </span>
+      )}
+      <span aria-live="polite" className="text-small text-ink-muted">
+        {drawing.guessFeedback ?? 'Guess the word before the timer runs out!'}
+      </span>
+    </div>
+  );
+}
+
+/** Drawer-only word pick (skribbl). */
 function WordSelectView({
   choices,
   drawerName,
@@ -424,7 +571,7 @@ function WordSelectView({
   );
 }
 
-/** Round reveal: word, who got it, drawer's cut (PRD §5.1). */
+/** Round reveal: word, who got it, drawer's cut. */
 function RoundResultsView({
   summary,
   round,
@@ -444,12 +591,12 @@ function RoundResultsView({
   return (
     <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
       <h3 className="font-display text-h3 text-ink">
-        The word was <span className="text-primary-deep">{summary.word}</span>
+        The answer was <span className="text-primary-deep">{summary.word}</span>
       </h3>
       <div className="flex flex-col gap-2">
         {summary.correct.length === 0 ? (
           <p className="text-body text-ink-muted">
-            Nobody guessed it this round — {summary.drawerName} drew a stumper!
+            Nobody got it this round — {summary.drawerName} drew a stumper!
           </p>
         ) : (
           <ul className="flex flex-col gap-1">
@@ -482,7 +629,7 @@ function RoundResultsView({
   );
 }
 
-/** Final podium (PRD §5.1). */
+/** Final podium. */
 function GameEndView({
   finalScores,
   myName,
@@ -534,7 +681,7 @@ function GameEndView({
   );
 }
 
-/** Host-only custom word list (PRD §5.1: paste your own words). */
+/** Host-only custom word list (skribbl). */
 function CustomWordsBlock({
   isHost,
   onApply,

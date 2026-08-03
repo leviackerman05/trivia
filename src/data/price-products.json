@@ -1,0 +1,662 @@
+[
+  {
+    "name": "Banana Slicer Pro",
+    "emoji": "🍌",
+    "description": "A curved blade that slices bananas perfectly. Yes, it is a real thing.",
+    "price": 12
+  },
+  {
+    "name": "Pet Rock 2.0",
+    "emoji": "🪨",
+    "description": "The original pet that never needs feeding, walking, or attention. Zero maintenance.",
+    "price": 20
+  },
+  {
+    "name": "Self-Stirring Coffee Mug",
+    "emoji": "☕",
+    "description": "A mug with a built-in motor that stirs your coffee while you scroll.",
+    "price": 25
+  },
+  {
+    "name": "Smart Water Bottle",
+    "emoji": "💧",
+    "description": "Tracks your hydration and glows when you have been slacking.",
+    "price": 45
+  },
+  {
+    "name": "Robot Vacuum",
+    "emoji": "🤖",
+    "description": "A roomba-style bot that fights dust bunnies while you nap.",
+    "price": 250
+  },
+  {
+    "name": "Espresso Machine",
+    "emoji": "☕",
+    "description": "Cafe-grade espresso at home, complete with steam wand and grinder.",
+    "price": 650
+  },
+  {
+    "name": "Mechanical Keyboard",
+    "emoji": "⌨️",
+    "description": "A clickety-clack keyboard with RGB lighting and satisfying switches.",
+    "price": 150
+  },
+  {
+    "name": "4K Smart TV",
+    "emoji": "📺",
+    "description": "A huge 4K screen that makes nature documentaries look unreal.",
+    "price": 900
+  },
+  {
+    "name": "Camera Drone",
+    "emoji": "🛸",
+    "description": "Flies, films, and makes the neighbors jealous from 400 feet up.",
+    "price": 500
+  },
+  {
+    "name": "Instant Camera",
+    "emoji": "📸",
+    "description": "Prints photos in 90 seconds; the retro filter is built in.",
+    "price": 80
+  },
+  {
+    "name": "Weighted Blanket",
+    "emoji": "🛏️",
+    "description": "A 20-pound hug for your bed that melts stress away.",
+    "price": 90
+  },
+  {
+    "name": "Air Fryer",
+    "emoji": "🍟",
+    "description": "Fries things with 90% less oil and 100% more crunch.",
+    "price": 120
+  },
+  {
+    "name": "Stand Mixer",
+    "emoji": "🥣",
+    "description": "Whisks, kneads, and whips like a tiny kitchen beast.",
+    "price": 400
+  },
+  {
+    "name": "Electric Bike",
+    "emoji": "🚲",
+    "description": "A bicycle with a battery and a big grin for hills.",
+    "price": 1200
+  },
+  {
+    "name": "Designer Sunglasses",
+    "emoji": "🕶️",
+    "description": "Tiny plastic frames that cost more than a week of groceries.",
+    "price": 350
+  },
+  {
+    "name": "Smart Ring",
+    "emoji": "💍",
+    "description": "Tracks sleep, heart rate, and steps from your finger.",
+    "price": 300
+  },
+  {
+    "name": "Gaming Console",
+    "emoji": "🎮",
+    "description": "Plays 4K games and doubles as a streaming box.",
+    "price": 500
+  },
+  {
+    "name": "Luxury Fountain Pen",
+    "emoji": "🖋️",
+    "description": "A pen that makes your grocery list feel like poetry.",
+    "price": 180
+  },
+  {
+    "name": "Gold-Plated Paperclip",
+    "emoji": "📎",
+    "description": "A paperclip with more gold than your wedding ring.",
+    "price": 75
+  },
+  {
+    "name": "Diamond Toothpick",
+    "emoji": "🦷",
+    "description": "Pick your teeth in style; each pick has a tiny diamond.",
+    "price": 500
+  },
+  {
+    "name": "Self-Cleaning Bottle",
+    "emoji": "🍼",
+    "description": "UV light kills germs in your water bottle while you sip.",
+    "price": 60
+  },
+  {
+    "name": "Pizza Scissors",
+    "emoji": "🍕",
+    "description": "Scissors that cut pizza like a dream and snap shut with flair.",
+    "price": 20
+  },
+  {
+    "name": "Avocado Saver",
+    "emoji": "🥑",
+    "description": "Keeps your avocado green for days. Small green magic.",
+    "price": 10
+  },
+  {
+    "name": "Garlic Press",
+    "emoji": "🧄",
+    "description": "Crush garlic with one squeeze and no tears.",
+    "price": 18
+  },
+  {
+    "name": "Electric Wine Opener",
+    "emoji": "🍷",
+    "description": "Opens bottles with a satisfying whir; no muscles needed.",
+    "price": 40
+  },
+  {
+    "name": "Milk Frother",
+    "emoji": "🥛",
+    "description": "Whisks foamy milk for lattes in 30 seconds flat.",
+    "price": 35
+  },
+  {
+    "name": "Sous Vide Machine",
+    "emoji": "🍖",
+    "description": "Cooks steak to perfection in a water bath. Science for dinner.",
+    "price": 150
+  },
+  {
+    "name": "Instant Pot",
+    "emoji": "🍲",
+    "description": "A pressure cooker that does everything except taste the food.",
+    "price": 130
+  },
+  {
+    "name": "Rice Cooker",
+    "emoji": "🍚",
+    "description": "Perfect rice every time; never burn dinner again.",
+    "price": 60
+  },
+  {
+    "name": "Meme Toaster",
+    "emoji": "🍞",
+    "description": "A toaster that displays memes on its screen while toasting.",
+    "price": 100
+  },
+  {
+    "name": "Smart Mirror",
+    "emoji": "🪞",
+    "description": "Shows weather, workouts, and your tired face.",
+    "price": 1500
+  },
+  {
+    "name": "Treadmill Desk",
+    "emoji": "🏃",
+    "description": "Walk 10,000 steps while answering emails. Multi-tasking king.",
+    "price": 1200
+  },
+  {
+    "name": "Standing Desk",
+    "emoji": "🧍",
+    "description": "Sit, stand, repeat. Your back will thank you.",
+    "price": 500
+  },
+  {
+    "name": "Ergonomic Chair",
+    "emoji": "🪑",
+    "description": "A throne for your spine with proper lumbar support.",
+    "price": 800
+  },
+  {
+    "name": "Massage Gun",
+    "emoji": "💪",
+    "description": "Percussive therapy that beats sore muscles into submission.",
+    "price": 150
+  },
+  {
+    "name": "Ice Bath Tub",
+    "emoji": "🧊",
+    "description": "Cryotherapy at home; legs hate it, ego loves it.",
+    "price": 1000
+  },
+  {
+    "name": "Sauna Blanket",
+    "emoji": "🧖",
+    "description": "A sleeping bag that sweats toxins out of you.",
+    "price": 500
+  },
+  {
+    "name": "LED Face Mask",
+    "emoji": "✨",
+    "description": "Glows red and promises younger skin while you binge TV.",
+    "price": 350
+  },
+  {
+    "name": "Hair Dryer Brush",
+    "emoji": "💇",
+    "description": "Dries and styles hair in one swoosh.",
+    "price": 120
+  },
+  {
+    "name": "Smart Toothbrush",
+    "emoji": "🪥",
+    "description": "Brushing that grades you and judges your technique.",
+    "price": 80
+  },
+  {
+    "name": "Water Flosser",
+    "emoji": "💦",
+    "description": "A jet of water for your gums; dentists approve.",
+    "price": 70
+  },
+  {
+    "name": "Shower Speaker",
+    "emoji": "🚿",
+    "description": "A waterproof speaker that turns shower time into a concert.",
+    "price": 40
+  },
+  {
+    "name": "Smart Scale",
+    "emoji": "⚖️",
+    "description": "Weighs you and knows more about your body than you do.",
+    "price": 60
+  },
+  {
+    "name": "Fitness Tracker",
+    "emoji": "🏅",
+    "description": "Watches your steps and guilt-trips you about sleep.",
+    "price": 130
+  },
+  {
+    "name": "Smartwatch",
+    "emoji": "⌚",
+    "description": "A mini computer on your wrist that also tells time.",
+    "price": 400
+  },
+  {
+    "name": "Noise-Cancelling Headphones",
+    "emoji": "🎧",
+    "description": "Silence the world; hear only your podcast.",
+    "price": 350
+  },
+  {
+    "name": "Wireless Earbuds",
+    "emoji": "🎶",
+    "description": "Tiny earbuds with big bass and no wires to tangle.",
+    "price": 150
+  },
+  {
+    "name": "Vinyl Turntable",
+    "emoji": "📀",
+    "description": "Spins vinyl records with warm, crackly nostalgia.",
+    "price": 250
+  },
+  {
+    "name": "Bluetooth Speaker",
+    "emoji": "🔊",
+    "description": "A portable speaker that thumps hard for its size.",
+    "price": 120
+  },
+  {
+    "name": "Soundbar",
+    "emoji": "🎼",
+    "description": "Makes your TV sound like a movie theater.",
+    "price": 400
+  },
+  {
+    "name": "Mini Projector",
+    "emoji": "🎥",
+    "description": "Throws a 120-inch movie screen onto any wall.",
+    "price": 600
+  },
+  {
+    "name": "Smart Display",
+    "emoji": "🖥️",
+    "description": "A screen that answers questions and shows recipes.",
+    "price": 250
+  },
+  {
+    "name": "E-Reader",
+    "emoji": "📚",
+    "description": "Thousands of books in a device lighter than one paperback.",
+    "price": 150
+  },
+  {
+    "name": "Tablet",
+    "emoji": "📱",
+    "description": "A big phone that forgot how to make calls.",
+    "price": 500
+  },
+  {
+    "name": "Gaming Mouse",
+    "emoji": "🖱️",
+    "description": "A mouse with more buttons than your TV remote.",
+    "price": 100
+  },
+  {
+    "name": "Gaming Headset",
+    "emoji": "🕹️",
+    "description": "Hear footsteps, enemies, and your teammate's excuses.",
+    "price": 150
+  },
+  {
+    "name": "Graphics Card",
+    "emoji": "⚡",
+    "description": "Renders ray-traced pixels at 200 frames per second.",
+    "price": 700
+  },
+  {
+    "name": "External SSD",
+    "emoji": "💾",
+    "description": "Pocket-sized storage for your entire life's photos.",
+    "price": 120
+  },
+  {
+    "name": "USB-C Hub",
+    "emoji": "🔌",
+    "description": "Turns one port into twelve; cable chaos begins.",
+    "price": 80
+  },
+  {
+    "name": "Power Bank",
+    "emoji": "🔋",
+    "description": "Charges your phone twice; your luggage, never.",
+    "price": 50
+  },
+  {
+    "name": "Solar Charger",
+    "emoji": "☀️",
+    "description": "Charges gadgets with sunlight, weather permitting.",
+    "price": 90
+  },
+  {
+    "name": "Portable Monitor",
+    "emoji": "🖥️",
+    "description": "A second screen that folds into your backpack.",
+    "price": 200
+  },
+  {
+    "name": "Streaming Webcam",
+    "emoji": "📹",
+    "description": "Makes you look decent on Zoom with 4K magic.",
+    "price": 130
+  },
+  {
+    "name": "Ring Light",
+    "emoji": "💡",
+    "description": "Makes your selfies glow like a golden hour.",
+    "price": 60
+  },
+  {
+    "name": "Podcast Microphone",
+    "emoji": "🎙️",
+    "description": "A podcast-ready mic that makes your voice sound richer.",
+    "price": 120
+  },
+  {
+    "name": "Smart Plug",
+    "emoji": "🔌",
+    "description": "Turns dumb appliances into voice-controlled wonders.",
+    "price": 25
+  },
+  {
+    "name": "Smart Bulb",
+    "emoji": "💡",
+    "description": "A light bulb that changes color with your mood.",
+    "price": 30
+  },
+  {
+    "name": "Robot Lawn Mower",
+    "emoji": "🌿",
+    "description": "Mows the lawn while you watch from the couch.",
+    "price": 1100
+  },
+  {
+    "name": "Smart Lock",
+    "emoji": "🔐",
+    "description": "Your door opens with a fingerprint; keys become obsolete.",
+    "price": 250
+  },
+  {
+    "name": "Video Doorbell",
+    "emoji": "🚪",
+    "description": "See who rang the bell without leaving the couch.",
+    "price": 180
+  },
+  {
+    "name": "Security Camera",
+    "emoji": "📷",
+    "description": "Watches your driveway and judges the delivery guy.",
+    "price": 120
+  },
+  {
+    "name": "GPS Tracker",
+    "emoji": "🛰️",
+    "description": "Knows where your cat, car, or kid goes.",
+    "price": 60
+  },
+  {
+    "name": "Dash Cam",
+    "emoji": "🚗",
+    "description": "Records your drives; insurance companies love this.",
+    "price": 100
+  },
+  {
+    "name": "Car Vacuum",
+    "emoji": "🧹",
+    "description": "A tiny vacuum for the crumbs between the seats.",
+    "price": 60
+  },
+  {
+    "name": "Tire Inflator",
+    "emoji": "⚙️",
+    "description": "Pumps tires in minutes and saves you at gas stations.",
+    "price": 70
+  },
+  {
+    "name": "Jump Starter",
+    "emoji": "🔋",
+    "description": "A box that revives dead car batteries; roadside hero.",
+    "price": 130
+  },
+  {
+    "name": "Electric Scooter",
+    "emoji": "🛴",
+    "description": "Commute like a teenager, arrive like a boss.",
+    "price": 600
+  },
+  {
+    "name": "Longboard",
+    "emoji": "🛹",
+    "description": "A wooden board with wheels; your knees will remember.",
+    "price": 120
+  },
+  {
+    "name": "Onewheel",
+    "emoji": "🌀",
+    "description": "A single-wheeled electric board that looks like magic.",
+    "price": 1900
+  },
+  {
+    "name": "Electric Unicycle",
+    "emoji": "🛞",
+    "description": "One wheel, two feet, zero sense of balance required.",
+    "price": 900
+  },
+  {
+    "name": "Water Jetpack",
+    "emoji": "🌊",
+    "description": "Fly 30 feet above the water; scream accordingly.",
+    "price": 1500
+  },
+  {
+    "name": "Inflatable Paddleboard",
+    "emoji": "🏄",
+    "description": "Yoga on water; falls are part of the workout.",
+    "price": 350
+  },
+  {
+    "name": "Kayak",
+    "emoji": "🛶",
+    "description": "A boat you carry on your car roof and paddle yourself.",
+    "price": 500
+  },
+  {
+    "name": "Pop-Up Tent",
+    "emoji": "⛺",
+    "description": "A tent that assembles itself and looks at you smugly.",
+    "price": 150
+  },
+  {
+    "name": "Camping Stove",
+    "emoji": "🔥",
+    "description": "Boils water in minutes; gourmet camping awaits.",
+    "price": 80
+  },
+  {
+    "name": "Camping Hammock",
+    "emoji": "🌳",
+    "description": "A cloth bed between two trees; instant nap zone.",
+    "price": 60
+  },
+  {
+    "name": "Backyard Fire Pit",
+    "emoji": "🪵",
+    "description": "Backyard fire pit; s'mores season starts now.",
+    "price": 200
+  },
+  {
+    "name": "Smart Grill",
+    "emoji": "🥩",
+    "description": "Grills steaks via app; your phone is now a chef.",
+    "price": 700
+  },
+  {
+    "name": "Pizza Oven",
+    "emoji": "🍕",
+    "description": "800 degrees of wood-fired pizza glory in your backyard.",
+    "price": 500
+  },
+  {
+    "name": "Cold Brew Maker",
+    "emoji": "🫖",
+    "description": "Steeps cold coffee overnight; mornings get easier.",
+    "price": 50
+  },
+  {
+    "name": "Whistling Kettle",
+    "emoji": "♨️",
+    "description": "Whistles when water boils; classic kitchen soundtrack.",
+    "price": 40
+  },
+  {
+    "name": "Dutch Oven",
+    "emoji": "🥘",
+    "description": "A cast iron pot that makes stews taste like grandma's.",
+    "price": 150
+  },
+  {
+    "name": "Cast Iron Skillet",
+    "emoji": "🍳",
+    "description": "A heavy pan that lasts generations and builds arm muscle.",
+    "price": 60
+  },
+  {
+    "name": "Chef Knife Set",
+    "emoji": "🔪",
+    "description": "Sharp knives that make chopping feel cinematic.",
+    "price": 200
+  },
+  {
+    "name": "Cheese Board Set",
+    "emoji": "🧀",
+    "description": "Everything you need for a fancy cheese night.",
+    "price": 70
+  },
+  {
+    "name": "Fondue Set",
+    "emoji": "🫕",
+    "description": "Melts cheese or chocolate; dip everything nearby.",
+    "price": 80
+  },
+  {
+    "name": "Waffle Maker",
+    "emoji": "🧇",
+    "description": "Makes crispy waffles; Sundays become sacred.",
+    "price": 60
+  },
+  {
+    "name": "Crepe Maker",
+    "emoji": "🥞",
+    "description": "Spreads batter into thin crepes; Paris at home.",
+    "price": 50
+  },
+  {
+    "name": "Burrito Blanket",
+    "emoji": "🌯",
+    "description": "A blanket shaped like a burrito; wrap yourself in carbs.",
+    "price": 40
+  },
+  {
+    "name": "Sushi Kit",
+    "emoji": "🍣",
+    "description": "Roll your own sushi; wasabi included, tears optional.",
+    "price": 45
+  },
+  {
+    "name": "Ramen Kit",
+    "emoji": "🍜",
+    "description": "Chef-level ramen in a box; slurp responsibly.",
+    "price": 60
+  },
+  {
+    "name": "Popcorn Machine",
+    "emoji": "🍿",
+    "description": "Movie-theater popcorn in your living room; butter warning.",
+    "price": 120
+  },
+  {
+    "name": "Cotton Candy Maker",
+    "emoji": "🍭",
+    "description": "A machine that turns sugar into pink clouds.",
+    "price": 90
+  },
+  {
+    "name": "Soda Maker",
+    "emoji": "🥤",
+    "description": "Carbonates tap water; the fizz never disappoints.",
+    "price": 130
+  },
+  {
+    "name": "Mini Fridge",
+    "emoji": "🥶",
+    "description": "A tiny fridge for the bedroom; drinks within reach.",
+    "price": 150
+  },
+  {
+    "name": "Wine Fridge",
+    "emoji": "🍇",
+    "description": "Stores wine at the perfect temperature; classy.",
+    "price": 300
+  },
+  {
+    "name": "Kegerator",
+    "emoji": "🍺",
+    "description": "A fridge that pours draft beer; party legend status.",
+    "price": 900
+  },
+  {
+    "name": "Cocktail Smoker",
+    "emoji": "🍸",
+    "description": "Smokes cocktails with wood chips; speakeasy vibes.",
+    "price": 70
+  },
+  {
+    "name": "Ice Maker",
+    "emoji": "🧊",
+    "description": "Cubes on demand; the machine that never runs out.",
+    "price": 200
+  },
+  {
+    "name": "Salt Lamp",
+    "emoji": "🪔",
+    "description": "A glowing pink salt block; calm vibes guaranteed.",
+    "price": 50
+  }
+]

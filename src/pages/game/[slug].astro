@@ -3,7 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
 import Chip from '../../components/ui/Chip.astro';
 import RoomLobby from '../../islands/room/RoomLobby.tsx';
-import SkribblArena from '../../islands/SkribblArena.tsx';
+import DrawingGameArena from '../../islands/DrawingGameArena.tsx';
+import CopycatArena from '../../islands/CopycatArena.tsx';
 import TriviaSolo from '../../islands/TriviaSolo.tsx';
 import WouldYouRatherOneScreen from '../../islands/WouldYouRatherOneScreen.tsx';
 import { games, getGame, getRelatedGames } from '../../lib/games';
@@ -63,8 +64,10 @@ const isMultiplayer = game.type !== 'solo';
               <h2 class="font-display text-h3 text-ink">Play in a room</h2>
             </div>
             <Card>
-              {game.slug === 'skribbl-arena' ? (
-                <SkribblArena client:load gameSlug={game.slug} />
+              {game.slug === 'copycat-challenge' ? (
+                <CopycatArena client:load gameSlug={game.slug} />
+              ) : game.family === 'drawing' ? (
+                <DrawingGameArena client:load gameSlug={game.slug} />
               ) : (
                 <RoomLobby client:load gameSlug={game.slug} />
               )}

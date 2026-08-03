@@ -22,17 +22,30 @@ import {
   upsertRoomPlayer,
 } from '../lib/room-persistence.js';
 import { getPrisma } from '../lib/prisma.js';
-import { PLAYABLE_ROOM_GAMES } from '../lib/game-registry.js';
 import { ROOM_GRACE_MS, type RoomEngine, type RoomState } from '../engine/room-engine.js';
 import {
-  SKRIBBL_BREAK_MS,
-  SKRIBBL_FIRST_HINT_MS,
-  SKRIBBL_ROUND_DURATION_MS,
-  SKRIBBL_SECOND_HINT_MS,
-  SKRIBBL_WORD_SELECT_TIMEOUT_MS,
-  SkribblSession,
-  type SkribblPhase,
-} from '../engine/skribbl-engine.js';
+  DRAWING_WORD_SELECT_TIMEOUT_MS,
+  DrawingGameSession,
+  type DrawingEntry,
+  type DrawingGameConfig,
+  type DrawingGameSession as DrawingSession,
+} from '../engine/drawing-game.js';
+import {
+  COPYCAT_AWARDS,
+  COPYCAT_DRAW_MS,
+  COPYCAT_REVEAL_MS,
+  COPYCAT_VOTE_MS,
+  CopycatSession,
+  type CopycatAward,
+  type CopycatImage,
+} from '../engine/copycat-engine.js';
+import { PLAYABLE_ROOM_GAMES } from '../lib/game-registry.js';
+
+import wordsJson from '../data/skribbl-words.json' with { type: 'json' };
+import objectsJson from '../data/one-line-objects.json' with { type: 'json' };
+import silhouettesJson from '../data/silhouettes.json' with { type: 'json' };
+import lyricsJson from '../data/lyrics.json' with { type: 'json' };
+import copycatImagesJson from '../data/copycat-images.json' with { type: 'json' };
 
 export interface SocketGatewayDeps {
   engine: RoomEngine;
@@ -52,22 +65,84 @@ interface ChatPayload {
   message?: unknown;
 }
 
-/** Per-room game timers owned by the gateway (session is transport-agnostic). */
+/** Per-room game timers owned by the gateway (sessions are transport-agnostic). */
 interface RoomTimers {
   wordSelect?: NodeJS.Timeout;
   firstHint?: NodeJS.Timeout;
   secondHint?: NodeJS.Timeout;
   roundEnd?: NodeJS.Timeout;
   breakTimer?: NodeJS.Timeout;
+  reveal?: NodeJS.Timeout;
+  drawEnd?: NodeJS.Timeout;
+  voteEnd?: NodeJS.Timeout;
 }
 
-const SKRIBBL_GAME_ID = 'skribbl-arena';
+/** A live game session: a shared-canvas drawing game or Copycat. */
+type GameSession = DrawingSession | CopycatSession;
+
+const DRAWING_CONFIGS: Record<string, DrawingGameConfig> = {
+  'skribbl-arena': {
+    gameId: 'skribbl-arena',
+    wordMode: 'choices',
+    roundDurationMs: 60_000,
+    firstHintMs: 30_000,
+    secondHintMs: 45_000,
+    allowCustomWords: true,
+  },
+  'one-line-one-shape': {
+    gameId: 'one-line-one-shape',
+    wordMode: 'direct',
+    roundDurationMs: 60_000,
+    liftPenaltyMs: 10_000,
+  },
+  'shadow-sketch': {
+    gameId: 'shadow-sketch',
+    wordMode: 'direct',
+    roundDurationMs: 90_000,
+    silhouetteRevealMs: 60_000,
+  },
+  'draw-the-lyric': {
+    gameId: 'draw-the-lyric',
+    wordMode: 'lyric',
+    roundDurationMs: 90_000,
+    artistHintMs: 45_000,
+    fixedGuesserPoints: 100,
+    fixedDrawerPoints: 50,
+  },
+};
+
+function entriesFrom(gameId: string): DrawingEntry[] {
+  switch (gameId) {
+    case 'skribbl-arena':
+      return (wordsJson as { word: string }[]).map((entry) => ({
+        word: entry.word,
+        data: { word: entry.word },
+      }));
+    case 'one-line-one-shape':
+      return (objectsJson as { object: string }[]).map((entry) => ({
+        word: entry.object,
+        data: { object: entry.object },
+      }));
+    case 'shadow-sketch':
+      return (silhouettesJson as { name: string; path: string }[]).map((entry) => ({
+        word: entry.name,
+        data: { name: entry.name, path: entry.path },
+      }));
+    case 'draw-the-lyric':
+      return (lyricsJson as { title: string; artist: string; lyric: string }[]).map((entry) => ({
+        word: entry.title,
+        data: { title: entry.title, artist: entry.artist, lyric: entry.lyric },
+      }));
+    default:
+      return [];
+  }
+}
 
 /**
  * Socket.io gateway — PRD §8.2 event handlers on top of the Room Engine.
  * The engine is authoritative; this layer validates, coordinates broadcasts,
- * and persists best-effort (gameplay never depends on the DB). M4 adds the
- * Skribbl Arena adapter: one SkribblSession per room + its timers.
+ * and persists best-effort. M5 generalizes the Skribbl adapter into
+ * config-driven drawing games (DRAWING_CONFIGS) plus the Copycat adapter.
  */
 export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps): Server {
   const { engine, limiters } = deps;
@@ -75,8 +150,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     cors: { origin: resolveCorsOrigin() },
   });
 
-  /** roomCode → SkribblSession (M4). M5 refactors this into per-game adapters. */
-  const sessions = new Map<string, SkribblSession>();
+  /** roomCode → live game session (drawing games + copycat). */
+  const sessions = new Map<string, GameSession>();
   const timers = new Map<string, RoomTimers>();
   /** Host-provided custom word list, applied when the game starts. */
   const pendingCustomWords = new Map<string, string[]>();
@@ -104,7 +179,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     }, ROOM_GRACE_MS).unref();
   }
 
-  // --- Skribbl Arena adapter helpers (M4) -----------------------------------
+  // --- Game adapter helpers (M4/M5) -----------------------------------------
 
   function clearTimers(roomCode: string): void {
     const roomTimers = timers.get(roomCode);
@@ -123,13 +198,27 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     pendingCustomWords.delete(roomCode);
   }
 
-  function sessionOf(room: RoomState): SkribblSession | undefined {
+  function sessionOf(room: RoomState): GameSession | undefined {
     return sessions.get(room.code);
+  }
+
+  function drawingOf(room: RoomState): DrawingSession | undefined {
+    const session = sessions.get(room.code);
+    return session instanceof DrawingGameSession ? session : undefined;
+  }
+
+  function copycatOf(room: RoomState): CopycatSession | undefined {
+    const session = sessions.get(room.code);
+    return session instanceof CopycatSession ? session : undefined;
+  }
+
+  function isCopycatRoom(room: RoomState): boolean {
+    return room.gameId === 'copycat-challenge';
   }
 
   /** Socket id of the current drawer, if connected. */
   function drawerSocketId(room: RoomState): string | null {
-    const session = sessionOf(room);
+    const session = drawingOf(room);
     if (!session?.currentDrawer) {
       return null;
     }
@@ -142,33 +231,44 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   }
 
   /**
-   * Round-start for everyone (word-select has no deadline; drawing does).
-   * The 3 word choices are drawer-only: the drawer is excluded from the
-   * public emit and receives a single tailored event instead, so clients
-   * never see a choice-less round-start race.
+   * Round-start for the shared-canvas drawing games. Word-select has no
+   * deadline; drawing carries endsAt. Game-specific private fields (object,
+   * silhouette, lyric) go ONLY to the drawer; everyone else gets one event.
    */
-  function emitRoundStart(room: RoomState, phase: SkribblPhase): void {
-    const session = sessionOf(room);
+  function emitDrawingRoundStart(room: RoomState, phase: 'word-select' | 'drawing'): void {
+    const session = drawingOf(room);
     if (!session) {
       return;
     }
-    const base = {
+    const config = DRAWING_CONFIGS[room.gameId];
+    const base: Record<string, unknown> = {
       round: session.currentRound,
       totalRounds: session.totalRoundsValue,
       drawerName: session.currentDrawer,
       wordLength: phase === 'drawing' ? session.wordLength : null,
-      endsAt:
-        phase === 'drawing' && session.drawingStartedAt !== null
-          ? session.drawingStartedAt + SKRIBBL_ROUND_DURATION_MS
-          : undefined,
+      endsAt: phase === 'drawing' ? session.roundEndsAt : undefined,
     };
     const drawerId = drawerSocketId(room);
+    let privateFields: Record<string, unknown> = {};
+    if (phase === 'drawing' && session.currentEntry) {
+      const data = session.currentEntry.data;
+      if (config?.gameId === 'one-line-one-shape') {
+        privateFields = { object: data.object };
+      } else if (config?.gameId === 'shadow-sketch') {
+        privateFields = { silhouette: data.path };
+      } else if (config?.gameId === 'draw-the-lyric') {
+        privateFields = { lyric: data.lyric, artist: data.artist };
+      }
+    }
     if (phase === 'word-select' && drawerId && session.choices) {
       io.to(room.code).except(drawerId).emit(ServerEvents.roundStart, base);
       io.to(drawerId).emit(ServerEvents.roundStart, { ...base, choices: session.choices });
       return;
     }
     io.to(room.code).emit(ServerEvents.roundStart, base);
+    if (drawerId && Object.keys(privateFields).length > 0) {
+      io.to(drawerId).emit(ServerEvents.roundStart, { ...base, ...privateFields });
+    }
   }
 
   function scheduleWordSelectTimeout(room: RoomState): void {
@@ -176,7 +276,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     clearTimers(code);
     const roomTimers: RoomTimers = {
       wordSelect: setTimeout(() => {
-        const session = sessionOf(room);
+        const session = drawingOf(room);
         if (!session || session.phaseValue !== 'word-select' || !session.choices) {
           return;
         }
@@ -186,22 +286,28 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
           return;
         }
         beginDrawing(room, pick);
-      }, SKRIBBL_WORD_SELECT_TIMEOUT_MS),
+      }, DRAWING_WORD_SELECT_TIMEOUT_MS),
     };
     timers.set(code, roomTimers);
   }
 
-  function beginDrawing(room: RoomState, word: string): boolean {
-    const session = sessionOf(room);
+  function beginDrawing(room: RoomState, word?: string): boolean {
+    const session = drawingOf(room);
     if (!session) {
       return false;
     }
-    const chosen = session.chooseWord(session.currentDrawer ?? '', word);
+    let chosen: { ok: boolean; error?: string };
+    if (session.phaseValue === 'word-select' && word) {
+      chosen = session.chooseWord(session.currentDrawer ?? '', word);
+    } else if (session.phaseValue === 'word-select') {
+      chosen = session.assignWordForDirectMode();
+    } else {
+      return false;
+    }
     if (!chosen.ok) {
       return false;
     }
-    // Only the first round moves game-setup → in-progress; later rounds are
-    // already in-progress (the RoomEngine has no per-round phases).
+    // Only the first round moves game-setup → in-progress.
     if (room.phase !== 'in-progress') {
       const engineResult = engine.transition(room, 'in-progress');
       if (!engineResult.ok) {
@@ -209,38 +315,57 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       }
     }
     clearTimers(room.code);
-    emitRoundStart(room, 'drawing');
+    emitDrawingRoundStart(room, 'drawing');
     broadcastState(room);
+    const config = DRAWING_CONFIGS[room.gameId];
     const startedAt = session.drawingStartedAt;
     if (startedAt === null) {
       return false;
     }
-    const roomTimers: RoomTimers = {
-      firstHint: setTimeout(() => {
+    const roomTimers: RoomTimers = {};
+    if (config?.firstHintMs && config.secondHintMs) {
+      roomTimers.firstHint = setTimeout(() => {
+        const hints = session.letterHintsAt(Date.now());
         io.to(room.code).emit(ServerEvents.roundHint, {
           round: session.currentRound,
-          firstLetter: session.currentWord?.[0] ?? null,
+          firstLetter: hints.firstLetter,
           lastLetter: null,
         });
-      }, SKRIBBL_FIRST_HINT_MS),
-      secondHint: setTimeout(() => {
-        const hints = session.hintsAt(Date.now());
+      }, config.firstHintMs);
+      roomTimers.secondHint = setTimeout(() => {
+        const hints = session.letterHintsAt(Date.now());
         io.to(room.code).emit(ServerEvents.roundHint, {
           round: session.currentRound,
           firstLetter: hints.firstLetter,
           lastLetter: hints.lastLetter,
         });
-      }, SKRIBBL_SECOND_HINT_MS),
-      roundEnd: setTimeout(() => {
-        endRound(room);
-      }, SKRIBBL_ROUND_DURATION_MS),
-    };
+      }, config.secondHintMs);
+    }
+    if (config?.artistHintMs) {
+      roomTimers.secondHint = setTimeout(() => {
+        const artist = session.artistAt(Date.now());
+        if (artist) {
+          io.to(room.code).emit(ServerEvents.roundHint, { round: session.currentRound, artist });
+        }
+      }, config.artistHintMs);
+    }
+    if (config?.silhouetteRevealMs) {
+      roomTimers.secondHint = setTimeout(() => {
+        io.to(room.code).emit(ServerEvents.roundHint, {
+          round: session.currentRound,
+          silhouette: session.currentEntry?.data.path ?? null,
+        });
+      }, config.silhouetteRevealMs);
+    }
+    roomTimers.roundEnd = setTimeout(() => {
+      endRound(room);
+    }, config?.roundDurationMs ?? 60_000);
     timers.set(room.code, roomTimers);
     return true;
   }
 
   function endRound(room: RoomState): void {
-    const session = sessionOf(room);
+    const session = drawingOf(room);
     if (!session) {
       return;
     }
@@ -256,13 +381,13 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     const roomTimers: RoomTimers = {
       breakTimer: setTimeout(() => {
         advanceRound(room);
-      }, SKRIBBL_BREAK_MS),
+      }, 10_000),
     };
     timers.set(room.code, roomTimers);
   }
 
   function advanceRound(room: RoomState): void {
-    const session = sessionOf(room);
+    const session = drawingOf(room);
     if (!session) {
       return;
     }
@@ -275,12 +400,17 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       finishGame(room);
       return;
     }
-    emitRoundStart(room, 'word-select');
+    // Direct-mode games skip word-select: assign + start drawing immediately.
+    if (DRAWING_CONFIGS[room.gameId]?.wordMode !== 'choices') {
+      beginDrawing(room);
+      return;
+    }
+    emitDrawingRoundStart(room, 'word-select');
     scheduleWordSelectTimeout(room);
   }
 
   function finishGame(room: RoomState): void {
-    const session = sessionOf(room);
+    const session = drawingOf(room);
     if (!session) {
       return;
     }
@@ -293,14 +423,13 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     io.to(room.code).emit(ServerEvents.gameEnd, { scores, winner: session.winnerName });
     broadcastState(room);
     persistBestEffort(setRoomStatus(room.code, 'finished'), `finish ${room.code}`);
-    // Best-effort leaderboard persistence — idempotent per room+player.
     const startedAt = session.startedTimestamp;
     for (const entry of scores) {
-      const clientKey = `skribbl:${room.code}:${startedAt}:${entry.playerName}`;
+      const clientKey = `${room.gameId}:${room.code}:${startedAt}:${entry.playerName}`;
       persistBestEffort(
         getPrisma().score.create({
           data: {
-            gameId: SKRIBBL_GAME_ID,
+            gameId: room.gameId,
             playerName: entry.playerName,
             score: entry.score,
             clientKey,
@@ -309,7 +438,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         `score ${room.code} ${entry.playerName}`
       );
     }
-    logger.info({ roomCode: room.code, scores }, 'skribbl game finished');
+    logger.info({ roomCode: room.code, scores }, 'drawing game finished');
   }
 
   function restartGame(room: RoomState): void {
@@ -329,8 +458,30 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     if (!session) {
       return null;
     }
-    const hints = session.hintsAt(Date.now());
+    if (session instanceof CopycatSession) {
+      return {
+        view: session.phaseValue,
+        image: session.currentImage
+          ? { title: session.currentImage.title, url: session.currentImage.url }
+          : null,
+        drawings: session.drawings,
+        awards: session.finalAwards,
+      };
+    }
+    const hints = session.letterHintsAt(Date.now());
     const isDrawer = session.currentDrawer === requesterName;
+    const config = DRAWING_CONFIGS[room.gameId];
+    const entry = session.currentEntry;
+    let privateFields: Record<string, unknown> = {};
+    if (isDrawer && entry) {
+      if (config?.gameId === 'one-line-one-shape') {
+        privateFields = { object: entry.data.object };
+      } else if (config?.gameId === 'shadow-sketch') {
+        privateFields = { silhouette: entry.data.path };
+      } else if (config?.gameId === 'draw-the-lyric') {
+        privateFields = { lyric: entry.data.lyric, artist: entry.data.artist };
+      }
+    }
     return {
       view: session.phaseValue,
       round: session.currentRound,
@@ -340,16 +491,96 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       choices: session.phaseValue === 'word-select' && isDrawer ? session.choices : null,
       firstLetter: hints.firstLetter,
       lastLetter: hints.lastLetter,
-      endsAt:
-        session.phaseValue === 'drawing' && session.drawingStartedAt !== null
-          ? session.drawingStartedAt + SKRIBBL_ROUND_DURATION_MS
-          : null,
+      endsAt: session.roundEndsAt,
       scores: session.scores,
       strokes: session.strokesLog,
       summary: session.phaseValue === 'round-results' ? session.lastRoundSummary : null,
       finalScores: session.phaseValue === 'game-end' ? session.finalScores : null,
       winner: session.phaseValue === 'game-end' ? session.winnerName : null,
+      ...privateFields,
     };
+  }
+
+  // --- Copycat adapter helpers (M5) -----------------------------------------
+
+  function startCopycat(room: RoomState): boolean {
+    clearRoomGame(room.code);
+    const session = new CopycatSession(copycatImagesJson as CopycatImage[]);
+    const players = [...room.players.values()]
+      .filter((player) => player.connected)
+      .map((player) => player.name);
+    const started = session.start(players);
+    if (!started.ok) {
+      return false;
+    }
+    sessions.set(room.code, session);
+    const endsAt = Date.now() + COPYCAT_REVEAL_MS;
+    io.to(room.code).emit(ServerEvents.roundStart, {
+      phase: 'image-reveal',
+      image: { title: started.value.image.title, url: started.value.image.url },
+      endsAt,
+    });
+    const roomTimers: RoomTimers = {
+      reveal: setTimeout(() => {
+        const begun = session.beginDrawing();
+        if (!begun.ok) {
+          return;
+        }
+        const drawEndsAt = Date.now() + COPYCAT_DRAW_MS;
+        io.to(room.code).emit(ServerEvents.roundStart, {
+          phase: 'drawing',
+          endsAt: drawEndsAt,
+        });
+        timers.set(room.code, {
+          drawEnd: setTimeout(() => {
+            openGallery(room);
+          }, COPYCAT_DRAW_MS),
+        });
+      }, COPYCAT_REVEAL_MS),
+    };
+    timers.set(room.code, roomTimers);
+    return true;
+  }
+
+  function openGallery(room: RoomState): void {
+    const session = copycatOf(room);
+    if (!session || session.phaseValue !== 'drawing') {
+      return;
+    }
+    const begun = session.beginVoting();
+    if (!begun.ok) {
+      return;
+    }
+    clearTimers(room.code);
+    io.to(room.code).emit(ServerEvents.roundEnd, { phase: 'gallery', images: session.drawings });
+    const endsAt = Date.now() + COPYCAT_VOTE_MS;
+    io.to(room.code).emit(ServerEvents.voteStart, { categories: COPYCAT_AWARDS, endsAt });
+    timers.set(room.code, {
+      voteEnd: setTimeout(() => {
+        finishVoting(room);
+      }, COPYCAT_VOTE_MS),
+    });
+  }
+
+  function finishVoting(room: RoomState): void {
+    const session = copycatOf(room);
+    if (!session || session.phaseValue !== 'voting') {
+      return;
+    }
+    const finished = session.finish();
+    if (!finished.ok) {
+      return;
+    }
+    clearTimers(room.code);
+    const engineResult = engine.transition(room, 'results');
+    if (!engineResult.ok) {
+      return;
+    }
+    io.to(room.code).emit(ServerEvents.voteReveal, { awards: finished.value.awards });
+    io.to(room.code).emit(ServerEvents.gameEnd, { awards: finished.value.awards });
+    broadcastState(room);
+    persistBestEffort(setRoomStatus(room.code, 'finished'), `finish ${room.code}`);
+    logger.info({ roomCode: room.code, awards: finished.value.awards }, 'copycat finished');
   }
 
   io.on('connection', (socket) => {
@@ -398,15 +629,14 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       await socket.join(room.code);
       persistBestEffort(upsertRoomPlayer(room.code, player.name), `join ${room.code}`);
 
-      // Mid-game joins join the live session so they can guess from the
-      // current round on (they never draw — the rotation is fixed at start).
+      // Mid-game joins join the live session so they can guess/vote/draw.
       const session = sessions.get(room.code);
-      if (session && session.phaseValue !== 'game-end') {
+      if (session instanceof DrawingGameSession && session.phaseValue !== 'game-end') {
         const added = session.addPlayer(player.name);
         if (!added.ok) {
           logger.warn(
-            { roomCode: room.code, playerName: player.name, error: added.error },
-            'could not add late joiner to session'
+            { roomCode: room.code, error: added.error },
+            'late join to drawing session failed'
           );
         }
       }
@@ -462,11 +692,6 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({ ok: false, error: 'INVALID_ROOM_CODE' });
         return;
       }
-      // Only games with a shipped round adapter may leave the lobby — without
-      // this gate, unimplemented games stranded rooms in game-setup with
-      // nothing taking over ("Game in progress…" dead end). Solo Skribbl
-      // rooms are allowed (1 player = testing affordance; friends can join
-      // mid-game).
       const room = engine.getRoom(roomCode);
       if (!room) {
         ack?.({ ok: false, error: 'ROOM_NOT_FOUND' });
@@ -488,14 +713,22 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       broadcastState(result.value);
       logger.info({ roomCode: result.value.code }, 'game started');
 
-      // M4: Skribbl Arena — spin up the session and round 1 word-select.
-      if (result.value.gameId === SKRIBBL_GAME_ID) {
+      if (isCopycatRoom(result.value)) {
+        if (!startCopycat(result.value)) {
+          ack?.({ ok: false, error: 'NOT_ENOUGH_PLAYERS' });
+          return;
+        }
+      } else if (DRAWING_CONFIGS[result.value.gameId]) {
+        // Capture host-pasted words BEFORE clearing the room game state.
+        const pending = pendingCustomWords.get(result.value.code);
         clearRoomGame(result.value.code);
-        const session = new SkribblSession();
+        const session = new DrawingGameSession(
+          entriesFrom(result.value.gameId),
+          DRAWING_CONFIGS[result.value.gameId]!
+        );
         const players = [...result.value.players.values()]
           .filter((player) => player.connected)
           .map((player) => player.name);
-        const pending = pendingCustomWords.get(result.value.code);
         if (pending) {
           const applied = session.setCustomWords(pending);
           if (!applied.ok) {
@@ -509,13 +742,18 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
           return;
         }
         sessions.set(result.value.code, session);
-        emitRoundStart(result.value, 'word-select');
-        scheduleWordSelectTimeout(result.value);
+        // Direct-mode games (one-line/shadow/lyric) skip word-select.
+        if (DRAWING_CONFIGS[result.value.gameId]!.wordMode === 'choices') {
+          emitDrawingRoundStart(result.value, 'word-select');
+          scheduleWordSelectTimeout(result.value);
+        } else {
+          beginDrawing(result.value);
+        }
       }
       ack?.({ ok: true, state: engine.toPublicState(result.value) });
     });
 
-    // --- M4 Skribbl Arena events --------------------------------------------
+    // --- Shared-canvas drawing game events (M4/M5) ---------------------------
 
     socket.on(ClientEvents.setCustomWords, (payload: unknown, ack?: Ack) => {
       if (
@@ -526,7 +764,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         return;
       }
       const room = roomOf(socket);
-      if (!room || room.gameId !== SKRIBBL_GAME_ID) {
+      if (!room || !DRAWING_CONFIGS[room.gameId]) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -544,8 +782,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: 'words must be an array' });
         return;
       }
-      // Validate with the same rules the session applies at start.
-      const probe = new SkribblSession();
+      const probe = new DrawingGameSession([], DRAWING_CONFIGS[room.gameId]!);
       const validated = probe.setCustomWords(raw);
       if (!validated.ok) {
         ack?.({
@@ -569,11 +806,11 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         return;
       }
       const room = roomOf(socket);
-      if (!room || room.gameId !== SKRIBBL_GAME_ID) {
+      if (!room || !DRAWING_CONFIGS[room.gameId]) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
-      const session = sessionOf(room);
+      const session = drawingOf(room);
       if (!session) {
         ack?.({ ok: false, error: 'NOT_STARTED' });
         return;
@@ -592,7 +829,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
 
     socket.on(ClientEvents.drawStroke, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
-      if (!room || room.gameId !== SKRIBBL_GAME_ID) {
+      if (!room || !DRAWING_CONFIGS[room.gameId]) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -605,7 +842,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: input.error });
         return;
       }
-      const session = sessionOf(room);
+      const session = drawingOf(room);
       if (!session) {
         ack?.({ ok: false, error: 'NOT_STARTED' });
         return;
@@ -615,27 +852,22 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
-      if (player.name !== session.currentDrawer) {
-        ack?.({ ok: false, error: 'NOT_DRAWER' });
-        return;
-      }
       const added = session.addStroke(player.name, input.value);
       if (!added.ok) {
         ack?.({ ok: false, error: added.error });
         return;
       }
-      // Sender drew locally already — broadcast to the rest of the room.
       socket.to(room.code).emit(ServerEvents.drawStroke, input.value);
       ack?.({ ok: true });
     });
 
     socket.on(ClientEvents.undoStroke, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
-      if (!room || room.gameId !== SKRIBBL_GAME_ID) {
+      if (!room || !DRAWING_CONFIGS[room.gameId]) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
-      const session = sessionOf(room);
+      const session = drawingOf(room);
       if (!session) {
         ack?.({ ok: false, error: 'NOT_STARTED' });
         return;
@@ -651,9 +883,6 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         return;
       }
       if (undone.value.strokeId !== null) {
-        // Broadcast to the whole room INCLUDING the drawer: the drawer's own
-        // strokes live in their local log too, so the same strokeId removal
-        // keeps every client (and the replay) consistent.
         io.to(room.code).emit(ServerEvents.undoStroke, { strokeId: undone.value.strokeId });
       }
       ack?.({ ok: true, strokeId: undone.value.strokeId });
@@ -661,11 +890,11 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
 
     socket.on(ClientEvents.clearCanvas, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
-      if (!room || room.gameId !== SKRIBBL_GAME_ID) {
+      if (!room || !DRAWING_CONFIGS[room.gameId]) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
-      const session = sessionOf(room);
+      const session = drawingOf(room);
       if (!session) {
         ack?.({ ok: false, error: 'NOT_STARTED' });
         return;
@@ -680,9 +909,34 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({ ok: false, error: cleared.error });
         return;
       }
-      // Same reasoning as undo: everyone (including the drawer) clears.
       io.to(room.code).emit(ServerEvents.clearCanvas, {});
       ack?.({ ok: true });
+    });
+
+    /** One Line, One Shape: every pen lift deducts 10s (server-authoritative). */
+    socket.on(ClientEvents.strokeLift, (payload: unknown, ack?: Ack) => {
+      const room = roomOf(socket);
+      if (!room || !DRAWING_CONFIGS[room.gameId]) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const session = drawingOf(room);
+      if (!session) {
+        ack?.({ ok: false, error: 'NOT_STARTED' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player || player.name !== session.currentDrawer) {
+        ack?.({ ok: false, error: 'NOT_DRAWER' });
+        return;
+      }
+      const penalized = session.applyLiftPenalty();
+      if (!penalized.ok) {
+        ack?.({ ok: false, error: penalized.error });
+        return;
+      }
+      io.to(room.code).emit(ServerEvents.roundTimer, { endsAt: penalized.value.endsAt });
+      ack?.({ ok: true, endsAt: penalized.value.endsAt });
     });
 
     socket.on(ClientEvents.sendGuess, (payload: unknown, ack?: Ack) => {
@@ -692,7 +946,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         return;
       }
       const room = roomOf(socket);
-      if (!room || room.gameId !== SKRIBBL_GAME_ID) {
+      if (!room || !DRAWING_CONFIGS[room.gameId]) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -705,8 +959,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
-      const session = sessionOf(room);
-      // No live session, or not the drawing phase → plain chat message.
+      const session = drawingOf(room);
       if (!session || session.phaseValue !== 'drawing') {
         io.to(room.code).emit(ServerEvents.chatMessage, {
           kind: 'message',
@@ -741,10 +994,9 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         io.to(room.code).emit(ServerEvents.chatMessage, {
           kind: 'system',
           playerName: 'System',
-          message: `${player.name} guessed the word!`,
+          message: `${player.name} got it!`,
           at: Date.now(),
         });
-        // Everyone solved it → end the round early (server-authoritative).
         if (session.allGuessed()) {
           endRound(room);
         }
@@ -754,10 +1006,10 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true });
     });
 
-    /** Host-only: cut the current drawing phase short (solo testing, stalled rounds). */
+    /** Host-only: cut the current drawing phase short. */
     socket.on(ClientEvents.endRoundNow, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
-      if (!room || room.gameId !== SKRIBBL_GAME_ID) {
+      if (!room || !DRAWING_CONFIGS[room.gameId]) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -766,7 +1018,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({ ok: false, error: 'NOT_HOST' });
         return;
       }
-      const session = sessionOf(room);
+      const session = drawingOf(room);
       if (!session || session.phaseValue !== 'drawing') {
         ack?.({ ok: false, error: 'WRONG_PHASE' });
         return;
@@ -777,7 +1029,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
 
     socket.on(ClientEvents.nextRound, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
-      if (!room || room.gameId !== SKRIBBL_GAME_ID) {
+      if (!room || !DRAWING_CONFIGS[room.gameId]) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -786,7 +1038,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({ ok: false, error: 'NOT_HOST' });
         return;
       }
-      const session = sessionOf(room);
+      const session = drawingOf(room);
       if (!session || session.phaseValue !== 'round-results') {
         ack?.({ ok: false, error: 'WRONG_PHASE' });
         return;
@@ -798,7 +1050,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
 
     socket.on(ClientEvents.restartGame, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
-      if (!room || room.gameId !== SKRIBBL_GAME_ID) {
+      if (!room) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -815,6 +1067,88 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true });
     });
 
+    // --- Copycat Challenge events (M5) --------------------------------------
+
+    socket.on(ClientEvents.submitDrawing, (payload: unknown, ack?: Ack) => {
+      const input = validateRoomCodeInput(payload);
+      if (!input.ok) {
+        ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: input.error });
+        return;
+      }
+      const room = roomOf(socket);
+      if (!room || !isCopycatRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const session = copycatOf(room);
+      if (!session) {
+        ack?.({ ok: false, error: 'NOT_STARTED' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const image = (payload as { image?: unknown }).image;
+      if (typeof image !== 'string') {
+        ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: 'image must be a data URL string' });
+        return;
+      }
+      const submitted = session.submitDrawing(player.name, image);
+      if (!submitted.ok) {
+        ack?.({ ok: false, error: submitted.error });
+        return;
+      }
+      // Everyone submitted → skip the remaining draw time.
+      if (submitted.value.allSubmitted) {
+        clearTimers(room.code);
+        openGallery(room);
+      }
+      ack?.({ ok: true, allSubmitted: submitted.value.allSubmitted });
+    });
+
+    socket.on(ClientEvents.castVote, (payload: unknown, ack?: Ack) => {
+      const input = validateRoomCodeInput(payload);
+      if (!input.ok) {
+        ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: input.error });
+        return;
+      }
+      const room = roomOf(socket);
+      if (!room) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const session = copycatOf(room);
+      if (session) {
+        const category = (payload as { category?: unknown }).category;
+        const target = (payload as { target?: unknown }).target;
+        if (typeof category !== 'string' || typeof target !== 'string') {
+          ack?.({ ok: false, error: 'INVALID_PAYLOAD' });
+          return;
+        }
+        const voted = session.submitVote(player.name, category as CopycatAward, target);
+        if (!voted.ok) {
+          ack?.({ ok: false, error: voted.error });
+          return;
+        }
+        const tally = session.tally(category as CopycatAward);
+        io.to(room.code).emit(ServerEvents.voteUpdate, { category, votes: tally });
+        if (voted.value.allVoted) {
+          clearTimers(room.code);
+          finishVoting(room);
+        }
+        ack?.({ ok: true });
+        return;
+      }
+      ack?.({ ok: false, error: 'NOT_STARTED' });
+    });
+
     socket.on(ClientEvents.gameResync, (payload: unknown, ack?: Ack) => {
       const input = validateRoomCodeInput(payload);
       if (!input.ok) {
@@ -822,7 +1156,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         return;
       }
       const room = engine.getRoom(input.value.roomCode);
-      if (!room || room.gameId !== SKRIBBL_GAME_ID) {
+      if (!room) {
         ack?.({ ok: false, error: 'ROOM_NOT_FOUND' });
         return;
       }
@@ -882,7 +1216,6 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         if (result.value.hostChangedTo) {
           io.to(room.code).emit(ServerEvents.hostChanged, { hostName: result.value.hostChangedTo });
         }
-        // No connected players left → drop the game and let grace evict the room.
         if (room.players.size === 0) {
           clearRoomGame(room.code);
           scheduleEviction();

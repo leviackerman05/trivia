@@ -20,6 +20,15 @@ export const ClientEvents = {
   chatMessage: 'chat-message',
   // PRD §8.2 — Voting
   castVote: 'cast-vote',
+  // Additive (M5 — one-line lift penalty + Copycat private drawings)
+  strokeLift: 'stroke-lift',
+  submitDrawing: 'submit-drawing',
+  // Additive (M6 — voting games: player-submitted prompts)
+  submitPrompt: 'submit-prompt',
+  // Additive (M9 — Charades + Guess Who)
+  markCorrect: 'mark-correct',
+  askQuestion: 'ask-question',
+  answerQuestion: 'answer-question',
   // Additive: rejoin mid-game resync
   gameResync: 'game-resync',
   // Additive (M4 — Skribbl Arena round lifecycle)
@@ -63,6 +72,9 @@ export const ServerEvents = {
   // Additive — voting
   voteUpdate: 'vote-update',
   voteReveal: 'vote-reveal',
+  // Additive (M5) — round timer adjustments + Copycat gallery/voting phases
+  roundTimer: 'round-timer',
+  voteStart: 'vote-start',
   // Additive — errors (typed)
   gameError: 'game-error',
 } as const;

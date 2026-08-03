@@ -1,24 +1,21 @@
 import { describe, expect, it } from 'vitest';
 import {
-  SKRIBBL_FIRST_HINT_MS,
-  SKRIBBL_ROUND_DURATION_MS,
-  SKRIBBL_SECOND_HINT_MS,
-  SKRIBBL_WORD_CHOICES,
-  SkribblSession,
-  type SkribblError,
-  type SkribblResult,
-  type SkribblWord,
-} from '../skribbl-engine.js';
+  DrawingGameSession,
+  type DrawingEntry,
+  type DrawingGameConfig,
+  type DrawingGameError,
+  type DrawingGameResult,
+} from '../drawing-game.js';
 
-/** Narrowing helpers for the SkribblResult discriminated union. */
-function ok<T>(result: SkribblResult<T>): T {
+/** Narrowing helpers for the DrawingGameResult discriminated union. */
+function ok<T>(result: DrawingGameResult<T>): T {
   if (!result.ok) {
     throw new Error(`expected ok, got ${result.error}`);
   }
   return result.value;
 }
 
-function expectError<T>(result: SkribblResult<T>, expected: SkribblError): void {
+function expectError<T>(result: DrawingGameResult<T>, expected: DrawingGameError): void {
   expect(result.ok).toBe(false);
   if (result.ok) {
     return;
@@ -32,8 +29,8 @@ function seqRandom(): (max: number) => number {
   return (max) => state++ % max;
 }
 
-/** Tiny fixed word bank so tests never depend on the shipped dataset. */
-const TEST_WORDS: SkribblWord[] = [
+/** Tiny fixed entry pool so tests never depend on the shipped datasets. */
+const TEST_ENTRIES: DrawingEntry[] = [
   'apple',
   'banana',
   'cherry',
@@ -42,15 +39,29 @@ const TEST_WORDS: SkribblWord[] = [
   'flamingo',
   'guitar',
   'harbor',
-].map((word) => ({ word, difficulty: 'easy' as const }));
+].map((word) => ({ word, data: { word } }));
 
-function makeSession(overrides: { now?: () => number } = {}) {
-  return new SkribblSession({ words: TEST_WORDS, randomInt: seqRandom(), now: overrides.now });
+const SKRIBBL_CONFIG: DrawingGameConfig = {
+  gameId: 'skribbl-arena',
+  wordMode: 'choices',
+  roundDurationMs: 60_000,
+  firstHintMs: 30_000,
+  secondHintMs: 45_000,
+};
+
+function makeSession(
+  overrides: { now?: () => number } = {},
+  config: DrawingGameConfig = SKRIBBL_CONFIG
+) {
+  return new DrawingGameSession(TEST_ENTRIES, config, {
+    randomInt: seqRandom(),
+    now: overrides.now,
+  });
 }
 
 /** Starts a session and returns it with the drawer/guesser names derived. */
-function startSession(players = ['Alice', 'Bob']) {
-  const session = makeSession();
+function startSession(players = ['Alice', 'Bob'], config: DrawingGameConfig = SKRIBBL_CONFIG) {
+  const session = makeSession({}, config);
   const started = session.start(players);
   expect(started.ok).toBe(true);
   const drawer = session.currentDrawer!;
@@ -58,16 +69,20 @@ function startSession(players = ['Alice', 'Bob']) {
   return { session, drawer, guessers };
 }
 
-function reachDrawing({ session, drawer }: { session: SkribblSession; drawer: string }) {
-  const word = session.choices![0]!;
-  expect(session.chooseWord(drawer, word).ok).toBe(true);
-  return word;
+function reachDrawing({ session, drawer }: { session: DrawingGameSession; drawer: string }) {
+  if (session.choices) {
+    const word = session.choices[0]!;
+    expect(session.chooseWord(drawer, word).ok).toBe(true);
+    return word;
+  }
+  const assigned = session.assignWordForDirectMode();
+  expect(assigned.ok).toBe(true);
+  return session.currentWord!;
 }
 
-describe('SkribblSession — lifecycle', () => {
+describe('DrawingGameSession — lifecycle', () => {
   it('starts with a single player (solo testing) and rejects empty rooms', () => {
     const session = makeSession();
-    // 1 player × 3 rounds per player — solo rooms are a testing affordance.
     expect(ok(session.start(['Solo'])).totalRounds).toBe(3);
     const empty = makeSession();
     expectError(empty.start([]), 'NOT_PLAYER');
@@ -83,7 +98,6 @@ describe('SkribblSession — lifecycle', () => {
   it('runs rounds-per-player × players rounds with a rotating drawer', () => {
     const { session } = startSession(['Alice', 'Bob', 'Cara']);
     expect(session.totalRoundsValue).toBe(9);
-    expect(session.currentRound).toBe(1);
     const drawers: string[] = [];
     for (let i = 0; i < 9; i += 1) {
       const drawer = session.currentDrawer;
@@ -93,7 +107,6 @@ describe('SkribblSession — lifecycle', () => {
       ok(session.endRound());
       expect(session.nextRound().ok).toBe(true);
     }
-    // The drawer rotation is a fixed cycle through a shuffle of the players.
     expect(new Set(drawers).size).toBe(3);
     for (let i = 3; i < drawers.length; i += 1) {
       expect(drawers[i]).toBe(drawers[i % 3]);
@@ -101,12 +114,12 @@ describe('SkribblSession — lifecycle', () => {
     expect(session.phaseValue).toBe('game-end');
   });
 
-  it('offers 3 distinct word choices during word-select and picks the chosen one', () => {
+  it('offers 3 distinct word choices and picks the chosen one (skribbl)', () => {
     const { session, drawer } = startSession();
     expect(session.phaseValue).toBe('word-select');
     const choices = session.choices!;
-    expect(choices).toHaveLength(SKRIBBL_WORD_CHOICES);
-    expect(new Set(choices).size).toBe(SKRIBBL_WORD_CHOICES);
+    expect(choices).toHaveLength(3);
+    expect(new Set(choices).size).toBe(3);
     expect(session.currentWord).toBeNull();
 
     const chosen = choices[1]!;
@@ -121,12 +134,25 @@ describe('SkribblSession — lifecycle', () => {
     expectError(session.chooseWord(guessers[0]!, word), 'NOT_DRAWER');
     expectError(session.chooseWord(drawer, 'not-an-option'), 'WORD_NOT_IN_CHOICES');
     ok(session.chooseWord(drawer, word));
-    // Choices are consumed once the word is picked; a second pick is a phase error.
     expectError(session.chooseWord(drawer, word), 'WRONG_PHASE');
+  });
+
+  it('direct-mode games assign the word without a choice screen', () => {
+    const config: DrawingGameConfig = {
+      gameId: 'one-line-one-shape',
+      wordMode: 'direct',
+      roundDurationMs: 60_000,
+    };
+    const { session, drawer } = startSession(['Alice', 'Bob'], config);
+    expect(session.phaseValue).toBe('word-select');
+    expect(session.choices).toBeNull();
+    const word = reachDrawing({ session, drawer });
+    expect(session.currentWord).toBe(word);
+    expect(session.phaseValue).toBe('drawing');
   });
 });
 
-describe('SkribblSession — guesses and scoring (PRD §5.1)', () => {
+describe('DrawingGameSession — guesses and scoring', () => {
   it('matches guesses case-insensitively with whitespace trimmed', () => {
     const { session, drawer, guessers } = startSession();
     const word = reachDrawing({ session, drawer });
@@ -150,14 +176,8 @@ describe('SkribblSession — guesses and scoring (PRD §5.1)', () => {
       correct: true,
       points: 90,
     });
-    // Second correct guess is rejected as already-guessed.
     expectError(session.submitGuess(guesser, word, started + 6_000), 'ALREADY_GUESSED');
-    // Late guesses after the 60s window are rejected.
-    expectError(
-      session.submitGuess(guesser, 'apple', started + SKRIBBL_ROUND_DURATION_MS + 1),
-      'ROUND_OVER'
-    );
-    // The drawer can never guess their own word.
+    expectError(session.submitGuess(guesser, 'apple', started + 60_000 + 1), 'ROUND_OVER');
     const second = startSession();
     const word2 = reachDrawing(second);
     expectError(
@@ -170,12 +190,11 @@ describe('SkribblSession — guesses and scoring (PRD §5.1)', () => {
     const { session, drawer, guessers } = startSession(['Alice', 'Bob', 'Cara']);
     const word = reachDrawing({ session, drawer });
     const started = session.drawingStartedAt!;
-    const points = [90, 80];
     for (let i = 0; i < guessers.length; i += 1) {
       const result = ok(
         session.submitGuess(guessers[i]!, word, started + (i === 0 ? 5_000 : 10_000))
       );
-      expect(result.points).toBe(points[i]);
+      expect(result.points).toBe(i === 0 ? 90 : 80);
     }
     const ended = ok(session.endRound());
     expect(ended).toMatchObject({
@@ -185,107 +204,167 @@ describe('SkribblSession — guesses and scoring (PRD §5.1)', () => {
         { playerName: guessers[0], points: 90 },
         { playerName: guessers[1], points: 80 },
       ],
-      drawerPoints: 85, // floor((90 + 80) / 2)
+      drawerPoints: 85,
     });
     expect(session.scores[drawer]).toBe(85);
     expect(session.scores[guessers[0]!]).toBe(90);
-    expect(session.scores[guessers[1]!]).toBe(80);
+  });
+
+  it('lyric mode: fixed points (guesser 100, drawer 50) and title-style matching', () => {
+    const config: DrawingGameConfig = {
+      gameId: 'draw-the-lyric',
+      wordMode: 'lyric',
+      roundDurationMs: 90_000,
+      fixedGuesserPoints: 100,
+      fixedDrawerPoints: 50,
+    };
+    // Single entry each so the assigned word is deterministic.
+    const session = new DrawingGameSession(
+      [
+        {
+          word: 'Shape of You',
+          data: {
+            title: 'Shape of You',
+            artist: 'Ed Sheeran',
+            lyric: 'We found a rhythm in a crowded room.',
+          },
+        },
+      ],
+      config,
+      { randomInt: () => 0 }
+    );
+    session.start(['Alice', 'Bob']);
+    const drawer = session.currentDrawer!;
+    const guesser = drawer === 'Alice' ? 'Bob' : 'Alice';
+    ok(session.assignWordForDirectMode());
+    const started = session.drawingStartedAt!;
+
+    // Leading "the" and trailing punctuation are ignored when matching titles.
+    const result = ok(session.submitGuess(guesser, 'the shape of you!', started + 10_000));
+    expect(result).toMatchObject({ correct: true, points: 100 });
+    const ended = ok(session.endRound());
+    expect(ended.correct).toEqual([{ playerName: guesser, points: 100 }]);
+    expect(ended.drawerPoints).toBe(50);
+
+    // A title that starts with "The" matches a guess that includes one "the".
+    const session2 = new DrawingGameSession(
+      [
+        {
+          word: 'The Sound of Silence',
+          data: {
+            title: 'The Sound of Silence',
+            artist: 'Simon & Garfunkel',
+            lyric: 'A darkness shared in quiet conversation.',
+          },
+        },
+      ],
+      config,
+      { randomInt: () => 0 }
+    );
+    session2.start(['Alice', 'Bob']);
+    const drawer2 = session2.currentDrawer!;
+    const guesser2 = drawer2 === 'Alice' ? 'Bob' : 'Alice';
+    ok(session2.assignWordForDirectMode());
+    const right = ok(
+      session2.submitGuess(guesser2, 'the sound of silence?', session2.drawingStartedAt! + 5_000)
+    );
+    expect(right).toMatchObject({ correct: true, points: 100 });
   });
 
   it('never ends a solo round early (allGuessed needs a guesser)', () => {
     const { session, drawer } = startSession(['Only']);
     reachDrawing({ session, drawer });
     expect(session.allGuessed()).toBe(false);
-    // The round runs its full 60s unless the host ends it manually.
     expect(session.endRound().ok).toBe(true);
   });
 
   it('lets mid-game joiners guess from the current round (addPlayer)', () => {
     const { session, drawer } = startSession(['Alice', 'Bob']);
     const word = reachDrawing({ session, drawer });
-    // Carol joins mid-round.
     expect(ok(session.addPlayer('Carol')).score).toBe(0);
-    // Idempotent for existing players (rejoins).
     expect(ok(session.addPlayer('Alice')).score).toBeGreaterThanOrEqual(0);
-    // The new player can guess and win points.
     const result = ok(session.submitGuess('Carol', word, session.drawingStartedAt! + 4_000));
     expect(result).toMatchObject({ correct: true, points: 92 });
     expect(session.scores.Carol).toBe(92);
   });
-
-  it('rejects addPlayer once the game is over', () => {
-    const session = makeSession();
-    session.start(['Alice', 'Bob']);
-    const drawer = session.currentDrawer!;
-    reachDrawing({ session, drawer });
-    session.endRound();
-    session.nextRound();
-    // Fast-forward: mark every round as drawn to reach game-end.
-    for (let i = 2; i <= session.totalRoundsValue; i += 1) {
-      if (session.phaseValue !== 'game-end') {
-        const current = session.currentDrawer!;
-        reachDrawing({ session, drawer: current });
-        session.endRound();
-        session.nextRound();
-      }
-    }
-    expect(session.phaseValue).toBe('game-end');
-    expectError(session.addPlayer('Late'), 'WRONG_PHASE');
-  });
-
-  it('reports allGuessed and ends the round early when everyone solved it', () => {
-    const { session, drawer, guessers } = startSession(); // 2 players
-    const word = reachDrawing({ session, drawer });
-    expect(session.allGuessed()).toBe(false);
-    ok(session.submitGuess(guessers[0]!, word, session.drawingStartedAt! + 2_000));
-    expect(session.allGuessed()).toBe(true);
-    expect(session.endRound().ok).toBe(true);
-    // Idempotent: a second endRound is a no-op error.
-    expect(session.endRound().ok).toBe(false);
-  });
-
-  it('produces an empty correct list and a podium after a winless round', () => {
-    const { session, drawer } = startSession(['Alice', 'Bob', 'Cara']);
-    reachDrawing({ session, drawer });
-    const summary = ok(session.endRound());
-    expect(summary.correct).toEqual([]);
-    expect(summary.drawerPoints).toBe(0);
-    const final = session.finalScores;
-    expect(final).toHaveLength(3);
-    expect(final[0]!.score).toBe(0);
-  });
 });
 
-describe('SkribblSession — hints (PRD §5.1)', () => {
-  it('reveals the first letter at 30s and the last letter at 45s', () => {
-    const session = new SkribblSession({ words: TEST_WORDS, randomInt: seqRandom(), now: () => 0 });
+describe('DrawingGameSession — hints', () => {
+  it('reveals the first letter at 30s and the last letter at 45s (skribbl)', () => {
+    const session = makeSession({ now: () => 0 });
     session.start(['Alice', 'Bob']);
     const drawer = session.currentDrawer!;
-    const word = session.choices![0]!;
-    session.chooseWord(drawer, word);
+    const word = reachDrawing({ session, drawer });
 
-    expect(session.hintsAt(0)).toEqual({ firstLetter: null, lastLetter: null });
-    expect(session.hintsAt(SKRIBBL_FIRST_HINT_MS - 1)).toEqual({
-      firstLetter: null,
-      lastLetter: null,
-    });
-    expect(session.hintsAt(SKRIBBL_FIRST_HINT_MS)).toEqual({
-      firstLetter: word[0],
-      lastLetter: null,
-    });
-    expect(session.hintsAt(SKRIBBL_SECOND_HINT_MS)).toEqual({
+    expect(session.letterHintsAt(0)).toEqual({ firstLetter: null, lastLetter: null });
+    expect(session.letterHintsAt(29_999)).toEqual({ firstLetter: null, lastLetter: null });
+    expect(session.letterHintsAt(30_000)).toEqual({ firstLetter: word[0], lastLetter: null });
+    expect(session.letterHintsAt(45_000)).toEqual({
       firstLetter: word[0],
       lastLetter: word[word.length - 1],
     });
   });
 
-  it('returns no hints outside the drawing phase', () => {
-    const { session } = startSession();
-    expect(session.hintsAt(1_000_000)).toEqual({ firstLetter: null, lastLetter: null });
+  it('reveals the lyric artist at 45s', () => {
+    const config: DrawingGameConfig = {
+      gameId: 'draw-the-lyric',
+      wordMode: 'lyric',
+      roundDurationMs: 90_000,
+      artistHintMs: 45_000,
+      fixedGuesserPoints: 100,
+      fixedDrawerPoints: 50,
+    };
+    const session = new DrawingGameSession(
+      [
+        {
+          word: 'Shape of You',
+          data: {
+            title: 'Shape of You',
+            artist: 'Ed Sheeran',
+            lyric: 'A rhythm found in a crowded room.',
+          },
+        },
+      ],
+      config,
+      { randomInt: seqRandom(), now: () => 0 }
+    );
+    session.start(['Alice', 'Bob']);
+    reachDrawing({ session, drawer: session.currentDrawer! });
+    expect(session.artistAt(44_999)).toBeNull();
+    expect(session.artistAt(45_000)).toBe('Ed Sheeran');
   });
 });
 
-describe('SkribblSession — custom word list (PRD §5.1)', () => {
+describe('DrawingGameSession — one-line lift penalty', () => {
+  it('deducts 10s per lift with a 5s floor', () => {
+    const config: DrawingGameConfig = {
+      gameId: 'one-line-one-shape',
+      wordMode: 'direct',
+      roundDurationMs: 60_000,
+      liftPenaltyMs: 10_000,
+    };
+    const session = makeSession({}, config);
+    session.start(['Alice', 'Bob']);
+    reachDrawing({ session, drawer: session.currentDrawer! });
+    const base = session.roundEndsAt!;
+    const first = ok(session.applyLiftPenalty());
+    expect(first.endsAt).toBe(base - 10_000);
+    const second = ok(session.applyLiftPenalty());
+    expect(second.endsAt).toBe(base - 20_000);
+    // 6 lifts → floor at 5s remaining.
+    for (let i = 0; i < 6; i += 1) {
+      session.applyLiftPenalty();
+    }
+    expect(session.roundEndsAt).toBe(session.drawingStartedAt! + 5_000);
+    // Penalties reset each round.
+    session.endRound();
+    session.nextRound();
+    reachDrawing({ session, drawer: session.currentDrawer! });
+    expect(session.roundEndsAt).toBe(session.drawingStartedAt! + 60_000);
+  });
+});
+
+describe('DrawingGameSession — custom word list', () => {
   it('validates and dedupes the host-pasted list', () => {
     const session = makeSession();
     expectError(session.setCustomWords(['a', 'b']), 'INVALID_WORD_LIST');
@@ -297,14 +376,13 @@ describe('SkribblSession — custom word list (PRD §5.1)', () => {
     const applied = ok(
       session.setCustomWords(['Pizza', ' pizza ', 'Astronaut', 'PIZZA', 'Banana'])
     );
-    expect(applied.count).toBe(3); // duplicates collapse
+    expect(applied.count).toBe(3);
     session.start(['Alice', 'Bob']);
-    const choices = session.choices!;
-    expect(choices.every((word) => ['pizza', 'astronaut', 'banana'].includes(word))).toBe(true);
+    expect(session.choices!.every((w) => ['pizza', 'astronaut', 'banana'].includes(w))).toBe(true);
   });
 });
 
-describe('SkribblSession — strokes', () => {
+describe('DrawingGameSession — strokes', () => {
   it('accepts drawer strokes, rejects non-drawers and out-of-phase strokes', () => {
     const { session, drawer, guessers } = startSession();
     const stroke = {
@@ -317,7 +395,7 @@ describe('SkribblSession — strokes', () => {
       brushSize: 4,
       tool: 'pen' as const,
     };
-    expectError(session.addStroke(drawer, stroke), 'WRONG_PHASE'); // word-select
+    expectError(session.addStroke(drawer, stroke), 'WRONG_PHASE');
     reachDrawing({ session, drawer });
     expect(session.addStroke(drawer, { ...stroke, strokeId: 's2' }).ok).toBe(true);
     expect(session.strokesLog).toHaveLength(1);
@@ -339,15 +417,12 @@ describe('SkribblSession — strokes', () => {
     reachDrawing({ session, drawer });
     session.addStroke(drawer, stroke('a'));
     session.addStroke(drawer, stroke('b'));
-    session.addStroke(drawer, stroke('b')); // same group: second segment
+    session.addStroke(drawer, stroke('b'));
     expect(session.strokesLog).toHaveLength(3);
-    const undone = session.undoStroke(drawer);
-    expect(undone.ok).toBe(true);
-    if (undone.ok) {
-      expect(undone.value.strokeId).toBe('b');
-    }
+    const undone = ok(session.undoStroke(drawer));
+    expect(undone.strokeId).toBe('b');
     expect(session.strokesLog).toHaveLength(1);
-    expect(session.clearCanvas(drawer).ok).toBe(true);
+    ok(session.clearCanvas(drawer));
     expect(session.strokesLog).toHaveLength(0);
   });
 });

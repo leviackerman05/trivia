@@ -11,16 +11,50 @@
 
 ## Current Milestone
 
-**M5 — Remaining Drawing Games** (next up).
+**M6 — Voting Component + Voting Games** (next up).
 
-M4 — Drawing Canvas + Skribbl Arena is ✅ **complete**, including the
-owner-requested **Instant Play** feature (verified below).
+M5 — Remaining Drawing Games is ✅ **complete** (verified below).
 
 ---
 
 ## Completed Work
 
-### Milestone 4 — Drawing Canvas + Skribbl Arena ✅ (verified 2026-08-04)
+### Milestone 5 — Remaining Drawing Games ✅ (verified 2026-08-04)
+
+- [x] **Engine refactor (D028):** one config-driven `DrawingGameSession`
+      (`server/src/engine/drawing-game.ts`) replaces the Skribbl-only engine —
+      wordMode (`choices`/`direct`/`lyric`), per-game round duration, hint
+      rules (first/last letter, artist at 45s, silhouette reveal at 60s),
+      lift penalty (−10s, floor 5s), fixed lyric scoring (100/50), custom
+      words (Skribbl only); `DRAWING_CONFIGS` table in the gateway
+- [x] **One Line, One Shape:** 220 objects (`server/src/data/one-line-objects.json`),
+      continuous-line enforcement — every pen lift emits `stroke-lift`,
+      server deducts 10s (floor 5s) and broadcasts `round-timer`; drawer sees
+      the object, guessers see the warning
+- [x] **Draw the Lyric:** 120 paraphrased/original lyrics (`server/src/data/lyrics.json`),
+      lyric banner drawer-only, guess the song TITLE (normalizeTitle strips
+      leading "The" + trailing punctuation), artist hint at 45s, fixed
+      scoring (guesser 100 / drawer 50)
+- [x] **Shadow Sketch:** 110 SVG silhouettes (`server/src/data/silhouettes.json`),
+      faint background layer via `Path2D` + `pathBBox` aspect-preserving
+      render (`src/lib/canvas.ts`), drawer-only until the 60s reveal
+      (additive `round-hint.silhouette`)
+- [x] **Copycat Challenge (D028):** `CopycatSession` engine (image-reveal 5s →
+      private drawing 90s → gallery → voting 30s → awards) + `CopycatArena`
+      island: private canvas (local-only strokes, PNG data-URL submit, 400k
+      cap), gallery grid with enlarge, three award votes (Most
+      Recognizable/Funniest/Most Abstract, no self-votes), live tallies,
+      awards ceremony; 104 PD images (Wikimedia FilePath); solo rooms reach
+      voting (single drawing allowed) so the full flow is testable alone
+- [x] `DrawingCanvas` gains `onLift` (One Line penalty) + `background`
+      (silhouette layer) props + `DrawingCanvasHandle.toDataURL` (copycat
+      submit)
+- [x] Game page wires `DrawingGameArena` (4 games) + `CopycatArena`;
+      `games.json` marks all 5 drawing games `playable` (lockstep test green)
+- [x] **Datasets validated:** `scripts/check-datasets.mjs` green (~2,550
+      entries across 15 files)
+- [x] **Verification:** `pnpm verify` green — **70 client + 87 server tests**,
+      server tsc, 26-page Astro build, smoke 8/8
 
 - [x] `DrawingCanvas` component (`src/components/DrawingCanvas.tsx`): pen
       (variable brush), eraser, 12-color palette, undo, clear; pointer events
@@ -175,9 +209,9 @@ owner-requested **Instant Play** feature (verified below).
 
 ## In Progress
 
-- **Nothing.** Awaiting `IMPLEMENT M5` to start
-  **M5 — Remaining Drawing Games** (Copycat Challenge, Draw the Lyric,
-  One Line One Shape, Shadow Sketch on the shared canvas + engine).
+- **M6 — Voting Component + Voting Games** (Would You Rather room mode,
+  Most Likely To, Never Have I Ever, This or That — reusing RoomEngine +
+  the vote pattern from D028).
 
 ---
 
@@ -185,23 +219,20 @@ owner-requested **Instant Play** feature (verified below).
 
 Full roadmap: [TODO.md](TODO.md). Highlights:
 
-- **M5** Remaining 4 drawing games (Copycat, Draw the Lyric, One Line,
-  Shadow Sketch) — canvas + engine reuse; dataset curation pass for the
-  word bank
 - **M6** Voting component + 4 voting games
 - **M7** Solo template + 4 solo games
 - **M8** Genre Swap + Genre-Bender + Trivia room mode (solo already live
-  via instant play)
+  via instant play) + daily challenge
 - **M9** Charades + Guess Who (all 18 games playable)
 - **M10** SEO content completion + AdSense compliance + performance budgets
 - **M11** Deployment (Cloudflare Pages + Railway/Render) + launch QA
-  (incl. browser-level E2E tooling)
+  (owner: currently deprioritized)
 
 ---
 
 ## Known Bugs
 
-- None known. All suites green (50 client + 77 server).
+- None known. All suites green (70 client + 87 server).
 
 ---
 
@@ -209,10 +240,10 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 - **Word bank curation:** 5,686 words exceeds the PRD's 500+ target with
   loose difficulty labels and some non-drawable entries (hand-generated
-  lists). A curation pass is queued in M5; gameplay is unaffected (3 random
-  choices per round).
-- **Trivia dataset:** 100 questions vs PRD's 500+ target — expansion queued
-  with M8 (room mode).
+  lists). A curation pass is still queued (backlog); gameplay is unaffected
+  (3 random choices per round).
+- **Trivia dataset:** 100 questions vs PRD's 500+ target — expansion lands
+  with M8 (room mode + daily challenge).
 - **Canvas repaint:** full-log repaint per segment (rAF-coalesced) — fine for
   one drawer; revisit if a drawing game needs livelier multi-drawer strokes.
 - **Drawer disconnect mid-round:** the round runs to the 60s timeout with no
@@ -235,10 +266,9 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 | Task                  | Blocked by                                             |
 | --------------------- | ------------------------------------------------------ |
-| M5+ implementation    | `IMPLEMENT` instruction                                |
 | AdSense application   | ~10 daily users (PRD §1)                               |
 | GA4 real ID           | Google Analytics account (placeholder stays commented) |
-| Live domain + deploy  | M11                                                    |
+| Live domain + deploy  | M11 (owner: deprioritized for now)                     |
 | Draw the Lyric lyrics | Open question #2 (licensing — paraphrased/PD only)     |
 
 ---
@@ -249,7 +279,8 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
    BounceBox (kids 3–8) vs audience 16–35; `@DESIGN.md` missing. Architecture
    defaults to BounceBox (M2 tokens already scaffolded that way).
 2. ⚠ **Song lyrics licensing:** Draw the Lyric + Genre-Bender need lyrics;
-   PRD forbids copyrighted material. Default: paraphrased/original/PD only.
+   PRD forbids copyrighted material. Default: paraphrased/original/PD only
+   (M5 dataset follows this).
 3. ⚠ **Remote Charades:** no video in the stack; default: co-located mode only.
 4. ⚠ **Two Truths & a Lie** listed in §4.3 but absent from the 18 games.
 5. ⚠ **"6 voting games" (§4.3) vs 4 in the game list.**
@@ -265,29 +296,27 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Upcoming Milestone
 
-**M5 — Remaining Drawing Games** (working app: all 5 drawing games playable
-on the shared canvas + engine)
+**M6 — Voting Component + Voting Games** (working app: all 4 voting games
+playable — reusing the RoomEngine + the D028 vote pattern)
 
-- **Copycat Challenge:** 5s image reveal → private canvas → gallery → votes
-  (Most Recognizable/Funniest/Most Abstract); PD image dataset (50+
-  paintings, 50+ photos)
-- **Draw the Lyric:** lyric banner (drawer only), guess song title, artist
-  hint at 45s, scoring (guesser 100, drawer 50); ⚠ dataset per open
-  question #2 (paraphrased/PD lyrics)
-- **One Line, One Shape:** continuous-line enforcement (mouse/touch lift →
-  warning + −10s), 200+ objects
-- **Shadow Sketch:** silhouette background layer (drawer only), reveal to
-  guessers at 60s, 100+ SVG silhouettes
-- **Engine adapter refactor:** one drawing-game config per game (rounds,
-  timers, scoring, hint rules)
-- Word-bank curation pass (from M4 debt)
-- E2E: each drawing game journey; late-join replay for each
+- **VotingComponent island:** prompt + 2–6 options, tap to vote, live
+  percentage bars, reveal animation, vote timer
+- **Server voting adapter:** `cast-vote` tally, `vote-update`, `vote-reveal`,
+  all-in/timer reveal
+- **Would You Rather room mode:** 500+ dilemmas (190 curated), A/B blue/red,
+  total votes counter, submit-own-question queue
+- **Most Likely To…:** 210 prompts, player names as options, ranking reveal,
+  crown animation
+- **Never Have I Ever:** turn rotation, statement input/suggestions,
+  I HAVE / I HAVE NOT (anonymous toggle), wildness tally
+- **This or That:** 320 pairs, two cards, tap-to-vote, 6s auto-advance,
+  herd streak, 20 rounds
+- Tests: tally math, reveal timing, anonymous toggle, rotation; docs update
 
 ---
 
 ## Next Recommended Prompt
 
-> **"IMPLEMENT M5"** — build the remaining four drawing games per
-> `docs/TODO.md` M5 (reuse `DrawingCanvas`, the Skribbl session pattern, and
-> the gateway adapter). Open question #2 (lyrics licensing) gates Draw the
-> Lyric's dataset — default remains paraphrased/PD only.
+> **"Continue with M6–M10"** — build the voting games (M6), solo games
+> (M7–M8), Charades + Guess Who (M9), and the SEO/perf pass (M10) per
+> `docs/TODO.md`. M11 deployment stays deprioritized until the owner asks.

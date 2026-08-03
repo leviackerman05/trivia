@@ -13,6 +13,7 @@
     "name": "Copycat Challenge",
     "type": "multiplayer-realtime",
     "family": "drawing",
+    "playable": true,
     "tagline": "Memorize a masterpiece, then draw it from memory.",
     "description": "A famous painting flashes for five seconds. Then everyone draws it from memory on their own private canvas and votes on the best (and funniest) results."
   },
@@ -21,6 +22,7 @@
     "name": "Draw the Lyric",
     "type": "multiplayer-realtime",
     "family": "drawing",
+    "playable": true,
     "tagline": "Draw the lyric — everyone else guesses the song.",
     "description": "One player sees a song lyric and draws it on the shared canvas. Everyone else races to name the song title before the timer runs out."
   },
@@ -29,6 +31,7 @@
     "name": "One Line, One Shape",
     "type": "multiplayer-realtime",
     "family": "drawing",
+    "playable": true,
     "tagline": "Draw it in one continuous line. Lift the pen and lose time.",
     "description": "Draw an object without ever lifting the pen. Break the line and the clock punishes you — guessers still have to figure out what it is."
   },
@@ -37,6 +40,7 @@
     "name": "Shadow Sketch",
     "type": "multiplayer-realtime",
     "family": "drawing",
+    "playable": true,
     "tagline": "Fill in the silhouette — guessers only see your strokes.",
     "description": "The drawer sees a faint silhouette and must sketch the details that make it recognizable. Guessers watch the drawing appear with no silhouette to help them."
   },

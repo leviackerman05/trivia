@@ -331,7 +331,7 @@ describe('Skribbl Arena full game (M4) — DB-backed socket integration', () => 
       return rows.length === 2 ? rows : null;
     });
     expect(scoreRows.map((row) => row.gameId)).toEqual(['skribbl-arena', 'skribbl-arena']);
-    expect(scoreRows.every((row) => row.clientKey?.startsWith('skribbl:'))).toBe(true);
+    expect(scoreRows.every((row) => row.clientKey?.startsWith('skribbl-arena:'))).toBe(true);
     // Same game re-submission is impossible via sockets, but the key is unique per room.
     expect(new Set(scoreRows.map((row) => row.clientKey)).size).toBe(2);
 

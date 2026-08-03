@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useRef, type PointerEvent as ReactPointerEvent } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  type PointerEvent as ReactPointerEvent,
+  type Ref,
+} from 'react';
 import {
   applyStroke,
   CANVAS_HEIGHT,
@@ -21,32 +28,62 @@ import {
  *   committed through onStroke so the log (and remote clients) stay in sync.
  */
 
+/** Imperative handle: flatten the current canvas (Copycat private submit). */
+export interface DrawingCanvasHandle {
+  toDataURL: (type?: string) => string;
+}
+
 interface DrawingCanvasProps {
   strokes: Stroke[];
   onStroke?: (stroke: Stroke) => void;
   /** Called once per canvas tap while the fill tool is active. */
   onFill?: (x: number, y: number) => void;
+  /**
+   * One Line, One Shape: called when a drawing stroke ends (pointer up).
+   * Every lift of the pen deducts round time (server-authoritative).
+   */
+  onLift?: () => void;
+  /**
+   * Shadow Sketch: faint SVG silhouette path rendered behind the strokes
+   * (drawer sees it during drawing; everyone sees it after the reveal).
+   */
+  background?: string;
   enabled: boolean;
   color: string;
   brushSize: number;
   tool: CanvasTool;
   ariaLabel?: string;
+  /** React 19 ref-as-prop: exposes toDataURL for private canvas export. */
+  ref?: Ref<DrawingCanvasHandle>;
 }
 
 export default function DrawingCanvas({
   strokes,
   onStroke,
   onFill,
+  onLift,
+  background,
   enabled,
   color,
   brushSize,
   tool,
   ariaLabel = 'Drawing canvas',
+  ref,
 }: DrawingCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const activeRef = useRef<{ strokeId: string; prevX: number; prevY: number } | null>(null);
-  const propsRef = useRef({ enabled, color, brushSize, tool, onStroke, onFill });
-  propsRef.current = { enabled, color, brushSize, tool, onStroke, onFill };
+  const propsRef = useRef({ enabled, color, brushSize, tool, onStroke, onFill, onLift });
+  propsRef.current = { enabled, color, brushSize, tool, onStroke, onFill, onLift };
+  const backgroundRef = useRef(background);
+  backgroundRef.current = background;
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      toDataURL: (type = 'image/png') => canvasRef.current?.toDataURL(type) ?? '',
+    }),
+    []
+  );
 
   // One-time setup: physical pixel size (devicePixelRatio) + coordinate scale.
   useEffect(() => {
@@ -70,11 +107,11 @@ export default function DrawingCanvas({
     const frame = requestAnimationFrame(() => {
       const ctx = canvasRef.current?.getContext('2d');
       if (ctx) {
-        replayStrokes(ctx, strokes);
+        replayStrokes(ctx, strokes, backgroundRef.current);
       }
     });
     return () => cancelAnimationFrame(frame);
-  }, [strokes]);
+  }, [strokes, background]);
 
   const pointFromEvent = useCallback((event: ReactPointerEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current!;
@@ -143,8 +180,24 @@ export default function DrawingCanvas({
   };
 
   const endStroke = () => {
+    if (activeRef.current !== null) {
+      // One Line, One Shape: every finished stroke = one pen lift.
+      propsRef.current.onLift?.();
+    }
     activeRef.current = null;
   };
+
+  // The silhouette changes (reveal) without touching the stroke log —
+  // repaint immediately so the background is visible to everyone.
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const ctx = canvasRef.current?.getContext('2d');
+      if (ctx) {
+        replayStrokes(ctx, strokes, backgroundRef.current);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [background]);
 
   return (
     <canvas

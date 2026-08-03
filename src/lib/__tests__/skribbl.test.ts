@@ -86,16 +86,60 @@ describe('skribblReducer — round lifecycle', () => {
   it('hints reveal the first and last letter', () => {
     const state = skribblReducer(stateWith(), {
       type: 'round-hint',
-      firstLetter: 'a',
-      lastLetter: null,
+      payload: { firstLetter: 'a', lastLetter: null },
     });
     expect(state.firstLetter).toBe('a');
     const revealed = skribblReducer(state, {
       type: 'round-hint',
-      firstLetter: 'a',
-      lastLetter: 'e',
+      payload: { firstLetter: 'a', lastLetter: 'e' },
     });
     expect(revealed.lastLetter).toBe('e');
+  });
+
+  it('hints carry game-specific fields (artist, silhouette reveal)', () => {
+    const lyric = skribblReducer(stateWith(), {
+      type: 'round-hint',
+      payload: { artist: 'Baha Men' },
+    });
+    expect(lyric.artistHint).toBe('Baha Men');
+    const shadow = skribblReducer(lyric, {
+      type: 'round-hint',
+      payload: { silhouette: 'M50 32 Z' },
+    });
+    expect(shadow.revealedSilhouette).toBe('M50 32 Z');
+    expect(shadow.artistHint).toBe('Baha Men');
+  });
+
+  it('drawer-only prompt data arrives with the drawing round-start', () => {
+    const oneLine: RoundStartPayload = {
+      round: 1,
+      totalRounds: 4,
+      drawerName: 'Me',
+      wordLength: 8,
+      endsAt: 123,
+      object: 'bicycle',
+    };
+    const state = skribblReducer(stateWith(), {
+      type: 'round-start',
+      payload: oneLine,
+      myName: 'Me',
+    });
+    expect(state.drawerData.object).toBe('bicycle');
+    expect(state.view).toBe('drawing');
+  });
+
+  it('stroke-lift deducts time and counts warnings (One Line, One Shape)', () => {
+    let state = stateWith({ endsAt: 1_000_000 });
+    state = skribblReducer(state, { type: 'stroke-lift', endsAt: 990_000 });
+    expect(state.endsAt).toBe(990_000);
+    expect(state.liftWarnings).toBe(1);
+    state = skribblReducer(state, { type: 'stroke-lift', endsAt: 980_000 });
+    expect(state.liftWarnings).toBe(2);
+  });
+
+  it('round-timer replaces the deadline (server-authoritative adjustments)', () => {
+    const state = skribblReducer(stateWith({ endsAt: 100 }), { type: 'round-timer', endsAt: 90 });
+    expect(state.endsAt).toBe(90);
   });
 });
 

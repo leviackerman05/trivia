@@ -1,0 +1,752 @@
+[
+  {
+    "original": "Harry Potter",
+    "genre": "haunted house",
+    "description": "A young orphan enrolls at a remote boarding school where a shadowy presence lurks in the walls and the portraits refuse to keep secrets."
+  },
+  {
+    "original": "Star Wars",
+    "genre": "western",
+    "description": "A desert farmhand joins an outlaw band to strike back at an empire of armored enforcers, guided by an old gunslinger with a mysterious past."
+  },
+  {
+    "original": "Titanic",
+    "genre": "zombie apocalypse",
+    "description": "A penniless artist and a society girl fall in love aboard an opulent ocean liner, then must survive when the dead rise among the passengers."
+  },
+  {
+    "original": "The Lion King",
+    "genre": "courtroom drama",
+    "description": "A young lion prince is tried for a crime he did not commit while his scheming uncle seizes the pride, and only a shaman can prove the truth."
+  },
+  {
+    "original": "Frozen",
+    "genre": "horror",
+    "description": "A queen's icy curse spreads from her fingertips, and her kingdom slowly freezes from within while a strange winter descends without end."
+  },
+  {
+    "original": "Jurassic Park",
+    "genre": "zombie apocalypse",
+    "description": "A billionaire's island theme park of resurrected predators descends into chaos when the power fails and the ancient beasts break loose."
+  },
+  {
+    "original": "The Matrix",
+    "genre": "film noir",
+    "description": "A lone hacker in a rain-soaked city follows a stranger down a rabbit hole and discovers the world he knows is a beautiful lie."
+  },
+  {
+    "original": "Inception",
+    "genre": "heist film",
+    "description": "A thief who steals secrets from dreams assembles a crew to pull the perfect job: planting an idea inside a rival's most guarded mind."
+  },
+  {
+    "original": "The Godfather",
+    "genre": "mockumentary",
+    "description": "A camera crew documents the aging patriarch of a crime family as he passes his empire to the youngest son, who never wanted the crown."
+  },
+  {
+    "original": "Forrest Gump",
+    "genre": "space opera",
+    "description": "A simple man with a pure heart drifts through cosmic history, from distant battlefields to the moonshot itself, touching every soul he meets."
+  },
+  {
+    "original": "Toy Story",
+    "genre": "buddy comedy",
+    "description": "A beloved old cowboy doll is replaced by a flashy space ranger, and the jealous rivals must team up to escape a toy-torturing neighbor."
+  },
+  {
+    "original": "Finding Nemo",
+    "genre": "western",
+    "description": "An overprotective father rides the ocean current with a forgetful sidekick, crossing shark-filled territory to bring his son home."
+  },
+  {
+    "original": "Shrek",
+    "genre": "rom-com",
+    "description": "A grumpy green recluse falls for a princess with a secret of her own, and both must learn that true love sees past the surface."
+  },
+  {
+    "original": "The Avengers",
+    "genre": "superhero saga",
+    "description": "Earth's mightiest heroes must set aside their egos when a trickster god opens a portal above the city and an army pours through."
+  },
+  {
+    "original": "Jaws",
+    "genre": "horror",
+    "description": "A beach town's golden summer turns bloody when a great white shark begins feeding on swimmers, and no one believes the local sheriff."
+  },
+  {
+    "original": "E.T.",
+    "genre": "buddy comedy",
+    "description": "A lonely boy befriends a stranded alien, hides him from the authorities, and helps him build a device to call home."
+  },
+  {
+    "original": "Back to the Future",
+    "genre": "western",
+    "description": "A teenager is blasted back to the frontier days in a scientist's time machine and must ensure his own parents meet or he will never exist."
+  },
+  {
+    "original": "The Wizard of Oz",
+    "genre": "superhero saga",
+    "description": "A farm girl is swept to a magical land where enchanted slippers grant her power over wicked rulers, and she assembles unlikely allies."
+  },
+  {
+    "original": "Pulp Fiction",
+    "genre": "musical",
+    "description": "Two hitmen break into song between jobs, a boxer tap-dances his way out of a fix, and a glowing briefcase steals every scene."
+  },
+  {
+    "original": "The Dark Knight",
+    "genre": "film noir",
+    "description": "A masked vigilante stalks the rain-slicked streets of a corrupt city while a grinning madman forces decent citizens to betray each other."
+  },
+  {
+    "original": "Interstellar",
+    "genre": "western",
+    "description": "A farmer-turned-pilot rides a wormhole across the final frontier to find a new home for a dying Earth while time slips away from his daughter."
+  },
+  {
+    "original": "Coco",
+    "genre": "haunted house",
+    "description": "A boy who dreams of music is trapped in a house of the dead where every door opens onto memory, forgetting, and a family's buried secrets."
+  },
+  {
+    "original": "Moana",
+    "genre": "buddy comedy",
+    "description": "A headstrong young navigator and a boastful demigod bicker their way across an endless ocean to restore a stolen heart."
+  },
+  {
+    "original": "Home Alone",
+    "genre": "heist film",
+    "description": "A boy accidentally left behind during the holidays turns his house into a fortress of booby traps to foil two bumbling would-be robbers."
+  },
+  {
+    "original": "Die Hard",
+    "genre": "heist film",
+    "description": "A vacationing cop at a Christmas party discovers the festive gathering is a cover for a vault heist and takes on the crew alone."
+  },
+  {
+    "original": "Mean Girls",
+    "genre": "courtroom drama",
+    "description": "A newcomer to high school takes the stand against the queen of the popular clique when a burned book of rumors lands everyone in the principal's court."
+  },
+  {
+    "original": "The Notebook",
+    "genre": "zombie apocalypse",
+    "description": "A poor boy's courtship of a rich girl survives letters, war, and class, even as the world outside crumbles into a plague of the walking dead."
+  },
+  {
+    "original": "Twilight",
+    "genre": "horror",
+    "description": "A shy newcomer falls for a brooding clan of elegant blood drinkers while a rival predator hunts her through the rain-soaked woods."
+  },
+  {
+    "original": "The Hangover",
+    "genre": "mockumentary",
+    "description": "A camera crew follows three friends as they retrace a lost night in a city of sin, hunting for the groom, a tiger, and their own memories."
+  },
+  {
+    "original": "Bridesmaids",
+    "genre": "musical",
+    "description": "A down-on-her-luck maid of honor duels a perfect rival for the spotlight during a wedding week of song, dance, and disastrous speeches."
+  },
+  {
+    "original": "Superbad",
+    "genre": "buddy comedy",
+    "description": "Two geeky seniors embark on one epic quest for booze before graduation tears their friendship apart, with a clueless cop in hot pursuit."
+  },
+  {
+    "original": "The Social Network",
+    "genre": "courtroom drama",
+    "description": "A college wunderkind is deposed in a bitter courtroom war over the invention of a website that changed the world overnight."
+  },
+  {
+    "original": "Gladiator",
+    "genre": "western",
+    "description": "A wronged general, stripped of rank and family, fights his way across a lawless empire to face the tyrant who destroyed his world."
+  },
+  {
+    "original": "Braveheart",
+    "genre": "space opera",
+    "description": "On a conquered world, a chieftain's son rises to unite the scattered clans against an empire that rules the stars with an iron fist."
+  },
+  {
+    "original": "The Terminator",
+    "genre": "horror",
+    "description": "A relentless machine from the future hunts a waitress whose unborn son will doom its kind, and only one soldier stands between her and doom."
+  },
+  {
+    "original": "Rocky",
+    "genre": "musical",
+    "description": "A Philadelphia club fighter gets one shot at the heavyweight title and trains to the beat of brass and strings, dancing up the museum steps."
+  },
+  {
+    "original": "Casablanca",
+    "genre": "film noir",
+    "description": "A cynical nightclub owner in a foggy wartime port must choose between the love he lost and the cause that needs him most."
+  },
+  {
+    "original": "Gone with the Wind",
+    "genre": "rom-com",
+    "description": "A headstrong belle schemes through war and ruin to win back the only man who ever refused her, learning too late what she truly wants."
+  },
+  {
+    "original": "Psycho",
+    "genre": "haunted house",
+    "description": "A runaway embezzler checks into a lonely roadside motel where the boyish manager is devoted to a mother who never quite left."
+  },
+  {
+    "original": "The Silence of the Lambs",
+    "genre": "musical",
+    "description": "A young trainee and a brilliant cannibal duet across a prison interview room while a killer who collects skins stalks the stage."
+  },
+  {
+    "original": "Fight Club",
+    "genre": "buddy comedy",
+    "description": "An insomniac office drone and a charismatic soap salesman bond over bruises and start an underground brawling circle that gets out of hand."
+  },
+  {
+    "original": "The Shawshank Redemption",
+    "genre": "courtroom drama",
+    "description": "A banker wrongly convicted of murder spends decades fighting for justice from inside a brutal prison, where hope is the only contraband."
+  },
+  {
+    "original": "The Green Mile",
+    "genre": "haunted house",
+    "description": "A death-row guard discovers his gentle giant of a prisoner carries a strange gift that brushes against the spirits of the dead."
+  },
+  {
+    "original": "Spirited Away",
+    "genre": "haunted house",
+    "description": "A sullen girl's parents are cursed in a bathhouse of spirits, and she must take service there to earn their freedom before she is forgotten."
+  },
+  {
+    "original": "Your Name",
+    "genre": "rom-com",
+    "description": "A country girl and a city boy wake up in each other's bodies, and their strange long-distance romance must survive time, distance, and disaster."
+  },
+  {
+    "original": "Parasite",
+    "genre": "zombie apocalypse",
+    "description": "A struggling family schemes its way into a wealthy household, unaware that the basement hides a hunger that will spread through them all."
+  },
+  {
+    "original": "Get Out",
+    "genre": "horror",
+    "description": "A young man's weekend at his girlfriend's family estate becomes a waking nightmare of hypnosis, swapped souls, and neighbors who smile too long."
+  },
+  {
+    "original": "The Conjuring",
+    "genre": "courtroom drama",
+    "description": "A terrified family takes their farmhouse's unseen tormentor to court, where paranormal experts must present evidence the jury can believe."
+  },
+  {
+    "original": "It",
+    "genre": "horror",
+    "description": "In a town where children vanish, a band of misfits confronts a dancing clown that wears many faces and feasts on their deepest fears."
+  },
+  {
+    "original": "Joker",
+    "genre": "gritty crime thriller",
+    "description": "A failed performer spirals into madness after the city mocks him, igniting a clown-masked uprising that will burn the streets down."
+  },
+  {
+    "original": "Barbie",
+    "genre": "mockumentary",
+    "description": "A documentary follows a doll from a pink utopia as she ventures into the real world and discovers perfection was never the point."
+  },
+  {
+    "original": "Oppenheimer",
+    "genre": "courtroom drama",
+    "description": "A brilliant physicist who forged the ultimate weapon is called before a tribunal to answer for the legacy of the fire he unleashed."
+  },
+  {
+    "original": "Dune",
+    "genre": "western",
+    "description": "A desert prince rides with the native tribes against the barons who strip his world of its precious spice, riding sandworms across the dunes."
+  },
+  {
+    "original": "Top Gun",
+    "genre": "space opera",
+    "description": "A cocky starfighter pilot enters an elite academy among the stars, where rivalry, a crash, and a forbidden romance test his nerve."
+  },
+  {
+    "original": "Mission Impossible",
+    "genre": "heist film",
+    "description": "A secret agent is framed for his team's deaths and must plan the perfect counter-heist while his own agency hunts him across the globe."
+  },
+  {
+    "original": "Indiana Jones",
+    "genre": "zombie apocalypse",
+    "description": "A whip-cracking archaeologist races rival grave robbers across the globe to recover a relic that raises the dead from their tombs."
+  },
+  {
+    "original": "Pirates of the Caribbean",
+    "genre": "heist film",
+    "description": "A blacksmith and a rum-soaked rogue captain plan an audacious theft aboard a haunted ship whose crew owes its soul to the sea."
+  },
+  {
+    "original": "Kung Fu Panda",
+    "genre": "superhero saga",
+    "description": "A clumsy noodle-loving bear is chosen as the valley's champion and must master the ancient art of believing before the enemy arrives."
+  },
+  {
+    "original": "Up",
+    "genre": "buddy comedy",
+    "description": "A cranky widower ties his house to balloons and floats toward a lost paradise, with an overeager stowaway scout bickering at his side."
+  },
+  {
+    "original": "WALL-E",
+    "genre": "space opera",
+    "description": "A trash-compacting robot tending a deserted Earth falls for a sleek probe and hitches a ride across the galaxy to save humanity."
+  },
+  {
+    "original": "Ratatouille",
+    "genre": "mockumentary",
+    "description": "A documentary crew sneaks into a famous Paris kitchen to uncover the rat hiding beneath the chef's hat, and the truth shocks the food world."
+  },
+  {
+    "original": "Monsters Inc",
+    "genre": "musical",
+    "description": "Two furry scream collectors discover that children's laughter powers the whole city, and the plant erupts into a joyous song."
+  },
+  {
+    "original": "Inside Out",
+    "genre": "space opera",
+    "description": "Five tiny commanders pilot a young girl's mind-ship through the galaxies of her emotions after her family moves to a strange new world."
+  },
+  {
+    "original": "Soul",
+    "genre": "film noir",
+    "description": "A jazz pianist dies on the brink of his big break and drifts through a foggy between-world, chasing the moment that got away."
+  },
+  {
+    "original": "Encanto",
+    "genre": "superhero saga",
+    "description": "In a family blessed with magical gifts, the one girl without power may be the only one who can save the house and the miracle itself."
+  },
+  {
+    "original": "Zootopia",
+    "genre": "film noir",
+    "description": "A rookie bunny cop and a sly fox con artist dig through the underbelly of a city where predators are mysteriously going savage."
+  },
+  {
+    "original": "Despicable Me",
+    "genre": "heist film",
+    "description": "A supervillain plans the greatest heist in history while three orphan girls complicate every step and steal his heart instead."
+  },
+  {
+    "original": "Minions",
+    "genre": "space opera",
+    "description": "Three loyal yellow servants wander the ages and the stars, searching for a master worthy of their boundless devotion."
+  },
+  {
+    "original": "Sing",
+    "genre": "mockumentary",
+    "description": "A camera crew follows a desperate koala as he stages a talent competition to save his bankrupt theater, with the city's oddest hopefuls."
+  },
+  {
+    "original": "Trolls",
+    "genre": "buddy comedy",
+    "description": "A sunshiny optimist and a grumpy survivalist bicker their way into danger to rescue their friends from creatures who eat happiness."
+  },
+  {
+    "original": "Boss Baby",
+    "genre": "heist film",
+    "description": "A newborn in a suit and tie masterminds a corporate heist with his reluctant older brother to stop a plot against all babies."
+  },
+  {
+    "original": "Paddington",
+    "genre": "rom-com",
+    "description": "A polite young bear from the jungle arrives in a gray London household and melts the frosty hearts of a family one mishap at a time."
+  },
+  {
+    "original": "Willy Wonka",
+    "genre": "horror",
+    "description": "A reclusive confectioner lures children into his wonderland factory, where each tour stop ends with a guest mysteriously disappearing."
+  },
+  {
+    "original": "Charlie and the Chocolate Factory",
+    "genre": "musical",
+    "description": "A poor boy's golden ticket opens a candy wonderland where every room erupts into song and each child learns a costly lesson."
+  },
+  {
+    "original": "The Hunger Games",
+    "genre": "gritty crime thriller",
+    "description": "A teenager volunteers for a televised death match staged by a corrupt regime, and her defiance sparks a rebellion in the districts."
+  },
+  {
+    "original": "Divergent",
+    "genre": "superhero saga",
+    "description": "In a city divided into five factions, a girl who fits none hides a rare power that could unite the city or destroy it."
+  },
+  {
+    "original": "Maze Runner",
+    "genre": "zombie apocalypse",
+    "description": "Boys with erased memories wake in a walled glade with no escape while a strange virus rages beyond the shifting stone maze."
+  },
+  {
+    "original": "Fifty Shades",
+    "genre": "rom-com",
+    "description": "A shy literature student tumbles into a whirlwind affair with a wealthy young recluse who has very particular tastes in romance."
+  },
+  {
+    "original": "Crazy Rich Asians",
+    "genre": "rom-com",
+    "description": "A New York professor flies to Singapore to meet her boyfriend's family and discovers they are among the wealthiest families on the continent."
+  },
+  {
+    "original": "La La Land",
+    "genre": "film noir",
+    "description": "A jazz purist and an aspiring star chase their dreams through a city of neon and broken promises, trading love for ambition along the way."
+  },
+  {
+    "original": "Whiplash",
+    "genre": "horror",
+    "description": "A young drummer's hunger for greatness becomes a waking nightmare as his teacher's methods turn monstrous and perfection demands blood."
+  },
+  {
+    "original": "Birdman",
+    "genre": "superhero saga",
+    "description": "A faded actor who once wore wings on screen stages a Broadway comeback while a voice in his head urges him to fly again."
+  },
+  {
+    "original": "Spotlight",
+    "genre": "gritty crime thriller",
+    "description": "A newspaper's small investigative team digs into a city-wide conspiracy that powerful institutions buried for decades, one source at a time."
+  },
+  {
+    "original": "12 Years a Slave",
+    "genre": "western",
+    "description": "A free musician is stolen and sold across a lawless frontier, enduring years of bondage before a stranger offers him a chance at freedom."
+  },
+  {
+    "original": "The Revenant",
+    "genre": "zombie apocalypse",
+    "description": "A fur trapper, left for dead in a frozen wilderness, crawls across the ice while the dead he buried rise behind him, driven by vengeance."
+  },
+  {
+    "original": "Mad Max",
+    "genre": "western",
+    "description": "A lone drifter in a scorched wasteland commandeers a war rig and takes a stand against a tyrant's roaring motorcycle horde."
+  },
+  {
+    "original": "John Wick",
+    "genre": "western",
+    "description": "A retired gunman is drawn back for one last ride after outlaws take everything he loves, and he leaves a trail of blood across the underworld."
+  },
+  {
+    "original": "Fast and Furious",
+    "genre": "heist film",
+    "description": "An undercover officer infiltrates a crew of street racers who double as master thieves, and family loyalty complicates every job."
+  },
+  {
+    "original": "Transformers",
+    "genre": "space opera",
+    "description": "A teenager's used car reveals itself as an armored robot from another world, and the war that destroyed its home follows it to Earth."
+  },
+  {
+    "original": "Pacific Rim",
+    "genre": "superhero saga",
+    "description": "Pilots bond mind-to-mind with towering machines to defend the world against monsters rising from the deepest trenches of the ocean."
+  },
+  {
+    "original": "Godzilla",
+    "genre": "superhero saga",
+    "description": "A titanic guardian rises from the sea when humanity faces a threat no weapon can stop, and a city's only hope is the monster itself."
+  },
+  {
+    "original": "King Kong",
+    "genre": "mockumentary",
+    "description": "A film crew captures a colossal ape from a lost island and parades him through a city, with catastrophic results caught on camera."
+  },
+  {
+    "original": "Planet of the Apes",
+    "genre": "horror",
+    "description": "An astronaut crashes on a world where intelligent apes rule and humans are hunted for sport, and the truth is worse than the nightmare."
+  },
+  {
+    "original": "X-Men",
+    "genre": "courtroom drama",
+    "description": "Children born with strange powers are put on trial for gifts they never chose, and a school for outcasts becomes the center of the case."
+  },
+  {
+    "original": "Spider-Man",
+    "genre": "gritty crime thriller",
+    "description": "A bitten teenager prowls the city in a mask, hunting the criminals who took his uncle's life and learning that power demands sacrifice."
+  },
+  {
+    "original": "Black Panther",
+    "genre": "superhero saga",
+    "description": "The heir to a hidden African kingdom inherits the power of a great cat spirit and must reclaim his throne from a cousin who would arm the world."
+  },
+  {
+    "original": "Wonder Woman",
+    "genre": "space opera",
+    "description": "A warrior princess from a hidden world joins a war among the stars, believing love can stop the god of war himself."
+  },
+  {
+    "original": "Aquaman",
+    "genre": "superhero saga",
+    "description": "A lighthouse boy learns he is the heir to an undersea empire and must claim its legendary trident to unite a divided realm."
+  },
+  {
+    "original": "Guardians of the Galaxy",
+    "genre": "space opera",
+    "description": "A thief, an assassin, a raccoon, a tree, and a brute bicker their way across the cosmos to stop a mad zealot from destroying everything."
+  },
+  {
+    "original": "Deadpool",
+    "genre": "rom-com",
+    "description": "A wisecracking masked mercenary with a healing factor goes to murderously romantic lengths to win back the love of his life."
+  },
+  {
+    "original": "Logan",
+    "genre": "western",
+    "description": "An aging gunslinger with metal claws escorts a strange child across a dying frontier, pursued by those who want to weaponize her."
+  },
+  {
+    "original": "Venom",
+    "genre": "buddy comedy",
+    "description": "A down-on-his-luck journalist and the wisecracking alien sharing his body bicker their way through the city's underworld."
+  },
+  {
+    "original": "Jumanji",
+    "genre": "superhero saga",
+    "description": "Players sucked into a cursed board game are granted heroic avatars with wild abilities and must survive the jungle to finish the quest."
+  },
+  {
+    "original": "Zathura",
+    "genre": "space opera",
+    "description": "A pair of bickering siblings play a metal board game that flings their house across the cosmos, with each turn raising the stakes."
+  },
+  {
+    "original": "Night at the Museum",
+    "genre": "haunted house",
+    "description": "A night guard's first shift reveals that the exhibits in an old building come alive when the doors close, and history has a temper."
+  },
+  {
+    "original": "The Parent Trap",
+    "genre": "buddy comedy",
+    "description": "Twin sisters who never met become fast friends and conspirators, switching places to reunite the divorced parents they each miss."
+  },
+  {
+    "original": "Freaky Friday",
+    "genre": "rom-com",
+    "description": "A stressed mother and her teenage daughter wake up in each other's bodies the day before a wedding and learn to walk in each other's shoes."
+  },
+  {
+    "original": "Clueless",
+    "genre": "mockumentary",
+    "description": "A camera crew follows a wealthy high-school queen as she remakes a new student in her own image, with mixed and hilarious results."
+  },
+  {
+    "original": "Legally Blonde",
+    "genre": "courtroom drama",
+    "description": "A pink-loving sorority star follows her ex to law school and surprises everyone, including herself, by winning the biggest case of the term."
+  },
+  {
+    "original": "The Devil Wears Prada",
+    "genre": "horror",
+    "description": "A young assistant's dream job becomes a waking nightmare ruled by a fashion tyrant who destroys assistants for breakfast."
+  },
+  {
+    "original": "The Proposal",
+    "genre": "rom-com",
+    "description": "A demanding editor blackmails her assistant into a sham marriage for a visa, then brings him home to meet a family that steals her heart."
+  },
+  {
+    "original": "27 Dresses",
+    "genre": "zombie apocalypse",
+    "description": "A perennial bridesmaid's endless wedding season turns into a scramble when the undead crash every ceremony she has ever stood in."
+  },
+  {
+    "original": "How to Lose a Guy in 10 Days",
+    "genre": "zombie apocalypse",
+    "description": "A journalist's plan to scare off a suitor in ten days collides with an outbreak that turns the whole city into the undead."
+  },
+  {
+    "original": "Notting Hill",
+    "genre": "rom-com",
+    "description": "A humble bookshop owner falls for the most famous actress in the world when she wanders into his shop, and somehow she stays."
+  },
+  {
+    "original": "Love Actually",
+    "genre": "zombie apocalypse",
+    "description": "Nine intertwined stories of the heart unfold across London while the dead rise, and love endures through every gesture and sacrifice."
+  },
+  {
+    "original": "Four Weddings and a Funeral",
+    "genre": "zombie apocalypse",
+    "description": "A bumbling romantic keeps meeting the woman of his dreams at ceremonies, but every event is overrun by the undead and he still cannot confess."
+  },
+  {
+    "original": "Bridget Jones",
+    "genre": "zombie apocalypse",
+    "description": "A chaotic singleton's diary of diets, disasters, and bad decisions continues uninterrupted even as the city around her falls to the dead."
+  },
+  {
+    "original": "Mamma Mia",
+    "genre": "musical",
+    "description": "A bride-to-be on a sunlit Greek island invites three possible fathers to her wedding, and everyone bursts into song at the altar."
+  },
+  {
+    "original": "Grease",
+    "genre": "musical",
+    "description": "A summer romance reignites in senior year when the girl next door meets the leather-jacket rebel she kissed, and the whole school sings."
+  },
+  {
+    "original": "Dirty Dancing",
+    "genre": "musical",
+    "description": "A doctor's daughter spends the summer learning to dance with the resort's bad-boy instructor, and nobody puts their love story in a corner."
+  },
+  {
+    "original": "Footloose",
+    "genre": "musical",
+    "description": "A city teen moves to a town where dancing is banned and rallies his classmates to overturn the law with song and defiance."
+  },
+  {
+    "original": "Flashdance",
+    "genre": "musical",
+    "description": "A welder who dances in a bar by night dares to audition for a prestigious academy, and her dream becomes a song of steel and light."
+  },
+  {
+    "original": "Saturday Night Fever",
+    "genre": "film noir",
+    "description": "A Brooklyn clerk rules the disco floor by night until a woman's disappearance drags him into the neon underbelly of the city."
+  },
+  {
+    "original": "The Princess Bride",
+    "genre": "western",
+    "description": "A farm boy braves a frontier of dangers, giants, and duels to rescue his true love from a wicked prince's scheme."
+  },
+  {
+    "original": "Ghostbusters",
+    "genre": "buddy comedy",
+    "description": "Three scientists start a paranormal cleanup business and save the city with wits, wallets, and proton packs when the dead come knocking."
+  },
+  {
+    "original": "The Breakfast Club",
+    "genre": "courtroom drama",
+    "description": "Five teens from rival cliques are sentenced to a Saturday in detention, where they are tried, judged, and finally understood by each other."
+  },
+  {
+    "original": "Groundhog Day",
+    "genre": "film noir",
+    "description": "A man is caught in a loop he cannot break, and with each dawn the small town's secrets and his own sins surface again."
+  },
+  {
+    "original": "The Goonies",
+    "genre": "heist film",
+    "description": "A gang of kids plans a treasure heist through booby-trapped caverns while a family of criminals races them to the fortune."
+  },
+  {
+    "original": "Alien",
+    "genre": "space opera",
+    "description": "A deep-space crew answers a distress signal and finds a nightmare waiting in the dark, hunting them one by one through the ship."
+  },
+  {
+    "original": "The Exorcist",
+    "genre": "haunted house",
+    "description": "A child's bedroom grows cold and her voice turns strange, so her desperate mother summons two priests to a house that is no longer theirs."
+  },
+  {
+    "original": "The Sixth Sense",
+    "genre": "haunted house",
+    "description": "A child psychologist discovers his young patient can see the dead, and the boy's house is full of visitors no one else can see."
+  },
+  {
+    "original": "Scream",
+    "genre": "horror",
+    "description": "A masked knife-wielder toys with a town of teens who know every horror movie rule by heart, and the game is personal."
+  },
+  {
+    "original": "Halloween",
+    "genre": "gritty crime thriller",
+    "description": "An escaped killer in a white mask returns to his hometown and picks off babysitters one by one while the local doctor hunts him."
+  },
+  {
+    "original": "The Truman Show",
+    "genre": "mockumentary",
+    "description": "A documentary crew follows an ordinary man who does not know that his entire life, his town, and his marriage are the show."
+  },
+  {
+    "original": "Cast Away",
+    "genre": "buddy comedy",
+    "description": "A stranded pilot and the volleyball he talks to bicker their way through years of isolation until rescue or madness comes first."
+  },
+  {
+    "original": "The Karate Kid",
+    "genre": "superhero saga",
+    "description": "A bullied teen is trained by a mysterious old master in a secret art that turns him into the neighborhood's unlikely champion."
+  },
+  {
+    "original": "The Incredibles",
+    "genre": "courtroom drama",
+    "description": "A family of retired heroes stands trial for using their powers in public, and their case becomes the fight that brings capes back."
+  },
+  {
+    "original": "The Little Mermaid",
+    "genre": "film noir",
+    "description": "A sea princess trades her voice for legs and discovers the prince's court hides a darker bargain than the sea witch ever let on."
+  },
+  {
+    "original": "Aladdin",
+    "genre": "heist film",
+    "description": "A street thief steals a magic lamp and plans the heist of a lifetime inside the sultan's palace, with a genie as his getaway."
+  },
+  {
+    "original": "Beauty and the Beast",
+    "genre": "haunted house",
+    "description": "A young woman is trapped in a cursed castle where every mirror, clock, and candlestick watches her, and the master hides in the shadows."
+  },
+  {
+    "original": "The Sound of Music",
+    "genre": "haunted house",
+    "description": "A singing governess arrives at a captain's mansion and discovers the children's mother never truly left the halls."
+  },
+  {
+    "original": "Mary Poppins",
+    "genre": "mockumentary",
+    "description": "A documentary crew follows a mysterious nanny who claims she can fly, and the children she tends insist the camera saw it too."
+  },
+  {
+    "original": "Goodfellas",
+    "genre": "gritty crime thriller",
+    "description": "A neighborhood kid climbs the mob ladder through the fifties and sixties until paranoia, greed, and one long night tear it all down."
+  },
+  {
+    "original": "Scarface",
+    "genre": "gritty crime thriller",
+    "description": "A small-time exile builds a cocaine empire in a glittering city and drowns in the paranoia of his own excess."
+  },
+  {
+    "original": "Reservoir Dogs",
+    "genre": "gritty crime thriller",
+    "description": "After a jewelry heist goes horribly wrong, wounded strangers gather in a warehouse to discover which of them is the rat."
+  },
+  {
+    "original": "Se7en",
+    "genre": "gritty crime thriller",
+    "description": "Two detectives hunt a methodical killer who stages his murders as lessons from the old book of deadly sins, and the finale is personal."
+  },
+  {
+    "original": "The Departed",
+    "genre": "gritty crime thriller",
+    "description": "A mole inside the police and a cop inside the mob race to unmask each other before the walls close in on both of them."
+  },
+  {
+    "original": "Schindler's List",
+    "genre": "courtroom drama",
+    "description": "A factory owner is called before a tribunal to account for the lives he saved and the ones he could not, in the shadow of atrocity."
+  },
+  {
+    "original": "Saving Private Ryan",
+    "genre": "courtroom drama",
+    "description": "A captain testifies about the mission to bring one soldier home, and the trial asks whether any single life is worth so many."
+  },
+  {
+    "original": "Slumdog Millionaire",
+    "genre": "gritty crime thriller",
+    "description": "A street kid is arrested for cheating on a game show, and each answer he gives unlocks a brutal chapter of his past."
+  }
+]

@@ -214,24 +214,25 @@ Play without joining a room, wherever a no-room mode makes sense (D022):
 
 ---
 
-## Milestone 5 — Remaining Drawing Games
+## Milestone 5 — Remaining Drawing Games ✅
 
 Working app: all 5 drawing games playable (reuse canvas + engine).
 
-- [ ] **Copycat Challenge:** 5s image reveal → private canvas → gallery → votes
-      (Most Recognizable/Funniest/Most Abstract); PD image dataset (50+
-      paintings, 50+ photos)
-- [ ] **Draw the Lyric:** lyric banner (drawer only), guess song title, artist
-      hint at 45s, scoring (guesser 100, drawer 50); ⚠ dataset per open
-      question #2 (paraphrased/PD lyrics)
-- [ ] **One Line, One Shape:** continuous-line enforcement (mouse/touch lift →
-      warning + −10s), 200+ objects
-- [ ] **Shadow Sketch:** silhouette background layer (drawer only), reveal to
-      guessers at 60s, 100+ SVG silhouettes
-- [ ] Engine adapter refactor: one drawing-game config per game (rounds,
-      timers, scoring, hint rules)
-- [ ] E2E: each drawing game journey; late-join replay for each
-- [ ] Update docs
+- [x] **Copycat Challenge:** 5s image reveal → private canvas → gallery → votes
+      (Most Recognizable/Funniest/Most Abstract); PD image dataset (104
+      paintings/photos, Wikimedia FilePath links)
+- [x] **Draw the Lyric:** lyric banner (drawer only), guess song title, artist
+      hint at 45s, scoring (guesser 100, drawer 50); paraphrased/original
+      lyrics only (open question #2 — no copyrighted lyrics)
+- [x] **One Line, One Shape:** continuous-line enforcement (mouse/touch lift →
+      warning + −10s, floor 5s), 220 objects
+- [x] **Shadow Sketch:** silhouette background layer (drawer only), reveal to
+      guessers at 60s, 110 SVG silhouettes
+- [x] Engine adapter refactor: one drawing-game config per game (rounds,
+      timers, scoring, hint rules) + Copycat session (D028)
+- [x] E2E: each drawing game journey; late-join replay for each (drawing-game
+      engine tests + skribbl socket integration)
+- [x] Update docs (D028, PROJECT_STATE)
 
 **Done when:** all 5 drawing games playable and tested; no duplicated canvas
 logic.

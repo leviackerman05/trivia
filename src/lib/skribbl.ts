@@ -1,8 +1,9 @@
 /**
- * Client-side Skribbl Arena game state (PRD §5.1).
- * A pure reducer over the server's additive round events — the island
- * dispatches actions and renders. Server-authoritative: the server owns
- * phases, timers, words, and scores; this mirror only displays them.
+ * Client-side drawing-game state (shared by Skribbl Arena, One Line One
+ * Shape, Shadow Sketch, Draw the Lyric). A pure reducer over the server's
+ * additive round events — the island dispatches actions and renders.
+ * Server-authoritative: the server owns phases, timers, words, and scores;
+ * this mirror only displays them.
  */
 
 import type { Stroke } from './canvas';
@@ -31,6 +32,23 @@ export interface RoundStartPayload {
   wordLength: number | null;
   choices?: string[];
   endsAt?: number;
+  /** One Line, One Shape — drawer-only object name. */
+  object?: string;
+  /** Shadow Sketch — drawer-only silhouette SVG path. */
+  silhouette?: string;
+  /** Draw the Lyric — drawer-only lyric + artist. */
+  lyric?: string;
+  artist?: string;
+}
+
+export interface RoundHintPayload {
+  round?: number;
+  firstLetter?: string | null;
+  lastLetter?: string | null;
+  /** Draw the Lyric — artist reveal. */
+  artist?: string;
+  /** Shadow Sketch — silhouette reveal to everyone. */
+  silhouette?: string;
 }
 
 export interface SkribblGameState {
@@ -46,6 +64,18 @@ export interface SkribblGameState {
   lastLetter: string | null;
   /** Server-clock deadline of the drawing phase (ms epoch). */
   endsAt: number | null;
+  /** Drawer-only prompt data (One Line object / Shadow silhouette / Lyric). */
+  drawerData: {
+    object: string | null;
+    silhouette: string | null;
+    lyric: string | null;
+    artist: string | null;
+  };
+  /** Draw the Lyric artist hint; Shadow Sketch silhouette reveal (all players). */
+  artistHint: string | null;
+  revealedSilhouette: string | null;
+  /** One Line, One Shape — lift warnings. */
+  liftWarnings: number;
   scores: Record<string, number>;
   strokes: Stroke[];
   summary: SkribblRoundSummary | null;
@@ -69,6 +99,10 @@ export function initialSkribblState(): SkribblGameState {
     firstLetter: null,
     lastLetter: null,
     endsAt: null,
+    drawerData: { object: null, silhouette: null, lyric: null, artist: null },
+    artistHint: null,
+    revealedSilhouette: null,
+    liftWarnings: 0,
     scores: {},
     strokes: [],
     summary: null,
@@ -82,7 +116,9 @@ export function initialSkribblState(): SkribblGameState {
 export type SkribblAction =
   | { type: 'reset' }
   | { type: 'round-start'; payload: RoundStartPayload; myName: string }
-  | { type: 'round-hint'; firstLetter: string | null; lastLetter: string | null }
+  | { type: 'round-hint'; payload: RoundHintPayload }
+  | { type: 'round-timer'; endsAt: number }
+  | { type: 'stroke-lift'; endsAt: number }
   | { type: 'stroke-added'; stroke: Stroke }
   | { type: 'stroke-removed'; strokeId: string }
   | { type: 'canvas-cleared' }
@@ -114,6 +150,13 @@ export type SkribblAction =
         summary: SkribblRoundSummary | null;
         finalScores: SkribblScoreEntry[] | null;
         winner: string | null;
+        object?: string | null;
+        silhouette?: string | null;
+        lyric?: string | null;
+        artist?: string | null;
+        artistHint?: string | null;
+        revealedSilhouette?: string | null;
+        liftWarnings?: number;
       };
     };
 
@@ -137,6 +180,15 @@ export function skribblReducer(state: SkribblGameState, action: SkribblAction): 
         endsAt: action.payload.endsAt ?? null,
         firstLetter: null,
         lastLetter: null,
+        drawerData: {
+          object: action.payload.object ?? null,
+          silhouette: action.payload.silhouette ?? null,
+          lyric: action.payload.lyric ?? null,
+          artist: action.payload.artist ?? null,
+        },
+        artistHint: null,
+        revealedSilhouette: null,
+        liftWarnings: 0,
         summary: null,
         guessFeedback: null,
         // Fresh round → fresh canvas (drawer already cleared locally; others
@@ -145,7 +197,21 @@ export function skribblReducer(state: SkribblGameState, action: SkribblAction): 
       };
     }
     case 'round-hint':
-      return { ...state, firstLetter: action.firstLetter, lastLetter: action.lastLetter };
+      return {
+        ...state,
+        firstLetter: action.payload.firstLetter ?? state.firstLetter,
+        lastLetter: action.payload.lastLetter ?? state.lastLetter,
+        artistHint: action.payload.artist ?? state.artistHint,
+        revealedSilhouette: action.payload.silhouette ?? state.revealedSilhouette,
+      };
+    case 'round-timer':
+      return { ...state, endsAt: action.endsAt };
+    case 'stroke-lift':
+      return {
+        ...state,
+        endsAt: action.endsAt,
+        liftWarnings: state.liftWarnings + 1,
+      };
     case 'stroke-added':
       return { ...state, strokes: [...state.strokes, action.stroke] };
     case 'stroke-removed':
@@ -182,7 +248,20 @@ export function skribblReducer(state: SkribblGameState, action: SkribblAction): 
       return { ...state, guessFeedback: feedback, feedbackSeq: state.feedbackSeq + 1 };
     }
     case 'resync':
-      return { ...initialSkribblState(), myName: action.myName, ...action.state };
+      return {
+        ...initialSkribblState(),
+        myName: action.myName,
+        ...action.state,
+        drawerData: {
+          object: action.state.object ?? null,
+          silhouette: action.state.silhouette ?? null,
+          lyric: action.state.lyric ?? null,
+          artist: action.state.artist ?? null,
+        },
+        artistHint: action.state.artistHint ?? null,
+        revealedSilhouette: action.state.revealedSilhouette ?? null,
+        liftWarnings: action.state.liftWarnings ?? 0,
+      };
     default:
       return state;
   }

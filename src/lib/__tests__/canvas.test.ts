@@ -6,6 +6,7 @@ import {
   COLOR_PALETTE,
   DEFAULT_COLOR,
   floodFill,
+  pathBBox,
   removeStrokeById,
   replayStrokes,
   type Stroke,
@@ -144,6 +145,37 @@ describe('canvas primitives', () => {
     expect(CANVAS_HEIGHT).toBe(500);
     expect(COLOR_PALETTE).toHaveLength(12);
     expect(DEFAULT_COLOR).toBe(COLOR_PALETTE[0]);
+  });
+});
+
+describe('silhouette path bounds (Shadow Sketch)', () => {
+  it('computes a bounding box for absolute SVG paths', () => {
+    // heart silhouette from the dataset (0–100 space)
+    const box = pathBBox(
+      'M50 32 C50 22 38 14 28 22 C18 30 19 42 28 50 L50 70 L72 50 C81 42 82 30 72 22 C62 14 50 22 50 32 Z'
+    );
+    expect(box).not.toBeNull();
+    expect(box!.minX).toBeCloseTo(18, 0);
+    expect(box!.maxX).toBeCloseTo(82, 0);
+    expect(box!.minY).toBeCloseTo(14, 0);
+    expect(box!.maxY).toBeCloseTo(70, 0);
+  });
+
+  it('handles H/V commands and returns null for empty paths', () => {
+    const box = pathBBox('M47 16 H53 V84 H47 Z M16 47 H84 V53 H16 Z');
+    expect(box).not.toBeNull();
+    expect(box!.minX).toBe(16);
+    expect(box!.maxX).toBe(84);
+    expect(box!.minY).toBe(16);
+    expect(box!.maxY).toBe(84);
+    expect(pathBBox('')).toBeNull();
+    expect(pathBBox('ZZZZ')).toBeNull();
+  });
+
+  it('replays strokes with a background without crashing in Node (Path2D absent)', () => {
+    const { ctx, calls } = fakeContext();
+    replayStrokes(ctx, [stroke()], 'M50 32 Z');
+    expect(calls).toContain('fillRect 0 0 800 500');
   });
 });
 

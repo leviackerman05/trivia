@@ -5,6 +5,7 @@ import { ClientEvents, ServerEvents } from '../lib/events';
 import {
   initialSkribblState,
   skribblReducer,
+  type RoundHintPayload,
   type RoundStartPayload,
   type SkribblGameState,
   type SkribblRoundSummary,
@@ -12,13 +13,13 @@ import {
 import type { Stroke } from '../lib/canvas';
 
 /**
- * Skribbl Arena game session (M4) — socket listeners + actions on top of the
- * pure skribblReducer. Mounts only while a game is running (room phase is
- * past the lobby); unmount resets. A `game-resync` on mount and on every
- * socket reconnect rebuilds the full state for mid-game joins/refreshes.
+ * Drawing-game session hook (M5) — socket listeners + actions on top of the
+ * pure skribblReducer. Shared by Skribbl Arena, One Line One Shape, Shadow
+ * Sketch, and Draw the Lyric. Mounts while a game is running; `game-resync`
+ * on mount and on every socket reconnect rebuilds the full state.
  */
 
-export interface UseSkribblGame {
+export interface UseDrawingGame {
   game: SkribblGameState;
   actions: {
     chooseWord: (word: string) => Promise<{ ok: boolean; error?: string }>;
@@ -26,6 +27,7 @@ export interface UseSkribblGame {
     sendFill: (x: number, y: number, color: string) => Promise<{ ok: boolean; error?: string }>;
     undoStroke: () => Promise<{ ok: boolean; error?: string }>;
     clearCanvas: () => Promise<{ ok: boolean; error?: string }>;
+    strokeLift: () => Promise<{ ok: boolean; error?: string; endsAt?: number }>;
     sendGuess: (text: string) => Promise<{ ok: boolean; error?: string }>;
     nextRound: () => Promise<{ ok: boolean; error?: string }>;
     restartGame: () => Promise<{ ok: boolean; error?: string }>;
@@ -53,14 +55,22 @@ interface AckResponse {
     summary: SkribblRoundSummary | null;
     finalScores: { playerName: string; score: number }[] | null;
     winner: string | null;
+    object?: string | null;
+    silhouette?: string | null;
+    lyric?: string | null;
+    artist?: string | null;
+    artistHint?: string | null;
+    revealedSilhouette?: string | null;
+    liftWarnings?: number;
   };
   strokeId?: string | null;
+  endsAt?: number;
   count?: number;
 }
 
 const ACK_TIMEOUT_MS = 5000;
 
-export function useSkribblGame(roomCode: string | null, myName: string | null): UseSkribblGame {
+export function useDrawingGame(roomCode: string | null, myName: string | null): UseDrawingGame {
   const [game, dispatch] = useReducer(skribblReducer, undefined, initialSkribblState);
   const socketRef = useRef<Socket | null>(null);
   const roomCodeRef = useRef(roomCode);
@@ -105,9 +115,9 @@ export function useSkribblGame(roomCode: string | null, myName: string | null): 
     const onRoundStart = (payload: RoundStartPayload) => {
       dispatch({ type: 'round-start', payload, myName: myNameRef.current ?? '' });
     };
-    const onRoundHint = (payload: { firstLetter: string | null; lastLetter: string | null }) => {
-      dispatch({ type: 'round-hint', ...payload });
-    };
+    const onRoundHint = (payload: RoundHintPayload) => dispatch({ type: 'round-hint', payload });
+    const onRoundTimer = (payload: { endsAt: number }) =>
+      dispatch({ type: 'round-timer', endsAt: payload.endsAt });
     const onStroke = (stroke: Stroke) => dispatch({ type: 'stroke-added', stroke });
     const onUndo = (payload: { strokeId: string }) =>
       dispatch({ type: 'stroke-removed', strokeId: payload.strokeId });
@@ -130,6 +140,7 @@ export function useSkribblGame(roomCode: string | null, myName: string | null): 
     socket.on('connect', onConnect);
     socket.on(ServerEvents.roundStart, onRoundStart);
     socket.on(ServerEvents.roundHint, onRoundHint);
+    socket.on(ServerEvents.roundTimer, onRoundTimer);
     socket.on(ServerEvents.drawStroke, onStroke);
     socket.on(ServerEvents.undoStroke, onUndo);
     socket.on(ServerEvents.clearCanvas, onClear);
@@ -138,13 +149,13 @@ export function useSkribblGame(roomCode: string | null, myName: string | null): 
     socket.on(ServerEvents.guessResult, onGuessResult);
     socket.on(ServerEvents.gameRestart, onGameRestart);
 
-    // Rebuild full state for mid-game joins and refreshes.
     void resync();
 
     return () => {
       socket.off('connect', onConnect);
       socket.off(ServerEvents.roundStart, onRoundStart);
       socket.off(ServerEvents.roundHint, onRoundHint);
+      socket.off(ServerEvents.roundTimer, onRoundTimer);
       socket.off(ServerEvents.drawStroke, onStroke);
       socket.off(ServerEvents.undoStroke, onUndo);
       socket.off(ServerEvents.clearCanvas, onClear);
@@ -171,8 +182,7 @@ export function useSkribblGame(roomCode: string | null, myName: string | null): 
   /**
    * Optimistic send: the drawer's own strokes join the local log immediately
    * (so repaints never erase them and undo can remove them), then the server
-   * authorizes + relays them. The drawer is excluded from the echo, so the
-   * local append is the single source on this client.
+   * authorizes + relays them. The drawer is excluded from the echo.
    */
   const sendStroke = useCallback(
     async (stroke: Stroke) => {
@@ -228,6 +238,19 @@ export function useSkribblGame(roomCode: string | null, myName: string | null): 
     }
     const response = await emitAck(ClientEvents.clearCanvas, { roomCode: code });
     return { ok: response.ok, error: response.error };
+  }, [emitAck]);
+
+  /** One Line, One Shape: report a pen lift → server deducts 10s. */
+  const strokeLift = useCallback(async () => {
+    const code = roomCodeRef.current;
+    if (!code) {
+      return { ok: false, error: 'NOT_IN_ROOM' };
+    }
+    const response = await emitAck(ClientEvents.strokeLift, { roomCode: code });
+    if (response.ok && typeof response.endsAt === 'number') {
+      dispatch({ type: 'stroke-lift', endsAt: response.endsAt });
+    }
+    return { ok: response.ok, error: response.error, endsAt: response.endsAt };
   }, [emitAck]);
 
   /** Guess errors surface as visible feedback instead of failing silently. */
@@ -313,6 +336,7 @@ export function useSkribblGame(roomCode: string | null, myName: string | null): 
       sendFill,
       undoStroke,
       clearCanvas,
+      strokeLift,
       sendGuess,
       nextRound,
       restartGame,

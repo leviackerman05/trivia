@@ -1,0 +1,602 @@
+[
+  {
+    "title": "Bohemian Rhapsody",
+    "artist": "Queen",
+    "lyric": "A life weighed down by guilt, facing the gallows of regret, and the truth is that in the end, none of it matters to anyone."
+  },
+  {
+    "title": "Hotel California",
+    "artist": "Eagles",
+    "lyric": "We pulled in off that desert highway, and the strange hotel took us in forever, its doors never letting us leave."
+  },
+  {
+    "title": "Shape of You",
+    "artist": "Ed Sheeran",
+    "lyric": "We found a rhythm in a crowded room, bodies moving like the tide, and the night pulled us into love."
+  },
+  {
+    "title": "Rolling in the Deep",
+    "artist": "Adele",
+    "lyric": "The ashes of your betrayal still burn, and my revenge will roll through you like a wave from the deep."
+  },
+  {
+    "title": "Smells Like Teen Spirit",
+    "artist": "Nirvana",
+    "lyric": "The restless crowd gathers in the dark, a loud boredom that smells like revolution in the making."
+  },
+  {
+    "title": "Wonderwall",
+    "artist": "Oasis",
+    "lyric": "And after all these years, you're still the one who saves me, standing there like a wonderwall I lean on."
+  },
+  {
+    "title": "Billie Jean",
+    "artist": "Michael Jackson",
+    "lyric": "She told me her name and a story, but the child on the doorstep is not my son, and the lie follows me."
+  },
+  {
+    "title": "Yesterday",
+    "artist": "The Beatles",
+    "lyric": "All my troubles seemed so far away, but now they stay, and I long for the simple hours of yesterday."
+  },
+  {
+    "title": "Imagine",
+    "artist": "John Lennon",
+    "lyric": "Picture a world with no borders and no possessions, no greed or hunger, all of us dreaming as one."
+  },
+  {
+    "title": "Purple Rain",
+    "artist": "Prince",
+    "lyric": "I never meant to make you weep, I only wanted to see you laughing beneath that purple rain."
+  },
+  {
+    "title": "Lose Yourself",
+    "artist": "Eminem",
+    "lyric": "Nerves on fire before the biggest shot of your life, this moment is the only moment that matters."
+  },
+  {
+    "title": "Umbrella",
+    "artist": "Rihanna",
+    "lyric": "When the storm clouds roll in, my love will hover over you, an umbrella in the pouring rain."
+  },
+  {
+    "title": "Bad Guy",
+    "artist": "Billie Eilish",
+    "lyric": "I'm the one you blame when the lights flicker, the reason you double-check the lock, the bad guy you love."
+  },
+  {
+    "title": "All of Me",
+    "artist": "John Legend",
+    "lyric": "Give me all of you, your crooked smile and tangled thoughts, and I'll love every imperfect inch of you."
+  },
+  {
+    "title": "Shallow",
+    "artist": "Lady Gaga",
+    "lyric": "We left the safe shallows behind and dove into deep water together, and I'm falling with you."
+  },
+  {
+    "title": "Blinding Lights",
+    "artist": "The Weeknd",
+    "lyric": "The neon city blinds me and I can't see a thing, but I'll keep running through the night toward you."
+  },
+  {
+    "title": "Someone Like You",
+    "artist": "Adele",
+    "lyric": "Word is you've found your someone, and I'm happy for you, though part of me still waits for someone like you."
+  },
+  {
+    "title": "Let It Go",
+    "artist": "Idina Menzel",
+    "lyric": "The storm rages inside me, but I turn from the past and let the cold wind carry me away."
+  },
+  {
+    "title": "Hey Jude",
+    "artist": "The Beatles",
+    "lyric": "Take a broken heart and mend it with a tune, let her in, and the world gets brighter."
+  },
+  {
+    "title": "Sweet Child O' Mine",
+    "artist": "Guns N' Roses",
+    "lyric": "Her smile takes me back to a place I remember, where everything felt new, sweet child of mine."
+  },
+  {
+    "title": "Don't Stop Believin'",
+    "artist": "Journey",
+    "lyric": "Strangers meet on a midnight train, chasing a feeling that keeps them believing in the journey."
+  },
+  {
+    "title": "I Will Always Love You",
+    "artist": "Whitney Houston",
+    "lyric": "If I stay, I'd only be in your way, so I'll walk away, but I will always love you."
+  },
+  {
+    "title": "No Woman No Cry",
+    "artist": "Bob Marley",
+    "lyric": "We shared laughter and good times in the yard, so dry your eyes, everything will be alright."
+  },
+  {
+    "title": "The Sound of Silence",
+    "artist": "Simon & Garfunkel",
+    "lyric": "Darkness greets me like an old friend while visions crowd the city's neon sleep."
+  },
+  {
+    "title": "Dancing Queen",
+    "artist": "ABBA",
+    "lyric": "The weekend arrives and the floor is hers, young and sweet, the dancing queen of the night."
+  },
+  {
+    "title": "Born to Run",
+    "artist": "Bruce Springsteen",
+    "lyric": "The highway calls through the endless night, and we were born to run from this dead-end town."
+  },
+  {
+    "title": "Respect",
+    "artist": "Aretha Franklin",
+    "lyric": "All I ask when you walk through the door is the respect I'm owed, a simple thing."
+  },
+  {
+    "title": "My Heart Will Go On",
+    "artist": "Celine Dion",
+    "lyric": "Across oceans of distance and time, you live on inside me, and my heart will go on and on."
+  },
+  {
+    "title": "Toxic",
+    "artist": "Britney Spears",
+    "lyric": "Intoxicated by your poison kiss, I crave the taste that I know will ruin me, too high to come down."
+  },
+  {
+    "title": "Single Ladies",
+    "artist": "Beyoncé",
+    "lyric": "You had your chance to make it official, now watch the dance move on without you."
+  },
+  {
+    "title": "Hips Don't Lie",
+    "artist": "Shakira",
+    "lyric": "When she moves, the rhythm speaks the truth, and her hips tell stories words could never tell."
+  },
+  {
+    "title": "Firework",
+    "artist": "Katy Perry",
+    "lyric": "Sometimes you feel invisible, drifting through the air, but your spark is waiting to ignite."
+  },
+  {
+    "title": "Roar",
+    "artist": "Katy Perry",
+    "lyric": "I held my tongue for too long, now my voice rises and they finally hear me roar."
+  },
+  {
+    "title": "Happy",
+    "artist": "Pharrell Williams",
+    "lyric": "A joy so big it lifts the roof away, if you feel it too, clap your hands along."
+  },
+  {
+    "title": "Uptown Funk",
+    "artist": "Mark Ronson",
+    "lyric": "This beat is hot and the night ignites, don't believe me, just watch the funk take over uptown."
+  },
+  {
+    "title": "Despacito",
+    "artist": "Luis Fonsi",
+    "lyric": "Slowly, softly, the rhythm takes us, every breath a verse, every step a song between us."
+  },
+  {
+    "title": "Gangnam Style",
+    "artist": "Psy",
+    "lyric": "A horse-riding dance craze from Seoul, sweeping the whole world into its rhythm."
+  },
+  {
+    "title": "Baby Shark",
+    "artist": "Pinkfong",
+    "lyric": "Little shark, big shark, the whole family glides through the playful waves, snapping along the way."
+  },
+  {
+    "title": "Old Town Road",
+    "artist": "Lil Nas X",
+    "lyric": "Riding my horse down the country highway, cowboy boots and a hip-hop beat under the western sky."
+  },
+  {
+    "title": "WAP",
+    "artist": "Cardi B",
+    "lyric": "Loud and unashamed, she spells out exactly what she wants in a room that drips with desire."
+  },
+  {
+    "title": "Believer",
+    "artist": "Imagine Dragons",
+    "lyric": "The pain shaped me, every scar a lesson, and I'm a believer in the fire that made me."
+  },
+  {
+    "title": "Thunder",
+    "artist": "Imagine Dragons",
+    "lyric": "They said I was too young to dream, but the lightning struck, and I became the thunder."
+  },
+  {
+    "title": "Radioactive",
+    "artist": "Imagine Dragons",
+    "lyric": "I open my eyes on a world of ash, breathing in the glow of a brand new age."
+  },
+  {
+    "title": "Counting Stars",
+    "artist": "OneRepublic",
+    "lyric": "Lately I've been losing sleep over dreams, counting stars instead of counting what I owe."
+  },
+  {
+    "title": "Sugar",
+    "artist": "Maroon 5",
+    "lyric": "The ache is real without your sweetness, so pour it on me, I want every taste of you."
+  },
+  {
+    "title": "Payphone",
+    "artist": "Maroon 5",
+    "lyric": "All my change spent at the payphone, trying to reach you one last time before you go."
+  },
+  {
+    "title": "Moves Like Jagger",
+    "artist": "Maroon 5",
+    "lyric": "I've got the moves like the rock legend, strutting through the room and making it stare."
+  },
+  {
+    "title": "Viva la Vida",
+    "artist": "Coldplay",
+    "lyric": "A fallen king watches his empire slip away, sweeping streets he once ruled with a crown."
+  },
+  {
+    "title": "Fix You",
+    "artist": "Coldplay",
+    "lyric": "When the lights go out and the tears fall, I will hold you steady and try to fix you."
+  },
+  {
+    "title": "Yellow",
+    "artist": "Coldplay",
+    "lyric": "The stars burn bright just for you, and everything I do turns that same glowing gold."
+  },
+  {
+    "title": "Clocks",
+    "artist": "Coldplay",
+    "lyric": "Trouble in the turning gears of time, I can't stop the hands that spin my restless thoughts."
+  },
+  {
+    "title": "Paradise",
+    "artist": "Coldplay",
+    "lyric": "She dreamed beyond the grey horizon, chasing a paradise waiting past the endless fields."
+  },
+  {
+    "title": "Halo",
+    "artist": "Beyoncé",
+    "lyric": "I can feel your halo wrapping around me, a light that breaks through my darkest walls."
+  },
+  {
+    "title": "Love on Top",
+    "artist": "Beyoncé",
+    "lyric": "Baby, you're the one I've been waiting for, so take this love and lift it to the top."
+  },
+  {
+    "title": "Crazy in Love",
+    "artist": "Beyoncé",
+    "lyric": "Your stare ignites a fever in my soul, and I'm crazy, so crazy in love with you."
+  },
+  {
+    "title": "Drunk in Love",
+    "artist": "Beyoncé",
+    "lyric": "Sipping the night away in the kitchen, we sway drunk in love until the morning light."
+  },
+  {
+    "title": "Formation",
+    "artist": "Beyoncé",
+    "lyric": "I carry my whole history like a crown, watch me form up and take what's mine."
+  },
+  {
+    "title": "Sorry",
+    "artist": "Beyoncé",
+    "lyric": "I'm not the one apologizing, and he knows exactly who to call when the night gets lonely."
+  },
+  {
+    "title": "Blank Space",
+    "artist": "Taylor Swift",
+    "lyric": "They'll tell you stories about my past, but there's a blank space waiting for your name."
+  },
+  {
+    "title": "Shake It Off",
+    "artist": "Taylor Swift",
+    "lyric": "Let them talk, I'll keep dancing anyway, brushing it off and moving along."
+  },
+  {
+    "title": "Love Story",
+    "artist": "Taylor Swift",
+    "lyric": "A classic romance against our families' will, and the story ends with you and me."
+  },
+  {
+    "title": "Bad Blood",
+    "artist": "Taylor Swift",
+    "lyric": "You and me got bad blood now, the wreckage of a friendship turned into a battlefield."
+  },
+  {
+    "title": "You Belong with Me",
+    "artist": "Taylor Swift",
+    "lyric": "She wears short skirts and I wear t-shirts, but you belong with me in the bleachers."
+  },
+  {
+    "title": "I Knew You Were Trouble",
+    "artist": "Taylor Swift",
+    "lyric": "The second you smiled, I saw the storm coming, but I walked in anyway."
+  },
+  {
+    "title": "Style",
+    "artist": "Taylor Swift",
+    "lyric": "Midnight drives under the city lights, we go together and never go out of style."
+  },
+  {
+    "title": "We Are Never Ever Getting Back Together",
+    "artist": "Taylor Swift",
+    "lyric": "We're done for good this time, no more back and forth, never ever together again."
+  },
+  {
+    "title": "Welcome to New York",
+    "artist": "Taylor Swift",
+    "lyric": "The lights are so bright, a new beginning waits in the city that never sleeps."
+  },
+  {
+    "title": "Call Me Maybe",
+    "artist": "Carly Rae Jepsen",
+    "lyric": "I threw a wish into the well, took your number down, hey, call me maybe."
+  },
+  {
+    "title": "Party in the USA",
+    "artist": "Miley Cyrus",
+    "lyric": "The taxi pulled up under the Hollywood lights, and I'm partying in the USA tonight."
+  },
+  {
+    "title": "Wrecking Ball",
+    "artist": "Miley Cyrus",
+    "lyric": "I crashed through your defenses like a wrecking ball, breaking walls I never meant to."
+  },
+  {
+    "title": "We Can't Stop",
+    "artist": "Miley Cyrus",
+    "lyric": "Hands up, dancing in the club till the lights fade, we can't stop and we won't stop."
+  },
+  {
+    "title": "The Climb",
+    "artist": "Miley Cyrus",
+    "lyric": "Every struggle along the way makes the view worth it, it's all about the climb."
+  },
+  {
+    "title": "Malibu",
+    "artist": "Miley Cyrus",
+    "lyric": "We watched the sun sink into the waves, just a couple of kids in Malibu."
+  },
+  {
+    "title": "Grenade",
+    "artist": "Bruno Mars",
+    "lyric": "I would catch a grenade for you, throw my hand on a blade, anything to keep your love."
+  },
+  {
+    "title": "Just the Way You Are",
+    "artist": "Bruno Mars",
+    "lyric": "Her eyes, her smile, her hair, don't change a thing, she's amazing just the way she is."
+  },
+  {
+    "title": "The Lazy Song",
+    "artist": "Bruno Mars",
+    "lyric": "No plans, no alarms, just pajamas and the couch, the laziest of lazy days."
+  },
+  {
+    "title": "Locked Out of Heaven",
+    "artist": "Bruno Mars",
+    "lyric": "Your love lifts me to my knees, heaven locked but you hold the only key."
+  },
+  {
+    "title": "That's What I Like",
+    "artist": "Bruno Mars",
+    "lyric": "Fancy dinners, rooftop views, everything you like, I'll give it all to you."
+  },
+  {
+    "title": "24K Magic",
+    "artist": "Bruno Mars",
+    "lyric": "Gold chains and bad intentions, the party glitters in 24K magic all night."
+  },
+  {
+    "title": "Thriller",
+    "artist": "Michael Jackson",
+    "lyric": "At the witching hour, something stirs in the dark, and the dead are dancing in the moonlight."
+  },
+  {
+    "title": "Beat It",
+    "artist": "Michael Jackson",
+    "lyric": "Walk away from the fight, they want to see you down, but you're tougher than that."
+  },
+  {
+    "title": "Bad",
+    "artist": "Michael Jackson",
+    "lyric": "They whisper my name with fear and awe, I'm the one they can't ignore."
+  },
+  {
+    "title": "Smooth Criminal",
+    "artist": "Michael Jackson",
+    "lyric": "Someone slipped into the night and left a mystery, did you see the smooth criminal flee?"
+  },
+  {
+    "title": "Man in the Mirror",
+    "artist": "Michael Jackson",
+    "lyric": "If you want to make the world a better place, start by looking at the man in the mirror."
+  },
+  {
+    "title": "Black or White",
+    "artist": "Michael Jackson",
+    "lyric": "The world sees colors, but love doesn't, and that's all that should ever matter."
+  },
+  {
+    "title": "Let's Stay Together",
+    "artist": "Al Green",
+    "lyric": "Whatever you decide, I'll be right here beside you, our song keeps playing, let's stay together."
+  },
+  {
+    "title": "Ain't No Sunshine",
+    "artist": "Bill Withers",
+    "lyric": "The house grows dark and lonely when she leaves, the light gone with her."
+  },
+  {
+    "title": "Lean on Me",
+    "artist": "Bill Withers",
+    "lyric": "When your load gets heavy, pass it to me, I'll help you carry it along."
+  },
+  {
+    "title": "Lovely Day",
+    "artist": "Bill Withers",
+    "lyric": "The sun is shining on my face, and it's a lovely day whenever you're around."
+  },
+  {
+    "title": "What a Wonderful World",
+    "artist": "Louis Armstrong",
+    "lyric": "Green trees, red roses, blue skies, rainbows, a world so beautiful to behold."
+  },
+  {
+    "title": "Stand by Me",
+    "artist": "Ben E. King",
+    "lyric": "Through every dark hour, I won't shed a tear as long as you're beside me."
+  },
+  {
+    "title": "My Girl",
+    "artist": "The Temptations",
+    "lyric": "The greyest day turns bright when I'm with her, she's everything good in my life."
+  },
+  {
+    "title": "Superstition",
+    "artist": "Stevie Wonder",
+    "lyric": "Broken mirrors and bad omens, when you believe in signs, they'll get you every time."
+  },
+  {
+    "title": "I Just Called to Say I Love You",
+    "artist": "Stevie Wonder",
+    "lyric": "There's no occasion on the calendar, just a feeling that made me reach for the phone."
+  },
+  {
+    "title": "Signed Sealed Delivered",
+    "artist": "Stevie Wonder",
+    "lyric": "Here I am baby, signed, sealed, delivered, I'm yours forever."
+  },
+  {
+    "title": "Purple Haze",
+    "artist": "Jimi Hendrix",
+    "lyric": "A purple fog fills my head, nothing feels quite like it used to."
+  },
+  {
+    "title": "All Along the Watchtower",
+    "artist": "Jimi Hendrix",
+    "lyric": "Somewhere there's a road out of this maze, the watchtower keeps its silent vigil."
+  },
+  {
+    "title": "Stairway to Heaven",
+    "artist": "Led Zeppelin",
+    "lyric": "A woman trades her soul for gold and climbs a staircase that never ends."
+  },
+  {
+    "title": "Whole Lotta Love",
+    "artist": "Led Zeppelin",
+    "lyric": "You're burning up and I'm the remedy, I've got a whole lotta love for you."
+  },
+  {
+    "title": "Back in Black",
+    "artist": "AC/DC",
+    "lyric": "I'm back in black, thunder rolling down the highway, louder than before."
+  },
+  {
+    "title": "Highway to Hell",
+    "artist": "AC/DC",
+    "lyric": "An endless road with nothing to slow us down, we ride straight into the fire."
+  },
+  {
+    "title": "Thunderstruck",
+    "artist": "AC/DC",
+    "lyric": "The thunder rolled and the crowd went wild, everyone was thunderstruck."
+  },
+  {
+    "title": "Livin' on a Prayer",
+    "artist": "Bon Jovi",
+    "lyric": "Gina works the diner, Tommy rocks his guitar, and they hold on with a prayer."
+  },
+  {
+    "title": "You Give Love a Bad Name",
+    "artist": "Bon Jovi",
+    "lyric": "Your arrow found my chest and you walked away, giving love a bad name."
+  },
+  {
+    "title": "It's My Life",
+    "artist": "Bon Jovi",
+    "lyric": "This is my one and only ride, so I'll live it loud while I'm still breathing."
+  },
+  {
+    "title": "Sweet Home Alabama",
+    "artist": "Lynyrd Skynyrd",
+    "lyric": "The wheels roll on through the southern night, carrying me home to Alabama."
+  },
+  {
+    "title": "Free Bird",
+    "artist": "Lynyrd Skynyrd",
+    "lyric": "If I fly away one day, will you keep my memory? A free bird answers to the sky."
+  },
+  {
+    "title": "Piano Man",
+    "artist": "Billy Joel",
+    "lyric": "The bar goes quiet when the keys start, and the whole crowd sings along with him."
+  },
+  {
+    "title": "Uptown Girl",
+    "artist": "Billy Joel",
+    "lyric": "She's been living in her uptown world, but she's got a downtown taste for me."
+  },
+  {
+    "title": "We Didn't Start the Fire",
+    "artist": "Billy Joel",
+    "lyric": "Harry Truman, Doris Day, the world keeps burning, but we didn't start the fire."
+  },
+  {
+    "title": "I Wanna Dance with Somebody",
+    "artist": "Whitney Houston",
+    "lyric": "I wanna dance with somebody who loves me, under the lights of the night."
+  },
+  {
+    "title": "Like a Prayer",
+    "artist": "Madonna",
+    "lyric": "We each walk our own road, but I hear a voice calling me like a prayer."
+  },
+  {
+    "title": "Material Girl",
+    "artist": "Madonna",
+    "lyric": "A world of shiny things and diamond rings, that's the girl I choose to be."
+  },
+  {
+    "title": "Like a Virgin",
+    "artist": "Madonna",
+    "lyric": "Everything feels brand new, like the very first time, soft and unfamiliar."
+  },
+  {
+    "title": "Vogue",
+    "artist": "Madonna",
+    "lyric": "The music takes your body, hold the pose and let the floor applaud."
+  },
+  {
+    "title": "Poker Face",
+    "artist": "Lady Gaga",
+    "lyric": "My face gives nothing away, bluffing through the night with a hidden hand."
+  },
+  {
+    "title": "Bad Romance",
+    "artist": "Lady Gaga",
+    "lyric": "A love that burns as it destroys, caught in a romance gone wrong."
+  },
+  {
+    "title": "Born This Way",
+    "artist": "Lady Gaga",
+    "lyric": "Made the way I am, no apologies, this is who I was born to be."
+  },
+  {
+    "title": "Just Dance",
+    "artist": "Lady Gaga",
+    "lyric": "The room spins and the music thumps, but keep dancing, it's gonna be okay."
+  },
+  {
+    "title": "Edge of Glory",
+    "artist": "Lady Gaga",
+    "lyric": "Standing at the edge, pushing past the fear, living like there's no tomorrow."
+  }
+]

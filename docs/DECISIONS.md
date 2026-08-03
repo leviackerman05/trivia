@@ -612,4 +612,42 @@ workspace package.
 
 ---
 
-_(Next entry: D028 — recorded during M5.)_
+## D028 — M5 drawing games: config-driven engine, Copycat island, silhouette canvas (2026-08-04)
+
+- **Decision:** The Skribbl adapter generalizes into one config-driven drawing
+  engine (`DrawingGameSession` + `DRAWING_CONFIGS`) covering Skribbl Arena,
+  One Line One Shape, Draw the Lyric, and Shadow Sketch; Copycat Challenge
+  gets its own session (`CopycatSession`) and client island
+  (`CopycatArena`) because it has no shared canvas. Concrete additions:
+  1. **Config table** per game: wordMode (`choices`/`direct`/`lyric`),
+     roundDurationMs, firstHintMs/secondHintMs (letters), artistHintMs
+     (lyric artist at 45s), silhouetteRevealMs (shadow reveal at 60s),
+     liftPenaltyMs (One Line −10s per pen lift, floor 5s), fixed points
+     (lyric: guesser 100 / drawer 50), allowCustomWords (Skribbl only).
+  2. **Silhouette background:** SVG paths (dataset normalized to 0–100)
+     rendered behind the stroke log via `Path2D` + `pathBBox` aspect-
+     preserving fit; the drawer sees it during drawing, everyone sees it
+     after the 60s reveal (additive `round-hint.silhouette`).
+  3. **Copycat phases:** image-reveal (5s) → private drawing (90s) →
+     gallery → voting (30s) → awards. Private canvases are local only;
+     submit flattens the canvas to a PNG data URL (400k-char cap). Votes
+     are per award (Most Recognizable / Funniest / Most Abstract), no
+     self-votes, live tallies via `vote-update`.
+  4. **Solo rooms reach voting:** `beginVoting` accepts a single drawing
+     (the self-vote guard keeps a solo player from casting) so the whole
+     copycat flow is testable alone — same solo-testing affordance as D026.
+- **Reason:** One engine instead of four near-duplicate adapters (D009);
+  drawer-only secrets stay server-side (D023); the owner's solo-testing
+  requirement (D026) extends to every room game.
+- **Alternatives considered:** separate engine per game (rejected — the four
+  shared-canvas games differ only in config); broadcasting strokes for
+  copycat (rejected — the whole point is private drawings); server-side
+  image uploads (rejected — data URLs are self-contained and stateless).
+- **Tradeoffs:** `Path2D` is browser-only (rendering is guarded in Node
+  tests/SSR); data-URL submissions can hit the size cap on dense drawings
+  (surfaced as feedback, not a crash); fixed lyric scoring ignores speed
+  (PRD §5.5 specifies flat 100/50).
+- **Date:** 2026-08-04
+- **Future impact:** M6 voting games reuse the `vote-update`/`vote-reveal`
+  pattern and the private-canvas export via `DrawingCanvasHandle`; the
+  config table is the template for future drawing variants.
