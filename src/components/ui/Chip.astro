@@ -1,0 +1,30 @@
+---
+/**
+ * BounceBox Chip (PRD §11).
+ * filter: light coral fill, coral text, 2px coral border at 40% opacity.
+ * status: severity-tinted pill (success/warning/error).
+ */
+interface Props {
+  variant?: 'filter' | 'status';
+  status?: 'success' | 'warning' | 'error';
+  class?: string;
+}
+
+const { variant = 'filter', status = 'success', class: className } = Astro.props;
+
+const statusClasses: Record<NonNullable<Props['status']>, string> = {
+  success: 'bg-green-100 text-green-800',
+  warning: 'bg-yellow-100 text-yellow-800',
+  error: 'bg-red-100 text-red-800',
+};
+---
+
+<span
+  class={`inline-flex items-center gap-1.5 rounded-pill px-4 py-1.5 text-xs font-semibold ${
+    variant === 'filter'
+      ? 'border-2 border-primary/40 bg-primary/20 text-primary-deep'
+      : statusClasses[status]
+  } ${className ?? ''}`}
+>
+  <slot />
+</span>

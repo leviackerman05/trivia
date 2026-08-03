@@ -1,0 +1,6 @@
+# Build output — never format generated files
+dist/
+.astro/
+server/dist/
+coverage/
+node_modules/

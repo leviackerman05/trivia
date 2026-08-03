@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GameCard from '../components/GameCard.astro';
+import Button from '../components/ui/Button.astro';
+import Chip from '../components/ui/Chip.astro';
+import { games, type GameFamily } from '../lib/games';
+
+const familySections: { family: GameFamily; label: string }[] = [
+  { family: 'drawing', label: 'Drawing Games' },
+  { family: 'voting', label: 'Voting Games' },
+  { family: 'solo', label: 'Solo Games' },
+  { family: 'special', label: 'Party Classics' },
+  { family: 'quiz', label: 'Quiz' },
+];
+
+const valueProps = [
+  {
+    title: 'No downloads',
+    body: 'Every game runs right in your browser. Nothing to install, nothing to update.',
+  },
+  {
+    title: 'No accounts',
+    body: 'Pick a nickname and play. One link is all your friends need to join.',
+  },
+  {
+    title: 'Any device',
+    body: 'Phones, tablets, laptops — games are built mobile-first with touch in mind.',
+  },
+];
+---
+
+<BaseLayout
+  title="Free Online Party Games | Play with Friends Instantly | PartyBrain"
+  description="Play 18 free online party games with friends — no downloads, no accounts. Drawing games, trivia, word games, and more. Perfect for virtual parties, classrooms, and team building. Start playing in seconds!"
+  canonicalPath="/"
+>
+  <section class="mb-14 text-center">
+    <Chip variant="status" status="success" class="mb-6"
+      >18 free games · no downloads · no accounts</Chip
+    >
+    <h1 class="font-display text-h1 text-ink">
+      Free Online Party Games — Play Instantly with Friends
+    </h1>
+    <p class="mx-auto mt-4 max-w-2xl text-body text-ink-muted">
+      Drawing games, trivia, word games, voting games, charades and more. Share a room link and
+      start playing in seconds — perfect for virtual parties, classrooms, and remote teams.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <Button variant="primary" size="large" href="/#games">Browse all games</Button>
+      <Button variant="ghost" size="large" href="/faq">How it works</Button>
+    </div>
+  </section>
+
+  <section aria-label="Why PartyBrain" class="mb-14 grid gap-6 sm:grid-cols-3">
+    {
+      valueProps.map(({ title, body }) => (
+        <article class="rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+          <h2 class="mb-2 font-display text-h4 text-ink">{title}</h2>
+          <p class="text-body text-ink-muted">{body}</p>
+        </article>
+      ))
+    }
+  </section>
+
+  <section id="games" aria-label="All PartyBrain games">
+    {
+      familySections.map(({ family, label }) => {
+        const familyGames = games.filter((game) => game.family === family);
+        return (
+          <div class="mb-12">
+            <h2 class="mb-5 font-display text-h2 text-ink">{label}</h2>
+            <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {familyGames.map((game) => (
+                <li>
+                  <GameCard game={game} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })
+    }
+  </section>
+</BaseLayout>

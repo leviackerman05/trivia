@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/ui/Card.astro';
+
+const sections = [
+  {
+    heading: 'Acceptance of Terms',
+    body: 'By accessing or using PartyBrain, you agree to these Terms and Conditions. If you do not agree, please do not use the site.',
+  },
+  {
+    heading: 'Use of the Service',
+    body: 'PartyBrain provides free browser-based party games for personal, non-commercial entertainment. You agree not to misuse the service, including attempting to disrupt gameplay, cheat, spam rooms, or access the service in a way that harms other users.',
+  },
+  {
+    heading: 'User Conduct',
+    body: 'You are responsible for the nickname you choose and for messages you send in chat. Do not use the service to harass, abuse, or share content that is unlawful or infringes the rights of others.',
+  },
+  {
+    heading: 'Intellectual Property',
+    body: 'PartyBrain and its content — including game code, branding, and original text — are owned by PartyBrain or its licensors. You may not copy, modify, or redistribute them without permission. Content used in games is public domain, CC0, or original, per our content policy.',
+  },
+  {
+    heading: 'Disclaimers and Limitation of Liability',
+    body: 'The service is provided “as is” without warranties of any kind. To the maximum extent permitted by law, PartyBrain is not liable for damages arising from your use of the service. Games are for entertainment; scores and results have no monetary value.',
+  },
+  {
+    heading: 'Changes to These Terms',
+    body: 'We may update these terms from time to time. Continued use of the service after changes means you accept the updated terms.',
+  },
+  {
+    heading: 'Contact',
+    body: 'Questions about these terms? Reach out via the Contact Us page.',
+  },
+];
+---
+
+<BaseLayout
+  title="Terms & Conditions — PartyBrain"
+  description="The terms that govern your use of PartyBrain: acceptable use, user conduct, intellectual property, and liability."
+  canonicalPath="/terms-and-conditions"
+>
+  <section class="max-w-3xl">
+    <h1 class="mb-2 font-display text-h1 text-ink">Terms & Conditions</h1>
+    <p class="mb-8 text-small text-ink-muted">Last updated: August 2026</p>
+    <div class="flex flex-col gap-5">
+      {
+        sections.map(({ heading, body }) => (
+          <Card hover={false}>
+            <h2 class="mb-2 font-display text-h4 text-ink">{heading}</h2>
+            <p class="text-body text-ink-muted">{body}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

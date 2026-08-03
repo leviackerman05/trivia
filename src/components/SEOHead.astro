@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute path starting with "/" — canonical + OG URLs resolve against the site base. */
+  canonicalPath: string;
+  /** Optional OG image path (absolute). Real OG images land in M10. */
+  ogImage?: string;
+  /** Optional JSON-LD structured data (stringified). FAQ/WebApplication schemas land in M10. */
+  jsonLd?: string;
+}
+
+const { title, description, canonicalPath, ogImage, jsonLd } = Astro.props;
+const site = Astro.site ?? new URL('https://partybrain.com');
+const canonical = new URL(canonicalPath, site);
+const ogImageUrl = ogImage ? new URL(ogImage, site) : undefined;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="PartyBrain" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+
+{jsonLd && <script is:inline type="application/ld+json" set:html={jsonLd} />}

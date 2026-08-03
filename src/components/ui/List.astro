@@ -1,0 +1,24 @@
+---
+/**
+ * BounceBox List (PRD §11): 56px rows separated by 2px dashed dividers,
+ * 0 20px padding, 18px text; hover tints to light coral.
+ * Rows are rendered via the `rows` prop or slot content.
+ */
+interface Props {
+  rows?: string[];
+  class?: string;
+}
+
+const { rows, class: className } = Astro.props;
+---
+
+<ul class={`flex flex-col divide-y-2 divide-dashed divide-gray-200 ${className ?? ''}`}>
+  {
+    rows?.map((row) => (
+      <li class="flex min-h-14 items-center px-5 text-lg text-ink transition-colors hover:bg-[#fff5f5]">
+        {row}
+      </li>
+    ))
+  }
+  {!rows && <slot />}
+</ul>

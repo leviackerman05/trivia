@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import SEOHead from '../components/SEOHead.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  ogImage?: string;
+  jsonLd?: string;
+}
+
+const { title, description, canonicalPath, ogImage, jsonLd } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/#games', label: 'Games' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/about-us', label: 'About' },
+];
+
+const footerLinks = [
+  { href: '/privacy-policy', label: 'Privacy Policy' },
+  { href: '/terms-and-conditions', label: 'Terms & Conditions' },
+  { href: '/about-us', label: 'About Us' },
+  { href: '/contact-us', label: 'Contact Us' },
+  { href: '/faq', label: 'FAQ' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEOHead
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      ogImage={ogImage}
+      jsonLd={jsonLd}
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!--
+      Google Analytics placeholder (PRD §7).
+      Replace with the real GA4 ID once the account exists:
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXX');
+      </script>
+    -->
+  </head>
+  <body class="flex min-h-screen flex-col bg-surface font-body text-body text-ink">
+    <header
+      class="sticky top-0 z-10 border-b-2 border-dashed border-gray-200 bg-white/95 backdrop-blur"
+    >
+      <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3" aria-label="Main">
+        <a href="/" class="font-display text-2xl text-primary-strong">PartyBrain</a>
+        <ul class="flex items-center gap-6">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-small font-medium text-ink-muted hover:text-primary-strong"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+
+    <main class="mx-auto w-full max-w-5xl flex-1 px-4 py-10">
+      <slot />
+    </main>
+
+    <footer class="border-t-2 border-dashed border-gray-200 bg-white">
+      <div
+        class="mx-auto flex max-w-5xl flex-col items-center gap-4 px-4 py-8 sm:flex-row sm:justify-between"
+      >
+        <p class="text-small text-ink-muted">© 2026 PartyBrain — Free online party games</p>
+        <ul class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+          {
+            footerLinks.map((link) => (
+              <li>
+                <a href={link.href} class="text-small text-ink-muted hover:text-primary-strong">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </footer>
+
+    <!--
+      AdSense ad unit placeholder (PRD §7). Keep commented out until AdSense
+      approval. One slot per game page, placed near the game island:
+      <div class="ad-container"></div>
+    -->
+  </body>
+</html>

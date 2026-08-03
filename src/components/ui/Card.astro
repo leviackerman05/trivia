@@ -1,0 +1,26 @@
+---
+/**
+ * BounceBox Card (PRD §11): white surface, 24px radius, 24px padding.
+ * Default: 2px gray border + shadow-sm, hover lifts to shadow-md + teal border.
+ * Elevated: no border, shadow-md at rest, shadow-lg on hover.
+ */
+interface Props {
+  elevated?: boolean;
+  hover?: boolean;
+  class?: string;
+}
+
+const { elevated = false, hover = true, class: className } = Astro.props;
+
+const surface = 'rounded-lg bg-white p-6';
+const defaultCard = 'border-2 border-gray-200 shadow-sm';
+const elevatedCard = 'border-0 shadow-md';
+const hoverClasses = hover ? 'transition duration-150 hover:-translate-y-1 hover:shadow-md' : '';
+const hoverBorder = elevated ? '' : 'hover:border-secondary';
+---
+
+<div
+  class={`${surface} ${elevated ? elevatedCard : defaultCard} ${hoverClasses} ${hoverBorder} ${className ?? ''}`}
+>
+  <slot />
+</div>

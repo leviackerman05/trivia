@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Page Not Found — PartyBrain"
+  description="The page you were looking for doesn’t exist. Head back to PartyBrain and play a game instead."
+  canonicalPath="/404"
+>
+  <section class="flex flex-col items-center gap-4 py-16 text-center">
+    <p class="font-display text-8xl text-primary-strong">404</p>
+    <h1 class="font-display text-h2 text-ink">Page not found</h1>
+    <p class="max-w-md text-body text-ink-muted">
+      The page you’re looking for doesn’t exist or has moved. Let’s get you back to the games.
+    </p>
+    <Button variant="primary" size="large" href="/">Back to PartyBrain</Button>
+  </section>
+</BaseLayout>

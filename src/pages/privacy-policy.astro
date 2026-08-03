@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/ui/Card.astro';
+
+const sections = [
+  {
+    heading: 'Information We Collect',
+    body: 'PartyBrain is designed to work without an account. When you play, we collect only what is needed to run the games: your chosen nickname (which you can change at any time), game scores, and room participation. We do not collect your name, email address, or payment information.',
+  },
+  {
+    heading: 'Cookies and Advertising',
+    body: 'PartyBrain is supported by advertising. If we display ads, third-party advertising partners (including Google AdSense) may use cookies or similar technologies to serve ads based on your prior visits to this and other websites. Google’s use of advertising cookies enables it and its partners to serve ads to you. You can opt out of personalized advertising by visiting Google’s Ads Settings.',
+  },
+  {
+    heading: 'Analytics',
+    body: 'We use Google Analytics to understand how visitors use the site and to improve it. Analytics collects anonymized usage data such as pages visited and device type. You can learn more about Google’s data practices in Google’s Privacy Policy.',
+  },
+  {
+    heading: 'Third-Party Services',
+    body: 'We may use third-party services to host, analyze, and improve the site. Each service processes data according to its own privacy policy. We do not sell your personal information.',
+  },
+  {
+    heading: 'Children’s Privacy',
+    body: 'PartyBrain is intended for users aged 16 and older. We do not knowingly collect personal information from children under 13. If you believe a child has provided us personal information, contact us and we will delete it.',
+  },
+  {
+    heading: 'Your Choices',
+    body: 'You control your nickname and can stop playing at any time. For questions about your data, contact us using the details on the Contact Us page.',
+  },
+];
+---
+
+<BaseLayout
+  title="Privacy Policy — PartyBrain"
+  description="How PartyBrain handles your data: what we collect, how cookies and advertising work, third-party services, and your choices."
+  canonicalPath="/privacy-policy"
+>
+  <section class="max-w-3xl">
+    <h1 class="mb-2 font-display text-h1 text-ink">Privacy Policy</h1>
+    <p class="mb-8 text-small text-ink-muted">Last updated: August 2026</p>
+    <div class="flex flex-col gap-5">
+      {
+        sections.map(({ heading, body }) => (
+          <Card hover={false}>
+            <h2 class="mb-2 font-display text-h4 text-ink">{heading}</h2>
+            <p class="text-body text-ink-muted">{body}</p>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQSection from '../components/FAQSection.astro';
+
+const faqs = [
+  {
+    question: 'How do I play party games online with friends?',
+    answer:
+      'Open any game, create a room, and share the 6-character room code or link. Friends join from their own devices — phones, tablets, or computers — and play starts the moment everyone is in.',
+  },
+  {
+    question: 'Do I need to download anything to play PartyBrain games?',
+    answer:
+      'No. Every PartyBrain game runs in your browser. No downloads, no installs, no plugins.',
+  },
+  {
+    question: 'Can I play PartyBrain games on my phone?',
+    answer:
+      'Yes. All games are fully responsive and optimized for touch, including the drawing games and voting games.',
+  },
+  {
+    question: 'Are PartyBrain games free?',
+    answer: 'Yes, all 18 games are free to play. PartyBrain is supported by advertising.',
+  },
+  {
+    question: 'How many players can join a game?',
+    answer:
+      'Most rooms support up to 24 players. Voting and solo games work with any group size — from two friends to a full classroom or stream audience.',
+  },
+  {
+    question: 'Do I need to create an account?',
+    answer: 'No account needed. Just pick a nickname and join — that’s it.',
+  },
+  {
+    question: 'How do I create a private room?',
+    answer:
+      'Open a multiplayer game and choose “Create Room.” You’ll get a unique room code and link that only the people you share it with can use.',
+  },
+  {
+    question: 'What are the best party games for large groups?',
+    answer:
+      'Voting games like Would You Rather and This or That scale to any group size. Guess Who and Trivia also shine with a full room.',
+  },
+  {
+    question: 'Can I play PartyBrain games with people in different countries?',
+    answer:
+      'Yes. As long as everyone can reach the website, distance doesn’t matter — the game runs in real time over the internet.',
+  },
+];
+---
+
+<BaseLayout
+  title="FAQ — PartyBrain"
+  description="Answers to the most common questions about PartyBrain: how to play with friends, whether you need an account, which games work for large groups, and more."
+  canonicalPath="/faq"
+>
+  <section>
+    <h1 class="mb-2 font-display text-h1 text-ink">Frequently Asked Questions</h1>
+    <p class="mb-8 max-w-2xl text-body text-ink-muted">
+      Everything you need to know about playing PartyBrain with friends.
+    </p>
+    <FAQSection items={faqs} class="max-w-3xl" />
+  </section>
+</BaseLayout>

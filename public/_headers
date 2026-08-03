@@ -1,0 +1,10 @@
+# Cloudflare Pages headers (https://developers.cloudflare.com/pages/configuration/headers/)
+# Note: Cloudflare Pages automatically sends `X-Robots-Tag: noindex` on
+# preview deployments (*.pages.dev), keeping unapproved previews out of
+# Google (PRD §6.4). No noindex here so production stays indexable.
+# CSP hardening lands in M10.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

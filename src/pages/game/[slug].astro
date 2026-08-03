@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Chip from '../../components/ui/Chip.astro';
+import RoomLobby from '../../islands/room/RoomLobby.tsx';
+import SkribblArena from '../../islands/SkribblArena.tsx';
+import TriviaSolo from '../../islands/TriviaSolo.tsx';
+import WouldYouRatherOneScreen from '../../islands/WouldYouRatherOneScreen.tsx';
+import { games, getGame, getRelatedGames } from '../../lib/games';
+
+export function getStaticPaths() {
+  return games.map((game) => ({ params: { slug: game.slug } }));
+}
+
+const { slug } = Astro.params;
+// getStaticPaths guarantees slug is in the catalog; unknown slugs 404 via Astro.
+const game = getGame(slug)!;
+const related = getRelatedGames(game);
+const isMultiplayer = game.type !== 'solo';
+---
+
+<BaseLayout
+  title={`${game.name} — Play Free Online | PartyBrain`}
+  description={game.tagline}
+  canonicalPath={`/game/${game.slug}`}
+  ogImage={`/og/${game.slug}.png`}
+>
+  <article class="flex flex-col gap-8">
+    <header>
+      <Chip class="mb-4">{game.family} game</Chip>
+      <h1 class="font-display text-h1 text-ink">{game.name}</h1>
+      <p class="mt-3 max-w-2xl text-body text-ink-muted">{game.tagline}</p>
+    </header>
+
+    <!--
+      Interactive section (PRD §3): the playable React island hydrates here.
+      Games with `instantPlay` (owner request 2026-08-04) offer play without
+      a room first; multiplayer games get the shared Room Engine lobby (M3);
+      game-specific round logic hydrates onto this same slot in M4+.
+    -->
+    <section aria-label={`Play ${game.name}`} class="flex flex-col gap-8">
+      {
+        game.instantPlay && (
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <Chip>Instant play</Chip>
+              <h2 class="font-display text-h3 text-ink">Play now — no room needed</h2>
+            </div>
+            <Card>
+              {game.instantPlay === 'solo' && <TriviaSolo client:load />}
+              {game.instantPlay === 'one-screen' && <WouldYouRatherOneScreen client:load />}
+            </Card>
+          </div>
+        )
+      }
+      {
+        isMultiplayer && (
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <Chip variant="status" status="warning">
+                With friends
+              </Chip>
+              <h2 class="font-display text-h3 text-ink">Play in a room</h2>
+            </div>
+            <Card>
+              {game.slug === 'skribbl-arena' ? (
+                <SkribblArena client:load gameSlug={game.slug} />
+              ) : (
+                <RoomLobby client:load gameSlug={game.slug} />
+              )}
+            </Card>
+          </div>
+        )
+      }
+      {
+        !isMultiplayer && !game.instantPlay && (
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <Chip variant="status" status="warning">
+                Coming soon
+              </Chip>
+              <h2 class="font-display text-h3 text-ink">Play {game.name}</h2>
+            </div>
+            <Card>
+              <p class="max-w-2xl text-body text-ink-muted">
+                {game.name} is being built right now. The playable game lands in a coming milestone
+                — this is where it will live.
+              </p>
+            </Card>
+          </div>
+        )
+      }
+    </section>
+
+    <section aria-label={`How to play ${game.name}`}>
+      <Card>
+        <h2 class="mb-3 font-display text-h4 text-ink">How to play</h2>
+        <p class="text-body text-ink-muted">{game.description}</p>
+      </Card>
+    </section>
+
+    <section aria-label="Related games">
+      <h2 class="mb-4 font-display text-h2 text-ink">More games like this</h2>
+      <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          related.map((relatedGame) => (
+            <li>
+              <a href={`/game/${relatedGame.slug}`} class="group block h-full no-underline">
+                <Card class="flex h-full flex-col gap-2">
+                  <h3 class="font-display text-h3 text-ink group-hover:text-primary-strong">
+                    {relatedGame.name}
+                  </h3>
+                  <p class="text-body text-ink-muted">{relatedGame.tagline}</p>
+                </Card>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </article>
+</BaseLayout>

@@ -1,0 +1,29 @@
+---
+/**
+ * BounceBox Radio (PRD §11): 24px circle, teal border + inner dot when
+ * selected, teal focus ring. Styled via .pb-radio (global.css).
+ */
+interface Props {
+  id: string;
+  name?: string;
+  label: string;
+  value: string;
+  checked?: boolean;
+  disabled?: boolean;
+}
+
+const { id, name, label, value, checked, disabled } = Astro.props;
+---
+
+<label for={id} class="flex cursor-pointer items-center gap-2.5 text-lg text-ink">
+  <input
+    id={id}
+    name={name}
+    type="radio"
+    value={value}
+    checked={checked}
+    disabled={disabled}
+    class="pb-radio"
+  />
+  <span>{label}</span>
+</label>

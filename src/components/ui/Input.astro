@@ -1,0 +1,77 @@
+---
+/** Input types PartyBrain uses (subset of React's HTMLInputTypeAttribute). */
+type InputType = 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url';
+
+/**
+ * BounceBox Input (PRD §11): white surface, 16px radius, 12x16 padding,
+ * 18px text. Label 16px semibold; helper 14px; error state red border +
+ * light red bg + red helper.
+ */
+interface Props {
+  id: string;
+  name?: string;
+  label?: string;
+  type?: InputType;
+  value?: string;
+  placeholder?: string;
+  helper?: string;
+  error?: string;
+  disabled?: boolean;
+  required?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  name = id,
+  label,
+  type = 'text',
+  value,
+  placeholder,
+  helper,
+  error,
+  disabled,
+  required,
+  class: className,
+} = Astro.props;
+---
+
+<div class={`flex flex-col ${className ?? ''}`}>
+  {
+    label && (
+      <label for={id} class="mb-1.5 text-small font-semibold text-ink">
+        {label}
+      </label>
+    )
+  }
+  <input
+    id={id}
+    name={name}
+    type={type}
+    value={value}
+    placeholder={placeholder}
+    disabled={disabled}
+    required={required}
+    aria-invalid={error ? true : undefined}
+    aria-describedby={error ? `${id}-error` : helper ? `${id}-helper` : undefined}
+    class={`rounded-md border-2 bg-white px-4 py-3 text-lg text-ink transition-colors focus:outline-none focus:ring-4 ${
+      error
+        ? 'border-red-500 bg-red-50 focus:border-red-500 focus:ring-red-500/20'
+        : 'border-gray-200 hover:border-gray-400 focus:border-primary-strong focus:ring-primary/25'
+    } ${disabled ? 'opacity-50 disabled:cursor-not-allowed' : ''}`}
+  />
+  {
+    helper && !error && (
+      <p id={`${id}-helper`} class="mt-1.5 text-xs text-ink-muted">
+        {helper}
+      </p>
+    )
+  }
+  {
+    error && (
+      <p id={`${id}-error`} class="mt-1.5 text-xs text-error">
+        {error}
+      </p>
+    )
+  }
+</div>

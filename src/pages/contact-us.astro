@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/ui/Card.astro';
+---
+
+<BaseLayout
+  title="Contact Us — PartyBrain"
+  description="Get in touch with the PartyBrain team. Questions, feedback, and partnership inquiries welcome."
+  canonicalPath="/contact-us"
+>
+  <section class="max-w-3xl">
+    <h1 class="mb-8 font-display text-h1 text-ink">Contact Us</h1>
+    <div class="flex flex-col gap-5">
+      <Card hover={false}>
+        <p class="text-body text-ink-muted">
+          Questions, feedback, or found a bug? We’d love to hear from you.
+        </p>
+        <p class="mt-4 text-lg">
+          Email:{' '}
+          <a
+            href="mailto:hello@partybrain.com"
+            class="font-semibold text-primary-strong hover:underline"
+          >
+            hello@partybrain.com
+          </a>
+        </p>
+      </Card>
+      <Card hover={false}>
+        <p class="text-body text-ink-muted">
+          A contact form will be added here soon. For now, email is the fastest way to reach us.
+        </p>
+      </Card>
+    </div>
+  </section>
+</BaseLayout>

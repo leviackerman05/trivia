@@ -1,0 +1,64 @@
+---
+/**
+ * BounceBox Button (PRD §11): pill-shaped, ≥44px touch targets.
+ * Primary/secondary get glow shadows; disabled drops to 0.4 opacity.
+ * Renders an <a> when href is provided, otherwise a <button>.
+ */
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
+  size?: 'small' | 'medium' | 'large';
+  href?: string;
+  type?: 'button' | 'submit';
+  disabled?: boolean;
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'medium',
+  href,
+  type = 'button',
+  disabled = false,
+  class: className,
+} = Astro.props;
+
+const variants: Record<NonNullable<Props['variant']>, string> = {
+  primary: 'bg-primary-strong text-white shadow-coral hover:bg-primary-hover',
+  secondary: 'bg-secondary text-white shadow-teal hover:bg-secondary-dark',
+  ghost: 'border-3 border-primary text-primary-strong hover:bg-primary/15',
+  destructive: 'bg-red-500 text-white hover:bg-red-600',
+};
+
+const sizes: Record<NonNullable<Props['size']>, string> = {
+  small: 'min-h-11 px-5 py-2.5 text-small',
+  medium: 'min-h-12 px-7 py-3 text-lg',
+  large: 'min-h-14 px-9 py-4 text-xl',
+};
+
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-pill font-semibold no-underline transition-colors duration-150 select-none';
+const disabledClasses = disabled ? 'pointer-events-none opacity-40' : '';
+---
+
+{
+  href && (
+    <a
+      href={href}
+      aria-disabled={disabled || undefined}
+      class={`${base} ${variants[variant]} ${sizes[size]} ${disabledClasses} ${className ?? ''}`}
+    >
+      <slot />
+    </a>
+  )
+}
+{
+  !href && (
+    <button
+      type={type}
+      disabled={disabled}
+      class={`${base} ${variants[variant]} ${sizes[size]} ${disabledClasses} ${className ?? ''}`}
+    >
+      <slot />
+    </button>
+  )
+}

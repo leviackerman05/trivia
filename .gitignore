@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Astro build output
+dist/
+.astro/
+
+# Server build output
+server/dist/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Testing
+coverage/
+playwright-report/
+test-results/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Wrangler (Cloudflare Pages)
+.wrangler/
+
+# Generated OG images (build-time, via scripts/generate-og.mjs)
+public/og/

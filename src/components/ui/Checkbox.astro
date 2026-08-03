@@ -1,0 +1,28 @@
+---
+/**
+ * BounceBox Checkbox (PRD §11): 24px, 8px radius, teal fill + white
+ * checkmark when checked, teal focus ring. Styled via .pb-checkbox
+ * (global.css) for cross-browser consistency.
+ */
+interface Props {
+  id: string;
+  name?: string;
+  label: string;
+  checked?: boolean;
+  disabled?: boolean;
+}
+
+const { id, name = id, label, checked, disabled } = Astro.props;
+---
+
+<label for={id} class="flex cursor-pointer items-center gap-2.5 text-lg text-ink">
+  <input
+    id={id}
+    name={name}
+    type="checkbox"
+    checked={checked}
+    disabled={disabled}
+    class="pb-checkbox"
+  />
+  <span>{label}</span>
+</label>

@@ -1,0 +1,64 @@
+// PartyBrain database schema — PRD §8.3 models kept verbatim.
+// Additive changes only (indexes/constraints) per DECISIONS D006.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  type      String // "solo" | "multiplayer-realtime" | "multiplayer-voting"
+  createdAt DateTime @default(now())
+}
+
+model Room {
+  id        String       @id @default(cuid())
+  code      String       @unique
+  gameId    String
+  status    String       @default("lobby") // lobby, in-progress, finished
+  createdAt DateTime     @default(now())
+  players   RoomPlayer[]
+}
+
+model RoomPlayer {
+  id         String   @id @default(cuid())
+  roomId     String
+  room       Room     @relation(fields: [roomId], references: [id])
+  playerName String
+  joinedAt   DateTime @default(now())
+
+  // Additive: one seat per name per room (rejoin/replace upserts, M3)
+  @@unique([roomId, playerName])
+}
+
+model Score {
+  id         String   @id @default(cuid())
+  gameId     String
+  playerName String
+  score      Int
+  playedAt   DateTime @default(now())
+
+  // Additive: idempotent score submission (client-generated key, M3)
+  clientKey String? @unique
+
+  // Additive: leaderboard queries (gameId + period, gameId + top-N)
+  @@index([gameId, playedAt])
+  @@index([gameId, score])
+}
+
+model DailyChallenge {
+  id     String   @id @default(cuid())
+  gameId String
+  date   DateTime
+  data   Json
+
+  // Additive: one challenge per game per day (upsert-safe rollover)
+  @@unique([gameId, date])
+}

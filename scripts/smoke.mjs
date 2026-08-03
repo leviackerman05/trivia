@@ -1,0 +1,142 @@
+/**
+ * Post-build smoke test: serves the production `dist/` output and verifies
+ * that the key routes render with expected content. Run AFTER `astro build`
+ * (CI does: build → smoke). Deterministic — no Astro internals involved.
+ *
+ * Usage: pnpm smoke
+ */
+import { createServer } from 'node:http';
+import { readFile } from 'node:fs/promises';
+import { existsSync, statSync } from 'node:fs';
+import { join, extname, normalize } from 'node:path';
+
+const DIST_DIR = join(process.cwd(), 'dist');
+const PORT = 4321;
+const PAGE_WEIGHT_BUDGET_BYTES = 100 * 1024; // PRD §10: static pages < 100 KB
+
+const MIME = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript',
+  '.css': 'text/css',
+  '.svg': 'image/svg+xml',
+  '.xml': 'application/xml; charset=utf-8',
+  '.txt': 'text/plain; charset=utf-8',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.webp': 'image/webp',
+};
+
+if (!existsSync(DIST_DIR)) {
+  console.error('dist/ not found. Run `pnpm build` first.');
+  process.exit(1);
+}
+
+const checks = [
+  { path: '/', contains: 'Free Online Party Games' },
+  { path: '/faq', contains: 'Frequently Asked Questions' },
+  { path: '/privacy-policy', contains: 'Privacy Policy' },
+  { path: '/terms-and-conditions', contains: 'Terms &amp; Conditions' },
+  { path: '/about-us', contains: 'About PartyBrain' },
+  { path: '/contact-us', contains: 'Contact Us' },
+  { path: '/game/skribbl-arena', contains: 'Skribbl Arena' },
+  { path: '/game/trivia', contains: 'More games like this' },
+];
+
+// PRD §10: static pages < 100 KB total page weight (HTML + CSS + JS, no images).
+const weightChecks = ['/', '/faq', '/game/skribbl-arena'];
+
+/**
+ * PRD §10: static pages < 100 KB total page weight *excluding game
+ * JavaScript bundles* (the interactive islands). We measure HTML + CSS;
+ * game JS bundles get their own budget once islands ship (Lighthouse gate).
+ */
+function pageWeightBytes(html) {
+  const assets = [...html.matchAll(/(?:src|href)="\/_astro\/[^"]+\.css"/g)].map((match) =>
+    match[0].slice(match[0].indexOf('"') + 1, -1)
+  );
+  let total = Buffer.byteLength(html, 'utf8');
+  for (const asset of assets) {
+    const assetPath = join(DIST_DIR, asset.replace(/^\//, ''));
+    if (isFile(assetPath)) {
+      total += statSync(assetPath).size;
+    }
+  }
+  return total;
+}
+
+function isFile(path) {
+  try {
+    return statSync(path).isFile();
+  } catch {
+    return false;
+  }
+}
+
+function filePathFor(urlPath) {
+  if (urlPath === '/') return join(DIST_DIR, 'index.html');
+  const candidate = join(DIST_DIR, urlPath);
+  if (isFile(candidate)) return candidate; // e.g. /robots.txt
+  if (isFile(`${candidate}.html`)) return `${candidate}.html`;
+  return join(DIST_DIR, urlPath, 'index.html'); // e.g. /faq/index.html
+}
+
+function contentType(path) {
+  return MIME[extname(path)] ?? 'application/octet-stream';
+}
+
+const server = createServer(async (req, res) => {
+  try {
+    const urlPath = normalize(
+      decodeURIComponent(new URL(req.url ?? '/', 'http://localhost').pathname)
+    );
+    const filePath = filePathFor(urlPath);
+    if (!filePath.startsWith(DIST_DIR) || !existsSync(filePath)) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Not found');
+      return;
+    }
+    const body = await readFile(filePath);
+    res.writeHead(200, { 'Content-Type': contentType(filePath) });
+    res.end(body);
+  } catch {
+    res.writeHead(500, { 'Content-Type': 'text/plain' });
+    res.end('Smoke server error');
+  }
+});
+
+server.listen(PORT, async () => {
+  console.log(`Smoke server on http://localhost:${PORT}`);
+  try {
+    for (const check of checks) {
+      const response = await fetch(`http://localhost:${PORT}${check.path}`);
+      const body = await response.text();
+      if (response.status !== 200) {
+        throw new Error(`${check.path} → HTTP ${response.status}`);
+      }
+      if (!body.includes(check.contains)) {
+        throw new Error(`${check.path} → missing expected content: "${check.contains}"`);
+      }
+      console.log(`✓ ${check.path}`);
+    }
+
+    for (const path of weightChecks) {
+      const response = await fetch(`http://localhost:${PORT}${path}`);
+      const html = await response.text();
+      const bytes = pageWeightBytes(html);
+      if (bytes >= PAGE_WEIGHT_BUDGET_BYTES) {
+        throw new Error(
+          `${path} → page weight ${(bytes / 1024).toFixed(1)} KB exceeds the 100 KB budget (PRD §10)`
+        );
+      }
+      console.log(`✓ ${path} weight ${(bytes / 1024).toFixed(1)} KB`);
+    }
+
+    console.log('Smoke checks passed.');
+    process.exitCode = 0;
+  } catch (error) {
+    console.error(`Smoke check failed: ${error instanceof Error ? error.message : String(error)}`);
+    process.exitCode = 1;
+  } finally {
+    server.close();
+  }
+});

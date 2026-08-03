@@ -1,0 +1,33 @@
+---
+/**
+ * BounceBox Tooltip (PRD §11): dark (#2D2D2D) surface, white 14px text,
+ * 8x16 padding, 16px radius, max-width 220px, 400ms show delay.
+ * CSS-only (opacity transition + delay); appears on hover and keyboard focus.
+ */
+interface Props {
+  label: string;
+  position?: 'top' | 'bottom';
+  class?: string;
+}
+
+const { label, position = 'top', class: className } = Astro.props;
+
+const arrowTop = 'bottom-[-4px]';
+const arrowBottom = 'top-[-4px]';
+---
+
+<span class={`group relative inline-flex ${className ?? ''}`}>
+  <slot />
+  <span
+    role="tooltip"
+    class={`pointer-events-none absolute left-1/2 z-20 w-max max-w-[220px] -translate-x-1/2 rounded-md bg-[#2d2d2d] px-4 py-2 text-xs text-white opacity-0 shadow-md transition-opacity delay-[400ms] duration-150 group-hover:opacity-100 group-focus-within:opacity-100 ${
+      position === 'top' ? 'bottom-full mb-2' : 'top-full mt-2'
+    }`}
+  >
+    {label}
+    <span
+      aria-hidden="true"
+      class={`absolute left-1/2 size-2 -translate-x-1/2 rotate-45 bg-[#2d2d2d] ${position === 'top' ? arrowTop : arrowBottom}`}
+    ></span>
+  </span>
+</span>

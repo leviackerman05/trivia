@@ -1,0 +1,149 @@
+[
+  {
+    "slug": "skribbl-arena",
+    "name": "Skribbl Arena",
+    "type": "multiplayer-realtime",
+    "family": "drawing",
+    "playable": true,
+    "tagline": "Draw the word, race the clock, guess before everyone else.",
+    "description": "One player draws a secret word while everyone else guesses in chat. Fastest guessers score big — the drawer earns points from every correct guess."
+  },
+  {
+    "slug": "copycat-challenge",
+    "name": "Copycat Challenge",
+    "type": "multiplayer-realtime",
+    "family": "drawing",
+    "tagline": "Memorize a masterpiece, then draw it from memory.",
+    "description": "A famous painting flashes for five seconds. Then everyone draws it from memory on their own private canvas and votes on the best (and funniest) results."
+  },
+  {
+    "slug": "draw-the-lyric",
+    "name": "Draw the Lyric",
+    "type": "multiplayer-realtime",
+    "family": "drawing",
+    "tagline": "Draw the lyric — everyone else guesses the song.",
+    "description": "One player sees a song lyric and draws it on the shared canvas. Everyone else races to name the song title before the timer runs out."
+  },
+  {
+    "slug": "one-line-one-shape",
+    "name": "One Line, One Shape",
+    "type": "multiplayer-realtime",
+    "family": "drawing",
+    "tagline": "Draw it in one continuous line. Lift the pen and lose time.",
+    "description": "Draw an object without ever lifting the pen. Break the line and the clock punishes you — guessers still have to figure out what it is."
+  },
+  {
+    "slug": "shadow-sketch",
+    "name": "Shadow Sketch",
+    "type": "multiplayer-realtime",
+    "family": "drawing",
+    "tagline": "Fill in the silhouette — guessers only see your strokes.",
+    "description": "The drawer sees a faint silhouette and must sketch the details that make it recognizable. Guessers watch the drawing appear with no silhouette to help them."
+  },
+  {
+    "slug": "would-you-rather",
+    "name": "Would You Rather",
+    "type": "multiplayer-voting",
+    "family": "voting",
+    "instantPlay": "one-screen",
+    "tagline": "Tough choices. Live percentages. Zero wrong answers.",
+    "description": "Answer outrageous dilemmas in real time and watch the percentages swing as the room votes. Submit your own dilemmas to the queue."
+  },
+  {
+    "slug": "most-likely-to",
+    "name": "Most Likely To…",
+    "type": "multiplayer-voting",
+    "family": "voting",
+    "tagline": "Vote for who in the room would actually do it.",
+    "description": "A scenario appears and everyone votes for the player most likely to survive it, cause it, or star in it. Results rank the room from most to least guilty."
+  },
+  {
+    "slug": "never-have-i-ever",
+    "name": "Never Have I Ever",
+    "type": "multiplayer-voting",
+    "family": "voting",
+    "tagline": "Confess, vote, and find out who's the wildest in the room.",
+    "description": "Players take turns confessing things they've never done while everyone votes I HAVE or I HAVE NOT. Running tallies crown the most innocent and the most chaotic."
+  },
+  {
+    "slug": "this-or-that",
+    "name": "This or That",
+    "type": "multiplayer-voting",
+    "family": "voting",
+    "tagline": "Rapid-fire pairs. Tap your side. Ride the herd.",
+    "description": "Twenty lightning-fast comparisons in two minutes. Vote instantly, watch live bars swing, and build a streak when your pick matches the majority."
+  },
+  {
+    "slug": "rhyme-or-crime",
+    "name": "Rhyme or Crime",
+    "type": "solo",
+    "family": "solo",
+    "tagline": "A word that rhymes AND fits the category. Sounds easy.",
+    "description": "Match the prompt word with a rhyme that fits the category — a fruit that rhymes with 'witch'? Peach. Five rounds, streaks, and speed bonuses."
+  },
+  {
+    "slug": "emoji-plot",
+    "name": "Emoji Plot",
+    "type": "solo",
+    "family": "solo",
+    "tagline": "Decode movies and books from emoji sequences.",
+    "description": "👦⚡🧙🏰 — Harry Potter. Ten emoji movie and book plots to decode, with progressive hints and a create-your-own mode to challenge friends."
+  },
+  {
+    "slug": "timeline-tussle",
+    "name": "Timeline Tussle",
+    "type": "solo",
+    "family": "solo",
+    "tagline": "Drag three historical events into the right order.",
+    "description": "Three shuffled events, one correct order. Score big for perfect chronology, half for a single swapped pair, and learn something either way."
+  },
+  {
+    "slug": "price-is-right",
+    "name": "Price Is Right",
+    "type": "solo",
+    "family": "solo",
+    "tagline": "Guess the price. Don't go over. Get rich in bragging rights.",
+    "description": "Real product, real price, zero shopping. Guess within range on five weird, luxury, and everyday items — exact guesses are worth double."
+  },
+  {
+    "slug": "genre-swap",
+    "name": "Genre Swap",
+    "type": "solo",
+    "family": "solo",
+    "tagline": "Famous plots, wildly wrong genres.",
+    "description": "Harry Potter as a gritty crime thriller? Ten swapped-genre movie descriptions to identify against the clock."
+  },
+  {
+    "slug": "genre-bender",
+    "name": "Genre-Bender",
+    "type": "solo",
+    "family": "solo",
+    "tagline": "Rap lyrics rewritten as Shakespearean sonnets.",
+    "description": "Identify the song behind a sonnet-ified banger. Ten 'bended' lyrics with optional BPM and year clues for the truly stuck."
+  },
+  {
+    "slug": "charades",
+    "name": "Charades",
+    "type": "multiplayer-realtime",
+    "family": "special",
+    "tagline": "Act it out. Pass the phone. Keep the streak alive.",
+    "description": "The classic party game, digitized. Hollywood or Bollywood titles, a 60-second timer, and a pass-the-phone flow built for co-located play."
+  },
+  {
+    "slug": "guess-who",
+    "name": "Guess Who? Celebrity Edition",
+    "type": "multiplayer-realtime",
+    "family": "special",
+    "tagline": "Twenty yes/no questions to name the secret celebrity.",
+    "description": "One player holds a secret celebrity. Everyone else asks yes/no questions — alive? actor? — and races to name them before the 20-question reveal."
+  },
+  {
+    "slug": "trivia",
+    "name": "Trivia",
+    "type": "multiplayer-realtime",
+    "family": "quiz",
+    "instantPlay": "solo",
+    "tagline": "Solo daily challenges or a room-wide quiz race.",
+    "description": "500+ questions across five categories. Play the daily challenge solo or race the room — fastest correct answers earn the most points."
+  }
+]
