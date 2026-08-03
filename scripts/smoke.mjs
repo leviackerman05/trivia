@@ -6,7 +6,7 @@
  * Usage: pnpm smoke
  */
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { existsSync, statSync } from 'node:fs';
 import { join, extname, normalize } from 'node:path';
 
@@ -33,7 +33,9 @@ if (!existsSync(DIST_DIR)) {
 
 const checks = [
   { path: '/', contains: 'Free Online Party Games' },
+  { path: '/', contains: 'application/ld+json' },
   { path: '/faq', contains: 'Frequently Asked Questions' },
+  { path: '/faq', contains: 'application/ld+json' },
   { path: '/privacy-policy', contains: 'Privacy Policy' },
   { path: '/terms-and-conditions', contains: 'Terms &amp; Conditions' },
   { path: '/about-us', contains: 'About PartyBrain' },
@@ -42,8 +44,36 @@ const checks = [
   { path: '/game/trivia', contains: 'More games like this' },
 ];
 
+// PRD §6.2 — every game page ships a 150–160-char meta description and the
+// WebApplication + FAQPage JSON-LD blocks.
+const GAME_SLUGS = [
+  'skribbl-arena',
+  'copycat-challenge',
+  'draw-the-lyric',
+  'one-line-one-shape',
+  'shadow-sketch',
+  'would-you-rather',
+  'most-likely-to',
+  'never-have-i-ever',
+  'this-or-that',
+  'rhyme-or-crime',
+  'emoji-plot',
+  'timeline-tussle',
+  'price-is-right',
+  'genre-swap',
+  'genre-bender',
+  'charades',
+  'guess-who',
+  'trivia',
+];
+
 // PRD §10: static pages < 100 KB total page weight (HTML + CSS + JS, no images).
 const weightChecks = ['/', '/faq', '/game/skribbl-arena'];
+
+// PRD §10: bundle-size budget per game island (shared runtime excluded — it
+// is cached once per visitor; the gate is on the per-island chunks).
+const BUNDLE_BUDGET_BYTES = 300 * 1024;
+const SHARED_RUNTIME_PREFIX = 'client.';
 
 /**
  * PRD §10: static pages < 100 KB total page weight *excluding game
@@ -130,6 +160,40 @@ server.listen(PORT, async () => {
       }
       console.log(`✓ ${path} weight ${(bytes / 1024).toFixed(1)} KB`);
     }
+
+    // PRD §6.2 — per-game meta description length + JSON-LD presence.
+    for (const slug of GAME_SLUGS) {
+      const response = await fetch(`http://localhost:${PORT}/game/${slug}`);
+      const html = await response.text();
+      const meta = html.match(/<meta name="description" content="([^"]*)"/);
+      if (!meta) {
+        throw new Error(`/game/${slug} → missing meta description`);
+      }
+      const length = meta[1].length;
+      if (length < 150 || length > 160) {
+        throw new Error(`/game/${slug} → meta description is ${length} chars (need 150–160)`);
+      }
+      if (!html.includes('"WebApplication"') || !html.includes('"FAQPage"')) {
+        throw new Error(`/game/${slug} → missing WebApplication/FAQPage JSON-LD`);
+      }
+      console.log(`✓ /game/${slug} SEO (${length}-char meta + JSON-LD)`);
+    }
+
+    // PRD §10 — bundle-size budget per game island chunk.
+    for (const file of (await readdir(DIST_DIR + '/_astro')).filter((name) =>
+      name.endsWith('.js')
+    )) {
+      if (file.startsWith(SHARED_RUNTIME_PREFIX)) {
+        continue; // one-time shared runtime (React + socket client)
+      }
+      const size = statSync(join(DIST_DIR, '_astro', file)).size;
+      if (size > BUNDLE_BUDGET_BYTES) {
+        throw new Error(
+          `bundle ${file} is ${(size / 1024).toFixed(1)} KB — over the ${BUNDLE_BUDGET_BYTES / 1024} KB island budget (PRD §10)`
+        );
+      }
+    }
+    console.log('✓ island bundles within budget');
 
     console.log('Smoke checks passed.');
     process.exitCode = 0;

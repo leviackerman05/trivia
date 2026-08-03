@@ -249,6 +249,12 @@ const entries = [
     name: 'PartyBrain',
     tagline: '18 free online party games — play instantly with friends',
     family: 'special',
+    fileName: 'home.png',
+  },
+  {
+    name: 'PartyBrain',
+    tagline: '18 free online party games — play instantly with friends',
+    family: 'special',
     fileName: 'default.png',
   },
 ];

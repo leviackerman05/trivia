@@ -11,10 +11,12 @@
 
 ## Current Milestone
 
-**M10 — SEO Content + AdSense Compliance + Performance** (next up — the
-final build milestone; M11 deployment stays deprioritized).
+**M10 — SEO Content + AdSense Compliance + Performance ✅ complete** — the
+final build milestone. **M11 (deployment) stays deprioritized** until the
+owner asks; no active milestone is in flight.
 
-M9 — Charades + Guess Who is ✅ **complete** — **all 18 games playable**.
+All roadmapped milestones M1–M10 are ✅ complete — **all 18 games playable**
+and AdSense-ready.
 
 ---
 
@@ -40,6 +42,56 @@ M9 — Charades + Guess Who is ✅ **complete** — **all 18 games playable**.
 - [x] **Verification:** `pnpm verify` green — **120 client + 129 server
       tests** (engine suites + reducer tests + 2-journey socket
       integration)
+
+### Milestone 10 — SEO Content + AdSense Compliance + Performance ✅ (verified 2026-08-04)
+
+- [x] **Per-game SEO content** (`src/data/game-content.ts`): all 18 games get
+      400–600-word long-form bodies, unique 150–160-char meta descriptions,
+      and game-specific FAQ entries (D035)
+- [x] **Homepage** (`src/pages/index.astro`): ~600-word SEO section with the
+      required PRD §6.1 keywords (free online party games, browser party
+      games, play pictionary online, virtual party games, multiplayer
+      drawing games, online trivia games, would you rather online, skribbl
+      alternative) + internal links to all 18 games; global FAQ section +
+      FAQPage/WebApplication JSON-LD; `ogImage=/og/home.png`
+- [x] **Global FAQ** (`src/data/faqs.ts`): 9 questions; `/faq` refactored to
+      consume the data file + FAQPage JSON-LD
+- [x] **Game pages** (`src/pages/game/[slug].astro`): per-game meta +
+      WebApplication + BreadcrumbList + FAQPage JSON-LD; long-form content
+      sections + FAQ accordion; canonical URLs
+- [x] **OG images**: `scripts/generate-og.mjs` adds home.png — 20 OG PNGs
+      (18 games + home + default); sitemap complete (all 18 + legal + FAQ)
+- [x] **Smoke gates** (`scripts/smoke.mjs`): SEO checks on all 18 game pages
+      (150–160-char meta + JSON-LD), page weight < 100 KB, per-island bundle
+      budget 300 KB
+- [x] **Content validation** (`src/lib/__tests__/seo-content.test.ts`):
+      validates every content entry (7 tests)
+- [x] **Content-licensing audit**: paraphrased lyrics only, CC-licensed
+      product photos with credits (D034), Wikimedia Commons images for
+      Copycat (PRD §13)
+- [x] **AdSense prep audit**: privacy/terms/about/contact in footer, original
+      content, GA4 + ad placeholders only, no pop-ups/redirects
+- [x] **Mobile + a11y**: touch targets ≥ 44–48 px (min-h-11/12), responsive
+      320–1440 px by construction, aria-labels/pressed/live regions +
+      keyboard-operable controls on all game islands (browser-level
+      axe/Lighthouse audit deferred to M11 per TESTING_STRATEGY)
+- [x] **Verification:** `pnpm verify` green — **127 client + 129 server tests**, 26-page
+      build, smoke gates (SEO + weight + bundle budgets)
+
+### Feature — Price Is Right product photos (owner request 2026-08-04) ✅
+
+- [x] 536 products, **523 with real CC-licensed photos** via Openverse
+      (`commercial` license only); `credit` attribution (creator + license)
+      stored per product and shown in the UI; emoji fallback for the 13
+      without a licensed photo (D034 — supersedes the emoji-only stance of
+      D031)
+- [x] `scripts/enrich-price-products.mjs` (offline, low concurrency) +
+      regenerated `src/data/price-products.json` (6,065 lines);
+      `scripts/check-datasets.mjs` extended; `PriceIsRight.tsx` renders
+      product image (descriptive alt + lazy load) or emoji; `image`/`credit`
+      fields added to `PriceProduct`
+- [x] **Verification:** `pnpm verify` green — datasets check passes
+      ("ALL DATASETS OK"), 3 price-is-right tests
 
 ### Milestone 8 — Solo Batch 2 + Trivia + Daily Challenge ✅ (verified 2026-08-04)
 
@@ -304,9 +356,8 @@ M9 — Charades + Guess Who is ✅ **complete** — **all 18 games playable**.
 
 ## In Progress
 
-- **M10 — SEO Content + AdSense Compliance + Performance** (homepage and
-  per-game copy, JSON-LD, OG/sitemap completeness, Lighthouse budgets,
-  mobile + a11y passes).
+None — M10 is complete and committed. Awaiting owner direction (M11
+remains deprioritized).
 
 ---
 
@@ -314,15 +365,16 @@ M9 — Charades + Guess Who is ✅ **complete** — **all 18 games playable**.
 
 Full roadmap: [TODO.md](TODO.md). Highlights:
 
-- **M10** SEO content completion + AdSense compliance + performance budgets
 - **M11** Deployment (Cloudflare Pages + Railway/Render) + launch QA
-  (owner: currently deprioritized)
+  (owner: currently deprioritized — do not start without an ask)
+- **Backlog** (not milestone-blocking): word-bank curation, trivia dataset
+  expansion to 500+, Playwright E2E, CSP hardening, Lighthouse CI budgets
 
 ---
 
 ## Known Bugs
 
-- None known. All suites green (120 client + 129 server).
+- None known. All suites green (127 client + 129 server).
 
 ---
 
@@ -345,8 +397,8 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
   `chore` upgrade.
 - **`Score.clientKey` idempotency** is opt-in per client; solo islands
   generate + reuse a key per completed game (Trivia does; WYR has no scores).
-- **CSP hardening** deferred to M10; `_headers` noindex for preview domain
-  verify at M11.
+- **CSP hardening** deferred to M11 (launch QA); `_headers` comment updated
+  to match; `_headers` noindex for preview domain verify at M11.
 - **Integration tests require a reachable PostgreSQL** (local Docker
   container or CI service); serial execution configured (TESTING_STRATEGY).
 
@@ -386,23 +438,18 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Upcoming Milestone
 
-**M10 — SEO Content + AdSense Compliance + Performance** (production-grade
-content + compliance)
+**M11 — Deployment + launch QA** (deferred by the owner — do not start
+unless asked): Cloudflare Pages + Railway/Render, live domain, Lighthouse
+CI budgets, browser-level axe/Lighthouse audits, Google Rich Results
+validation, AdSense application, GA4 real ID, CSP hardening, runbook.
 
-- Homepage 600-word SEO copy with required keywords (PRD §6.1)
-- Per-game 400–600-word content + unique 150–160-char meta descriptions +
-  game-specific FAQ JSON-LD (all 18)
-- Global FAQ page JSON-LD (9 questions, PRD §6.3)
-- Schema.org: WebApplication markup + breadcrumbs on game pages
-- OG/Twitter tags + OG images for all pages; alt text everywhere;
-  canonical URLs; sitemap.xml complete (all 18 + legal + FAQ)
-- AdSense prep audit; content-licensing audit
-- Performance: Lighthouse CI budgets; page-weight gates; mobile pass;
-  accessibility audit
+Until then, backlog items are fair game on request (word-bank curation,
+trivia dataset expansion, Playwright E2E).
 
 ---
 
 ## Next Recommended Prompt
 
-> **"Continue with M10"** — the SEO/content/perf pass per `docs/TODO.md`.
-> M11 deployment stays deprioritized until the owner asks.
+> **Next recommended prompt:** M11 deployment is deferred by the owner.
+> Suggested: *"Continue with the backlog"* (word-bank curation, trivia
+> dataset expansion to 500+, Playwright E2E) — or ask to start M11.

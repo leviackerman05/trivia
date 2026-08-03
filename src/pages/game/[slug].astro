@@ -17,7 +17,9 @@ import TimelineTussle from '../../islands/solo/TimelineTussle.tsx';
 import PriceIsRight from '../../islands/solo/PriceIsRight.tsx';
 import GenreSwap from '../../islands/solo/GenreSwap.tsx';
 import GenreBender from '../../islands/solo/GenreBender.tsx';
+import FAQSection from '../../components/FAQSection.astro';
 import { games, getGame, getRelatedGames } from '../../lib/games';
+import { gameContent } from '../../data/game-content';
 
 export function getStaticPaths() {
   return games.map((game) => ({ params: { slug: game.slug } }));
@@ -26,8 +28,53 @@ export function getStaticPaths() {
 const { slug } = Astro.params;
 // getStaticPaths guarantees slug is in the catalog; unknown slugs 404 via Astro.
 const game = getGame(slug)!;
+const seo = gameContent[slug] ?? {
+  metaDescription: game.tagline,
+  sections: [],
+  faqs: [],
+};
 const related = getRelatedGames(game);
 const isMultiplayer = game.type !== 'solo';
+const site = Astro.site ?? new URL('https://partybrain.com');
+const gameUrl = new URL(`/game/${game.slug}`, site).href;
+const homeUrl = new URL('/', site).href;
+
+// M10 structured data (PRD §6.3/§6.4): WebApplication + breadcrumbs +
+// game-specific FAQPage, serialized for the SEOHead JSON-LD slot.
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: `${game.name} — PartyBrain`,
+    url: gameUrl,
+    description: seo.metaDescription,
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: homeUrl },
+      { '@type': 'ListItem', position: 2, name: game.name, item: gameUrl },
+    ],
+  },
+  ...(seo.faqs.length > 0
+    ? [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: seo.faqs.map((faq) => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+          })),
+        },
+      ]
+    : []),
+]);
 /** Solo games with a shipped island (M7/M8) — the rest show the placeholder. */
 const SHIPPED_SOLO = new Set([
   'rhyme-or-crime',
@@ -42,9 +89,10 @@ const soloShipped = SHIPPED_SOLO.has(game.slug);
 
 <BaseLayout
   title={`${game.name} — Play Free Online | PartyBrain`}
-  description={game.tagline}
+  description={seo.metaDescription}
   canonicalPath={`/game/${game.slug}`}
   ogImage={`/og/${game.slug}.png`}
+  jsonLd={jsonLd}
 >
   <article class="flex flex-col gap-8">
     <header>
@@ -130,11 +178,27 @@ const soloShipped = SHIPPED_SOLO.has(game.slug);
       }
     </section>
 
-    <section aria-label={`How to play ${game.name}`}>
+    <section aria-label={`How to play ${game.name}`} class="flex flex-col gap-8">
       <Card>
         <h2 class="mb-3 font-display text-h4 text-ink">How to play</h2>
         <p class="text-body text-ink-muted">{game.description}</p>
       </Card>
+      {
+        seo.sections.map((section) => (
+          <Card>
+            <h2 class="mb-3 font-display text-h4 text-ink">{section.heading}</h2>
+            <p class="text-body text-ink-muted">{section.body}</p>
+          </Card>
+        ))
+      }
+      {
+        seo.faqs.length > 0 && (
+          <div class="flex flex-col gap-4">
+            <h2 class="font-display text-h2 text-ink">{game.name} FAQ</h2>
+            <FAQSection items={seo.faqs} class="max-w-3xl" />
+          </div>
+        )
+      }
     </section>
 
     <section aria-label="Related games">

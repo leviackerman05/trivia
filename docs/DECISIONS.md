@@ -829,3 +829,56 @@ workspace package.
 - **Date:** 2026-08-04
 - **Future impact:** any future product-content needs follow the same
   PD-or-original rule.
+
+---
+
+## D034 — Price Is Right: real CC-licensed product photos via Openverse (2026-08-04)
+
+- **Decision:** Price Is Right ships 536 products, 523 with **real product
+  photos** sourced from the Openverse API (CC-licensed, `commercial` license
+  type only), enriched offline by `scripts/enrich-price-products.mjs`. Each
+  product stores `image` + `credit` (creator + license); emoji remains the
+  fallback when no licensed photo exists (13 products). This **supersedes the
+  emoji-only photo stance of D031** (owner request 2026-08-04).
+- **Reason:** the owner asked for real product images instead of emojis;
+  Openverse only returns CC/PD works, so PRD §13 stays satisfied; attribution
+  is embedded in the data and shown in the UI.
+- **Alternatives considered:** Wikimedia Commons (rejected — aggressive 429
+  rate limiting and product photos are scarce there); retailer/Amazon scraping
+  (rejected — ToS violation + hotlink/tracking risk, already ruled out in
+  D031); emoji-only (kept as the fallback path, not the primary).
+- **Tradeoffs:** photos are CC-BY/CC-BY-SA so the UI shows a small credit
+  line; image quality depends on Openverse search relevance; enrichment is
+  a one-time offline script, not a runtime fetch (dataset is static JSON).
+- **Date:** 2026-08-04
+- **Future impact:** any future imagery must follow the same CC/PD-or-original
+  rule; the `image`/`credit` shape is the reference for other visual datasets;
+  a licensed product-image API could replace the dataset if one ever appears.
+
+---
+
+## D035 — M10 SEO: static content + JSON-LD + smoke-gated budgets (2026-08-04)
+
+- **Decision:** M10 ships SEO as **static content + structured data**, no
+  runtime SEO work: per-game 400–600-word bodies + unique 150–160-char meta
+  descriptions + game-specific FAQs (`src/data/game-content.ts`), global FAQ
+  (`src/data/faqs.ts`), FAQPage/WebApplication/BreadcrumbList JSON-LD on game
+  pages, FAQPage on `/faq`, WebApplication + FAQPage on the homepage, OG
+  images for all pages (20 PNGs incl. home), canonical URLs, and a complete
+  sitemap. `scripts/smoke.mjs` gates SEO checks (all 18 game pages),
+  page weight < 100 KB, and a 300 KB per-island bundle budget;
+  `seo-content.test.ts` validates every content entry.
+- **Reason:** PRD §6.1/§6.3/§7 is SEO/AdSense-first; the static MPA already
+  serves full HTML so content costs nothing at runtime; smoke gates keep the
+  budgets from regressing on every commit.
+- **Alternatives considered:** a CMS for content (rejected — no non-engineer
+  authors yet; revisit when one exists); Lighthouse CI budgets (deferred to
+  M11 — no CI runner yet; smoke gates substitute locally); prerender/SSR
+  (unnecessary — Astro output is already static).
+- **Tradeoffs:** content lives in TS data files and needs code review to
+  change; browser-level axe/Lighthouse audits stay deferred to M11 per
+  TESTING_STRATEGY; Google Rich Results validation is a manual launch step.
+- **Date:** 2026-08-04
+- **Future impact:** game pages are AdSense-ready; adding a future game
+  requires adding its `game-content.ts` entry (enforced by tests + smoke);
+  structured data gets final validation in Google Rich Results at M11.
