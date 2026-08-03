@@ -13,4 +13,8 @@ export const PLAYABLE_ROOM_GAMES: ReadonlySet<string> = new Set([
   'draw-the-lyric',
   'one-line-one-shape',
   'shadow-sketch',
+  'would-you-rather',
+  'most-likely-to',
+  'never-have-i-ever',
+  'this-or-that',
 ]);

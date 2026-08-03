@@ -11,13 +11,38 @@
 
 ## Current Milestone
 
-**M6 — Voting Component + Voting Games** (next up).
+**M7 — Solo Template + Solo Games Batch 1** (next up).
 
-M5 — Remaining Drawing Games is ✅ **complete** (verified below).
+M6 — Voting games is ✅ **complete** (verified below).
 
 ---
 
 ## Completed Work
+
+### Milestone 6 — Voting Component + Voting Games ✅ (verified 2026-08-04)
+
+- [x] `VotingSession` engine (`server/src/engine/voting-engine.ts`): one
+      config-driven session for all four voting games (D029) — rounds,
+      timers, options-from-dataset/players, self-vote rules, wildness/crown/
+      herd scoring; mid-game joiners can vote (D027 pattern)
+- [x] Gateway voting adapter: `startVoting` + per-phase timers (statement /
+      vote / reveal-break), `emitVotingRoundStart` (kind + phase + options +
+      deadline), all-in early reveal (TOT keeps its fixed 6s beat),
+      `vote-update` live tallies, `vote-reveal`, kind-specific `game-end`;
+      `submit-prompt` handler (WYR dilemma queue + NHIE statements), host
+      `next-round` skip, resync snapshot with deadline
+- [x] `VotingArena` island (`src/islands/VotingArena.tsx`) + `useVotingGame` + pure `src/lib/voting.ts` reducer: WYR blue/red cards + live bars +
+      total-votes counter + submit-own-dilemma form; MLT player chips +
+      ranked reveal with crown; NHIE statement view (input + server
+      suggestions) + I HAVE / I HAVE NOT + wildness scoreboard; TOT two
+      cards + herd streak + herd-alignment podium; shared chat panel
+- [x] Datasets (server-side): 190 WYR dilemmas, 210 MLT prompts, 210 NHIE
+      statements, 320 TOT pairs — validated by `scripts/check-datasets.mjs`
+- [x] games.json marks all 4 voting games playable; registry lockstep test
+      green; game page renders VotingArena for the voting family
+- [x] **Verification:** `pnpm verify` green — **81 client + 105 server tests**
+      (engine + reducer + 3 socket journeys: full WYR flow with the custom
+      dilemma queue, NHIE rotation + wildness, TOT 6s rounds)
 
 ### Milestone 5 — Remaining Drawing Games ✅ (verified 2026-08-04)
 
@@ -209,9 +234,8 @@ M5 — Remaining Drawing Games is ✅ **complete** (verified below).
 
 ## In Progress
 
-- **M6 — Voting Component + Voting Games** (Would You Rather room mode,
-  Most Likely To, Never Have I Ever, This or That — reusing RoomEngine +
-  the vote pattern from D028).
+- **M7 — Solo Template + Solo Games Batch 1** (Rhyme or Crime, Emoji Plot,
+  Timeline Tussle, Price Is Right — reusing one SoloTemplate island).
 
 ---
 
@@ -219,7 +243,6 @@ M5 — Remaining Drawing Games is ✅ **complete** (verified below).
 
 Full roadmap: [TODO.md](TODO.md). Highlights:
 
-- **M6** Voting component + 4 voting games
 - **M7** Solo template + 4 solo games
 - **M8** Genre Swap + Genre-Bender + Trivia room mode (solo already live
   via instant play) + daily challenge
@@ -232,7 +255,7 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Known Bugs
 
-- None known. All suites green (70 client + 87 server).
+- None known. All suites green (81 client + 105 server).
 
 ---
 
@@ -296,27 +319,28 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Upcoming Milestone
 
-**M6 — Voting Component + Voting Games** (working app: all 4 voting games
-playable — reusing the RoomEngine + the D028 vote pattern)
+**M7 — Solo Template + Solo Games Batch 1** (working app: 4 solo games
+playable — reusing one SoloTemplate island)
 
-- **VotingComponent island:** prompt + 2–6 options, tap to vote, live
-  percentage bars, reveal animation, vote timer
-- **Server voting adapter:** `cast-vote` tally, `vote-update`, `vote-reveal`,
-  all-in/timer reveal
-- **Would You Rather room mode:** 500+ dilemmas (190 curated), A/B blue/red,
-  total votes counter, submit-own-question queue
-- **Most Likely To…:** 210 prompts, player names as options, ranking reveal,
-  crown animation
-- **Never Have I Ever:** turn rotation, statement input/suggestions,
-  I HAVE / I HAVE NOT (anonymous toggle), wildness tally
-- **This or That:** 320 pairs, two cards, tap-to-vote, 6s auto-advance,
-  herd streak, 20 rounds
-- Tests: tally math, reveal timing, anonymous toggle, rotation; docs update
+- **SoloTemplate island:** prompt → input → score → result → leaderboard
+  submit → play again; localStorage streak; share-result image (canvas)
+- **Rhyme or Crime:** CMU pronouncing dictionary (static JSON), category
+  word lists, scoring (+10, +5 speed, streak x2/x3), 60s × 5 rounds,
+  daily leaderboard
+- **Emoji Plot:** 210 emoji movies + books, fuzzy matching, progressive
+  hints (year 15s / first letter 25s), scoring (100/50/25),
+  create-your-own share link
+- **Timeline Tussle:** 210 events with years, click-select order,
+  instant feedback, scoring (100/50/0)
+- **Price Is Right:** 110 curated products, slider/text input, reveal
+  ($ over/under), scoring (100 − Δ·2, min 0, exact = 200)
+- Tests: rhyme validation, fuzzy matching, order scoring, price scoring;
+  docs update
 
 ---
 
 ## Next Recommended Prompt
 
-> **"Continue with M6–M10"** — build the voting games (M6), solo games
-> (M7–M8), Charades + Guess Who (M9), and the SEO/perf pass (M10) per
-> `docs/TODO.md`. M11 deployment stays deprioritized until the owner asks.
+> **"Continue with M7–M10"** — solo games (M7–M8), Charades + Guess Who
+> (M9), and the SEO/perf pass (M10) per `docs/TODO.md`. M11 deployment
+> stays deprioritized until the owner asks.

@@ -239,25 +239,30 @@ logic.
 
 ---
 
-## Milestone 6 — Voting Component + Voting Games
+## Milestone 6 — Voting Component + Voting Games ✅
 
 Working app: all 4 voting games playable (reuse RoomEngine + Voting).
 
-- [ ] VotingComponent island: prompt + 2–6 options, tap to vote, live
+- [x] VotingComponent island: prompt + 2–6 options, tap to vote, live
       percentage bars, reveal animation, vote timer
-- [ ] Server voting adapter: `cast-vote` tally, `vote-update`, `vote-reveal`,
+- [x] Server voting adapter: `cast-vote` tally, `vote-update`, `vote-reveal`,
       all-in/timer reveal
-- [ ] **Would You Rather:** 500+ dilemmas, A/B (blue/red), total votes counter,
-      submit-own-question queue
-- [ ] **Most Likely To…:** 200+ prompts, player names as options, ranking
-      reveal, crown animation
-- [ ] **Never Have I Ever:** turn rotation, statement input/suggestions,
-      I HAVE / I HAVE NOT (anonymous toggle), wildness tally
-- [ ] **This or That:** 300+ pairs, two cards, tap-to-vote, 6s auto-advance,
-      herd streak, 20 rounds
-- [ ] Tests: tally math, reveal timing, anonymous toggle, rotation
-- [ ] E2E: full voting game journeys
-- [ ] Update docs
+- [x] **Would You Rather:** 190 dilemmas (server-side), A/B (blue/red), total
+      votes counter, submit-own-question queue (player-submitted dilemmas
+      used before the dataset)
+- [x] **Most Likely To…:** 210 prompts, player names as options, ranking
+      reveal, crown animation, crown tallies
+- [x] **Never Have I Ever:** turn rotation, statement input/suggestions,
+      I HAVE / I HAVE NOT (aggregate reveal — anonymous by design), wildness
+      tally
+- [x] **This or That:** 320 pairs, two cards, tap-to-vote, 6s auto-advance,
+      herd streak, 20 rounds, herd-alignment score persisted to the
+      leaderboard
+- [x] Tests: tally math, reveal timing, anonymous toggle, rotation
+      (voting-engine + voting reducer + 3-journey socket integration)
+- [x] E2E: full voting game journeys (WYR flow + queue, NHIE rotation +
+      wildness, TOT fixed 6s rounds)
+- [x] Update docs (D029, PROJECT_STATE)
 
 **Done when:** all 4 voting games playable with live percentages and correct
 reveals.

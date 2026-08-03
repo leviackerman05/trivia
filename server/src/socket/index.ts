@@ -10,6 +10,7 @@ import {
   validateChooseWordInput,
   validateGuessInput,
   validateJoinRoomInput,
+  validatePromptInput,
   validateRoomCodeInput,
   validateRoomCreateInput,
   validateStrokePayload,
@@ -39,6 +40,11 @@ import {
   type CopycatAward,
   type CopycatImage,
 } from '../engine/copycat-engine.js';
+import {
+  VotingSession,
+  type VotingConfig,
+  type VotingSession as VotingGameSession,
+} from '../engine/voting-engine.js';
 import { PLAYABLE_ROOM_GAMES } from '../lib/game-registry.js';
 
 import wordsJson from '../data/skribbl-words.json' with { type: 'json' };
@@ -46,6 +52,10 @@ import objectsJson from '../data/one-line-objects.json' with { type: 'json' };
 import silhouettesJson from '../data/silhouettes.json' with { type: 'json' };
 import lyricsJson from '../data/lyrics.json' with { type: 'json' };
 import copycatImagesJson from '../data/copycat-images.json' with { type: 'json' };
+import wyrJson from '../data/wyr.json' with { type: 'json' };
+import mltJson from '../data/most-likely-to.json' with { type: 'json' };
+import nhieJson from '../data/never-have-i-ever.json' with { type: 'json' };
+import totJson from '../data/this-or-that.json' with { type: 'json' };
 
 export interface SocketGatewayDeps {
   engine: RoomEngine;
@@ -75,10 +85,11 @@ interface RoomTimers {
   reveal?: NodeJS.Timeout;
   drawEnd?: NodeJS.Timeout;
   voteEnd?: NodeJS.Timeout;
+  statementEnd?: NodeJS.Timeout;
 }
 
-/** A live game session: a shared-canvas drawing game or Copycat. */
-type GameSession = DrawingSession | CopycatSession;
+/** A live game session: a drawing game, Copycat, or a voting game. */
+type GameSession = DrawingSession | CopycatSession | VotingGameSession;
 
 const DRAWING_CONFIGS: Record<string, DrawingGameConfig> = {
   'skribbl-arena': {
@@ -110,6 +121,65 @@ const DRAWING_CONFIGS: Record<string, DrawingGameConfig> = {
     fixedDrawerPoints: 50,
   },
 };
+
+const VOTING_CONFIGS: Record<string, VotingConfig> = {
+  'would-you-rather': {
+    kind: 'would-you-rather',
+    voteMs: 30_000,
+    revealMs: 8_000,
+    totalRounds: () => 10,
+    allowSelfVote: false,
+  },
+  'most-likely-to': {
+    kind: 'most-likely-to',
+    voteMs: 30_000,
+    revealMs: 8_000,
+    totalRounds: () => 10,
+    allowSelfVote: true,
+  },
+  'never-have-i-ever': {
+    kind: 'never-have-i-ever',
+    voteMs: 20_000,
+    revealMs: 8_000,
+    statementMs: 30_000,
+    totalRounds: (playerCount) => Math.min(10, Math.max(4, playerCount * 2)),
+    allowSelfVote: false,
+  },
+  'this-or-that': {
+    kind: 'this-or-that',
+    voteMs: 6_000,
+    revealMs: 0,
+    totalRounds: () => 20,
+    allowSelfVote: false,
+  },
+};
+
+/** Host-submitted WYR dilemmas / NHIE statements, applied on the next round. */
+
+type WyrEntry = { a: string; b: string };
+type MltPrompt = { prompt: string };
+type NhieSuggestion = { statement: string };
+type TotPair = { a: string; b: string };
+
+function votingDatasetsFor(gameId: string): {
+  wyr?: WyrEntry[];
+  mlt?: MltPrompt[];
+  nhie?: NhieSuggestion[];
+  tot?: TotPair[];
+} {
+  switch (gameId) {
+    case 'would-you-rather':
+      return { wyr: wyrJson as WyrEntry[] };
+    case 'most-likely-to':
+      return { mlt: mltJson as MltPrompt[] };
+    case 'never-have-i-ever':
+      return { nhie: nhieJson as NhieSuggestion[] };
+    case 'this-or-that':
+      return { tot: totJson as TotPair[] };
+    default:
+      return {};
+  }
+}
 
 function entriesFrom(gameId: string): DrawingEntry[] {
   switch (gameId) {
@@ -150,11 +220,15 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     cors: { origin: resolveCorsOrigin() },
   });
 
-  /** roomCode → live game session (drawing games + copycat). */
+  /** roomCode → live game session (drawing games + copycat + voting). */
   const sessions = new Map<string, GameSession>();
   const timers = new Map<string, RoomTimers>();
   /** Host-provided custom word list, applied when the game starts. */
   const pendingCustomWords = new Map<string, string[]>();
+  /** WYR dilemmas / NHIE statements queued by players for future rounds. */
+  const pendingPrompts = new Map<string, { a: string; b: string }[]>();
+  /** Voting phase deadlines (ms epoch) so resync can rebuild client timers. */
+  const votingDeadlines = new Map<string, number>();
 
   function roomOf(socket: Socket): RoomState | undefined {
     return engine.roomsOfSocket(socket.id)[0];
@@ -196,6 +270,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     clearTimers(roomCode);
     sessions.delete(roomCode);
     pendingCustomWords.delete(roomCode);
+    pendingPrompts.delete(roomCode);
+    votingDeadlines.delete(roomCode);
   }
 
   function sessionOf(room: RoomState): GameSession | undefined {
@@ -210,6 +286,15 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   function copycatOf(room: RoomState): CopycatSession | undefined {
     const session = sessions.get(room.code);
     return session instanceof CopycatSession ? session : undefined;
+  }
+
+  function votingOf(room: RoomState): VotingGameSession | undefined {
+    const session = sessions.get(room.code);
+    return session instanceof VotingSession ? session : undefined;
+  }
+
+  function isVotingRoom(room: RoomState): boolean {
+    return VOTING_CONFIGS[room.gameId] !== undefined;
   }
 
   function isCopycatRoom(room: RoomState): boolean {
@@ -468,6 +553,22 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         awards: session.finalAwards,
       };
     }
+    if (session instanceof VotingSession) {
+      return {
+        view: session.phaseValue,
+        kind: VOTING_CONFIGS[room.gameId]?.kind ?? room.gameId,
+        prompt: session.roundPrompt,
+        options: session.roundOptions,
+        round: session.currentRound,
+        totalRounds: session.totalRoundsValue,
+        statementBy: session.currentStatementBy,
+        statement: session.currentStatement,
+        tallies: session.tallies,
+        reveal: session.lastReveal,
+        myVote: session.voteOf(requesterName),
+        endsAt: votingDeadlines.get(room.code) ?? null,
+      };
+    }
     const hints = session.letterHintsAt(Date.now());
     const isDrawer = session.currentDrawer === requesterName;
     const config = DRAWING_CONFIGS[room.gameId];
@@ -583,6 +684,187 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     logger.info({ roomCode: room.code, awards: finished.value.awards }, 'copycat finished');
   }
 
+  // --- Voting game adapter helpers (M6) ------------------------------------
+
+  function emitVotingRoundStart(room: RoomState): void {
+    const session = votingOf(room);
+    if (!session) {
+      return;
+    }
+    const config = VOTING_CONFIGS[room.gameId];
+    const phase = session.phaseValue === 'statement' ? 'statement' : 'voting';
+    const endsAt =
+      Date.now() +
+      (phase === 'statement' ? (config?.statementMs ?? 30_000) : (config?.voteMs ?? 30_000));
+    votingDeadlines.set(room.code, endsAt);
+    const { title, subtitle, custom } = session.roundPrompt;
+    io.to(room.code).emit(ServerEvents.roundStart, {
+      kind: config?.kind,
+      phase,
+      prompt: { title, subtitle },
+      options: session.roundOptions,
+      round: session.currentRound,
+      totalRounds: session.totalRoundsValue,
+      statementBy: session.currentStatementBy,
+      statement: session.currentStatement,
+      custom,
+      endsAt,
+    });
+  }
+
+  function startVoting(room: RoomState): boolean {
+    clearRoomGame(room.code);
+    const config = VOTING_CONFIGS[room.gameId];
+    if (!config) {
+      return false;
+    }
+    const session = new VotingSession(config, votingDatasetsFor(room.gameId));
+    const players = [...room.players.values()]
+      .filter((player) => player.connected)
+      .map((player) => player.name);
+    const started = session.start(players);
+    if (!started.ok) {
+      return false;
+    }
+    sessions.set(room.code, session);
+    const engineResult = engine.transition(room, 'in-progress');
+    if (!engineResult.ok) {
+      return false;
+    }
+    emitVotingRoundStart(room);
+    broadcastState(room);
+    scheduleVotingTimer(room, session.phaseValue === 'statement' ? 'statement' : 'voting');
+    logger.info({ roomCode: room.code, kind: config.kind }, 'voting game started');
+    return true;
+  }
+
+  /** Arm the timer for the current phase (statement or voting). */
+  function scheduleVotingTimer(room: RoomState, phase: 'statement' | 'voting'): void {
+    const session = votingOf(room);
+    if (!session) {
+      return;
+    }
+    const config = VOTING_CONFIGS[room.gameId];
+    clearTimers(room.code);
+    const code = room.code;
+    const roomTimers: RoomTimers = {};
+    if (phase === 'statement') {
+      roomTimers.statementEnd = setTimeout(() => {
+        // NHIE: idle statement author → server picks a suggestion.
+        const current = votingOf(room);
+        if (!current || current.phaseValue !== 'statement' || !current.currentStatementBy) {
+          return;
+        }
+        const pick = current.suggestionOptions(1)[0];
+        if (!pick) {
+          return;
+        }
+        const submitted = current.submitStatement(current.currentStatementBy, pick);
+        if (!submitted.ok) {
+          return;
+        }
+        emitVotingRoundStart(room);
+        scheduleVotingTimer(room, 'voting');
+      }, config?.statementMs ?? 30_000);
+    } else {
+      roomTimers.voteEnd = setTimeout(() => {
+        revealVotingRound(room);
+      }, config?.voteMs ?? 30_000);
+    }
+    timers.set(code, roomTimers);
+  }
+
+  /** Voting → revealed (all-in or timer). TOT reveals inline and advances. */
+  function revealVotingRound(room: RoomState): void {
+    const session = votingOf(room);
+    if (!session || session.phaseValue !== 'voting') {
+      return;
+    }
+    const revealed = session.reveal();
+    if (!revealed.ok) {
+      return;
+    }
+    const config = VOTING_CONFIGS[room.gameId];
+    io.to(room.code).emit(ServerEvents.voteReveal, revealed.value.reveal);
+    if (!config || config.revealMs <= 0) {
+      // This or That: no revealed phase — straight to the next pair.
+      advanceVotingRound(room);
+      return;
+    }
+    clearTimers(room.code);
+    timers.set(room.code, {
+      breakTimer: setTimeout(() => {
+        advanceVotingRound(room);
+      }, config.revealMs),
+    });
+  }
+
+  function advanceVotingRound(room: RoomState): void {
+    const session = votingOf(room);
+    if (!session) {
+      return;
+    }
+    // WYR: player-submitted dilemmas are used before the dataset runs out.
+    if (room.gameId === 'would-you-rather') {
+      const queue = pendingPrompts.get(room.code) ?? [];
+      const next = queue.shift();
+      if (next) {
+        if (queue.length === 0) {
+          pendingPrompts.delete(room.code);
+        } else {
+          pendingPrompts.set(room.code, queue);
+        }
+        session.useCustomPrompt(next.a, next.b);
+      }
+    }
+    const advanced = session.next();
+    if (!advanced.ok) {
+      return;
+    }
+    clearTimers(room.code);
+    if (advanced.value.finished) {
+      finishVotingGame(room);
+      return;
+    }
+    emitVotingRoundStart(room);
+    scheduleVotingTimer(room, session.phaseValue === 'statement' ? 'statement' : 'voting');
+  }
+
+  function finishVotingGame(room: RoomState): void {
+    const session = votingOf(room);
+    if (!session) {
+      return;
+    }
+    clearTimers(room.code);
+    const engineResult = engine.transition(room, 'results');
+    if (!engineResult.ok) {
+      return;
+    }
+    const payload = session.endPayload() as Record<string, unknown>;
+    io.to(room.code).emit(ServerEvents.gameEnd, payload);
+    broadcastState(room);
+    persistBestEffort(setRoomStatus(room.code, 'finished'), `finish ${room.code}`);
+    // This or That herd-alignment is a score; persist it like drawing games.
+    if (Array.isArray(payload.scores)) {
+      const startedAt = session.startedTimestamp;
+      for (const entry of payload.scores as { playerName: string; score: number }[]) {
+        const clientKey = `${room.gameId}:${room.code}:${startedAt}:${entry.playerName}`;
+        persistBestEffort(
+          getPrisma().score.create({
+            data: {
+              gameId: room.gameId,
+              playerName: entry.playerName,
+              score: entry.score,
+              clientKey,
+            },
+          }),
+          `score ${room.code} ${entry.playerName}`
+        );
+      }
+    }
+    logger.info({ roomCode: room.code, payload }, 'voting game finished');
+  }
+
   io.on('connection', (socket) => {
     logger.info({ socketId: socket.id }, 'socket connected');
 
@@ -637,6 +919,15 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
           logger.warn(
             { roomCode: room.code, error: added.error },
             'late join to drawing session failed'
+          );
+        }
+      }
+      if (session instanceof VotingSession && session.phaseValue !== 'game-end') {
+        const added = session.addPlayer(player.name);
+        if (!added.ok) {
+          logger.warn(
+            { roomCode: room.code, error: added.error },
+            'late join to voting session failed'
           );
         }
       }
@@ -715,6 +1006,11 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
 
       if (isCopycatRoom(result.value)) {
         if (!startCopycat(result.value)) {
+          ack?.({ ok: false, error: 'NOT_ENOUGH_PLAYERS' });
+          return;
+        }
+      } else if (isVotingRoom(result.value)) {
+        if (!startVoting(result.value)) {
           ack?.({ ok: false, error: 'NOT_ENOUGH_PLAYERS' });
           return;
         }
@@ -1029,7 +1325,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
 
     socket.on(ClientEvents.nextRound, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
-      if (!room || !DRAWING_CONFIGS[room.gameId]) {
+      if (!room || (!DRAWING_CONFIGS[room.gameId] && !isVotingRoom(room))) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -1038,14 +1334,21 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({ ok: false, error: 'NOT_HOST' });
         return;
       }
-      const session = drawingOf(room);
-      if (!session || session.phaseValue !== 'round-results') {
-        ack?.({ ok: false, error: 'WRONG_PHASE' });
+      const drawing = drawingOf(room);
+      if (drawing && drawing.phaseValue === 'round-results') {
+        clearTimers(room.code);
+        advanceRound(room);
+        ack?.({ ok: true });
         return;
       }
-      clearTimers(room.code);
-      advanceRound(room);
-      ack?.({ ok: true });
+      const voting = votingOf(room);
+      if (voting && voting.phaseValue === 'revealed') {
+        clearTimers(room.code);
+        advanceVotingRound(room);
+        ack?.({ ok: true });
+        return;
+      }
+      ack?.({ ok: false, error: 'WRONG_PHASE' });
     });
 
     socket.on(ClientEvents.restartGame, (payload: unknown, ack?: Ack) => {
@@ -1146,7 +1449,110 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({ ok: true });
         return;
       }
+      const votingSession = votingOf(room);
+      if (votingSession) {
+        const optionId = (payload as { optionId?: unknown }).optionId;
+        if (typeof optionId !== 'string' || optionId.length === 0 || optionId.length > 24) {
+          ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: 'invalid option' });
+          return;
+        }
+        const voted = votingSession.submitVote(player.name, optionId);
+        if (!voted.ok) {
+          ack?.({ ok: false, error: voted.error });
+          return;
+        }
+        io.to(room.code).emit(ServerEvents.voteUpdate, {
+          kind: VOTING_CONFIGS[room.gameId]?.kind ?? room.gameId,
+          tallies: votingSession.tallies,
+          totalVotes: votingSession.totalVotes,
+        });
+        // All-in → reveal early (except This or That, which keeps its 6s beat).
+        if (voted.value.allVoted && room.gameId !== 'this-or-that') {
+          clearTimers(room.code);
+          revealVotingRound(room);
+        }
+        ack?.({ ok: true });
+        return;
+      }
       ack?.({ ok: false, error: 'NOT_STARTED' });
+    });
+
+    /**
+     * M6 — submit-prompt: WYR dilemmas go to the room queue (used on the
+     * next round); NHIE statements start the current player's turn.
+     */
+    socket.on(ClientEvents.submitPrompt, (payload: unknown, ack?: Ack) => {
+      const input = validatePromptInput(payload);
+      if (!input.ok) {
+        ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: input.error });
+        return;
+      }
+      const room = roomOf(socket);
+      if (!room || !isVotingRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const session = votingOf(room);
+      if (!session) {
+        ack?.({ ok: false, error: 'NOT_STARTED' });
+        return;
+      }
+      if (input.value.statement !== undefined) {
+        if (room.gameId !== 'never-have-i-ever') {
+          ack?.({
+            ok: false,
+            error: 'INVALID_PAYLOAD',
+            message: 'statements are for Never Have I Ever',
+          });
+          return;
+        }
+        const submitted = session.submitStatement(player.name, input.value.statement);
+        if (!submitted.ok) {
+          ack?.({ ok: false, error: submitted.error });
+          return;
+        }
+        emitVotingRoundStart(room);
+        scheduleVotingTimer(room, 'voting');
+        io.to(room.code).emit(ServerEvents.chatMessage, {
+          kind: 'system',
+          playerName: 'System',
+          message: `${player.name} shared a confession — vote!`,
+          at: Date.now(),
+        });
+        ack?.({ ok: true });
+        return;
+      }
+      if (room.gameId !== 'would-you-rather') {
+        ack?.({
+          ok: false,
+          error: 'INVALID_PAYLOAD',
+          message: 'dilemmas are for Would You Rather',
+        });
+        return;
+      }
+      if (session.phaseValue !== 'voting' && session.phaseValue !== 'revealed') {
+        ack?.({ ok: false, error: 'WRONG_PHASE' });
+        return;
+      }
+      const queue = pendingPrompts.get(room.code) ?? [];
+      if (queue.length >= 20) {
+        ack?.({ ok: false, error: 'QUEUE_FULL' });
+        return;
+      }
+      queue.push({ a: input.value.a!, b: input.value.b! });
+      pendingPrompts.set(room.code, queue);
+      io.to(room.code).emit(ServerEvents.chatMessage, {
+        kind: 'system',
+        playerName: 'System',
+        message: `${player.name} added a dilemma to the queue`,
+        at: Date.now(),
+      });
+      ack?.({ ok: true, queued: queue.length });
     });
 
     socket.on(ClientEvents.gameResync, (payload: unknown, ack?: Ack) => {

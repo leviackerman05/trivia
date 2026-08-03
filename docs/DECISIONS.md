@@ -651,3 +651,46 @@ workspace package.
 - **Future impact:** M6 voting games reuse the `vote-update`/`vote-reveal`
   pattern and the private-canvas export via `DrawingCanvasHandle`; the
   config table is the template for future drawing variants.
+
+---
+
+## D029 — M6 voting games: one config-driven session, aggregate NHIE reveals (2026-08-04)
+
+- **Decision:** All four voting games share one `VotingSession` engine and
+  one `VotingArena` island; the D028 vote pattern (`cast-vote` →
+  `vote-update` → `vote-reveal`) extends to them. Kind-specific mechanics
+  live in the config: rounds (WYR/MLT 10, TOT 20, NHIE min(10, max(4,
+  players×2))), timers (WYR/MLT 30s vote + 8s reveal, NHIE 30s statement +
+  20s vote + 8s reveal, TOT 6s fixed with no revealed phase), and scoring
+  (MLT crowns, NHIE wildness, TOT herd-alignment persisted as a score).
+  Concrete calls:
+  1. **MLT self-votes allowed** (voting for yourself is a legit opinion);
+     every other voting game blocks self-votes; NHIE blocks the confession
+     author entirely (they "never have", so they can't vote).
+  2. **NHIE reveals are aggregate-only** ("2 of 5 have done this") — the
+     PRD's "anonymous toggle" is therefore unnecessary: anonymity is
+     inherent. Documented, not built.
+  3. **TOT herd streak is cosmetic client-side** (derived from the previous
+     round's majority tallies); the final herd-alignment score is
+     server-authoritative and persists to the leaderboard like drawing
+     scores.
+  4. **WYR player-submitted dilemmas** go to a per-room gateway queue and
+     are used before dataset prompts (PRD §5.13 submit-own-question).
+  5. **NHIE statement suggestions** come from the server dataset
+     (server-authoritative, D022-style); an idle statement phase auto-picks
+     a suggestion after 30s.
+- **Reason:** One engine + one island for four near-identical games (D009);
+  server-authoritative tallies and reveals (D008); solo rooms must be
+  playable end-to-end (D026) — all four games work with one player.
+- **Alternatives considered:** separate sessions per game (rejected — they
+  differ only in config); named NHIE reveals (rejected — PRD's reveal is
+  aggregate); client-side scoring (rejected — final scores must be
+  server-owned).
+- **Tradeoffs:** TOT rounds are fixed 6s even when everyone voted instantly
+  (PRD: 20 rounds in 2 minutes — the beat matters); mid-game joiners can
+  vote but are not MLT options for the current round (options are fixed at
+  round start).
+- **Date:** 2026-08-04
+- **Future impact:** Charades/Guess Who (M9) reuse the turn-rotation and
+  phase-timer patterns; the WYR queue is the template for player-generated
+  content moderation later.

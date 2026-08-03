@@ -5,6 +5,7 @@ import Chip from '../../components/ui/Chip.astro';
 import RoomLobby from '../../islands/room/RoomLobby.tsx';
 import DrawingGameArena from '../../islands/DrawingGameArena.tsx';
 import CopycatArena from '../../islands/CopycatArena.tsx';
+import VotingArena from '../../islands/VotingArena.tsx';
 import TriviaSolo from '../../islands/TriviaSolo.tsx';
 import WouldYouRatherOneScreen from '../../islands/WouldYouRatherOneScreen.tsx';
 import { games, getGame, getRelatedGames } from '../../lib/games';
@@ -68,6 +69,8 @@ const isMultiplayer = game.type !== 'solo';
                 <CopycatArena client:load gameSlug={game.slug} />
               ) : game.family === 'drawing' ? (
                 <DrawingGameArena client:load gameSlug={game.slug} />
+              ) : game.family === 'voting' ? (
+                <VotingArena client:load gameSlug={game.slug} />
               ) : (
                 <RoomLobby client:load gameSlug={game.slug} />
               )}

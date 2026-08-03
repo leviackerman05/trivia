@@ -50,6 +50,7 @@
     "type": "multiplayer-voting",
     "family": "voting",
     "instantPlay": "one-screen",
+    "playable": true,
     "tagline": "Tough choices. Live percentages. Zero wrong answers.",
     "description": "Answer outrageous dilemmas in real time and watch the percentages swing as the room votes. Submit your own dilemmas to the queue."
   },
@@ -58,6 +59,7 @@
     "name": "Most Likely To…",
     "type": "multiplayer-voting",
     "family": "voting",
+    "playable": true,
     "tagline": "Vote for who in the room would actually do it.",
     "description": "A scenario appears and everyone votes for the player most likely to survive it, cause it, or star in it. Results rank the room from most to least guilty."
   },
@@ -66,6 +68,7 @@
     "name": "Never Have I Ever",
     "type": "multiplayer-voting",
     "family": "voting",
+    "playable": true,
     "tagline": "Confess, vote, and find out who's the wildest in the room.",
     "description": "Players take turns confessing things they've never done while everyone votes I HAVE or I HAVE NOT. Running tallies crown the most innocent and the most chaotic."
   },
@@ -74,6 +77,7 @@
     "name": "This or That",
     "type": "multiplayer-voting",
     "family": "voting",
+    "playable": true,
     "tagline": "Rapid-fire pairs. Tap your side. Ride the herd.",
     "description": "Twenty lightning-fast comparisons in two minutes. Vote instantly, watch live bars swing, and build a streak when your pick matches the majority."
   },

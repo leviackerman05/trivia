@@ -270,3 +270,65 @@ export function validateChooseWordInput(
   }
   return { ok: true, value: { roomCode, word: trimmed } };
 }
+
+/** M6 additive cast-vote payload { roomCode, optionId }. */
+export function validateVoteInput(
+  input: unknown
+): ValidationResult<{ roomCode: string; optionId: string }> {
+  if (typeof input !== 'object' || input === null || Array.isArray(input)) {
+    return { ok: false, error: 'payload must be an object' };
+  }
+  const { roomCode, optionId } = input as Record<string, unknown>;
+  if (!isRoomCode(roomCode)) {
+    return { ok: false, error: 'invalid room code' };
+  }
+  if (typeof optionId !== 'string' || optionId.length === 0 || optionId.length > 24) {
+    return { ok: false, error: 'invalid option' };
+  }
+  return { ok: true, value: { roomCode, optionId } };
+}
+
+const PROMPT_TEXT_MAX = 160;
+const STATEMENT_TEXT_MAX = 120;
+
+/**
+ * M6 additive submit-prompt payload — two shapes:
+ * WYR dilemma { roomCode, a, b } or NHIE statement { roomCode, statement }.
+ */
+export function validatePromptInput(
+  input: unknown
+): ValidationResult<{ roomCode: string; a?: string; b?: string; statement?: string }> {
+  if (typeof input !== 'object' || input === null || Array.isArray(input)) {
+    return { ok: false, error: 'payload must be an object' };
+  }
+  const { roomCode, a, b, statement } = input as Record<string, unknown>;
+  if (!isRoomCode(roomCode)) {
+    return { ok: false, error: 'invalid room code' };
+  }
+  const dilemma = typeof a === 'string' && typeof b === 'string';
+  const single = typeof statement === 'string';
+  if (dilemma === single) {
+    return { ok: false, error: 'submit either a dilemma (a + b) or a statement' };
+  }
+  if (dilemma) {
+    const cleanA = stripControlChars(a as string).trim();
+    const cleanB = stripControlChars(b as string).trim();
+    if (
+      cleanA.length < 3 ||
+      cleanA.length > PROMPT_TEXT_MAX ||
+      cleanB.length < 3 ||
+      cleanB.length > PROMPT_TEXT_MAX
+    ) {
+      return { ok: false, error: `dilemma options must be 3–${PROMPT_TEXT_MAX} characters` };
+    }
+    return { ok: true, value: { roomCode, a: cleanA, b: cleanB } };
+  }
+  const cleanStatement = stripControlChars(statement as string).trim();
+  if (cleanStatement.length < 3 || cleanStatement.length > STATEMENT_TEXT_MAX) {
+    return {
+      ok: false,
+      error: `statement must be 3–${STATEMENT_TEXT_MAX} characters`,
+    };
+  }
+  return { ok: true, value: { roomCode, statement: cleanStatement } };
+}
