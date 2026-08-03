@@ -1,662 +1,5857 @@
 [
   {
     "name": "Banana Slicer Pro",
+    "searchTerm": "banana slicer",
     "emoji": "🍌",
     "description": "A curved blade that slices bananas perfectly. Yes, it is a real thing.",
-    "price": 12
-  },
-  {
-    "name": "Pet Rock 2.0",
-    "emoji": "🪨",
-    "description": "The original pet that never needs feeding, walking, or attention. Zero maintenance.",
-    "price": 20
+    "price": 12,
+    "image": "https://live.staticflickr.com/2853/13662310773_67ef4ab325_b.jpg",
+    "credit": {
+      "creator": "gruntzooki",
+      "license": "by-sa"
+    }
   },
   {
     "name": "Self-Stirring Coffee Mug",
+    "searchTerm": "coffee mug",
     "emoji": "☕",
-    "description": "A mug with a built-in motor that stirs your coffee while you scroll.",
-    "price": 25
-  },
-  {
-    "name": "Smart Water Bottle",
-    "emoji": "💧",
-    "description": "Tracks your hydration and glows when you have been slacking.",
-    "price": 45
-  },
-  {
-    "name": "Robot Vacuum",
-    "emoji": "🤖",
-    "description": "A roomba-style bot that fights dust bunnies while you nap.",
-    "price": 250
-  },
-  {
-    "name": "Espresso Machine",
-    "emoji": "☕",
-    "description": "Cafe-grade espresso at home, complete with steam wand and grinder.",
-    "price": 650
-  },
-  {
-    "name": "Mechanical Keyboard",
-    "emoji": "⌨️",
-    "description": "A clickety-clack keyboard with RGB lighting and satisfying switches.",
-    "price": 150
-  },
-  {
-    "name": "4K Smart TV",
-    "emoji": "📺",
-    "description": "A huge 4K screen that makes nature documentaries look unreal.",
-    "price": 900
-  },
-  {
-    "name": "Camera Drone",
-    "emoji": "🛸",
-    "description": "Flies, films, and makes the neighbors jealous from 400 feet up.",
-    "price": 500
-  },
-  {
-    "name": "Instant Camera",
-    "emoji": "📸",
-    "description": "Prints photos in 90 seconds; the retro filter is built in.",
-    "price": 80
-  },
-  {
-    "name": "Weighted Blanket",
-    "emoji": "🛏️",
-    "description": "A 20-pound hug for your bed that melts stress away.",
-    "price": 90
+    "description": "Your latte stirs itself while you stare into the void.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/8028/7106383471_8eabb5aafc_b.jpg",
+    "credit": {
+      "creator": "Steve A Johnson",
+      "license": "by"
+    }
   },
   {
     "name": "Air Fryer",
+    "searchTerm": "air fryer",
     "emoji": "🍟",
-    "description": "Fries things with 90% less oil and 100% more crunch.",
-    "price": 120
-  },
-  {
-    "name": "Stand Mixer",
-    "emoji": "🥣",
-    "description": "Whisks, kneads, and whips like a tiny kitchen beast.",
-    "price": 400
-  },
-  {
-    "name": "Electric Bike",
-    "emoji": "🚲",
-    "description": "A bicycle with a battery and a big grin for hills.",
-    "price": 1200
-  },
-  {
-    "name": "Designer Sunglasses",
-    "emoji": "🕶️",
-    "description": "Tiny plastic frames that cost more than a week of groceries.",
-    "price": 350
-  },
-  {
-    "name": "Smart Ring",
-    "emoji": "💍",
-    "description": "Tracks sleep, heart rate, and steps from your finger.",
-    "price": 300
-  },
-  {
-    "name": "Gaming Console",
-    "emoji": "🎮",
-    "description": "Plays 4K games and doubles as a streaming box.",
-    "price": 500
-  },
-  {
-    "name": "Luxury Fountain Pen",
-    "emoji": "🖋️",
-    "description": "A pen that makes your grocery list feel like poetry.",
-    "price": 180
-  },
-  {
-    "name": "Gold-Plated Paperclip",
-    "emoji": "📎",
-    "description": "A paperclip with more gold than your wedding ring.",
-    "price": 75
-  },
-  {
-    "name": "Diamond Toothpick",
-    "emoji": "🦷",
-    "description": "Pick your teeth in style; each pick has a tiny diamond.",
-    "price": 500
-  },
-  {
-    "name": "Self-Cleaning Bottle",
-    "emoji": "🍼",
-    "description": "UV light kills germs in your water bottle while you sip.",
-    "price": 60
-  },
-  {
-    "name": "Pizza Scissors",
-    "emoji": "🍕",
-    "description": "Scissors that cut pizza like a dream and snap shut with flair.",
-    "price": 20
-  },
-  {
-    "name": "Avocado Saver",
-    "emoji": "🥑",
-    "description": "Keeps your avocado green for days. Small green magic.",
-    "price": 10
-  },
-  {
-    "name": "Garlic Press",
-    "emoji": "🧄",
-    "description": "Crush garlic with one squeeze and no tears.",
-    "price": 18
-  },
-  {
-    "name": "Electric Wine Opener",
-    "emoji": "🍷",
-    "description": "Opens bottles with a satisfying whir; no muscles needed.",
-    "price": 40
-  },
-  {
-    "name": "Milk Frother",
-    "emoji": "🥛",
-    "description": "Whisks foamy milk for lattes in 30 seconds flat.",
-    "price": 35
-  },
-  {
-    "name": "Sous Vide Machine",
-    "emoji": "🍖",
-    "description": "Cooks steak to perfection in a water bath. Science for dinner.",
-    "price": 150
+    "description": "Fries without the oil, guilt without the calories.",
+    "price": 89,
+    "image": "https://live.staticflickr.com/941/42233412720_d37095b49b_b.jpg"
   },
   {
     "name": "Instant Pot",
+    "searchTerm": "instant pot",
     "emoji": "🍲",
-    "description": "A pressure cooker that does everything except taste the food.",
-    "price": 130
+    "description": "Pressure cooker, slow cooker, rice cooker, and more — all in one.",
+    "price": 99,
+    "image": "https://live.staticflickr.com/4317/35361506533_237d18d0d0_b.jpg",
+    "credit": {
+      "creator": "Stacy Spensley",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Stand Mixer",
+    "searchTerm": "stand mixer",
+    "emoji": "🥣",
+    "description": "The kitchen workhorse for serious bakers.",
+    "price": 299,
+    "image": "https://live.staticflickr.com/129/381448204_dc1dd5f1b8.jpg",
+    "credit": {
+      "creator": "Clean Wal-Mart",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Espresso Machine",
+    "searchTerm": "espresso machine",
+    "emoji": "☕",
+    "description": "Barista-level espresso without the barista attitude.",
+    "price": 129,
+    "image": "https://live.staticflickr.com/4138/4900544544_2a43a7bfb1_b.jpg",
+    "credit": {
+      "creator": "scanlime",
+      "license": "by-sa"
+    }
   },
   {
     "name": "Rice Cooker",
+    "searchTerm": "rice cooker",
     "emoji": "🍚",
-    "description": "Perfect rice every time; never burn dinner again.",
-    "price": 60
+    "description": "Perfect rice every time — foolproof.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/6132/5997801594_eaee376b4a_b.jpg",
+    "credit": {
+      "creator": "kalleboo",
+      "license": "by"
+    }
   },
   {
-    "name": "Meme Toaster",
-    "emoji": "🍞",
-    "description": "A toaster that displays memes on its screen while toasting.",
-    "price": 100
+    "name": "Electric Wine Opener",
+    "searchTerm": "wine opener",
+    "emoji": "🍷",
+    "description": "Corks pop with the press of a button.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/3342/4638740552_1bcc7676a8_b.jpg",
+    "credit": {
+      "creator": "quinn.anya",
+      "license": "by-sa"
+    }
   },
   {
-    "name": "Smart Mirror",
-    "emoji": "🪞",
-    "description": "Shows weather, workouts, and your tired face.",
-    "price": 1500
+    "name": "Milk Frother",
+    "searchTerm": "milk frother",
+    "emoji": "🥛",
+    "description": "Café-style foam for your home lattes.",
+    "price": 20,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Milk_frother_wand_battery_powered.jpg"
   },
   {
-    "name": "Treadmill Desk",
-    "emoji": "🏃",
-    "description": "Walk 10,000 steps while answering emails. Multi-tasking king.",
-    "price": 1200
-  },
-  {
-    "name": "Standing Desk",
-    "emoji": "🧍",
-    "description": "Sit, stand, repeat. Your back will thank you.",
-    "price": 500
-  },
-  {
-    "name": "Ergonomic Chair",
-    "emoji": "🪑",
-    "description": "A throne for your spine with proper lumbar support.",
-    "price": 800
-  },
-  {
-    "name": "Massage Gun",
-    "emoji": "💪",
-    "description": "Percussive therapy that beats sore muscles into submission.",
-    "price": 150
-  },
-  {
-    "name": "Ice Bath Tub",
-    "emoji": "🧊",
-    "description": "Cryotherapy at home; legs hate it, ego loves it.",
-    "price": 1000
-  },
-  {
-    "name": "Sauna Blanket",
-    "emoji": "🧖",
-    "description": "A sleeping bag that sweats toxins out of you.",
-    "price": 500
-  },
-  {
-    "name": "LED Face Mask",
-    "emoji": "✨",
-    "description": "Glows red and promises younger skin while you binge TV.",
-    "price": 350
-  },
-  {
-    "name": "Hair Dryer Brush",
-    "emoji": "💇",
-    "description": "Dries and styles hair in one swoosh.",
-    "price": 120
-  },
-  {
-    "name": "Smart Toothbrush",
-    "emoji": "🪥",
-    "description": "Brushing that grades you and judges your technique.",
-    "price": 80
-  },
-  {
-    "name": "Water Flosser",
-    "emoji": "💦",
-    "description": "A jet of water for your gums; dentists approve.",
-    "price": 70
-  },
-  {
-    "name": "Shower Speaker",
-    "emoji": "🚿",
-    "description": "A waterproof speaker that turns shower time into a concert.",
-    "price": 40
-  },
-  {
-    "name": "Smart Scale",
-    "emoji": "⚖️",
-    "description": "Weighs you and knows more about your body than you do.",
-    "price": 60
-  },
-  {
-    "name": "Fitness Tracker",
-    "emoji": "🏅",
-    "description": "Watches your steps and guilt-trips you about sleep.",
-    "price": 130
-  },
-  {
-    "name": "Smartwatch",
-    "emoji": "⌚",
-    "description": "A mini computer on your wrist that also tells time.",
-    "price": 400
-  },
-  {
-    "name": "Noise-Cancelling Headphones",
-    "emoji": "🎧",
-    "description": "Silence the world; hear only your podcast.",
-    "price": 350
-  },
-  {
-    "name": "Wireless Earbuds",
-    "emoji": "🎶",
-    "description": "Tiny earbuds with big bass and no wires to tangle.",
-    "price": 150
-  },
-  {
-    "name": "Vinyl Turntable",
-    "emoji": "📀",
-    "description": "Spins vinyl records with warm, crackly nostalgia.",
-    "price": 250
-  },
-  {
-    "name": "Bluetooth Speaker",
-    "emoji": "🔊",
-    "description": "A portable speaker that thumps hard for its size.",
-    "price": 120
-  },
-  {
-    "name": "Soundbar",
-    "emoji": "🎼",
-    "description": "Makes your TV sound like a movie theater.",
-    "price": 400
-  },
-  {
-    "name": "Mini Projector",
-    "emoji": "🎥",
-    "description": "Throws a 120-inch movie screen onto any wall.",
-    "price": 600
-  },
-  {
-    "name": "Smart Display",
-    "emoji": "🖥️",
-    "description": "A screen that answers questions and shows recipes.",
-    "price": 250
-  },
-  {
-    "name": "E-Reader",
-    "emoji": "📚",
-    "description": "Thousands of books in a device lighter than one paperback.",
-    "price": 150
-  },
-  {
-    "name": "Tablet",
-    "emoji": "📱",
-    "description": "A big phone that forgot how to make calls.",
-    "price": 500
-  },
-  {
-    "name": "Gaming Mouse",
-    "emoji": "🖱️",
-    "description": "A mouse with more buttons than your TV remote.",
-    "price": 100
-  },
-  {
-    "name": "Gaming Headset",
-    "emoji": "🕹️",
-    "description": "Hear footsteps, enemies, and your teammate's excuses.",
-    "price": 150
-  },
-  {
-    "name": "Graphics Card",
-    "emoji": "⚡",
-    "description": "Renders ray-traced pixels at 200 frames per second.",
-    "price": 700
-  },
-  {
-    "name": "External SSD",
-    "emoji": "💾",
-    "description": "Pocket-sized storage for your entire life's photos.",
-    "price": 120
-  },
-  {
-    "name": "USB-C Hub",
-    "emoji": "🔌",
-    "description": "Turns one port into twelve; cable chaos begins.",
-    "price": 80
-  },
-  {
-    "name": "Power Bank",
-    "emoji": "🔋",
-    "description": "Charges your phone twice; your luggage, never.",
-    "price": 50
-  },
-  {
-    "name": "Solar Charger",
-    "emoji": "☀️",
-    "description": "Charges gadgets with sunlight, weather permitting.",
-    "price": 90
-  },
-  {
-    "name": "Portable Monitor",
-    "emoji": "🖥️",
-    "description": "A second screen that folds into your backpack.",
-    "price": 200
-  },
-  {
-    "name": "Streaming Webcam",
-    "emoji": "📹",
-    "description": "Makes you look decent on Zoom with 4K magic.",
-    "price": 130
-  },
-  {
-    "name": "Ring Light",
-    "emoji": "💡",
-    "description": "Makes your selfies glow like a golden hour.",
-    "price": 60
-  },
-  {
-    "name": "Podcast Microphone",
-    "emoji": "🎙️",
-    "description": "A podcast-ready mic that makes your voice sound richer.",
-    "price": 120
-  },
-  {
-    "name": "Smart Plug",
-    "emoji": "🔌",
-    "description": "Turns dumb appliances into voice-controlled wonders.",
-    "price": 25
-  },
-  {
-    "name": "Smart Bulb",
-    "emoji": "💡",
-    "description": "A light bulb that changes color with your mood.",
-    "price": 30
-  },
-  {
-    "name": "Robot Lawn Mower",
-    "emoji": "🌿",
-    "description": "Mows the lawn while you watch from the couch.",
-    "price": 1100
-  },
-  {
-    "name": "Smart Lock",
-    "emoji": "🔐",
-    "description": "Your door opens with a fingerprint; keys become obsolete.",
-    "price": 250
-  },
-  {
-    "name": "Video Doorbell",
-    "emoji": "🚪",
-    "description": "See who rang the bell without leaving the couch.",
-    "price": 180
-  },
-  {
-    "name": "Security Camera",
-    "emoji": "📷",
-    "description": "Watches your driveway and judges the delivery guy.",
-    "price": 120
-  },
-  {
-    "name": "GPS Tracker",
-    "emoji": "🛰️",
-    "description": "Knows where your cat, car, or kid goes.",
-    "price": 60
-  },
-  {
-    "name": "Dash Cam",
-    "emoji": "🚗",
-    "description": "Records your drives; insurance companies love this.",
-    "price": 100
-  },
-  {
-    "name": "Car Vacuum",
-    "emoji": "🧹",
-    "description": "A tiny vacuum for the crumbs between the seats.",
-    "price": 60
-  },
-  {
-    "name": "Tire Inflator",
-    "emoji": "⚙️",
-    "description": "Pumps tires in minutes and saves you at gas stations.",
-    "price": 70
-  },
-  {
-    "name": "Jump Starter",
-    "emoji": "🔋",
-    "description": "A box that revives dead car batteries; roadside hero.",
-    "price": 130
-  },
-  {
-    "name": "Electric Scooter",
-    "emoji": "🛴",
-    "description": "Commute like a teenager, arrive like a boss.",
-    "price": 600
-  },
-  {
-    "name": "Longboard",
-    "emoji": "🛹",
-    "description": "A wooden board with wheels; your knees will remember.",
-    "price": 120
-  },
-  {
-    "name": "Onewheel",
-    "emoji": "🌀",
-    "description": "A single-wheeled electric board that looks like magic.",
-    "price": 1900
-  },
-  {
-    "name": "Electric Unicycle",
-    "emoji": "🛞",
-    "description": "One wheel, two feet, zero sense of balance required.",
-    "price": 900
-  },
-  {
-    "name": "Water Jetpack",
-    "emoji": "🌊",
-    "description": "Fly 30 feet above the water; scream accordingly.",
-    "price": 1500
-  },
-  {
-    "name": "Inflatable Paddleboard",
-    "emoji": "🏄",
-    "description": "Yoga on water; falls are part of the workout.",
-    "price": 350
-  },
-  {
-    "name": "Kayak",
-    "emoji": "🛶",
-    "description": "A boat you carry on your car roof and paddle yourself.",
-    "price": 500
-  },
-  {
-    "name": "Pop-Up Tent",
-    "emoji": "⛺",
-    "description": "A tent that assembles itself and looks at you smugly.",
-    "price": 150
-  },
-  {
-    "name": "Camping Stove",
-    "emoji": "🔥",
-    "description": "Boils water in minutes; gourmet camping awaits.",
-    "price": 80
-  },
-  {
-    "name": "Camping Hammock",
-    "emoji": "🌳",
-    "description": "A cloth bed between two trees; instant nap zone.",
-    "price": 60
-  },
-  {
-    "name": "Backyard Fire Pit",
-    "emoji": "🪵",
-    "description": "Backyard fire pit; s'mores season starts now.",
-    "price": 200
-  },
-  {
-    "name": "Smart Grill",
+    "name": "Sous Vide Machine",
+    "searchTerm": "sous vide",
     "emoji": "🥩",
-    "description": "Grills steaks via app; your phone is now a chef.",
-    "price": 700
-  },
-  {
-    "name": "Pizza Oven",
-    "emoji": "🍕",
-    "description": "800 degrees of wood-fired pizza glory in your backyard.",
-    "price": 500
+    "description": "Restaurant-perfect steak from a water bath.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/5553/14674745761_f5d9713b9a_b.jpg",
+    "credit": {
+      "creator": "mccun934",
+      "license": "by"
+    }
   },
   {
     "name": "Cold Brew Maker",
-    "emoji": "🫖",
-    "description": "Steeps cold coffee overnight; mornings get easier.",
-    "price": 50
+    "searchTerm": "cold brew coffee maker",
+    "emoji": "🥤",
+    "description": "Smooth, strong coffee without the heat.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/65535/50323353597_0a71a1d3df_b.jpg",
+    "credit": {
+      "creator": "coffee-rank",
+      "license": "by"
+    }
   },
   {
     "name": "Whistling Kettle",
-    "emoji": "♨️",
-    "description": "Whistles when water boils; classic kitchen soundtrack.",
-    "price": 40
+    "searchTerm": "tea kettle",
+    "emoji": "🫖",
+    "description": "Classic whistle, classic tea.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/7455/9222931286_bc493b4df6_b.jpg",
+    "credit": {
+      "creator": "CS Sharada Prasad",
+      "license": "by"
+    }
   },
   {
     "name": "Dutch Oven",
-    "emoji": "🥘",
-    "description": "A cast iron pot that makes stews taste like grandma's.",
-    "price": 150
+    "searchTerm": "dutch oven",
+    "emoji": "🍲",
+    "description": "The cast-iron legend of slow cooking.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/17/23366008_28b56a947e_b.jpg",
+    "credit": {
+      "creator": "saaby",
+      "license": "by-sa"
+    }
   },
   {
     "name": "Cast Iron Skillet",
+    "searchTerm": "cast iron skillet",
     "emoji": "🍳",
-    "description": "A heavy pan that lasts generations and builds arm muscle.",
-    "price": 60
+    "description": "Seasoned over decades, forever non-stick.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/5064/5679571063_93156e14a7_b.jpg",
+    "credit": {
+      "creator": "Stockton350",
+      "license": "by"
+    }
   },
   {
     "name": "Chef Knife Set",
+    "searchTerm": "chef knife set",
     "emoji": "🔪",
-    "description": "Sharp knives that make chopping feel cinematic.",
-    "price": 200
+    "description": "Six blades that make chopping feel like art.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/1342/5112860641_6cb101ee9c.jpg",
+    "credit": {
+      "creator": "Daniel-Latorre",
+      "license": "by"
+    }
   },
   {
     "name": "Cheese Board Set",
+    "searchTerm": "cheese board",
     "emoji": "🧀",
-    "description": "Everything you need for a fancy cheese night.",
-    "price": 70
+    "description": "Slate, knives, and a place for every wheel.",
+    "price": 55,
+    "image": "https://live.staticflickr.com/3306/5848067524_d9e7ed7b47_b.jpg",
+    "credit": {
+      "creator": "surprise truck",
+      "license": "by"
+    }
   },
   {
     "name": "Fondue Set",
-    "emoji": "🫕",
-    "description": "Melts cheese or chocolate; dip everything nearby.",
-    "price": 80
+    "searchTerm": "fondue set",
+    "emoji": "🧀",
+    "description": "Melted cheese is a personality trait.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/135/328790162_8eb6e26551_m.jpg",
+    "credit": {
+      "creator": "squarepants2004j/auntyhuia",
+      "license": "by-nd"
+    }
   },
   {
     "name": "Waffle Maker",
+    "searchTerm": "waffle maker",
     "emoji": "🧇",
-    "description": "Makes crispy waffles; Sundays become sacred.",
-    "price": 60
+    "description": "Crispy pockets for syrup and shame.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/1281/755118369_50ea9450f1_b.jpg",
+    "credit": {
+      "creator": "wEnDaLicious",
+      "license": "by-nd"
+    }
   },
   {
     "name": "Crepe Maker",
+    "searchTerm": "crepe pan",
     "emoji": "🥞",
-    "description": "Spreads batter into thin crepes; Paris at home.",
-    "price": 50
-  },
-  {
-    "name": "Burrito Blanket",
-    "emoji": "🌯",
-    "description": "A blanket shaped like a burrito; wrap yourself in carbs.",
-    "price": 40
+    "description": "Thin, French, and dangerously snackable.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/8503/8313972310_489271f3c2_b.jpg",
+    "credit": {
+      "creator": "RJL20",
+      "license": "by-sa"
+    }
   },
   {
     "name": "Sushi Kit",
+    "searchTerm": "sushi making kit",
     "emoji": "🍣",
-    "description": "Roll your own sushi; wasabi included, tears optional.",
-    "price": 45
+    "description": "Roll your own California dream.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/3793/12642734125_998d9971ab_b.jpg",
+    "credit": {
+      "creator": "tawalker",
+      "license": "by"
+    }
   },
   {
     "name": "Ramen Kit",
+    "searchTerm": "ramen bowl set",
     "emoji": "🍜",
-    "description": "Chef-level ramen in a box; slurp responsibly.",
-    "price": 60
+    "description": "Noodles, broth, and a dream.",
+    "price": 28,
+    "image": "https://live.staticflickr.com/3663/3548097403_b2366fc860_b.jpg",
+    "credit": {
+      "creator": "avlxyz",
+      "license": "by-sa"
+    }
   },
   {
     "name": "Popcorn Machine",
+    "searchTerm": "popcorn machine",
     "emoji": "🍿",
-    "description": "Movie-theater popcorn in your living room; butter warning.",
-    "price": 120
+    "description": "Movie-night theater energy at home.",
+    "price": 79,
+    "image": "https://live.staticflickr.com/3765/10604422184_6d9e1b40f3_b.jpg",
+    "credit": {
+      "creator": "liftarn",
+      "license": "by-sa"
+    }
   },
   {
     "name": "Cotton Candy Maker",
+    "searchTerm": "cotton candy machine",
     "emoji": "🍭",
-    "description": "A machine that turns sugar into pink clouds.",
-    "price": 90
+    "description": "Sugar spun into joy (and a mess).",
+    "price": 50,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Cotton_Candy_Machine.jpg",
+    "credit": {
+      "creator": "Salil Kumar Mukherjee",
+      "license": "by-sa"
+    }
   },
   {
     "name": "Soda Maker",
+    "searchTerm": "soda maker",
     "emoji": "🥤",
-    "description": "Carbonates tap water; the fizz never disappoints.",
-    "price": 130
+    "description": "Fizz on demand — skip the bottles.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/3126/3136394088_c3c69b7b71_b.jpg",
+    "credit": {
+      "creator": "jessicafm",
+      "license": "by-nd"
+    }
   },
   {
-    "name": "Mini Fridge",
-    "emoji": "🥶",
-    "description": "A tiny fridge for the bedroom; drinks within reach.",
-    "price": 150
+    "name": "Pizza Oven",
+    "searchTerm": "pizza oven",
+    "emoji": "🍕",
+    "description": "Wood-fired flavor in your backyard.",
+    "price": 199,
+    "image": "https://live.staticflickr.com/3880/15116779547_c46acfb39d_b.jpg",
+    "credit": {
+      "creator": "daryl_mitchell",
+      "license": "by-sa"
+    }
   },
   {
-    "name": "Wine Fridge",
-    "emoji": "🍇",
-    "description": "Stores wine at the perfect temperature; classy.",
-    "price": 300
+    "name": "Smart Grill",
+    "searchTerm": "smart grill",
+    "emoji": "🍖",
+    "description": "Wi-Fi steaks with app-controlled flames.",
+    "price": 249,
+    "image": "https://live.staticflickr.com/7294/8736284278_f5beaf9aab_b.jpg",
+    "credit": {
+      "creator": "Breville USA",
+      "license": "by"
+    }
   },
   {
-    "name": "Kegerator",
-    "emoji": "🍺",
-    "description": "A fridge that pours draft beer; party legend status.",
-    "price": 900
+    "name": "Pizza Scissors",
+    "searchTerm": "pizza cutter",
+    "emoji": "🍕",
+    "description": "Scissors designed for pizza. Genius.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/5293/5416991767_27a714d911_b.jpg",
+    "credit": {
+      "creator": "joebeone",
+      "license": "by"
+    }
   },
   {
-    "name": "Cocktail Smoker",
-    "emoji": "🍸",
-    "description": "Smokes cocktails with wood chips; speakeasy vibes.",
-    "price": 70
+    "name": "Avocado Saver",
+    "searchTerm": "avocado keeper",
+    "emoji": "🥑",
+    "description": "Keeps your avocado from browning. Science.",
+    "price": 10,
+    "image": "https://live.staticflickr.com/7192/27907298815_f8433fe266_b.jpg",
+    "credit": {
+      "creator": "Hopeisalot",
+      "license": "by-nd"
+    }
   },
   {
-    "name": "Ice Maker",
-    "emoji": "🧊",
-    "description": "Cubes on demand; the machine that never runs out.",
-    "price": 200
+    "name": "Garlic Press",
+    "searchTerm": "garlic press",
+    "emoji": "🧄",
+    "description": "Crush garlic without the tears.",
+    "price": 12,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Garlic_Press_and_Garlic.jpg",
+    "credit": {
+      "creator": "Lee Kindness",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Meme Toaster",
+    "searchTerm": "toaster",
+    "emoji": "🍞",
+    "description": "Toasts your bread and your humor.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/3345/3256234213_5bb74372d0_b.jpg",
+    "credit": {
+      "creator": "healthserviceglasses",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Electric Kettle",
+    "searchTerm": "electric kettle",
+    "emoji": "🫖",
+    "description": "Boils in seconds, not minutes.",
+    "price": 30,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Electric_kettle_-_%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%87%D0%B0%D0%B9%D0%BD%D0%B8%D0%BA.JPG",
+    "credit": {
+      "creator": "Schekinov Alexey Victorovich",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Blender",
+    "searchTerm": "blender",
+    "emoji": "🥤",
+    "description": "Smoothies, soups, and sauces.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/2060/1791683036_97bc35cfe4_b.jpg",
+    "credit": {
+      "creator": "gruntzooki",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Food Processor",
+    "searchTerm": "food processor",
+    "emoji": "🥕",
+    "description": "Chops, slices, and shreds on command.",
+    "price": 100,
+    "image": "https://live.staticflickr.com/3139/2491520745_98e83c797a_b.jpg",
+    "credit": {
+      "creator": "avlxyz",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Hand Mixer",
+    "searchTerm": "hand mixer",
+    "emoji": "🥄",
+    "description": "Whisking without the arm workout.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/4294/36081462381_6edcd52cd4_b.jpg"
+  },
+  {
+    "name": "Immersion Blender",
+    "searchTerm": "immersion blender",
+    "emoji": "🥣",
+    "description": "Blend soup right in the pot.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/4584/38748133621_621bf7c5c2_b.jpg"
+  },
+  {
+    "name": "Slow Cooker",
+    "searchTerm": "slow cooker",
+    "emoji": "🍲",
+    "description": "Set it in the morning, dinner by night.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/2696/4242316353_cec7f1f347_b.jpg",
+    "credit": {
+      "creator": "Jason Riedy",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Toaster Oven",
+    "searchTerm": "toaster oven",
+    "emoji": "🍞",
+    "description": "Small oven energy with toaster convenience.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/3247/3132856726_fd6281dc8f_b.jpg",
+    "credit": {
+      "creator": "Wallslide",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Microwave",
+    "searchTerm": "microwave oven",
+    "emoji": "🍱",
+    "description": "The 30-second hero of modern life.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/1011/613322022_7fe248c63a_b.jpg",
+    "credit": {
+      "creator": "Daniel M. Hendricks",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Electric Griddle",
+    "searchTerm": "electric griddle",
+    "emoji": "🥞",
+    "description": "Pancakes for a crowd, all at once.",
+    "price": 55,
+    "image": "https://live.staticflickr.com/5521/31136772771_b9b90db63b.jpg"
+  },
+  {
+    "name": "Induction Cooktop",
+    "searchTerm": "induction cooktop",
+    "emoji": "🔥",
+    "description": "Magnetic heat, instant control.",
+    "price": 140,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Induction_Cooktop_Rolling_Boil.jpg",
+    "credit": {
+      "creator": "Wtshymanski (talk).",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Burrito Blanket",
+    "searchTerm": "burrito blanket",
+    "emoji": "🌯",
+    "description": "Wrap yourself like the burrito you are.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/3126/2628242549_1d87252b9e_b.jpg",
+    "credit": {
+      "creator": "moonrat42",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Ice Cream Maker",
+    "searchTerm": "ice cream maker",
+    "emoji": "🍦",
+    "description": "Churn your own frozen joy.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/3664/3435906842_57a7e2b461.jpg",
+    "credit": {
+      "creator": "joyosity",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Popsicle Molds",
+    "searchTerm": "popsicle molds",
+    "emoji": "🍧",
+    "description": "Summer in a stick.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/2940/14709786542_3f6eb3bbd6_b.jpg",
+    "credit": {
+      "creator": "Didriks",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Donut Maker",
+    "searchTerm": "donut maker",
+    "emoji": "🍩",
+    "description": "Mini donuts in minutes.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/2592/4109476603_02deeb0718_b.jpg",
+    "credit": {
+      "creator": "Steve Snodgrass",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Chocolate Fountain",
+    "searchTerm": "chocolate fountain",
+    "emoji": "🍫",
+    "description": "A cascade of melted chocolate.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/45/143493187_b2fe14439c_b.jpg",
+    "credit": {
+      "creator": "Tracy Hunter",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Candy Thermometer",
+    "searchTerm": "candy thermometer",
+    "emoji": "🍬",
+    "description": "Precision sugar science.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/2616/4107689532_ab2c05198b_b.jpg",
+    "credit": {
+      "creator": "Veganbaking.net",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Kitchen Scale",
+    "searchTerm": "kitchen scale",
+    "emoji": "⚖️",
+    "description": "Baking is chemistry; weigh it.",
+    "price": 18,
+    "image": "https://live.staticflickr.com/2189/2484554920_1254f02abd_b.jpg",
+    "credit": {
+      "creator": "Marcus Jeffrey",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Meat Thermometer",
+    "searchTerm": "meat thermometer",
+    "emoji": "🌡️",
+    "description": "Perfect medium-rare, every time.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/65535/51373268133_a29d23cbef.jpg"
+  },
+  {
+    "name": "Spice Rack",
+    "searchTerm": "spice rack",
+    "emoji": "🧂",
+    "description": "Thirty jars of organized flavor.",
+    "price": 32,
+    "image": "https://live.staticflickr.com/7/7883554_6c82eac4a8.jpg",
+    "credit": {
+      "creator": "Ross Catrow",
+      "license": "by-sa"
+    }
   },
   {
     "name": "Salt Lamp",
+    "searchTerm": "salt lamp",
     "emoji": "🪔",
-    "description": "A glowing pink salt block; calm vibes guaranteed.",
-    "price": 50
+    "description": "Pink glow, allegedly calming.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/3189/2933799318_61dc0bffd3_b.jpg",
+    "credit": {
+      "creator": "thisisbossi",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Herb Garden Kit",
+    "searchTerm": "herb garden kit",
+    "emoji": "🌿",
+    "description": "Basil on your windowsill, chef.",
+    "price": 28,
+    "image": "https://live.staticflickr.com/8392/8680824947_6ee7db8040_b.jpg",
+    "credit": {
+      "creator": "missellyrh",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Espresso Grinder",
+    "searchTerm": "coffee grinder",
+    "emoji": "🫘",
+    "description": "Fresh grounds make better mornings.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/2420/1968636780_38de32abe3_b.jpg",
+    "credit": {
+      "creator": "AZRainman",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Pour-Over Set",
+    "searchTerm": "pour over coffee",
+    "emoji": "☕",
+    "description": "The slow, ritual way to caffeine.",
+    "price": 35,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/df/Manual_drip_%28pour-over%29_coffee.jpg"
+  },
+  {
+    "name": "French Press",
+    "searchTerm": "french press",
+    "emoji": "☕",
+    "description": "Bold coffee, minimal fuss.",
+    "price": 22,
+    "image": "https://live.staticflickr.com/8328/8106234908_856a360389_b.jpg",
+    "credit": {
+      "creator": "eschipul",
+      "license": "by"
+    }
+  },
+  {
+    "name": "AeroPress",
+    "searchTerm": "aeropress",
+    "emoji": "☕",
+    "description": "Travel coffee that tastes serious.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/556/20071545342_065ddac384_b.jpg"
+  },
+  {
+    "name": "Moka Pot",
+    "searchTerm": "moka pot",
+    "emoji": "☕",
+    "description": "Stovetop espresso, Italian style.",
+    "price": 28,
+    "image": "https://live.staticflickr.com/3508/3307977873_d21d000667_b.jpg",
+    "credit": {
+      "creator": "Anks",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Turkish Coffee Pot",
+    "searchTerm": "cezve",
+    "emoji": "☕",
+    "description": "Strong, foamy, and ancient.",
+    "price": 25,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Cezve_coffee_pot_in_a_small_coffee_shop_on_the_side_of_the_road..jpg",
+    "credit": {
+      "creator": "Michael Plutchok",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Tea Infuser Set",
+    "searchTerm": "tea infuser",
+    "emoji": "🍵",
+    "description": "Loose-leaf freedom.",
+    "price": 18,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Tea_infuser_01_Pengo.jpg",
+    "credit": {
+      "creator": "Pengo",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Matcha Whisk Set",
+    "searchTerm": "matcha whisk",
+    "emoji": "🍵",
+    "description": "Ceremonial-grade foam at home.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/65535/48132372757_ea96e7aa50_b.jpg",
+    "credit": {
+      "creator": "bonjour_de_y5i",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Omelette Pan",
+    "searchTerm": "frying pan",
+    "emoji": "🍳",
+    "description": "Non-stick eggs, perfectly folded.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/3297/4565041679_d63ef772af_b.jpg",
+    "credit": {
+      "creator": "kevin dooley",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Wok",
+    "searchTerm": "wok",
+    "emoji": "🥘",
+    "description": "High heat, big flavor.",
+    "price": 48,
+    "image": "https://live.staticflickr.com/149/354708507_d285ecf00f.jpg",
+    "credit": {
+      "creator": "oskay",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Baking Sheet Set",
+    "searchTerm": "baking sheet",
+    "emoji": "🍪",
+    "description": "The cookie canvas.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/3486/5806440171_188cb40e78_b.jpg",
+    "credit": {
+      "creator": "steph-uh-nini",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Cupcake Pan",
+    "searchTerm": "cupcake pan",
+    "emoji": "🧁",
+    "description": "Twelve chances at frosting glory.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/5187/5657771908_48d1029f07_b.jpg",
+    "credit": {
+      "creator": "The Recipe Drawer",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Springform Pan",
+    "searchTerm": "springform pan",
+    "emoji": "🍰",
+    "description": "Cheesecake without the struggle.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/8672/15736482349_ba3cc7ca67_b.jpg",
+    "credit": {
+      "creator": "Wilson Hui",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Bundt Pan",
+    "searchTerm": "bundt pan",
+    "emoji": "🍩",
+    "description": "Ridges for extra glaze.",
+    "price": 22,
+    "image": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvYTAxOS1qYWt1YmstMDIxOS1idW5kdC1wYW4xLmpwZw.jpg"
+  },
+  {
+    "name": "Pie Dish",
+    "searchTerm": "pie dish",
+    "emoji": "🥧",
+    "description": "Crusts crisp, fillings shine.",
+    "price": 18,
+    "image": "https://live.staticflickr.com/3082/3221023937_7fb4cfbf5e_b.jpg",
+    "credit": {
+      "creator": "jeans_Photos",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Rolling Pin",
+    "searchTerm": "rolling pin",
+    "emoji": "🥖",
+    "description": "Dough flattened since forever.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/3795/11412101665_e2b1d34d8a_b.jpg",
+    "credit": {
+      "creator": "m01229",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Pastry Brush",
+    "searchTerm": "pastry brush",
+    "emoji": "🥐",
+    "description": "Butter on everything.",
+    "price": 8,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/47/Pastry_brush_%2850704250402%29.jpg",
+    "credit": {
+      "creator": "Karon Elliott Edleson from La Quinta, CA, USA",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Pizza Stone",
+    "searchTerm": "pizza stone",
+    "emoji": "🍕",
+    "description": "Crispy crust science.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/5116/7155024316_9036d7a218_b.jpg",
+    "credit": {
+      "creator": "Tatiana12",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Ravioli Maker",
+    "searchTerm": "ravioli maker",
+    "emoji": "🥟",
+    "description": "Pasta pockets, homemade.",
+    "price": 18,
+    "image": "https://live.staticflickr.com/46/155952253_f2d7f96e83.jpg",
+    "credit": {
+      "creator": "tokyofoodcast",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Pasta Machine",
+    "searchTerm": "pasta maker",
+    "emoji": "🍝",
+    "description": "Fresh fettuccine from flour and eggs.",
+    "price": 75,
+    "image": "https://live.staticflickr.com/21/89061660_d7dd26d3a6.jpg",
+    "credit": {
+      "creator": "mwilkie",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Mandoline Slicer",
+    "searchTerm": "mandoline slicer",
+    "emoji": "🥒",
+    "description": "Paper-thin everything (careful with fingers).",
+    "price": 25,
+    "image": "https://live.staticflickr.com/3535/3192373086_8fda651eae_b.jpg",
+    "credit": {
+      "creator": "David Blaine",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Vegetable Spiralizer",
+    "searchTerm": "spiralizer",
+    "emoji": "🥕",
+    "description": "Zoodles for days.",
+    "price": 22,
+    "image": "https://live.staticflickr.com/4445/37157935813_800908a825_b.jpg"
+  },
+  {
+    "name": "Egg Slicer",
+    "searchTerm": "egg slicer",
+    "emoji": "🥚",
+    "description": "Perfect egg rounds for sandwiches.",
+    "price": 8,
+    "image": "https://live.staticflickr.com/2/1548733_4a48651b8b.jpg",
+    "credit": {
+      "creator": "fotogail",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Butter Crock",
+    "searchTerm": "butter dish",
+    "emoji": "🧈",
+    "description": "Spreadable butter, no fridge drama.",
+    "price": 15,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Butter_dish.jpg",
+    "credit": {
+      "creator": "The Digital Pimp",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Honey Dipper",
+    "searchTerm": "honey dipper",
+    "emoji": "🍯",
+    "description": "The OG honey tool.",
+    "price": 9,
+    "image": "https://live.staticflickr.com/5140/5536064349_842deff828_b.jpg",
+    "credit": {
+      "creator": "Thien Gretchen",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Olive Oil Dispenser",
+    "searchTerm": "oil dispenser",
+    "emoji": "🫒",
+    "description": "Drizzle with class.",
+    "price": 18,
+    "image": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L3BkMjMzLW1hc3Rlcm1yZzAyMTAyMTE2LmpwZw.jpg"
+  },
+  {
+    "name": "Sushi Mat",
+    "searchTerm": "sushi mat",
+    "emoji": "🍣",
+    "description": "Bamboo rolling essential.",
+    "price": 10,
+    "image": "https://live.staticflickr.com/551/19551596006_930c453ec0_b.jpg",
+    "credit": {
+      "creator": "insatiablemunch",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Rice Washer",
+    "searchTerm": "rice colander",
+    "emoji": "🍚",
+    "description": "Rinse rice like a pro.",
+    "price": 12,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Malaysian_Chinese_fried_rice.jpg",
+    "credit": {
+      "creator": "Lilblackdog29",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Steamer Basket",
+    "searchTerm": "steamer basket",
+    "emoji": "🥦",
+    "description": "Healthy vegetables, steam-powered.",
+    "price": 14,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/55/Yellow_dim_sum_in_steamer_basket.jpg"
+  },
+  {
+    "name": "Colander Set",
+    "searchTerm": "colander",
+    "emoji": "🍝",
+    "description": "Strain everything.",
+    "price": 16,
+    "image": "https://live.staticflickr.com/44/190418664_eaf11e7a62_b.jpg",
+    "credit": {
+      "creator": "Dano",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Measuring Cup Set",
+    "searchTerm": "measuring cups",
+    "emoji": "🥛",
+    "description": "Precision in glass and plastic.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/8388/8560786322_f3d0c031b9_b.jpg",
+    "credit": {
+      "creator": "HomeSpot HQ",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Mixing Bowl Set",
+    "searchTerm": "mixing bowls",
+    "emoji": "🥣",
+    "description": "Nesting bowls for every batter.",
+    "price": 25,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/27/Mixing_Bowl.jpg",
+    "credit": {
+      "creator": "Donovan Govan.",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Cutting Board Set",
+    "searchTerm": "cutting board",
+    "emoji": "🔪",
+    "description": "Wooden boards that age like fine wine.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/2884/9304466280_76c46a5dfa_b.jpg",
+    "credit": {
+      "creator": "rgirardin",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Knife Sharpener",
+    "searchTerm": "knife sharpener",
+    "emoji": "🗡️",
+    "description": "Keep those blades mean.",
+    "price": 18,
+    "image": "https://live.staticflickr.com/8200/8266946786_890bece9d3_b.jpg",
+    "credit": {
+      "creator": "Jonathan Kos-Read",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Pepper Mill",
+    "searchTerm": "pepper mill",
+    "emoji": "🌶️",
+    "description": "Fresh-cracked everything.",
+    "price": 22,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/00/Peugeot_pepper_mill.jpg",
+    "credit": {
+      "creator": "Sebastian Koppehel",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Salt Cellar",
+    "searchTerm": "salt cellar",
+    "emoji": "🧂",
+    "description": "Pinch-friendly salt, chef-style.",
+    "price": 12,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/00/Lopez_Elephant_with_salt_cellar_01.jpg"
+  },
+  {
+    "name": "Gravy Separator",
+    "searchTerm": "gravy separator",
+    "emoji": "🍗",
+    "description": "Fat-free gravy, magically.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/4080/4924169317_057b317925_b.jpg",
+    "credit": {
+      "creator": "Brian Rinker Creative",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Citrus Juicer",
+    "searchTerm": "citrus juicer",
+    "emoji": "🍊",
+    "description": "Fresh OJ without the pulp wars.",
+    "price": 15,
+    "image": "https://cdn.thingiverse.com/renders/47/8c/68/6f/f1/4cc93db32f7f5b0ece14cf38bbc544ae_display_large.jpg"
+  },
+  {
+    "name": "Watermelon Slicer",
+    "searchTerm": "watermelon cutter",
+    "emoji": "🍉",
+    "description": "Cubes of watermelon in one push.",
+    "price": 15,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Watermelon_Windmill_Cutter.jpg",
+    "credit": {
+      "creator": "Napo 12345",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Corn Holder Set",
+    "searchTerm": "corn holders",
+    "emoji": "🌽",
+    "description": "Butter without burned fingers.",
+    "price": 7,
+    "image": "https://live.staticflickr.com/4481/36916543523_5c2a3765d5_b.jpg",
+    "credit": {
+      "creator": "Judy Gallagher",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Lobster Crackers",
+    "searchTerm": "lobster cracker",
+    "emoji": "🦞",
+    "description": "Crack into the good stuff.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/65535/54144587248_049a64bb11_b.jpg"
+  },
+  {
+    "name": "Oyster Knife",
+    "searchTerm": "oyster knife",
+    "emoji": "🦪",
+    "description": "Shuck like a pro.",
+    "price": 14,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Oyster_knife_DSC09237.jpg",
+    "credit": {
+      "creator": null,
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Crab Mallet",
+    "searchTerm": "seafood mallet",
+    "emoji": "🦀",
+    "description": "Crack crabs with confidence.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/3229/2972301042_fe01f94f8f_b.jpg",
+    "credit": {
+      "creator": "Tony Weeg Photography",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Fondue Pot",
+    "searchTerm": "fondue pot",
+    "emoji": "🍫",
+    "description": "Melt, dip, repeat.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/2564/4058391179_af9c74c21d_b.jpg",
+    "credit": {
+      "creator": "moonlightbulb",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Raclette Grill",
+    "searchTerm": "raclette grill",
+    "emoji": "🧀",
+    "description": "Melted cheese table-side.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/2205/2433070633_eae5baaf8e_b.jpg",
+    "credit": {
+      "creator": "WordRidden",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Taco Holder",
+    "searchTerm": "taco holder",
+    "emoji": "🌮",
+    "description": "Tacos that stand tall.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/3669/9869469495_f147cc15ce_m.jpg"
+  },
+  {
+    "name": "Burger Press",
+    "searchTerm": "burger press",
+    "emoji": "🍔",
+    "description": "Perfectly round patties.",
+    "price": 15,
+    "image": "https://cdn.thingiverse.com/renders/d8/e6/7d/36/d4/57f312213586f4db5ce062b65d8a6737_display_large.jpg"
+  },
+  {
+    "name": "Hot Dog Roller",
+    "searchTerm": "hot dog roller",
+    "emoji": "🌭",
+    "description": "Convenience-store energy at home.",
+    "price": 70,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/26/TheUpsideDownCycloneRollerCoaster_HopeLourieKillcoyne.jpg",
+    "credit": {
+      "creator": "Hope Lourie Killcoyne",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Nacho Cheese Dispenser",
+    "searchTerm": "nachos",
+    "emoji": "🧀",
+    "description": "Game-day cheese, pumped.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/44/169945568_1555927a09_b.jpg",
+    "credit": {
+      "creator": "Navin75",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Bubble Tea Kit",
+    "searchTerm": "bubble tea set",
+    "emoji": "🧋",
+    "description": "Boba at home.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/5454/9139637124_21ebff4189_b.jpg",
+    "credit": {
+      "creator": "joyosity",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Cotton Candy Cones",
+    "searchTerm": "cotton candy",
+    "emoji": "🍭",
+    "description": "Cone-shaped sugar delivery.",
+    "price": 10,
+    "image": "https://live.staticflickr.com/3771/10150370396_a7166eaf9e_b.jpg"
+  },
+  {
+    "name": "Pretzel Maker",
+    "searchTerm": "pretzel",
+    "emoji": "🥨",
+    "description": "Twist your own soft pretzels.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/188/430597666_6bc05543eb_b.jpg",
+    "credit": {
+      "creator": "j.reed",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Corn Dog Maker",
+    "searchTerm": "corn dog",
+    "emoji": "🌭",
+    "description": "State-fair corn dogs at home.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/2156/2313038291_a29df5261d_b.jpg",
+    "credit": {
+      "creator": "IntangibleArts",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Mini Waffle Maker",
+    "searchTerm": "mini waffle maker",
+    "emoji": "🧇",
+    "description": "Bite-size waffles.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/1406/5183170213_62d4a7cda2_b.jpg",
+    "credit": {
+      "creator": "hudson",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Pancake Pen",
+    "searchTerm": "pancake batter dispenser",
+    "emoji": "🥞",
+    "description": "Draw your breakfast.",
+    "price": 12
+  },
+  {
+    "name": "Egg Poacher",
+    "searchTerm": "egg poacher",
+    "emoji": "🥚",
+    "description": "Perfect poached eggs, no vortex.",
+    "price": 18,
+    "image": "https://live.staticflickr.com/8094/8575994629_f129d0248e_b.jpg",
+    "credit": {
+      "creator": "afromusing",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Omelette Maker",
+    "searchTerm": "omelette maker",
+    "emoji": "🍳",
+    "description": "Folded eggs on autopilot.",
+    "price": 22,
+    "image": "https://live.staticflickr.com/3934/32643328183_2c23af44b0_b.jpg",
+    "credit": {
+      "creator": "randal-schwartz",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Breakfast Sandwich Maker",
+    "searchTerm": "breakfast sandwich",
+    "emoji": "🥪",
+    "description": "Egg, cheese, bagel — assembled.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/6132/6010096676_527639b2bd_b.jpg",
+    "credit": {
+      "creator": "Calgary Reviews",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Coffee Cup Warmer",
+    "searchTerm": "coffee warmer",
+    "emoji": "☕",
+    "description": "Never drink cold coffee again.",
+    "price": 18,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Coffee_Warmer_Pump_Jar_Filled_With_Coffee.jpg"
+  },
+  {
+    "name": "Charcuterie Board",
+    "searchTerm": "charcuterie board",
+    "emoji": "🧀",
+    "description": "Boards, meats, cheeses, spread.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/65535/51739861901_f481bf72ec_b.jpg"
+  },
+  {
+    "name": "Wine Aerator",
+    "searchTerm": "wine aerator",
+    "emoji": "🍷",
+    "description": "Breathe, wine, breathe.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/5178/5449391385_6073a4f795_m.jpg",
+    "credit": {
+      "creator": "Upstate Options Magazine",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Corkscrew Set",
+    "searchTerm": "corkscrew",
+    "emoji": "🍷",
+    "description": "The sommelier essential.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/2163/2451938096_5a2d42f263_b.jpg",
+    "credit": {
+      "creator": "kevin dooley",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Beer Growler",
+    "searchTerm": "beer growler",
+    "emoji": "🍺",
+    "description": "Fresh draft to go.",
+    "price": 22,
+    "image": "https://live.staticflickr.com/309/18496099018_538f0f9a99_b.jpg",
+    "credit": {
+      "creator": "PersonalCreations.com",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Kegerator",
+    "searchTerm": "kegerator",
+    "emoji": "🍺",
+    "description": "Draft beer at home, on tap.",
+    "price": 399,
+    "image": "https://live.staticflickr.com/3598/5749083494_a6a976c379_b.jpg",
+    "credit": {
+      "creator": "kvanhorn",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Cocktail Smoker",
+    "searchTerm": "cocktail smoker",
+    "emoji": "🍸",
+    "description": "Smoky old fashioneds.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/3753/14126354490_3bbe2eceed.jpg",
+    "credit": {
+      "creator": "wjarrettc",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Ice Maker",
+    "searchTerm": "ice maker",
+    "emoji": "🧊",
+    "description": "Craft ice on demand.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/3614/3693259680_5e591e553d_b.jpg",
+    "credit": {
+      "creator": "JD Hancock",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Ice Crusher",
+    "searchTerm": "ice crusher",
+    "emoji": "🧊",
+    "description": "Crushed ice for tiki nights.",
+    "price": 25,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/Ice-crusher-plastic.jpg"
+  },
+  {
+    "name": "Moscow Mule Mug Set",
+    "searchTerm": "copper mugs",
+    "emoji": "🥃",
+    "description": "Copper mugs, ice-cold.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/768/21150478925_7ae4e5ccef.jpg",
+    "credit": {
+      "creator": "amseaman",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Shot Glass Set",
+    "searchTerm": "shot glasses",
+    "emoji": "🥃",
+    "description": "Six glasses for the crew.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/3518/3706977893_5ba033e191_b.jpg",
+    "credit": {
+      "creator": "Counselman Collection",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Wine Glass Set",
+    "searchTerm": "wine glasses",
+    "emoji": "🍷",
+    "description": "Stemware for the good nights.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/7164/6688242745_2ecb4f400b_b.jpg",
+    "credit": {
+      "creator": "Arizona Parrot",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Champagne Flutes",
+    "searchTerm": "champagne flute",
+    "emoji": "🥂",
+    "description": "For the bubbles.",
+    "price": 32,
+    "image": "https://live.staticflickr.com/2727/4210681918_fe3f277160_b.jpg",
+    "credit": {
+      "creator": "ohsarahrose",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Cocktail Shaker",
+    "searchTerm": "cocktail shaker",
+    "emoji": "🍸",
+    "description": "Shaken, not stirred.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/147/387823564_938dc6b2e6_b.jpg",
+    "credit": {
+      "creator": "Ben Sutherland",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Jigger Set",
+    "searchTerm": "jigger",
+    "emoji": "🥃",
+    "description": "Measure twice, pour once.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/4089/5050545620_70149f2675_b.jpg",
+    "credit": {
+      "creator": "Moving Mountains Trust",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Muddler",
+    "searchTerm": "muddler",
+    "emoji": "🌿",
+    "description": "Mint, crushed, aromatic.",
+    "price": 10,
+    "image": "https://live.staticflickr.com/3631/3511505812_5b1a3525d2.jpg",
+    "credit": {
+      "creator": "nilsrinaldi",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Bar Spoon",
+    "searchTerm": "bar spoon",
+    "emoji": "🥄",
+    "description": "Long spoons, layered drinks.",
+    "price": 8,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Bar_spoon_pestle.jpeg",
+    "credit": {
+      "creator": "Malkoitrek H2O",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Strainer",
+    "searchTerm": "cocktail strainer",
+    "emoji": "🍹",
+    "description": "Ice-free pours.",
+    "price": 10,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Cocktail-strainer.jpg",
+    "credit": {
+      "creator": "MyName (Melikamp)",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Tiki Mug",
+    "searchTerm": "tiki mug",
+    "emoji": "🍹",
+    "description": "Drink out of a volcano.",
+    "price": 18,
+    "image": "https://live.staticflickr.com/7437/9567829842_93a4a29afc_b.jpg",
+    "credit": {
+      "creator": "Sam Howzit",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Mason Jar Set",
+    "searchTerm": "mason jars",
+    "emoji": "🫙",
+    "description": "Everything tastes better in a jar.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/2897/14288656071_c79eb84b4b_b.jpg",
+    "credit": {
+      "creator": "goblinbox_(queen_of_ad_hoc_bento)",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Smart Water Bottle",
+    "searchTerm": "smart water bottle",
+    "emoji": "💧",
+    "description": "Tracks your sips and glows when thirsty.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/4621/39677425191_8b2bd2cf1b_b.jpg",
+    "credit": {
+      "creator": "Ron of the Desert",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Robot Vacuum",
+    "searchTerm": "robot vacuum",
+    "emoji": "🤖",
+    "description": "Your floors clean themselves. Almost.",
+    "price": 199,
+    "image": "https://live.staticflickr.com/55/176405578_af036446cf_b.jpg",
+    "credit": {
+      "creator": "Kai Hendry",
+      "license": "by"
+    }
+  },
+  {
+    "name": "4K Smart TV",
+    "searchTerm": "smart tv",
+    "emoji": "📺",
+    "description": "Big, bright, and streaming.",
+    "price": 450,
+    "image": "https://live.staticflickr.com/7248/6946705142_94d146a68e.jpg",
+    "credit": {
+      "creator": "paz.ca",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Camera Drone",
+    "searchTerm": "drone",
+    "emoji": "🚁",
+    "description": "Aerial footage from your pocket.",
+    "price": 350,
+    "image": "https://live.staticflickr.com/2838/9338567239_d52dd7c257_b.jpg",
+    "credit": {
+      "creator": "Chris Hunkeler",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Instant Camera",
+    "searchTerm": "instant camera",
+    "emoji": "📷",
+    "description": "Photos that develop in your hand.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/7722/17083871137_9cd7bcbc1d_b.jpg",
+    "credit": {
+      "creator": "HighTechDad",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Mechanical Keyboard",
+    "searchTerm": "mechanical keyboard",
+    "emoji": "⌨️",
+    "description": "Clickety-clack heaven.",
+    "price": 110
+  },
+  {
+    "name": "Gaming Console",
+    "searchTerm": "gaming console",
+    "emoji": "🎮",
+    "description": "The family argument center.",
+    "price": 499,
+    "image": "https://live.staticflickr.com/2917/14482782276_36c92ea5ed_b.jpg",
+    "credit": {
+      "creator": "iluvs1udk",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Luxury Fountain Pen",
+    "searchTerm": "fountain pen",
+    "emoji": "🖋️",
+    "description": "Write like it is 1950.",
+    "price": 65,
+    "image": "https://live.staticflickr.com/7201/6943896489_c58e3612ec_b.jpg",
+    "credit": {
+      "creator": "rmhowie",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Gold-Plated Paperclip",
+    "searchTerm": "gold paperclip",
+    "emoji": "📎",
+    "description": "Fancy office supply.",
+    "price": 89,
+    "image": "https://live.staticflickr.com/1100/1389849058_837ad09a38_b.jpg",
+    "credit": {
+      "creator": "williac",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Diamond Toothpick",
+    "searchTerm": "toothpick",
+    "emoji": "🦷",
+    "description": "Dental floss? Never heard of her.",
+    "price": 75,
+    "image": "https://live.staticflickr.com/4144/5012559212_122dccfc72_b.jpg"
+  },
+  {
+    "name": "Self-Cleaning Bottle",
+    "searchTerm": "self cleaning water bottle",
+    "emoji": "🫙",
+    "description": "UV light scrubs your water bottle.",
+    "price": 45,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7d/LARQ_Water_Purification_Bottle_01.jpg",
+    "credit": {
+      "creator": "Elainee28",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Smart Mirror",
+    "searchTerm": "smart mirror",
+    "emoji": "🪞",
+    "description": "Weather, news, and your reflection.",
+    "price": 249,
+    "image": "https://live.staticflickr.com/5653/22091860708_7c0b9906c9_b.jpg",
+    "credit": {
+      "creator": "OKF DE",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Treadmill Desk",
+    "searchTerm": "treadmill desk",
+    "emoji": "🏃",
+    "description": "Walk and work. Multitasking.",
+    "price": 350,
+    "image": "https://live.staticflickr.com/2233/2120817721_bbaa518486.jpg",
+    "credit": {
+      "creator": "Joe Hoover",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Standing Desk",
+    "searchTerm": "standing desk",
+    "emoji": "🖥️",
+    "description": "Sit, stand, repeat.",
+    "price": 220,
+    "image": "https://live.staticflickr.com/8404/8682730703_7df742687a_b.jpg",
+    "credit": {
+      "creator": "juhansonin",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Ergonomic Chair",
+    "searchTerm": "office chair",
+    "emoji": "🪑",
+    "description": "Your back will thank you.",
+    "price": 180,
+    "image": "https://live.staticflickr.com/2712/4272145651_6b8cd01f7d_b.jpg",
+    "credit": {
+      "creator": "Horia Varlan",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Smart Ring",
+    "searchTerm": "smart ring",
+    "emoji": "💍",
+    "description": "A fitness tracker that fits on a finger.",
+    "price": 250,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Smart_Ring.jpg",
+    "credit": {
+      "creator": "Shidosuru",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "LED Face Mask",
+    "searchTerm": "led face mask",
+    "emoji": "😷",
+    "description": "Glow like a sci-fi villain.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/65535/49069510906_8ecd6013e3.jpg"
+  },
+  {
+    "name": "Hair Dryer Brush",
+    "searchTerm": "hair dryer brush",
+    "emoji": "💇",
+    "description": "Blow-dry and style in one.",
+    "price": 45
+  },
+  {
+    "name": "Smart Toothbrush",
+    "searchTerm": "electric toothbrush",
+    "emoji": "🪥",
+    "description": "Brushing data, tracked.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/7294/11694299396_930ce789e7_b.jpg",
+    "credit": {
+      "creator": "wwarby",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Water Flosser",
+    "searchTerm": "water flosser",
+    "emoji": "💦",
+    "description": "Pressurized flossing.",
+    "price": 35,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Water_Flosser.jpg"
+  },
+  {
+    "name": "Shower Speaker",
+    "searchTerm": "waterproof speaker",
+    "emoji": "🚿",
+    "description": "Sing in the shower, amplified.",
+    "price": 30,
+    "image": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L2JzNDM0LWltYWdlLmpwZw.jpg"
+  },
+  {
+    "name": "Smart Scale",
+    "searchTerm": "smart scale",
+    "emoji": "⚖️",
+    "description": "Weighs you and judges quietly.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/65535/48169309732_a50c0cb46f_b.jpg",
+    "credit": {
+      "creator": "masatsu",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Fitness Tracker",
+    "searchTerm": "fitness tracker",
+    "emoji": "⌚",
+    "description": "Steps, sleep, and streaks.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/3828/9614727702_a5213e2564.jpg",
+    "credit": {
+      "creator": "bjoern",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Smartwatch",
+    "searchTerm": "smartwatch",
+    "emoji": "⌚",
+    "description": "Your wrist's new best friend.",
+    "price": 180,
+    "image": "https://live.staticflickr.com/3790/13467474815_be54810773_b.jpg",
+    "credit": {
+      "creator": "Janitors",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Noise-Cancelling Headphones",
+    "searchTerm": "noise cancelling headphones",
+    "emoji": "🎧",
+    "description": "Silence, please.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/4041/4464206959_c5915f875f_b.jpg",
+    "credit": {
+      "creator": "Karen V Bryan",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Wireless Earbuds",
+    "searchTerm": "wireless earbuds",
+    "emoji": "🎧",
+    "description": "Cord-free listening.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/65535/49865018457_72a2189f93_b.jpg"
+  },
+  {
+    "name": "Vinyl Turntable",
+    "searchTerm": "turntable",
+    "emoji": "💿",
+    "description": "Warm analog sound.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/44/193537822_486fefff92.jpg",
+    "credit": {
+      "creator": "b E k",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Bluetooth Speaker",
+    "searchTerm": "bluetooth speaker",
+    "emoji": "🔊",
+    "description": "Party in a cylinder.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/4010/4526602816_7c44716609_b.jpg",
+    "credit": {
+      "creator": "osde8info",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Soundbar",
+    "searchTerm": "soundbar",
+    "emoji": "🔉",
+    "description": "TV audio that finally hits.",
+    "price": 120,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Philips_Soundbar_with_Ambisound_HTS9140_front.jpg",
+    "credit": {
+      "creator": "Philips Communications",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Mini Projector",
+    "searchTerm": "projector",
+    "emoji": "🎥",
+    "description": "Movie night on any wall.",
+    "price": 140,
+    "image": "https://live.staticflickr.com/2756/4316098828_037eb8788a_b.jpg",
+    "credit": {
+      "creator": "William Hook",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Smart Display",
+    "searchTerm": "smart display",
+    "emoji": "🖥️",
+    "description": "A tablet that lives in the kitchen.",
+    "price": 130,
+    "image": "https://live.staticflickr.com/6105/6375075785_2e95542348_b.jpg",
+    "credit": {
+      "creator": "InSapphoWeTrust",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "E-Reader",
+    "searchTerm": "e-reader",
+    "emoji": "📚",
+    "description": "A library in your bag.",
+    "price": 110,
+    "image": "https://live.staticflickr.com/2694/4253077751_251ef90f5b_b.jpg",
+    "credit": {
+      "creator": "ceslava.com",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Tablet",
+    "searchTerm": "tablet",
+    "emoji": "📱",
+    "description": "The in-between device.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/8334/8121770037_ffd68eb46b_b.jpg",
+    "credit": {
+      "creator": "Intel in Deutschland",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Gaming Mouse",
+    "searchTerm": "gaming mouse",
+    "emoji": "🖱️",
+    "description": "RGB-lit precision.",
+    "price": 55,
+    "image": "https://live.staticflickr.com/4096/4777334208_bbd8bd6c33_m.jpg",
+    "credit": {
+      "creator": "gcg2009",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Gaming Headset",
+    "searchTerm": "gaming headset",
+    "emoji": "🎙️",
+    "description": "Hear footsteps, chat with friends.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/65535/49063985346_7895cbd92a.jpg"
+  },
+  {
+    "name": "Graphics Card",
+    "searchTerm": "graphics card",
+    "emoji": "🖥️",
+    "description": "Frames per second.",
+    "price": 600
+  },
+  {
+    "name": "External SSD",
+    "searchTerm": "external ssd",
+    "emoji": "💾",
+    "description": "Storage that keeps up.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/3778/9527615376_b6d56596cd_b.jpg",
+    "credit": {
+      "creator": "sridgway",
+      "license": "by"
+    }
+  },
+  {
+    "name": "USB-C Hub",
+    "searchTerm": "usb hub",
+    "emoji": "🔌",
+    "description": "Ports for days.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/4016/4367289690_37472a3107_b.jpg"
+  },
+  {
+    "name": "Power Bank",
+    "searchTerm": "power bank",
+    "emoji": "🔋",
+    "description": "Juice for the go.",
+    "price": 40,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/75/Portable_power_bank.jpg",
+    "credit": {
+      "creator": "Santeri Viinamäki",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Solar Charger",
+    "searchTerm": "solar charger",
+    "emoji": "🔆",
+    "description": "Charge from the sun.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/3868/14676487111_86e3d70288_b.jpg",
+    "credit": {
+      "creator": "osde8info",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Portable Monitor",
+    "searchTerm": "portable monitor",
+    "emoji": "🖥️",
+    "description": "A second screen in your bag.",
+    "price": 160,
+    "image": "https://live.staticflickr.com/65535/48769025412_ee2fdee622_b.jpg",
+    "credit": {
+      "creator": "TheBetterDay",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Streaming Webcam",
+    "searchTerm": "webcam",
+    "emoji": "📹",
+    "description": "Look sharp on calls.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/41/92145961_7a34603ed1_b.jpg",
+    "credit": {
+      "creator": "Uwe Hermann",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Ring Light",
+    "searchTerm": "ring light",
+    "emoji": "💡",
+    "description": "TikTok-ready lighting.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/3296/3003380784_580cf7dfec_b.jpg",
+    "credit": {
+      "creator": "MorrowLess",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Podcast Microphone",
+    "searchTerm": "podcast microphone",
+    "emoji": "🎙️",
+    "description": "Sound professional.",
+    "price": 90,
+    "image": "https://pd.w.org/2024/07/4756694517aa39fa2.74810432-1533x2048.jpg"
+  },
+  {
+    "name": "Smart Plug",
+    "searchTerm": "smart plug",
+    "emoji": "🔌",
+    "description": "Voice-control any lamp.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/3867/15010960398_fbe694e0d0_b.jpg",
+    "credit": {
+      "creator": "code of the new",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Smart Bulb",
+    "searchTerm": "smart bulb",
+    "emoji": "💡",
+    "description": "16 million colors.",
+    "price": 18,
+    "image": "https://live.staticflickr.com/739/22885707356_94db16cba1.jpg"
+  },
+  {
+    "name": "Robot Lawn Mower",
+    "searchTerm": "robot lawn mower",
+    "emoji": "🌱",
+    "description": "The lawn mows itself.",
+    "price": 900,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/87/Robotic_lawn_mower_on_roundabout%2C_Lannion.jpg"
+  },
+  {
+    "name": "Smart Lock",
+    "searchTerm": "smart lock",
+    "emoji": "🔐",
+    "description": "Your door, app-controlled.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/3880/15207853585_b4bbec131a_b.jpg",
+    "credit": {
+      "creator": "pestoverde",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Video Doorbell",
+    "searchTerm": "video doorbell",
+    "emoji": "🔔",
+    "description": "See who is at the door.",
+    "price": 100,
+    "image": "https://cdn.thingiverse.com/renders/95/4e/34/06/30/027af0af6a658969ad57a2e3599c1c3b_display_large.jpg"
+  },
+  {
+    "name": "Security Camera",
+    "searchTerm": "security camera",
+    "emoji": "📹",
+    "description": "Watch the driveway.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/1161/624970578_cc45f55ea4_b.jpg",
+    "credit": {
+      "creator": "Hay Kranen",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "GPS Tracker",
+    "searchTerm": "gps tracker",
+    "emoji": "📍",
+    "description": "Know where your keys are.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/65535/51884361448_fac35a258e_b.jpg"
+  },
+  {
+    "name": "Dash Cam",
+    "searchTerm": "dash cam",
+    "emoji": "🚗",
+    "description": "Proof for the insurance gods.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/801/41192477962_f112c3e640_b.jpg",
+    "credit": {
+      "creator": "newagecrap",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Car Vacuum",
+    "searchTerm": "car vacuum",
+    "emoji": "🚗",
+    "description": "Crumbs, be gone.",
+    "price": 45
+  },
+  {
+    "name": "Tire Inflator",
+    "searchTerm": "tire inflator",
+    "emoji": "🚗",
+    "description": "Air on the go.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/65535/49061714192_1b816a865f.jpg"
+  },
+  {
+    "name": "Jump Starter",
+    "searchTerm": "jump starter",
+    "emoji": "🔋",
+    "description": "Dead battery? Not anymore.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/4878/44422100950_cbf0325131_b.jpg"
+  },
+  {
+    "name": "Electric Bike",
+    "searchTerm": "electric bicycle",
+    "emoji": "🚲",
+    "description": "Hills, neutralized.",
+    "price": 800,
+    "image": "https://live.staticflickr.com/3900/14397672712_8e245b7c84_b.jpg",
+    "credit": {
+      "creator": "DriveeO",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Electric Scooter",
+    "searchTerm": "electric scooter",
+    "emoji": "🛴",
+    "description": "Last-mile legend.",
+    "price": 400,
+    "image": "https://live.staticflickr.com/65535/52429980565_a178b49eda_b.jpg",
+    "credit": {
+      "creator": "Phillip Pessar",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Longboard",
+    "searchTerm": "longboard",
+    "emoji": "🛹",
+    "description": "Cruise the boardwalk.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/4080/4792426285_cb40952028_b.jpg",
+    "credit": {
+      "creator": "michael pollak",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Onewheel",
+    "searchTerm": "onewheel",
+    "emoji": "🛹",
+    "description": "One wheel, all the attention.",
+    "price": 1000,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Onewheel_XR.png"
+  },
+  {
+    "name": "Electric Unicycle",
+    "searchTerm": "electric unicycle",
+    "emoji": "🛞",
+    "description": "Balance required.",
+    "price": 700,
+    "image": "https://live.staticflickr.com/65535/49039489752_fdc0f8e5a1_b.jpg",
+    "credit": {
+      "creator": "archer10 (Dennis)",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Water Jetpack",
+    "searchTerm": "water jetpack",
+    "emoji": "🚀",
+    "description": "Fly over the lake.",
+    "price": 2500,
+    "image": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2ZsMTY2MTU4ODIyNzYtaW1hZ2Uta3R4cGRudGEuanBn.jpg"
+  },
+  {
+    "name": "Smart Glasses",
+    "searchTerm": "smart glasses",
+    "emoji": "👓",
+    "description": "A display in your frames.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/8655/16581309296_1fc98ae809_b.jpg",
+    "credit": {
+      "creator": "cabrera.photo",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "VR Headset",
+    "searchTerm": "vr headset",
+    "emoji": "🥽",
+    "description": "Another world, on your face.",
+    "price": 300,
+    "image": "https://live.staticflickr.com/8674/16237219524_348f9088c9_b.jpg",
+    "credit": {
+      "creator": "nan palmero",
+      "license": "by"
+    }
+  },
+  {
+    "name": "3D Printer",
+    "searchTerm": "3d printer",
+    "emoji": "🖨️",
+    "description": "Print your ideas.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/3777/13603738074_112b86e2a0_b.jpg",
+    "credit": {
+      "creator": "Creative Tools",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Laser Engraver",
+    "searchTerm": "laser engraver",
+    "emoji": "🔥",
+    "description": "Etch anything.",
+    "price": 400,
+    "image": "https://live.staticflickr.com/8285/7600377426_8630dac4e5.jpg",
+    "credit": {
+      "creator": "Book Worm Laser & Design",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Robotic Dog",
+    "searchTerm": "robot dog",
+    "emoji": "🐕",
+    "description": "A robot that fetches.",
+    "price": 1500,
+    "image": "https://live.staticflickr.com/171/438125799_1f4852d0fa_b.jpg",
+    "credit": {
+      "creator": "firepile",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Robotic Arm Kit",
+    "searchTerm": "robot arm",
+    "emoji": "🦾",
+    "description": "Automate your desk.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/7416/11073010005_c1e2cec2e9_b.jpg",
+    "credit": {
+      "creator": "James Webb Space Telescope",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Smart Pen",
+    "searchTerm": "smart pen",
+    "emoji": "🖊️",
+    "description": "Digitizes your handwriting.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/2586/3962870549_7e930dc200_b.jpg",
+    "credit": {
+      "creator": "EirePreneur",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Digital Voice Recorder",
+    "searchTerm": "voice recorder",
+    "emoji": "🎙️",
+    "description": "Every idea, captured.",
+    "price": 50,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/ee/2000s_digital_voice_recorder_OLYMPUS_VN_120_made_in_China.jpg",
+    "credit": {
+      "creator": "R. Henrik Nilsson",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Mechanical Watch",
+    "searchTerm": "mechanical watch",
+    "emoji": "⌚",
+    "description": "Ticking craft on your wrist.",
+    "price": 200,
+    "image": "https://live.staticflickr.com/2913/14465782273_bbcbe759ba_b.jpg"
+  },
+  {
+    "name": "Pocket Radio",
+    "searchTerm": "pocket radio",
+    "emoji": "📻",
+    "description": "Analog waves.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/3881/14676493882_5c67b81790_b.jpg",
+    "credit": {
+      "creator": "SenseiAlan",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Hologram Fan",
+    "searchTerm": "hologram projector fan",
+    "emoji": "🌀",
+    "description": "3D visuals in the air.",
+    "price": 90
+  },
+  {
+    "name": "Galaxy Projector",
+    "searchTerm": "star projector",
+    "emoji": "🌌",
+    "description": "Stars on your ceiling.",
+    "price": 50,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/05/Spitz_Star_Projector.jpg",
+    "credit": {
+      "creator": "Michael L. Umbricht",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Sun Lamp",
+    "searchTerm": "sun lamp",
+    "emoji": "🌞",
+    "description": "Vitamin D, simulated.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/5512/30841224455_0a0f02129b_b.jpg",
+    "credit": {
+      "creator": "UNclimatechange",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Air Purifier",
+    "searchTerm": "air purifier",
+    "emoji": "💨",
+    "description": "Breathe cleaner.",
+    "price": 130,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Rowenta_Intense_Pure_Air_air_purifier.jpg"
+  },
+  {
+    "name": "Dehumidifier",
+    "searchTerm": "dehumidifier",
+    "emoji": "💧",
+    "description": "Dry, comfortable air.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/2637/4129750968_f501da3c27_b.jpg",
+    "credit": {
+      "creator": "Thoth, God of Knowledge",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Space Heater",
+    "searchTerm": "space heater",
+    "emoji": "🔥",
+    "description": "Small-room warmth.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/8093/8520340192_2b83483f65_b.jpg",
+    "credit": {
+      "creator": "OakleyOriginals",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Tower Fan",
+    "searchTerm": "tower fan",
+    "emoji": "🌬️",
+    "description": "Breezy and slim.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/5191/5884494608_212548b2cb_b.jpg",
+    "credit": {
+      "creator": "yto",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Humidifier",
+    "searchTerm": "humidifier",
+    "emoji": "💦",
+    "description": "Moisture for dry rooms.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/4148/4999159117_b74c45e49a_b.jpg"
+  },
+  {
+    "name": "Essential Oil Diffuser",
+    "searchTerm": "oil diffuser",
+    "emoji": "🌺",
+    "description": "Aromatherapy mist.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/1833/30228136108_d46819ac71_b.jpg",
+    "credit": {
+      "creator": "1DayReview",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Electric Blanket",
+    "searchTerm": "electric blanket",
+    "emoji": "🛏️",
+    "description": "Cozy, toasty, controllable.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/4852/31298043517_e18017fb7f_b.jpg",
+    "credit": {
+      "creator": "TheBetterDay",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Weighted Blanket",
+    "searchTerm": "weighted blanket",
+    "emoji": "🛏️",
+    "description": "A hug for the whole body.",
+    "price": 80,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/37/DIY_weighted_blanket.jpg",
+    "credit": {
+      "creator": "Forsaken Fotos",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Smart Bed",
+    "searchTerm": "smart bed",
+    "emoji": "🛏️",
+    "description": "Sleep tracking mattress.",
+    "price": 2000,
+    "image": "https://live.staticflickr.com/65535/52326596221_e4109be914_b.jpg"
+  },
+  {
+    "name": "White Noise Machine",
+    "searchTerm": "white noise machine",
+    "emoji": "😴",
+    "description": "Sleep, uninterrupted.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/65535/49061781897_509757e574.jpg"
+  },
+  {
+    "name": "Alarm Clock",
+    "searchTerm": "alarm clock",
+    "emoji": "⏰",
+    "description": "Wake up. Gently.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/4030/4469802598_b822eb553f_b.jpg",
+    "credit": {
+      "creator": "matsuyuki",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Sunrise Alarm Clock",
+    "searchTerm": "sunrise alarm clock",
+    "emoji": "🌅",
+    "description": "Wake with the light.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/2553/4198764364_6d27d81620_b.jpg",
+    "credit": {
+      "creator": "AlphaTangoBravo / Adam Baker",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Digital Photo Frame",
+    "searchTerm": "digital photo frame",
+    "emoji": "🖼️",
+    "description": "A rotating gallery of memories.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/7013/6403308891_e512d08afa_b.jpg"
+  },
+  {
+    "name": "E-Ink Tablet",
+    "searchTerm": "e ink tablet",
+    "emoji": "📝",
+    "description": "Write on paper-like glass.",
+    "price": 300,
+    "image": "https://live.staticflickr.com/8105/8517887773_ffaccf1551.jpg"
+  },
+  {
+    "name": "Scanner",
+    "searchTerm": "document scanner",
+    "emoji": "📠",
+    "description": "Paper to PDF.",
+    "price": 80,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/99/Fujitsu_-_ScanSnap_SV600_-_Contactless_Document_Scanner_-_Kolkata_2015-12-12_7912.JPG",
+    "credit": {
+      "creator": "Biswarup Ganguly",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Label Maker",
+    "searchTerm": "label maker",
+    "emoji": "🏷️",
+    "description": "Organize everything.",
+    "price": 30,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Dymo_embossing_label_maker_circa_1967.jpg"
+  },
+  {
+    "name": "Cricut Machine",
+    "searchTerm": "cricut",
+    "emoji": "✂️",
+    "description": "Cut vinyl, make crafts.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/6076/6085946508_c729b30114_b.jpg",
+    "credit": {
+      "creator": "RoboGenius",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Embroidery Machine",
+    "searchTerm": "embroidery machine",
+    "emoji": "🧵",
+    "description": "Stitch your designs.",
+    "price": 400,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/41/Fully_automated_schiffli_embroidery_machine_by_Saurer.jpg",
+    "credit": {
+      "creator": "Chris Riedener",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Sewing Machine",
+    "searchTerm": "sewing machine",
+    "emoji": "🧵",
+    "description": "Make and mend.",
+    "price": 130,
+    "image": "https://live.staticflickr.com/5133/5543545869_359f3fbb28_b.jpg",
+    "credit": {
+      "creator": "eggrole",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Karaoke Machine",
+    "searchTerm": "karaoke machine",
+    "emoji": "🎤",
+    "description": "Sing your heart out.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/4099/5058582874_8ea210bce4_b.jpg",
+    "credit": {
+      "creator": "liftarn",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "DJ Controller",
+    "searchTerm": "dj controller",
+    "emoji": "🎛️",
+    "description": "Your living room, a club.",
+    "price": 150,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Pioneer_DDJ-RX_DJ-Controller_%28front%29_with_computer_running_mixing_software_Rekordbox.jpg",
+    "credit": {
+      "creator": "Foto: Jonn Leffmann",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Synthesizer",
+    "searchTerm": "synthesizer",
+    "emoji": "🎹",
+    "description": "Beep boop, beautifully.",
+    "price": 300,
+    "image": "https://live.staticflickr.com/4028/4268316517_ced5595ce5_b.jpg",
+    "credit": {
+      "creator": "Horia Varlan",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Electric Guitar",
+    "searchTerm": "electric guitar",
+    "emoji": "🎸",
+    "description": "Six strings of rock.",
+    "price": 200,
+    "image": "https://live.staticflickr.com/2232/2467308300_2883464413_b.jpg",
+    "credit": {
+      "creator": "nzgabriel",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Digital Piano",
+    "searchTerm": "digital piano",
+    "emoji": "🎹",
+    "description": "88 weighted keys.",
+    "price": 400,
+    "image": "https://live.staticflickr.com/7065/6841741604_06f7e882f5_b.jpg",
+    "credit": {
+      "creator": "yugenro",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Drum Machine",
+    "searchTerm": "drum machine",
+    "emoji": "🥁",
+    "description": "Beat-making box.",
+    "price": 200,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/be/Roland_TR-808_drum_machine.jpg",
+    "credit": {
+      "creator": "Eriq at Dutch Wikipedia",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Looper Pedal",
+    "searchTerm": "loop pedal",
+    "emoji": "🎸",
+    "description": "Layer your riffs.",
+    "price": 130,
+    "image": "https://live.staticflickr.com/5142/5877120578_057d769bd4_b.jpg",
+    "credit": {
+      "creator": "WAMC's The Roundtable",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Wireless Charger",
+    "searchTerm": "wireless charger",
+    "emoji": "🔋",
+    "description": "Drop and charge.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/65535/51640374613_15e331cf01_b.jpg",
+    "credit": {
+      "creator": "TheBetterDay",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Phone Gimbal",
+    "searchTerm": "phone gimbal",
+    "emoji": "📱",
+    "description": "Buttery smooth video.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/5657/31170578875_dba1ff220a_b.jpg",
+    "credit": {
+      "creator": "mikecogh",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Selfie Stick",
+    "searchTerm": "selfie stick",
+    "emoji": "🤳",
+    "description": "Extend the arm.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/8709/17368059152_0813cf58af_b.jpg",
+    "credit": {
+      "creator": "k0a1a.net",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Phone Tripod",
+    "searchTerm": "phone tripod",
+    "emoji": "📱",
+    "description": "Steady shots anywhere.",
+    "price": 25,
+    "image": "https://cdn.thingiverse.com/assets/d7/35/20/96/5d/large_display_phone_adapter.png"
+  },
+  {
+    "name": "LED Strip Lights",
+    "searchTerm": "led strip",
+    "emoji": "✨",
+    "description": "RGB everywhere.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/7581/15819266577_0e03672d62_b.jpg",
+    "credit": {
+      "creator": "BuddaBoy",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Lava Lamp",
+    "searchTerm": "lava lamp",
+    "emoji": "🛋️",
+    "description": "Nostalgic blobs.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/3896/14367791348_9551ee20fe_b.jpg"
+  },
+  {
+    "name": "Disco Ball",
+    "searchTerm": "disco ball",
+    "emoji": "🪩",
+    "description": "Party, classic mode.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/20/73017482_96b83e9ec4_b.jpg",
+    "credit": {
+      "creator": "Bruno Girin",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Bubble Machine",
+    "searchTerm": "bubble machine",
+    "emoji": "🫧",
+    "description": "Thousands of bubbles.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/8388/8489816125_47c660d32b.jpg",
+    "credit": {
+      "creator": "awsheffield",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Fog Machine",
+    "searchTerm": "fog machine",
+    "emoji": "🌫️",
+    "description": "Spooky atmosphere.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/4189/34349524876_14efc2e3f7_b.jpg"
+  },
+  {
+    "name": "Strobe Light",
+    "searchTerm": "strobe light",
+    "emoji": "⚡",
+    "description": "Dance floor energy.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/6143/6005258536_015e13da37_m.jpg",
+    "credit": {
+      "creator": "EpicFireworks",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Laser Light Show",
+    "searchTerm": "laser lights",
+    "emoji": "🔦",
+    "description": "Beams and patterns.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/3450/3306504966_be926f86b9_b.jpg",
+    "credit": {
+      "creator": "kevin dooley",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Projection Clock",
+    "searchTerm": "projection clock",
+    "emoji": "⏰",
+    "description": "Time on the ceiling.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/1767/28377500287_ee5ea2696a_b.jpg",
+    "credit": {
+      "creator": "TheBetterDay",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Smart Doorbell Chime",
+    "searchTerm": "doorbell chime",
+    "emoji": "🔔",
+    "description": "Custom doorbell sounds.",
+    "price": 25,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/63/Doorbell_chime_box.jpg",
+    "credit": {
+      "creator": "Dilshan Jayakody",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Wi-Fi Router",
+    "searchTerm": "wifi router",
+    "emoji": "📶",
+    "description": "The internet backbone.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/8740/16199008854_2824d6e4c8_b.jpg",
+    "credit": {
+      "creator": "s_pixels",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Mesh Wi-Fi System",
+    "searchTerm": "mesh wifi",
+    "emoji": "📶",
+    "description": "Full-home coverage.",
+    "price": 200,
+    "image": "https://live.staticflickr.com/65535/50551414866_11fe46c111_b.jpg",
+    "credit": {
+      "creator": "Haydn Blackey",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "NAS Drive",
+    "searchTerm": "nas",
+    "emoji": "💾",
+    "description": "Personal cloud storage.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/100/292984768_b00aa39f4d_b.jpg"
+  },
+  {
+    "name": "Raspberry Pi Kit",
+    "searchTerm": "raspberry pi",
+    "emoji": "🖥️",
+    "description": "A tiny computer for tinkerers.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/7248/6917663642_dc3b560d47_b.jpg",
+    "credit": {
+      "creator": "Ashley Basil",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Arduino Kit",
+    "searchTerm": "arduino",
+    "emoji": "🔧",
+    "description": "Electronics playground.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/1095/5116021434_7f753da18e_b.jpg",
+    "credit": {
+      "creator": "s p e x",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Smart Home Hub",
+    "searchTerm": "smart home hub",
+    "emoji": "🏠",
+    "description": "Connect everything.",
+    "price": 100,
+    "image": "https://live.staticflickr.com/7381/11825127025_9e720780c8.jpg",
+    "credit": {
+      "creator": "AskDaveTaylor",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Cable Organizer Kit",
+    "searchTerm": "cable organizer",
+    "emoji": "🔌",
+    "description": "Tangled no more.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/5345/9435493626_f3ef633361.jpg",
+    "credit": {
+      "creator": "QuakeCon",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Power Strip Surge Protector",
+    "searchTerm": "power strip",
+    "emoji": "🔌",
+    "description": "Ports and protection.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/6163/6250035530_ed3a0810eb_b.jpg",
+    "credit": {
+      "creator": "AstroSamantha",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Laptop Stand",
+    "searchTerm": "laptop stand",
+    "emoji": "💻",
+    "description": "Eye-level computing.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/2640/3802229064_3dec6f22e6_b.jpg",
+    "credit": {
+      "creator": "mandiberg",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Laptop Cooling Pad",
+    "searchTerm": "laptop cooler",
+    "emoji": "💻",
+    "description": "Keep it chill.",
+    "price": 30,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/14/Laptop_cooler.JPG",
+    "credit": {
+      "creator": "User:Littletung",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Mouse Pad XL",
+    "searchTerm": "mouse pad",
+    "emoji": "🖱️",
+    "description": "Desk-sized tracking.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/4082/4776723533_e434ffc277_m.jpg",
+    "credit": {
+      "creator": "gcg2009",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Ergonomic Mouse",
+    "searchTerm": "ergonomic mouse",
+    "emoji": "🖱️",
+    "description": "Wrist-friendly clicks.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/7173/13491077733_711520aef0_b.jpg",
+    "credit": {
+      "creator": "mastermaq",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Trackball Mouse",
+    "searchTerm": "trackball",
+    "emoji": "🖱️",
+    "description": "Spin the ball.",
+    "price": 45,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/96/Trackball-Kensington-ExpertMouse5.jpg",
+    "credit": {
+      "creator": "Suimasentyottohensyuushimasuyo",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Drawing Tablet",
+    "searchTerm": "drawing tablet",
+    "emoji": "🎨",
+    "description": "Digital art canvas.",
+    "price": 80
+  },
+  {
+    "name": "USB Microphone",
+    "searchTerm": "usb microphone",
+    "emoji": "🎙️",
+    "description": "Plug and sound great.",
+    "price": 50,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Singstar_usb_microphones.png",
+    "credit": {
+      "creator": "DynaBlast",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Video Capture Card",
+    "searchTerm": "capture card",
+    "emoji": "🎥",
+    "description": "Stream your console.",
+    "price": 100,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Rode_Streamer_X_Audio_Interface_and_Video_Capture_Card.jpg",
+    "credit": {
+      "creator": "TaurusEmerald",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Elgato Stream Deck",
+    "searchTerm": "stream deck",
+    "emoji": "🎛️",
+    "description": "Buttons for streamers.",
+    "price": 150,
+    "image": "https://cdn.thingiverse.com/renders/f3/ec/17/8e/e1/f31b58a4479f5d23395e2513150a9c4c_display_large.jpg"
+  },
+  {
+    "name": "Green Screen Kit",
+    "searchTerm": "green screen",
+    "emoji": "🟩",
+    "description": "Chroma-key yourself anywhere.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/4120/5440295152_52a8829d88_b.jpg",
+    "credit": {
+      "creator": "jurvetson",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Teleprompter",
+    "searchTerm": "teleprompter",
+    "emoji": "📺",
+    "description": "Never forget a line.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/2528/3907937027_28e1530b19.jpg",
+    "credit": {
+      "creator": "PrimeImageMedia.com",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Pet Rock 2.0",
+    "searchTerm": "pet rock",
+    "emoji": "🪨",
+    "description": "The classic pet, now with a stand.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/4020/4406009856_af3a7275c3_b.jpg"
+  },
+  {
+    "name": "Robot Pet",
+    "searchTerm": "robot pet",
+    "emoji": "🐈",
+    "description": "Cuddles without the vet bills.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/5323/7232164294_698c757d1b_b.jpg",
+    "credit": {
+      "creator": "donjd2",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Self-Watering Planter",
+    "searchTerm": "self watering planter",
+    "emoji": "🪴",
+    "description": "Plants that survive trips.",
+    "price": 30,
+    "image": "https://cdn.thingiverse.com/renders/0c/8b/e1/71/05/My-self-watering-planter-Inner-cup-v4.2_display_large.jpg"
+  },
+  {
+    "name": "Smart Garden",
+    "searchTerm": "smart garden",
+    "emoji": "🌱",
+    "description": "Indoor growing, automated.",
+    "price": 100,
+    "image": "https://pd.w.org/2023/11/763654d9c3aa34a38.29857332-2048x1536.jpeg"
+  },
+  {
+    "name": "Aromatherapy Humidifier",
+    "searchTerm": "humidifier",
+    "emoji": "🌸",
+    "description": "Mist and scent.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/4148/4999159117_b74c45e49a_b.jpg"
+  },
+  {
+    "name": "Giant Bean Bag",
+    "searchTerm": "bean bag chair",
+    "emoji": "🛋️",
+    "description": "Furniture that hugs back.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/125/419578447_85b9f34694_b.jpg",
+    "credit": {
+      "creator": "Clean Wal-Mart",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Massage Chair",
+    "searchTerm": "massage chair",
+    "emoji": "💺",
+    "description": "Your own masseuse.",
+    "price": 800,
+    "image": "https://live.staticflickr.com/2141/2219409789_57b60e2fa0_b.jpg",
+    "credit": {
+      "creator": "zappowbang",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Foot Massager",
+    "searchTerm": "foot massager",
+    "emoji": "🦶",
+    "description": "Tired feet, revived.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/36/105571629_3a88473fc8_b.jpg",
+    "credit": {
+      "creator": "Tracy Hunter",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Massage Gun",
+    "searchTerm": "massage gun",
+    "emoji": "🔫",
+    "description": "Deep-tissue relief on demand.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/65535/49876778672_36fd952ea0_b.jpg",
+    "credit": {
+      "creator": "TheBetterDay",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Heated Massage Pad",
+    "searchTerm": "heated massage pad",
+    "emoji": "🛋️",
+    "description": "Warm vibrating chair cover.",
+    "price": 55
+  },
+  {
+    "name": "Shiatsu Neck Pillow",
+    "searchTerm": "neck massager",
+    "emoji": "💆",
+    "description": "Neck knots, released.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/6011/5900790230_3d3e868b76.jpg",
+    "credit": {
+      "creator": "ShamaKern",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Ice Bath Tub",
+    "searchTerm": "ice bath tub",
+    "emoji": "🧊",
+    "description": "Cold plunge recovery.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/3617/3317399114_687fbc6911_b.jpg",
+    "credit": {
+      "creator": "kruemi",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Sauna Blanket",
+    "searchTerm": "sauna blanket",
+    "emoji": "🧖",
+    "description": "Portable sweat session.",
+    "price": 250
+  },
+  {
+    "name": "Infrared Sauna",
+    "searchTerm": "infrared sauna",
+    "emoji": "🧖",
+    "description": "Detox in your bathroom.",
+    "price": 1500,
+    "image": "https://live.staticflickr.com/8114/15175900733_bb638a2b95.jpg",
+    "credit": {
+      "creator": "brunosan",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Hot Tub",
+    "searchTerm": "hot tub",
+    "emoji": "🛁",
+    "description": "Bubbles and warmth.",
+    "price": 3000,
+    "image": "https://live.staticflickr.com/3070/2794425534_5ac761dcbf_b.jpg",
+    "credit": {
+      "creator": "madaise",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Foot Spa",
+    "searchTerm": "foot spa",
+    "emoji": "🦶",
+    "description": "Soak, bubble, relax.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/5104/5624057046_90b1d86027.jpg",
+    "credit": {
+      "creator": "hern42",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Bath Bomb Set",
+    "searchTerm": "bath bombs",
+    "emoji": "🛁",
+    "description": "Fizzing self-care.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/3061/2283364686_dc39d7831e_b.jpg",
+    "credit": {
+      "creator": "Corey Ann",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Waterproof Shower Speaker",
+    "searchTerm": "shower speaker",
+    "emoji": "🚿",
+    "description": "Concerts in the shower.",
+    "price": 28,
+    "image": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L2JzNDMxLWltYWdlLmpwZw.jpg"
+  },
+  {
+    "name": "Bidet Attachment",
+    "searchTerm": "bidet",
+    "emoji": "🚽",
+    "description": "Freshness, upgraded.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/50/150703179_8f2496a863_b.jpg",
+    "credit": {
+      "creator": "acaben",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Smart Toilet",
+    "searchTerm": "smart toilet",
+    "emoji": "🚽",
+    "description": "Heated seats and more.",
+    "price": 500,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4f/JP_%E6%97%A5%E6%9C%AC_Japan_%E6%B2%96%E7%B9%A9_OKINAWA_%E9%82%A3%E9%9C%B8_Naha_%E4%B9%9D%E5%B7%9E%E9%85%92%E5%BA%97_JR_Kyushu_Hotel_Blossom_Naha_bathroom_%E6%99%BA%E8%83%BD%E9%A6%AC%E6%A1%B6_smart_toilet_seat_January_2025_01.jpg"
+  },
+  {
+    "name": "Robot Mop",
+    "searchTerm": "robot mop",
+    "emoji": "🧹",
+    "description": "Floors, cleaned hands-free.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/2697/4481452223_bc61924c99_b.jpg",
+    "credit": {
+      "creator": "☺ Lee J Haywood",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Carpet Cleaner",
+    "searchTerm": "carpet cleaner",
+    "emoji": "🧺",
+    "description": "Stains, reversed.",
+    "price": 180,
+    "image": "https://live.staticflickr.com/4083/4834986601_459684bef4.jpg",
+    "credit": {
+      "creator": "zimpenfish",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Steam Mop",
+    "searchTerm": "steam mop",
+    "emoji": "🧹",
+    "description": "Sanitize floors with steam.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/65535/49062442616_f7218f1106.jpg"
+  },
+  {
+    "name": "Upright Vacuum",
+    "searchTerm": "vacuum cleaner",
+    "emoji": "🧹",
+    "description": "Classic suction power.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/5054/5449273873_970df62196_b.jpg",
+    "credit": {
+      "creator": "Glen Bledsoe",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Stick Vacuum",
+    "searchTerm": "stick vacuum",
+    "emoji": "🧹",
+    "description": "Lightweight floor duty.",
+    "price": 100,
+    "image": "https://live.staticflickr.com/4383/37414672405_1f004477cf_b.jpg",
+    "credit": {
+      "creator": "allenjaymichael",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Handheld Vacuum",
+    "searchTerm": "handheld vacuum",
+    "emoji": "🧹",
+    "description": "Crumbs everywhere? Solved.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/65535/48955527432_7a9663bdfd_b.jpg",
+    "credit": {
+      "creator": "TheBetterDay",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Cordless Drill",
+    "searchTerm": "cordless drill",
+    "emoji": "🪛",
+    "description": "The DIY starter pack.",
+    "price": 80,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Cordless_drill_Metabo_BS_14%2C4_Li.JPG"
+  },
+  {
+    "name": "Power Tool Set",
+    "searchTerm": "power tools",
+    "emoji": "🛠️",
+    "description": "Drill, saw, drive.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/2748/4449906252_dbed6e54b5_b.jpg"
+  },
+  {
+    "name": "Electric Screwdriver",
+    "searchTerm": "electric screwdriver",
+    "emoji": "🪛",
+    "description": "Twist with power.",
+    "price": 40,
+    "image": "https://images.rawpixel.com/image_png_1300/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjc5LTE5NS1wLWwxNjd5MWo2LnBuZw.png"
+  },
+  {
+    "name": "Stud Finder",
+    "searchTerm": "stud finder",
+    "emoji": "🧱",
+    "description": "Find the wall studs.",
+    "price": 25,
+    "image": "https://cdn.thingiverse.com/renders/4c/32/10/f8/f9/00b0c490a269965b207004d0685c2a52_display_large.jpg"
+  },
+  {
+    "name": "Laser Level",
+    "searchTerm": "laser level",
+    "emoji": "📐",
+    "description": "Perfectly straight lines.",
+    "price": 50,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Laser-Level.jpg",
+    "credit": {
+      "creator": "Billbeee at English Wikipedia",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Tape Measure",
+    "searchTerm": "tape measure",
+    "emoji": "📏",
+    "description": "Measure twice.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/78/184612846_231af7edae_b.jpg",
+    "credit": {
+      "creator": "Laineys Repertoire",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Smart Thermostat",
+    "searchTerm": "smart thermostat",
+    "emoji": "🌡️",
+    "description": "Home temperature, app-controlled.",
+    "price": 130,
+    "image": "https://live.staticflickr.com/65535/49063427053_df400d0ea3.jpg"
+  },
+  {
+    "name": "Ceiling Fan",
+    "searchTerm": "ceiling fan",
+    "emoji": "🌀",
+    "description": "Air circulation classic.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/2/1586819_8f92cee864.jpg",
+    "credit": {
+      "creator": "jeffk",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Robot Window Cleaner",
+    "searchTerm": "window cleaner robot",
+    "emoji": "🪟",
+    "description": "Glass, cleaned by a robot.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/4562/38595075426_e14db89577_b.jpg",
+    "credit": {
+      "creator": "TheBetterDay",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Pressure Washer",
+    "searchTerm": "pressure washer",
+    "emoji": "💦",
+    "description": "Driveway, reborn.",
+    "price": 140,
+    "image": "https://live.staticflickr.com/62/227679619_29bdf2c7fd_b.jpg",
+    "credit": {
+      "creator": "ARendle",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Leaf Blower",
+    "searchTerm": "leaf blower",
+    "emoji": "🍂",
+    "description": "Fall cleanup, quick.",
+    "price": 90,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/da/Leaf_blower%2C_Homewood_Cemetery.jpg"
+  },
+  {
+    "name": "Snow Blower",
+    "searchTerm": "snow blower",
+    "emoji": "❄️",
+    "description": "Winter driveway hero.",
+    "price": 400,
+    "image": "https://live.staticflickr.com/7600/16579789947_782482c796_b.jpg"
+  },
+  {
+    "name": "Lawn Mower",
+    "searchTerm": "lawn mower",
+    "emoji": "🌱",
+    "description": "The classic grass cutter.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/7830/46470972554_ba56f15298_b.jpg"
+  },
+  {
+    "name": "Hedge Trimmer",
+    "searchTerm": "hedge trimmer",
+    "emoji": "🌳",
+    "description": "Shrubs, tamed.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/8541/8683650117_f9e481e4e0_b.jpg",
+    "credit": {
+      "creator": "Elsie esq.",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Chainsaw",
+    "searchTerm": "chainsaw",
+    "emoji": "🪚",
+    "description": "For serious yard work.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/65535/52502117917_49c234d17c_b.jpg"
+  },
+  {
+    "name": "Electric Scissors",
+    "searchTerm": "electric scissors",
+    "emoji": "✂️",
+    "description": "Cutting, effortless.",
+    "price": 20,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/6d/19ft_Electric_Scissor_Lift_at_Duralift.jpg",
+    "credit": {
+      "creator": "ERab123",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Garage Door Opener",
+    "searchTerm": "garage door opener",
+    "emoji": "🚗",
+    "description": "Click to open.",
+    "price": 100,
+    "image": "https://live.staticflickr.com/3171/2931380513_d4a16ac810_b.jpg",
+    "credit": {
+      "creator": "scanlime",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Smart Garage Camera",
+    "searchTerm": "garage camera",
+    "emoji": "📹",
+    "description": "Watch the garage.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/65535/51618790407_1983b7afe9_b.jpg"
+  },
+  {
+    "name": "Home Battery Backup",
+    "searchTerm": "home battery",
+    "emoji": "🔋",
+    "description": "Power through outages.",
+    "price": 800,
+    "image": "https://live.staticflickr.com/65535/55024284974_8f76baaf24_b.jpg"
+  },
+  {
+    "name": "Portable Generator",
+    "searchTerm": "generator",
+    "emoji": "⚡",
+    "description": "Emergency power.",
+    "price": 500,
+    "image": "https://live.staticflickr.com/139/353459282_44ed71b009_b.jpg",
+    "credit": {
+      "creator": "-fabio-",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Solar Panel Kit",
+    "searchTerm": "solar panel kit",
+    "emoji": "☀️",
+    "description": "Sun-powered savings.",
+    "price": 300,
+    "image": "https://live.staticflickr.com/2876/11868770425_0ebf7e9b3a_b.jpg",
+    "credit": {
+      "creator": "sridgway",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Rain Barrel",
+    "searchTerm": "rain barrel",
+    "emoji": "🌧️",
+    "description": "Collect the rain.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/4092/4844712362_8ef273a385_b.jpg",
+    "credit": {
+      "creator": "Ken_Mayer",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Compost Bin",
+    "searchTerm": "compost bin",
+    "emoji": "♻️",
+    "description": "Food scraps, recycled.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/3066/2646188010_e2d3c83174_b.jpg",
+    "credit": {
+      "creator": "daryl_mitchell",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Bird Feeder Camera",
+    "searchTerm": "bird feeder camera",
+    "emoji": "🐦",
+    "description": "Birdwatching, streamed.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/7541/15440479154_ffa27d3222_b.jpg",
+    "credit": {
+      "creator": "sagesolar",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Bee Hotel",
+    "searchTerm": "bee hotel",
+    "emoji": "🐝",
+    "description": "Bees welcome.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/3758/11370245494_98db8db586_b.jpg",
+    "credit": {
+      "creator": "orangeaurochs",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Garden Gnome",
+    "searchTerm": "garden gnome",
+    "emoji": "🧙",
+    "description": "The classic lawn guardian.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/5254/5518057205_f38fb3dbac_b.jpg",
+    "credit": {
+      "creator": "Gareth1953 All Right Now",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Flamingo Yard Decor",
+    "searchTerm": "flamingo lawn ornament",
+    "emoji": "🦩",
+    "description": "Tacky is a lifestyle.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/3819/11615639116_790ae3d542.jpg",
+    "credit": {
+      "creator": "aislinn2000",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Solar Garden Lights",
+    "searchTerm": "solar lights",
+    "emoji": "✨",
+    "description": "Path lighting, free energy.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/8191/8399476747_c5a906665f.jpg",
+    "credit": {
+      "creator": "dhslit",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Fairy Lights",
+    "searchTerm": "fairy lights",
+    "emoji": "✨",
+    "description": "Cozy string lighting.",
+    "price": 18,
+    "image": "https://live.staticflickr.com/7352/11976189644_7fbd315038_b.jpg",
+    "credit": {
+      "creator": "solarisgirl",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Projection Light",
+    "searchTerm": "projector light",
+    "emoji": "🌙",
+    "description": "Moon and stars on the wall.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/7481/16281298375_d8957ce875_b.jpg",
+    "credit": {
+      "creator": "▓▒░ TORLEY ░▒▓",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Curtain Lights",
+    "searchTerm": "curtain lights",
+    "emoji": "✨",
+    "description": "Glowing window drapes.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/1385/724893180_859c4df405.jpg",
+    "credit": {
+      "creator": "Yeah Im Kenny",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Scented Candle Set",
+    "searchTerm": "candles",
+    "emoji": "🕯️",
+    "description": "Smells like home.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/33/63478468_e63e90beb8_b.jpg",
+    "credit": {
+      "creator": "hans s",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Candle Warmer",
+    "searchTerm": "candle warmer",
+    "emoji": "🕯️",
+    "description": "Scent without the flame.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/65535/52007166348_a599702375_b.jpg"
+  },
+  {
+    "name": "Oil Burner",
+    "searchTerm": "oil burner",
+    "emoji": "🔥",
+    "description": "Warm scented melts.",
+    "price": 18,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Oil_burner_pipe.jpg"
+  },
+  {
+    "name": "Incense Set",
+    "searchTerm": "incense",
+    "emoji": "🪔",
+    "description": "Calming smoke.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/131/377416299_5ade9c132c_b.jpg",
+    "credit": {
+      "creator": "Vanessa Pike-Russell",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Room Spray Set",
+    "searchTerm": "room spray",
+    "emoji": "🌸",
+    "description": "Freshness in a bottle.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/65535/49735632088_4d36b6a651_b.jpg"
+  },
+  {
+    "name": "Robot Dustpan",
+    "searchTerm": "robot dustpan",
+    "emoji": "🧹",
+    "description": "Follows you around for crumbs.",
+    "price": 40
+  },
+  {
+    "name": "Shoe Dryer",
+    "searchTerm": "shoe dryer",
+    "emoji": "👟",
+    "description": "Rainy-day boots, dried.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/2529/3708056496_f857bee6e8_b.jpg",
+    "credit": {
+      "creator": "Donald Lee Pardue",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Clothes Steamer",
+    "searchTerm": "clothes steamer",
+    "emoji": "👔",
+    "description": "Wrinkles, gone.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/65535/52271220651_d96d72b32c.jpg"
+  },
+  {
+    "name": "Garment Rack",
+    "searchTerm": "clothing rack",
+    "emoji": "👗",
+    "description": "Open-air closet.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/3335/3481671697_2c2f8b15bb_b.jpg",
+    "credit": {
+      "creator": "CJ Isherwood",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Laundry Hamper",
+    "searchTerm": "laundry basket",
+    "emoji": "🧺",
+    "description": "Where the clothes go.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/7226/7067696493_d3f68c86d7_b.jpg",
+    "credit": {
+      "creator": "Joelk75",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Smart Iron",
+    "searchTerm": "iron",
+    "emoji": "👔",
+    "description": "Auto-off ironing.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/7216/7209185282_a298303844.jpg",
+    "credit": {
+      "creator": "STICK KIM",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Portable Washer",
+    "searchTerm": "portable washing machine",
+    "emoji": "🧺",
+    "description": "Laundry anywhere.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/5818/23271641041_baf62e5b52_b.jpg",
+    "credit": {
+      "creator": "Designathon Works",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Clothes Dryer",
+    "searchTerm": "clothes dryer",
+    "emoji": "🌀",
+    "description": "Warm, dry clothes.",
+    "price": 300,
+    "image": "https://live.staticflickr.com/3586/3446995471_424594f291_b.jpg",
+    "credit": {
+      "creator": "Peter Blanchard",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Mini Fridge",
+    "searchTerm": "mini fridge",
+    "emoji": "🧊",
+    "description": "Snacks at arm's reach.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/3291/3288191077_cb4840fa53_b.jpg",
+    "credit": {
+      "creator": "Vox Efx",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Wine Fridge",
+    "searchTerm": "wine refrigerator",
+    "emoji": "🍷",
+    "description": "Perfect temp for every bottle.",
+    "price": 180,
+    "image": "https://live.staticflickr.com/3116/3154990718_baf4e76b9d_b.jpg",
+    "credit": {
+      "creator": "Brian Omura",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Beverage Cooler",
+    "searchTerm": "beverage cooler",
+    "emoji": "🥤",
+    "description": "Cans on ice, organized.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/5160/5899713112_d6c1589926.jpg",
+    "credit": {
+      "creator": "Larry Kwan",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Countertop Ice Maker",
+    "searchTerm": "ice maker",
+    "emoji": "🧊",
+    "description": "Cubes in minutes.",
+    "price": 110,
+    "image": "https://live.staticflickr.com/3614/3693259680_5e591e553d_b.jpg",
+    "credit": {
+      "creator": "JD Hancock",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Water Filter Pitcher",
+    "searchTerm": "water pitcher",
+    "emoji": "💧",
+    "description": "Cleaner tap water.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/7355/15829809684_63150d0a00_b.jpg"
+  },
+  {
+    "name": "Water Dispenser",
+    "searchTerm": "water dispenser",
+    "emoji": "💧",
+    "description": "Hot and cold on tap.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/6039/6395850857_489a59a294_b.jpg",
+    "credit": {
+      "creator": "AstroSamantha",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Espresso Cart",
+    "searchTerm": "coffee cart",
+    "emoji": "☕",
+    "description": "A café corner at home.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/7396/11814081074_d062db7635_b.jpg",
+    "credit": {
+      "creator": "Ben Atherton",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Kitchen Island Cart",
+    "searchTerm": "kitchen cart",
+    "emoji": "🛒",
+    "description": "Rolling counter space.",
+    "price": 100,
+    "image": "https://live.staticflickr.com/3003/2685722161_a464f4235d_b.jpg",
+    "credit": {
+      "creator": "feverblue",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Spice Drawer Organizer",
+    "searchTerm": "spice organizer",
+    "emoji": "🧂",
+    "description": "Thirty jars, sorted.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/1163/986904281_1dbda0e2f5.jpg",
+    "credit": {
+      "creator": "Kelly Sue",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Pantry Organizer Set",
+    "searchTerm": "pantry organizer",
+    "emoji": "🥫",
+    "description": "Cans in rows.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/3520/3917995380_23d42417ed_b.jpg",
+    "credit": {
+      "creator": "prettyemmy",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Fridge Organizer Bins",
+    "searchTerm": "fridge organizer",
+    "emoji": "🧊",
+    "description": "A fridge that makes sense.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/3047/2343213697_7853aa25d4.jpg",
+    "credit": {
+      "creator": "shimelle",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Countertop Compost",
+    "searchTerm": "countertop compost bin",
+    "emoji": "♻️",
+    "description": "Scraps, contained.",
+    "price": 30
+  },
+  {
+    "name": "Silicone Baking Mat",
+    "searchTerm": "baking mat",
+    "emoji": "🥖",
+    "description": "Non-stick, reusable.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/5570/15010872626_49dd4a1266_b.jpg",
+    "credit": {
+      "creator": "Didriks",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Air Fryer Liners",
+    "searchTerm": "air fryer liner",
+    "emoji": "🍟",
+    "description": "Less cleanup, same crisp.",
+    "price": 10
+  },
+  {
+    "name": "Sous Vide Container",
+    "searchTerm": "sous vide container",
+    "emoji": "🥩",
+    "description": "A bath for your brisket.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/897/41589217215_ec143bc412_b.jpg",
+    "credit": {
+      "creator": "sousvideguy",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Meat Slicer",
+    "searchTerm": "meat slicer",
+    "emoji": "🥩",
+    "description": "Deli-thin at home.",
+    "price": 90,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/61/Meat_slicer.jpg",
+    "credit": {
+      "creator": "Brett L.",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Vacuum Sealer",
+    "searchTerm": "vacuum sealer",
+    "emoji": "🥩",
+    "description": "Seal in the freshness.",
+    "price": 45,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Vacuum_sealer_with_food_sealed_on_wooden_table_and_rolls_of_plastic_for_sealing.jpg",
+    "credit": {
+      "creator": "Your Best Digs",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Food Dehydrator",
+    "searchTerm": "food dehydrator",
+    "emoji": "🍎",
+    "description": "Jerky and fruit leather.",
+    "price": 70,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Food_dehydrator.jpg",
+    "credit": {
+      "creator": "Vassilik",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Yogurt Maker",
+    "searchTerm": "yogurt maker",
+    "emoji": "🥛",
+    "description": "Cultured at home.",
+    "price": 30,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Homemade_yogurt_maker_-_01.jpg"
+  },
+  {
+    "name": "Bread Maker",
+    "searchTerm": "bread maker",
+    "emoji": "🍞",
+    "description": "Fresh loaves on a timer.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/5529/11815897476_842935ceb0_b.jpg",
+    "credit": {
+      "creator": "Rod Waddington",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Egg Boiler",
+    "searchTerm": "egg cooker",
+    "emoji": "🥚",
+    "description": "Perfect hard-boiled eggs.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/1491/23872301353_e751674d43_b.jpg",
+    "credit": {
+      "creator": "matsuyuki",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Popcorn Popper",
+    "searchTerm": "popcorn popper",
+    "emoji": "🍿",
+    "description": "Stovetop theater snack.",
+    "price": 35,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/62/Oscar_Bluhme%2C_Popcorn_Popper%2C_c._1940%2C_NGA_25372.jpg"
+  },
+  {
+    "name": "Corn Roaster",
+    "searchTerm": "corn roaster",
+    "emoji": "🌽",
+    "description": "Charred street corn.",
+    "price": 25,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Corn_roaster_-_Indiana_State_Fair.jpg"
+  },
+  {
+    "name": "Cotton Candy Floss Sugar",
+    "searchTerm": "cotton candy sugar",
+    "emoji": "🍬",
+    "description": "The floss refill.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/3634/3668536798_5ee229fb0d.jpg",
+    "credit": {
+      "creator": "jasonlam",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Chocolate Melter",
+    "searchTerm": "chocolate melter",
+    "emoji": "🍫",
+    "description": "Tempered dips.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/6006/5978792537_90540f4fe8.jpg",
+    "credit": {
+      "creator": "qmacrocarpa",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Cake Pop Maker",
+    "searchTerm": "cake pop maker",
+    "emoji": "🧁",
+    "description": "Balls of cake.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/7342/9694210621_401cb16855_b.jpg",
+    "credit": {
+      "creator": "jencu",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Brownie Pan",
+    "searchTerm": "brownie pan",
+    "emoji": "🍫",
+    "description": "Every piece an edge piece.",
+    "price": 18,
+    "image": "https://live.staticflickr.com/2421/5736015778_9974261f83_b.jpg",
+    "credit": {
+      "creator": "David Berkowitz",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Cupcake Decorating Kit",
+    "searchTerm": "cupcake kit",
+    "emoji": "🧁",
+    "description": "Piping bags and tips.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/7305/12588136855_2cd5877292_b.jpg",
+    "credit": {
+      "creator": "JeepersMedia",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Fondant Kit",
+    "searchTerm": "fondant tools",
+    "emoji": "🎂",
+    "description": "Sculpt your cake.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/8697/16649238608_6c4fed88a7_b.jpg",
+    "credit": {
+      "creator": "Didriks",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Cake Stand",
+    "searchTerm": "cake stand",
+    "emoji": "🎂",
+    "description": "Make it a centerpiece.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/8653/16458139500_d2408f555d_b.jpg",
+    "credit": {
+      "creator": "Berries.com",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Dinnerware Set",
+    "searchTerm": "dinner plates",
+    "emoji": "🍽️",
+    "description": "Plates for the table.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/7678/17137108849_c98e835d5f_b.jpg"
+  },
+  {
+    "name": "Stemless Wine Glasses",
+    "searchTerm": "wine glasses",
+    "emoji": "🍷",
+    "description": "Spill-proof elegance.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/7002/6838210225_c9526bcbac_b.jpg",
+    "credit": {
+      "creator": "sermoa",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Copper Cocktail Set",
+    "searchTerm": "copper bar set",
+    "emoji": "🥃",
+    "description": "Shaker, jigger, cups.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/2950/15412880232_06e0709c59_b.jpg",
+    "credit": {
+      "creator": "ell brown",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Punch Bowl Set",
+    "searchTerm": "punch bowl",
+    "emoji": "🍹",
+    "description": "Party-sized drinks.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/3515/4086980529_b851274a2c_b.jpg"
+  },
+  {
+    "name": "Chafing Dish",
+    "searchTerm": "chafing dish",
+    "emoji": "🍲",
+    "description": "Buffet food, kept warm.",
+    "price": 60,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Rembrandt_van_Rijn%2C_Beggar_Seated_Warming_His_Hands_at_a_Chafing_Dish%2C_c._1630%2C_NGA_9868.jpg"
+  },
+  {
+    "name": "BBQ Tool Set",
+    "searchTerm": "bbq tools",
+    "emoji": "🍖",
+    "description": "Tongs, spatula, fork.",
+    "price": 40,
+    "image": "https://cdn.thingiverse.com/renders/8c/3e/32/6d/88/tool_holder_display_large.jpg"
+  },
+  {
+    "name": "Grill Cover",
+    "searchTerm": "grill cover",
+    "emoji": "🍖",
+    "description": "Protect the grill.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/65535/51538381434_ebbfc69541.jpg"
+  },
+  {
+    "name": "Smoker Box",
+    "searchTerm": "smoker box",
+    "emoji": "🔥",
+    "description": "Wood chips, smoky flavor.",
+    "price": 20,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Tobacco_smoker%27s_box%2C_Japan%2C_19th_century%2C_black_lacquer%2C_silver_and_gold_lacquer_on_wood%2C_metal_-_%C3%96stasiatiska_museet%2C_Stockholm_-_DSC09180.JPG"
+  },
+  {
+    "name": "Rotisserie Kit",
+    "searchTerm": "rotisserie",
+    "emoji": "🍗",
+    "description": "Spinning chicken.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/65535/51409281290_92b995963c_b.jpg"
+  },
+  {
+    "name": "Meat Claws",
+    "searchTerm": "meat claws",
+    "emoji": "🍖",
+    "description": "Shred like a beast.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/5489/12257374564_7ef0cf9ba6_b.jpg",
+    "credit": {
+      "creator": "Tambako the Jaguar",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Brisket Injector",
+    "searchTerm": "meat injector",
+    "emoji": "💉",
+    "description": "Flavor, deep inside.",
+    "price": 15
+  },
+  {
+    "name": "Cooler",
+    "searchTerm": "cooler",
+    "emoji": "🧊",
+    "description": "Ice, drinks, beach.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/2567/4052025468_70a679cfe2_b.jpg",
+    "credit": {
+      "creator": "Benson Kua",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Picnic Basket",
+    "searchTerm": "picnic basket",
+    "emoji": "🧺",
+    "description": "Outdoor dining, classic.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/3402/3494695701_6e8df48f33_b.jpg",
+    "credit": {
+      "creator": "langalex",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Thermos",
+    "searchTerm": "thermos",
+    "emoji": "🥤",
+    "description": "Hot or cold for hours.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/2448/3602592574_69e298cfc7_b.jpg",
+    "credit": {
+      "creator": "alexkerhead",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Lunch Box Set",
+    "searchTerm": "lunch box",
+    "emoji": "🍱",
+    "description": "Bento energy.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/124/328976713_0fb14c7903.jpg",
+    "credit": {
+      "creator": "avlxyz",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Reusable Straw Set",
+    "searchTerm": "straws",
+    "emoji": "🥤",
+    "description": "Sip sustainably.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/5220/5383419929_5ba549a233_b.jpg"
+  },
+  {
+    "name": "Water Bottle Set",
+    "searchTerm": "water bottles",
+    "emoji": "💧",
+    "description": "Hydration, matched.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/7316/16466809032_07bda6dfa3_b.jpg"
+  },
+  {
+    "name": "Coffee Travel Mug",
+    "searchTerm": "travel mug",
+    "emoji": "☕",
+    "description": "Coffee on the commute.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/4074/4852894285_30271905f8_b.jpg",
+    "credit": {
+      "creator": "Denis Dervisevic",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Massage Gun Pro",
+    "searchTerm": "massage gun",
+    "emoji": "🔫",
+    "description": "Percussion therapy, pro model.",
+    "price": 90,
+    "image": "https://live.staticflickr.com/65535/49876778672_36fd952ea0_b.jpg",
+    "credit": {
+      "creator": "TheBetterDay",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Foam Roller",
+    "searchTerm": "foam roller",
+    "emoji": "🛢️",
+    "description": "Muscle recovery cylinder.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/5690/23613110549_79863a2645_b.jpg"
+  },
+  {
+    "name": "Resistance Band Set",
+    "searchTerm": "resistance bands",
+    "emoji": "🏋️",
+    "description": "A gym in a pouch.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/5805/23898625111_6305e291e2_b.jpg"
+  },
+  {
+    "name": "Kettlebell",
+    "searchTerm": "kettlebell",
+    "emoji": "🏋️",
+    "description": "Swing your way fit.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/6195/6089310496_f57d05a480_b.jpg",
+    "credit": {
+      "creator": "drewgstephens",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Dumbbell Set",
+    "searchTerm": "dumbbells",
+    "emoji": "🏋️",
+    "description": "Classic iron.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/3270/2849545766_2b560d9b65_b.jpg",
+    "credit": {
+      "creator": "WilsonB",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Adjustable Dumbbells",
+    "searchTerm": "adjustable dumbbells",
+    "emoji": "🏋️",
+    "description": "One set, every weight.",
+    "price": 300,
+    "image": "https://live.staticflickr.com/1727/42702231182_1565649062_b.jpg",
+    "credit": {
+      "creator": "Homedust",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Pull-Up Bar",
+    "searchTerm": "pull up bar",
+    "emoji": "🤸",
+    "description": "Doorway gym.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/6201/6121731303_9aea9849ef_b.jpg",
+    "credit": {
+      "creator": "thomasfrank09",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Ab Roller",
+    "searchTerm": "ab roller",
+    "emoji": "🤸",
+    "description": "Core, engaged.",
+    "price": 15,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Ab_roller.webp"
+  },
+  {
+    "name": "Jump Rope",
+    "searchTerm": "jump rope",
+    "emoji": "🪢",
+    "description": "Cardio, portable.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/7240/27477704496_cbdfeb77eb_b.jpg"
+  },
+  {
+    "name": "Yoga Mat",
+    "searchTerm": "yoga mat",
+    "emoji": "🧘",
+    "description": "Your floor, softened.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/3570/3286289446_51157914b2_b.jpg",
+    "credit": {
+      "creator": "Bekathwia",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Yoga Block Set",
+    "searchTerm": "yoga blocks",
+    "emoji": "🧘",
+    "description": "Depth for every pose.",
+    "price": 18,
+    "image": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L2JzMTAzLWltYWdlLmpwZw.jpg"
+  },
+  {
+    "name": "Balance Board",
+    "searchTerm": "balance board",
+    "emoji": "🛹",
+    "description": "Stability training.",
+    "price": 30,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Wii_Balance_Board.JPG",
+    "credit": {
+      "creator": "Dddeco",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Speed Ladder",
+    "searchTerm": "agility ladder",
+    "emoji": "🪜",
+    "description": "Footwork drills.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/1698/24831902211_6cf7f09947_b.jpg"
+  },
+  {
+    "name": "Punching Bag",
+    "searchTerm": "punching bag",
+    "emoji": "🥊",
+    "description": "Stress relief, heavy bag.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/8093/8352318741_2c37999128_b.jpg",
+    "credit": {
+      "creator": "www.davidrosenphotography.com",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Boxing Gloves",
+    "searchTerm": "boxing gloves",
+    "emoji": "🥊",
+    "description": "Hands protected.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/1300/1135698211_813e3c3a60_b.jpg",
+    "credit": {
+      "creator": "markhillary",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Hand Grips",
+    "searchTerm": "hand grip strengthener",
+    "emoji": "💪",
+    "description": "Grip strength builder.",
+    "price": 12,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/00/Peralatan_Olahraga.jpg",
+    "credit": {
+      "creator": "Herusutimbul",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Grip Trainer",
+    "searchTerm": "grip trainer",
+    "emoji": "🤏",
+    "description": "Squeeze your way strong.",
+    "price": 15,
+    "image": "https://cdn.thingiverse.com/renders/68/8f/f2/67/f6/62e092806d8cacbcfb2195c6fc38ae2b_display_large.jpg"
+  },
+  {
+    "name": "Workout Bench",
+    "searchTerm": "workout bench",
+    "emoji": "🏋️",
+    "description": "Press, curl, row.",
+    "price": 90,
+    "image": "http://s0.geograph.org.uk/photos/51/20/512058_cff55ea5.jpg",
+    "credit": {
+      "creator": "Bob Embleton",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Treadmill",
+    "searchTerm": "treadmill",
+    "emoji": "🏃",
+    "description": "Run in place, forever.",
+    "price": 500,
+    "image": "https://live.staticflickr.com/2186/2117302606_7469e24535.jpg",
+    "credit": {
+      "creator": "Joe Hoover",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Elliptical Machine",
+    "searchTerm": "elliptical",
+    "emoji": "🏃",
+    "description": "Low-impact cardio.",
+    "price": 400,
+    "image": "https://live.staticflickr.com/5760/23409704522_6acef7967d_b.jpg",
+    "credit": {
+      "creator": "NASA Goddard Photo and Video",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Exercise Bike",
+    "searchTerm": "exercise bike",
+    "emoji": "🚴",
+    "description": "Spin at home.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/7815/40404208063_491a136674_b.jpg",
+    "credit": {
+      "creator": "jurvetson",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Rowing Machine",
+    "searchTerm": "rowing machine",
+    "emoji": "🚣",
+    "description": "Full-body pull.",
+    "price": 300,
+    "image": "https://live.staticflickr.com/7275/6952839060_17642b470a_b.jpg",
+    "credit": {
+      "creator": "freyafit",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Stair Stepper",
+    "searchTerm": "stair stepper",
+    "emoji": "🪜",
+    "description": "Climb without stairs.",
+    "price": 80,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/27/Stair_stepper.webp"
+  },
+  {
+    "name": "Skipping Rope Smart",
+    "searchTerm": "smart jump rope",
+    "emoji": "🪢",
+    "description": "Tracks your jumps.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/7890/32287151027_d7bc366520_b.jpg",
+    "credit": {
+      "creator": "Carol (vanhookc)",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Smart Yoga Mat",
+    "searchTerm": "smart yoga mat",
+    "emoji": "🧘",
+    "description": "Pose detection mat.",
+    "price": 150,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Bali_015_-_Ubud_-_yoga_mats_for_sale.jpg",
+    "credit": {
+      "creator": "mckaysavage",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Fitness Mirror",
+    "searchTerm": "fitness mirror",
+    "emoji": "🪞",
+    "description": "Classes in the mirror.",
+    "price": 800,
+    "image": "https://live.staticflickr.com/496/18834926588_64bb95f62c_b.jpg",
+    "credit": {
+      "creator": "Paula Satijn",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Heart Rate Monitor",
+    "searchTerm": "heart rate monitor",
+    "emoji": "❤️",
+    "description": "Chest strap accuracy.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/8529/8575465404_12a61c12f2_b.jpg",
+    "credit": {
+      "creator": "Iain Farrell",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Running Belt",
+    "searchTerm": "running belt",
+    "emoji": "🏃",
+    "description": "Phone, keys, go.",
+    "price": 18,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Running_belt.jpg",
+    "credit": {
+      "creator": "Tiia Monto",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Waterproof Watch",
+    "searchTerm": "waterproof watch",
+    "emoji": "⌚",
+    "description": "Swim-proof timing.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/547/18720503203_f39e3fa82c_b.jpg",
+    "credit": {
+      "creator": "Felipe Valduga",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Hiking Backpack",
+    "searchTerm": "hiking backpack",
+    "emoji": "🎒",
+    "description": "Carry the essentials.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/4411/37000797096_3921f09f37_b.jpg"
+  },
+  {
+    "name": "Camping Tent",
+    "searchTerm": "camping tent",
+    "emoji": "⛺",
+    "description": "Home, outdoors.",
+    "price": 90,
+    "image": "https://cdn.stocksnap.io/img-thumbs/960w/177F2EBDDC.jpg"
+  },
+  {
+    "name": "Pop-Up Tent",
+    "searchTerm": "pop up tent",
+    "emoji": "⛺",
+    "description": "Pitches in seconds.",
+    "price": 60,
+    "image": "https://cdn.thingiverse.com/renders/a6/99/35/73/c3/6f8b6c71816d86e25ec2f0af0253875e_display_large.jpg"
+  },
+  {
+    "name": "Camping Hammock",
+    "searchTerm": "hammock",
+    "emoji": "🪁",
+    "description": "Nap between trees.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/8013/7433810112_e0ffaab168_b.jpg",
+    "credit": {
+      "creator": "slgckgc",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Camping Stove",
+    "searchTerm": "camping stove",
+    "emoji": "🔥",
+    "description": "Hot meals in the wild.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/5595/15090523571_197cf94e78_b.jpg",
+    "credit": {
+      "creator": "nicolas.boullosa",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Portable Grill",
+    "searchTerm": "portable grill",
+    "emoji": "🍖",
+    "description": "BBQ anywhere.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/1014/537960077_54414abeb2.jpg",
+    "credit": {
+      "creator": "fleno.de",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Camping Lantern",
+    "searchTerm": "camping lantern",
+    "emoji": "🏮",
+    "description": "Light the site.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/65535/49445065802_fc5dee3e67_b.jpg",
+    "credit": {
+      "creator": "Helena Jacoba",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Headlamp",
+    "searchTerm": "headlamp",
+    "emoji": "🔦",
+    "description": "Hands-free light.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/4099/4878866808_f966c444fb.jpg",
+    "credit": {
+      "creator": "Poster Boy NYC",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Sleeping Bag",
+    "searchTerm": "sleeping bag",
+    "emoji": "🛌",
+    "description": "Cozy in the cold.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/5615/15445530080_0b7a5e0a39_b.jpg",
+    "credit": {
+      "creator": "MIKI Yoshihito. (#mikiyoshihito)",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Camping Pillow",
+    "searchTerm": "camping pillow",
+    "emoji": "🛌",
+    "description": "Inflatable comfort.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/6153/6168618228_b1e73e6918_b.jpg",
+    "credit": {
+      "creator": "Rick McCharles",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Camp Chair",
+    "searchTerm": "camping chair",
+    "emoji": "🪑",
+    "description": "Sit by the fire.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/2873/33776223425_a98709c0ef_b.jpg",
+    "credit": {
+      "creator": "Chris Hunkeler",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Camp Table",
+    "searchTerm": "camping table",
+    "emoji": "🪑",
+    "description": "Foldable surface.",
+    "price": 40,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Geometric-design-on-a-folding-camping-table.png"
+  },
+  {
+    "name": "Cooler Backpack",
+    "searchTerm": "cooler backpack",
+    "emoji": "🎒",
+    "description": "Drinks on the go.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/8430/7845758172_6fabbe22c0_b.jpg",
+    "credit": {
+      "creator": "CHEJ",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Inflatable Paddleboard",
+    "searchTerm": "paddleboard",
+    "emoji": "🏄",
+    "description": "Stand-up paddling.",
+    "price": 300,
+    "image": "https://live.staticflickr.com/5342/9219158091_751806254f_b.jpg",
+    "credit": {
+      "creator": "Chris Hunkeler",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Kayak",
+    "searchTerm": "kayak",
+    "emoji": "🛶",
+    "description": "Paddle the lake.",
+    "price": 400,
+    "image": "https://live.staticflickr.com/880/41373296841_6fcb055226_b.jpg"
+  },
+  {
+    "name": "Life Jacket",
+    "searchTerm": "life jacket",
+    "emoji": "🦺",
+    "description": "Safety first.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/3114/2546640975_ff0dcfe007_b.jpg",
+    "credit": {
+      "creator": "Casey LeFever",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Fishing Rod Set",
+    "searchTerm": "fishing rod",
+    "emoji": "🎣",
+    "description": "Catch of the day.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/7288/8741300534_07a59d7db2_b.jpg"
+  },
+  {
+    "name": "Fishing Tackle Box",
+    "searchTerm": "tackle box",
+    "emoji": "🎣",
+    "description": "Lures organized.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/5137/5468334737_f7a3ce7464.jpg",
+    "credit": {
+      "creator": "Jami.1022",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Cast Net",
+    "searchTerm": "casting net",
+    "emoji": "🕸️",
+    "description": "Throw it wide.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/65535/51797924926_566e3cb616_b.jpg",
+    "credit": {
+      "creator": "paaddor",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Snorkel Set",
+    "searchTerm": "snorkel mask",
+    "emoji": "🤿",
+    "description": "Breathe underwater.",
+    "price": 35,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/04/United-Service-Agency_Snorkel-Mask.jpg"
+  },
+  {
+    "name": "Wetsuit",
+    "searchTerm": "wetsuit",
+    "emoji": "🤿",
+    "description": "Warm in the waves.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/26/48416853_4f199e9c3e_b.jpg",
+    "credit": {
+      "creator": "avlxyz",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Pool Noodle",
+    "searchTerm": "pool noodle",
+    "emoji": "🩱",
+    "description": "The float classic.",
+    "price": 8,
+    "image": "https://live.staticflickr.com/65535/53469906851_435371bbfe_b.jpg",
+    "credit": {
+      "creator": "James Webb Space Telescope",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Pool Float",
+    "searchTerm": "pool float",
+    "emoji": "🛟",
+    "description": "Lounge on water.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/28/52894519_4d003868b7.jpg",
+    "credit": {
+      "creator": "celine nadeau",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Inflatable Pool",
+    "searchTerm": "inflatable pool",
+    "emoji": "🏊",
+    "description": "Backyard splash zone.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/2899/13987208225_c5bce13c88_b.jpg",
+    "credit": {
+      "creator": "USCPSC",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Diving Mask",
+    "searchTerm": "diving mask",
+    "emoji": "🤿",
+    "description": "See the reef.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/7354/10728575983_40ecba6578_b.jpg",
+    "credit": {
+      "creator": "U.S. Navy Seabee Museum",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Waterproof Camera",
+    "searchTerm": "waterproof camera",
+    "emoji": "📷",
+    "description": "Underwater shots.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/5560/30341814123_6c2ed2a16c_b.jpg"
+  },
+  {
+    "name": "Action Camera",
+    "searchTerm": "action camera",
+    "emoji": "📹",
+    "description": "Mount it anywhere.",
+    "price": 200,
+    "image": "https://live.staticflickr.com/65535/48438662662_f6bfed8f53_b.jpg"
+  },
+  {
+    "name": "Bike Helmet",
+    "searchTerm": "bike helmet",
+    "emoji": "🚴",
+    "description": "Protect the brain.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/5711/22820916133_0037960164_b.jpg"
+  },
+  {
+    "name": "Bike Lock",
+    "searchTerm": "bike lock",
+    "emoji": "🔒",
+    "description": "Keep the wheels.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/2519/3837139265_93feab003c_b.jpg",
+    "credit": {
+      "creator": "chris.dustin",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Bike Lights",
+    "searchTerm": "bike lights",
+    "emoji": "🚴",
+    "description": "See and be seen.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/35/72175201_148ea45194_b.jpg",
+    "credit": {
+      "creator": "chrismetcalfTV",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Bike Pump",
+    "searchTerm": "bike pump",
+    "emoji": "🚲",
+    "description": "Air, manual.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/5178/5585280902_88c3eae2ee_b.jpg",
+    "credit": {
+      "creator": "scriptingnews",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Bike Rack",
+    "searchTerm": "bike rack",
+    "emoji": "🚲",
+    "description": "Park the bikes.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/2154/2290119086_71e3dc01d5_b.jpg",
+    "credit": {
+      "creator": "*Sally M*",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Scooter",
+    "searchTerm": "scooter",
+    "emoji": "🛴",
+    "description": "Kick around town.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/8568/16587531276_49c776ea3c_b.jpg"
+  },
+  {
+    "name": "Skateboard",
+    "searchTerm": "skateboard",
+    "emoji": "🛹",
+    "description": "Board and roll.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/2499/3674686528_39d0b95591_b.jpg",
+    "credit": {
+      "creator": "TomenoNaoki",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Roller Skates",
+    "searchTerm": "roller skates",
+    "emoji": "🛼",
+    "description": "Retro wheels.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/3315/3580771716_283dc921fb_b.jpg",
+    "credit": {
+      "creator": "smaedli",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Ice Skates",
+    "searchTerm": "ice skates",
+    "emoji": "⛸️",
+    "description": "Glide the rink.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/7157/6625045137_4b5aee79c8_b.jpg",
+    "credit": {
+      "creator": "Benson Kua",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Ski Goggles",
+    "searchTerm": "ski goggles",
+    "emoji": "⛷️",
+    "description": "Clear vision, slopes.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/5497/11745465034_b8ea027e98_b.jpg",
+    "credit": {
+      "creator": "Lars Plougmann",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Snowboard",
+    "searchTerm": "snowboard",
+    "emoji": "🏂",
+    "description": "Ride the powder.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/7028/6583113409_e47d0e0f7b_b.jpg",
+    "credit": {
+      "creator": "ffo-sesp",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Sled",
+    "searchTerm": "sled",
+    "emoji": "🛷",
+    "description": "Winter hill thrills.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/3641/3432981950_dcf8463a9d_b.jpg",
+    "credit": {
+      "creator": "Beverly & Pack",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Snow Sled Tube",
+    "searchTerm": "snow tube",
+    "emoji": "🛟",
+    "description": "Spin down the hill.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/8087/8457525843_662ba8f8fc_b.jpg",
+    "credit": {
+      "creator": "MIKI Yoshihito. (#mikiyoshihito)",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Tennis Racket",
+    "searchTerm": "tennis racket",
+    "emoji": "🎾",
+    "description": "Ace potential.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/2799/4370537412_ffcd72ac87.jpg",
+    "credit": {
+      "creator": "CORE-Materials",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Pickleball Set",
+    "searchTerm": "pickleball",
+    "emoji": "🏓",
+    "description": "The fastest-growing sport.",
+    "price": 40,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Pickleball_Pros.jpg",
+    "credit": {
+      "creator": "Picklerpeej",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Badminton Set",
+    "searchTerm": "badminton set",
+    "emoji": "🏸",
+    "description": "Backyard rallies.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/65535/50104711048_609ba99137_b.jpg",
+    "credit": {
+      "creator": "Liz Henry",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Table Tennis Set",
+    "searchTerm": "table tennis",
+    "emoji": "🏓",
+    "description": "Ping-pong basics.",
+    "price": 30,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/cd/40mm_table_tennis_ball_Celluloid.jpg"
+  },
+  {
+    "name": "Golf Putter",
+    "searchTerm": "golf putter",
+    "emoji": "⛳",
+    "description": "Sink the putt.",
+    "price": 80,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/35/Golf_putter_on_green.jpg"
+  },
+  {
+    "name": "Golf Club Set",
+    "searchTerm": "golf clubs",
+    "emoji": "⛳",
+    "description": "Eighteen holes.",
+    "price": 200,
+    "image": "https://live.staticflickr.com/2507/4010582747_704cc0866e_b.jpg",
+    "credit": {
+      "creator": "kulicki",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Golf Rangefinder",
+    "searchTerm": "golf rangefinder",
+    "emoji": "📏",
+    "description": "Distance, exact.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/3346/3289854390_24793ff7a6_b.jpg",
+    "credit": {
+      "creator": "donjd2",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Disc Golf Set",
+    "searchTerm": "disc golf",
+    "emoji": "🥏",
+    "description": "Frisbee golf.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/4455/37151553183_54ba8b2244_b.jpg",
+    "credit": {
+      "creator": "MarkScottAustinTX",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Frisbee",
+    "searchTerm": "frisbee",
+    "emoji": "🥏",
+    "description": "Catch the disc.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/65535/48137420406_edf930529d_b.jpg"
+  },
+  {
+    "name": "Boomerang",
+    "searchTerm": "boomerang",
+    "emoji": "🪃",
+    "description": "It comes back.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/7419/12312661583_2f925d978a_b.jpg",
+    "credit": {
+      "creator": "Alang7™",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Cornhole Set",
+    "searchTerm": "cornhole",
+    "emoji": "🪵",
+    "description": "Tailgate classic.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/7569/15594838477_49a3960b9c.jpg",
+    "credit": {
+      "creator": "DiamondBack Truck Covers",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Lawn Darts",
+    "searchTerm": "lawn darts",
+    "emoji": "🎯",
+    "description": "Garden target game.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/3248/2704526241_89d523185d_b.jpg",
+    "credit": {
+      "creator": "TheDamnMushroom",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Croquet Set",
+    "searchTerm": "croquet",
+    "emoji": "🔨",
+    "description": "Mallets and hoops.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/4057/4382428611_183d47b0ff_b.jpg",
+    "credit": {
+      "creator": "Toronto Public Library Special Collections",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Horseshoe Set",
+    "searchTerm": "horseshoes",
+    "emoji": "🥾",
+    "description": "Clank and score.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/6230/6212508198_8a4e909b77_b.jpg"
+  },
+  {
+    "name": "Ladder Toss",
+    "searchTerm": "ladder toss",
+    "emoji": "🪜",
+    "description": "Bolos on rungs.",
+    "price": 30,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Ladder_toss_ladder.jpg"
+  },
+  {
+    "name": "Giant Jenga",
+    "searchTerm": "giant jenga",
+    "emoji": "🧱",
+    "description": "Backyard tower drama.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/610/31749164775_d84244d4c0_b.jpg"
+  },
+  {
+    "name": "Yard Dice",
+    "searchTerm": "giant dice",
+    "emoji": "🎲",
+    "description": "Oversized chance.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/85/212888591_f3ff8ad936_b.jpg",
+    "credit": {
+      "creator": "8one6",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Bocce Set",
+    "searchTerm": "bocce",
+    "emoji": "🎱",
+    "description": "Roll the balls.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/444/19917359199_62316cf39c_b.jpg",
+    "credit": {
+      "creator": "specialolympicsusa",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "KanJam",
+    "searchTerm": "kanjam",
+    "emoji": "🥏",
+    "description": "Score in the can.",
+    "price": 35,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7a/KanJam.jpg",
+    "credit": {
+      "creator": "Flickr user Chris Waits",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Spikeball Set",
+    "searchTerm": "spikeball",
+    "emoji": "🏐",
+    "description": "Roundnet rallies.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/840/41453405770_7fd23d12d1_b.jpg"
+  },
+  {
+    "name": "Slackline",
+    "searchTerm": "slackline",
+    "emoji": "🪢",
+    "description": "Walk the line.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/4134/4766690425_966399fdf9_b.jpg",
+    "credit": {
+      "creator": "Wonderlane",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Pogo Stick",
+    "searchTerm": "pogo stick",
+    "emoji": "🤸",
+    "description": "Bounce back.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/2868/12739393484_a9794f75d1_b.jpg",
+    "credit": {
+      "creator": "abbamouse",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Hula Hoop",
+    "searchTerm": "hula hoop",
+    "emoji": "🪀",
+    "description": "Spin it around your waist like it is the nineties.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/65535/51309091079_5e1462c561_b.jpg"
+  },
+  {
+    "name": "Juggling Balls",
+    "searchTerm": "juggling balls",
+    "emoji": "🤹",
+    "description": "Three-ball cascade.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/7338/11912553005_505d1f4919_b.jpg",
+    "credit": {
+      "creator": "wwarby",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Yo-Yo",
+    "searchTerm": "yo yo",
+    "emoji": "🪀",
+    "description": "Walk the dog.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/6087/6061854683_b65a878c65_b.jpg",
+    "credit": {
+      "creator": "ell brown",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Fidget Spinner",
+    "searchTerm": "fidget spinner",
+    "emoji": "🌀",
+    "description": "Spin, repeat.",
+    "price": 8,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Fidget_spinner_red%2C_cropped.jpg"
+  },
+  {
+    "name": "Rubik's Cube",
+    "searchTerm": "rubik's cube",
+    "emoji": "🧩",
+    "description": "Solve the cube.",
+    "price": 12,
+    "image": "https://live.staticflickr.com/2520/4032144165_ae06416f49_b.jpg",
+    "credit": {
+      "creator": "Scarygami",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "LEGO Classic Set",
+    "searchTerm": "lego set",
+    "emoji": "🧱",
+    "description": "Bricks of imagination.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/3255/3134000253_5a00ddebca_b.jpg",
+    "credit": {
+      "creator": "Wootang01",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Puzzle 1000 Pieces",
+    "searchTerm": "jigsaw puzzle",
+    "emoji": "🧩",
+    "description": "Patience required.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/3526/4054093512_080f56de61_b.jpg",
+    "credit": {
+      "creator": "Electric-Eye",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Board Game Collection",
+    "searchTerm": "board games",
+    "emoji": "🎲",
+    "description": "Game night bundle.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/8164/7173196970_433530e88a_b.jpg",
+    "credit": {
+      "creator": "Average Jane",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Chess Set",
+    "searchTerm": "chess set",
+    "emoji": "♟️",
+    "description": "The classic strategy.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/2523/4163089889_f0ac0a425a_b.jpg"
+  },
+  {
+    "name": "Backgammon Set",
+    "searchTerm": "backgammon",
+    "emoji": "🎲",
+    "description": "Dice and strategy.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/5132/5567430618_4431f1d457_b.jpg",
+    "credit": {
+      "creator": "kirichkov",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Mahjong Set",
+    "searchTerm": "mahjong",
+    "emoji": "🀄",
+    "description": "Tile matching classic.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/8689/17120877818_dc052aa59a_b.jpg"
+  },
+  {
+    "name": "Dominos Set",
+    "searchTerm": "dominoes",
+    "emoji": "🁢",
+    "description": "Line them up.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/1099/1035780973_583d1fe4c8_b.jpg"
+  },
+  {
+    "name": "Card Deck Set",
+    "searchTerm": "playing cards",
+    "emoji": "🃏",
+    "description": "Fifty-two pick up.",
+    "price": 10,
+    "image": "https://live.staticflickr.com/3676/13716779785_7c97162011.jpg",
+    "credit": {
+      "creator": "aquarian_insight",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Poker Chip Set",
+    "searchTerm": "poker chips",
+    "emoji": "🎰",
+    "description": "Texas hold'em night.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/2056/2235120304_4a15755d2b_b.jpg",
+    "credit": {
+      "creator": "V1LL14N",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Dartboard",
+    "searchTerm": "dartboard",
+    "emoji": "🎯",
+    "description": "Bullseye practice.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/5265/5887390697_0dbda319d1_b.jpg",
+    "credit": {
+      "creator": "mags20_eb",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Pool Table",
+    "searchTerm": "billiards table",
+    "emoji": "🎱",
+    "description": "The game room centerpiece.",
+    "price": 800,
+    "image": "https://live.staticflickr.com/3216/2965042296_e65e99c179_b.jpg",
+    "credit": {
+      "creator": "Scarygami",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Air Hockey Table",
+    "searchTerm": "air hockey",
+    "emoji": "🏒",
+    "description": "Tabletop hockey.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/5260/5522273594_53ab8d3694_b.jpg",
+    "credit": {
+      "creator": "osde8info",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Foosball Table",
+    "searchTerm": "foosball table",
+    "emoji": "⚽",
+    "description": "Table football.",
+    "price": 200,
+    "image": "https://live.staticflickr.com/3902/14309797388_5bbe76d8e0_b.jpg",
+    "credit": {
+      "creator": "stumajestic",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Arcade Machine",
+    "searchTerm": "arcade cabinet",
+    "emoji": "🕹️",
+    "description": "Home arcade dreams.",
+    "price": 400,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Kung-Fu_Master-arcade-cabinet.jpg",
+    "credit": {
+      "creator": "goodrob13",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Pinball Machine",
+    "searchTerm": "pinball machine",
+    "emoji": "🕹️",
+    "description": "Flippers and bells.",
+    "price": 2500,
+    "image": "https://live.staticflickr.com/65535/49319255368_0305da7392_b.jpg"
+  },
+  {
+    "name": "Ping Pong Table",
+    "searchTerm": "ping pong table",
+    "emoji": "🏓",
+    "description": "Garage tournaments.",
+    "price": 200,
+    "image": "https://live.staticflickr.com/7413/9482139077_75977bb985_b.jpg"
+  },
+  {
+    "name": "Slip-and-Slide",
+    "searchTerm": "slip and slide",
+    "emoji": "💦",
+    "description": "Summer sliding.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/3455/3909859317_74222e8b80_b.jpg",
+    "credit": {
+      "creator": "Trevecca Student Government",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Water Balloon Kit",
+    "searchTerm": "water balloons",
+    "emoji": "🎈",
+    "description": "Hydration warfare.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/5229/5675125159_2fc94045f7_b.jpg",
+    "credit": {
+      "creator": "Luke Peterson Photography",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Bubble Wand Set",
+    "searchTerm": "bubble wands",
+    "emoji": "🫧",
+    "description": "Giant bubbles.",
+    "price": 10,
+    "image": "https://live.staticflickr.com/2875/9592650744_ce6956a97d_b.jpg",
+    "credit": {
+      "creator": "simon_music",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Kite",
+    "searchTerm": "kite",
+    "emoji": "🪁",
+    "description": "Skyward fun.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/2600/3985783648_4702b45d13_b.jpg",
+    "credit": {
+      "creator": "Vironevaeh",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "RC Car",
+    "searchTerm": "rc car",
+    "emoji": "🏎️",
+    "description": "Radio-controlled speed.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/5009/5312292347_5613e921b5_b.jpg",
+    "credit": {
+      "creator": "bamyers4az",
+      "license": "by"
+    }
+  },
+  {
+    "name": "RC Boat",
+    "searchTerm": "rc boat",
+    "emoji": "🚤",
+    "description": "Lake racing.",
+    "price": 70,
+    "image": "https://live.staticflickr.com/2268/4509441388_2eb46d420b_b.jpg",
+    "credit": {
+      "creator": "bamyers4az",
+      "license": "by"
+    }
+  },
+  {
+    "name": "RC Helicopter",
+    "searchTerm": "rc helicopter",
+    "emoji": "🚁",
+    "description": "Hover practice.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/6005/5987970925_949b70dba4_b.jpg",
+    "credit": {
+      "creator": "wwarby",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Nerf Blaster",
+    "searchTerm": "nerf blaster",
+    "emoji": "🔫",
+    "description": "Foam warfare.",
+    "price": 30,
+    "image": "https://cdn.thingiverse.com/renders/14/e1/e3/eb/d2/e5ad4433ff99ca76bde63783fcd270ad_display_large.jpg"
+  },
+  {
+    "name": "Water Gun",
+    "searchTerm": "water gun",
+    "emoji": "💦",
+    "description": "Summer squirt fights.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/3930/15277272649_ce1c37ef62_b.jpg",
+    "credit": {
+      "creator": "Dean Hochman",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Light-Up Sneakers",
+    "searchTerm": "light up shoes",
+    "emoji": "👟",
+    "description": "Step in style.",
+    "price": 50,
+    "image": "https://live.staticflickr.com/7010/6767862297_1101617d62_b.jpg",
+    "credit": {
+      "creator": "Dan Harrelson",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Fanny Pack",
+    "searchTerm": "fanny pack",
+    "emoji": "👝",
+    "description": "Hands-free classic.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/76/177191012_fb8b27d28e_b.jpg",
+    "credit": {
+      "creator": "ndanger",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Bucket Hat",
+    "searchTerm": "bucket hat",
+    "emoji": "🧢",
+    "description": "Sunny-day style.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/2861/12312770015_2af4a69523_b.jpg",
+    "credit": {
+      "creator": "m01229",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Sunglasses",
+    "searchTerm": "sunglasses",
+    "emoji": "🕶️",
+    "description": "Shade, squared.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/8454/7993768362_324ae52f7e_b.jpg",
+    "credit": {
+      "creator": "Tobyotter",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Designer Sunglasses",
+    "searchTerm": "designer sunglasses",
+    "emoji": "🕶️",
+    "description": "Runway shade.",
+    "price": 120,
+    "image": "https://live.staticflickr.com/153/402517588_eb0ba6ac3f_b.jpg",
+    "credit": {
+      "creator": "colros",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Smart Sunglasses",
+    "searchTerm": "smart sunglasses",
+    "emoji": "🕶️",
+    "description": "Audio in your frames.",
+    "price": 200,
+    "image": "https://live.staticflickr.com/5081/5246176579_12af327fb5_b.jpg",
+    "credit": {
+      "creator": "vionaleews",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Umbrella",
+    "searchTerm": "umbrella",
+    "emoji": "☂️",
+    "description": "Rain, defeated.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/7020/6450761035_81e6837bf4_b.jpg",
+    "credit": {
+      "creator": "princedd",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Golf Umbrella",
+    "searchTerm": "golf umbrella",
+    "emoji": "☂️",
+    "description": "Oversized coverage.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/6164/6157182971_76bf60abc0_b.jpg",
+    "credit": {
+      "creator": "oddharmonic",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Poncho",
+    "searchTerm": "rain poncho",
+    "emoji": "🧥",
+    "description": "Instant rainwear.",
+    "price": 10,
+    "image": "https://live.staticflickr.com/7347/9370463387_7353f07af5_b.jpg",
+    "credit": {
+      "creator": "Toronto History",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Rain Boots",
+    "searchTerm": "rain boots",
+    "emoji": "🥾",
+    "description": "Puddle stompers.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/3191/2641816595_5a35587e61_b.jpg",
+    "credit": {
+      "creator": "tanakawho",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Winter Gloves",
+    "searchTerm": "gloves",
+    "emoji": "🧤",
+    "description": "Warm hands.",
+    "price": 20,
+    "image": "https://live.staticflickr.com/1300/1135698211_813e3c3a60_b.jpg",
+    "credit": {
+      "creator": "markhillary",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Beanie",
+    "searchTerm": "beanie",
+    "emoji": "🧢",
+    "description": "Head warmth.",
+    "price": 15,
+    "image": "https://live.staticflickr.com/3743/11113742313_0f8728ede3_b.jpg",
+    "credit": {
+      "creator": "rpavich",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Scarf",
+    "searchTerm": "scarf",
+    "emoji": "🧣",
+    "description": "Neck coziness.",
+    "price": 18,
+    "image": "https://live.staticflickr.com/3753/13571973965_1d51f48899_b.jpg",
+    "credit": {
+      "creator": "DU Jenny",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Electric Hand Warmer",
+    "searchTerm": "hand warmer",
+    "emoji": "🔥",
+    "description": "Pocket heat.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/2062/1551483716_8239050979_b.jpg",
+    "credit": {
+      "creator": "Breibeest",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Heated Socks",
+    "searchTerm": "heated socks",
+    "emoji": "🧦",
+    "description": "Toasty toes.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/5130/5282052729_7d190e3662_b.jpg",
+    "credit": {
+      "creator": "uncleboatshoes",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Heated Jacket",
+    "searchTerm": "heated jacket",
+    "emoji": "🧥",
+    "description": "Battery-powered warmth.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/65535/54133090903_cc0f288140_b.jpg"
+  },
+  {
+    "name": "Cooling Towel",
+    "searchTerm": "cooling towel",
+    "emoji": "🧣",
+    "description": "Evaporative chill.",
+    "price": 12,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Wet_cooling_towel.jpg",
+    "credit": {
+      "creator": "Corn cheese",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Neck Fan",
+    "searchTerm": "neck fan",
+    "emoji": "🌀",
+    "description": "Personal breeze.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/65535/52232783821_e47713e62e_b.jpg",
+    "credit": {
+      "creator": "TheBetterDay",
+      "license": "by-nd"
+    }
+  },
+  {
+    "name": "Portable AC",
+    "searchTerm": "portable air conditioner",
+    "emoji": "❄️",
+    "description": "Room cooling.",
+    "price": 250,
+    "image": "https://live.staticflickr.com/7287/8732267829_1880e0f0ec_b.jpg",
+    "credit": {
+      "creator": "Tom Hentoff",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Evaporative Cooler",
+    "searchTerm": "evaporative cooler",
+    "emoji": "🌬️",
+    "description": "Dry-heat relief.",
+    "price": 80,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Hessaire_MC92V_Evaporative_Cooler.jpg",
+    "credit": {
+      "creator": "TaurusEmerald",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Handheld Fan",
+    "searchTerm": "handheld fan",
+    "emoji": "🪭",
+    "description": "Pocket breeze.",
+    "price": 10,
+    "image": "https://images.rawpixel.com/image_png_1300/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2pvYjcyNC0xMDEtcC5wbmc.png"
+  },
+  {
+    "name": "Mini Projector Screen",
+    "searchTerm": "projector screen",
+    "emoji": "📽️",
+    "description": "A real screen.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/3435/3307784314_1e8117624a_b.jpg",
+    "credit": {
+      "creator": "arj03",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Tripod",
+    "searchTerm": "camera tripod",
+    "emoji": "📷",
+    "description": "Steady shots.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/5226/5662665898_e600e1e794_b.jpg",
+    "credit": {
+      "creator": "Wonderlane",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Monopod",
+    "searchTerm": "monopod",
+    "emoji": "📷",
+    "description": "One-leg stability.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/6039/7036587817_12428fba14_b.jpg",
+    "credit": {
+      "creator": "cloudchaser32000",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Camera Bag",
+    "searchTerm": "camera bag",
+    "emoji": "📷",
+    "description": "Gear, protected.",
+    "price": 45,
+    "image": "https://live.staticflickr.com/2302/2389691743_986b4d21cb_b.jpg",
+    "credit": {
+      "creator": "flymolo17",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Binoculars",
+    "searchTerm": "binoculars",
+    "emoji": "🔭",
+    "description": "See farther.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/8241/8502151556_b276fea761_b.jpg"
+  },
+  {
+    "name": "Telescope",
+    "searchTerm": "telescope",
+    "emoji": "🔭",
+    "description": "Stargazing.",
+    "price": 150,
+    "image": "https://live.staticflickr.com/4845/46397907811_39064bfd5f_b.jpg"
+  },
+  {
+    "name": "Microscope",
+    "searchTerm": "microscope",
+    "emoji": "🔬",
+    "description": "Tiny worlds.",
+    "price": 100,
+    "image": "https://live.staticflickr.com/3529/3866958782_6a0a2c33fd_b.jpg"
+  },
+  {
+    "name": "Metal Detector",
+    "searchTerm": "metal detector",
+    "emoji": "🔍",
+    "description": "Buried treasure.",
+    "price": 80,
+    "image": "https://live.staticflickr.com/4328/35179186484_ef259ec52e_b.jpg"
+  },
+  {
+    "name": "Weather Station",
+    "searchTerm": "weather station",
+    "emoji": "🌦️",
+    "description": "Your own forecast.",
+    "price": 60,
+    "image": "https://live.staticflickr.com/7505/16017540416_023cbe724e_b.jpg"
+  },
+  {
+    "name": "Birdhouse Camera",
+    "searchTerm": "birdhouse camera",
+    "emoji": "🐦",
+    "description": "Nest cam for the birds in your backyard.",
+    "price": 90,
+    "image": "https://cdn.thingiverse.com/renders/13/41/21/4a/de/6b36a6f209d3f431451bb04f37fd50c0_display_large.jpg"
+  },
+  {
+    "name": "Bug Vacuum",
+    "searchTerm": "bug vacuum",
+    "emoji": "🐞",
+    "description": "Catch and release.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/8236/8466461842_32d5f2b138.jpg",
+    "credit": {
+      "creator": "Jo Naylor",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Ant Farm",
+    "searchTerm": "ant farm",
+    "emoji": "🐜",
+    "description": "Tiny colony drama.",
+    "price": 25,
+    "image": "https://live.staticflickr.com/1861/29538504217_f42c994640_b.jpg"
+  },
+  {
+    "name": "Grow Light",
+    "searchTerm": "grow light",
+    "emoji": "💡",
+    "description": "Plants, powered.",
+    "price": 35,
+    "image": "https://live.staticflickr.com/7204/6862730209_1b39858e48_b.jpg",
+    "credit": {
+      "creator": "joncandy",
+      "license": "by-sa"
+    }
+  },
+  {
+    "name": "Terrarium Kit",
+    "searchTerm": "terrarium",
+    "emoji": "🪴",
+    "description": "A garden in glass.",
+    "price": 40,
+    "image": "https://live.staticflickr.com/5019/5475349361_0cd7293a7b.jpg",
+    "credit": {
+      "creator": "TinyApartmentCrafts",
+      "license": "by"
+    }
+  },
+  {
+    "name": "Fairy Garden Kit",
+    "searchTerm": "fairy garden",
+    "emoji": "🧚",
+    "description": "Miniature magic.",
+    "price": 30,
+    "image": "https://live.staticflickr.com/3630/3453444691_e8708a8222_b.jpg",
+    "credit": {
+      "creator": "JeffChristiansen",
+      "license": "by-sa"
+    }
   }
 ]

@@ -44,7 +44,14 @@ const files = [
   [
     'src/data/price-products.json',
     (e) =>
-      Number.isInteger(e.price) && e.price >= 1 && e.price <= 2000 && e.description.length >= 10,
+      Number.isInteger(e.price) &&
+      e.price >= 1 &&
+      e.price <= 4000 &&
+      e.description.length >= 10 &&
+      (e.image === undefined || typeof e.image === 'string') &&
+      (e.credit === undefined ||
+        (typeof e.credit.license === 'string' &&
+          (e.credit.creator === null || typeof e.credit.creator === 'string'))),
   ],
   [
     'src/data/genre-swaps.json',

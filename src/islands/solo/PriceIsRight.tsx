@@ -97,11 +97,26 @@ export default function PriceIsRight() {
       {product && (
         <>
           <div className="rounded-lg border-2 border-gray-200 bg-white p-6 text-center shadow-sm">
-            <p className="text-6xl" aria-hidden="true">
-              {product.emoji}
-            </p>
+            {product.image ? (
+              <img
+                src={product.image}
+                alt={product.name}
+                loading="lazy"
+                className="mx-auto max-h-56 rounded-lg border-2 border-gray-100 object-contain"
+              />
+            ) : (
+              <p className="text-6xl" aria-hidden="true">
+                {product.emoji}
+              </p>
+            )}
             <h3 className="mt-3 font-display text-h3 text-ink">{product.name}</h3>
             <p className="mx-auto mt-1 max-w-md text-body text-ink-muted">{product.description}</p>
+            {product.credit && (
+              <p className="mt-2 text-xs text-ink-muted">
+                Photo: {product.credit.creator ?? 'Wikimedia Commons'} ·{' '}
+                {product.credit.license.toUpperCase()}
+              </p>
+            )}
           </div>
           <div className="rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3">
