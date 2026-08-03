@@ -184,6 +184,19 @@ server tests) + live dev-server check on 2026-08-04.
       flow checked against the dev backend (start → choose → draw → end
       round → next round; trivia start rejected)
 
+### M4.2 — Guess/undo/fill fixes (owner report, 2026-08-04) ✅
+
+- [x] Mid-game joiners can guess: `SkribblSession.addPlayer` on join (was
+      `NOT_PLAYER` — "not letting me win"; D027)
+- [x] Drawer-local log: strokes append optimistically client-side; undo/clear
+      now broadcast to the whole room including the drawer (undo actually
+      works for the drawer now)
+- [x] Guess errors surface as visible feedback instead of failing silently
+- [x] Fill tool: `Stroke.type: 'pen' | 'fill'` + `floodFill` (dpr-aware,
+      replay-safe) + toolbar Fill button (white when eraser armed)
+- [x] Verified: `pnpm verify` green (56 client + 83 server tests) +
+      Git initial commit `4e7ea75` (M0–M4)
+
 ### Feature — Instant play (owner request 2026-08-04, landed with M4) ✅
 
 Play without joining a room, wherever a no-room mode makes sense (D022):

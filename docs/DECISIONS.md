@@ -575,4 +575,41 @@ workspace package.
 
 ---
 
-_(Next entry: D027 — recorded during M5.)_
+## D027 — Skribbl correctness fixes: late-joiner guessing, drawer-local log, fill tool (owner report 2026-08-04)
+
+- **Decision:** Four fixes after owner testing reported "can't win by
+  guessing", broken undo, and a missing fill tool:
+  1. **Late joiners can guess:** `SkribblSession.addPlayer(name)` adds
+     mid-game joins to the live session (idempotent for rejoins, rejected at
+     game-end) — previously their guesses failed with `NOT_PLAYER` (the
+     "not letting me win" report). They never draw (the drawer rotation is
+     fixed at start) and total rounds are unchanged.
+  2. **Drawer-local log:** the drawer's own strokes now join their local log
+     optimistically (`sendStroke` dispatches `stroke-added`), and
+     `undo-stroke`/`clear-canvas` broadcast to the WHOLE room including the
+     drawer. Previously the drawer's log never contained their strokes
+     (repaints could erase them, undo silently did nothing for the drawer).
+  3. **Visible guess errors:** `DRAWER_CANNOT_GUESS`, `ROUND_OVER`,
+     `NOT_PLAYER`, `WRONG_PHASE`, `RATE_LIMITED` map to feedback text shown
+     under the word-length display instead of failing silently.
+  4. **Fill tool:** additive `Stroke.type: 'pen' | 'fill'`; flood fill rides
+     the existing `draw-stroke` payload (no new event); replay applies fills
+     in log order (`floodFill` on the dpr-aware physical bitmap at logical
+     coordinates). Fill button fills with the selected color, or white when
+     the eraser is armed (patching holes); one tap returns to the pen.
+- **Reason:** All four were real defects surfaced by the owner's manual
+  testing of the live dev build.
+- **Alternatives considered:** separate `fill` socket event (unnecessary —
+  `draw-stroke` carries the additive type); server-side rasterization (over-
+  engineered for one drawer); excluding the drawer from undo (kept the bug).
+- **Tradeoffs:** flood fill is O(pixels) per application and every replay
+  recomputes it — fine at 800×500, revisit if canvases grow; optimistic
+  local strokes can briefly diverge from the server on rejection (self-
+  heals at round start).
+- **Date:** 2026-08-04
+- **Future impact:** The optimistic-log pattern is the reference for all
+  canvas actions; M5 drawing games inherit the fill tool.
+
+---
+
+_(Next entry: D028 — recorded during M5.)_

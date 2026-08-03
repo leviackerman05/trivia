@@ -389,7 +389,9 @@ Implementation notes (additive, not schema changes):
   podium), `game-restart` (rematch).
 - Drawing: `stroke-replay` (bulk stored strokes to a late joiner, PRD §4.2),
   `canvas-snapshot`; `draw-stroke`/`undo-stroke`/`clear-canvas` also
-  broadcast server→client (M4).
+  broadcast server→client (M4). Fills ride `draw-stroke` as an additive
+  `type: 'fill'` entry (D027); undo/clear broadcast to the whole room
+  including the drawer so every client's log (and replay) stays consistent.
 - Guessing: `guess-result` (correct/incorrect + scorer delta),
   `guess-feedback` (near-miss hint for "one line" penalty timers).
 - Skribbl round protocol (M4, D023): `choose-word` (drawer picks 1 of 3),
