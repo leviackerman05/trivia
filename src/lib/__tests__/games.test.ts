@@ -87,11 +87,12 @@ describe('game catalog (src/data/games.json)', () => {
       games.filter((game) => game.playable === true).map((game) => game.slug)
     );
     expect(playableSlugs).toEqual(new Set([...PLAYABLE_ROOM_GAMES]));
-    // Skribbl Arena (M4) and Trivia room mode (M8) are live.
-    expect(getGame('skribbl-arena')?.playable).toBe(true);
-    expect(getGame('trivia')?.playable).toBe(true);
-    // Room games without a round adapter yet stay unplayable.
-    expect(getGame('charades')?.playable).toBeUndefined();
+    // Every room game ships a round adapter since M9 (all 18 games playable).
+    for (const game of games) {
+      if (game.type !== 'solo') {
+        expect(game.playable, game.slug).toBe(true);
+      }
+    }
   });
 });
 

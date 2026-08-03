@@ -11,13 +11,35 @@
 
 ## Current Milestone
 
-**M9 — Charades + Guess Who** (next up — the final two room games).
+**M10 — SEO Content + AdSense Compliance + Performance** (next up — the
+final build milestone; M11 deployment stays deprioritized).
 
-M8 — Solo batch 2 + Trivia + daily challenge is ✅ **complete** (verified below).
+M9 — Charades + Guess Who is ✅ **complete** — **all 18 games playable**.
 
 ---
 
 ## Completed Work
+
+### Milestone 9 — Charades + Guess Who ✅ (verified 2026-08-04)
+
+- [x] **Charades (D033):** `CharadesSession` engine + `CharadesArena`
+      island — 300 movies (Hollywood/Bollywood/Mixed, host toggle),
+      actor-only title reveal (`.except(actorId)` broadcast), 60s timer,
+      any-player "Got it!" (+1 team score), pass-the-phone rotation, host
+      skip, team-score game end; datasets via
+      `scripts/generate-special-datasets.mjs` + validator
+- [x] **Guess Who (D033):** `GuessWhoSession` engine + `GuessWhoArena`
+      island — 205 celebrities with trait objects, answerer-only secret,
+      yes/no question log (20-cap → reveal), guess input (full/last-name
+      match), answerer-judged answers, solo affordance (D026); events:
+      `ask-question`, `set-charades-category`, `mark-correct`;
+      `answer-question` extended for guess-who, `send-guess` extended for
+      guesses
+- [x] games.json: charades + guess-who playable; registry lockstep green
+      (all 12 room games); page wires both arenas
+- [x] **Verification:** `pnpm verify` green — **120 client + 129 server
+      tests** (engine suites + reducer tests + 2-journey socket
+      integration)
 
 ### Milestone 8 — Solo Batch 2 + Trivia + Daily Challenge ✅ (verified 2026-08-04)
 
@@ -282,8 +304,9 @@ M8 — Solo batch 2 + Trivia + daily challenge is ✅ **complete** (verified bel
 
 ## In Progress
 
-- **M9 — Charades + Guess Who** (the last two room games; all 18 games
-  playable when done).
+- **M10 — SEO Content + AdSense Compliance + Performance** (homepage and
+  per-game copy, JSON-LD, OG/sitemap completeness, Lighthouse budgets,
+  mobile + a11y passes).
 
 ---
 
@@ -291,7 +314,6 @@ M8 — Solo batch 2 + Trivia + daily challenge is ✅ **complete** (verified bel
 
 Full roadmap: [TODO.md](TODO.md). Highlights:
 
-- **M9** Charades + Guess Who (all 18 games playable)
 - **M10** SEO content completion + AdSense compliance + performance budgets
 - **M11** Deployment (Cloudflare Pages + Railway/Render) + launch QA
   (owner: currently deprioritized)
@@ -300,7 +322,7 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Known Bugs
 
-- None known. All suites green (114 client + 117 server).
+- None known. All suites green (120 client + 129 server).
 
 ---
 
@@ -364,20 +386,23 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Upcoming Milestone
 
-**M9 — Charades + Guess Who** (working app: all 18 games playable)
+**M10 — SEO Content + AdSense Compliance + Performance** (production-grade
+content + compliance)
 
-- **Charades:** Hollywood (300+) / Bollywood categories + Mixed toggle,
-  actor word reveal (device-held), 60s timer, "Correct!" tally, pass-the-
-  phone flow; co-located mode only (open question #3)
-- **Guess Who? Celebrity Edition:** 200+ celebrity trait objects (text
-  only), yes/no question log, attempt counter, guess input, 20-question
-  reveal, host answers
-- Engine adapter: special-games configs; no canvas
-- Tests: category toggle, pass-the-phone rotation, question/guess flow
+- Homepage 600-word SEO copy with required keywords (PRD §6.1)
+- Per-game 400–600-word content + unique 150–160-char meta descriptions +
+  game-specific FAQ JSON-LD (all 18)
+- Global FAQ page JSON-LD (9 questions, PRD §6.3)
+- Schema.org: WebApplication markup + breadcrumbs on game pages
+- OG/Twitter tags + OG images for all pages; alt text everywhere;
+  canonical URLs; sitemap.xml complete (all 18 + legal + FAQ)
+- AdSense prep audit; content-licensing audit
+- Performance: Lighthouse CI budgets; page-weight gates; mobile pass;
+  accessibility audit
 
 ---
 
 ## Next Recommended Prompt
 
-> **"Continue with M9–M10"** — Charades + Guess Who (M9) and the SEO/perf
-> pass (M10) per `docs/TODO.md`. M11 deployment stays deprioritized.
+> **"Continue with M10"** — the SEO/content/perf pass per `docs/TODO.md`.
+> M11 deployment stays deprioritized until the owner asks.

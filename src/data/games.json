@@ -134,6 +134,7 @@
     "name": "Charades",
     "type": "multiplayer-realtime",
     "family": "special",
+    "playable": true,
     "tagline": "Act it out. Pass the phone. Keep the streak alive.",
     "description": "The classic party game, digitized. Hollywood or Bollywood titles, a 60-second timer, and a pass-the-phone flow built for co-located play."
   },
@@ -142,6 +143,7 @@
     "name": "Guess Who? Celebrity Edition",
     "type": "multiplayer-realtime",
     "family": "special",
+    "playable": true,
     "tagline": "Twenty yes/no questions to name the secret celebrity.",
     "description": "One player holds a secret celebrity. Everyone else asks yes/no questions — alive? actor? — and races to name them before the 20-question reveal."
   },

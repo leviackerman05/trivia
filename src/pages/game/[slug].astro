@@ -8,6 +8,8 @@ import CopycatArena from '../../islands/CopycatArena.tsx';
 import VotingArena from '../../islands/VotingArena.tsx';
 import TriviaSolo from '../../islands/TriviaSolo.tsx';
 import TriviaArena from '../../islands/TriviaArena.tsx';
+import CharadesArena from '../../islands/CharadesArena.tsx';
+import GuessWhoArena from '../../islands/GuessWhoArena.tsx';
 import WouldYouRatherOneScreen from '../../islands/WouldYouRatherOneScreen.tsx';
 import RhymeOrCrime from '../../islands/solo/RhymeOrCrime.tsx';
 import EmojiPlot from '../../islands/solo/EmojiPlot.tsx';
@@ -90,6 +92,10 @@ const soloShipped = SHIPPED_SOLO.has(game.slug);
                 <VotingArena client:load gameSlug={game.slug} />
               ) : game.slug === 'trivia' ? (
                 <TriviaArena client:load gameSlug={game.slug} />
+              ) : game.slug === 'charades' ? (
+                <CharadesArena client:load gameSlug={game.slug} />
+              ) : game.slug === 'guess-who' ? (
+                <GuessWhoArena client:load gameSlug={game.slug} />
               ) : (
                 <RoomLobby client:load gameSlug={game.slug} />
               )}

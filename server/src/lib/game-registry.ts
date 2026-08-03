@@ -18,4 +18,6 @@ export const PLAYABLE_ROOM_GAMES: ReadonlySet<string> = new Set([
   'never-have-i-ever',
   'this-or-that',
   'trivia',
+  'charades',
+  'guess-who',
 ]);

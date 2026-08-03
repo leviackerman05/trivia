@@ -54,6 +54,22 @@ const files = [
     'src/data/genre-benders.json',
     (e) => e.bent.length >= 40 && e.bent.length <= 200 && typeof e.year === 'number',
   ],
+  [
+    'server/src/data/charades-movies.json',
+    (e) =>
+      e.title.length >= 2 &&
+      (e.category === 'hollywood' || e.category === 'bollywood') &&
+      e.title.length <= 70,
+  ],
+  [
+    'server/src/data/celebrities.json',
+    (e) =>
+      e.name.length >= 3 &&
+      (e.gender === 'm' || e.gender === 'f') &&
+      typeof e.alive === 'boolean' &&
+      e.profession.length >= 3 &&
+      e.famousFor.length >= 3,
+  ],
 ];
 
 let failed = 0;

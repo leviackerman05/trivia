@@ -324,20 +324,24 @@ Working app: remaining solo games + Trivia (solo & room) + daily challenges.
 
 ---
 
-## Milestone 9 — Charades + Guess Who
+## Milestone 9 — Charades + Guess Who ✅
 
 Working app: all 18 games playable.
 
-- [ ] **Charades:** Hollywood (300+) / Bollywood categories + Mixed toggle,
-      actor word reveal (device-held), 60s timer, "Correct!" tally, pass-the-
-      phone flow; ⚠ remote mode per open question #3
-- [ ] **Guess Who? Celebrity Edition:** 200+ celebrity trait objects (text
-      only), yes/no question log, attempt counter, guess input, 20-question
-      reveal, host answers
-- [ ] Engine adapter: special-games configs; no canvas
-- [ ] Tests: category toggle, pass-the-phone rotation, question/guess flow
-- [ ] E2E: Charades + Guess Who journeys
-- [ ] Update docs
+- [x] **Charades:** 300 movies (Hollywood 159 / Bollywood 141) + Mixed
+      toggle, actor-only word reveal (device-held), 60s timer, "Correct!"
+      tally (+1, anyone can tap — self-policed co-located play), pass-the-
+      phone rotation, host skip; co-located mode only (open question #3)
+- [x] **Guess Who? Celebrity Edition:** 205 celebrity trait objects (text
+      only), yes/no question log (20-question cap → reveal), attempt
+      counter, guess input (full or last-name match), answerer answers,
+      winner reveal; solo rooms let the answerer participate (D026)
+- [x] Engine adapter: special-games configs; no canvas (CharadesSession +
+      GuessWhoSession + gateway adapters)
+- [x] Tests: category toggle, pass-the-phone rotation, question/guess flow
+      (engine suites + 2-journey socket integration + reducer tests)
+- [x] E2E: Charades + Guess Who journeys
+- [x] Update docs (D033, PROJECT_STATE)
 
 **Done when:** all 18 games playable; game registry complete.
 

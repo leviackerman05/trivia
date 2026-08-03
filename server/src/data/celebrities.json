@@ -1,0 +1,2052 @@
+[
+  {
+    "name": "Beyoncé",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "blonde",
+    "famousFor": "Run the World, Lemonade"
+  },
+  {
+    "name": "Taylor Swift",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "blonde",
+    "famousFor": "Eras Tour, folklore"
+  },
+  {
+    "name": "Elon Musk",
+    "gender": "m",
+    "alive": true,
+    "profession": "Entrepreneur",
+    "nationality": "South African",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Tesla, SpaceX, X"
+  },
+  {
+    "name": "Albert Einstein",
+    "gender": "m",
+    "alive": false,
+    "profession": "Physicist",
+    "nationality": "German",
+    "ageRange": "70s",
+    "hairColor": "white",
+    "famousFor": "Theory of relativity"
+  },
+  {
+    "name": "Marie Curie",
+    "gender": "f",
+    "alive": false,
+    "profession": "Scientist",
+    "nationality": "Polish",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Radioactivity research"
+  },
+  {
+    "name": "Nelson Mandela",
+    "gender": "m",
+    "alive": false,
+    "profession": "Politician",
+    "nationality": "South African",
+    "ageRange": "90s",
+    "hairColor": "gray",
+    "famousFor": "Ending apartheid"
+  },
+  {
+    "name": "Michael Jackson",
+    "gender": "m",
+    "alive": false,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "Thriller"
+  },
+  {
+    "name": "Oprah Winfrey",
+    "gender": "f",
+    "alive": true,
+    "profession": "TV Host",
+    "nationality": "American",
+    "ageRange": "70s",
+    "hairColor": "black",
+    "famousFor": "The Oprah Winfrey Show"
+  },
+  {
+    "name": "Barack Obama",
+    "gender": "m",
+    "alive": true,
+    "profession": "Politician",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "gray",
+    "famousFor": "44th US president"
+  },
+  {
+    "name": "Donald Trump",
+    "gender": "m",
+    "alive": true,
+    "profession": "Politician",
+    "nationality": "American",
+    "ageRange": "70s",
+    "hairColor": "blonde",
+    "famousFor": "45th & 47th US president"
+  },
+  {
+    "name": "Bill Gates",
+    "gender": "m",
+    "alive": true,
+    "profession": "Entrepreneur",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "gray",
+    "famousFor": "Microsoft"
+  },
+  {
+    "name": "Steve Jobs",
+    "gender": "m",
+    "alive": false,
+    "profession": "Entrepreneur",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Apple"
+  },
+  {
+    "name": "Mark Zuckerberg",
+    "gender": "m",
+    "alive": true,
+    "profession": "Entrepreneur",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Facebook"
+  },
+  {
+    "name": "Jeff Bezos",
+    "gender": "m",
+    "alive": true,
+    "profession": "Entrepreneur",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "gray",
+    "famousFor": "Amazon"
+  },
+  {
+    "name": "Warren Buffett",
+    "gender": "m",
+    "alive": true,
+    "profession": "Investor",
+    "nationality": "American",
+    "ageRange": "90s",
+    "hairColor": "gray",
+    "famousFor": "Berkshire Hathaway"
+  },
+  {
+    "name": "Leonardo DiCaprio",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "blonde",
+    "famousFor": "Titanic, The Revenant"
+  },
+  {
+    "name": "Tom Cruise",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Mission: Impossible"
+  },
+  {
+    "name": "Brad Pitt",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "blonde",
+    "famousFor": "Fight Club, Once Upon a Time in Hollywood"
+  },
+  {
+    "name": "Angelina Jolie",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Maleficent, Lara Croft"
+  },
+  {
+    "name": "Jennifer Lawrence",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "blonde",
+    "famousFor": "The Hunger Games"
+  },
+  {
+    "name": "Scarlett Johansson",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "blonde",
+    "famousFor": "Black Widow"
+  },
+  {
+    "name": "Robert Downey Jr.",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Iron Man"
+  },
+  {
+    "name": "Chris Hemsworth",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Australian",
+    "ageRange": "40s",
+    "hairColor": "blonde",
+    "famousFor": "Thor"
+  },
+  {
+    "name": "Dwayne Johnson",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "Jumanji, WWE"
+  },
+  {
+    "name": "Will Smith",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "The Fresh Prince, Men in Black"
+  },
+  {
+    "name": "Shah Rukh Khan",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Indian",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "King of Bollywood"
+  },
+  {
+    "name": "Aamir Khan",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Indian",
+    "ageRange": "60s",
+    "hairColor": "black",
+    "famousFor": "Dangal, 3 Idiots"
+  },
+  {
+    "name": "Salman Khan",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Indian",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "Dabangg"
+  },
+  {
+    "name": "Priyanka Chopra",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "Indian",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "Quantico, Bajirao Mastani"
+  },
+  {
+    "name": "Deepika Padukone",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "Indian",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Padmaavat"
+  },
+  {
+    "name": "Alia Bhatt",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "Indian",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Gangubai Kathiawadi"
+  },
+  {
+    "name": "Ranbir Kapoor",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Indian",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "Animal"
+  },
+  {
+    "name": "Virat Kohli",
+    "gender": "m",
+    "alive": true,
+    "profession": "Cricketer",
+    "nationality": "Indian",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Indian cricket captain"
+  },
+  {
+    "name": "MS Dhoni",
+    "gender": "m",
+    "alive": true,
+    "profession": "Cricketer",
+    "nationality": "Indian",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "World Cup 2011 win"
+  },
+  {
+    "name": "Sachin Tendulkar",
+    "gender": "m",
+    "alive": true,
+    "profession": "Cricketer",
+    "nationality": "Indian",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "100 international centuries"
+  },
+  {
+    "name": "Ronaldo",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "Portuguese",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "Five Ballon d’Or awards"
+  },
+  {
+    "name": "Lionel Messi",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "Argentine",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "World Cup 2022 win"
+  },
+  {
+    "name": "Neymar",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "Brazilian",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Samba football"
+  },
+  {
+    "name": "Serena Williams",
+    "gender": "f",
+    "alive": true,
+    "profession": "Tennis Player",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "23 Grand Slam titles"
+  },
+  {
+    "name": "Roger Federer",
+    "gender": "m",
+    "alive": true,
+    "profession": "Tennis Player",
+    "nationality": "Swiss",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "20 Grand Slam titles"
+  },
+  {
+    "name": "Rafael Nadal",
+    "gender": "m",
+    "alive": true,
+    "profession": "Tennis Player",
+    "nationality": "Spanish",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "Clay-court king"
+  },
+  {
+    "name": "Michael Jordan",
+    "gender": "m",
+    "alive": true,
+    "profession": "Basketball Player",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "black",
+    "famousFor": "Six NBA titles"
+  },
+  {
+    "name": "LeBron James",
+    "gender": "m",
+    "alive": true,
+    "profession": "Basketball Player",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "NBA all-time scorer"
+  },
+  {
+    "name": "Usain Bolt",
+    "gender": "m",
+    "alive": true,
+    "profession": "Sprinter",
+    "nationality": "Jamaican",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "World-record 100m"
+  },
+  {
+    "name": "Simone Biles",
+    "gender": "f",
+    "alive": true,
+    "profession": "Gymnast",
+    "nationality": "American",
+    "ageRange": "20s",
+    "hairColor": "black",
+    "famousFor": "Most decorated gymnast"
+  },
+  {
+    "name": "Marilyn Monroe",
+    "gender": "f",
+    "alive": false,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "blonde",
+    "famousFor": "Hollywood icon"
+  },
+  {
+    "name": "Elvis Presley",
+    "gender": "m",
+    "alive": false,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "King of Rock and Roll"
+  },
+  {
+    "name": "John Lennon",
+    "gender": "m",
+    "alive": false,
+    "profession": "Musician",
+    "nationality": "British",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "The Beatles"
+  },
+  {
+    "name": "Freddie Mercury",
+    "gender": "m",
+    "alive": false,
+    "profession": "Singer",
+    "nationality": "British",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "Queen"
+  },
+  {
+    "name": "David Bowie",
+    "gender": "m",
+    "alive": false,
+    "profession": "Musician",
+    "nationality": "British",
+    "ageRange": "60s",
+    "hairColor": "red",
+    "famousFor": "Ziggy Stardust"
+  },
+  {
+    "name": "Whitney Houston",
+    "gender": "f",
+    "alive": false,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "I Will Always Love You"
+  },
+  {
+    "name": "Princess Diana",
+    "gender": "f",
+    "alive": false,
+    "profession": "Royal",
+    "nationality": "British",
+    "ageRange": "30s",
+    "hairColor": "blonde",
+    "famousFor": "The People’s Princess"
+  },
+  {
+    "name": "Queen Elizabeth II",
+    "gender": "f",
+    "alive": false,
+    "profession": "Royal",
+    "nationality": "British",
+    "ageRange": "90s",
+    "hairColor": "white",
+    "famousFor": "Longest-reigning monarch"
+  },
+  {
+    "name": "Winston Churchill",
+    "gender": "m",
+    "alive": false,
+    "profession": "Politician",
+    "nationality": "British",
+    "ageRange": "80s",
+    "hairColor": "gray",
+    "famousFor": "WWII UK prime minister"
+  },
+  {
+    "name": "Mahatma Gandhi",
+    "gender": "m",
+    "alive": false,
+    "profession": "Activist",
+    "nationality": "Indian",
+    "ageRange": "70s",
+    "hairColor": "gray",
+    "famousFor": "Indian independence"
+  },
+  {
+    "name": "Mother Teresa",
+    "gender": "f",
+    "alive": false,
+    "profession": "Nun",
+    "nationality": "Albanian",
+    "ageRange": "80s",
+    "hairColor": "white",
+    "famousFor": "Charity work in Kolkata"
+  },
+  {
+    "name": "Martin Luther King Jr.",
+    "gender": "m",
+    "alive": false,
+    "profession": "Activist",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Civil rights movement"
+  },
+  {
+    "name": "Rosa Parks",
+    "gender": "f",
+    "alive": false,
+    "profession": "Activist",
+    "nationality": "American",
+    "ageRange": "90s",
+    "hairColor": "gray",
+    "famousFor": "Montgomery bus boycott"
+  },
+  {
+    "name": "Abraham Lincoln",
+    "gender": "m",
+    "alive": false,
+    "profession": "Politician",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Ending slavery in the US"
+  },
+  {
+    "name": "George Washington",
+    "gender": "m",
+    "alive": false,
+    "profession": "Politician",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "white",
+    "famousFor": "First US president"
+  },
+  {
+    "name": "Napoleon Bonaparte",
+    "gender": "m",
+    "alive": false,
+    "profession": "Military Leader",
+    "nationality": "French",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "French emperor"
+  },
+  {
+    "name": "Julius Caesar",
+    "gender": "m",
+    "alive": false,
+    "profession": "Military Leader",
+    "nationality": "Roman",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Roman dictator"
+  },
+  {
+    "name": "Cleopatra",
+    "gender": "f",
+    "alive": false,
+    "profession": "Ruler",
+    "nationality": "Egyptian",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Last pharaoh of Egypt"
+  },
+  {
+    "name": "William Shakespeare",
+    "gender": "m",
+    "alive": false,
+    "profession": "Playwright",
+    "nationality": "British",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Romeo and Juliet"
+  },
+  {
+    "name": "Charles Dickens",
+    "gender": "m",
+    "alive": false,
+    "profession": "Author",
+    "nationality": "British",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "A Christmas Carol"
+  },
+  {
+    "name": "Jane Austen",
+    "gender": "f",
+    "alive": false,
+    "profession": "Author",
+    "nationality": "British",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Pride and Prejudice"
+  },
+  {
+    "name": "J.K. Rowling",
+    "gender": "f",
+    "alive": true,
+    "profession": "Author",
+    "nationality": "British",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Harry Potter"
+  },
+  {
+    "name": "Stephen King",
+    "gender": "m",
+    "alive": true,
+    "profession": "Author",
+    "nationality": "American",
+    "ageRange": "70s",
+    "hairColor": "gray",
+    "famousFor": "The Shining, It"
+  },
+  {
+    "name": "Agatha Christie",
+    "gender": "f",
+    "alive": false,
+    "profession": "Author",
+    "nationality": "British",
+    "ageRange": "80s",
+    "hairColor": "gray",
+    "famousFor": "Murder on the Orient Express"
+  },
+  {
+    "name": "Pablo Picasso",
+    "gender": "m",
+    "alive": false,
+    "profession": "Artist",
+    "nationality": "Spanish",
+    "ageRange": "90s",
+    "hairColor": "gray",
+    "famousFor": "Cubism"
+  },
+  {
+    "name": "Vincent van Gogh",
+    "gender": "m",
+    "alive": false,
+    "profession": "Artist",
+    "nationality": "Dutch",
+    "ageRange": "30s",
+    "hairColor": "red",
+    "famousFor": "Starry Night"
+  },
+  {
+    "name": "Leonardo da Vinci",
+    "gender": "m",
+    "alive": false,
+    "profession": "Artist",
+    "nationality": "Italian",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Mona Lisa"
+  },
+  {
+    "name": "Frida Kahlo",
+    "gender": "f",
+    "alive": false,
+    "profession": "Artist",
+    "nationality": "Mexican",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "Self-portraits"
+  },
+  {
+    "name": "Salvador Dalí",
+    "gender": "m",
+    "alive": false,
+    "profession": "Artist",
+    "nationality": "Spanish",
+    "ageRange": "80s",
+    "hairColor": "black",
+    "famousFor": "Surrealism"
+  },
+  {
+    "name": "Michelangelo",
+    "gender": "m",
+    "alive": false,
+    "profession": "Artist",
+    "nationality": "Italian",
+    "ageRange": "80s",
+    "hairColor": "brown",
+    "famousFor": "Sistine Chapel"
+  },
+  {
+    "name": "Mozart",
+    "gender": "m",
+    "alive": false,
+    "profession": "Composer",
+    "nationality": "Austrian",
+    "ageRange": "30s",
+    "hairColor": "blonde",
+    "famousFor": "Classical music"
+  },
+  {
+    "name": "Beethoven",
+    "gender": "m",
+    "alive": false,
+    "profession": "Composer",
+    "nationality": "German",
+    "ageRange": "50s",
+    "hairColor": "gray",
+    "famousFor": "Symphony No. 5"
+  },
+  {
+    "name": "Bach",
+    "gender": "m",
+    "alive": false,
+    "profession": "Composer",
+    "nationality": "German",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Baroque music"
+  },
+  {
+    "name": "Charlie Chaplin",
+    "gender": "m",
+    "alive": false,
+    "profession": "Actor",
+    "nationality": "British",
+    "ageRange": "80s",
+    "hairColor": "brown",
+    "famousFor": "The Tramp"
+  },
+  {
+    "name": "Alfred Hitchcock",
+    "gender": "m",
+    "alive": false,
+    "profession": "Director",
+    "nationality": "British",
+    "ageRange": "80s",
+    "hairColor": "gray",
+    "famousFor": "Psycho"
+  },
+  {
+    "name": "Steven Spielberg",
+    "gender": "m",
+    "alive": true,
+    "profession": "Director",
+    "nationality": "American",
+    "ageRange": "70s",
+    "hairColor": "brown",
+    "famousFor": "Jaws, E.T., Jurassic Park"
+  },
+  {
+    "name": "Christopher Nolan",
+    "gender": "m",
+    "alive": true,
+    "profession": "Director",
+    "nationality": "British",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Inception, Dark Knight"
+  },
+  {
+    "name": "Martin Scorsese",
+    "gender": "m",
+    "alive": true,
+    "profession": "Director",
+    "nationality": "American",
+    "ageRange": "80s",
+    "hairColor": "gray",
+    "famousFor": "Goodfellas, Taxi Driver"
+  },
+  {
+    "name": "Quentin Tarantino",
+    "gender": "m",
+    "alive": true,
+    "profession": "Director",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Pulp Fiction"
+  },
+  {
+    "name": "Stanley Kubrick",
+    "gender": "m",
+    "alive": false,
+    "profession": "Director",
+    "nationality": "American",
+    "ageRange": "70s",
+    "hairColor": "brown",
+    "famousFor": "2001: A Space Odyssey"
+  },
+  {
+    "name": "Walt Disney",
+    "gender": "m",
+    "alive": false,
+    "profession": "Entrepreneur",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Disney empire"
+  },
+  {
+    "name": "Jimmy Carter",
+    "gender": "m",
+    "alive": true,
+    "profession": "Politician",
+    "nationality": "American",
+    "ageRange": "90s",
+    "hairColor": "white",
+    "famousFor": "39th US president"
+  },
+  {
+    "name": "Joe Biden",
+    "gender": "m",
+    "alive": true,
+    "profession": "Politician",
+    "nationality": "American",
+    "ageRange": "80s",
+    "hairColor": "white",
+    "famousFor": "46th US president"
+  },
+  {
+    "name": "Kamala Harris",
+    "gender": "f",
+    "alive": true,
+    "profession": "Politician",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "black",
+    "famousFor": "US vice president"
+  },
+  {
+    "name": "Justin Bieber",
+    "gender": "m",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "Canadian",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "Baby, Sorry"
+  },
+  {
+    "name": "Drake",
+    "gender": "m",
+    "alive": true,
+    "profession": "Rapper",
+    "nationality": "Canadian",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "God’s Plan"
+  },
+  {
+    "name": "Kanye West",
+    "gender": "m",
+    "alive": true,
+    "profession": "Rapper",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "Graduation, Yeezy"
+  },
+  {
+    "name": "Jay-Z",
+    "gender": "m",
+    "alive": true,
+    "profession": "Rapper",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "Empire State of Mind"
+  },
+  {
+    "name": "Rihanna",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "Barbadian",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Umbrella, Fenty"
+  },
+  {
+    "name": "Adele",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "British",
+    "ageRange": "30s",
+    "hairColor": "blonde",
+    "famousFor": "Someone Like You"
+  },
+  {
+    "name": "Ed Sheeran",
+    "gender": "m",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "British",
+    "ageRange": "30s",
+    "hairColor": "red",
+    "famousFor": "Shape of You"
+  },
+  {
+    "name": "Lady Gaga",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "blonde",
+    "famousFor": "Poker Face, A Star Is Born"
+  },
+  {
+    "name": "Madonna",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "blonde",
+    "famousFor": "Queen of Pop"
+  },
+  {
+    "name": "Celine Dion",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "Canadian",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "My Heart Will Go On"
+  },
+  {
+    "name": "Ariana Grande",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "Thank U, Next"
+  },
+  {
+    "name": "Billie Eilish",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "20s",
+    "hairColor": "black",
+    "famousFor": "Bad Guy"
+  },
+  {
+    "name": "Bruno Mars",
+    "gender": "m",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Uptown Funk"
+  },
+  {
+    "name": "Post Malone",
+    "gender": "m",
+    "alive": true,
+    "profession": "Rapper",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "blonde",
+    "famousFor": "Circles"
+  },
+  {
+    "name": "The Weeknd",
+    "gender": "m",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "Canadian",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Blinding Lights"
+  },
+  {
+    "name": "Harry Styles",
+    "gender": "m",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "British",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "As It Was"
+  },
+  {
+    "name": "Shakira",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "Colombian",
+    "ageRange": "40s",
+    "hairColor": "blonde",
+    "famousFor": "Hips Don’t Lie"
+  },
+  {
+    "name": "Jennifer Lopez",
+    "gender": "f",
+    "alive": true,
+    "profession": "Singer",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "On the Floor"
+  },
+  {
+    "name": "Kim Kardashian",
+    "gender": "f",
+    "alive": true,
+    "profession": "Media Personality",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Keeping Up with the Kardashians"
+  },
+  {
+    "name": "Kylie Jenner",
+    "gender": "f",
+    "alive": true,
+    "profession": "Media Personality",
+    "nationality": "American",
+    "ageRange": "20s",
+    "hairColor": "brown",
+    "famousFor": "Kylie Cosmetics"
+  },
+  {
+    "name": "Cristiano Ronaldo",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "Portuguese",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "Five Champions Leagues"
+  },
+  {
+    "name": "Kylian Mbappé",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "French",
+    "ageRange": "20s",
+    "hairColor": "black",
+    "famousFor": "World Cup 2018 win"
+  },
+  {
+    "name": "Erling Haaland",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "Norwegian",
+    "ageRange": "20s",
+    "hairColor": "blonde",
+    "famousFor": "Goal machine"
+  },
+  {
+    "name": "Zinedine Zidane",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "French",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "1998 World Cup win"
+  },
+  {
+    "name": "Diego Maradona",
+    "gender": "m",
+    "alive": false,
+    "profession": "Footballer",
+    "nationality": "Argentine",
+    "ageRange": "60s",
+    "hairColor": "black",
+    "famousFor": "Hand of God goal"
+  },
+  {
+    "name": "Pelé",
+    "gender": "m",
+    "alive": false,
+    "profession": "Footballer",
+    "nationality": "Brazilian",
+    "ageRange": "80s",
+    "hairColor": "black",
+    "famousFor": "Three World Cups"
+  },
+  {
+    "name": "Muhammad Ali",
+    "gender": "m",
+    "alive": false,
+    "profession": "Boxer",
+    "nationality": "American",
+    "ageRange": "70s",
+    "hairColor": "black",
+    "famousFor": "Float like a butterfly"
+  },
+  {
+    "name": "Mike Tyson",
+    "gender": "m",
+    "alive": true,
+    "profession": "Boxer",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "Youngest heavyweight champ"
+  },
+  {
+    "name": "Conor McGregor",
+    "gender": "m",
+    "alive": true,
+    "profession": "MMA Fighter",
+    "nationality": "Irish",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "UFC double champion"
+  },
+  {
+    "name": "Lewis Hamilton",
+    "gender": "m",
+    "alive": true,
+    "profession": "Racing Driver",
+    "nationality": "British",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "Seven F1 titles"
+  },
+  {
+    "name": "Max Verstappen",
+    "gender": "m",
+    "alive": true,
+    "profession": "Racing Driver",
+    "nationality": "Dutch",
+    "ageRange": "20s",
+    "hairColor": "blonde",
+    "famousFor": "F1 world champion"
+  },
+  {
+    "name": "Valentino Rossi",
+    "gender": "m",
+    "alive": true,
+    "profession": "Motorcyclist",
+    "nationality": "Italian",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Nine MotoGP titles"
+  },
+  {
+    "name": "Tiger Woods",
+    "gender": "m",
+    "alive": true,
+    "profession": "Golfer",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "15 major titles"
+  },
+  {
+    "name": "Novak Djokovic",
+    "gender": "m",
+    "alive": true,
+    "profession": "Tennis Player",
+    "nationality": "Serbian",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "24 Grand Slam titles"
+  },
+  {
+    "name": "Andy Murray",
+    "gender": "m",
+    "alive": true,
+    "profession": "Tennis Player",
+    "nationality": "British",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "Three Grand Slams"
+  },
+  {
+    "name": "Emma Raducanu",
+    "gender": "f",
+    "alive": true,
+    "profession": "Tennis Player",
+    "nationality": "British",
+    "ageRange": "20s",
+    "hairColor": "brown",
+    "famousFor": "US Open 2021 win"
+  },
+  {
+    "name": "Naomi Osaka",
+    "gender": "f",
+    "alive": true,
+    "profession": "Tennis Player",
+    "nationality": "Japanese",
+    "ageRange": "20s",
+    "hairColor": "black",
+    "famousFor": "Four Grand Slams"
+  },
+  {
+    "name": "Shaquille O’Neal",
+    "gender": "m",
+    "alive": true,
+    "profession": "Basketball Player",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "NBA dominance"
+  },
+  {
+    "name": "Kobe Bryant",
+    "gender": "m",
+    "alive": false,
+    "profession": "Basketball Player",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "Five NBA titles"
+  },
+  {
+    "name": "Stephen Curry",
+    "gender": "m",
+    "alive": true,
+    "profession": "Basketball Player",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Three-point revolution"
+  },
+  {
+    "name": "Kevin Durant",
+    "gender": "m",
+    "alive": true,
+    "profession": "Basketball Player",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "NBA champion"
+  },
+  {
+    "name": "Tom Brady",
+    "gender": "m",
+    "alive": true,
+    "profession": "Football Player",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Seven Super Bowls"
+  },
+  {
+    "name": "Patrick Mahomes",
+    "gender": "m",
+    "alive": true,
+    "profession": "Football Player",
+    "nationality": "American",
+    "ageRange": "20s",
+    "hairColor": "black",
+    "famousFor": "Super Bowl MVP"
+  },
+  {
+    "name": "Amelia Earhart",
+    "gender": "f",
+    "alive": false,
+    "profession": "Aviation Pioneer",
+    "nationality": "American",
+    "ageRange": "30s",
+    "hairColor": "blonde",
+    "famousFor": "First woman to fly the Atlantic"
+  },
+  {
+    "name": "Neil Armstrong",
+    "gender": "m",
+    "alive": false,
+    "profession": "Astronaut",
+    "nationality": "American",
+    "ageRange": "80s",
+    "hairColor": "brown",
+    "famousFor": "First man on the Moon"
+  },
+  {
+    "name": "Buzz Aldrin",
+    "gender": "m",
+    "alive": true,
+    "profession": "Astronaut",
+    "nationality": "American",
+    "ageRange": "90s",
+    "hairColor": "white",
+    "famousFor": "Apollo 11"
+  },
+  {
+    "name": "Stephen Hawking",
+    "gender": "m",
+    "alive": false,
+    "profession": "Physicist",
+    "nationality": "British",
+    "ageRange": "70s",
+    "hairColor": "brown",
+    "famousFor": "A Brief History of Time"
+  },
+  {
+    "name": "Isaac Newton",
+    "gender": "m",
+    "alive": false,
+    "profession": "Physicist",
+    "nationality": "British",
+    "ageRange": "80s",
+    "hairColor": "gray",
+    "famousFor": "Laws of motion"
+  },
+  {
+    "name": "Charles Darwin",
+    "gender": "m",
+    "alive": false,
+    "profession": "Naturalist",
+    "nationality": "British",
+    "ageRange": "70s",
+    "hairColor": "brown",
+    "famousFor": "Theory of evolution"
+  },
+  {
+    "name": "Nikola Tesla",
+    "gender": "m",
+    "alive": false,
+    "profession": "Inventor",
+    "nationality": "Serbian",
+    "ageRange": "80s",
+    "hairColor": "brown",
+    "famousFor": "AC electricity"
+  },
+  {
+    "name": "Thomas Edison",
+    "gender": "m",
+    "alive": false,
+    "profession": "Inventor",
+    "nationality": "American",
+    "ageRange": "80s",
+    "hairColor": "gray",
+    "famousFor": "Light bulb"
+  },
+  {
+    "name": "Alexander Graham Bell",
+    "gender": "m",
+    "alive": false,
+    "profession": "Inventor",
+    "nationality": "British",
+    "ageRange": "70s",
+    "hairColor": "brown",
+    "famousFor": "Telephone"
+  },
+  {
+    "name": "The Wright Brothers",
+    "gender": "m",
+    "alive": false,
+    "profession": "Inventors",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "First airplane flight"
+  },
+  {
+    "name": "Florence Nightingale",
+    "gender": "f",
+    "alive": false,
+    "profession": "Nurse",
+    "nationality": "British",
+    "ageRange": "90s",
+    "hairColor": "brown",
+    "famousFor": "Modern nursing"
+  },
+  {
+    "name": "Helen Keller",
+    "gender": "f",
+    "alive": false,
+    "profession": "Activist",
+    "nationality": "American",
+    "ageRange": "80s",
+    "hairColor": "brown",
+    "famousFor": "Deafblind advocate"
+  },
+  {
+    "name": "Anne Frank",
+    "gender": "f",
+    "alive": false,
+    "profession": "Diary Author",
+    "nationality": "German",
+    "ageRange": "10s",
+    "hairColor": "brown",
+    "famousFor": "The Diary of a Young Girl"
+  },
+  {
+    "name": "Malala Yousafzai",
+    "gender": "f",
+    "alive": true,
+    "profession": "Activist",
+    "nationality": "Pakistani",
+    "ageRange": "20s",
+    "hairColor": "black",
+    "famousFor": "Girls’ education"
+  },
+  {
+    "name": "Greta Thunberg",
+    "gender": "f",
+    "alive": true,
+    "profession": "Activist",
+    "nationality": "Swedish",
+    "ageRange": "20s",
+    "hairColor": "blonde",
+    "famousFor": "Climate strikes"
+  },
+  {
+    "name": "Ruth Bader Ginsburg",
+    "gender": "f",
+    "alive": false,
+    "profession": "Judge",
+    "nationality": "American",
+    "ageRange": "80s",
+    "hairColor": "white",
+    "famousFor": "US Supreme Court justice"
+  },
+  {
+    "name": "Johnny Depp",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Pirates of the Caribbean"
+  },
+  {
+    "name": "Meryl Streep",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "70s",
+    "hairColor": "blonde",
+    "famousFor": "The Devil Wears Prada"
+  },
+  {
+    "name": "Tom Hanks",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Forrest Gump"
+  },
+  {
+    "name": "Julia Roberts",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Pretty Woman"
+  },
+  {
+    "name": "Sandra Bullock",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "blonde",
+    "famousFor": "Gravity, Speed"
+  },
+  {
+    "name": "George Clooney",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "gray",
+    "famousFor": "Ocean’s Eleven"
+  },
+  {
+    "name": "Matt Damon",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Bourne series"
+  },
+  {
+    "name": "Ben Affleck",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Argo"
+  },
+  {
+    "name": "Jennifer Aniston",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "blonde",
+    "famousFor": "Friends"
+  },
+  {
+    "name": "Courteney Cox",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Friends"
+  },
+  {
+    "name": "David Schwimmer",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Friends"
+  },
+  {
+    "name": "Matt LeBlanc",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Friends"
+  },
+  {
+    "name": "Hugh Jackman",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Australian",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Wolverine"
+  },
+  {
+    "name": "Ryan Reynolds",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Canadian",
+    "ageRange": "40s",
+    "hairColor": "red",
+    "famousFor": "Deadpool"
+  },
+  {
+    "name": "Chris Pratt",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Guardians of the Galaxy"
+  },
+  {
+    "name": "Emma Watson",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "British",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "Hermione Granger"
+  },
+  {
+    "name": "Daniel Radcliffe",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "British",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "Harry Potter"
+  },
+  {
+    "name": "Rupert Grint",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "British",
+    "ageRange": "30s",
+    "hairColor": "red",
+    "famousFor": "Ron Weasley"
+  },
+  {
+    "name": "Keanu Reeves",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Canadian",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "John Wick, The Matrix"
+  },
+  {
+    "name": "Natalie Portman",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "Israeli",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Black Swan"
+  },
+  {
+    "name": "Cate Blanchett",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "Australian",
+    "ageRange": "50s",
+    "hairColor": "blonde",
+    "famousFor": "Elizabeth"
+  },
+  {
+    "name": "Nicole Kidman",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "Australian",
+    "ageRange": "50s",
+    "hairColor": "red",
+    "famousFor": "Moulin Rouge"
+  },
+  {
+    "name": "Samuel L. Jackson",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "70s",
+    "hairColor": "black",
+    "famousFor": "Pulp Fiction"
+  },
+  {
+    "name": "Morgan Freeman",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "80s",
+    "hairColor": "gray",
+    "famousFor": "The Shawshank Redemption"
+  },
+  {
+    "name": "Denzel Washington",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "70s",
+    "hairColor": "black",
+    "famousFor": "Training Day"
+  },
+  {
+    "name": "Viola Davis",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "How to Get Away with Murder"
+  },
+  {
+    "name": "Zendaya",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "American",
+    "ageRange": "20s",
+    "hairColor": "black",
+    "famousFor": "Euphoria, Dune"
+  },
+  {
+    "name": "Timothée Chalamet",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "20s",
+    "hairColor": "brown",
+    "famousFor": "Dune, Wonka"
+  },
+  {
+    "name": "Margot Robbie",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "Australian",
+    "ageRange": "30s",
+    "hairColor": "blonde",
+    "famousFor": "Barbie"
+  },
+  {
+    "name": "Ryan Gosling",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Canadian",
+    "ageRange": "40s",
+    "hairColor": "blonde",
+    "famousFor": "La La Land, Barbie"
+  },
+  {
+    "name": "Joaquin Phoenix",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Joker"
+  },
+  {
+    "name": "Adam Sandler",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Happy Gilmore"
+  },
+  {
+    "name": "Jim Carrey",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Canadian",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "The Mask"
+  },
+  {
+    "name": "Eddie Murphy",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "60s",
+    "hairColor": "black",
+    "famousFor": "Coming to America"
+  },
+  {
+    "name": "Jackie Chan",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Chinese",
+    "ageRange": "70s",
+    "hairColor": "black",
+    "famousFor": "Kung fu movies"
+  },
+  {
+    "name": "Arnold Schwarzenegger",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Austrian",
+    "ageRange": "70s",
+    "hairColor": "brown",
+    "famousFor": "Terminator"
+  },
+  {
+    "name": "Sylvester Stallone",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "70s",
+    "hairColor": "black",
+    "famousFor": "Rocky, Rambo"
+  },
+  {
+    "name": "Bruce Lee",
+    "gender": "m",
+    "alive": false,
+    "profession": "Martial Artist",
+    "nationality": "Chinese",
+    "ageRange": "30s",
+    "hairColor": "black",
+    "famousFor": "Enter the Dragon"
+  },
+  {
+    "name": "Irina Shayk",
+    "gender": "f",
+    "alive": true,
+    "profession": "Model",
+    "nationality": "Russian",
+    "ageRange": "30s",
+    "hairColor": "brown",
+    "famousFor": "Supermodel"
+  },
+  {
+    "name": "David Beckham",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "British",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "Manchester United"
+  },
+  {
+    "name": "Zlatan Ibrahimović",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "Swedish",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "Bicycle kicks"
+  },
+  {
+    "name": "Andrés Iniesta",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "Spanish",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "2010 World Cup winner"
+  },
+  {
+    "name": "Xavi",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "Spanish",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Barcelona midfield"
+  },
+  {
+    "name": "Wayne Rooney",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "British",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "England top scorer"
+  },
+  {
+    "name": "Gary Lineker",
+    "gender": "m",
+    "alive": true,
+    "profession": "Footballer",
+    "nationality": "British",
+    "ageRange": "60s",
+    "hairColor": "brown",
+    "famousFor": "Match of the Day host"
+  },
+  {
+    "name": "Dwayne \"The Rock\" Johnson",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "Red Notice"
+  },
+  {
+    "name": "John Cena",
+    "gender": "m",
+    "alive": true,
+    "profession": "Wrestler",
+    "nationality": "American",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "You can’t see me"
+  },
+  {
+    "name": "The Rock",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "American",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "WWE legend"
+  },
+  {
+    "name": "Angela Merkel",
+    "gender": "f",
+    "alive": true,
+    "profession": "Politician",
+    "nationality": "German",
+    "ageRange": "70s",
+    "hairColor": "blonde",
+    "famousFor": "German chancellor"
+  },
+  {
+    "name": "Volodymyr Zelenskyy",
+    "gender": "m",
+    "alive": true,
+    "profession": "Politician",
+    "nationality": "Ukrainian",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Ukraine wartime leader"
+  },
+  {
+    "name": "Rishi Sunak",
+    "gender": "m",
+    "alive": true,
+    "profession": "Politician",
+    "nationality": "British",
+    "ageRange": "40s",
+    "hairColor": "black",
+    "famousFor": "UK prime minister"
+  },
+  {
+    "name": "Narendra Modi",
+    "gender": "m",
+    "alive": true,
+    "profession": "Politician",
+    "nationality": "Indian",
+    "ageRange": "70s",
+    "hairColor": "gray",
+    "famousFor": "Indian prime minister"
+  },
+  {
+    "name": "Mukesh Ambani",
+    "gender": "m",
+    "alive": true,
+    "profession": "Entrepreneur",
+    "nationality": "Indian",
+    "ageRange": "60s",
+    "hairColor": "gray",
+    "famousFor": "Reliance Industries"
+  },
+  {
+    "name": "Ratan Tata",
+    "gender": "m",
+    "alive": false,
+    "profession": "Entrepreneur",
+    "nationality": "Indian",
+    "ageRange": "80s",
+    "hairColor": "gray",
+    "famousFor": "Tata Group"
+  },
+  {
+    "name": "Lata Mangeshkar",
+    "gender": "f",
+    "alive": false,
+    "profession": "Singer",
+    "nationality": "Indian",
+    "ageRange": "90s",
+    "hairColor": "black",
+    "famousFor": "Nightingale of India"
+  },
+  {
+    "name": "Amitabh Bachchan",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Indian",
+    "ageRange": "80s",
+    "hairColor": "gray",
+    "famousFor": "Shahenshah of Bollywood"
+  },
+  {
+    "name": "Hrithik Roshan",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Indian",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "Krrish"
+  }
+]

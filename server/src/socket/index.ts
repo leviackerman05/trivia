@@ -51,6 +51,17 @@ import {
   type TriviaMode,
   type TriviaSession as TriviaGameSession,
 } from '../engine/trivia-engine.js';
+import {
+  CharadesSession,
+  type CharadesCategory,
+  type CharadesSession as CharadesGameSession,
+} from '../engine/charades-engine.js';
+import {
+  GuessWhoSession,
+  GUESS_WHO_MAX_QUESTIONS,
+  type Celebrity,
+  type GuessWhoSession as GuessWhoGameSession,
+} from '../engine/guess-who-engine.js';
 import { PLAYABLE_ROOM_GAMES } from '../lib/game-registry.js';
 
 import wordsJson from '../data/skribbl-words.json' with { type: 'json' };
@@ -63,7 +74,10 @@ import mltJson from '../data/most-likely-to.json' with { type: 'json' };
 import nhieJson from '../data/never-have-i-ever.json' with { type: 'json' };
 import totJson from '../data/this-or-that.json' with { type: 'json' };
 import triviaQuestionsJson from '../data/trivia-questions.json' with { type: 'json' };
+import charadesMoviesJson from '../data/charades-movies.json' with { type: 'json' };
+import celebritiesJson from '../data/celebrities.json' with { type: 'json' };
 import type { TriviaQuestion } from '../engine/trivia-engine.js';
+import type { CharadesMovie } from '../engine/charades-engine.js';
 
 export interface SocketGatewayDeps {
   engine: RoomEngine;
@@ -95,10 +109,17 @@ interface RoomTimers {
   voteEnd?: NodeJS.Timeout;
   statementEnd?: NodeJS.Timeout;
   questionEnd?: NodeJS.Timeout;
+  actingEnd?: NodeJS.Timeout;
 }
 
-/** A live game session: a drawing game, Copycat, a voting game, or Trivia. */
-type GameSession = DrawingSession | CopycatSession | VotingGameSession | TriviaGameSession;
+/** A live game session: drawing, Copycat, voting, Trivia, Charades, Guess Who. */
+type GameSession =
+  | DrawingSession
+  | CopycatSession
+  | VotingGameSession
+  | TriviaGameSession
+  | CharadesGameSession
+  | GuessWhoGameSession;
 
 const DRAWING_CONFIGS: Record<string, DrawingGameConfig> = {
   'skribbl-arena': {
@@ -245,6 +266,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   const pendingPrompts = new Map<string, { a: string; b: string }[]>();
   /** Host-chosen Trivia room mode, applied when the game starts. */
   const pendingTriviaModes = new Map<string, TriviaMode>();
+  /** Host-chosen Charades category, applied when the game starts. */
+  const pendingCharadesCategories = new Map<string, CharadesCategory>();
   /** Voting phase deadlines (ms epoch) so resync can rebuild client timers. */
   const votingDeadlines = new Map<string, number>();
 
@@ -290,6 +313,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     pendingCustomWords.delete(roomCode);
     pendingPrompts.delete(roomCode);
     pendingTriviaModes.delete(roomCode);
+    pendingCharadesCategories.delete(roomCode);
     votingDeadlines.delete(roomCode);
   }
 
@@ -315,6 +339,24 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   function triviaOf(room: RoomState): TriviaGameSession | undefined {
     const session = sessions.get(room.code);
     return session instanceof TriviaSession ? session : undefined;
+  }
+
+  function charadesOf(room: RoomState): CharadesGameSession | undefined {
+    const session = sessions.get(room.code);
+    return session instanceof CharadesSession ? session : undefined;
+  }
+
+  function guessWhoOf(room: RoomState): GuessWhoGameSession | undefined {
+    const session = sessions.get(room.code);
+    return session instanceof GuessWhoSession ? session : undefined;
+  }
+
+  function isCharadesRoom(room: RoomState): boolean {
+    return room.gameId === 'charades';
+  }
+
+  function isGuessWhoRoom(room: RoomState): boolean {
+    return room.gameId === 'guess-who';
   }
 
   function isTriviaRoom(room: RoomState): boolean {
@@ -613,6 +655,45 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         myAnswer: session.answerOf(requesterName),
         reveal: session.lastReveal,
         scores: session.scoreboard,
+      };
+    }
+    if (session instanceof CharadesSession) {
+      const isActor = session.currentActor === requesterName;
+      return {
+        view: session.phaseValue,
+        kind: 'charades',
+        category: session.categoryValue,
+        round: session.currentRound,
+        totalRounds: session.totalRoundsValue,
+        actor: session.currentActor,
+        score: session.scoreValue,
+        // The movie title only goes to the actor's own device.
+        movie: isActor ? (session.currentMovie?.title ?? null) : null,
+      };
+    }
+    if (session instanceof GuessWhoSession) {
+      const isAnswerer = session.answerer === requesterName;
+      return {
+        view: session.phaseValue,
+        kind: 'guess-who',
+        answerer: session.answerer,
+        questionCount: session.questionCount,
+        maxQuestions: session.maxQuestions,
+        questions: session.questionLog,
+        winner: session.winnerValue,
+        // The secret celebrity only goes to the answerer's device.
+        celebrity: isAnswerer
+          ? {
+              name: session.secretCelebrity?.name ?? null,
+              gender: session.secretCelebrity?.gender ?? null,
+              alive: session.secretCelebrity?.alive ?? null,
+              profession: session.secretCelebrity?.profession ?? null,
+              nationality: session.secretCelebrity?.nationality ?? null,
+              ageRange: session.secretCelebrity?.ageRange ?? null,
+              hairColor: session.secretCelebrity?.hairColor ?? null,
+              famousFor: session.secretCelebrity?.famousFor ?? null,
+            }
+          : null,
       };
     }
     const hints = session.letterHintsAt(Date.now());
@@ -1046,6 +1127,189 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     logger.info({ roomCode: room.code, payload }, 'trivia game finished');
   }
 
+  // --- Charades + Guess Who adapter helpers (M9) ---------------------------
+
+  function emitCharadesRoundStart(room: RoomState): void {
+    const session = charadesOf(room);
+    if (!session || !session.currentMovie) {
+      return;
+    }
+    const actorId = roomActorSocketId(room, session.currentActor);
+    const base = {
+      kind: 'charades',
+      phase: 'acting',
+      category: session.categoryValue,
+      actor: session.currentActor,
+      round: session.currentRound,
+      totalRounds: session.totalRoundsValue,
+      score: session.scoreValue,
+      endsAt: Date.now() + 60_000,
+    };
+    // The movie title is actor-only (D023 — like the drawer's word): the
+    // base goes to everyone EXCEPT the actor; the actor gets the private one.
+    if (actorId) {
+      io.to(room.code).except(actorId).emit(ServerEvents.roundStart, base);
+      io.to(actorId).emit(ServerEvents.roundStart, {
+        ...base,
+        movie: session.currentMovie.title,
+      });
+    } else {
+      io.to(room.code).emit(ServerEvents.roundStart, base);
+    }
+  }
+
+  function roomActorSocketId(room: RoomState, actorName: string | null): string | null {
+    if (!actorName) {
+      return null;
+    }
+    for (const [socketId, player] of room.players) {
+      if (player.name === actorName && player.connected) {
+        return socketId;
+      }
+    }
+    return null;
+  }
+
+  function startCharades(room: RoomState): boolean {
+    // Capture the host-chosen category BEFORE clearing the room game state.
+    const category = pendingCharadesCategories.get(room.code) ?? 'mixed';
+    clearRoomGame(room.code);
+    const session = new CharadesSession(charadesMoviesJson as CharadesMovie[], { roundMs: 60_000 });
+    const players = [...room.players.values()]
+      .filter((player) => player.connected)
+      .map((player) => player.name);
+    const started = session.start(players, category);
+    if (!started.ok) {
+      return false;
+    }
+    sessions.set(room.code, session);
+    const engineResult = engine.transition(room, 'in-progress');
+    if (!engineResult.ok) {
+      return false;
+    }
+    emitCharadesRoundStart(room);
+    broadcastState(room);
+    timers.set(room.code, {
+      actingEnd: setTimeout(() => {
+        advanceCharades(room);
+      }, 60_000),
+    });
+    logger.info({ roomCode: room.code, category }, 'charades started');
+    return true;
+  }
+
+  /** Correct! (scored) or timeout (0): rotate to the next actor. */
+  function advanceCharades(room: RoomState, scored = false): void {
+    const session = charadesOf(room);
+    if (!session || session.phaseValue !== 'acting') {
+      return;
+    }
+    const score = session.scoreValue;
+    const advanced = session.next();
+    if (!advanced.ok) {
+      return;
+    }
+    clearTimers(room.code);
+    if (advanced.value.finished) {
+      io.to(room.code).emit(ServerEvents.roundEnd, {
+        kind: 'charades',
+        scored,
+        score,
+        nextActor: null,
+      });
+      finishCharades(room, score);
+      return;
+    }
+    // Announce the result, then start the next round.
+    io.to(room.code).emit(ServerEvents.roundEnd, {
+      kind: 'charades',
+      scored,
+      score,
+      nextActor: session.currentActor,
+    });
+    emitCharadesRoundStart(room);
+    timers.set(room.code, {
+      actingEnd: setTimeout(() => {
+        advanceCharades(room);
+      }, 60_000),
+    });
+  }
+
+  function finishCharades(room: RoomState, score: number): void {
+    const session = charadesOf(room);
+    if (!session) {
+      return;
+    }
+    clearTimers(room.code);
+    const engineResult = engine.transition(room, 'results');
+    if (!engineResult.ok) {
+      return;
+    }
+    const payload = session.endPayload() as Record<string, unknown>;
+    io.to(room.code).emit(ServerEvents.gameEnd, payload);
+    broadcastState(room);
+    persistBestEffort(setRoomStatus(room.code, 'finished'), `finish ${room.code}`);
+    logger.info({ roomCode: room.code, score }, 'charades finished');
+  }
+
+  function startGuessWho(room: RoomState): boolean {
+    clearRoomGame(room.code);
+    const session = new GuessWhoSession(celebritiesJson as Celebrity[]);
+    const players = [...room.players.values()]
+      .filter((player) => player.connected)
+      .map((player) => player.name);
+    const host = [...room.players.values()].find((player) => player.isHost && player.connected);
+    const answerer = host?.name ?? players[0] ?? '';
+    const started = session.start(players, answerer);
+    if (!started.ok) {
+      return false;
+    }
+    sessions.set(room.code, session);
+    const engineResult = engine.transition(room, 'in-progress');
+    if (!engineResult.ok) {
+      return false;
+    }
+    const answererId = roomActorSocketId(room, answerer);
+    const base = {
+      kind: 'guess-who',
+      phase: 'questioning',
+      answerer,
+      questionCount: 0,
+      maxQuestions: GUESS_WHO_MAX_QUESTIONS,
+    };
+    // The secret celebrity is answerer-only (D023): base to everyone except
+    // the answerer, private payload to the answerer's device.
+    if (answererId) {
+      io.to(room.code).except(answererId).emit(ServerEvents.roundStart, base);
+      io.to(answererId).emit(ServerEvents.roundStart, {
+        ...base,
+        celebrity: started.value.celebrity,
+      });
+    } else {
+      io.to(room.code).emit(ServerEvents.roundStart, base);
+    }
+    broadcastState(room);
+    logger.info({ roomCode: room.code, answerer }, 'guess-who started');
+    return true;
+  }
+
+  function finishGuessWho(room: RoomState): void {
+    const session = guessWhoOf(room);
+    if (!session) {
+      return;
+    }
+    clearTimers(room.code);
+    const engineResult = engine.transition(room, 'results');
+    if (!engineResult.ok) {
+      return;
+    }
+    const payload = session.endPayload() as Record<string, unknown>;
+    io.to(room.code).emit(ServerEvents.gameEnd, payload);
+    broadcastState(room);
+    persistBestEffort(setRoomStatus(room.code, 'finished'), `finish ${room.code}`);
+    logger.info({ roomCode: room.code, payload }, 'guess-who finished');
+  }
+
   io.on('connection', (socket) => {
     logger.info({ socketId: socket.id }, 'socket connected');
 
@@ -1206,6 +1470,16 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         }
       } else if (isTriviaRoom(result.value)) {
         if (!startTrivia(result.value)) {
+          ack?.({ ok: false, error: 'NOT_ENOUGH_PLAYERS' });
+          return;
+        }
+      } else if (isCharadesRoom(result.value)) {
+        if (!startCharades(result.value)) {
+          ack?.({ ok: false, error: 'NOT_ENOUGH_PLAYERS' });
+          return;
+        }
+      } else if (isGuessWhoRoom(result.value)) {
+        if (!startGuessWho(result.value)) {
           ack?.({ ok: false, error: 'NOT_ENOUGH_PLAYERS' });
           return;
         }
@@ -1437,7 +1711,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         return;
       }
       const room = roomOf(socket);
-      if (!room || !DRAWING_CONFIGS[room.gameId]) {
+      if (!room) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -1447,6 +1721,45 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       }
       const player = room.players.get(socket.id);
       if (!player) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+
+      // M9 — Guess Who: a guess can end the round at any time.
+      if (isGuessWhoRoom(room)) {
+        const gw = guessWhoOf(room);
+        if (!gw) {
+          ack?.({ ok: false, error: 'NOT_STARTED' });
+          return;
+        }
+        const guessed = gw.submitGuess(player.name, input.value.text);
+        if (!guessed.ok) {
+          ack?.({ ok: false, error: guessed.error });
+          return;
+        }
+        socket.emit(ServerEvents.guessResult, {
+          correct: guessed.value.correct,
+          alreadyGuessed: false,
+        });
+        if (guessed.value.correct) {
+          io.to(room.code).emit(ServerEvents.guessFeedback, {
+            playerName: player.name,
+            correct: true,
+            points: 1,
+          });
+          io.to(room.code).emit(ServerEvents.chatMessage, {
+            kind: 'system',
+            playerName: 'System',
+            message: `${player.name} guessed it!`,
+            at: Date.now(),
+          });
+          finishGuessWho(room);
+        }
+        ack?.({ ok: true });
+        return;
+      }
+
+      if (!DRAWING_CONFIGS[room.gameId]) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -1520,7 +1833,13 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
 
     socket.on(ClientEvents.nextRound, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
-      if (!room || (!DRAWING_CONFIGS[room.gameId] && !isVotingRoom(room) && !isTriviaRoom(room))) {
+      if (
+        !room ||
+        (!DRAWING_CONFIGS[room.gameId] &&
+          !isVotingRoom(room) &&
+          !isTriviaRoom(room) &&
+          !isCharadesRoom(room))
+      ) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -1547,6 +1866,13 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       if (trivia && trivia.phaseValue === 'revealed') {
         clearTimers(room.code);
         advanceTriviaRound(room);
+        ack?.({ ok: true });
+        return;
+      }
+      const charades = charadesOf(room);
+      if (charades && charades.phaseValue === 'acting') {
+        // Host skip: move on without scoring the current word.
+        advanceCharades(room, false);
         ack?.({ ok: true });
         return;
       }
@@ -1789,15 +2115,51 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true });
     });
 
-    /** M8 — Trivia room: answer the current question (option index). */
+    /** M8/M9 — answer-question: Trivia option picks + Guess Who yes/no. */
     socket.on(ClientEvents.answerQuestion, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
-      if (!room || !isTriviaRoom(room)) {
+      if (!room) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
       const player = room.players.get(socket.id);
       if (!player) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+
+      // M9 — Guess Who: the answerer answers the latest question (yes/no).
+      if (isGuessWhoRoom(room)) {
+        const gw = guessWhoOf(room);
+        if (!gw) {
+          ack?.({ ok: false, error: 'NOT_STARTED' });
+          return;
+        }
+        const yes = (payload as { yes?: unknown }).yes;
+        if (typeof yes !== 'boolean') {
+          ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: 'yes must be a boolean' });
+          return;
+        }
+        const answered = gw.answerQuestion(player.name, yes);
+        if (!answered.ok) {
+          ack?.({ ok: false, error: answered.error });
+          return;
+        }
+        io.to(room.code).emit(ServerEvents.roundReveal, {
+          kind: 'guess-who',
+          questions: gw.questionLog,
+          questionCount: gw.questionCount,
+          maxQuestions: gw.maxQuestions,
+          finished: answered.value.finished,
+        });
+        if (answered.value.finished) {
+          finishGuessWho(room);
+        }
+        ack?.({ ok: true });
+        return;
+      }
+
+      if (!isTriviaRoom(room)) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -1828,6 +2190,113 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         revealTriviaRound(room);
       }
       ack?.({ ok: true, points: answered.value.points, correct: answered.value.correct });
+    });
+
+    /** M9 — Guess Who: ask a yes/no question about the secret celebrity. */
+    socket.on(ClientEvents.askQuestion, (payload: unknown, ack?: Ack) => {
+      const room = roomOf(socket);
+      if (!room || !isGuessWhoRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const session = guessWhoOf(room);
+      if (!session) {
+        ack?.({ ok: false, error: 'NOT_STARTED' });
+        return;
+      }
+      const text = (payload as { text?: unknown }).text;
+      if (typeof text !== 'string' || text.trim().length < 3 || text.trim().length > 140) {
+        ack?.({
+          ok: false,
+          error: 'INVALID_PAYLOAD',
+          message: 'question must be 3–140 characters',
+        });
+        return;
+      }
+      const asked = session.askQuestion(player.name, text);
+      if (!asked.ok) {
+        ack?.({ ok: false, error: asked.error });
+        return;
+      }
+      io.to(room.code).emit(ServerEvents.chatMessage, {
+        kind: 'message',
+        playerName: player.name,
+        message: `Q${asked.value.number}: ${text.trim()}`,
+        at: Date.now(),
+      });
+      io.to(room.code).emit(ServerEvents.roundReveal, {
+        kind: 'guess-who',
+        questions: session.questionLog,
+        questionCount: session.questionCount,
+        maxQuestions: session.maxQuestions,
+        finished: false,
+      });
+      ack?.({ ok: true });
+    });
+
+    /** M9 — Charades: anyone presses Correct! when the team shouts it. */
+    socket.on(ClientEvents.markCorrect, (payload: unknown, ack?: Ack) => {
+      const room = roomOf(socket);
+      if (!room || !isCharadesRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const session = charadesOf(room);
+      if (!session || session.phaseValue !== 'acting') {
+        ack?.({ ok: false, error: 'WRONG_PHASE' });
+        return;
+      }
+      const scored = session.markCorrect(player.name);
+      if (!scored.ok) {
+        ack?.({ ok: false, error: scored.error });
+        return;
+      }
+      io.to(room.code).emit(ServerEvents.guessFeedback, {
+        playerName: player.name,
+        correct: true,
+        points: 1,
+      });
+      advanceCharades(room, true);
+      ack?.({ ok: true, score: scored.value.score });
+    });
+
+    /** M9 — Charades: host picks the category in the lobby. */
+    socket.on(ClientEvents.setCharadesCategory, (payload: unknown, ack?: Ack) => {
+      const room = roomOf(socket);
+      if (!room || !isCharadesRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player?.isHost) {
+        ack?.({ ok: false, error: 'NOT_HOST' });
+        return;
+      }
+      if (room.phase !== 'lobby') {
+        ack?.({ ok: false, error: 'INVALID_PHASE' });
+        return;
+      }
+      const category = (payload as { category?: unknown }).category;
+      if (category !== 'hollywood' && category !== 'bollywood' && category !== 'mixed') {
+        ack?.({
+          ok: false,
+          error: 'INVALID_PAYLOAD',
+          message: 'category must be hollywood, bollywood, or mixed',
+        });
+        return;
+      }
+      pendingCharadesCategories.set(room.code, category);
+      ack?.({ ok: true });
     });
 
     socket.on(ClientEvents.gameResync, (payload: unknown, ack?: Ack) => {

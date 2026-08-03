@@ -416,8 +416,7 @@ describe('Skribbl Arena full game (M4) — DB-backed socket integration', () => 
     expect((await emitAck(solo, ClientEvents.nextRound, { roomCode })).ok).toBe(true);
     expect((await nextPromise).round).toBe(2);
 
-    // Room games without a round adapter reject start outright (no dead-end
-    // "Game in progress" state) — charades ships in M9.
+    // M9: every room game has a round adapter now — charades starts too.
     const charades = await connect(port);
     const charadesCreated = await emitAck(charades, ClientEvents.createRoom, {
       gameId: 'charades',
@@ -430,8 +429,7 @@ describe('Skribbl Arena full game (M4) — DB-backed socket integration', () => 
     const charadesStart = await emitAck(charades, ClientEvents.startGame, {
       roomCode: charadesCode,
     });
-    expect(charadesStart.ok).toBe(false);
-    expect(charadesStart.error).toBe('GAME_NOT_PLAYABLE_YET');
+    expect(charadesStart.ok).toBe(true);
 
     // M8: trivia's room mode is live, so starting now works.
     const trivia = await connect(port);

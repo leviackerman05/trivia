@@ -32,6 +32,7 @@ export const ClientEvents = {
   // Additive (M9 — Charades + Guess Who)
   markCorrect: 'mark-correct',
   askQuestion: 'ask-question',
+  setCharadesCategory: 'set-charades-category',
   // Additive: rejoin mid-game resync
   gameResync: 'game-resync',
   // Additive (M4 — Skribbl Arena round lifecycle)
