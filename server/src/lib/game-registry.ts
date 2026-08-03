@@ -17,4 +17,5 @@ export const PLAYABLE_ROOM_GAMES: ReadonlySet<string> = new Set([
   'most-likely-to',
   'never-have-i-ever',
   'this-or-that',
+  'trivia',
 ]);

@@ -25,10 +25,12 @@ export const ClientEvents = {
   submitDrawing: 'submit-drawing',
   // Additive (M6 — voting games: player-submitted prompts)
   submitPrompt: 'submit-prompt',
+  // Additive (M8 — Trivia room mode: host mode toggle + answers)
+  setTriviaMode: 'set-trivia-mode',
+  answerQuestion: 'answer-question',
   // Additive (M9 — Charades + Guess Who)
   markCorrect: 'mark-correct',
   askQuestion: 'ask-question',
-  answerQuestion: 'answer-question',
   // Additive: rejoin mid-game resync
   gameResync: 'game-resync',
   // Additive (M4 — Skribbl Arena round lifecycle)

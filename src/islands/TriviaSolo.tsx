@@ -7,7 +7,7 @@ import {
   TRIVIA_QUESTION_SECONDS,
   type TriviaQuestion,
 } from '../lib/trivia';
-import { submitScore } from '../lib/api';
+import { SERVER_URL, submitScore } from '../lib/api';
 
 /**
  * Trivia — instant solo play (PRD §5.15, owner request 2026-08-04).
@@ -32,6 +32,8 @@ export default function TriviaSolo() {
     typeof window === 'undefined' ? '' : (localStorage.getItem(NICKNAME_STORAGE_KEY) ?? '')
   );
   const [dateKey, setDateKey] = useState('');
+  /** Server-seeded daily questions (M8); falls back to local selection. */
+  const [dailyQuestions, setDailyQuestions] = useState<TriviaQuestion[] | null>(null);
   const [questions, setQuestions] = useState<TriviaQuestion[]>([]);
   const [index, setIndex] = useState(0);
   const [remaining, setRemaining] = useState(TRIVIA_QUESTION_SECONDS);
@@ -52,6 +54,34 @@ export default function TriviaSolo() {
     setDateKey(dailyDateKey(new Date()));
   }, []);
 
+  // M8: the server seeds the daily challenge (same 10 questions for everyone);
+  // keep the local deterministic selection as the offline fallback.
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`${SERVER_URL}/api/daily-challenge`)
+      .then((response) => (response.ok ? response.json() : null))
+      .then(
+        (
+          body: { challenges?: { gameId: string; data: { questions?: TriviaQuestion[] } }[] } | null
+        ) => {
+          if (cancelled) {
+            return;
+          }
+          const challenge = body?.challenges?.find((entry) => entry.gameId === 'trivia');
+          const seeded = challenge?.data?.questions;
+          if (Array.isArray(seeded) && seeded.length > 0) {
+            setDailyQuestions(seeded);
+          }
+        }
+      )
+      .catch(() => {
+        // Offline/static preview — the local seed is fine.
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const startGame = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const name = nickname.trim();
@@ -61,7 +91,7 @@ export default function TriviaSolo() {
     if (typeof window !== 'undefined') {
       localStorage.setItem(NICKNAME_STORAGE_KEY, name);
     }
-    setQuestions(selectDailyQuestions(new Date()));
+    setQuestions(dailyQuestions ?? selectDailyQuestions(new Date()));
     setIndex(0);
     setResults([]);
     setTotalScore(0);

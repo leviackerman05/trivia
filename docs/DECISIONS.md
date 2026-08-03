@@ -733,6 +733,46 @@ workspace package.
 
 ---
 
+## D032 — M8 Trivia room + server-seeded daily challenge (2026-08-04)
+
+- **Decision:**
+  1. **Daily challenges are server-seeded:** `GET /api/daily-challenge`
+     upserts 10 deterministic questions (FNV-1a + seeded shuffle per UTC
+     date) into `DailyChallenge` on first read — no cron, idempotent, and
+     the same set for every player. TriviaSolo fetches it and falls back
+     to the identical local selection when the API is unreachable
+     (static-site resilience).
+  2. **Trivia room mode** is a new `TriviaSession` engine + `TriviaArena`
+     island: 10 questions × 10s, everyone answers the same question, race
+     scoring (100 + 10·seconds remaining), all-in early reveal, host skip,
+     podium with score persistence. The correct answer index NEVER leaves
+     the server in the question payload — clients only get it in the
+     round-reveal (D008 + D022).
+  3. **Wrong Answers Only mode:** a room-level host toggle (`set-trivia-mode`)
+     flips scoring — any wrong pick scores 50 + 10·seconds remaining, the
+     correct answer scores 0. Comedy mode, per PRD §5.15.
+  4. **Genre Swap / Genre-Bender ship as MC-only** (4 options, no type-in):
+     PRD §5.9/5.10 say "Multiple choice (4 options) or type-in" — one of
+     the two is compliant; MC keeps the input surface uniform with the
+     room quiz and avoids fuzzy-acceptance edge cases for song titles.
+- **Reason:** the daily leaderboard is only meaningful if everyone played
+  the same questions (PRD §5.15); the server already owns score idempotency,
+  so it should own the challenge set too. MC-only keeps M8 focused.
+- **Alternatives considered:** client-only daily selection (rejected — two
+  independent shuffles could diverge, breaking leaderboard comparability);
+  cron seeding (rejected — on-demand upsert is simpler and zero-ops);
+  type-in answers (deferred, see above).
+- **Tradeoffs:** on-demand seeding adds one upsert to the first daily
+  challenge read per day (negligible); the answer index is absent from
+  resync, so a mid-game joiner can't see the current correct answer — they
+  can still answer (their pick is judged server-side).
+- **Date:** 2026-08-04
+- **Future impact:** Charades/Guess Who (M9) reuse the phase-timer and
+  host-skip patterns; the seeded-challenge pattern extends to any solo game
+  that wants a comparable daily leaderboard.
+
+---
+
 ## D031 — M7 Price Is Right: emoji product cards instead of product photos (2026-08-04)
 
 - **Decision:** The Price Is Right product dataset uses emoji + description

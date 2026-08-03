@@ -298,25 +298,27 @@ Working app: 4 solo games playable (reuse SoloTemplate).
 
 ---
 
-## Milestone 8 — Solo Batch 2 + Trivia + Daily Challenge
+## Milestone 8 — Solo Batch 2 + Trivia + Daily Challenge ✅
 
 Working app: remaining solo games + Trivia (solo & room) + daily challenges.
 
-- [ ] **Genre Swap:** 150+ swapped movie plots, 4-option MC or type-in, 20s
-      timer, speed bonus
-- [ ] **Genre-Bender:** 100+ "bended" lyrics ⚠ licensing, MC/type-in, optional
-      BPM/year clue
-- [ ] **Trivia:** 500+ questions (General/Science/History/Pop Culture/Sports),
-      4 options; solo mode (15s/q, daily challenge + leaderboard); room mode
-      (10 questions, 10s race, podium); "Wrong Answers Only" comedy mode
-- [ ] Daily challenge generation: 10 new questions/day seeded into
-      `DailyChallenge` (upsert `(gameId, date)`), `GET /api/daily-challenge`
-- [ ] Daily challenge island surfaces for solo games (Trivia + others as
-      defined by PRD §5.15)
-- [ ] Tests: question pool sampling, daily rollover at TZ boundaries,
-      race-mode scoring
-- [ ] E2E: Trivia solo + room journeys, daily challenge play
-- [ ] Update docs
+- [x] **Genre Swap:** 150+ swapped movie plots, 4-option MC, 20s
+      timer, speed bonus (+10, +5 under 10s)
+- [x] **Genre-Bender:** 70+ "bended" lyrics (paraphrased/original only —
+      licensing-safe), MC (title — artist), optional year clue
+- [x] **Trivia:** 210 questions (42 × 5 categories), 4 options; solo mode
+      (15s/q, daily challenge + leaderboard — now server-seeded); room mode
+      (10 questions, 10s race, podium, score persistence); "Wrong Answers
+      Only" comedy mode (correct answer scores 0, wrong picks score)
+- [x] Daily challenge generation: 10 new questions/day seeded into
+      `DailyChallenge` (upsert `(gameId, date)` — on-demand, idempotent),
+      `GET /api/daily-challenge` seeds + returns; TriviaSolo fetches it
+      with a local deterministic fallback
+- [x] Tests: question pool sampling, daily rollover at TZ boundaries,
+      race-mode scoring (daily-seed, trivia-engine, trivia reducer +
+      2-journey trivia socket integration)
+- [x] E2E: Trivia solo + room journeys, daily challenge play
+- [x] Update docs (D032, PROJECT_STATE)
 
 **Done when:** Trivia (both modes) + daily challenges live; all solo games done.
 

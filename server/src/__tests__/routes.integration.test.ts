@@ -170,24 +170,24 @@ describe('REST API (PRD §8.1) — DB-backed integration', () => {
   });
 
   describe('GET /api/daily-challenge', () => {
-    it('returns seeded challenges for today and empty lists otherwise', async () => {
+    it('returns the seeded trivia challenge for any date (M8 on-demand seeding)', async () => {
       const today = new Date().toISOString().slice(0, 10);
-      await getPrisma().dailyChallenge.create({
-        data: {
-          gameId: 'trivia',
-          date: new Date(`${today}T00:00:00.000Z`),
-          data: { questions: [1, 2, 3] },
-        },
-      });
       const response = await request(app).get('/api/daily-challenge');
       expect(response.status).toBe(200);
       expect(response.body.date).toBe(today);
-      expect(response.body.challenges).toEqual([
-        { gameId: 'trivia', data: { questions: [1, 2, 3] } },
-      ]);
+      const trivia = response.body.challenges.find(
+        (challenge: { gameId: string }) => challenge.gameId === 'trivia'
+      );
+      expect(trivia).toBeDefined();
+      expect(trivia.data.questions).toHaveLength(10);
 
+      // The same date returns the identical set (idempotent upsert), and a
+      // past date is seeded deterministically on first read.
+      const again = await request(app).get('/api/daily-challenge');
+      expect(again.body.challenges).toEqual(response.body.challenges);
       const other = await request(app).get('/api/daily-challenge?date=2026-01-01');
-      expect(other.body.challenges).toEqual([]);
+      expect(other.body.challenges).toHaveLength(1);
+      expect(other.body.challenges[0].data.questions).toHaveLength(10);
     });
   });
 

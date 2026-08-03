@@ -134,6 +134,36 @@ export function soloClientKey(slug: string, dateKey: string, salt: string): stri
 }
 
 /**
+ * Multiple-choice option builder: the correct label plus `count - 1` random
+ * distractors from the pool, shuffled (Fisher–Yates with Math.random — solo
+ * games have no server authority to protect).
+ */
+export function buildOptions(
+  correct: string,
+  pool: string[],
+  count = 4,
+  random: () => number = Math.random
+): string[] {
+  const distractors = pool.filter((label) => label !== correct);
+  const picks: string[] = [];
+  while (picks.length < count - 1 && distractors.length > 0) {
+    const index = Math.floor(random() * distractors.length);
+    const [picked] = distractors.splice(index, 1);
+    if (picked) {
+      picks.push(picked);
+    }
+  }
+  const options = [correct, ...picks];
+  for (let i = options.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(random() * (i + 1));
+    const swap = options[i]!;
+    options[i] = options[j]!;
+    options[j] = swap;
+  }
+  return options;
+}
+
+/**
  * Draw a share-result PNG on a canvas (score card) and download/share it.
  * Pure canvas 2D — no image assets, no libraries (M7 share-result image).
  */

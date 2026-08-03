@@ -11,13 +11,35 @@
 
 ## Current Milestone
 
-**M8 — Solo Batch 2 + Trivia + Daily Challenge** (next up).
+**M9 — Charades + Guess Who** (next up — the final two room games).
 
-M7 — Solo games batch 1 is ✅ **complete** (verified below).
+M8 — Solo batch 2 + Trivia + daily challenge is ✅ **complete** (verified below).
 
 ---
 
 ## Completed Work
+
+### Milestone 8 — Solo Batch 2 + Trivia + Daily Challenge ✅ (verified 2026-08-04)
+
+- [x] **Daily challenge seeding (D032):** `server/src/lib/daily-seed.ts` +
+      on-demand upsert in `GET /api/daily-challenge` — 10 deterministic
+      questions per UTC date (FNV-1a + seeded shuffle), idempotent, no cron;
+      TriviaSolo fetches it with a local fallback
+- [x] **Trivia room mode (D032):** `TriviaSession` engine (10 questions × 10s,
+      race scoring 100 + 10·s, all-in reveal, Wrong Answers Only scoring),
+      gateway adapter (`answer-question` + `set-trivia-mode` events,
+      round-reveal, break timer, host skip, podium + score persistence),
+      `TriviaArena` island + `useTriviaGame` + pure `trivia-room.ts` reducer
+      — the answer index never leaves the server before reveal
+- [x] **Genre Swap:** 150 entries, 20s × 10, 4-option MC (correct + 3
+      distractors via shared `buildOptions`), +10 (+5 < 10s)
+- [x] **Genre-Bender:** 70 paraphrased/original benders, 20s × 10, MC
+      (title — artist), free year clue
+- [x] games.json: trivia `playable` (lockstep green); game page renders
+      TriviaArena (room) + the two solo islands
+- [x] **Verification:** `pnpm verify` green — **114 client + 117 server tests**
+      (new: daily-seed, trivia-engine, trivia-room reducer, genre logic,
+      2-journey trivia socket integration)
 
 ### Milestone 7 — Solo Template + Solo Games Batch 1 ✅ (verified 2026-08-04)
 
@@ -260,8 +282,8 @@ M7 — Solo games batch 1 is ✅ **complete** (verified below).
 
 ## In Progress
 
-- **M8 — Solo Batch 2 + Trivia + Daily Challenge** (Genre Swap,
-  Genre-Bender, Trivia room mode, daily challenge generation).
+- **M9 — Charades + Guess Who** (the last two room games; all 18 games
+  playable when done).
 
 ---
 
@@ -269,8 +291,6 @@ M7 — Solo games batch 1 is ✅ **complete** (verified below).
 
 Full roadmap: [TODO.md](TODO.md). Highlights:
 
-- **M8** Genre Swap + Genre-Bender + Trivia room mode (solo already live
-  via instant play) + daily challenge
 - **M9** Charades + Guess Who (all 18 games playable)
 - **M10** SEO content completion + AdSense compliance + performance budgets
 - **M11** Deployment (Cloudflare Pages + Railway/Render) + launch QA
@@ -280,7 +300,7 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Known Bugs
 
-- None known. All suites green (102 client + 105 server).
+- None known. All suites green (114 client + 117 server).
 
 ---
 
@@ -344,26 +364,20 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Upcoming Milestone
 
-**M8 — Solo Batch 2 + Trivia + Daily Challenge** (working app: remaining
-solo games + Trivia solo & room + daily challenges)
+**M9 — Charades + Guess Who** (working app: all 18 games playable)
 
-- **Genre Swap:** 150+ swapped movie plots, 4-option MC or type-in, 20s
-  timer, speed bonus
-- **Genre-Bender:** 70+ "bended" lyrics (paraphrased/original only — open
-  question #2), MC/type-in, optional BPM/year clue
-- **Trivia:** 210 questions (5 categories), 4 options; solo mode (15s/q,
-  daily challenge + leaderboard); room mode (10 questions, 10s race,
-  podium); "Wrong Answers Only" comedy mode
-- Daily challenge generation: 10 new questions/day seeded into
-  `DailyChallenge` (upsert `(gameId, date)`), `GET /api/daily-challenge`
-- Tests: question pool sampling, daily rollover at TZ boundaries,
-  race-mode scoring
+- **Charades:** Hollywood (300+) / Bollywood categories + Mixed toggle,
+  actor word reveal (device-held), 60s timer, "Correct!" tally, pass-the-
+  phone flow; co-located mode only (open question #3)
+- **Guess Who? Celebrity Edition:** 200+ celebrity trait objects (text
+  only), yes/no question log, attempt counter, guess input, 20-question
+  reveal, host answers
+- Engine adapter: special-games configs; no canvas
+- Tests: category toggle, pass-the-phone rotation, question/guess flow
 
 ---
 
 ## Next Recommended Prompt
 
-> **"Continue with M8–M10"** — Genre Swap + Genre-Bender + Trivia room mode
->
-> - daily challenge (M8), Charades + Guess Who (M9), and the SEO/perf pass
->   (M10) per `docs/TODO.md`. M11 deployment stays deprioritized.
+> **"Continue with M9–M10"** — Charades + Guess Who (M9) and the SEO/perf
+> pass (M10) per `docs/TODO.md`. M11 deployment stays deprioritized.

@@ -151,6 +151,7 @@
     "type": "multiplayer-realtime",
     "family": "quiz",
     "instantPlay": "solo",
+    "playable": true,
     "tagline": "Solo daily challenges or a room-wide quiz race.",
     "description": "500+ questions across five categories. Play the daily challenge solo or race the room — fastest correct answers earn the most points."
   }

@@ -1,5 +1,6 @@
 import { Router, type NextFunction, type Request, type Response } from 'express';
 import { getPrisma } from '../lib/prisma.js';
+import { ensureDailyChallenges } from '../lib/daily-seed.js';
 
 /** PRD §8.1: GET /api/daily-challenge — today's daily challenge per solo game. */
 
@@ -18,6 +19,9 @@ export function createDailyChallengeRouter(): Router {
       const date = dateParam ?? new Date().toISOString().slice(0, 10); // UTC day
       const start = new Date(`${date}T00:00:00.000Z`);
       const end = new Date(start.getTime() + DAY_MS);
+
+      // M8: seed today's challenges on first read (idempotent upsert).
+      await ensureDailyChallenges(date);
 
       const rows = await getPrisma().dailyChallenge.findMany({
         where: { date: { gte: start, lt: end } },

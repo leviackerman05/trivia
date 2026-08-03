@@ -87,9 +87,11 @@ describe('game catalog (src/data/games.json)', () => {
       games.filter((game) => game.playable === true).map((game) => game.slug)
     );
     expect(playableSlugs).toEqual(new Set([...PLAYABLE_ROOM_GAMES]));
-    // Skribbl Arena is the first playable room game (M4).
+    // Skribbl Arena (M4) and Trivia room mode (M8) are live.
     expect(getGame('skribbl-arena')?.playable).toBe(true);
-    expect(getGame('trivia')?.playable).toBeUndefined();
+    expect(getGame('trivia')?.playable).toBe(true);
+    // Room games without a round adapter yet stay unplayable.
+    expect(getGame('charades')?.playable).toBeUndefined();
   });
 });
 

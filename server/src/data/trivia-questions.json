@@ -1,0 +1,1272 @@
+[
+  {
+    "category": "General",
+    "question": "What color is a school bus in most of the United States?",
+    "options": ["Red", "Yellow", "Green", "Blue"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "How many legs does a spider have?",
+    "options": ["Six", "Eight", "Ten", "Twelve"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What is the largest ocean on Earth?",
+    "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+    "answer": 3
+  },
+  {
+    "category": "General",
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Venus", "Mars", "Jupiter", "Saturn"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What do bees produce?",
+    "options": ["Milk", "Honey", "Wax only", "Silk"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "How many continents are there on Earth?",
+    "options": ["Five", "Six", "Seven", "Eight"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "What is the capital of France?",
+    "options": ["Berlin", "Madrid", "Rome", "Paris"],
+    "answer": 3
+  },
+  {
+    "category": "General",
+    "question": "Which instrument has 88 keys?",
+    "options": ["Guitar", "Piano", "Violin", "Flute"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What is the freezing point of water in Celsius?",
+    "options": ["0", "32", "100", "-10"],
+    "answer": 0
+  },
+  {
+    "category": "General",
+    "question": "Which animal is known as the king of the jungle?",
+    "options": ["Tiger", "Elephant", "Lion", "Gorilla"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "How many colors are in a rainbow?",
+    "options": ["Five", "Six", "Seven", "Eight"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "What is the smallest prime number?",
+    "options": ["0", "1", "2", "3"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which country is home to the kangaroo?",
+    "options": ["New Zealand", "Australia", "South Africa", "Brazil"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What do you call a baby dog?",
+    "options": ["Kitten", "Cub", "Puppy", "Fawn"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "How many sides does a hexagon have?",
+    "options": ["Five", "Six", "Seven", "Eight"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "Which gas do plants absorb from the air?",
+    "options": ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "What is the tallest mammal?",
+    "options": ["Elephant", "Giraffe", "Hippo", "Rhino"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "How many minutes are in an hour?",
+    "options": ["60", "100", "30", "90"],
+    "answer": 0
+  },
+  {
+    "category": "General",
+    "question": "Which of these is a type of pasta?",
+    "options": ["Sushi", "Baguette", "Spaghetti", "Croissant"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "What is the name of the fairy in Peter Pan?",
+    "options": ["Belle", "Tinker Bell", "Cinderella", "Aurora"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is H2O commonly known as?",
+    "options": ["Salt", "Water", "Sugar", "Oxygen"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What force pulls objects toward the Earth?",
+    "options": ["Magnetism", "Friction", "Gravity", "Inertia"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What part of the cell contains DNA?",
+    "options": ["Mitochondria", "Nucleus", "Ribosome", "Membrane"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which planet has the most moons in our solar system?",
+    "options": ["Earth", "Mars", "Jupiter", "Mercury"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is the speed of light approximately?",
+    "options": ["300,000 km/s", "150,000 km/s", "30,000 km/s", "3,000 km/s"],
+    "answer": 0
+  },
+  {
+    "category": "Science",
+    "question": "What metal is liquid at room temperature?",
+    "options": ["Iron", "Mercury", "Gold", "Copper"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the powerhouse of the cell?",
+    "options": ["Nucleus", "Ribosome", "Mitochondria", "Golgi body"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "How many bones are in the adult human body?",
+    "options": ["106", "206", "306", "406"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which gas makes up most of Earth's atmosphere?",
+    "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Argon"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is the chemical symbol for gold?",
+    "options": ["Go", "Gd", "Au", "Ag"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What type of animal is a dolphin?",
+    "options": ["Fish", "Mammal", "Reptile", "Amphibian"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What does a barometer measure?",
+    "options": ["Temperature", "Humidity", "Air pressure", "Wind speed"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "Which vitamin is produced by sunlight?",
+    "options": ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is the smallest unit of life?",
+    "options": ["Atom", "Cell", "Molecule", "Organ"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "How many planets are in our solar system?",
+    "options": ["Seven", "Eight", "Nine", "Ten"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the hardest natural substance on Earth?",
+    "options": ["Titanium", "Steel", "Diamond", "Quartz"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What process do plants use to make food?",
+    "options": ["Respiration", "Photosynthesis", "Digestion", "Fermentation"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which organ pumps blood through the body?",
+    "options": ["Lungs", "Brain", "Heart", "Liver"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is the boiling point of water in Celsius?",
+    "options": ["50", "90", "100", "120"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "Which of these is NOT a state of matter?",
+    "options": ["Solid", "Liquid", "Gas", "Energy"],
+    "answer": 3
+  },
+  {
+    "category": "History",
+    "question": "Who was the first President of the United States?",
+    "options": ["Thomas Jefferson", "George Washington", "Abraham Lincoln", "John Adams"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "In which year did World War II end?",
+    "options": ["1943", "1944", "1945", "1946"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "What ancient civilization built the pyramids of Giza?",
+    "options": ["Romans", "Greeks", "Egyptians", "Mayans"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Who painted the Mona Lisa?",
+    "options": ["Michelangelo", "Leonardo da Vinci", "Raphael", "Van Gogh"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The Berlin Wall fell in which year?",
+    "options": ["1985", "1987", "1989", "1991"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Who was the first man to walk on the Moon?",
+    "options": ["Buzz Aldrin", "Neil Armstrong", "Yuri Gagarin", "John Glenn"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which ship sank in 1912 on its maiden voyage?",
+    "options": ["Lusitania", "Titanic", "Britannic", "Queen Mary"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The Great Wall is located in which country?",
+    "options": ["Japan", "India", "China", "Mongolia"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Who was known as the 'Iron Lady'?",
+    "options": ["Queen Elizabeth II", "Margaret Thatcher", "Angela Merkel", "Indira Gandhi"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "In which century did the Renaissance begin?",
+    "options": ["12th", "14th", "16th", "18th"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which empire was ruled by Julius Caesar?",
+    "options": ["Greek", "Persian", "Roman", "Ottoman"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "The Declaration of Independence was signed in which year?",
+    "options": ["1774", "1776", "1781", "1789"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Who discovered penicillin?",
+    "options": ["Marie Curie", "Alexander Fleming", "Louis Pasteur", "Isaac Newton"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which country gifted the Statue of Liberty to the USA?",
+    "options": ["England", "Germany", "France", "Italy"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "What was the name of the first artificial satellite?",
+    "options": ["Apollo 1", "Sputnik 1", "Explorer 1", "Voyager 1"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The Middle Ages are also known as the…?",
+    "options": ["Dark Ages", "Golden Ages", "Stone Ages", "Ice Ages"],
+    "answer": 0
+  },
+  {
+    "category": "History",
+    "question": "Who was the Egyptian queen famous for her relationship with Mark Antony?",
+    "options": ["Nefertiti", "Hatshepsut", "Cleopatra", "Isis"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Which war was fought between the North and South of the USA?",
+    "options": ["Revolutionary War", "Civil War", "World War I", "War of 1812"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The ancient Olympic Games originated in which country?",
+    "options": ["Italy", "Greece", "Turkey", "Egypt"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Who invented the printing press?",
+    "options": ["Galileo", "Gutenberg", "Edison", "Bell"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which wizard attends Hogwarts School?",
+    "options": ["Gandalf", "Harry Potter", "Merlin", "Dumbledore's cat"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who is known as the 'Queen of Pop'?",
+    "options": ["Beyoncé", "Madonna", "Lady Gaga", "Taylor Swift"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which movie features the quote 'May the Force be with you'?",
+    "options": ["Star Trek", "Star Wars", "Alien", "E.T."],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What is the name of the superhero with a web-slinging alter ego Peter Parker?",
+    "options": ["Batman", "Superman", "Spider-Man", "Iron Man"],
+    "answer": 2
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which band sang 'Bohemian Rhapsody'?",
+    "options": ["The Beatles", "Queen", "The Rolling Stones", "Led Zeppelin"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "In Friends, what is the name of the coffee house?",
+    "options": ["Central Perk", "Java Hut", "Café Nero", "The Grind"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which streaming service produced 'Stranger Things'?",
+    "options": ["Hulu", "Netflix", "Prime Video", "Disney+"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who voiced Woody in Toy Story?",
+    "options": ["Tom Hanks", "Tim Allen", "Billy Crystal", "Robin Williams"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What is the highest-grossing film of all time (unadjusted)?",
+    "options": ["Avatar", "Titanic", "Avengers: Endgame", "Star Wars: The Force Awakens"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which singer is known for the song 'Shape of You'?",
+    "options": ["Ed Sheeran", "Justin Bieber", "Drake", "Shawn Mendes"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What is the name of the yellow family in The Simpsons?",
+    "options": ["The Flanders", "The Simpsons", "The Griffins", "The Browns"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which game franchise features Mario?",
+    "options": ["Sonic", "Super Mario", "Zelda", "Metroid"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who wrote the Harry Potter books?",
+    "options": ["J.R.R. Tolkien", "J.K. Rowling", "Suzanne Collins", "Stephen King"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What year did the first iPhone launch?",
+    "options": ["2005", "2007", "2009", "2011"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which movie is about a clownfish searching for his son?",
+    "options": ["Shark Tale", "Finding Nemo", "Moana", "The Little Mermaid"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who is the 'King of Pop'?",
+    "options": ["Elvis Presley", "Michael Jackson", "Prince", "Freddie Mercury"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which TV show features the Stark family?",
+    "options": ["The Witcher", "Game of Thrones", "Vikings", "The Crown"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What is Batman's real name?",
+    "options": ["Clark Kent", "Bruce Wayne", "Tony Stark", "Barry Allen"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which artist painted a famous melting clocks painting?",
+    "options": ["Pablo Picasso", "Salvador Dalí", "Claude Monet", "Andy Warhol"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which movie franchise features a character named Darth Vader?",
+    "options": ["Star Wars", "Star Trek", "Guardians of the Galaxy", "Dune"],
+    "answer": 0
+  },
+  {
+    "category": "Sports",
+    "question": "How many players are on a soccer team on the field?",
+    "options": ["9", "10", "11", "12"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "In which sport would you perform a slam dunk?",
+    "options": ["Tennis", "Basketball", "Volleyball", "Cricket"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "How often is the Summer Olympics held?",
+    "options": ["Every 2 years", "Every 4 years", "Every 5 years", "Every 6 years"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "What is the distance of a marathon in miles?",
+    "options": ["21.1", "26.2", "30.0", "42.2"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which country has won the most FIFA World Cups?",
+    "options": ["Germany", "Italy", "Brazil", "Argentina"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "In tennis, what is a score of zero called?",
+    "options": ["Nil", "Love", "Zero", "Duck"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "How many rings are on the Olympic flag?",
+    "options": ["Four", "Five", "Six", "Seven"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which sport is played at Wimbledon?",
+    "options": ["Golf", "Tennis", "Cricket", "Badminton"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "What is a 'hat trick' in hockey or soccer?",
+    "options": ["Three saves", "Three goals by one player", "Three penalties", "Three substitutes"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "How many players are on a basketball team on the court?",
+    "options": ["Four", "Five", "Six", "Seven"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which athlete is known as 'The Greatest' in boxing?",
+    "options": ["Mike Tyson", "Muhammad Ali", "Joe Frazier", "George Foreman"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "In which country did cricket originate?",
+    "options": ["Australia", "India", "England", "South Africa"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "What is the fastest land animal?",
+    "options": ["Lion", "Cheetah", "Horse", "Greyhound"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "How many players are in a volleyball team on the court?",
+    "options": ["Five", "Six", "Seven", "Eight"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which Grand Slam tennis tournament is played on clay?",
+    "options": ["Wimbledon", "US Open", "French Open", "Australian Open"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "In which sport is the term 'checkmate' used?",
+    "options": ["Poker", "Chess", "Backgammon", "Go"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which country hosted the 2016 Summer Olympics?",
+    "options": ["China", "UK", "Brazil", "Japan"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "What is the diameter of a basketball hoop in inches?",
+    "options": ["16", "18", "20", "24"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "How many periods are in a standard NHL hockey game?",
+    "options": ["Two", "Three", "Four", "Five"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which swimmer won the most Olympic gold medals?",
+    "options": ["Michael Phelps", "Mark Spitz", "Ian Thorpe", "Katie Ledecky"],
+    "answer": 0
+  },
+  {
+    "category": "General",
+    "question": "Which country is famous for the ancient city of Machu Picchu?",
+    "options": ["Brazil", "Peru", "Chile", "Colombia"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What is the largest country by land area?",
+    "options": ["Canada", "China", "Russia", "USA"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which currency is used in Japan?",
+    "options": ["Won", "Yuan", "Yen", "Ringgit"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "How many time zones does mainland USA span?",
+    "options": ["Two", "Three", "Four", "Five"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "What is the name of the Greek god of the sea?",
+    "options": ["Zeus", "Ares", "Poseidon", "Apollo"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which continent is the Sahara Desert located on?",
+    "options": ["Asia", "Africa", "Australia", "South America"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What language is spoken in Brazil?",
+    "options": ["Spanish", "Portuguese", "French", "Italian"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "Which of these is a breakfast food made from oats?",
+    "options": ["Porridge", "Sushi", "Borscht", "Tortilla"],
+    "answer": 0
+  },
+  {
+    "category": "General",
+    "question": "What is the world's most spoken first language?",
+    "options": ["English", "Spanish", "Mandarin", "Hindi"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which animal is the largest on Earth?",
+    "options": ["Elephant", "Blue whale", "Giraffe", "Polar bear"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "How many strings does a standard guitar have?",
+    "options": ["Four", "Five", "Six", "Seven"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which fruit is known for being very high in vitamin C?",
+    "options": ["Apple", "Orange", "Banana", "Grape"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What is the currency of the United Kingdom?",
+    "options": ["Euro", "Dollar", "Pound", "Franc"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which city is home to the Colosseum?",
+    "options": ["Athens", "Rome", "Istanbul", "Cairo"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What do you call a group of lions?",
+    "options": ["Flock", "Herd", "Pride", "Swarm"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which is the smallest continent by land area?",
+    "options": ["Europe", "Australia", "Antarctica", "South America"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What does the acronym PIN stand for?",
+    "options": [
+      "Personal Identification Number",
+      "Private Internet Node",
+      "Public Information Network",
+      "Personal Input Number"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "General",
+    "question": "Which of these countries is landlocked?",
+    "options": ["Spain", "Italy", "Switzerland", "Portugal"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which season comes after summer?",
+    "options": ["Spring", "Winter", "Autumn", "Monsoon"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "What is the name of the fairy tale girl with a red hood?",
+    "options": ["Snow White", "Cinderella", "Little Red Riding Hood", "Goldilocks"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "How many days are in a leap year?",
+    "options": ["364", "365", "366", "367"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which instrument has black and white keys?",
+    "options": ["Flute", "Piano", "Saxophone", "Trumpet"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the chemical symbol for sodium?",
+    "options": ["So", "Sd", "Na", "N"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "Which planet is closest to the Sun?",
+    "options": ["Venus", "Mercury", "Mars", "Earth"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What do scientists call the study of weather?",
+    "options": ["Geology", "Meteorology", "Astronomy", "Ecology"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which blood cells fight infection?",
+    "options": ["Red blood cells", "White blood cells", "Platelets", "Plasma"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the largest organ of the human body?",
+    "options": ["Liver", "Brain", "Skin", "Lungs"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "Which planet is famous for its rings?",
+    "options": ["Mars", "Saturn", "Venus", "Neptune"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What gas do humans exhale?",
+    "options": ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "How many hearts does an octopus have?",
+    "options": ["One", "Two", "Three", "Four"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is the study of fossils called?",
+    "options": ["Astrology", "Paleontology", "Entomology", "Mythology"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which scientist proposed the theory of evolution by natural selection?",
+    "options": ["Newton", "Darwin", "Einstein", "Galileo"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the center of an atom called?",
+    "options": ["Proton", "Electron", "Nucleus", "Orbit"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "Which of these is a renewable energy source?",
+    "options": ["Coal", "Oil", "Solar", "Natural gas"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "How many teeth does an adult human typically have?",
+    "options": ["24", "28", "32", "36"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What part of the plant absorbs water from the soil?",
+    "options": ["Leaves", "Roots", "Flowers", "Stems"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which planet is called the Morning Star?",
+    "options": ["Mercury", "Venus", "Jupiter", "Mars"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the basic unit of heredity?",
+    "options": ["Cell", "Gene", "Atom", "Molecule"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which animal can regenerate lost limbs?",
+    "options": ["Starfish", "Snail", "Crab", "Shark"],
+    "answer": 0
+  },
+  {
+    "category": "Science",
+    "question": "What is the chemical symbol for iron?",
+    "options": ["Ir", "Fe", "In", "Io"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which scale measures earthquakes?",
+    "options": ["Fahrenheit", "Richter", "Beaufort", "Celsius"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the main source of energy for Earth?",
+    "options": ["The Moon", "The Sun", "Volcanoes", "Wind"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which of these animals is a marsupial?",
+    "options": ["Penguin", "Kangaroo", "Panda", "Walrus"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the fastest land bird?",
+    "options": ["Eagle", "Ostrich", "Falcon", "Swan"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which ancient wonder stood in Alexandria?",
+    "options": ["Pyramids", "Lighthouse", "Temple of Artemis", "Colossus"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Who was the first Roman emperor?",
+    "options": ["Julius Caesar", "Augustus", "Nero", "Constantine"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The Renaissance began in which country?",
+    "options": ["France", "Italy", "England", "Germany"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which explorer reached the Americas in 1492?",
+    "options": ["Magellan", "Columbus", "Cook", "Vasco da Gama"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which city was the capital of the Aztec Empire?",
+    "options": ["Cusco", "Tenochtitlan", "Tikal", "Machu Picchu"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which empire built the Taj Mahal?",
+    "options": ["Ottoman", "Mughal", "Roman", "Byzantine"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "What was the name of Napoleon's final battle?",
+    "options": ["Waterloo", "Austerlitz", "Trafalgar", "Borodino"],
+    "answer": 0
+  },
+  {
+    "category": "History",
+    "question": "Which wall stretched across northern England under Emperor Hadrian?",
+    "options": ["Great Wall of China", "Berlin Wall", "Hadrian's Wall", "Western Wall"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Who developed the theory of general relativity?",
+    "options": ["Newton", "Einstein", "Hawking", "Bohr"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The Magna Carta was signed in which country?",
+    "options": ["France", "England", "Scotland", "Spain"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which ancient civilization built Machu Picchu?",
+    "options": ["Aztec", "Inca", "Maya", "Olmec"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Who was the first woman to fly solo across the Atlantic?",
+    "options": ["Amelia Earhart", "Marie Curie", "Rosa Parks", "Florence Nightingale"],
+    "answer": 0
+  },
+  {
+    "category": "History",
+    "question": "The Hundred Years' War was fought mainly between which two countries?",
+    "options": [
+      "England and France",
+      "France and Spain",
+      "England and Germany",
+      "Italy and France"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "History",
+    "question": "Who was the Greek philosopher who taught Alexander the Great?",
+    "options": ["Socrates", "Plato", "Aristotle", "Homer"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Which city was the first to be attacked with an atomic bomb?",
+    "options": ["Nagasaki", "Hiroshima", "Tokyo", "Osaka"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "What was the name of the first space station?",
+    "options": ["Mir", "Salyut 1", "Skylab", "ISS"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which empire was ruled by Genghis Khan?",
+    "options": ["Mongol", "Ottoman", "Aztec", "Persian"],
+    "answer": 0
+  },
+  {
+    "category": "History",
+    "question": "In which century was the steam engine first widely used?",
+    "options": ["16th", "17th", "18th", "19th"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Who wrote the Declaration of Independence?",
+    "options": ["George Washington", "Thomas Jefferson", "Benjamin Franklin", "John Adams"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The Rosetta Stone helped decode which ancient language?",
+    "options": ["Latin", "Egyptian hieroglyphs", "Sanskrit", "Cuneiform"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which African country was never colonized by Europeans?",
+    "options": ["Nigeria", "Ethiopia", "Kenya", "Ghana"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Who was the first female winner of a Nobel Prize?",
+    "options": ["Marie Curie", "Ada Lovelace", "Jane Goodall", "Rosalind Franklin"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which artist released the album 'Thriller'?",
+    "options": ["Prince", "Michael Jackson", "Stevie Wonder", "Lionel Richie"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which animated film features the song 'Let It Go'?",
+    "options": ["Tangled", "Frozen", "Moana", "Coco"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which animated series features a sponge who lives in a pineapple?",
+    "options": ["SpongeBob SquarePants", "Fairly OddParents", "Phineas and Ferb", "Jimmy Neutron"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which K-pop group sang 'Dynamite'?",
+    "options": ["Blackpink", "BTS", "EXO", "Twice"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who plays Iron Man in the Marvel movies?",
+    "options": ["Chris Evans", "Robert Downey Jr.", "Chris Hemsworth", "Mark Ruffalo"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which singer is nicknamed 'The Boss'?",
+    "options": ["Bruce Springsteen", "Bon Jovi", "Billy Joel", "Elton John"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which 2008 film features a lonely robot on Earth?",
+    "options": ["WALL-E", "Robots", "Big Hero 6", "Chappie"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who is the creator of the manga 'Naruto'?",
+    "options": ["Masashi Kishimoto", "Akira Toriyama", "Eiichiro Oda", "Hayao Miyazaki"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which animated film is about a rat who dreams of being a chef?",
+    "options": ["Ratatouille", "Coco", "The Chef Show", "Kung Fu Panda"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which band performed the song 'Yellow Submarine'?",
+    "options": ["The Beatles", "The Who", "Pink Floyd", "The Kinks"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which 1982 film features a friendly alien and a boy named Elliott?",
+    "options": ["E.T. the Extra-Terrestrial", "Close Encounters", "Alien", "Starman"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which streaming platform's show 'Squid Game' became a global hit?",
+    "options": ["Hulu", "Netflix", "HBO Max", "Apple TV+"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who played Jack in the film 'Titanic'?",
+    "options": ["Leonardo DiCaprio", "Brad Pitt", "Tom Cruise", "Johnny Depp"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which singer is known as 'The Queen of Soul'?",
+    "options": ["Aretha Franklin", "Whitney Houston", "Diana Ross", "Tina Turner"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which animated movie features a penguin named Skipper?",
+    "options": ["Happy Feet", "Madagascar", "Surf's Up", "Ice Age"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which TV drama follows the Dutton family?",
+    "options": ["Yellowstone", "Succession", "Ozark", "Empire"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which 2019 film follows a stand-up comedian's descent into madness?",
+    "options": ["Joker", "Venom", "Deadpool", "Taxi Driver"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which YouTube personality has the most subscribers?",
+    "options": ["MrBeast", "PewDiePie", "T-Series", "Cocomelon"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which musical features the character Elphaba?",
+    "options": ["Wicked", "Hamilton", "Cats", "Les Misérables"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which superhero film features the line 'I am Groot'?",
+    "options": ["Guardians of the Galaxy", "Avengers", "Thor", "Ant-Man"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which singer's fans are called 'Swifties'?",
+    "options": ["Taylor Swift", "Ariana Grande", "Billie Eilish", "Dua Lipa"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which animated film is set in the Land of the Dead?",
+    "options": ["Coco", "Moana", "Encanto", "Luca"],
+    "answer": 0
+  },
+  {
+    "category": "Sports",
+    "question": "Which country invented golf?",
+    "options": ["England", "Scotland", "Ireland", "Wales"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "How many players are in a rugby union team?",
+    "options": ["11", "13", "15", "17"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "In which sport do players use a shuttlecock?",
+    "options": ["Tennis", "Badminton", "Squash", "Pickleball"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "What is the maximum score in a single dart throw?",
+    "options": ["50", "57", "60", "100"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "Which country hosts the Tour de France?",
+    "options": ["Italy", "Spain", "France", "Belgium"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "How many laps is the Indianapolis 500?",
+    "options": ["100", "200", "300", "500"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "What is the length of an Olympic swimming pool in meters?",
+    "options": ["25", "50", "100", "75"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which footballer is known as 'CR7'?",
+    "options": ["Lionel Messi", "Cristiano Ronaldo", "Neymar", "Mbappé"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "In which country did table tennis originate?",
+    "options": ["China", "Japan", "England", "Korea"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "How many players are on an ice hockey team on the ice?",
+    "options": ["Five", "Six", "Seven", "Eight"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which country has won the most Olympic medals of all time?",
+    "options": ["USA", "China", "Russia", "Germany"],
+    "answer": 0
+  },
+  {
+    "category": "Sports",
+    "question": "What is the scoring term for a hole played one stroke under par?",
+    "options": ["Birdie", "Eagle", "Bogey", "Albatross"],
+    "answer": 0
+  },
+  {
+    "category": "Sports",
+    "question": "Which martial art originates from Japan?",
+    "options": ["Taekwondo", "Judo", "Capoeira", "Krav Maga"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "In cricket, how many balls are in an over?",
+    "options": ["Four", "Five", "Six", "Eight"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "Which country won the 2019 Cricket World Cup?",
+    "options": ["Australia", "England", "India", "New Zealand"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "What is the standard height of a tennis net at the center?",
+    "options": ["0.5 m", "0.9 m", "1.2 m", "1.5 m"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which sport uses a pommel horse?",
+    "options": ["Gymnastics", "Weightlifting", "Fencing", "Wrestling"],
+    "answer": 0
+  },
+  {
+    "category": "Sports",
+    "question": "How many points is a touchdown worth in American football?",
+    "options": ["Three", "Six", "Seven", "Ten"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which Asian country hosted the 2020 Summer Olympics?",
+    "options": ["China", "Japan", "South Korea", "Qatar"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "What is the nickname of the New Zealand national rugby team?",
+    "options": ["All Blacks", "Springboks", "Wallabies", "Lions"],
+    "answer": 0
+  },
+  {
+    "category": "Sports",
+    "question": "In boxing, what is the term for a punch thrown from the side?",
+    "options": ["Hook", "Jab", "Uppercut", "Cross"],
+    "answer": 0
+  },
+  {
+    "category": "Sports",
+    "question": "Which country is credited with inventing association football's modern rules?",
+    "options": ["Brazil", "England", "Italy", "Uruguay"],
+    "answer": 1
+  }
+]

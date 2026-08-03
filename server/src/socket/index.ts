@@ -45,6 +45,12 @@ import {
   type VotingConfig,
   type VotingSession as VotingGameSession,
 } from '../engine/voting-engine.js';
+import {
+  TriviaSession,
+  type TriviaConfig,
+  type TriviaMode,
+  type TriviaSession as TriviaGameSession,
+} from '../engine/trivia-engine.js';
 import { PLAYABLE_ROOM_GAMES } from '../lib/game-registry.js';
 
 import wordsJson from '../data/skribbl-words.json' with { type: 'json' };
@@ -56,6 +62,8 @@ import wyrJson from '../data/wyr.json' with { type: 'json' };
 import mltJson from '../data/most-likely-to.json' with { type: 'json' };
 import nhieJson from '../data/never-have-i-ever.json' with { type: 'json' };
 import totJson from '../data/this-or-that.json' with { type: 'json' };
+import triviaQuestionsJson from '../data/trivia-questions.json' with { type: 'json' };
+import type { TriviaQuestion } from '../engine/trivia-engine.js';
 
 export interface SocketGatewayDeps {
   engine: RoomEngine;
@@ -86,10 +94,11 @@ interface RoomTimers {
   drawEnd?: NodeJS.Timeout;
   voteEnd?: NodeJS.Timeout;
   statementEnd?: NodeJS.Timeout;
+  questionEnd?: NodeJS.Timeout;
 }
 
-/** A live game session: a drawing game, Copycat, or a voting game. */
-type GameSession = DrawingSession | CopycatSession | VotingGameSession;
+/** A live game session: a drawing game, Copycat, a voting game, or Trivia. */
+type GameSession = DrawingSession | CopycatSession | VotingGameSession | TriviaGameSession;
 
 const DRAWING_CONFIGS: Record<string, DrawingGameConfig> = {
   'skribbl-arena': {
@@ -181,6 +190,13 @@ function votingDatasetsFor(gameId: string): {
   }
 }
 
+const TRIVIA_CONFIG: TriviaConfig = {
+  mode: 'race',
+  questionMs: 10_000,
+  totalRounds: 10,
+  breakMs: 6_000,
+};
+
 function entriesFrom(gameId: string): DrawingEntry[] {
   switch (gameId) {
     case 'skribbl-arena':
@@ -227,6 +243,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   const pendingCustomWords = new Map<string, string[]>();
   /** WYR dilemmas / NHIE statements queued by players for future rounds. */
   const pendingPrompts = new Map<string, { a: string; b: string }[]>();
+  /** Host-chosen Trivia room mode, applied when the game starts. */
+  const pendingTriviaModes = new Map<string, TriviaMode>();
   /** Voting phase deadlines (ms epoch) so resync can rebuild client timers. */
   const votingDeadlines = new Map<string, number>();
 
@@ -271,6 +289,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     sessions.delete(roomCode);
     pendingCustomWords.delete(roomCode);
     pendingPrompts.delete(roomCode);
+    pendingTriviaModes.delete(roomCode);
     votingDeadlines.delete(roomCode);
   }
 
@@ -291,6 +310,15 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   function votingOf(room: RoomState): VotingGameSession | undefined {
     const session = sessions.get(room.code);
     return session instanceof VotingSession ? session : undefined;
+  }
+
+  function triviaOf(room: RoomState): TriviaGameSession | undefined {
+    const session = sessions.get(room.code);
+    return session instanceof TriviaSession ? session : undefined;
+  }
+
+  function isTriviaRoom(room: RoomState): boolean {
+    return room.gameId === 'trivia';
   }
 
   function isVotingRoom(room: RoomState): boolean {
@@ -567,6 +595,24 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         reveal: session.lastReveal,
         myVote: session.voteOf(requesterName),
         endsAt: votingDeadlines.get(room.code) ?? null,
+      };
+    }
+    if (session instanceof TriviaSession) {
+      const question = session.currentQuestion;
+      return {
+        view: session.phaseValue,
+        kind: 'trivia',
+        mode: session.mode,
+        round: session.currentRound,
+        totalRounds: session.totalRoundsValue,
+        // The correct answer index NEVER leaves the server in the question
+        // payload — clients only see options + category.
+        question: question
+          ? { category: question.category, question: question.question, options: question.options }
+          : null,
+        myAnswer: session.answerOf(requesterName),
+        reveal: session.lastReveal,
+        scores: session.scoreboard,
       };
     }
     const hints = session.letterHintsAt(Date.now());
@@ -865,6 +911,141 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     logger.info({ roomCode: room.code, payload }, 'voting game finished');
   }
 
+  // --- Trivia room adapter helpers (M8) ------------------------------------
+
+  function emitTriviaQuestion(room: RoomState): void {
+    const session = triviaOf(room);
+    if (!session || !session.currentQuestion) {
+      return;
+    }
+    const question = session.currentQuestion;
+    const endsAt = Date.now() + TRIVIA_CONFIG.questionMs;
+    io.to(room.code).emit(ServerEvents.roundStart, {
+      kind: 'trivia',
+      phase: 'question',
+      mode: session.mode,
+      question: {
+        category: question.category,
+        question: question.question,
+        options: question.options,
+      },
+      round: session.currentRound,
+      totalRounds: session.totalRoundsValue,
+      endsAt,
+    });
+  }
+
+  function startTrivia(room: RoomState): boolean {
+    // Capture the host-chosen mode BEFORE clearing the room game state.
+    const mode = pendingTriviaModes.get(room.code) ?? 'race';
+    clearRoomGame(room.code);
+    const session = new TriviaSession(triviaQuestionsJson as TriviaQuestion[], {
+      ...TRIVIA_CONFIG,
+      mode,
+    });
+    const players = [...room.players.values()]
+      .filter((player) => player.connected)
+      .map((player) => player.name);
+    const started = session.start(players);
+    if (!started.ok) {
+      return false;
+    }
+    sessions.set(room.code, session);
+    const engineResult = engine.transition(room, 'in-progress');
+    if (!engineResult.ok) {
+      return false;
+    }
+    emitTriviaQuestion(room);
+    broadcastState(room);
+    scheduleTriviaTimer(room);
+    logger.info({ roomCode: room.code, mode }, 'trivia game started');
+    return true;
+  }
+
+  /** 10s question timer → reveal (all-answered also reveals early). */
+  function scheduleTriviaTimer(room: RoomState): void {
+    clearTimers(room.code);
+    timers.set(room.code, {
+      questionEnd: setTimeout(() => {
+        revealTriviaRound(room);
+      }, TRIVIA_CONFIG.questionMs),
+    });
+  }
+
+  function revealTriviaRound(room: RoomState): void {
+    const session = triviaOf(room);
+    if (!session || session.phaseValue !== 'question') {
+      return;
+    }
+    const revealed = session.reveal();
+    if (!revealed.ok) {
+      return;
+    }
+    clearTimers(room.code);
+    io.to(room.code).emit(ServerEvents.roundReveal, {
+      kind: 'trivia',
+      ...revealed.value,
+      scores: session.scoreboard,
+    });
+    timers.set(room.code, {
+      breakTimer: setTimeout(() => {
+        advanceTriviaRound(room);
+      }, TRIVIA_CONFIG.breakMs),
+    });
+  }
+
+  function advanceTriviaRound(room: RoomState): void {
+    const session = triviaOf(room);
+    if (!session) {
+      return;
+    }
+    const advanced = session.next();
+    if (!advanced.ok) {
+      return;
+    }
+    clearTimers(room.code);
+    if (advanced.value.finished) {
+      finishTriviaGame(room);
+      return;
+    }
+    emitTriviaQuestion(room);
+    scheduleTriviaTimer(room);
+  }
+
+  function finishTriviaGame(room: RoomState): void {
+    const session = triviaOf(room);
+    if (!session) {
+      return;
+    }
+    clearTimers(room.code);
+    const engineResult = engine.transition(room, 'results');
+    if (!engineResult.ok) {
+      return;
+    }
+    const payload = session.endPayload() as Record<string, unknown>;
+    io.to(room.code).emit(ServerEvents.gameEnd, payload);
+    broadcastState(room);
+    persistBestEffort(setRoomStatus(room.code, 'finished'), `finish ${room.code}`);
+    if (Array.isArray(payload.scores)) {
+      const startedAt = session.startedTimestamp;
+      for (const entry of payload.scores as { playerName: string; score: number }[]) {
+        const clientKey = `${room.gameId}:${room.code}:${startedAt}:${entry.playerName}`;
+        persistBestEffort(
+          getPrisma().score.create({
+            data: {
+              gameId: room.gameId,
+              playerName: entry.playerName,
+              score: entry.score,
+              clientKey,
+            },
+          }),
+          `score ${room.code} ${entry.playerName}`
+        );
+      }
+    }
+    logger.info({ roomCode: room.code, payload }, 'trivia game finished');
+  }
+
   io.on('connection', (socket) => {
     logger.info({ socketId: socket.id }, 'socket connected');
 
@@ -928,6 +1109,15 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
           logger.warn(
             { roomCode: room.code, error: added.error },
             'late join to voting session failed'
+          );
+        }
+      }
+      if (session instanceof TriviaSession && session.phaseValue !== 'game-end') {
+        const added = session.addPlayer(player.name);
+        if (!added.ok) {
+          logger.warn(
+            { roomCode: room.code, error: added.error },
+            'late join to trivia session failed'
           );
         }
       }
@@ -1011,6 +1201,11 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         }
       } else if (isVotingRoom(result.value)) {
         if (!startVoting(result.value)) {
+          ack?.({ ok: false, error: 'NOT_ENOUGH_PLAYERS' });
+          return;
+        }
+      } else if (isTriviaRoom(result.value)) {
+        if (!startTrivia(result.value)) {
           ack?.({ ok: false, error: 'NOT_ENOUGH_PLAYERS' });
           return;
         }
@@ -1325,7 +1520,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
 
     socket.on(ClientEvents.nextRound, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
-      if (!room || (!DRAWING_CONFIGS[room.gameId] && !isVotingRoom(room))) {
+      if (!room || (!DRAWING_CONFIGS[room.gameId] && !isVotingRoom(room) && !isTriviaRoom(room))) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
       }
@@ -1345,6 +1540,13 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       if (voting && voting.phaseValue === 'revealed') {
         clearTimers(room.code);
         advanceVotingRound(room);
+        ack?.({ ok: true });
+        return;
+      }
+      const trivia = triviaOf(room);
+      if (trivia && trivia.phaseValue === 'revealed') {
+        clearTimers(room.code);
+        advanceTriviaRound(room);
         ack?.({ ok: true });
         return;
       }
@@ -1553,6 +1755,79 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         at: Date.now(),
       });
       ack?.({ ok: true, queued: queue.length });
+    });
+
+    /**
+     * M8 — Trivia room: host picks the mode in the lobby (race or
+     * Wrong Answers Only); applied when the game starts.
+     */
+    socket.on(ClientEvents.setTriviaMode, (payload: unknown, ack?: Ack) => {
+      const room = roomOf(socket);
+      if (!room || !isTriviaRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player?.isHost) {
+        ack?.({ ok: false, error: 'NOT_HOST' });
+        return;
+      }
+      if (room.phase !== 'lobby') {
+        ack?.({ ok: false, error: 'INVALID_PHASE' });
+        return;
+      }
+      const mode = (payload as { mode?: unknown }).mode;
+      if (mode !== 'race' && mode !== 'wrong-answers') {
+        ack?.({
+          ok: false,
+          error: 'INVALID_PAYLOAD',
+          message: 'mode must be race or wrong-answers',
+        });
+        return;
+      }
+      pendingTriviaModes.set(room.code, mode);
+      ack?.({ ok: true });
+    });
+
+    /** M8 — Trivia room: answer the current question (option index). */
+    socket.on(ClientEvents.answerQuestion, (payload: unknown, ack?: Ack) => {
+      const room = roomOf(socket);
+      if (!room || !isTriviaRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const session = triviaOf(room);
+      if (!session) {
+        ack?.({ ok: false, error: 'NOT_STARTED' });
+        return;
+      }
+      const optionIndex = (payload as { optionIndex?: unknown }).optionIndex;
+      if (typeof optionIndex !== 'number' || !Number.isInteger(optionIndex)) {
+        ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: 'optionIndex must be an integer' });
+        return;
+      }
+      const startedAt = session.questionStartedAtValue;
+      const elapsed = startedAt === null ? 0 : Math.max(0, Date.now() - startedAt);
+      const answered = session.submitAnswer(player.name, optionIndex, elapsed);
+      if (!answered.ok) {
+        ack?.({ ok: false, error: answered.error });
+        return;
+      }
+      socket.emit(ServerEvents.guessResult, {
+        correct: answered.value.correct,
+        points: answered.value.points,
+        alreadyGuessed: false,
+      });
+      if (answered.value.allAnswered) {
+        clearTimers(room.code);
+        revealTriviaRound(room);
+      }
+      ack?.({ ok: true, points: answered.value.points, correct: answered.value.correct });
     });
 
     socket.on(ClientEvents.gameResync, (payload: unknown, ack?: Ack) => {

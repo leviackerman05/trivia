@@ -7,11 +7,14 @@ import DrawingGameArena from '../../islands/DrawingGameArena.tsx';
 import CopycatArena from '../../islands/CopycatArena.tsx';
 import VotingArena from '../../islands/VotingArena.tsx';
 import TriviaSolo from '../../islands/TriviaSolo.tsx';
+import TriviaArena from '../../islands/TriviaArena.tsx';
 import WouldYouRatherOneScreen from '../../islands/WouldYouRatherOneScreen.tsx';
 import RhymeOrCrime from '../../islands/solo/RhymeOrCrime.tsx';
 import EmojiPlot from '../../islands/solo/EmojiPlot.tsx';
 import TimelineTussle from '../../islands/solo/TimelineTussle.tsx';
 import PriceIsRight from '../../islands/solo/PriceIsRight.tsx';
+import GenreSwap from '../../islands/solo/GenreSwap.tsx';
+import GenreBender from '../../islands/solo/GenreBender.tsx';
 import { games, getGame, getRelatedGames } from '../../lib/games';
 
 export function getStaticPaths() {
@@ -23,6 +26,16 @@ const { slug } = Astro.params;
 const game = getGame(slug)!;
 const related = getRelatedGames(game);
 const isMultiplayer = game.type !== 'solo';
+/** Solo games with a shipped island (M7/M8) — the rest show the placeholder. */
+const SHIPPED_SOLO = new Set([
+  'rhyme-or-crime',
+  'emoji-plot',
+  'timeline-tussle',
+  'price-is-right',
+  'genre-swap',
+  'genre-bender',
+]);
+const soloShipped = SHIPPED_SOLO.has(game.slug);
 ---
 
 <BaseLayout
@@ -75,6 +88,8 @@ const isMultiplayer = game.type !== 'solo';
                 <DrawingGameArena client:load gameSlug={game.slug} />
               ) : game.family === 'voting' ? (
                 <VotingArena client:load gameSlug={game.slug} />
+              ) : game.slug === 'trivia' ? (
+                <TriviaArena client:load gameSlug={game.slug} />
               ) : (
                 <RoomLobby client:load gameSlug={game.slug} />
               )}
@@ -96,14 +111,13 @@ const isMultiplayer = game.type !== 'solo';
               {game.slug === 'emoji-plot' && <EmojiPlot client:load />}
               {game.slug === 'timeline-tussle' && <TimelineTussle client:load />}
               {game.slug === 'price-is-right' && <PriceIsRight client:load />}
-              {game.slug !== 'rhyme-or-crime' &&
-                game.slug !== 'emoji-plot' &&
-                game.slug !== 'timeline-tussle' &&
-                game.slug !== 'price-is-right' && (
-                  <p class="max-w-2xl text-body text-ink-muted">
-                    {game.name} is being built right now — this is where it will live.
-                  </p>
-                )}
+              {game.slug === 'genre-swap' && <GenreSwap client:load />}
+              {game.slug === 'genre-bender' && <GenreBender client:load />}
+              {!soloShipped && (
+                <p class="max-w-2xl text-body text-ink-muted">
+                  {game.name} is being built right now — this is where it will live.
+                </p>
+              )}
             </Card>
           </div>
         )
