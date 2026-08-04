@@ -1268,5 +1268,1945 @@
     "question": "Which country is credited with inventing association football's modern rules?",
     "options": ["Brazil", "England", "Italy", "Uruguay"],
     "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What is the capital of Australia?",
+    "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "How many minutes are in a day?",
+    "options": ["1,200", "1,440", "1,600", "1,800"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What is the hardest natural substance?",
+    "options": ["Iron", "Quartz", "Diamond", "Granite"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "What do you call a baby kangaroo?",
+    "options": ["Cub", "Joey", "Calf", "Kit"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "How many players are on a soccer team?",
+    "options": ["9", "10", "11", "12"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which country has the most people?",
+    "options": ["USA", "India", "China", "Indonesia"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What is the tallest mountain on Earth?",
+    "options": ["K2", "Kangchenjunga", "Everest", "Kilimanjaro"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "How many teeth does a human adult normally have?",
+    "options": ["28", "30", "32", "34"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "What is the currency of Japan?",
+    "options": ["Won", "Yuan", "Yen", "Ringgit"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which animal is the fastest land animal?",
+    "options": ["Lion", "Cheetah", "Horse", "Greyhound"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "What gas do plants absorb from the air?",
+    "options": ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which is the largest desert on Earth?",
+    "options": ["Sahara", "Gobi", "Antarctic", "Kalahari"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "What is the smallest country in the world?",
+    "options": ["Monaco", "Malta", "Vatican City", "San Marino"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "Which language has the most native speakers?",
+    "options": ["English", "Spanish", "Hindi", "Mandarin"],
+    "answer": 3
+  },
+  {
+    "category": "General",
+    "question": "Which metal is liquid at room temperature?",
+    "options": ["Mercury", "Aluminum", "Lead", "Zinc"],
+    "answer": 0
+  },
+  {
+    "category": "General",
+    "question": "What is the national animal of Australia?",
+    "options": ["Koala", "Kangaroo", "Emu", "Dingo"],
+    "answer": 1
+  },
+  {
+    "category": "General",
+    "question": "Which fruit has its seeds on the outside?",
+    "options": ["Apple", "Orange", "Strawberry", "Grapes"],
+    "answer": 2
+  },
+  {
+    "category": "General",
+    "question": "What is the speed of light roughly?",
+    "options": ["300,000 km/s", "150,000 km/s", "1,000 km/s", "30,000 km/s"],
+    "answer": 0
+  },
+  {
+    "category": "General",
+    "question": "Which country is famous for the Great Barrier Reef?",
+    "options": ["Brazil", "Mexico", "Australia", "Thailand"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "Which planet has the most moons?",
+    "options": ["Earth", "Mars", "Saturn", "Neptune"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is H2O?",
+    "options": ["Salt", "Water", "Oxygen", "Hydrogen peroxide"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which force pulls objects toward Earth?",
+    "options": ["Magnetism", "Friction", "Gravity", "Inertia"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is the largest planet?",
+    "options": ["Saturn", "Neptune", "Jupiter", "Uranus"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What gas do humans need to breathe?",
+    "options": ["Nitrogen", "Carbon dioxide", "Oxygen", "Helium"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is the boiling point of water at sea level?",
+    "options": ["90°C", "100°C", "110°C", "120°C"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which vitamin comes from sunlight?",
+    "options": ["A", "B12", "C", "D"],
+    "answer": 3
+  },
+  {
+    "category": "Science",
+    "question": "Which scientist proposed the theory of relativity?",
+    "options": ["Newton", "Einstein", "Hawking", "Bohr"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the most abundant gas in Earth’s atmosphere?",
+    "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Argon"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "How many chromosomes do humans have?",
+    "options": ["23", "44", "46", "48"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is the study of weather called?",
+    "options": ["Geology", "Meteorology", "Astronomy", "Ecology"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which part of the eye controls how much light enters?",
+    "options": ["Retina", "Cornea", "Iris", "Lens"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "Which element has the symbol Fe?",
+    "options": ["Fluorine", "Iron", "Francium", "Lead"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the main ingredient in glass?",
+    "options": ["Sand", "Clay", "Limestone", "Soda"],
+    "answer": 0
+  },
+  {
+    "category": "Science",
+    "question": "Which organ pumps blood around the body?",
+    "options": ["Lungs", "Liver", "Heart", "Kidneys"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What do we call a scientist who studies stars?",
+    "options": ["Geologist", "Astronomer", "Meteorologist", "Seismologist"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "How many bones does a baby have at birth?",
+    "options": ["About 200", "About 300", "About 400", "About 100"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What causes tides on Earth?",
+    "options": ["Wind", "The Moon’s gravity", "Earthquakes", "Ocean currents alone"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "Which acid is found in the human stomach?",
+    "options": ["Citric acid", "Hydrochloric acid", "Acetic acid", "Sulfuric acid"],
+    "answer": 1
+  },
+  {
+    "category": "Science",
+    "question": "What is the SI unit of force?",
+    "options": ["Watt", "Joule", "Newton", "Pascal"],
+    "answer": 2
+  },
+  {
+    "category": "Science",
+    "question": "What is the process of plants making food called?",
+    "options": ["Respiration", "Photosynthesis", "Fermentation", "Digestion"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The Great Wall is in which country?",
+    "options": ["Japan", "China", "India", "Mongolia"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Who discovered the sea route to India in 1498?",
+    "options": ["Columbus", "Magellan", "Vasco da Gama", "Marco Polo"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "The pyramids of Giza are in which country?",
+    "options": ["Mexico", "Egypt", "Peru", "Sudan"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Who was known as the Iron Lady?",
+    "options": ["Indira Gandhi", "Margaret Thatcher", "Angela Merkel", "Golda Meir"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "In which year did India gain independence?",
+    "options": ["1945", "1946", "1947", "1948"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "The Roman Colosseum is in which city?",
+    "options": ["Athens", "Rome", "Naples", "Florence"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Who was the first woman Prime Minister of India?",
+    "options": ["Sonia Gandhi", "Indira Gandhi", "Sarojini Naidu", "Pratibha Patil"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which empire built Machu Picchu?",
+    "options": ["Aztec", "Maya", "Inca", "Olmec"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Who was the leader of Nazi Germany?",
+    "options": ["Mussolini", "Hitler", "Stalin", "Franco"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The Titanic sank in which year?",
+    "options": ["1905", "1910", "1912", "1915"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Who wrote the Indian national anthem?",
+    "options": [
+      "Rabindranath Tagore",
+      "Bankim Chandra Chatterjee",
+      "Sarojini Naidu",
+      "Subhash Chandra Bose"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "History",
+    "question": "Who was assassinated on 30 January 1948?",
+    "options": ["Jawaharlal Nehru", "Mahatma Gandhi", "Bhagat Singh", "Subhash Chandra Bose"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The first moon landing was in which year?",
+    "options": ["1965", "1967", "1969", "1971"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Which city was the capital of the Byzantine Empire?",
+    "options": ["Rome", "Athens", "Constantinople", "Alexandria"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "Who was known as the Father of the Atomic Bomb?",
+    "options": ["Einstein", "Oppenheimer", "Fermi", "Teller"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The French Revolution began in which year?",
+    "options": ["1776", "1789", "1799", "1804"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which queen ruled England for 63 years (1837–1901)?",
+    "options": ["Elizabeth I", "Victoria", "Anne", "Mary"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "The Silk Road connected China with which region?",
+    "options": ["Africa", "Europe", "Australia", "South America"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Who was the first emperor of Rome?",
+    "options": ["Julius Caesar", "Nero", "Augustus", "Constantine"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "In which year did the American Civil War end?",
+    "options": ["1863", "1864", "1865", "1867"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "The Taj Mahal was built by which emperor?",
+    "options": ["Akbar", "Shah Jahan", "Aurangzeb", "Babur"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which explorer first circumnavigated the globe?",
+    "options": ["Columbus", "Cook", "Magellan’s crew", "Drake"],
+    "answer": 2
+  },
+  {
+    "category": "History",
+    "question": "The UN was founded in which year?",
+    "options": ["1943", "1945", "1948", "1950"],
+    "answer": 1
+  },
+  {
+    "category": "History",
+    "question": "Which civilization built the city of Petra?",
+    "options": ["Romans", "Nabataeans", "Greeks", "Phoenicians"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which singer is known as the Queen of Pop?",
+    "options": ["Beyoncé", "Madonna", "Rihanna", "Taylor Swift"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which TV show is set in the office of Dunder Mifflin?",
+    "options": ["Parks and Recreation", "The Office", "Community", "30 Rock"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who played Iron Man in the MCU?",
+    "options": ["Chris Evans", "Robert Downey Jr.", "Mark Ruffalo", "Chris Hemsworth"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which movie features the quote “May the Force be with you”?",
+    "options": ["Star Trek", "Star Wars", "Guardians of the Galaxy", "Dune"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who is known as the King of Pop?",
+    "options": ["Elvis Presley", "Michael Jackson", "Prince", "Justin Timberlake"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which band sang “Bohemian Rhapsody”?",
+    "options": ["The Beatles", "Queen", "Pink Floyd", "Led Zeppelin"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "In which year did the first iPhone launch?",
+    "options": ["2005", "2006", "2007", "2008"],
+    "answer": 2
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who is the protagonist of the Harry Potter series?",
+    "options": ["Ron Weasley", "Hermione Granger", "Harry Potter", "Neville Longbottom"],
+    "answer": 2
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which streaming platform produced “Stranger Things”?",
+    "options": ["Netflix", "Hulu", "Amazon Prime", "Disney+"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What is the name of the green ogre in the Shrek movies?",
+    "options": ["Donkey", "Shrek", "Fiona", "Farquaad"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who won the first season of “Kaun Banega Crorepati”?",
+    "options": ["Harshvardhan Nawathe", "Rahul Mahajan", "Amitabh Bachchan", "Sushil Kumar"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which artist released the album “Thriller”?",
+    "options": ["Prince", "Michael Jackson", "Stevie Wonder", "Lionel Richie"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which fictional detective lives at 221B Baker Street?",
+    "options": ["Hercule Poirot", "Sherlock Holmes", "Miss Marple", "Columbo"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What is the name of the supercomputer in “2001: A Space Odyssey”?",
+    "options": ["HAL", "WALL-E", "JARVIS", "GERTY"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who hosted “The Oprah Winfrey Show”?",
+    "options": ["Oprah Winfrey", "Ellen DeGeneres", "Kelly Ripa", "Barbara Walters"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which superhero wears a red and blue suit with a spider emblem?",
+    "options": ["Batman", "Superman", "Spider-Man", "Iron Man"],
+    "answer": 2
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What is the name of the wizarding school in Harry Potter?",
+    "options": ["Beauxbatons", "Hogwarts", "Durmstrang", "Ilvermorny"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which singer is nicknamed “The Weekend”?",
+    "options": ["The Weeknd", "Post Malone", "Drake", "Bruno Mars"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which movie series features the character Jack Sparrow?",
+    "options": ["Indiana Jones", "Pirates of the Caribbean", "The Mummy", "National Treasure"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who created the character Mickey Mouse?",
+    "options": ["Walt Disney", "Steven Spielberg", "Hanna-Barbera", "Chuck Jones"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which reality show features the quote “You’re fired!”?",
+    "options": ["Survivor", "Big Brother", "The Apprentice", "Shark Tank"],
+    "answer": 2
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What is the fastest-selling album by Taylor Swift?",
+    "options": ["Red", "1989", "Midnights", "Folklore"],
+    "answer": 2
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which movie won Best Picture at the 2020 Oscars?",
+    "options": ["Joker", "Parasite", "1917", "Once Upon a Time in Hollywood"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who is the CEO of Tesla?",
+    "options": ["Jeff Bezos", "Elon Musk", "Tim Cook", "Sundar Pichai"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which animated movie features the song “Let It Go”?",
+    "options": ["Moana", "Tangled", "Frozen", "Encanto"],
+    "answer": 2
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What is the name of the coffee shop in “Friends”?",
+    "options": ["Central Perk", "The Coffee Bean", "Java Joe", "Monk’s Cafe"],
+    "answer": 0
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Who played Jack in the movie “Titanic”?",
+    "options": ["Brad Pitt", "Leonardo DiCaprio", "Tom Cruise", "Johnny Depp"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "Which K-pop group sang “Dynamite”?",
+    "options": ["BLACKPINK", "BTS", "EXO", "TWICE"],
+    "answer": 1
+  },
+  {
+    "category": "Pop Culture",
+    "question": "What is the name of the wizard in “The Lord of the Rings”?",
+    "options": ["Gandalf", "Dumbledore", "Merlin", "Radagast"],
+    "answer": 0
+  },
+  {
+    "category": "Sports",
+    "question": "How many players are on a cricket team?",
+    "options": ["10", "11", "12", "9"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which country hosted the 2024 Summer Olympics?",
+    "options": ["Japan", "France", "USA", "Australia"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "How often is the FIFA World Cup held?",
+    "options": ["Every 2 years", "Every 4 years", "Every 5 years", "Every 6 years"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Who has won the most Grand Slam singles titles (men)?",
+    "options": ["Federer", "Nadal", "Djokovic", "Sampras"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "Which country won the 2011 Cricket World Cup?",
+    "options": ["Australia", "Sri Lanka", "India", "Pakistan"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "Who is the fastest man in history (100m record)?",
+    "options": ["Tyson Gay", "Usain Bolt", "Carl Lewis", "Yohan Blake"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which team has won the most NBA championships?",
+    "options": ["Lakers", "Celtics", "Bulls", "Warriors"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "How many holes are on a standard golf course?",
+    "options": ["9", "12", "18", "24"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "Which boxer was known as “The Greatest”?",
+    "options": ["Mike Tyson", "Muhammad Ali", "Floyd Mayweather", "Joe Frazier"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "In which year did India win its first T20 World Cup?",
+    "options": ["2005", "2007", "2009", "2011"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which country invented cricket?",
+    "options": ["India", "Australia", "England", "Pakistan"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "How many players are on a basketball team?",
+    "options": ["4", "5", "6", "7"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which F1 driver has won the most championships?",
+    "options": ["Schumacher & Hamilton (7 each)", "Senna", "Verstappen", "Vettel"],
+    "answer": 0
+  },
+  {
+    "category": "Sports",
+    "question": "In which sport is the “butterfly” a stroke?",
+    "options": ["Rowing", "Swimming", "Kayaking", "Sailing"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Who is known as the “Flying Sikh”?",
+    "options": ["Milkha Singh", "Usain Bolt", "PT Usha", "Abhinav Bindra"],
+    "answer": 0
+  },
+  {
+    "category": "Sports",
+    "question": "How long is a marathon in kilometers?",
+    "options": ["40.2 km", "42.2 km", "44.2 km", "38.2 km"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which Indian city hosted the 2010 Commonwealth Games?",
+    "options": ["Mumbai", "Delhi", "Bangalore", "Hyderabad"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which sport uses a puck?",
+    "options": ["Field hockey", "Ice hockey", "Lacrosse", "Rugby"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Who won the 2023 FIFA Women’s World Cup?",
+    "options": ["USA", "Spain", "England", "Japan"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "How many overs are in a T20 cricket match (per side)?",
+    "options": ["10", "15", "20", "50"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "Which tennis player is nicknamed “The King of Clay”?",
+    "options": ["Federer", "Djokovic", "Nadal", "Murray"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "In which year were the first modern Olympics held?",
+    "options": ["1892", "1896", "1900", "1904"],
+    "answer": 1
+  },
+  {
+    "category": "Sports",
+    "question": "Which Indian cricketer scored 100 international centuries?",
+    "options": ["Virat Kohli", "Rahul Dravid", "Sachin Tendulkar", "Sourav Ganguly"],
+    "answer": 2
+  },
+  {
+    "category": "Sports",
+    "question": "Which country invented table tennis?",
+    "options": ["China", "Japan", "England", "USA"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Canada?",
+    "options": ["Toronto", "Vancouver", "Ottawa", "Montreal"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "Which is the longest river in the world?",
+    "options": ["Amazon", "Nile", "Yangtze", "Mississippi"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "Mount Everest is on the border of which two countries?",
+    "options": ["India & China", "Nepal & China", "Nepal & India", "China & Bhutan"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "Which country is shaped like a boot?",
+    "options": ["Greece", "Spain", "Italy", "Portugal"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "What is the largest country by area?",
+    "options": ["Canada", "China", "USA", "Russia"],
+    "answer": 3
+  },
+  {
+    "category": "Geography",
+    "question": "Which is the smallest continent?",
+    "options": ["Europe", "Australia", "Antarctica", "South America"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "The Sahara Desert is in which continent?",
+    "options": ["Asia", "Africa", "Australia", "South America"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Japan?",
+    "options": ["Osaka", "Kyoto", "Tokyo", "Nagoya"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "Which ocean is the deepest?",
+    "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+    "answer": 3
+  },
+  {
+    "category": "Geography",
+    "question": "Which river flows through Paris?",
+    "options": ["Thames", "Rhine", "Seine", "Loire"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Brazil?",
+    "options": ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "Which is the largest island in the world?",
+    "options": ["Madagascar", "Borneo", "Greenland", "Sumatra"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "The Statue of Liberty is in which city?",
+    "options": ["Washington DC", "Boston", "New York", "Philadelphia"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "Which country has the most time zones?",
+    "options": ["Russia", "USA", "France", "China"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Italy?",
+    "options": ["Milan", "Venice", "Rome", "Naples"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "Which is the highest waterfall in the world?",
+    "options": ["Niagara", "Angel Falls", "Victoria", "Iguazu"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "The Ganges river flows mainly through which country?",
+    "options": ["Bangladesh", "Nepal", "India", "Bhutan"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Egypt?",
+    "options": ["Alexandria", "Giza", "Cairo", "Luxor"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "Which two countries share the longest border?",
+    "options": ["USA & Mexico", "Canada & USA", "China & Russia", "India & China"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "Which city is known as the City of Love?",
+    "options": ["Rome", "Paris", "Vienna", "Prague"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "Which country is the largest producer of coffee?",
+    "options": ["Colombia", "Vietnam", "Brazil", "Ethiopia"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Germany?",
+    "options": ["Munich", "Hamburg", "Berlin", "Frankfurt"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "Which desert is the largest hot desert?",
+    "options": ["Gobi", "Kalahari", "Sahara", "Arabian"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "The Eiffel Tower was built for which event?",
+    "options": ["Olympics", "World’s Fair of 1889", "World War I", "Expo 1900"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "Which country has the most volcanoes?",
+    "options": ["Japan", "Indonesia", "USA", "Iceland"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Russia?",
+    "options": ["St. Petersburg", "Moscow", "Kiev", "Novosibirsk"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "Which is the largest lake in the world?",
+    "options": ["Lake Superior", "Caspian Sea", "Lake Victoria", "Lake Baikal"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "Which continent is the Amazon rainforest in?",
+    "options": ["Africa", "Asia", "South America", "Central America"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "Which country is known as the Land of the Rising Sun?",
+    "options": ["China", "Japan", "Thailand", "South Korea"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Spain?",
+    "options": ["Barcelona", "Seville", "Madrid", "Valencia"],
+    "answer": 2
+  },
+  {
+    "category": "Movies",
+    "question": "Who directed “Inception”?",
+    "options": ["Spielberg", "Nolan", "Tarantino", "Scorsese"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Which movie won the first-ever Academy Award for Best Picture?",
+    "options": ["Gone with the Wind", "Wings", "The Jazz Singer", "Citizen Kane"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who played the Joker in “The Dark Knight”?",
+    "options": ["Jack Nicholson", "Heath Ledger", "Jared Leto", "Joaquin Phoenix"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Which studio produced “Toy Story”?",
+    "options": ["DreamWorks", "Pixar", "Blue Sky", "Illumination"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who directed “Schindler’s List”?",
+    "options": ["Spielberg", "Kubrick", "Coppola", "Hitchcock"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which movie features the line “I’m the king of the world!”?",
+    "options": ["Avatar", "Titanic", "Braveheart", "Gladiator"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who played Forrest Gump?",
+    "options": ["Tom Hanks", "Tom Cruise", "Brad Pitt", "Matt Damon"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which film series features the character Darth Vader?",
+    "options": ["Star Trek", "Star Wars", "The Matrix", "Alien"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who directed “Pulp Fiction”?",
+    "options": ["Tarantino", "Scorsese", "Fincher", "Coen Brothers"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which animated film features the character Elsa?",
+    "options": ["Moana", "Frozen", "Tangled", "Coco"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who played Neo in “The Matrix”?",
+    "options": ["Keanu Reeves", "Brad Pitt", "Will Smith", "Johnny Depp"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which movie series follows a boy wizard?",
+    "options": ["Percy Jackson", "Harry Potter", "Narnia", "Eragon"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who directed “The Godfather”?",
+    "options": ["Scorsese", "Coppola", "Lumet", "Penn"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Which 2023 film starred Margot Robbie as a famous doll?",
+    "options": ["Oppenheimer", "Barbie", "Wonka", "The Little Mermaid"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who is the voice of Woody in “Toy Story”?",
+    "options": ["Tim Allen", "Tom Hanks", "Billy Crystal", "Robin Williams"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Which movie introduced the character James Bond?",
+    "options": ["Goldfinger", "Dr. No", "From Russia with Love", "Thunderball"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who starred in “Cast Away” and “Forrest Gump”?",
+    "options": ["Tom Hanks", "Will Smith", "Jim Carrey", "Morgan Freeman"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which director is known for “Taxi Driver” and “Goodfellas”?",
+    "options": ["Tarantino", "Scorsese", "Spielberg", "De Palma"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Which movie’s theme song is “My Heart Will Go On”?",
+    "options": ["Titanic", "Romeo + Juliet", "The Bodyguard", "Pearl Harbor"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Who played Black Panther in the MCU?",
+    "options": ["Chadwick Boseman", "Michael B. Jordan", "Idris Elba", "John Boyega"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which film won Best Picture at the 2024 Oscars?",
+    "options": ["Barbie", "Oppenheimer", "Killers of the Flower Moon", "Poor Things"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who directed “Jaws” and “E.T.”?",
+    "options": ["Lucas", "Spielberg", "Zemeckis", "Cameron"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Which movie series features the character Gandalf?",
+    "options": ["Narnia", "Harry Potter", "The Lord of the Rings", "The Hobbit only"],
+    "answer": 2
+  },
+  {
+    "category": "Movies",
+    "question": "Who played Captain Jack Sparrow?",
+    "options": ["Johnny Depp", "Orlando Bloom", "Hugh Jackman", "Colin Farrell"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which 2019 movie won Best Picture?",
+    "options": ["Joker", "1917", "Parasite", "Once Upon a Time in Hollywood"],
+    "answer": 2
+  },
+  {
+    "category": "Movies",
+    "question": "Who directed “Interstellar”?",
+    "options": ["Nolan", "Villeneuve", "Scott", "Cameron"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which film features the character Michael Corleone?",
+    "options": ["Goodfellas", "The Godfather", "Scarface", "Casino"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who voiced the Genie in the 1992 “Aladdin”?",
+    "options": ["Robin Williams", "Eddie Murphy", "Mike Myers", "Will Smith"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which movie was the first to gross $1 billion?",
+    "options": ["Titanic", "Jurassic Park", "The Lion King", "Star Wars"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Who sang “Billie Jean”?",
+    "options": ["Prince", "Michael Jackson", "Stevie Wonder", "James Brown"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Which band recorded “Hotel California”?",
+    "options": ["The Eagles", "Fleetwood Mac", "The Doors", "Lynyrd Skynyrd"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Who is known as the “Queen of Soul”?",
+    "options": ["Aretha Franklin", "Whitney Houston", "Diana Ross", "Tina Turner"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Which instrument does Yo-Yo Ma play?",
+    "options": ["Violin", "Cello", "Piano", "Double bass"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Who sang “Shape of You”?",
+    "options": ["Ed Sheeran", "Sam Smith", "Shawn Mendes", "Charlie Puth"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Which band released “Smoke on the Water”?",
+    "options": ["Led Zeppelin", "Deep Purple", "Black Sabbath", "AC/DC"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Who is the lead singer of Queen?",
+    "options": ["Elton John", "Freddie Mercury", "David Bowie", "Mick Jagger"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Which artist is nicknamed “The Boss”?",
+    "options": ["Bruce Springsteen", "Bon Jovi", "Billy Joel", "John Mellencamp"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "What genre is associated with Jay-Z?",
+    "options": ["Country", "Hip-hop", "Jazz", "Rock"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Who sang “Rolling in the Deep”?",
+    "options": ["Beyoncé", "Adele", "Rihanna", "Sia"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Which instrument has 47 strings and a pedal?",
+    "options": ["Harp", "Piano", "Guitar", "Cello"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Who composed the “Four Seasons”?",
+    "options": ["Bach", "Mozart", "Vivaldi", "Handel"],
+    "answer": 2
+  },
+  {
+    "category": "Music",
+    "question": "Which band sang “Sweet Child O’ Mine”?",
+    "options": ["Aerosmith", "Guns N’ Roses", "Bon Jovi", "Metallica"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Who is the best-selling female artist of all time?",
+    "options": ["Madonna", "Rihanna", "Taylor Swift", "Whitney Houston"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Which country does the band BTS come from?",
+    "options": ["Japan", "China", "South Korea", "Thailand"],
+    "answer": 2
+  },
+  {
+    "category": "Music",
+    "question": "Who sang “Old Town Road”?",
+    "options": ["Post Malone", "Lil Nas X", "Drake", "Kid Cudi"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "What does “a cappella” mean?",
+    "options": ["With guitar", "Without instruments", "With piano", "Slowly"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Who is known as the “King of Rock and Roll”?",
+    "options": ["Elvis Presley", "Chuck Berry", "John Lennon", "Little Richard"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Which singer has the most Grammy wins?",
+    "options": ["Beyoncé", "Quincy Jones", "Taylor Swift", "Jay-Z"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Which instrument is also a vegetable?",
+    "options": ["Trumpet", "Oboe", "Cornet", "Trombone"],
+    "answer": 2
+  },
+  {
+    "category": "Music",
+    "question": "Who sang “Purple Rain”?",
+    "options": ["Michael Jackson", "Prince", "David Bowie", "Lenny Kravitz"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Which classical composer became deaf?",
+    "options": ["Mozart", "Bach", "Beethoven", "Chopin"],
+    "answer": 2
+  },
+  {
+    "category": "Music",
+    "question": "What is the highest female singing voice?",
+    "options": ["Alto", "Mezzo-soprano", "Soprano", "Contralto"],
+    "answer": 2
+  },
+  {
+    "category": "Music",
+    "question": "Who wrote “Bohemian Rhapsody”?",
+    "options": ["Freddie Mercury", "Elton John", "Paul McCartney", "David Bowie"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Which rapper released “Lose Yourself”?",
+    "options": ["Jay-Z", "Eminem", "Kanye West", "Drake"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Who sang “Shallow” with Bradley Cooper?",
+    "options": ["Ariana Grande", "Lady Gaga", "Beyoncé", "Katy Perry"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Which genre did Elvis Presley popularize?",
+    "options": ["Jazz", "Rock and roll", "Blues", "Country"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Which group sang “Dancing Queen”?",
+    "options": ["ABBA", "The Bee Gees", "Boney M", "The Carpenters"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Who is the lead vocalist of Coldplay?",
+    "options": ["Chris Martin", "Thom Yorke", "Brandon Flowers", "Matt Bellamy"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "Which country is famous for sushi?",
+    "options": ["China", "Thailand", "Japan", "Korea"],
+    "answer": 2
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in guacamole?",
+    "options": ["Tomato", "Avocado", "Pepper", "Onion"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "Which cheese is traditionally used on pizza?",
+    "options": ["Cheddar", "Mozzarella", "Swiss", "Feta"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "What is the most consumed fruit in the world?",
+    "options": ["Banana", "Apple", "Tomato", "Mango"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "Which country invented pasta?",
+    "options": ["France", "Italy", "Greece", "China"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in hummus?",
+    "options": ["Lentils", "Chickpeas", "Beans", "Peas"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "Which beverage contains caffeine?",
+    "options": ["Water", "Orange juice", "Coffee", "Milk"],
+    "answer": 2
+  },
+  {
+    "category": "Food",
+    "question": "What is sushi wrapped in?",
+    "options": ["Seaweed", "Rice paper", "Lettuce", "Soy sheets"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "Which fruit is known as the king of fruits?",
+    "options": ["Mango", "Durian", "Pineapple", "Jackfruit"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in chocolate?",
+    "options": ["Sugar", "Cocoa", "Milk", "Caramel"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "Which country is famous for tacos?",
+    "options": ["Spain", "Argentina", "Mexico", "Peru"],
+    "answer": 2
+  },
+  {
+    "category": "Food",
+    "question": "What is a croissant traditionally made from?",
+    "options": ["Puff pastry", "Shortcrust", "Bread dough", "Choux"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "Which nut is used to make marzipan?",
+    "options": ["Peanut", "Cashew", "Almond", "Walnut"],
+    "answer": 2
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in a mojito?",
+    "options": ["Rum", "Vodka", "Tequila", "Gin"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "Which food is fermented cabbage?",
+    "options": ["Kimchi", "Sauerkraut", "Pickles", "Salsa"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "What is the world’s most expensive spice?",
+    "options": ["Cinnamon", "Saffron", "Vanilla", "Turmeric"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "Which country consumes the most tea per person?",
+    "options": ["China", "UK", "Turkey", "India"],
+    "answer": 2
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in miso soup?",
+    "options": ["Soybean paste", "Seaweed", "Tofu only", "Rice"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "Which fruit is a berry?",
+    "options": ["Strawberry", "Banana", "Watermelon", "Tomato"],
+    "answer": 3
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in pesto?",
+    "options": ["Basil", "Cilantro", "Mint", "Parsley"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "Which country invented french fries?",
+    "options": ["France", "Belgium", "USA", "Netherlands"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "What does “al dente” mean?",
+    "options": ["Soft", "Firm to the bite", "Overcooked", "Cold"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "Which is a popular Indian street food?",
+    "options": ["Poutine", "Pani puri", "Falafel", "Ramen"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in a carbonara sauce?",
+    "options": ["Tomato", "Eggs and cheese", "Cream only", "Butter"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "Which country drinks the most coffee?",
+    "options": ["USA", "Brazil", "Finland", "Italy"],
+    "answer": 2
+  },
+  {
+    "category": "Food",
+    "question": "What is a “boba” in bubble tea?",
+    "options": ["Cheese foam", "Tapioca pearls", "Jelly cubes", "Ice cream"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "Which fish is used to make the most authentic sushi?",
+    "options": ["Salmon", "Tuna", "Sea bass", "All of the above"],
+    "answer": 3
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in mayonnaise?",
+    "options": ["Milk", "Oil and eggs", "Butter", "Vinegar only"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "Which country is famous for paella?",
+    "options": ["Mexico", "Portugal", "Spain", "Italy"],
+    "answer": 2
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in tofu?",
+    "options": ["Rice", "Soybeans", "Lentils", "Wheat"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "Who co-founded Apple with Steve Jobs?",
+    "options": ["Bill Gates", "Steve Wozniak", "Jeff Bezos", "Tim Cook"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What does “www” stand for?",
+    "options": ["World Wide Web", "World Web Window", "Wide World Web", "Web World Wide"],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "Which company makes the iPhone?",
+    "options": ["Samsung", "Google", "Apple", "OnePlus"],
+    "answer": 2
+  },
+  {
+    "category": "Technology",
+    "question": "What does “RAM” stand for?",
+    "options": [
+      "Random Access Memory",
+      "Read All Memory",
+      "Rapid Access Module",
+      "Random Allocated Memory"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "Which programming language is named after a snake?",
+    "options": ["Java", "Python", "Cobra", "Rust"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What is the most popular search engine?",
+    "options": ["Bing", "Yahoo", "Google", "DuckDuckGo"],
+    "answer": 2
+  },
+  {
+    "category": "Technology",
+    "question": "What does “USB” stand for?",
+    "options": [
+      "Universal Serial Bus",
+      "United Serial Bus",
+      "Universal System Bus",
+      "Universal Sync Base"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "Which social media platform was founded by Mark Zuckerberg?",
+    "options": ["Twitter", "Instagram", "Facebook", "LinkedIn"],
+    "answer": 2
+  },
+  {
+    "category": "Technology",
+    "question": "What is the name of Google’s AI chatbot?",
+    "options": ["Siri", "Gemini", "Alexa", "Cortana"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "Which company created the Windows operating system?",
+    "options": ["Apple", "Microsoft", "IBM", "Dell"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What does “AI” stand for?",
+    "options": [
+      "Automated Intelligence",
+      "Artificial Intelligence",
+      "Advanced Interface",
+      "Algorithmic Input"
+    ],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "Which currency is a cryptocurrency?",
+    "options": ["Dollar", "Bitcoin", "Euro", "Yen"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What is the name of the first web browser?",
+    "options": ["Chrome", "Mosaic", "Netscape", "Safari"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "Which company owns WhatsApp?",
+    "options": ["Google", "Microsoft", "Meta", "Amazon"],
+    "answer": 2
+  },
+  {
+    "category": "Technology",
+    "question": "What does “GPU” stand for?",
+    "options": [
+      "Graphics Processing Unit",
+      "General Processing Unit",
+      "Graphics Power Unit",
+      "Global Processing Unit"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "Which operating system does a Mac run?",
+    "options": ["Windows", "Linux", "macOS", "Android"],
+    "answer": 2
+  },
+  {
+    "category": "Technology",
+    "question": "Who is known as the father of computers?",
+    "options": ["Alan Turing", "Charles Babbage", "Bill Gates", "Steve Jobs"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What is the most popular programming language in 2024?",
+    "options": ["Java", "C++", "Python", "JavaScript"],
+    "answer": 2
+  },
+  {
+    "category": "Technology",
+    "question": "Which company makes the PlayStation?",
+    "options": ["Nintendo", "Microsoft", "Sony", "Sega"],
+    "answer": 2
+  },
+  {
+    "category": "Technology",
+    "question": "What does “HTML” stand for?",
+    "options": [
+      "HyperText Markup Language",
+      "HighText Machine Language",
+      "Hyperlink Text Mode Language",
+      "Home Tool Markup Language"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "Which electric car company did Elon Musk lead?",
+    "options": ["Rivian", "Tesla", "NIO", "BYD"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What is the name of Amazon’s voice assistant?",
+    "options": ["Siri", "Alexa", "Google Assistant", "Bixby"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "Which company created the Android OS?",
+    "options": ["Apple", "Google", "Samsung", "Microsoft"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What does “CPU” stand for?",
+    "options": [
+      "Central Processing Unit",
+      "Computer Personal Unit",
+      "Core Processing Unit",
+      "Central Program Utility"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "Which video platform was founded in 2005?",
+    "options": ["Netflix", "YouTube", "Twitch", "Vimeo"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What is the name of Microsoft’s gaming console?",
+    "options": ["PlayStation", "Xbox", "Switch", "Steam Deck"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "Which company makes the GPT models?",
+    "options": ["Google", "OpenAI", "Meta", "Anthropic"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What does “VPN” stand for?",
+    "options": [
+      "Virtual Private Network",
+      "Very Private Network",
+      "Virtual Public Network",
+      "Verified Personal Network"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "Which is the largest tech company by market value?",
+    "options": ["Microsoft", "Apple", "Nvidia", "Amazon"],
+    "answer": 2
+  },
+  {
+    "category": "Technology",
+    "question": "What is the name of the cloud service by Amazon?",
+    "options": ["Azure", "AWS", "GCP", "Oracle Cloud"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "Which country has the largest population in Africa?",
+    "options": ["Egypt", "Nigeria", "Ethiopia", "Kenya"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "The Panama Canal connects which two oceans?",
+    "options": ["Atlantic & Indian", "Atlantic & Pacific", "Pacific & Arctic", "Indian & Pacific"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Switzerland?",
+    "options": ["Zurich", "Geneva", "Bern", "Basel"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "Which is the largest country in South America?",
+    "options": ["Argentina", "Peru", "Colombia", "Brazil"],
+    "answer": 3
+  },
+  {
+    "category": "Geography",
+    "question": "Which city is known as the Big Apple?",
+    "options": ["Los Angeles", "New York City", "Chicago", "Boston"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "The Danube River flows through which continent?",
+    "options": ["Asia", "Africa", "Europe", "South America"],
+    "answer": 2
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Kenya?",
+    "options": ["Nairobi", "Lagos", "Accra", "Addis Ababa"],
+    "answer": 0
+  },
+  {
+    "category": "Geography",
+    "question": "Which country is the largest island nation?",
+    "options": ["Japan", "Indonesia", "Philippines", "New Zealand"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "Mount Kilimanjaro is in which country?",
+    "options": ["Kenya", "Tanzania", "Uganda", "Zimbabwe"],
+    "answer": 1
+  },
+  {
+    "category": "Geography",
+    "question": "What is the capital of Norway?",
+    "options": ["Stockholm", "Helsinki", "Oslo", "Copenhagen"],
+    "answer": 2
+  },
+  {
+    "category": "Movies",
+    "question": "Who directed “Titanic” and “Avatar”?",
+    "options": ["James Cameron", "Steven Spielberg", "Ridley Scott", "Christopher Nolan"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which movie features the character Jack Dawson?",
+    "options": ["Avatar", "Titanic", "Inception", "The Revenant"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who played Hermione Granger in the Harry Potter films?",
+    "options": ["Emma Stone", "Emma Watson", "Emma Roberts", "Keira Knightley"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Which film features the quote “I’ll be back”?",
+    "options": ["Terminator", "RoboCop", "Predator", "Rambo"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Who directed “La La Land”?",
+    "options": ["Damien Chazelle", "David O. Russell", "Greta Gerwig", "Wes Anderson"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which animated studio made “Shrek”?",
+    "options": ["Pixar", "DreamWorks", "Illumination", "Blue Sky"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who played Batman in “The Dark Knight”?",
+    "options": ["Christian Bale", "Ben Affleck", "Michael Keaton", "Robert Pattinson"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which movie is about a girl named Matilda?",
+    "options": ["Nanny McPhee", "Matilda", "A Little Princess", "Annie"],
+    "answer": 1
+  },
+  {
+    "category": "Movies",
+    "question": "Who directed “The Wizard of Oz”?",
+    "options": ["Victor Fleming", "Frank Capra", "Alfred Hitchcock", "John Ford"],
+    "answer": 0
+  },
+  {
+    "category": "Movies",
+    "question": "Which movie series features the character Ethan Hunt?",
+    "options": ["James Bond", "Mission Impossible", "Bourne", "John Wick"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Who sang “Despacito”?",
+    "options": ["Shakira", "Luis Fonsi", "Ricky Martin", "Enrique Iglesias"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Which band sang “Don’t Stop Believin’”?",
+    "options": ["Journey", "Bon Jovi", "REO Speedwagon", "Survivor"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Who is the lead singer of the Rolling Stones?",
+    "options": ["Mick Jagger", "Keith Richards", "Elton John", "Rod Stewart"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Which song by Adele is about a past relationship?",
+    "options": ["Rolling in the Deep", "Skyfall", "Easy on Me", "Hello"],
+    "answer": 3
+  },
+  {
+    "category": "Music",
+    "question": "What is the largest string instrument in an orchestra?",
+    "options": ["Cello", "Viola", "Double bass", "Violin"],
+    "answer": 2
+  },
+  {
+    "category": "Music",
+    "question": "Who sang “Single Ladies”?",
+    "options": ["Beyoncé", "Rihanna", "Nicki Minaj", "Alicia Keys"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Which group sings “Uptown Funk”?",
+    "options": ["Bruno Mars", "Mark Ronson ft. Bruno Mars", "Pharrell Williams", "Daft Punk"],
+    "answer": 1
+  },
+  {
+    "category": "Music",
+    "question": "Who composed the “Moonlight Sonata”?",
+    "options": ["Bach", "Mozart", "Beethoven", "Chopin"],
+    "answer": 2
+  },
+  {
+    "category": "Music",
+    "question": "Which rapper is known as “Slim Shady”?",
+    "options": ["Eminem", "Dr. Dre", "Snoop Dogg", "50 Cent"],
+    "answer": 0
+  },
+  {
+    "category": "Music",
+    "question": "Which instrument is most associated with jazz?",
+    "options": ["Saxophone", "Violin", "Sitar", "Accordion"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in a traditional Italian risotto?",
+    "options": ["Rice", "Pasta", "Polenta", "Barley"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "Which fruit is used to make wine?",
+    "options": ["Apples", "Grapes", "Berries", "Plums"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "What is the national dish of Japan?",
+    "options": ["Sushi", "Ramen", "Curry rice", "Tempura"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "Which cheese has holes?",
+    "options": ["Cheddar", "Swiss", "Mozzarella", "Gouda"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in a falafel?",
+    "options": ["Lentils", "Chickpeas", "Fava beans only", "Tofu"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "Which country is famous for chocolate?",
+    "options": ["Belgium", "Italy", "France", "Germany"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "What is the main ingredient in a classic margherita pizza sauce?",
+    "options": ["Tomato", "Cream", "Pesto", "BBQ sauce"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "Which vegetable is the main ingredient in French onion soup?",
+    "options": ["Potato", "Onion", "Leek", "Garlic"],
+    "answer": 1
+  },
+  {
+    "category": "Food",
+    "question": "What is a “croque monsieur”?",
+    "options": ["A ham and cheese sandwich", "A pastry", "A soup", "A dessert"],
+    "answer": 0
+  },
+  {
+    "category": "Food",
+    "question": "Which fruit is dried to make raisins?",
+    "options": ["Grapes", "Plums", "Apricots", "Cherries"],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "What does “Wi-Fi” stand for?",
+    "options": ["Wireless Fidelity", "Wide Frequency", "Wireless Frequency", "Wired Fidelity"],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "Which company makes the Galaxy phone?",
+    "options": ["Apple", "Samsung", "Xiaomi", "Google"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What is the most popular social media app by users?",
+    "options": ["Instagram", "TikTok", "Facebook", "WhatsApp"],
+    "answer": 2
+  },
+  {
+    "category": "Technology",
+    "question": "Which operating system powers most smartphones?",
+    "options": ["iOS", "Android", "Windows", "Symbian"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What does “API” stand for?",
+    "options": [
+      "Application Programming Interface",
+      "Automated Program Input",
+      "Applied Programming Index",
+      "Application Process Integration"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "Which company owns Instagram?",
+    "options": ["Google", "Meta", "Microsoft", "Snap"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What is the name of Apple’s virtual assistant?",
+    "options": ["Alexa", "Siri", "Gemini", "Cortana"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "Which language is used to style web pages?",
+    "options": ["HTML", "CSS", "Python", "SQL"],
+    "answer": 1
+  },
+  {
+    "category": "Technology",
+    "question": "What does “SSD” stand for?",
+    "options": [
+      "Solid State Drive",
+      "Super Speed Disk",
+      "System Storage Device",
+      "Solid System Drive"
+    ],
+    "answer": 0
+  },
+  {
+    "category": "Technology",
+    "question": "Which company created the Java language?",
+    "options": ["Microsoft", "Sun Microsystems", "IBM", "Oracle"],
+    "answer": 1
   }
 ]

@@ -141,11 +141,10 @@ describe('Trivia room (M8) — DB-backed socket integration', () => {
     expect(reveal.results).toHaveLength(2);
     expect(reveal.scores).toHaveLength(2);
     // The answer index is server-side; picks 0/1 may or may not match it.
-    // Anyone who matched scored 100+, and the scores must be consistent
-    // with the reveal results.
+    // Anyone who matched scored a flat 10 (M18); wrong picks score 0.
     for (const result of reveal.results) {
       if (result.correct) {
-        expect(result.points).toBeGreaterThanOrEqual(100);
+        expect(result.points).toBe(10);
       } else {
         expect(result.points).toBe(0);
       }
@@ -180,7 +179,7 @@ describe('Trivia room (M8) — DB-backed socket integration', () => {
     expect(question.mode).toBe('wrong-answers');
 
     // Both pick DIFFERENT options → if one matched the (secret) answer it
-    // must score 0 in this mode; every wrong pick scores ≥ 50.
+    // must score 0 in this mode; every wrong pick scores a flat 10 (M18).
     const revealPromise = waitFor<TriviaReveal>(host, ServerEvents.roundReveal);
     await emitAck(host, ClientEvents.answerQuestion, { roomCode, optionIndex: 0 });
     await emitAck(bob, ClientEvents.answerQuestion, { roomCode, optionIndex: 1 });
@@ -191,7 +190,7 @@ describe('Trivia room (M8) — DB-backed socket integration', () => {
       expect(correctResult.points).toBe(0);
     }
     for (const wrong of wrongResults) {
-      expect(wrong.points).toBeGreaterThanOrEqual(50);
+      expect(wrong.points).toBe(10);
     }
   });
 });

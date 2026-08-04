@@ -221,15 +221,16 @@ export default function TriviaSolo() {
       <div className="flex flex-col gap-5">
         <div className="flex flex-wrap items-center gap-3">
           <span className="rounded-pill bg-primary/20 px-4 py-1.5 text-xs font-semibold text-primary-deep">
-            Daily challenge
+            Daily Trivia
           </span>
           <span className="rounded-pill bg-tertiary/40 px-4 py-1.5 text-xs font-semibold text-ink">
             {dateKey}
           </span>
         </div>
         <p className="max-w-2xl text-body text-ink-muted">
-          {TRIVIA_QUESTION_SECONDS} seconds per question, {questions.length || 10} questions, speed
-          bonus scoring. Same questions for everyone today — the leaderboard is the prize.
+          {TRIVIA_QUESTION_SECONDS} seconds per question, {questions.length || 10} questions, 10
+          points per correct answer. Same questions for everyone today — the leaderboard is the
+          prize.
         </p>
         <form onSubmit={startGame} className="flex max-w-md flex-col gap-3">
           <label className="flex flex-col gap-1.5">
@@ -247,7 +248,7 @@ export default function TriviaSolo() {
             disabled={!nickname.trim()}
             className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
           >
-            Start the daily challenge
+            Start the daily trivia
           </button>
         </form>
       </div>
@@ -309,7 +310,7 @@ export default function TriviaSolo() {
   const question = questions[index];
   const isRevealed = selected !== null || lockedRef.current;
   return (
-    <div className="flex flex-col gap-5">
+    <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
       <div className="flex flex-wrap items-center gap-3">
         <span className="rounded-pill bg-primary/20 px-4 py-1.5 text-xs font-semibold text-primary-deep">
           Question {index + 1} of {questions.length}
@@ -329,9 +330,9 @@ export default function TriviaSolo() {
         </span>
       </div>
 
-      <h3 className="font-display text-h3 text-ink">{question?.question}</h3>
+      <h3 className="mt-4 font-display text-h3 text-ink">{question?.question}</h3>
 
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {question?.options.map((option, optionIndex) => {
           const isCorrectOption = optionIndex === correctIndex;
           const isPicked = optionIndex === selected;
@@ -365,7 +366,7 @@ export default function TriviaSolo() {
       </div>
 
       {isRevealed && (
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="mt-4 flex flex-wrap items-center gap-3">
           <span className="text-body font-semibold text-ink">
             {points > 0
               ? `+${points} points`

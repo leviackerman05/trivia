@@ -1,14 +1,15 @@
 import { randomInt } from 'node:crypto';
 
 /**
- * Trivia room session engine (M8, PRD §5.15) — transport-agnostic.
- * 10 questions, everyone answers the same question within 10s, the reveal
- * shows the correct answer and per-player points, and the game ends with a
- * podium. Modes:
+ * Trivia room session engine (M8, PRD §5.15; M18 scoring) —
+ * transport-agnostic. 10 questions, everyone answers the same question
+ * within 10s, the reveal shows the correct answer and per-player points,
+ * and the game ends with a podium. Modes (M18: simple flat scoring —
+ * 10 for a correct answer, 0 for a wrong one):
  *
- * - race: correct answers score 100 + 10·seconds remaining (fastest = most).
- * - wrong-answers ("Wrong Answers Only" comedy mode): any WRONG answer
- *   scores 50 + 10·seconds remaining; the correct answer scores 0.
+ * - race: correct answers score 10; wrong or missing score 0.
+ * - wrong-answers ("Wrong Answers Only" comedy mode): a WRONG answer
+ *   scores 10; the correct answer scores 0.
  *
  * Phases: idle → question → revealed → … → game-end. Timers (10s question,
  * 6s break) are owned by the gateway.
@@ -195,14 +196,14 @@ export class TriviaSession {
       return { ok: false, error: 'INVALID_ANSWER' };
     }
     const clamped = Math.min(this.config.questionMs, Math.max(0, elapsedMs));
-    const remainingSeconds = Math.max(1, Math.ceil((this.config.questionMs - clamped) / 1000));
     const correct = optionIndex === this.question.answer;
     let points: number;
     if (this.config.mode === 'race') {
-      points = correct ? 100 + 10 * remainingSeconds : 0;
+      // M18: flat scoring — 10 for correct, 0 otherwise (owner request).
+      points = correct ? 10 : 0;
     } else {
       // Wrong Answers Only: the most absurd wrong answer wins.
-      points = correct ? 0 : 50 + 10 * remainingSeconds;
+      points = correct ? 0 : 10;
     }
     const player = this.players.find((entry) => entry.name === playerName);
     if (player) {

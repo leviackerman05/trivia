@@ -47,7 +47,7 @@ describe('PRD §3 required routes', () => {
 
   it('covers every game slug from the catalog', () => {
     const slugs = games.map((game) => game.slug);
-    expect(slugs).toHaveLength(18);
+    expect(slugs).toHaveLength(19);
   });
 });
 
@@ -57,7 +57,7 @@ describe('SEO artifacts (PRD §6.4)', () => {
     expect(robots).toContain('Sitemap: https://partybrain.com/sitemap.xml');
   });
 
-  it('sitemap.xml lists the homepage, all 18 game pages, and every static page', () => {
+  it('sitemap.xml lists every game page (19) and every static page', () => {
     const sitemap = readFileSync(join(publicDir, 'sitemap.xml'), 'utf-8');
     for (const url of SITEMAP_STATIC_URLS) {
       expect(sitemap, `sitemap missing ${url}`).toContain(url);

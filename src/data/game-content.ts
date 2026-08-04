@@ -814,23 +814,23 @@ export const gameContent: Record<string, GameSeoContent> = {
   },
   trivia: {
     metaDescription:
-      'Play Trivia online free — 500+ questions in five categories: solo daily challenges or a room race with Wrong Answers Only mode. Fastest correct answers win.',
+      'Play trivia online free — 525 questions across ten categories. Take the daily trivia solo or race a room with Wrong Answers Only. 10 points per correct answer.',
     sections: [
       {
         heading: 'How to play Trivia',
-        body: 'PartyBrain Trivia covers two ways to play. Solo: take on the daily challenge — the same 10 questions everyone else gets that day, 15 seconds each, with a speed bonus for fast answers and a global daily leaderboard to climb. With friends: join a room for a 10-question race where everyone answers the same questions and the fastest correct answer earns the most points, ending in a podium ceremony. Questions span General, Science, History, Pop Culture, and Sports.',
+        body: 'PartyBrain Trivia covers two ways to play. Solo: take on the daily trivia — the same 10 questions everyone else gets that day, 15 seconds each, 10 points per correct answer, and a global daily leaderboard to climb. With friends: join a room for a 10-question race where everyone answers the same questions on the same clock, ending in a podium ceremony. Questions span General, Science, History, Pop Culture, Sports, Geography, Movies, Music, Food, and Technology.',
       },
       {
         heading: 'Rules & scoring',
-        body: "Solo rounds score 100 points plus 10 per second remaining, so a lightning answer is worth up to 250. Room races give everyone the same 10-second clock, and each question's points depend on your speed. Wrong Answers Only mode flips the game into comedy: pick the most absurd WRONG answer to score, while answering correctly earns nothing. Scores persist to the leaderboards, and the daily challenge resets at midnight UTC.",
+        body: 'Scoring is simple: 10 points for a correct answer, 0 for a wrong one or a timeout — a perfect daily trivia run scores 100. Room races give everyone the same 10-second clock. Wrong Answers Only mode flips the game into comedy: pick the most absurd WRONG answer to score, while answering correctly earns nothing. Scores persist to the leaderboards, and the daily puzzle resets at midnight UTC.',
       },
       {
         heading: 'Tips to win',
-        body: 'Read all four options before you commit — the fastest correct answers usually come from eliminating two instantly. In the room race, answer in the first two seconds: the speed bonus dwarfs the difference between correct and fast-correct. In Wrong Answers Only, resist the urge to be right and pick the option that would make your friends groan loudest. And play the daily challenge every day — streaks count.',
+        body: 'Read all four options before you commit — most rounds are winnable by eliminating two instantly. Answer early in the room race so you are never caught by the buzzer. In Wrong Answers Only, resist the urge to be right and pick the option that would make your friends groan loudest. And play the daily trivia every day — streaks count.',
       },
       {
         heading: 'Why it works for everyone',
-        body: 'Trivia is the most flexible game on PartyBrain: a solo daily ritual, a classroom review tool, a competitive room race, or a comedy mode for game nights. With 500+ questions across five categories, it is the definitive free online trivia game for groups and solo players alike.',
+        body: 'Trivia is the most flexible game on PartyBrain: a solo daily ritual, a classroom review tool, a competitive room race, or a comedy mode for game nights. With 525 questions across ten categories — including Geography, Movies, Music, Food, and Technology — it is the definitive free online trivia game for groups and solo players alike, and it stays fresh all year round.',
       },
       {
         heading: 'Devices & requirements',
@@ -838,14 +838,14 @@ export const gameContent: Record<string, GameSeoContent> = {
       },
       {
         heading: 'Playing solo and with friends',
-        body: 'Trivia covers both modes of play. Solo players get the daily challenge — the same ten questions as everyone else that day, with a speed-bonus scoring system and a global daily leaderboard — plus a per-game streak that rewards daily visits. In a room, up to 24 players race the same questions on the same ten-second clock, and the host can flip the lobby toggle to Wrong Answers Only for a comedy round. The room mode ends with a podium, and every score persists, so the daily leaderboard becomes a habit for competitive groups.',
+        body: 'Trivia covers both modes of play. Solo players get the daily trivia — the same ten questions as everyone else that day, 10 points per correct answer, and a global daily leaderboard — plus a per-game streak that rewards daily visits. In a room, up to 24 players race the same questions on the same ten-second clock, and the host can flip the lobby toggle to Wrong Answers Only for a comedy round. The room mode ends with a podium, and every score persists, so the daily leaderboard becomes a habit for competitive groups.',
       },
     ],
     faqs: [
       {
-        question: 'What is the daily challenge?',
+        question: 'What is the daily trivia?',
         answer:
-          'Ten questions, the same for every player each UTC day, with a speed-bonus scoring system and a global daily leaderboard.',
+          'Ten questions, the same for every player each UTC day, with simple 10-point-per-correct-answer scoring and a global daily leaderboard.',
       },
       {
         question: 'How does Wrong Answers Only work?',
@@ -855,7 +855,54 @@ export const gameContent: Record<string, GameSeoContent> = {
       {
         question: 'What categories are included?',
         answer:
-          'General knowledge, Science, History, Pop Culture, and Sports — 500+ questions in total, refreshed by the daily selection.',
+          'General knowledge, Science, History, Pop Culture, Sports, Geography, Movies, Music, Food, and Technology — 525 questions in total, refreshed by the daily selection.',
+      },
+    ],
+  },
+  sudoku: {
+    metaDescription:
+      'Play free daily sudoku online — a fresh puzzle every day, same grid for everyone. Simple tap-to-fill controls, streaks, and a daily leaderboard. No downloads.',
+    sections: [
+      {
+        heading: 'How to play Daily Sudoku',
+        body: 'A classic 9×9 sudoku grid, seeded by date so everyone on PartyBrain plays the same puzzle every day. Tap a cell to select it, then tap a number to place it. Given numbers are fixed; everything else is yours to solve. Fill all 81 cells with no repeated digits in any row, column, or 3×3 box to complete the puzzle. The controls are built for touch: a number pad sits right below the grid, and an erase button clears any cell you placed, so experimenting is free.',
+      },
+      {
+        heading: 'Rules & scoring',
+        body: 'Completing the daily puzzle scores 200 points on the daily leaderboard — the race is who finishes first, so the leaderboard is a friendly global time trial. Conflicting entries are highlighted in red the moment you place them, which makes mistakes easy to spot and fix while you play. There is no game over and no penalty for wrong attempts — you can erase and rethink as often as you like. The puzzle resets at midnight UTC, so tomorrow brings a fresh grid and a fresh chance at the top of the board.',
+      },
+      {
+        heading: 'Tips to win',
+        body: 'Start with the rows, columns, and boxes that already have the most given numbers — every forced cell you find unlocks the next one. Scan each 3×3 box for missing digits and use the tap-to-fill controls to keep the grid clean. When you are stuck, look for a row or column where only two cells remain, or a box where a single digit has only one possible home. The red conflict highlight is your best friend: place a candidate, and the grid tells you instantly whether it collides with an existing number.',
+      },
+      {
+        heading: 'Why it works for everyone',
+        body: 'Sudoku needs no setup, no opponents, and no talking — it is the perfect daily brain warm-up, classroom filler, quiet-game-night companion, or coffee-break ritual. Because the puzzle is the same for every player each day, you are never solving alone: your friends, family, and strangers around the world are all working the same grid, and the daily leaderboard turns a solitary puzzle into a shared race.',
+      },
+      {
+        heading: 'Devices & requirements',
+        body: 'Any browser, any device. The grid is sized for thumbs and the number pad sits right under the board, so it plays as naturally on a phone as on a laptop. There is nothing to install and no account to create — pick a nickname, start the puzzle, and your score is saved to the daily leaderboard when you finish.',
+      },
+      {
+        heading: 'A daily habit',
+        body: 'The daily sudoku joins the daily trivia as one of PartyBrain’s rotating daily games. Play both each day to keep your streak alive, compare your finish times on the leaderboard, and share your completed-grid score card with friends. Same puzzle, same day, same rules for everyone — that is what makes the daily games addictive.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is the daily sudoku the same for everyone?',
+        answer:
+          'Yes — the puzzle is seeded by UTC date, so every player gets the same grid on the same day and the daily leaderboard is a fair race.',
+      },
+      {
+        question: 'What happens if I place a wrong number?',
+        answer:
+          'Conflicting entries are highlighted in red and you can erase any cell you placed. There is no game over — just keep solving.',
+      },
+      {
+        question: 'How is the score calculated?',
+        answer:
+          'Completing the puzzle scores 200 points. The daily leaderboard ranks completions, so speed is the tiebreaker.',
       },
     ],
   },

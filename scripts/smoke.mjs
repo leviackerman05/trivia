@@ -65,6 +65,7 @@ const GAME_SLUGS = [
   'charades',
   'guess-who',
   'trivia',
+  'sudoku',
 ];
 
 // PRD §10: static pages < 100 KB total page weight (HTML + CSS + JS, no images).

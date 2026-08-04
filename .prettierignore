@@ -4,3 +4,5 @@ dist/
 server/dist/
 coverage/
 node_modules/
+# M18 — generated puzzle data (400×81 digits); keep compact
+src/data/sudoku-puzzles.json

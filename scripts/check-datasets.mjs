@@ -52,6 +52,13 @@ const files = [
   ],
   ['src/data/timeline-events.json', (e) => typeof e.year === 'number' && e.event.length >= 3],
   [
+    'src/data/sudoku-puzzles.json',
+    (e) =>
+      Array.isArray(e) &&
+      e.length === 81 &&
+      e.every((digit) => Number.isInteger(digit) && digit >= 0 && digit <= 9),
+  ],
+  [
     'src/data/price-products.json',
     (e) =>
       Number.isInteger(e.price) &&

@@ -7,6 +7,7 @@ import DrawingGameArena from '../../islands/DrawingGameArena.tsx';
 import CopycatArena from '../../islands/CopycatArena.tsx';
 import VotingArena from '../../islands/VotingArena.tsx';
 import TriviaSolo from '../../islands/TriviaSolo.tsx';
+import Sudoku from '../../islands/solo/Sudoku.tsx';
 import TriviaArena from '../../islands/TriviaArena.tsx';
 import CharadesArena from '../../islands/CharadesArena.tsx';
 import GuessWhoArena from '../../islands/GuessWhoArena.tsx';
@@ -117,7 +118,8 @@ const soloShipped = SHIPPED_SOLO.has(game.slug);
               <h2 class="font-display text-h3 text-ink">Play now — no room needed</h2>
             </div>
             <Card>
-              {game.instantPlay === 'solo' && <TriviaSolo client:load />}
+              {game.instantPlay === 'solo' && game.slug === 'sudoku' && <Sudoku client:load />}
+              {game.instantPlay === 'solo' && game.slug !== 'sudoku' && <TriviaSolo client:load />}
               {game.instantPlay === 'one-screen' && <WouldYouRatherOneScreen client:load />}
             </Card>
           </div>

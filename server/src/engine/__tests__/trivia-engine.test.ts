@@ -28,24 +28,25 @@ function make(config: TriviaConfig, now = 1_000_000) {
 }
 
 describe('TriviaSession — race mode (PRD §5.15)', () => {
-  it('starts with a question and scores fastest-correct-highest', () => {
+  it('starts with a question and scores flat 10 for correct answers (M18)', () => {
     const session = make(RACE);
     expect(session.start(['Alice', 'Bob']).ok).toBe(true);
     expect(session.phaseValue).toBe('question');
     expect(session.currentQuestion?.question).toBe('Q1');
 
-    // Alice answers at 1s → 100 + 10·9 = 190; Bob at 9s → 100 + 10·1 = 110.
+    // M18: correct = 10 points, regardless of speed.
     expect(ok2(session.submitAnswer('Alice', 1, 1_000))).toMatchObject({
-      points: 190,
+      points: 10,
       correct: true,
     });
     expect(ok2(session.submitAnswer('Bob', 1, 9_000))).toMatchObject({
-      points: 110,
+      points: 10,
       correct: true,
     });
-    // Wrong answer scores 0 in race mode.
-    const slow = session.submitAnswer('Cara', 2, 5_000);
-    expect(slow.ok).toBe(false); // Cara is not a player
+    // A wrong answer scores 0.
+    session.addPlayer('Cara');
+    const wrong = session.submitAnswer('Cara', 2, 5_000);
+    expect(ok2(wrong)).toMatchObject({ points: 0, correct: false });
   });
 
   it('rejects double answers and invalid options', () => {
@@ -64,7 +65,7 @@ describe('TriviaSession — race mode (PRD §5.15)', () => {
     const revealed = session.reveal();
     expect(ok2(revealed).correctIndex).toBe(1);
     expect(ok2(revealed).results).toEqual([
-      { playerName: 'Alice', points: 190, correct: true },
+      { playerName: 'Alice', points: 10, correct: true },
       { playerName: 'Bob', points: 0, correct: false },
     ]);
     expect(session.phaseValue).toBe('revealed');
@@ -92,13 +93,12 @@ describe('TriviaSession — race mode (PRD §5.15)', () => {
 });
 
 describe('TriviaSession — Wrong Answers Only mode', () => {
-  it('scores wrong answers and punishes the correct one', () => {
+  it('scores wrong answers and punishes the correct one (M18 flat)', () => {
     const session = make(WRONG);
     session.start(['Alice', 'Bob']);
-    // Alice picks a wrong answer fast → 50 + 10·9 = 140.
+    // M18: a wrong answer scores a flat 10; the correct answer scores 0.
     const alice = session.submitAnswer('Alice', 0, 1_000);
-    expect(ok2(alice)).toMatchObject({ points: 140, correct: false });
-    // Bob picks the correct answer → 0.
+    expect(ok2(alice)).toMatchObject({ points: 10, correct: false });
     const bob = session.submitAnswer('Bob', 1, 1_000);
     expect(ok2(bob)).toMatchObject({ points: 0, correct: true });
   });

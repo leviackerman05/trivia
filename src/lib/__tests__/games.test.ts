@@ -29,13 +29,14 @@ const PRD_SLUGS = [
   'never-have-i-ever',
   'guess-who',
   'this-or-that',
+  'sudoku',
 ];
 
 const VALID_TYPES: GameType[] = ['solo', 'multiplayer-realtime', 'multiplayer-voting'];
 const VALID_FAMILIES: GameFamily[] = ['drawing', 'voting', 'solo', 'special', 'quiz'];
 
 describe('game catalog (src/data/games.json)', () => {
-  it('contains exactly the 18 games from PRD §5, with slugs verbatim', () => {
+  it('contains the 18 PRD games plus the M18 daily game (sudoku)', () => {
     const slugs = games.map((game) => game.slug);
     expect(slugs.sort()).toEqual([...PRD_SLUGS].sort());
   });
@@ -64,7 +65,7 @@ describe('game catalog (src/data/games.json)', () => {
     const counts = Object.groupBy(games, (game) => game.family) as Record<string, GameFamily[]>;
     expect(counts.drawing).toHaveLength(5);
     expect(counts.voting).toHaveLength(4);
-    expect(counts.solo).toHaveLength(6);
+    expect(counts.solo).toHaveLength(7);
     expect(counts.special).toHaveLength(2);
     expect(counts.quiz).toHaveLength(1);
   });
@@ -119,6 +120,10 @@ describe('registry helpers', () => {
 
   it('getInstantPlayGames returns exactly the instant-play games', () => {
     const instant = getInstantPlayGames();
-    expect(instant.map((game) => game.slug).sort()).toEqual(['trivia', 'would-you-rather']);
+    expect(instant.map((game) => game.slug).sort()).toEqual([
+      'sudoku',
+      'trivia',
+      'would-you-rather',
+    ]);
   });
 });

@@ -155,6 +155,15 @@
     "instantPlay": "solo",
     "playable": true,
     "tagline": "Solo daily challenges or a room-wide quiz race.",
-    "description": "500+ questions across five categories. Play the daily challenge solo or race the room — fastest correct answers earn the most points."
+    "description": "525 questions across ten categories. Play the daily trivia solo or race the room — 10 points per correct answer."
+  },
+  {
+    "slug": "sudoku",
+    "name": "Daily Sudoku",
+    "type": "solo",
+    "family": "solo",
+    "instantPlay": "solo",
+    "tagline": "The same seeded sudoku for everyone, every day.",
+    "description": "A fresh sudoku puzzle every day, seeded by date so everyone plays the same grid. Tap to place numbers, finish the grid, and race the daily leaderboard."
   }
 ]

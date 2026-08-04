@@ -1,11 +1,12 @@
 /**
- * Trivia solo logic (PRD §5.15 + owner request 2026-08-04: instant play).
- * Pure functions only — the TriviaSolo island is a thin UI on top.
+ * Trivia solo logic (PRD §5.15 + owner requests: instant play, M18 flat
+ * scoring, 525-question / 10-category dataset). Pure functions only — the
+ * TriviaSolo island is a thin UI on top.
  *
  * Daily challenge model: the question set is seeded by UTC date, so every
  * player sees the same 10 questions on the same day and the leaderboard is
- * comparable. The static dataset (100 questions, M4-era) is expanded toward
- * the PRD's 500+ target in a later milestone.
+ * comparable. M18: 10 points per correct answer, 0 for wrong (the dataset
+ * lives in src/data/trivia-questions.json, mirrored to the server).
  */
 
 import questionsJson from '../data/trivia-questions.json';
@@ -21,8 +22,8 @@ export const triviaQuestions = questionsJson as TriviaQuestion[];
 
 export const TRIVIA_QUESTIONS_PER_GAME = 10;
 export const TRIVIA_QUESTION_SECONDS = 15;
-export const TRIVIA_BASE_SCORE = 100;
-export const TRIVIA_SPEED_BONUS_PER_SECOND = 10;
+/** M18 — flat scoring per the owner: 10 for a correct answer, 0 otherwise. */
+export const TRIVIA_BASE_SCORE = 10;
 
 /** FNV-1a string hash — deterministic across sessions and browsers. */
 export function hashString(value: string): number {
@@ -48,10 +49,7 @@ export function seededRandom(seed: number): () => number {
 
 /** UTC date key (YYYY-MM-DD) — the daily challenge identity. */
 export function dailyDateKey(date: Date): string {
-  const y = date.getUTCFullYear();
-  const m = String(date.getUTCMonth() + 1).padStart(2, '0');
-  const d = String(date.getUTCDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
+  return date.toISOString().slice(0, 10);
 }
 
 /** Deterministic per-day seed: same questions for everyone that day. */
@@ -79,14 +77,12 @@ export function selectDailyQuestions(
 }
 
 /**
- * PRD §5.15 scoring: base + speed bonus per remaining second.
- * No answer (timeout) scores 0. Max: 100 + 10 × 15 = 250 per question.
+ * M18 scoring (owner request): 10 points for a correct answer, 0 for a
+ * wrong one or a timeout. No speed bonus — the daily leaderboard is a
+ * simple right-answer race. Max: 10 × 10 = 100 per game.
  */
-export function scoreTriviaAnswer(secondsRemaining: number, correct: boolean): number {
-  if (!correct || secondsRemaining <= 0) {
-    return 0;
-  }
-  return TRIVIA_BASE_SCORE + TRIVIA_SPEED_BONUS_PER_SECOND * secondsRemaining;
+export function scoreTriviaAnswer(_secondsRemaining: number, correct: boolean): number {
+  return correct ? TRIVIA_BASE_SCORE : 0;
 }
 
 /**

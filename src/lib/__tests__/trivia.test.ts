@@ -68,17 +68,18 @@ describe('daily challenge selection', () => {
   });
 });
 
-describe('scoring (PRD §5.15)', () => {
-  it('rewards speed: base + bonus per remaining second', () => {
-    expect(scoreTriviaAnswer(15, true)).toBe(250);
-    expect(scoreTriviaAnswer(10, true)).toBe(200);
-    expect(scoreTriviaAnswer(1, true)).toBe(110);
+describe('scoring (M18 — owner request: flat 10/0)', () => {
+  it('scores 10 for a correct answer regardless of speed', () => {
+    expect(scoreTriviaAnswer(15, true)).toBe(10);
+    expect(scoreTriviaAnswer(1, true)).toBe(10);
   });
 
   it('scores 0 for wrong answers and timeouts', () => {
     expect(scoreTriviaAnswer(10, false)).toBe(0);
-    expect(scoreTriviaAnswer(0, true)).toBe(0);
     expect(scoreTriviaAnswer(0, false)).toBe(0);
+    // The seconds param is ignored under flat scoring — a correct pick
+    // scores 10 even with no time left on the clock.
+    expect(scoreTriviaAnswer(0, true)).toBe(10);
   });
 });
 
