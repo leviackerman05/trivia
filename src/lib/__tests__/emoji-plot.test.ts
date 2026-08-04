@@ -16,14 +16,14 @@ const ENTRIES: EmojiPlotEntry[] = [
 ];
 
 describe('Emoji Plot logic (PRD §5.3, M14)', () => {
-  it('M14: hints are button-driven — letter reveal is skribbl-style', () => {
+  it('M14: hints are button-driven, letter reveal is skribbl-style', () => {
     expect(revealedTitle('The Lion King', 0)).toBe('••• •••• ••••');
     expect(revealedTitle('The Lion King', 3)).toBe('the •••• ••••');
     expect(revealedTitle('The Lion King', 7)).toBe('the lion ••••');
     expect(revealedTitle('The Lion King', 11)).toBe('the lion king');
   });
 
-  it('M14: scoring — 100 base, −50 year hint, −10 per letter (floor 10)', () => {
+  it('M14: scoring, 100 base, −50 year hint, −10 per letter (floor 10)', () => {
     expect(scoreEmojiGuess({ yearUsed: false, lettersRevealed: 0 })).toBe(100);
     expect(scoreEmojiGuess({ yearUsed: true, lettersRevealed: 0 })).toBe(50);
     expect(scoreEmojiGuess({ yearUsed: false, lettersRevealed: 3 })).toBe(70);

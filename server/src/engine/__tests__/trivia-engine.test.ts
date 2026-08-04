@@ -27,7 +27,7 @@ function make(config: TriviaConfig, now = 1_000_000) {
   return new TriviaSession(QUESTIONS, config, { randomInt: (_max) => 0, now: () => now });
 }
 
-describe('TriviaSession — race mode (PRD §5.15)', () => {
+describe('TriviaSession, race mode (PRD §5.15)', () => {
   it('starts with a question and scores flat 10 for correct answers (M18)', () => {
     const session = make(RACE);
     expect(session.start(['Alice', 'Bob']).ok).toBe(true);
@@ -92,7 +92,7 @@ describe('TriviaSession — race mode (PRD §5.15)', () => {
   });
 });
 
-describe('TriviaSession — Wrong Answers Only mode', () => {
+describe('TriviaSession, Wrong Answers Only mode', () => {
   it('scores wrong answers and punishes the correct one (M18 flat)', () => {
     const session = make(WRONG);
     session.start(['Alice', 'Bob']);
@@ -104,7 +104,7 @@ describe('TriviaSession — Wrong Answers Only mode', () => {
   });
 });
 
-describe('TriviaSession — guards', () => {
+describe('TriviaSession, guards', () => {
   it('mid-game joiners can answer (D027 pattern)', () => {
     const session = make(RACE);
     session.start(['Alice']);

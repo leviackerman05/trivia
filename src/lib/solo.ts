@@ -1,5 +1,5 @@
 /**
- * Shared solo-game utilities (M7) — streak persistence, answer normalization
+ * Shared solo-game utilities (M7), streak persistence, answer normalization
  * and fuzzy matching, leaderboard client keys, and the share-result image.
  * Pure and dependency-free so every solo game and its tests share one
  * implementation (D009).
@@ -21,14 +21,46 @@ export interface StreakState {
   lastDate: string;
 }
 
-const STREAK_PREFIX = 'partybrain:streak:';
+const STREAK_PREFIX = 'triviahub:streak:';
+/** Legacy key (pre-rebrand), read-only fallback so streaks survive. */
+const STREAK_LEGACY_PREFIX = 'partybrain:streak:';
+
+/** Shared nickname storage (pre-rebrand key read as a fallback). */
+const NICKNAME_STORAGE_KEY = 'triviahub:nickname';
+const NICKNAME_LEGACY_KEY = 'partybrain:nickname';
+
+export function readNickname(): string {
+  if (typeof window === 'undefined') {
+    return '';
+  }
+  try {
+    return (
+      localStorage.getItem(NICKNAME_STORAGE_KEY) ?? localStorage.getItem(NICKNAME_LEGACY_KEY) ?? ''
+    );
+  } catch {
+    return '';
+  }
+}
+
+export function writeNickname(name: string): void {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  try {
+    localStorage.setItem(NICKNAME_STORAGE_KEY, name);
+  } catch {
+    // Storage full/blocked, best-effort.
+  }
+}
 
 export function readStreak(slug: string): StreakState {
   if (typeof window === 'undefined') {
     return { count: 0, lastDate: '' };
   }
   try {
-    const raw = localStorage.getItem(`${STREAK_PREFIX}${slug}`);
+    const raw =
+      localStorage.getItem(`${STREAK_PREFIX}${slug}`) ??
+      localStorage.getItem(`${STREAK_LEGACY_PREFIX}${slug}`);
     if (!raw) {
       return { count: 0, lastDate: '' };
     }
@@ -63,7 +95,7 @@ export function registerStreak(slug: string, today = dailyDateKey(new Date())): 
     try {
       localStorage.setItem(`${STREAK_PREFIX}${slug}`, JSON.stringify(next));
     } catch {
-      // Storage full/blocked — streaks are best-effort.
+      // Storage full/blocked, streaks are best-effort.
     }
   }
   return next;
@@ -133,15 +165,19 @@ export function soloClientKey(slug: string, dateKey: string, salt: string): stri
   return `${slug}:${dateKey}:${salt}`;
 }
 
-/** M14 — per-game round-timer preference (seconds), persisted locally. */
-const TIMER_PREFIX = 'partybrain:timer:';
+/** M14, per-game round-timer preference (seconds), persisted locally. */
+const TIMER_PREFIX = 'triviahub:timer:';
+/** Legacy key (pre-rebrand), read-only fallback. */
+const TIMER_LEGACY_PREFIX = 'partybrain:timer:';
 
 export function readTimerSetting(slug: string, fallback: number): number {
   if (typeof window === 'undefined') {
     return fallback;
   }
   try {
-    const raw = localStorage.getItem(`${TIMER_PREFIX}${slug}`);
+    const raw =
+      localStorage.getItem(`${TIMER_PREFIX}${slug}`) ??
+      localStorage.getItem(`${TIMER_LEGACY_PREFIX}${slug}`);
     const parsed = raw === null ? NaN : Number(raw);
     return Number.isFinite(parsed) && parsed >= 10 && parsed <= 300 ? parsed : fallback;
   } catch {
@@ -156,13 +192,13 @@ export function saveTimerSetting(slug: string, seconds: number): void {
   try {
     localStorage.setItem(`${TIMER_PREFIX}${slug}`, String(seconds));
   } catch {
-    // Storage full/blocked — best-effort.
+    // Storage full/blocked, best-effort.
   }
 }
 
 /**
  * Multiple-choice option builder: the correct label plus `count - 1` random
- * distractors from the pool, shuffled (Fisher–Yates with Math.random — solo
+ * distractors from the pool, shuffled (Fisher-Yates with Math.random, solo
  * games have no server authority to protect).
  */
 export function buildOptions(
@@ -192,7 +228,7 @@ export function buildOptions(
 
 /**
  * Draw a share-result PNG on a canvas (score card) and download/share it.
- * Pure canvas 2D — no image assets, no libraries (M7 share-result image).
+ * Pure canvas 2D, no image assets, no libraries (M7 share-result image).
  */
 export function drawScoreImage(
   canvas: HTMLCanvasElement,
@@ -219,12 +255,12 @@ export function drawScoreImage(
   ctx.fillText(String(options.score), width / 2, 300);
   ctx.font = '500 36px system-ui, sans-serif';
   ctx.fillText(`${options.playerName} · ${options.dateKey}`, width / 2, 400);
-  ctx.fillText('Play PartyBrain — free party games online', width / 2, 480);
+  ctx.fillText('Play TriviaHub: free party games and daily trivia online', width / 2, 480);
 }
 
 export function downloadCanvas(canvas: HTMLCanvasElement, slug: string): void {
   const link = document.createElement('a');
-  link.download = `partybrain-${slug}-${dailyDateKey(new Date())}.png`;
+  link.download = `triviahub-${slug}-${dailyDateKey(new Date())}.png`;
   link.href = canvas.toDataURL('image/png');
   link.click();
 }

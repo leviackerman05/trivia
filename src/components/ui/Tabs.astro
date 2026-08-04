@@ -1,0 +1,86 @@
+---
+/**
+ * Tabs: accessible tab list (roving tabindex, arrow keys, aria-selected).
+ * Each tab panel is wired by id via a tiny inline script.
+ */
+interface Props {
+  /** Tabs must be unique per page: [{ id, label }]. */
+  tabs: { id: string; label: string }[];
+  /** Id of the initially selected tab. */
+  initial?: string;
+  class?: string;
+}
+
+const { tabs, initial, class: className } = Astro.props;
+const firstTab = tabs[0]?.id ?? '';
+const activeTab = initial ?? firstTab;
+---
+
+<div class={className}>
+  <div role="tablist" aria-label="Sections" class="flex flex-wrap gap-2" data-tabs>
+    {
+      tabs.map((tab) => (
+        <button
+          type="button"
+          role="tab"
+          id={`tab-${tab.id}`}
+          aria-controls={`panel-${tab.id}`}
+          aria-selected={tab.id === activeTab ? 'true' : 'false'}
+          tabindex={tab.id === activeTab ? '0' : '-1'}
+          data-tab-button={tab.id}
+          class="rounded-pill border-2 border-border bg-surface-muted px-5 py-2.5 text-small font-semibold text-ink-muted transition-colors aria-selected:border-primary aria-selected:bg-primary/15 aria-selected:text-primary-strong"
+        >
+          {tab.label}
+        </button>
+      ))
+    }
+  </div>
+  <div class="mt-5">
+    {
+      tabs.map((tab) => (
+        <div
+          role="tabpanel"
+          id={`panel-${tab.id}`}
+          aria-labelledby={`tab-${tab.id}`}
+          data-tab-panel={tab.id}
+          class:list={[tab.id === activeTab ? '' : 'hidden']}
+        >
+          <slot name={tab.id} />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const root = document.querySelector('[data-tabs]');
+    if (!root) return;
+    const buttons = Array.from(root.querySelectorAll('[data-tab-button]'));
+    const panels = Array.from(document.querySelectorAll('[data-tab-panel]'));
+    function select(id) {
+      buttons.forEach((button) => {
+        const selected = button.dataset.tabButton === id;
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+      });
+      panels.forEach((panel) => {
+        panel.classList.toggle('hidden', panel.dataset.tabPanel !== id);
+      });
+    }
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', () => select(button.dataset.tabButton));
+      button.addEventListener('keydown', (event) => {
+        let next = null;
+        if (event.key === 'ArrowRight') next = buttons[(index + 1) % buttons.length];
+        if (event.key === 'ArrowLeft')
+          next = buttons[(index - 1 + buttons.length) % buttons.length];
+        if (next) {
+          event.preventDefault();
+          next.focus();
+          select(next.dataset.tabButton);
+        }
+      });
+    });
+  })();
+</script>

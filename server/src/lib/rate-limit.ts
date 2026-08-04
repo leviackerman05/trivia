@@ -52,6 +52,8 @@ export interface Limiters {
   guess: RateLimiter;
   drawStroke: RateLimiter;
   scoreSubmit: RateLimiter;
+  dailySubmit: RateLimiter;
+  memberClaim: RateLimiter;
 }
 
 /** Production defaults (per IP per minute). Tune with real traffic. */
@@ -64,5 +66,8 @@ export function createDefaultLimiters(): Limiters {
     guess: new RateLimiter(60_000, 60),
     drawStroke: new RateLimiter(60_000, 6_000),
     scoreSubmit: new RateLimiter(60_000, 30),
+    // Phase 1.5: daily runs are one per game per day; 30/min per IP is generous.
+    dailySubmit: new RateLimiter(60_000, 30),
+    memberClaim: new RateLimiter(60_000, 10),
   };
 }

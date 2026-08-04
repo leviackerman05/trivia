@@ -1,7 +1,7 @@
 /**
  * Client-side drawing-game state (shared by Skribbl Arena, One Line One
  * Shape, Shadow Sketch, Draw the Lyric). A pure reducer over the server's
- * additive round events — the island dispatches actions and renders.
+ * additive round events, the island dispatches actions and renders.
  * Server-authoritative: the server owns phases, timers, words, and scores;
  * this mirror only displays them.
  */
@@ -32,11 +32,11 @@ export interface RoundStartPayload {
   wordLength: number | null;
   choices?: string[];
   endsAt?: number;
-  /** One Line, One Shape — drawer-only object name. */
+  /** One Line, One Shape, drawer-only object name. */
   object?: string;
-  /** Shadow Sketch — drawer-only silhouette SVG path. */
+  /** Shadow Sketch, drawer-only silhouette SVG path. */
   silhouette?: string;
-  /** Draw the Lyric — drawer-only lyric + artist. */
+  /** Draw the Lyric, drawer-only lyric + artist. */
   lyric?: string;
   artist?: string;
 }
@@ -45,9 +45,9 @@ export interface RoundHintPayload {
   round?: number;
   firstLetter?: string | null;
   lastLetter?: string | null;
-  /** Draw the Lyric — artist reveal. */
+  /** Draw the Lyric, artist reveal. */
   artist?: string;
-  /** Shadow Sketch — silhouette reveal to everyone. */
+  /** Shadow Sketch, silhouette reveal to everyone. */
   silhouette?: string;
 }
 
@@ -58,7 +58,7 @@ export interface SkribblGameState {
   round: number;
   totalRounds: number;
   wordLength: number | null;
-  /** The 3 word options — only the drawer ever sees these. */
+  /** The 3 word options, only the drawer ever sees these. */
   choices: string[] | null;
   firstLetter: string | null;
   lastLetter: string | null;
@@ -74,7 +74,7 @@ export interface SkribblGameState {
   /** Draw the Lyric artist hint; Shadow Sketch silhouette reveal (all players). */
   artistHint: string | null;
   revealedSilhouette: string | null;
-  /** One Line, One Shape — lift warnings. */
+  /** One Line, One Shape, lift warnings. */
   liftWarnings: number;
   scores: Record<string, number>;
   strokes: Stroke[];
@@ -129,7 +129,7 @@ export type SkribblAction =
       correct: boolean;
       points?: number;
       alreadyGuessed?: boolean;
-      /** Server/transport error text (e.g. late guess) — overrides the defaults. */
+      /** Server/transport error text (e.g. late guess), overrides the defaults. */
       message?: string;
     }
   | {
@@ -239,11 +239,11 @@ export function skribblReducer(state: SkribblGameState, action: SkribblAction): 
       if (action.message) {
         feedback = action.message;
       } else if (action.alreadyGuessed) {
-        feedback = 'Already guessed it — the word is yours!';
+        feedback = 'Already guessed it, the word is yours!';
       } else if (action.correct) {
         feedback = `Correct! +${action.points ?? 0} points`;
       } else {
-        feedback = 'Wrong — keep guessing!';
+        feedback = 'Wrong, keep guessing!';
       }
       return { ...state, guessFeedback: feedback, feedbackSeq: state.feedbackSeq + 1 };
     }

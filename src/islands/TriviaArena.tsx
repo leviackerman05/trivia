@@ -6,7 +6,7 @@ import { getGame } from '../lib/games';
 import type { TriviaGameState, TriviaMode } from '../lib/trivia-room';
 
 /**
- * Trivia room arena (M8, PRD §5.15) — 10-question race on a 10s clock, or
+ * Trivia room arena (M8, PRD §5.15), 10-question race on a 10s clock, or
  * "Wrong Answers Only" comedy mode. The lobby is the shared RoomLobbyPanel
  * with a host mode toggle; rounds render question → reveal → podium.
  * All state is server-authoritative via useTriviaGame (the correct answer
@@ -116,7 +116,7 @@ export default function TriviaArena({ gameSlug }: Props) {
           <h2 className="font-display text-h2 text-ink">{trivia.question.question}</h2>
           <p className="text-small text-ink-muted">
             {trivia.mode === 'wrong-answers'
-              ? 'Pick the most absurd WRONG answer — answering correctly scores nothing!'
+              ? 'Pick the most absurd WRONG answer, answering correctly scores nothing!'
               : 'Fastest correct answer earns the most points.'}
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -221,7 +221,7 @@ function ModeToggle({
               : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
           }`}
         >
-          🏁 Race mode — fastest correct wins
+          🏁 Race mode, fastest correct wins
         </button>
         <button
           type="button"
@@ -233,7 +233,7 @@ function ModeToggle({
               : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
           }`}
         >
-          🤡 Wrong Answers Only — the worst answer wins
+          🤡 Wrong Answers Only, the worst answer wins
         </button>
       </div>
     </div>
@@ -261,7 +261,7 @@ function RevealView({
           </span>{' '}
           {trivia.mode === 'wrong-answers' && (
             <span className="text-ink-muted">
-              — anyone who picked this gets nothing. The wronger, the better.
+              , anyone who picked this gets nothing. The wronger, the better.
             </span>
           )}
         </p>
@@ -288,7 +288,7 @@ function RevealView({
         </button>
       ) : (
         <p className="text-small text-ink-muted">
-          Waiting for the host — the next question starts automatically in a moment.
+          Waiting for the host, the next question starts automatically in a moment.
         </p>
       )}
     </div>

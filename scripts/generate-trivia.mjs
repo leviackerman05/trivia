@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * M18 — Trivia dataset expansion: 210 → 500+ questions across 10 categories
+ * M18, Trivia dataset expansion: 210 → 500+ questions across 10 categories
  * (the PRD's 500+ target; owner request: "much much larger dataset and add
  * genres"). Existing questions are kept verbatim; new ones are appended and
  * the result is written to BOTH the client dataset (solo play + local daily
@@ -314,7 +314,7 @@ const NEW_QUESTIONS = [
   ['History', 'The French Revolution began in which year?', ['1776', '1789', '1799', '1804'], 1],
   [
     'History',
-    'Which queen ruled England for 63 years (1837–1901)?',
+    'Which queen ruled England for 63 years (1837-1901)?',
     ['Elizabeth I', 'Victoria', 'Anne', 'Mary'],
     1,
   ],

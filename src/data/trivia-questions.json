@@ -1612,7 +1612,7 @@
   },
   {
     "category": "History",
-    "question": "Which queen ruled England for 63 years (1837–1901)?",
+    "question": "Which queen ruled England for 63 years (1837-1901)?",
     "options": ["Elizabeth I", "Victoria", "Anne", "Mary"],
     "answer": 1
   },

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * M15 — Genre-Bender expansion: 70 → 200 entries. Every `bent` is an
- * ORIGINAL Shakespearean-style paraphrase of the song's mood/theme —
+ * M15, Genre-Bender expansion: 70 → 200 entries. Every `bent` is an
+ * ORIGINAL Shakespearean-style paraphrase of the song's mood/theme.
  * never the actual lyrics (PRD §13 licensing-safe; D022). Idempotent:
  * existing entries are kept, new ones appended by (original, artist).
  *
@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-/** [original, artist, year, bent] — 130 new entries. */
+/** [original, artist, year, bent], 130 new entries. */
 const ENTRIES = [
   [
     'Imagine',
@@ -56,13 +56,13 @@ const ENTRIES = [
     'Another Brick in the Wall',
     'Pink Floyd',
     1979,
-    'The masters of the schoolhouse, cruel and cold, would have us all one brick within their wall; we need no education writ in fear — leave us be, and let the children play.',
+    'The masters of the schoolhouse, cruel and cold, would have us all one brick within their wall; we need no education writ in fear, leave us be, and let the children play.',
   ],
   [
     'Comfortably Numb',
     'Pink Floyd',
     1979,
-    'A fever takes the player on the stage; a needle brings him ease, and then the lights, the crowd, the roar — yet he is comfortably numb to all.',
+    'A fever takes the player on the stage; a needle brings him ease, and then the lights, the crowd, the roar, yet he is comfortably numb to all.',
   ],
   [
     'We Will Rock You',
@@ -86,7 +86,7 @@ const ENTRIES = [
     "Livin' on a Prayer",
     'Bon Jovi',
     1986,
-    'A working lad and his true love hold on though the coffers run dry; down on their knees they swear by six-string oaths — we are but half a world from doom, yet we shall make it through.',
+    'A working lad and his true love hold on though the coffers run dry; down on their knees they swear by six-string oaths, we are but half a world from doom, yet we shall make it through.',
   ],
   [
     'Eye of the Tiger',
@@ -116,7 +116,7 @@ const ENTRIES = [
     'Every Breath You Take',
     'The Police',
     1983,
-    'Each breath thou drawest, each step thou takest, each vow thou breakest — I shall be watching, ever near, for thou art mine alone to keep.',
+    'Each breath thou drawest, each step thou takest, each vow thou breakest, I shall be watching, ever near, for thou art mine alone to keep.',
   ],
   [
     'With or Without You',
@@ -140,7 +140,7 @@ const ENTRIES = [
     'Respect',
     'Aretha Franklin',
     1967,
-    'What thou askest of me, I shall give in kind; but know this, sir: when thou comest home, thou must render unto me my due — a little respect.',
+    'What thou askest of me, I shall give in kind; but know this, sir: when thou comest home, thou must render unto me my due, a little respect.',
   ],
   [
     'I Will Survive',
@@ -158,7 +158,7 @@ const ENTRIES = [
     'Mamma Mia',
     'ABBA',
     1975,
-    'I was undone the moment I saw thee again; my heart breaks loose and sings its old refrain — mamma mia, here I go again, my my, how I have missed thee so.',
+    'I was undone the moment I saw thee again; my heart breaks loose and sings its old refrain, mamma mia, here I go again, my my, how I have missed thee so.',
   ],
   [
     'Waterloo',
@@ -188,7 +188,7 @@ const ENTRIES = [
     "Stayin' Alive",
     'Bee Gees',
     1977,
-    'Whether thou art a man of means or of the street, thou must keep thy head and strut thy beat; for life itself is the prize — I am stayin’ alive.',
+    'Whether thou art a man of means or of the street, thou must keep thy head and strut thy beat; for life itself is the prize, I am stayin’ alive.',
   ],
   [
     'YMCA',
@@ -314,7 +314,7 @@ const ENTRIES = [
     'Hello',
     'Adele',
     2015,
-    'Hello from the other side, where I have called a thousand times; they say time heals, but I am not yet whole — forgive me, for I still remember all.',
+    'Hello from the other side, where I have called a thousand times; they say time heals, but I am not yet whole, forgive me, for I still remember all.',
   ],
   [
     'Easy on Me',
@@ -350,7 +350,7 @@ const ENTRIES = [
     'Livin’ la Vida Loca',
     'Ricky Martin',
     1999,
-    'She came upon me like a storm, all fire and grace; her lips are devil-red and her world is a whirlwind — and I am living la vida loca with her.',
+    'She came upon me like a storm, all fire and grace; her lips are devil-red and her world is a whirlwind, and I am living la vida loca with her.',
   ],
   [
     'La Bamba',
@@ -368,7 +368,7 @@ const ENTRIES = [
     'Waka Waka',
     'Shakira',
     2010,
-    'The time is come to rise and claim the prize; we are Africa’s children, and we shall fight — waka waka, this time for Africa.',
+    'The time is come to rise and claim the prize; we are Africa’s children, and we shall fight, waka waka, this time for Africa.',
   ],
   [
     'Chandelier',
@@ -416,7 +416,7 @@ const ENTRIES = [
     'Mirrors',
     'Justin Timberlake',
     2013,
-    'Thou art the mirror of my soul; I cannot see myself without thee. Even in the dark, I shall reflect thy light — for thou and I are one.',
+    'Thou art the mirror of my soul; I cannot see myself without thee. Even in the dark, I shall reflect thy light, for thou and I are one.',
   ],
   [
     'Get Lucky',
@@ -446,7 +446,7 @@ const ENTRIES = [
     'Heartless',
     'Kanye West',
     2008,
-    'In the night I hear them speak of my cold ways; my heart is frozen, and I cannot feel a thing — so the preacher man preacheth to an empty pew.',
+    'In the night I hear them speak of my cold ways; my heart is frozen, and I cannot feel a thing, so the preacher man preacheth to an empty pew.',
   ],
   [
     'Lose Yourself',
@@ -518,7 +518,7 @@ const ENTRIES = [
     'HUMBLE.',
     'Kendrick Lamar',
     2017,
-    'Sit down, be humble; for all thy boasts and banners, the crown is not yet thine. I have the gold and the grace — now bow thy head.',
+    'Sit down, be humble; for all thy boasts and banners, the crown is not yet thine. I have the gold and the grace, now bow thy head.',
   ],
   [
     'DNA.',
@@ -662,7 +662,7 @@ const ENTRIES = [
     'Jai Ho',
     'A. R. Rahman',
     2008,
-    'Let the world resound with joy, for I have found my fortune; I have come to claim my destiny — jai ho, victory is mine.',
+    'Let the world resound with joy, for I have found my fortune; I have come to claim my destiny, jai ho, victory is mine.',
   ],
   [
     'Kala Chashma',
@@ -692,11 +692,11 @@ const ENTRIES = [
     'Chaiyya Chaiyya',
     'A. R. Rahman',
     1998,
-    'I walk upon the wind atop the moving train, my heart light as a feather; the shadows part before me — chaiyya chaiyya, I am soaring.',
+    'I walk upon the wind atop the moving train, my heart light as a feather; the shadows part before me, chaiyya chaiyya, I am soaring.',
   ],
   [
     'Gallan Goodiyaan',
-    'Shankar–Ehsaan–Loy',
+    'Shankar-Ehsaan-Loy',
     2014,
     'The friends gather and the gossip flows like wine; we are young and loud, and the night is ours to fill with laughter.',
   ],
@@ -720,7 +720,7 @@ const ENTRIES = [
   ],
   [
     'Kal Ho Naa Ho',
-    'Jatin–Lalit',
+    'Jatin-Lalit',
     2003,
     'Tomorrow may never come, so seize the joy of this very hour; love freely and laugh aloud, for the morrow is not promised.',
   ],
@@ -732,7 +732,7 @@ const ENTRIES = [
   ],
   [
     'Bekhayali',
-    'Sachet–Parampara',
+    'Sachet-Parampara',
     2019,
     'The nights are long with longing for thee; I wander through the city’s empty streets, restless and bereft without thy voice.',
   ],
@@ -800,10 +800,10 @@ const ENTRIES = [
 
 const path = join(root, 'src/data/genre-benders.json');
 const existing = JSON.parse(readFileSync(path, 'utf8'));
-const seen = new Set(existing.map((entry) => `${entry.original}—${entry.artist}`.toLowerCase()));
+const seen = new Set(existing.map((entry) => `${entry.original} - ${entry.artist}`.toLowerCase()));
 let added = 0;
 for (const [original, artist, year, bent] of ENTRIES) {
-  const key = `${original}—${artist}`.toLowerCase();
+  const key = `${original} - ${artist}`.toLowerCase();
   if (seen.has(key)) {
     continue;
   }

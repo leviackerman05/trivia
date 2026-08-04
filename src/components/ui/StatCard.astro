@@ -1,0 +1,33 @@
+---
+/**
+ * StatCard: label + value + optional trend line for dashboards, daily hub,
+ * and profile statistics.
+ */
+interface Props {
+  label: string;
+  value: string;
+  /** e.g. "+2 today", "top 8%". Rendered with success/error tone by sign. */
+  trend?: string;
+  class?: string;
+}
+
+const { label, value, trend, class: className } = Astro.props;
+const trendNegative = trend?.startsWith('-');
+---
+
+<div class={`rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm ${className ?? ''}`}>
+  <p class="text-xs font-semibold uppercase tracking-wide text-ink-muted">{label}</p>
+  <p class="mt-1 font-display text-h3 text-ink">{value}</p>
+  {
+    trend && (
+      <p
+        class:list={[
+          'mt-1 text-small font-semibold',
+          trendNegative ? 'text-danger-strong' : 'text-success-strong',
+        ]}
+      >
+        {trend}
+      </p>
+    )
+  }
+</div>

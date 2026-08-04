@@ -15,7 +15,7 @@ import {
 import type { Stroke } from '../lib/canvas';
 
 /**
- * Copycat Challenge session hook (M5) — socket listeners + actions over the
+ * Copycat Challenge session hook (M5), socket listeners + actions over the
  * pure copycatReducer. The private canvas stays local until submit; strokes
  * are never emitted (the server never sees them, only the flattened PNG).
  */
@@ -169,7 +169,7 @@ export function useCopycatGame(roomCode: string | null, myName: string | null): 
     };
   }, [roomCode, myName, resync]);
 
-  // M13 — preload the reveal image the moment the round starts, then tell
+  // M13, preload the reveal image the moment the round starts, then tell
   // the server. The reveal countdown only begins once every player has the
   // image (server-side), so nobody misses it to a slow connection.
   useEffect(() => {
@@ -217,7 +217,7 @@ export function useCopycatGame(roomCode: string | null, myName: string | null): 
       } else if (response.error === 'IMAGE_TOO_LARGE') {
         dispatch({
           type: 'feedback',
-          text: 'That drawing is too complex to upload — simplify it and submit again.',
+          text: 'That drawing is too complex to upload, simplify it and submit again.',
         });
       }
       return { ok: response.ok, error: response.error };
@@ -239,7 +239,7 @@ export function useCopycatGame(roomCode: string | null, myName: string | null): 
       if (response.ok) {
         dispatch({ type: 'vote-cast', category, target });
       } else {
-        dispatch({ type: 'feedback', text: 'That vote was rejected — try a different drawing.' });
+        dispatch({ type: 'feedback', text: 'That vote was rejected, try a different drawing.' });
       }
       return { ok: response.ok, error: response.error };
     },

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * M10 — enrich price-products.json with real product photos via the
- * Openverse API (CC-licensed image search — PRD §13-safe). License
+ * M10, enrich price-products.json with real product photos via the
+ * Openverse API (CC-licensed image search, PRD §13-safe). License
  * preference: CC0/PDM first (no attribution), then CC-BY/CC-BY-SA with the
  * creator + license stored as `credit` and shown under the image. Products
  * without a usable photo keep their emoji as the UI fallback.
@@ -34,13 +34,13 @@ const BAD_TOKENS = [
 const FREE_LICENSES = new Set(['cc0', 'pdm', 'publicdomain']);
 
 async function searchOpenverse(term, attempt = 0) {
-  // M14 — quoted phrase + the word "product" biases results toward the item
+  // M14, quoted phrase + the word "product" biases results toward the item
   // itself instead of random photos that happen to share a word.
   const url =
     `https://api.openverse.org/v1/images/?q=${encodeURIComponent(`"${term}" product`)}` +
     '&license_type=commercial&page_size=20';
   const response = await fetch(url, {
-    headers: { 'User-Agent': 'PartyBrain-dev/1.0 (price-game product images)' },
+    headers: { 'User-Agent': 'TriviaHub-dev/1.0 (price-game product images)' },
   });
   if (response.status === 429 && attempt < 4) {
     await new Promise((resolve) => setTimeout(resolve, 2000 * (attempt + 1)));
@@ -83,7 +83,7 @@ function pickResult(candidates, productName) {
   const rank = (entry) => {
     const lower = entry.title.toLowerCase();
     const shared = nameTokens.filter((token) => lower.includes(token)).length;
-    // M14 — the image must plausibly BE the product: at least one
+    // M14, the image must plausibly BE the product: at least one
     // significant name token in the title, full-name matches rank highest.
     if (shared === 0) {
       return -1;
@@ -115,7 +115,7 @@ async function withConcurrency(items, limit, worker) {
 }
 
 const products = JSON.parse(readFileSync(path, 'utf8'));
-// M14 — re-enrich EVERY product: the first pass's queries returned plenty of
+// M14, re-enrich EVERY product: the first pass's queries returned plenty of
 // off-topic photos, and the improved query + ranking replaces them.
 const todo = products.map((product, index) => ({ product, index }));
 
@@ -148,4 +148,4 @@ for (const [offset, outcome] of outcomes.entries()) {
 
 writeFileSync(path, JSON.stringify(products, null, 2) + '\n');
 const total = products.filter((product) => product.image).length;
-console.log(`\n${withImages} newly enriched — ${total}/${products.length} products have photos.`);
+console.log(`\n${withImages} newly enriched, ${total}/${products.length} products have photos.`);

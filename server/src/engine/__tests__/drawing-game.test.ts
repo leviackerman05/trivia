@@ -80,7 +80,7 @@ function reachDrawing({ session, drawer }: { session: DrawingGameSession; drawer
   return session.currentWord!;
 }
 
-describe('DrawingGameSession — lifecycle', () => {
+describe('DrawingGameSession, lifecycle', () => {
   it('starts with a single player (solo testing) and rejects empty rooms', () => {
     const session = makeSession();
     expect(ok(session.start(['Solo'])).totalRounds).toBe(3);
@@ -152,7 +152,7 @@ describe('DrawingGameSession — lifecycle', () => {
   });
 });
 
-describe('DrawingGameSession — guesses and scoring', () => {
+describe('DrawingGameSession, guesses and scoring', () => {
   it('matches guesses case-insensitively with whitespace trimmed', () => {
     const { session, drawer, guessers } = startSession();
     const word = reachDrawing({ session, drawer });
@@ -289,7 +289,7 @@ describe('DrawingGameSession — guesses and scoring', () => {
   });
 });
 
-describe('DrawingGameSession — hints', () => {
+describe('DrawingGameSession, hints', () => {
   it('reveals the first letter at 30s and the last letter at 45s (skribbl)', () => {
     const session = makeSession({ now: () => 0 });
     session.start(['Alice', 'Bob']);
@@ -335,7 +335,7 @@ describe('DrawingGameSession — hints', () => {
   });
 });
 
-describe('DrawingGameSession — one-line lift penalty', () => {
+describe('DrawingGameSession, one-line lift penalty', () => {
   it('deducts 10s per lift with a 5s floor', () => {
     const config: DrawingGameConfig = {
       gameId: 'one-line-one-shape',
@@ -364,7 +364,7 @@ describe('DrawingGameSession — one-line lift penalty', () => {
   });
 });
 
-describe('DrawingGameSession — custom word list', () => {
+describe('DrawingGameSession, custom word list', () => {
   it('validates and dedupes the host-pasted list', () => {
     const session = makeSession();
     expectError(session.setCustomWords(['a', 'b']), 'INVALID_WORD_LIST');
@@ -382,7 +382,7 @@ describe('DrawingGameSession — custom word list', () => {
   });
 });
 
-describe('DrawingGameSession — strokes', () => {
+describe('DrawingGameSession, strokes', () => {
   it('accepts drawer strokes, rejects non-drawers and out-of-phase strokes', () => {
     const { session, drawer, guessers } = startSession();
     const stroke = {

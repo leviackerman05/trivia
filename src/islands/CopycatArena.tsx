@@ -8,7 +8,7 @@ import { COLOR_PALETTE, DEFAULT_BRUSH_SIZE, DEFAULT_COLOR, type CanvasTool } fro
 import { COPYCAT_AWARD_LABELS, type CopycatAward, type CopycatGameState } from '../lib/copycat';
 
 /**
- * Copycat Challenge arena (M5) — the one drawing game without a shared
+ * Copycat Challenge arena (M5), the one drawing game without a shared
  * canvas. Flow: 5s image reveal → private canvas (90s) → gallery → vote
  * (Most Recognizable / Funniest / Most Abstract) → awards ceremony.
  * All phase and vote state is server-authoritative via useCopycatGame.
@@ -151,15 +151,15 @@ export default function CopycatArena({ gameSlug }: Props) {
               </span>
               <p className="font-display text-h3 text-ink">Loading the image…</p>
               <p className="text-small text-ink-muted">
-                The timer starts as soon as every player has it — no more missing the reveal.
+                The timer starts as soon as every player has it, no more missing the reveal.
               </p>
             </div>
           ) : (
             <>
               <p className="text-body text-ink-muted">
-                {copycat.image.kind === 'painting' ? 'A famous painting' : 'An iconic photo'} —{' '}
+                {copycat.image.kind === 'painting' ? 'A famous painting' : 'An iconic photo'} -{' '}
                 <span className="font-semibold text-primary-deep">{copycat.image.title}</span>. It
-                disappears in {secondsLeft}s — then draw it from memory.
+                disappears in {secondsLeft}s, then draw it from memory.
               </p>
               <img
                 src={copycat.image.url}
@@ -256,7 +256,7 @@ export default function CopycatArena({ gameSlug }: Props) {
             color={color}
             brushSize={brushSize}
             tool={tool}
-            ariaLabel="Your private Copycat canvas — your drawing is only shared when you submit it"
+            ariaLabel="Your private Copycat canvas, your drawing is only shared when you submit it"
           />
           {copycat.feedback && (
             <p
@@ -442,7 +442,7 @@ function LiveTally({ copycat }: { copycat: CopycatGameState }) {
   );
 }
 
-/** Awards ceremony — one podium per award category. */
+/** Awards ceremony, one podium per award category. */
 function AwardsView({ copycat }: { copycat: CopycatGameState }) {
   const awards = copycat.awards ?? [];
   return (
@@ -470,7 +470,7 @@ function AwardsView({ copycat }: { copycat: CopycatGameState }) {
                 <li key={row.playerName} className="text-small text-ink">
                   <span className="font-semibold">{row.playerName}</span>{' '}
                   <span className="text-ink-muted">
-                    — {row.count} vote{row.count === 1 ? '' : 's'}
+                    , {row.count} vote{row.count === 1 ? '' : 's'}
                   </span>
                 </li>
               ))}
@@ -479,7 +479,7 @@ function AwardsView({ copycat }: { copycat: CopycatGameState }) {
         ))}
       </div>
       <p className="text-small text-ink-muted">
-        Play again from the lobby — the host can restart the room.
+        Play again from the lobby, the host can restart the room.
       </p>
     </div>
   );
@@ -511,7 +511,7 @@ function ChatBox({
         ))}
         {messages.length === 0 && (
           <li className="text-small text-ink-muted">
-            No chatting during the drawing phase — save it for the gallery!
+            No chatting during the drawing phase, save it for the gallery!
           </li>
         )}
       </ul>

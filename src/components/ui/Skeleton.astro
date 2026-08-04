@@ -1,0 +1,16 @@
+---
+/**
+ * Skeleton: shimmer placeholder for loading states. Respects
+ * prefers-reduced-motion (the global rule kills the animation).
+ */
+interface Props {
+  /** Height in Tailwind classes, e.g. "h-4". */
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span
+  aria-hidden="true"
+  class={`block animate-pulse rounded-md bg-surface-muted ${className ?? 'h-4 w-full'}`}></span>

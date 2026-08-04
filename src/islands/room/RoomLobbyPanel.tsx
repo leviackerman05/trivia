@@ -6,7 +6,7 @@ import type { RoomState, ChatMessage } from '../../lib/room-types';
 
 /**
  * Shared room lobby UI (create/join forms, leaderboard, player list, chat,
- * start button) — reused by the generic RoomLobby island (all multiplayer
+ * start button), reused by the generic RoomLobby island (all multiplayer
  * games) and game-specific islands that need a lobby before their round
  * logic takes over (Skribbl Arena, M4). Pure presentation: all room state
  * and socket actions come in through props.
@@ -46,7 +46,7 @@ export default function RoomLobbyPanel({
 }: RoomLobbyPanelProps) {
   const [nickname, setNickname] = useState('');
   const [joinCode, setJoinCode] = useState(() =>
-    // Astro prerenders islands server-side — window only exists in the browser.
+    // Astro prerenders islands server-side, window only exists in the browser.
     typeof window === 'undefined'
       ? ''
       : (new URLSearchParams(window.location.search).get('code') ?? '')
@@ -109,7 +109,7 @@ export default function RoomLobbyPanel({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // clipboard unavailable (e.g., non-secure context) — show the code instead
+      // clipboard unavailable (e.g., non-secure context), show the code instead
     }
   };
 
@@ -194,7 +194,7 @@ export default function RoomLobbyPanel({
 
         <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <div className="mb-3 flex items-center justify-between">
-            <h3 className="font-display text-h4 text-ink">Top players — {game?.name}</h3>
+            <h3 className="font-display text-h4 text-ink">Top players, {game?.name}</h3>
             <button
               type="button"
               onClick={() => void loadLeaderboard()}
@@ -204,7 +204,7 @@ export default function RoomLobbyPanel({
             </button>
           </div>
           {leaderboard.length === 0 ? (
-            <p className="text-body text-ink-muted">No scores yet — be the first on the board!</p>
+            <p className="text-body text-ink-muted">No scores yet, be the first on the board!</p>
           ) : (
             <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
               {leaderboard.map((entry) => (
@@ -297,7 +297,7 @@ export default function RoomLobbyPanel({
           </button>
           {!gamePlayable && room.phase === 'lobby' && (
             <p className="text-small text-ink-muted">
-              The playable rounds for this game land in a later milestone — the room (invites,
+              The playable rounds for this game land in a later milestone, the room (invites,
               players, chat) works today, and Skribbl Arena is fully playable!
             </p>
           )}

@@ -23,7 +23,7 @@ describe('Price Is Right logic (PRD §5.8)', () => {
     expect(scorePriceGuess(112, 12)).toEqual({ points: 0, delta: 100 });
   });
 
-  it('clamps guesses to the $1–$1000 range and rounds', () => {
+  it('clamps guesses to the $1-$1000 range and rounds', () => {
     expect(clampPrice(-50)).toBe(PRICE_MIN);
     expect(clampPrice(50_000)).toBe(PRICE_MAX);
     expect(clampPrice(12.6)).toBe(13);

@@ -13,9 +13,10 @@ import {
   scoreEmojiGuess,
   type EmojiPlotEntry,
 } from '../../lib/emoji-plot';
+import { dailyGameSeed } from '../../lib/daily';
 
 /**
- * Emoji Plot (M7, PRD §5.3; M14 owner fixes) — decode movies and books from
+ * Emoji Plot (M7, PRD §5.3; M14 owner fixes), decode movies and books from
  * emoji sequences. Hints are button-driven: a year hint and skribbl-style
  * progressive letter reveals; the clock starts only when the player starts.
  */
@@ -25,7 +26,12 @@ const TIMER_OPTIONS = [20, 30, 40, 50];
 
 type Phase = 'setup' | 'playing' | 'done';
 
-export default function EmojiPlot() {
+interface Props {
+  /** Phase A: when set, the day's content is deterministic for everyone. */
+  dailyDateKey?: string;
+}
+
+export default function EmojiPlot({ dailyDateKey }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('emoji-plot', 30));
   const [questions, setQuestions] = useState<EmojiPlotEntry[]>([]);
@@ -51,7 +57,11 @@ export default function EmojiPlot() {
     event.preventDefault();
     saveTimerSetting('emoji-plot', timerSeconds);
     setQuestions(
-      pickEmojiQuestions(entries, EMOJI_TOTAL_QUESTIONS, Math.floor(Math.random() * 1000))
+      pickEmojiQuestions(
+        entries,
+        EMOJI_TOTAL_QUESTIONS,
+        dailyDateKey ? dailyGameSeed(dailyDateKey, 'emoji-plot') : Math.floor(Math.random() * 1000)
+      )
     );
     setIndex(0);
     setScore(0);
@@ -86,7 +96,7 @@ export default function EmojiPlot() {
     setFeedback({
       correct,
       text: correct
-        ? `“${question.title}” — +${points} points!`
+        ? `“${question.title}”, +${points} points!`
         : `Not quite. It was “${question.title}”.`,
     });
     if (correct) {
@@ -139,7 +149,7 @@ export default function EmojiPlot() {
         <h3 className="font-display text-h3 text-ink">Emoji Plot</h3>
         <p className="max-w-xl text-body text-ink-muted">
           Decode the movie or book from its emoji sequence. Hints are yours to take: reveal the year
-          or letters of the title — each hint costs points. The clock starts when you do.
+          or letters of the title, each hint costs points. The clock starts when you do.
         </p>
         <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />
         <button

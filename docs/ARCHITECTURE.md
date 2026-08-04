@@ -1,6 +1,6 @@
-# PartyBrain — Architecture
+# TriviaHub, Architecture
 
-> **Status:** v2 — regenerated against `PRD.md` (2026-08-04). The earlier
+> **Status:** v2, regenerated against `PRD.md` (2026-08-04). The earlier
 > architecture (v1, pre-PRD) was written before the PRD existed and is
 > **superseded**. Where the PRD says "DO NOT DEVIATE", this document follows it
 > exactly. Contradictions or unclear requirements found in the PRD are tracked
@@ -11,17 +11,17 @@
 
 ## 1. Project Overview
 
-**PartyBrain** is a free online party games hub featuring **18 multiplayer and
-solo games** — no downloads, no accounts. Players share a room link (or just
+**TriviaHub** is a free online party games hub featuring **19 games** (18 party
+games + Daily Sudoku), no downloads, no accounts. Players share a room link (or just
 open a game) and start playing instantly. It competes with skribbl.io, Jackbox
-Games, and browser game hubs.
+Games, and browser game hubs. Production domain: `playtriviahub.com`.
 
-- **Audience:** US-based, ages 16–35 (virtual parties, classrooms, streamers).
+- **Audience:** US-based, ages 16-35 (virtual parties, classrooms, streamers).
 - **Monetization:** Google AdSense, applied for after ~10 daily users; the site
   is built AdSense-compliant from day one.
 - **SEO:** MPA with a static page per game; this is a core requirement, not a
   nice-to-have. Google ranking is a primary success metric.
-- **Identity:** No accounts, no authentication — a nickname is the only identity.
+- **Identity:** No accounts, no authentication, a nickname is the only identity.
 
 ---
 
@@ -47,9 +47,9 @@ Games, and browser game hubs.
 ```
 ┌────────────────────────────────────────────────────────────────────────────┐
 │                          Cloudflare Pages (CDN + static)                    │
-│  Astro v5 MPA — SSG at build time; every route is static HTML               │
+│  Astro v5 MPA, SSG at build time; every route is static HTML               │
 │                                                                             │
-│  SEO pages (title/meta/OG/JSON-LD, 400–600-word content, FAQs)              │
+│  SEO pages (title/meta/OG/JSON-LD, 400-600-word content, FAQs)              │
 │  ┌──────────────┐ ┌──────────────────┐ ┌──────────────────────────────┐    │
 │  │ / (home)     │ │ /game/[18 slugs] │ │ /privacy · /terms · /about   │    │
 │  │ /faq /404 /500│ │ each has ONE    │ │ /contact                     │    │
@@ -63,7 +63,7 @@ Games, and browser game hubs.
                │  HTTPS · REST (/api/*) + Socket.io (WSS)
                ▼
 ┌────────────────────────────────────────────────────────────────────────────┐
-│              /server — Node.js + Express + Socket.io (Railway/Render)      │
+│              /server, Node.js + Express + Socket.io (Railway/Render)      │
 │  ┌───────────────────┐   ┌────────────────────────────────────────────┐   │
 │  │ REST routes       │   │ Socket.io gateway (rooms, game events)     │   │
 │  │ /api/scores       │   │  room handlers · drawing broadcast ·       │   │
@@ -78,25 +78,25 @@ Games, and browser game hubs.
 │            │                │ (drawing/voting/quiz/special)│             │
 │            │                └──────────────────────────────┘             │
 │            ▼                                                              │
-│  PostgreSQL (Prisma) — scores · room history · daily challenges           │
+│  PostgreSQL (Prisma), scores · room history · daily challenges           │
 └────────────────────────────────────────────────────────────────────────────┘
 ```
 
 **Runtime model:** the frontend is a static export served by Cloudflare Pages;
 the backend is a single Node process (initially) on Railway/Render. Socket.io
 rooms live in server memory; the client is a thin event-driven island. No auth,
-no sessions — a room code + nickname is everything.
+no sessions, a room code + nickname is everything.
 
 ---
 
 ## 4. Folder Structure
 
 ```
-partybrain/
+triviahub/
 ├── src/                          # Astro app (root package.json)
 │   ├── pages/
 │   │   ├── index.astro           # Homepage (hero, game grid, 600-word SEO content)
-│   │   ├── game/[slug].astro     # Static per-game page (SEO + island) — 18 games
+│   │   ├── game/[slug].astro     # Static per-game page (SEO + island), 18 games
 │   │   ├── privacy-policy.astro
 │   │   ├── terms-and-conditions.astro
 │   │   ├── about-us.astro
@@ -152,7 +152,7 @@ partybrain/
 > **Note:** PRD §8 mandates `/server`; the Astro app lives at the repo root with
 > a single root `package.json` (`astro build` + `wrangler pages deploy dist`).
 > pnpm 11 manages both packages via a workspace root (`pnpm-workspace.yaml`,
-> `server` is a member) — one `pnpm install` covers the repo (DECISIONS D018).
+> `server` is a member), one `pnpm install` covers the repo (DECISIONS D018).
 
 ---
 
@@ -163,10 +163,10 @@ partybrain/
 - **Islands:** only interactive components are React islands loaded with
   `client:load` (the game itself). Everything else is plain Astro/HTML/CSS.
 - **Per-game page anatomy** (required by PRD §3):
-  1. SEO section — title, meta description (150–160 chars), OG/Twitter tags,
-     canonical, JSON-LD (WebApplication + FAQ + breadcrumbs), 400–600-word
-     original content (how to play, rules, tips), links to 2–3 related games.
-  2. Interactive section — the playable game island.
+  1. SEO section, title, meta description (150-160 chars), OG/Twitter tags,
+     canonical, JSON-LD (WebApplication + FAQ + breadcrumbs), 400-600-word
+     original content (how to play, rules, tips), links to 2-3 related games.
+  2. Interactive section, the playable game island.
 - **Static data:** game datasets ship as JSON in `src/data/` (imported by
   islands and validated at build time by a dataset-integrity test).
 - **API client:** thin `fetch` wrapper in `src/lib/api.ts` for scores,
@@ -177,7 +177,7 @@ partybrain/
   strokes live in refs for performance; streaks persist to `localStorage`
   (PRD §4.4).
 - **Accessibility:** 48px touch targets, keyboard-operable games, focus
-  management, color+icon signals (not color alone), WCAG AA — target
+  management, color+icon signals (not color alone), WCAG AA, target
   Lighthouse Accessibility = 100 (PRD §10).
 
 ---
@@ -195,14 +195,14 @@ partybrain/
   correctness, vote tallies, and scores. Clients send intents (`send-guess`,
   `cast-vote`, `draw-stroke`) and render what the server broadcasts.
 - **Validation:** every REST body and socket payload is validated server-side
-  (small hand-rolled validators or zod) — malformed payloads are rejected and
+  (small hand-rolled validators or zod), malformed payloads are rejected and
   logged as a security signal.
 - **Errors:** consistent JSON error shape; socket errors emitted as typed
   error events; never leak stack traces.
 - **Logging:** structured logs (pino) with request ids; log room lifecycle and
   errors for operability.
 - **Concurrency model (v2):** single backend instance with in-memory rooms is
-  the initial target (matches PRD stack — no Redis). Redis-based Socket.io
+  the initial target (matches PRD stack, no Redis). Redis-based Socket.io
   adapter + PG-backed state is the documented scale-up path (see
   [DECISIONS.md](DECISIONS.md) D015/D017 and §19).
 
@@ -213,35 +213,35 @@ partybrain/
 PRD §4 defines four shared systems. They are the foundation; games are thin
 configurations on top of them.
 
-### 7.1 Room Engine — powers all 12 real-time games
+### 7.1 Room Engine, powers all 12 real-time games
 
 - 6-character alphanumeric room code (e.g., `ABC123`); join via code or
-  `partybrain.com/room/ABC123`.
+  `triviahub.com/room/ABC123`.
 - Player management: join, leave, rejoin, **host migration**.
 - Generic state machine: `lobby → game-setup → in-progress → results → lobby`.
 - Chat: text messages + system notifications ("Alice guessed correctly!").
 - Implemented as one client island + one server engine; each game supplies a
   config (rounds, timers, scoring fn, phases).
 
-### 7.2 Drawing Canvas — powers all 5 drawing games
+### 7.2 Drawing Canvas, powers all 5 drawing games
 
 - Pen (variable brush sizes), eraser, color picker (≥ 12 colors), undo, clear.
 - Stroke broadcast: `draw-stroke` `{x, y, prevX, prevY, color, brushSize, tool}`.
 - **Canvas replay:** late joiners receive stored strokes to see the drawing.
 - Touch: `touchstart/move/end` → mouse events; responsive canvas (PRD §9).
 
-### 7.3 Voting/Poll — powers the voting games
+### 7.3 Voting/Poll, powers the voting games
 
-- Prompt + 2–6 options; tap to vote; live percentage bars via Socket.io;
+- Prompt + 2-6 options; tap to vote; live percentage bars via Socket.io;
   reveal animation when all votes in or timer expires.
 
-### 7.4 Solo Game Template — powers the 6 solo games
+### 7.4 Solo Game Template, powers the 6 solo games
 
 - Loads data from static JSON; UI pattern
   `prompt → input → score → result → leaderboard submit → play again`.
 - `POST /api/scores` on completion; local streak in `localStorage`.
 
-### Game catalog (18) — how they map to shared systems
+### Game catalog (18), how they map to shared systems
 
 | #   | Game (slug)         | Type           | Shared systems                | Key data (static JSON)                   |
 | --- | ------------------- | -------------- | ----------------------------- | ---------------------------------------- |
@@ -303,7 +303,7 @@ cast-vote {option} ──▶ server tallies ──▶ broadcast percentages (liv
 
 ---
 
-## 9. API Architecture (REST — PRD §8.1)
+## 9. API Architecture (REST, PRD §8.1)
 
 | Endpoint                       | Purpose                                       | Notes                                                              |
 | ------------------------------ | --------------------------------------------- | ------------------------------------------------------------------ |
@@ -315,7 +315,7 @@ cast-vote {option} ──▶ server tallies ──▶ broadcast percentages (liv
 
 Conventions: JSON only; consistent error shape `{error: {code, message}}`;
 CORS allowlist (Cloudflare Pages domain + localhost); no versioning in the URL
-(PRD defines `/api/*` verbatim — any future versioning is additive); optional
+(PRD defines `/api/*` verbatim, any future versioning is additive); optional
 idempotency for score submission (client-generated key) to survive retries.
 
 ---
@@ -331,12 +331,12 @@ idempotency for score submission (client-generated key) to survive retries.
 | Static datasets                            | `src/data/*.json` | Read-only, imported at build time                                     |
 
 **Invariant:** clients send intents; the server decides. Drawing strokes are the
-one exception (rendering data, not outcomes) — but replay/state remain
+one exception (rendering data, not outcomes), but replay/state remain
 server-managed for late joiners.
 
 ---
 
-## 11. Database Design (Prisma — PRD §8.3)
+## 11. Database Design (Prisma, PRD §8.3)
 
 The PRD defines five models. This document preserves them **verbatim** and adds
 indexes/constraints as implementation notes (flagged as such).
@@ -352,11 +352,11 @@ DailyChallenge  id(cuid) · gameId · date · data(Json)
 Implementation notes (additive, not schema changes):
 
 - **Indexes:** `Score(gameId, playedAt)` for period leaderboards;
-  `Score(gameId, score)` for top-N; `DailyChallenge(gameId, date)` —
+  `Score(gameId, score)` for top-N; `DailyChallenge(gameId, date)`.
   recommend `@@unique([gameId, date])` so the daily rollover is upsert-safe.
 - **Room is ephemeral metadata** (code, game, status, players); live game state
   lives in the engine. Finished room results are captured as `Score` rows.
-- **No users table, no auth** — `playerName` is free-text, sanitized,
+- **No users table, no auth**, `playerName` is free-text, sanitized,
   length-capped (e.g., ≤ 20 chars). This is intentional (PRD §13: no auth).
 - **Scores are the leaderboard source of truth**; period filtering derives
   from `playedAt`.
@@ -397,7 +397,7 @@ Implementation notes (additive, not schema changes):
 - Skribbl round protocol (M4, D023): `choose-word` (drawer picks 1 of 3),
   `next-round` (host skip), `restart-game` (host rematch), `set-custom-words`
   (host paste), `round-hint` (first letter at 30s / last at 45s),
-  `end-round-now` (host cuts the drawing phase short — M4.1, D026). The
+  `end-round-now` (host cuts the drawing phase short, M4.1, D026). The
   word-select `round-start` carries the 3 choices only to the drawer
   (private emit; drawer excluded from the public emit).
 - Voting: `vote-update` (live percentages), `vote-reveal`.
@@ -431,7 +431,7 @@ Implementation notes (additive, not schema changes):
 
 1. Timers are server-side; clients receive deadlines, the server enforces them.
 2. Late guesses/votes are rejected (`ROUND_LOCKED`).
-3. Guess checking is server-side (case-insensitive, trimmed — PRD §5.1).
+3. Guess checking is server-side (case-insensitive, trimmed, PRD §5.1).
 4. Scores are pure functions defined per game (e.g., Skribbl:
    `guesser = 100 − seconds*2`, `drawer = Σ guesser points / 2`).
 5. Host disconnects → host migration; player disconnects → marked absent,
@@ -460,8 +460,8 @@ Implementation notes (additive, not schema changes):
   server-side; a single public `VITE_`-style backend URL is exposed.
 - **Content licensing (PRD §13):** only public-domain/CC0/self-created assets.
   No scraping. Flagged risks: song lyrics (Draw the Lyric, Genre-Bender),
-  celebrity names (Guess Who — text only, no photos), "Price Is Right" name
-  (trademark — see PROJECT_STATE.md open questions).
+  celebrity names (Guess Who, text only, no photos), "Price Is Right" name
+  (trademark, see PROJECT_STATE.md open questions).
 - **AdSense compliance:** placeholders only (commented GA4 + ad container);
   no pop-ups/auto-redirects/deceptive content (PRD §7, §13).
 
@@ -477,7 +477,7 @@ Implementation notes (additive, not schema changes):
   (`client:load`); no JS on the homepage beyond analytics placeholder.
 - **Bundle discipline:** one island per game page; shared island code is code-
   split so each game page ships only what it needs; no heavy animation
-  libraries — CSS animations only (PRD §13).
+  libraries, CSS animations only (PRD §13).
 - **Assets:** self-created SVGs, WebP images, `loading="lazy"` for below-fold
   media, hashed filenames, CDN cache via Cloudflare Pages.
 - **Runtime (server):** indexed leaderboard queries; batched score writes;
@@ -488,21 +488,26 @@ Implementation notes (additive, not schema changes):
 
 ---
 
-## 15. Deployment Strategy (PRD §12)
+## 15. Deployment Strategy (PRD §12, D052)
 
 ```
 GitHub repo
-  └─ push to main ──▶ GitHub Actions
-        ├─ CI: format → lint → typecheck → dataset tests → unit → integration → build
+  └─ push to main
+        ├─ CI: format → lint → typecheck → unit → integration → build → smoke
         └─ Deploy:
-              ├─ Frontend → Cloudflare Pages (astro build && wrangler pages deploy dist)
-              │    · static export from dist/
+              ├─ Frontend → Cloudflare Pages (git integration: pnpm build,
+              │    output dist/; wrangler.toml for direct uploads)
               │    · _headers: noindex .pages.dev preview domain (PRD §6.4)
-              │    · custom domain (partybrain.com) with canonical URLs
-              └─ Backend → Railway or Render
-                   · /server with Dockerfile (Node 20, non-root, healthcheck)
-                   · env: DATABASE_URL (managed PostgreSQL addon), PORT, CORS_ORIGIN
+              │    · custom domain playtriviahub.com with canonical URLs
+              │    · build env: PUBLIC_SERVER_URL=https://api.playtriviahub.com
+              └─ Backend → Railway (Docker service from server/Dockerfile)
+                   · multi-stage, non-root, /readyz healthcheck
+                   · env: DATABASE_URL (Railway Postgres), PORT, CORS_ORIGIN
+                   · migrations via CI (db:deploy), never from the container
+                   · Render = documented fallback (paid tier; free tier sleeps)
 ```
+
+Full runbook: `docs/DEPLOYMENT.md` (setup, DNS, verification, rollback).
 
 - **Environments:** local (Astro dev + server dev + local Postgres via
   Docker or managed local) → production (Cloudflare Pages + Railway/Render).
@@ -524,13 +529,13 @@ GitHub repo
 - **Astro:** pages under `src/pages/` (route = file); islands under
   `src/islands/`; Astro components under `src/components/`; datasets under
   `src/data/`.
-- **Server:** `server/src/` — Express bootstrap in `app.ts`/`index.ts`; routes
+- **Server:** `server/src/`, Express bootstrap in `app.ts`/`index.ts`; routes
   thin (validate → call service/engine → respond); engine logic pure and
   transport-free where possible (unit-testable).
 - **Validation:** every inbound boundary validates (small validators or zod).
 - **Naming:** files/folders kebab-case; React components PascalCase; Prisma
   models PascalCase; socket events exactly as PRD defines (`draw-stroke`,
-  `cast-vote`, …) — a shared constants module (`events.ts`) used by both
+  `cast-vote`, …), a shared constants module (`events.ts`) used by both
   client and server so names can never drift.
 - **Logging:** structured (pino); no `console.log` in committed code.
 - **Data hygiene:** datasets validated by a test (shape, duplicates, counts ≥
@@ -559,7 +564,7 @@ GitHub repo
 | ---------------------------- | ------------------------------------------------------------------ | ---------------------------- |
 | RoomEngine (island + server) | `src/islands/room/` + `server/src/engine/room-engine.ts`           | 12 real-time games           |
 | DrawingCanvas                | `src/islands/drawing/`                                             | 5 drawing games              |
-| VotingComponent              | `src/islands/voting/`                                              | 4–6 voting games             |
+| VotingComponent              | `src/islands/voting/`                                              | 4-6 voting games             |
 | SoloGameTemplate             | `src/islands/solo/`                                                | 6 solo games (+ solo Trivia) |
 | Socket event constants       | `src/lib/events.ts` ↔ `server/src/lib/events.ts`                   | all real-time islands        |
 | API client                   | `src/lib/api.ts`                                                   | all islands                  |
@@ -581,21 +586,112 @@ GitHub repo
 - **Observability:** structured logs → log drain; request/room metrics; uptime
   monitoring once live.
 - **New games:** adding a game = new static page + island + dataset + optional
-  engine adapter — the shared systems are the compatibility boundary.
+  engine adapter, the shared systems are the compatibility boundary.
 
 ---
 
-## 20. Technology Stack (PRD §2 — DO NOT DEVIATE)
+## 20. Technology Stack (PRD §2, DO NOT DEVIATE)
 
-| Layer               | Choice                                                       |
-| ------------------- | ------------------------------------------------------------ |
-| Frontend            | Astro v5+ (SSG/MPA; 7.x since M1 — DECISIONS D018)           |
-| Interactive islands | React (TypeScript strict)                                    |
-| Styling             | Tailwind CSS v4                                              |
-| Design system       | BounceBox (PRD §11 — see open question re: §2 contradiction) |
-| Real-time           | Socket.io (client + server)                                  |
-| Backend             | Node.js + Express.js (`/server`)                             |
-| Database            | PostgreSQL + Prisma ORM                                      |
-| Hosting             | Cloudflare Pages (frontend) + Railway/Render (backend)       |
-| Package manager     | pnpm (preferred) or npm                                      |
-| Language            | TypeScript everywhere (strict)                               |
+| Layer               | Choice                                                      |
+| ------------------- | ----------------------------------------------------------- |
+| Frontend            | Astro v5+ (SSG/MPA; 7.x since M1, DECISIONS D018)           |
+| Interactive islands | React (TypeScript strict)                                   |
+| Styling             | Tailwind CSS v4                                             |
+| Design system       | BounceBox (PRD §11, see open question re: §2 contradiction) |
+| Real-time           | Socket.io (client + server)                                 |
+| Backend             | Node.js + Express.js (`/server`)                            |
+| Database            | PostgreSQL + Prisma ORM                                     |
+| Hosting             | Cloudflare Pages (frontend) + Railway/Render (backend)      |
+| Package manager     | pnpm (preferred) or npm                                     |
+| Language            | TypeScript everywhere (strict)                              |
+
+---
+
+## 21. Phase 0/1 Foundation (2026-08-04, D043-D046)
+
+The foundation phase added four layers that every future game, daily game, and
+page plugs into. Nothing existing was removed; all additions are additive and
+backwards-compatible (legacy localStorage keys are read as fallbacks).
+
+### 21.1 Rebrand: TriviaHub
+
+- Domain `https://playtriviahub.com` in `astro.config.mjs`, `SEOHead`, sitemap,
+  robots, OG generator, and smoke tests.
+- Product name in all UI strings, metadata, JSON-LD, legal copy, README, docs,
+  and package metadata (`triviahub`, `@triviahub/server`).
+- `public/site.webmanifest` (PWA-ready), new `favicon.svg` mark, theme-color.
+- Client storage keys migrated with legacy fallback: `triviahub:streak:*` reads
+  `partybrain:streak:*`, `triviahub:nickname` reads `partybrain:nickname`, and
+  the timer preference key likewise (D043).
+
+### 21.2 Design system (`src/components/ui/`)
+
+BounceBox components, all token-based, AA contrast, keyboard-operable, and
+reduced-motion safe:
+
+| Component                                                 | Notes                           |
+| --------------------------------------------------------- | ------------------------------- |
+| Button, Card, Chip, Input, Checkbox, Radio, List, Tooltip | pre-existing (M1-M10)           |
+| Badge, Skeleton, EmptyState, Dialog, Tabs, StatCard       | new (Phase 0/1)                 |
+| LeaderboardTable, PlayerCard, CategoryCard                | new (Phase 0/1)                 |
+| GameCard v2                                               | discovery metadata row + badges |
+
+### 21.3 Daily games framework (`src/lib/daily.ts` + `/daily` routes)
+
+- Registry-driven: one entry per daily game (slug, category, tiers, live flag).
+  Adding a daily game = one registry entry + one page render (D044).
+- `/daily` hub (streaks + 7-day strip via `DailyHubStatus` island), `/daily/[slug]`
+  per-game pages (live engines today: Trivia, Sudoku), `/daily/archive`
+  (client-side history, `triviahub:daily-history:v1`).
+- Streak and history recording wired into `SoloShell` and `TriviaSolo`;
+  server-seeded content, leaderboards, and share images reuse the existing
+  solo engine unchanged.
+- Server-side identity, streaks, and history are the next milestone (vision
+  M1.5.1); the client-side layer is the deliberate interim (D044).
+
+### 21.4 Discovery metadata (`games.json`)
+
+- New per-game fields: `players`, `durationMinutes`, `energy`, `featured`,
+  `isNew`, `popularity`. Powers GameCard metadata, Trending/New/Multiplayer
+  rails, and the categories page (D046).
+
+### 21.5 Navigation and SEO
+
+- Header: Home, Daily Games, Games, Categories, Multiplayer, New Games,
+  Trending, with `aria-current` and a skip-to-main link.
+- `SEOHead`: `og:site_name` TriviaHub, theme-color, manifest link, OG
+  dimensions; breadcrumb JSON-LD on daily pages.
+- Sitemap + robots updated for the new domain and the new routes (`/daily`,
+  `/daily/trivia`, `/daily/sudoku`, `/daily/archive`, `/categories`).
+- Writing standard: no em dashes or en dashes anywhere (scripts/purge-dashes.mjs
+  applied repo-wide).
+
+### 21.6 Phase 1.5 identity and server streaks (D047-D049)
+
+- **Account-lite membership:** a member is a browser with a device-generated
+  memberKey (`triviahub:member-key`). No passwords, no email, no PII.
+  `POST /api/me/claim` converts a guest in one tap; `GET /api/me` is the
+  member read model.
+- **Streak engine** (`server/src/lib/streak-engine.ts`): pure and unit
+  tested. Grand scope (any daily game) + per-game scopes. Freeze tokens
+  earned per 7-day milestone (cap 3), one one-day restore per calendar
+  quarter, reset preserves longest.
+- **DailyRun** (`server/src/routes/daily.ts`): idempotent member runs
+  (unique clientKey + one per member per game per day) in a transaction with
+  streak updates; rate-limited (30/min). `Score` remains the leaderboard
+  source for guests and members; DailyRun feeds history, personal bests, and
+  streaks (D049). Friends leaderboard scope lands with the social phase.
+- **Tables:** `UserProfile`, `DailyRun`, `DailyStreak` (migration
+  `phase15_identity_streaks`). Lockstep test keeps client and server live
+  daily registries in sync (`LIVE_DAILY_GAMES`).
+
+### 21.7 Phase A daily expansion (D050)
+
+- Eight live daily games. Trivia keeps its server-seeded challenge
+  (DailyChallenge); the other seven select content client-side with
+  `dailyGameSeed(dateKey, slug)` passed into the shared `pick*` functions
+  (the sudoku precedent). The registry `live` flag is the switch between
+  daily and solo modes; islands receive `dailyDateKey` only on `/daily/*`.
+- Play-again in daily mode keeps the day's content (it is the daily); solo
+  mode re-rolls. All live dailies feed the Phase 1.5 member pipeline
+  (streaks, history, personal bests) with no per-game server work.

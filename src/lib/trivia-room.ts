@@ -1,5 +1,5 @@
 /**
- * Client-side Trivia room state (M8) — pure reducer over the server's trivia
+ * Client-side Trivia room state (M8), pure reducer over the server's trivia
  * events (question → revealed → game-end). Server-authoritative: the server
  * owns questions, timing, scoring, and the final podium; the correct answer
  * index only ever arrives in the round-reveal (never in the question).
@@ -34,7 +34,7 @@ export interface TriviaGameState {
   totalRounds: number;
   endsAt: number | null;
   myAnswer: number | null;
-  /** Points banked for my answer (from the ack — shown on reveal). */
+  /** Points banked for my answer (from the ack, shown on reveal). */
   myPoints: number | null;
   correctIndex: number | null;
   results: TriviaRoundResult[];
@@ -130,8 +130,8 @@ export function triviaRoomReducer(state: TriviaGameState, action: TriviaAction):
           action.correct && state.mode === 'race'
             ? `Correct! +${action.points} points`
             : action.correct
-              ? 'Correct answer — but this is Wrong Answers Only! +0'
-              : `Wrong answer — the room approves! +${action.points} points`,
+              ? 'Correct answer, but this is Wrong Answers Only! +0'
+              : `Wrong answer, the room approves! +${action.points} points`,
       };
     case 'reveal':
       return {

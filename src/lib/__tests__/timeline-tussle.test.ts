@@ -26,7 +26,7 @@ describe('Timeline Tussle logic (PRD §5.7)', () => {
     expect(years.every((year) => year < 0)).toBe(true);
   });
 
-  it('M14: per-card scoring — 100 perfect, ~33 per card in place, 0 otherwise', () => {
+  it('M14: per-card scoring, 100 perfect, ~33 per card in place, 0 otherwise', () => {
     const correct = [0, 1, 2];
     expect(scoreTimelineOrder([0, 1, 2], correct)).toBe(100);
     expect(scoreTimelineOrder([1, 0, 2], correct)).toBe(33); // one card in place

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * M14 rhyme-key generator — builds src/data/rhyme-phonemes.json from the
+ * M14 rhyme-key generator, builds src/data/rhyme-phonemes.json from the
  * public-domain CMU Pronouncing Dictionary (https://github.com/cmusphinx/cmudict).
  *
  * A word's RHYME KEY is the final stressed vowel plus everything after it
  * (stress digits stripped). Two words rhyme when their rhyme keys match:
  * PIE → P AY1 → "ay", HI → HH AY1 → "ay" → rhyme. This lets Rhyme or Crime
  * accept ANY rhyming word ("hi" for "pie"), not just the dataset's answer
- * list, without shipping the full 134k-word dictionary — only ~3.5k common
+ * list, without shipping the full 134k-word dictionary, only ~3.5k common
  * words + every prompt/answer in the dataset.
  *
  * Usage: node scripts/generate-rhyme-phonemes.mjs <cmudict.dict> [words.txt]
@@ -97,9 +97,9 @@ if (existsSync(rhymesPath)) {
     }
   }
 }
-// …then the common-word list (kept at the top of the file order matters —
+// …then the common-word list (kept at the top of the file order matters.
 // entries are emitted in dictionary order, so the set is just for lookup).
-// Only clean alphabetic words from the top of the frequency list — the tail
+// Only clean alphabetic words from the top of the frequency list, the tail
 // of web-frequency lists is spam, and symbols/abbreviations don't rhyme.
 const wordsPath = process.argv[3];
 const commonWords = wordsPath

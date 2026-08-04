@@ -1,6 +1,6 @@
 /**
- * Genre-Bender (M8, PRD §5.10) — pure game logic. 10 questions × 20s; a
- * (paraphrased/original — licensing-safe, open question #2) lyric rewritten
+ * Genre-Bender (M8, PRD §5.10), pure game logic. 10 questions × 20s; a
+ * (paraphrased/original, licensing-safe, open question #2) lyric rewritten
  * as a Shakespearean sonnet; pick the song + artist from four options. The
  * year clue is a free hint (no penalty) per PRD's "optional BPM/year clue".
  */
@@ -35,7 +35,7 @@ export function pickGenreBenderQuestions(
 }
 
 export function benderLabel(entry: GenreBenderEntry): string {
-  return `${entry.original} — ${entry.artist}`;
+  return `${entry.original} - ${entry.artist}`;
 }
 
 export function genreBenderOptions(

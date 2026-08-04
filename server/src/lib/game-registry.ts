@@ -1,6 +1,6 @@
 /**
  * Room games with a shipped round adapter. Single source of truth for the
- * start-game gate — a room whose game has no adapter must not advance into
+ * start-game gate, a room whose game has no adapter must not advance into
  * game-setup (that stranded rooms in "Game in progress" with nothing taking
  * over). M5 ships all five drawing games.
  *

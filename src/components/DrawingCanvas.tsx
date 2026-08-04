@@ -16,9 +16,9 @@ import {
 } from '../lib/canvas';
 
 /**
- * Shared drawing surface (DECISIONS D009 — reused by every drawing game).
+ * Shared drawing surface (DECISIONS D009, reused by every drawing game).
  *
- * - Fixed logical 800×500 coordinate space, scaled responsively via CSS —
+ * - Fixed logical 800×500 coordinate space, scaled responsively via CSS.
  *   stroke coordinates are resolution-independent, so replays look identical
  *   on any device (pointer events are mapped through getBoundingClientRect).
  * - Pointer events unify mouse/touch/pen (touch-action: none).
@@ -187,7 +187,7 @@ export default function DrawingCanvas({
     activeRef.current = null;
   };
 
-  // The silhouette changes (reveal) without touching the stroke log —
+  // The silhouette changes (reveal) without touching the stroke log.
   // repaint immediately so the background is visible to everyone.
   useEffect(() => {
     const frame = requestAnimationFrame(() => {

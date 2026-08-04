@@ -8,7 +8,7 @@ import {
 /**
  * Contract lockstep test: the client event constants must exactly mirror the
  * server's (DECISIONS D011). If this fails, both files must be updated
- * together — event-name drift is the classic real-time bug.
+ * together, event-name drift is the classic real-time bug.
  */
 describe('socket event contract (client ↔ server lockstep)', () => {
   it('ClientEvents matches the server mirror', () => {

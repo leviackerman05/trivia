@@ -1,5 +1,5 @@
 /**
- * Typed API client for the PartyBrain backend (PRD §8.1 endpoints).
+ * Typed API client for the TriviaHub backend (PRD §8.1 endpoints).
  * Islands use these helpers; errors surface as ApiError with a stable code.
  */
 
@@ -17,7 +17,7 @@ export class ApiError extends Error {
   }
 }
 
-async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
+export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${SERVER_URL}${path}`, {
     headers: { 'Content-Type': 'application/json' },
     ...init,
@@ -74,7 +74,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 /**
  * Submit a score with idempotent retries: the same clientKey returns the
  * original row, so retries after network failures never create duplicates.
- * Retries only on network errors / 5xx — never on 4xx.
+ * Retries only on network errors / 5xx, never on 4xx.
  */
 export async function submitScore(
   input: SubmitScoreInput,

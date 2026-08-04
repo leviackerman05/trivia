@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * M18 — Daily Sudoku puzzle generator. Produces src/data/sudoku-puzzles.json:
+ * M18, Daily Sudoku puzzle generator. Produces src/data/sudoku-puzzles.json:
  * an array of 400 medium-difficulty puzzles (81 digits each, 0 = empty),
  * each with a UNIQUE solution (verified by a two-solution-counting solver).
  * Deterministic (mulberry32 seeded) so re-running yields identical output.
@@ -113,7 +113,7 @@ function countSolutions(grid, limit = 2) {
 }
 
 /** Remove cells at random while keeping the solution unique. Target: a
- * medium difficulty (28–32 clues). */
+ * medium difficulty (28-32 clues). */
 function makePuzzle(random) {
   const solution = fullGrid(random);
   const grid = solution.map((row) => [...row]);
@@ -122,7 +122,7 @@ function makePuzzle(random) {
     random
   );
   let clues = 81;
-  const target = 28 + Math.floor(random() * 5); // 28–32 clues
+  const target = 28 + Math.floor(random() * 5); // 28-32 clues
   for (const [row, col] of positions) {
     if (clues <= target) {
       break;
@@ -131,7 +131,7 @@ function makePuzzle(random) {
     grid[row][col] = 0;
     const probe = grid.map((r) => [...r]);
     if (countSolutions(probe, 2) !== 1) {
-      grid[row][col] = backup; // removal breaks uniqueness — keep the clue
+      grid[row][col] = backup; // removal breaks uniqueness, keep the clue
     } else {
       clues -= 1;
     }
@@ -156,7 +156,7 @@ while (puzzles.length < COUNT && attempts < 2000) {
   }
 }
 if (puzzles.length < COUNT) {
-  console.error(`only generated ${puzzles.length} — increase attempts`);
+  console.error(`only generated ${puzzles.length}, increase attempts`);
   process.exit(1);
 }
 

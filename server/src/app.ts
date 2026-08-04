@@ -22,7 +22,7 @@ export function createApp(deps: Partial<AppDeps> = {}): express.Express {
   app.disable('x-powered-by');
 
   app.use(cors({ origin: resolveCorsOrigin() }));
-  // Small body cap — scores/messages are tiny; rejects oversized payloads early.
+  // Small body cap, scores/messages are tiny; rejects oversized payloads early.
   app.use(express.json({ limit: '32kb' }));
   app.use(pinoHttp({ logger }));
 

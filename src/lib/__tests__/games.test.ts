@@ -9,6 +9,8 @@ import {
   type InstantPlayMode,
 } from '../games';
 import { PLAYABLE_ROOM_GAMES } from '../../../server/src/lib/game-registry';
+import { LIVE_DAILY_GAMES } from '../../../server/src/lib/daily-games';
+import { getLiveDailyGames } from '../daily';
 
 const PRD_SLUGS = [
   'skribbl-arena',
@@ -94,6 +96,13 @@ describe('game catalog (src/data/games.json)', () => {
         expect(game.playable, game.slug).toBe(true);
       }
     }
+  });
+
+  it('live daily games mirror the server registry (lockstep, Phase 1.5)', () => {
+    const clientLive = getLiveDailyGames()
+      .map((game) => game.slug)
+      .sort();
+    expect(clientLive).toEqual([...LIVE_DAILY_GAMES].sort());
   });
 });
 

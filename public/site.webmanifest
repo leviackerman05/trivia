@@ -1,0 +1,17 @@
+{
+  "name": "TriviaHub: Free Party Games, Daily Trivia and Multiplayer",
+  "short_name": "TriviaHub",
+  "description": "Play free party games, daily trivia challenges, and multiplayer games with friends. No downloads, no accounts, play in seconds.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff6b6b",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

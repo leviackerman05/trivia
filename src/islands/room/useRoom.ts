@@ -37,7 +37,7 @@ const ACK_TIMEOUT_MS = 5000;
 function ackErrorText(error: string | undefined): string {
   switch (error) {
     case 'ROOM_NOT_FOUND':
-      return 'Room not found — check the code.';
+      return 'Room not found, check the code.';
     case 'ROOM_FULL':
       return 'Room is full.';
     case 'NICKNAME_TAKEN':
@@ -45,17 +45,17 @@ function ackErrorText(error: string | undefined): string {
     case 'NOT_HOST':
       return 'Only the host can do that.';
     case 'RATE_LIMITED':
-      return 'Too many requests — try again in a moment.';
+      return 'Too many requests, try again in a moment.';
     case 'GAME_NOT_FOUND':
       return 'That game is not available.';
     case 'GAME_NOT_PLAYABLE_YET':
-      return "This game's playable rounds arrive in a later milestone — Skribbl Arena is live today!";
+      return "This game's playable rounds arrive in a later milestone, Skribbl Arena is live today!";
     case 'NOT_ENOUGH_PLAYERS':
-      return 'Not enough players — invite a friend or open a second window.';
+      return 'Not enough players, invite a friend or open a second window.';
     case 'INVALID_PAYLOAD':
       return 'Check your input and try again.';
     case 'TIMEOUT':
-      return 'No response from the server — try again.';
+      return 'No response from the server, try again.';
     default:
       return error ?? 'Something went wrong.';
   }

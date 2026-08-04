@@ -1,5 +1,5 @@
 /**
- * Would You Rather — one-screen instant play (owner request 2026-08-04).
+ * Would You Rather, one-screen instant play (owner request 2026-08-04).
  * Co-located scorekeeper mode: pass the phone around the room, tap A or B
  * for every vote, watch the live tally. Pure functions only; the island
  * holds the per-dilemma vote state.

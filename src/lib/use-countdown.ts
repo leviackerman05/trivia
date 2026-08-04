@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 /**
- * M14 — round countdown with the deadline in STATE, not a ref.
+ * M14, round countdown with the deadline in STATE, not a ref.
  *
  * The old pattern stored the deadline in a ref and computed `remaining` at
  * render time: on the very first render of a round the ref was still unset,
@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
  *
  * @param active  countdown runs only while true (round playing, not locked)
  * @param seconds full round duration in seconds
- * @param key     round identity — changing it (new question index) resets
+ * @param key     round identity, changing it (new question index) resets
  *                the deadline, so round N+1 doesn't inherit round N's
  */
 export function useCountdown(active: boolean, seconds: number, key: number | string): number {

@@ -1,4 +1,4 @@
-// PartyBrain database schema — PRD §8.3 models kept verbatim.
+// TriviaHub database schema, PRD §8.3 models kept verbatim.
 // Additive changes only (indexes/constraints) per DECISIONS D006.
 
 generator client {
@@ -61,4 +61,59 @@ model DailyChallenge {
 
   // Additive: one challenge per game per day (upsert-safe rollover)
   @@unique([gameId, date])
+}
+
+// Phase 1.5 (D047-D049): account-lite identity + server-side streaks.
+// A member is a browser with a device-generated memberKey; no passwords,
+// no email. The Score table remains the leaderboard source for guests and
+// members alike; DailyRun is the identity/history/personal-best layer.
+
+model UserProfile {
+  id               String        @id @default(cuid())
+  memberKey        String        @unique
+  nickname         String        @default("Player")
+  email            String? // reserved for future recovery/recap (D047)
+  xp               Int           @default(0)
+  level            Int           @default(1)
+  streakFreezes    Int           @default(0)
+  restoreUsedSeason String? // e.g. "2026-Q3", one mercy restore per season
+  createdAt        DateTime      @default(now())
+  lastSeenAt       DateTime      @default(now())
+  dailyRuns        DailyRun[]
+  streaks          DailyStreak[]
+
+  @@index([lastSeenAt])
+}
+
+model DailyRun {
+  id           String      @id @default(cuid())
+  userId       String
+  user         UserProfile @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gameId       String
+  dateKey      String // UTC day "YYYY-MM-DD" (matches client dailyDateKey)
+  tier         String      @default("normal")
+  score        Int
+  durationMs   Int         @default(0)
+  correctCount Int         @default(0)
+  totalCount   Int         @default(0)
+  clientKey    String      @unique
+  createdAt    DateTime    @default(now())
+
+  // One run per member per game per day; replays are idempotent no-ops.
+  @@unique([userId, gameId, dateKey])
+  @@index([gameId, dateKey])
+  @@index([userId, dateKey])
+}
+
+model DailyStreak {
+  id       String      @id @default(cuid())
+  userId   String
+  user     UserProfile @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scope    String // "grand" or a daily game slug
+  current  Int         @default(0)
+  longest  Int         @default(0)
+  lastDate String      @default("")
+  updatedAt DateTime   @updatedAt
+
+  @@unique([userId, scope])
 }

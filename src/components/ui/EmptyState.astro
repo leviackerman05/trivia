@@ -1,0 +1,33 @@
+---
+/**
+ * EmptyState: friendly zero-results surface with an optional action.
+ * Used by the catalog filters, archive, and any empty list.
+ */
+interface Props {
+  title: string;
+  body?: string;
+  actionHref?: string;
+  actionLabel?: string;
+  class?: string;
+}
+
+const { title, body, actionHref, actionLabel, class: className } = Astro.props;
+---
+
+<div
+  class={`flex flex-col items-center gap-3 rounded-lg border-2 border-dashed border-border bg-surface-raised px-6 py-12 text-center ${className ?? ''}`}
+>
+  <span aria-hidden="true" class="text-5xl">🎉</span>
+  <h2 class="font-display text-h3 text-ink">{title}</h2>
+  {body && <p class="max-w-md text-body text-ink-muted">{body}</p>}
+  {
+    actionHref && actionLabel && (
+      <a
+        href={actionHref}
+        class="mt-2 inline-flex min-h-11 items-center justify-center rounded-pill bg-primary-strong px-6 py-2.5 font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover"
+      >
+        {actionLabel}
+      </a>
+    )
+  }
+</div>

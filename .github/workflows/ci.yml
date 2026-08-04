@@ -12,18 +12,17 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_USER: partybrain
-          POSTGRES_PASSWORD: partybrain
-          POSTGRES_DB: partybrain
+          POSTGRES_USER: triviahub
+          POSTGRES_PASSWORD: triviahub
+          POSTGRES_DB: triviahub
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U partybrain"
-          --health-interval 10s
+          --health-cmd "pg_isready -U triviahub"
           --health-timeout 5s
           --health-retries 5
     env:
-      DATABASE_URL: postgresql://partybrain:partybrain@localhost:5432/partybrain
+      DATABASE_URL: postgresql://triviahub:triviahub@localhost:5432/triviahub
     steps:
       - uses: actions/checkout@v4
 
@@ -36,7 +35,7 @@ jobs:
           node-version: 26
           cache: pnpm
 
-      # Workspace install: root Astro app + @partybrain/server.
+      # Workspace install: root Astro app + @triviahub/server.
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -53,13 +52,13 @@ jobs:
         run: pnpm test:unit
 
       - name: Apply database migrations
-        run: pnpm --filter @partybrain/server db:deploy
+        run: pnpm --filter @triviahub/server db:deploy
 
       - name: Server tests (integration)
-        run: pnpm --filter @partybrain/server test
+        run: pnpm --filter @triviahub/server test
 
       - name: Server build (tsc)
-        run: pnpm --filter @partybrain/server build
+        run: pnpm --filter @triviahub/server build
 
       - name: Build (astro build)
         run: pnpm build

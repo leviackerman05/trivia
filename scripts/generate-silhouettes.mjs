@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * M15 — Shadow Sketch silhouettes: tag every existing silhouette with a
+ * M15, Shadow Sketch silhouettes: tag every existing silhouette with a
  * genre (so hosts can pick a category) and append a new set of more
  * detailed, recognizable multi-part silhouettes (the owner called the
- * original set "childish"). Idempotent — re-running keeps existing genres
+ * original set "childish"). Idempotent, re-running keeps existing genres
  * and only adds missing entries.
  *
  * Run: node scripts/generate-silhouettes.mjs
@@ -309,4 +309,4 @@ const byGenre = {};
 for (const entry of silhouettes) {
   byGenre[entry.genre] = (byGenre[entry.genre] ?? 0) + 1;
 }
-console.log(`silhouettes: ${silhouettes.length} — ${JSON.stringify(byGenre)}`);
+console.log(`silhouettes: ${silhouettes.length}, ${JSON.stringify(byGenre)}`);

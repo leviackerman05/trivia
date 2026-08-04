@@ -1,4 +1,4 @@
-/* PartyBrain global styles — Tailwind CSS v4 (CSS-first config). */
+/* TriviaHub global styles, Tailwind CSS v4 (CSS-first config). */
 /* BounceBox design system per PRD §11. */
 
 @import 'tailwindcss';
@@ -14,7 +14,7 @@
   /* BounceBox palette (PRD §11) */
   --color-primary: #ff6b6b;
   --color-primary-dark: #e85d5d;
-  /* Accessible coral scale (WCAG AA — PRD §11 colors fail contrast for text):
+  /* Accessible coral scale (WCAG AA, PRD §11 colors fail contrast for text):
      primary-strong = text on white (4.6:1), primary-deep = text on light
      coral fills (4.7:1), primary-hover = button hover state. See DECISIONS D019. */
   --color-primary-strong: #d93636;
@@ -24,7 +24,7 @@
   --color-secondary-dark: #3dbeb5;
   --color-tertiary: #ffe66d;
   --color-surface: #ffffff;
-  /* M12 — semantic surfaces/borders (dark mode swaps these under :root.dark). */
+  /* M12, semantic surfaces/borders (dark mode swaps these under :root.dark). */
   --color-surface-raised: #ffffff;
   --color-surface-muted: #f7f4f1;
   --color-border: #e5e7eb;
@@ -35,7 +35,7 @@
   --color-info: #60a5fa;
   --color-ink: #2d2d2d;
   --color-ink-muted: #6b6b6b;
-  /* Status soft/strong pairs (M12) — readable on both themes (WCAG AA). */
+  /* Status soft/strong pairs (M12), readable on both themes (WCAG AA). */
   --color-success-soft: #dcfce7;
   --color-success-strong: #15803d;
   --color-warning-soft: #fef3c7;
@@ -79,7 +79,7 @@
   --shadow-sunny: 0 4px 14px rgb(255 230 109 / 0.4);
 }
 
-/* Dark theme (M12) — semantic tokens swap under the `.dark` class; all
+/* Dark theme (M12), semantic tokens swap under the `.dark` class; all
    components use tokens, so the whole site flips. Set by the theme script
    in BaseLayout (no-FOUC) + the header toggle; persists in localStorage. */
 :root.dark {

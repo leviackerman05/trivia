@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
- * M15 — add tiers to Never Have I Ever statements and genres to This or
+ * M15, add tiers to Never Have I Ever statements and genres to This or
  * That pairs, plus curated new NHIE statements for the dirty/super-dirty
  * tiers (owner request 2026-08-04). Idempotent: re-running merges cleanly.
  *
  * Tier scale: boring → moderate → dirty → super-dirty (NSFW). The default
  * game tier is "moderate"; hosts opt into dirtier content. NOTE: NSFW text
- * is a known AdSense-policy risk (see DECISIONS) — the default keeps it off.
+ * is a known AdSense-policy risk (see DECISIONS), the default keeps it off.
  *
  * Run: node scripts/generate-voting-datasets.mjs
  */
@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 // ---------------------------------------------------------------------------
-// Never Have I Ever — tier per existing statement index (0-209).
+// Never Have I Ever, tier per existing statement index (0-209).
 // ---------------------------------------------------------------------------
 const BORING = new Set([
   0, 1, 3, 4, 5, 6, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20, 21, 24, 25, 27, 28, 31, 32, 34, 35,
@@ -33,7 +33,7 @@ const DIRTY = new Set([123, 124, 125, 126, 127, 129, 130, 139, 157, 161, 162]);
 // Everything else falls into MODERATE (mild mischief / dating / embarrassing).
 
 const NEW_STATEMENTS = [
-  // dirty — alcohol, dating, mild taboo
+  // dirty, alcohol, dating, mild taboo
   { statement: 'drunk dialed an ex', tier: 'dirty' },
   { statement: 'had a fake ID', tier: 'dirty' },
   { statement: 'been to a party I was not invited to', tier: 'dirty' },
@@ -60,7 +60,7 @@ const NEW_STATEMENTS = [
   { statement: 'been the third wheel on purpose', tier: 'dirty' },
   { statement: 'reused a first date outfit for a second date', tier: 'dirty' },
   { statement: 'googled how to flirt', tier: 'dirty' },
-  // super-dirty — NSFW (host must opt in; flagged in DECISIONS)
+  // super-dirty, NSFW (host must opt in; flagged in DECISIONS)
   { statement: 'had a one-night stand', tier: 'super-dirty' },
   { statement: 'hooked up with a coworker', tier: 'super-dirty' },
   { statement: 'had a fling with a friend’s ex', tier: 'super-dirty' },
@@ -84,7 +84,7 @@ function tierOf(index) {
 }
 
 // ---------------------------------------------------------------------------
-// This or That — genre per existing pair index (0-319).
+// This or That, genre per existing pair index (0-319).
 // ---------------------------------------------------------------------------
 function genreOf(index) {
   if (index <= 86) return 'food';
@@ -134,7 +134,7 @@ writeFileSync(nhiePath, JSON.stringify(nhie, null, 2) + '\n');
 const counts = { boring: 0, moderate: 0, dirty: 0, 'super-dirty': 0 };
 for (const entry of nhie) counts[entry.tier] += 1;
 console.log(
-  `nhie: ${nhie.length} statements — ${JSON.stringify(counts)} (dirty+${dirtyCount}, super-dirty+${superDirtyCount})`
+  `nhie: ${nhie.length} statements, ${JSON.stringify(counts)} (dirty+${dirtyCount}, super-dirty+${superDirtyCount})`
 );
 
 const totPath = join(root, 'server/src/data/this-or-that.json');
@@ -145,5 +145,5 @@ for (const [index, entry] of tot.entries()) {
   genreCounts[entry.genre] = (genreCounts[entry.genre] ?? 0) + 1;
 }
 writeFileSync(totPath, JSON.stringify(tot, null, 2) + '\n');
-console.log(`tot: ${tot.length} pairs — ${JSON.stringify(genreCounts)}`);
+console.log(`tot: ${tot.length} pairs, ${JSON.stringify(genreCounts)}`);
 console.log('GENRE_LABELS:', JSON.stringify(GENRE_LABELS));

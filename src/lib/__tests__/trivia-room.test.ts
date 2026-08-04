@@ -17,7 +17,7 @@ const questionStart = {
   },
 };
 
-describe('triviaRoomReducer — question flow (PRD §5.15)', () => {
+describe('triviaRoomReducer, question flow (PRD §5.15)', () => {
   it('question-start resets the round state and shows the question', () => {
     const state = triviaRoomReducer(
       stateWith({ view: 'revealed', scores: [{ playerName: 'X', score: 1 }] }),
@@ -111,7 +111,7 @@ describe('triviaRoomReducer — question flow (PRD §5.15)', () => {
   });
 });
 
-describe('triviaRoomReducer — resync and reset', () => {
+describe('triviaRoomReducer, resync and reset', () => {
   it('resync rebuilds state without exposing the answer before reveal', () => {
     const state = triviaRoomReducer(stateWith({ round: 3 }), {
       type: 'resync',

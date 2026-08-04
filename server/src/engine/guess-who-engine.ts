@@ -1,10 +1,10 @@
 import { randomInt } from 'node:crypto';
 
 /**
- * Guess Who? Celebrity Edition session engine (M9/M17, PRD §5.17) —
+ * Guess Who? Celebrity Edition session engine (M9/M17, PRD §5.17).
  * transport-agnostic. The answerer (rotating each round) holds a secret
  * celebrity with trait objects; everyone else asks yes/no questions (the
- * ANSWERER judges — the traits help), sees the question log, and can guess
+ * ANSWERER judges, the traits help), sees the question log, and can guess
  * the name at any time. A correct guess scores +1 and reveals the celebrity
  * WITH fun facts (M17); the host advances to the next round. 5 rounds, then
  * the highest scorer wins. 20-question cap per round → reveal.
@@ -35,7 +35,7 @@ export interface Celebrity {
   ageRange: string;
   hairColor: string;
   famousFor: string;
-  /** M17 — fun facts revealed after the round (more movies, awards, trivia). */
+  /** M17, fun facts revealed after the round (more movies, awards, trivia). */
   facts: string[];
 }
 
@@ -77,7 +77,7 @@ export class GuessWhoSession {
     return this.answererName;
   }
 
-  /** The secret celebrity — ONLY ever sent to the answerer's device (D023). */
+  /** The secret celebrity, ONLY ever sent to the answerer's device (D023). */
   get secretCelebrity(): Celebrity | null {
     return this.celebrity;
   }
@@ -110,7 +110,7 @@ export class GuessWhoSession {
     return this.totalRounds;
   }
 
-  /** M17 — running scores (guesser +1 per correct guess). */
+  /** M17, running scores (guesser +1 per correct guess). */
   get scoreTable(): { playerName: string; score: number }[] {
     return [...this.scores.entries()]
       .map(([playerName, score]) => ({ playerName, score }))
@@ -139,7 +139,7 @@ export class GuessWhoSession {
   }
 
   /** Anyone except the answerer asks a yes/no question (solo rooms excepted
-   * — with one player the answerer is also the questioner, a testing
+   *, with one player the answerer is also the questioner, a testing
    * affordance, D026). */
   askQuestion(playerName: string, question: string): GuessWhoResult<{ number: number }> {
     if (this.phase !== 'questioning') {
@@ -180,7 +180,7 @@ export class GuessWhoSession {
     open.answer = yes;
     const answered = this.questionCount;
     if (answered >= GUESS_WHO_MAX_QUESTIONS) {
-      // M17 — nobody guessed in time: reveal without a winner.
+      // M17, nobody guessed in time: reveal without a winner.
       this.phase = 'revealed';
       return {
         ok: true,
@@ -225,7 +225,7 @@ export class GuessWhoSession {
     return { ok: true, value: { correct: false, finished: false } };
   }
 
-  /** M17 — host advances after the reveal: next round or game end. */
+  /** M17, host advances after the reveal: next round or game end. */
   next(): GuessWhoResult<{ finished: boolean }> {
     if (this.phase !== 'revealed') {
       return { ok: false, error: 'WRONG_PHASE' };
@@ -254,7 +254,7 @@ export class GuessWhoSession {
 
   private beginRound(): void {
     this.roundNumber += 1;
-    // M17 — the answerer rotates each round (pass-the-phone fairness).
+    // M17, the answerer rotates each round (pass-the-phone fairness).
     if (this.players.length > 0) {
       const index = (this.roundNumber - 1) % this.players.length;
       this.answererName = this.players[index]!.name;

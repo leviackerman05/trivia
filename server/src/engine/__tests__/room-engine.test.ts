@@ -21,7 +21,7 @@ async function createRoom(engine: RoomEngine, gameId = 'skribbl-arena') {
   return result.value;
 }
 
-describe('RoomEngine — room creation', () => {
+describe('RoomEngine, room creation', () => {
   it('creates a room in lobby phase with a 6-char code from the safe alphabet', async () => {
     const engine = makeEngine();
     const room = await createRoom(engine);
@@ -55,7 +55,7 @@ describe('RoomEngine — room creation', () => {
   });
 });
 
-describe('RoomEngine — join/leave/rejoin', () => {
+describe('RoomEngine, join/leave/rejoin', () => {
   it('first joiner becomes host; subsequent joiners do not', async () => {
     const engine = makeEngine();
     const room = await createRoom(engine);
@@ -131,7 +131,7 @@ describe('RoomEngine — join/leave/rejoin', () => {
   });
 });
 
-describe('RoomEngine — state machine (PRD §4.1)', () => {
+describe('RoomEngine, state machine (PRD §4.1)', () => {
   const EXPECTED_PATH: RoomPhase[] = ['lobby', 'game-setup', 'in-progress', 'results', 'lobby'];
 
   it('follows lobby → game-setup → in-progress → results → lobby', async () => {
@@ -172,7 +172,7 @@ describe('RoomEngine — state machine (PRD §4.1)', () => {
   });
 });
 
-describe('RoomEngine — eviction', () => {
+describe('RoomEngine, eviction', () => {
   it('evicts only rooms empty past the grace period', async () => {
     const engine = makeEngine();
     const emptyOld = await createRoom(engine);
@@ -188,7 +188,7 @@ describe('RoomEngine — eviction', () => {
   });
 });
 
-describe('RoomEngine — public state', () => {
+describe('RoomEngine, public state', () => {
   it('exposes a serializable snapshot', async () => {
     const engine = makeEngine();
     const room = await createRoom(engine);

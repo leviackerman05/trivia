@@ -2,7 +2,7 @@ import { getPrisma } from './prisma.js';
 import triviaQuestionsJson from '../data/trivia-questions.json' with { type: 'json' };
 
 /**
- * Daily challenge seeding (M8, PRD §5.15 + §8.1) — the server owns the daily
+ * Daily challenge seeding (M8, PRD §5.15 + §8.1), the server owns the daily
  * question set so every player's challenge and leaderboard are comparable.
  * Deterministic per UTC date (FNV-1a + seeded shuffle, matching the client's
  * old selection so nothing breaks); upserted idempotently on first read of
@@ -22,7 +22,7 @@ export interface DailyChallengeData {
 
 const TRIVIA_DAILY_QUESTIONS = 10;
 
-/** FNV-1a string hash (mirrors src/lib/trivia.ts — deterministic cross-platform). */
+/** FNV-1a string hash (mirrors src/lib/trivia.ts, deterministic cross-platform). */
 export function hashString(value: string): number {
   let hash = 2166136261;
   for (let i = 0; i < value.length; i += 1) {

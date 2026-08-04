@@ -13,7 +13,7 @@ import {
 import type { Stroke } from '../lib/canvas';
 
 /**
- * Drawing-game session hook (M5) — socket listeners + actions on top of the
+ * Drawing-game session hook (M5), socket listeners + actions on top of the
  * pure skribblReducer. Shared by Skribbl Arena, One Line One Shape, Shadow
  * Sketch, and Draw the Lyric. Mounts while a game is running; `game-resync`
  * on mount and on every socket reconnect rebuilds the full state.
@@ -198,7 +198,7 @@ export function useDrawingGame(roomCode: string | null, myName: string | null): 
     [emitAck]
   );
 
-  /** Flood fill at (x, y) with the current color — same optimistic path. */
+  /** Flood fill at (x, y) with the current color, same optimistic path. */
   const sendFill = useCallback(
     async (x: number, y: number, color: string) => {
       const code = roomCodeRef.current;
@@ -258,15 +258,15 @@ export function useDrawingGame(roomCode: string | null, myName: string | null): 
   const guessErrorMessage = (error: string | undefined): string | undefined => {
     switch (error) {
       case 'DRAWER_CANNOT_GUESS':
-        return "You're the drawer — you can't guess your own word!";
+        return "You're the drawer, you can't guess your own word!";
       case 'ROUND_OVER':
-        return 'Time is up — the round already ended.';
+        return 'Time is up, the round already ended.';
       case 'NOT_PLAYER':
-        return 'Joining you into this round — guess again!';
+        return 'Joining you into this round, guess again!';
       case 'WRONG_PHASE':
         return 'Guessing is only open during the drawing phase.';
       case 'RATE_LIMITED':
-        return 'Too many guesses — pause for a moment.';
+        return 'Too many guesses, pause for a moment.';
       default:
         return undefined;
     }

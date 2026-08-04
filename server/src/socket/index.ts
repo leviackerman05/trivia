@@ -249,7 +249,7 @@ function entriesFrom(gameId: string): DrawingEntry[] {
 }
 
 /**
- * Socket.io gateway — PRD §8.2 event handlers on top of the Room Engine.
+ * Socket.io gateway, PRD §8.2 event handlers on top of the Room Engine.
  * The engine is authoritative; this layer validates, coordinates broadcasts,
  * and persists best-effort. M5 generalizes the Skribbl adapter into
  * config-driven drawing games (DRAWING_CONFIGS) plus the Copycat adapter.
@@ -273,16 +273,16 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   const pendingCharadesCategories = new Map<string, CharadesCategory>();
   /** Voting phase deadlines (ms epoch) so resync can rebuild client timers. */
   const votingDeadlines = new Map<string, number>();
-  /** M13 — Copycat: players whose image finished loading (reveal waits). */
+  /** M13, Copycat: players whose image finished loading (reveal waits). */
   const copycatLoaded = new Map<string, Set<string>>();
-  /** M13 — Copycat: the post-load 10s timer is scheduled once per reveal. */
+  /** M13, Copycat: the post-load 10s timer is scheduled once per reveal. */
   const copycatPostLoadScheduled = new Set<string>();
-  /** M15 — host-chosen voting content options (NHIE tier/source, TOT genre). */
+  /** M15, host-chosen voting content options (NHIE tier/source, TOT genre). */
   const pendingVotingOptions = new Map<
     string,
     { nhieTier?: NhieTier; nhieSource?: NhieSource; totGenre?: string | null }
   >();
-  /** M15 — Shadow Sketch: host-chosen silhouette genre (null = all). */
+  /** M15, Shadow Sketch: host-chosen silhouette genre (null = all). */
   const pendingShadowGenres = new Map<string, string | null>();
 
   function roomOf(socket: Socket): RoomState | undefined {
@@ -671,7 +671,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         round: session.currentRound,
         totalRounds: session.totalRoundsValue,
         // The correct answer index NEVER leaves the server in the question
-        // payload — clients only see options + category.
+        // payload, clients only see options + category.
         question: question
           ? { category: question.category, question: question.question, options: question.options }
           : null,
@@ -783,7 +783,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     return true;
   }
 
-  /** M13 — reveal ends only when every connected player's image has loaded
+  /** M13, reveal ends only when every connected player's image has loaded
    * (then 10s to study it). Scheduled by the image-loaded handler; the 30s
    * fallback in startCopycat stays as the stuck-player safety net. */
   function advanceToDrawing(room: RoomState): void {
@@ -879,7 +879,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   }
 
   function startVoting(room: RoomState): boolean {
-    // M15 — capture the host-chosen content options BEFORE clearing the game.
+    // M15, capture the host-chosen content options BEFORE clearing the game.
     const pending = pendingVotingOptions.get(room.code);
     clearRoomGame(room.code);
     const config = VOTING_CONFIGS[room.gameId];
@@ -930,7 +930,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         }
         const pick = current.usesProvidedSuggestions
           ? current.suggestionOptions(1)[0]
-          : 'skipped the statement — ran out of time';
+          : 'skipped the statement, ran out of time';
         if (!pick) {
           return;
         }
@@ -962,7 +962,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     const config = VOTING_CONFIGS[room.gameId];
     io.to(room.code).emit(ServerEvents.voteReveal, revealed.value.reveal);
     if (!config || config.revealMs <= 0) {
-      // This or That: no revealed phase — straight to the next pair.
+      // This or That: no revealed phase, straight to the next pair.
       advanceVotingRound(room);
       return;
     }
@@ -1193,7 +1193,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       score: session.scoreValue,
       endsAt: Date.now() + 60_000,
     };
-    // The movie title is actor-only (D023 — like the drawer's word): the
+    // The movie title is actor-only (D023, like the drawer's word): the
     // base goes to everyone EXCEPT the actor; the actor gets the private one.
     if (actorId) {
       io.to(room.code).except(actorId).emit(ServerEvents.roundStart, base);
@@ -1353,7 +1353,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     }
   }
 
-  /** M17 — a correct guess (or the question cap) reveals the celebrity and
+  /** M17, a correct guess (or the question cap) reveals the celebrity and
    * facts to everyone; the host then advances via guess-who-next. */
   function revealGuessWho(room: RoomState, finished: boolean): void {
     const session = guessWhoOf(room);
@@ -1522,7 +1522,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       if (result.value.becameEmpty) {
         clearRoomGame(room.code);
         scheduleEviction();
-        logger.info({ roomCode: room.code }, 'room empty — eviction scheduled');
+        logger.info({ roomCode: room.code }, 'room empty, eviction scheduled');
       } else {
         broadcastState(room);
         io.to(room.code).emit(ServerEvents.playerLeft, { playerName });
@@ -1662,7 +1662,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({
           ok: false,
           error: 'INVALID_WORD_LIST',
-          message: '3–200 words, letters/spaces/hyphens/apostrophes only',
+          message: '3-200 words, letters/spaces/hyphens/apostrophes only',
         });
         return;
       }
@@ -1673,7 +1673,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true, count: validated.value.count });
     });
 
-    /** M15 — Shadow Sketch: host picks the silhouette genre in the lobby. */
+    /** M15, Shadow Sketch: host picks the silhouette genre in the lobby. */
     socket.on(ClientEvents.setShadowGenre, (payload: unknown, ack?: Ack) => {
       const input = validateRoomCodeInput(payload);
       if (!input.ok) {
@@ -1864,7 +1864,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         return;
       }
 
-      // M9 — Guess Who: a guess can end the round at any time.
+      // M9, Guess Who: a guess can end the round at any time.
       if (isGuessWhoRoom(room)) {
         const gw = guessWhoOf(room);
         if (!gw) {
@@ -1892,7 +1892,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
             message: `${player.name} guessed it!`,
             at: Date.now(),
           });
-          // M17 — reveal + facts to everyone; the host advances the game.
+          // M17, reveal + facts to everyone; the host advances the game.
           revealGuessWho(room, guessed.value.finished);
         }
         ack?.({ ok: true });
@@ -2188,7 +2188,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     });
 
     /**
-     * M6 — submit-prompt: WYR dilemmas go to the room queue (used on the
+     * M6, submit-prompt: WYR dilemmas go to the room queue (used on the
      * next round); NHIE statements start the current player's turn.
      */
     socket.on(ClientEvents.submitPrompt, (payload: unknown, ack?: Ack) => {
@@ -2231,7 +2231,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         io.to(room.code).emit(ServerEvents.chatMessage, {
           kind: 'system',
           playerName: 'System',
-          message: `${player.name} shared a confession — vote!`,
+          message: `${player.name} shared a confession, vote!`,
           at: Date.now(),
         });
         ack?.({ ok: true });
@@ -2265,7 +2265,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true, queued: queue.length });
     });
 
-    /** M15 — voting games: host picks NHIE tier/source or the TOT genre in
+    /** M15, voting games: host picks NHIE tier/source or the TOT genre in
      * the lobby; applied when the game starts (like pendingCharadesCategories). */
     socket.on(ClientEvents.setVotingConfig, (payload: unknown, ack?: Ack) => {
       const input = validateRoomCodeInput(payload);
@@ -2321,7 +2321,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     });
 
     /**
-     * M8 — Trivia room: host picks the mode in the lobby (race or
+     * M8, Trivia room: host picks the mode in the lobby (race or
      * Wrong Answers Only); applied when the game starts.
      */
     socket.on(ClientEvents.setTriviaMode, (payload: unknown, ack?: Ack) => {
@@ -2352,7 +2352,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true });
     });
 
-    /** M8/M9 — answer-question: Trivia option picks + Guess Who yes/no. */
+    /** M8/M9, answer-question: Trivia option picks + Guess Who yes/no. */
     socket.on(ClientEvents.answerQuestion, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
       if (!room) {
@@ -2365,7 +2365,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         return;
       }
 
-      // M9 — Guess Who: the answerer answers the latest question (yes/no).
+      // M9, Guess Who: the answerer answers the latest question (yes/no).
       if (isGuessWhoRoom(room)) {
         const gw = guessWhoOf(room);
         if (!gw) {
@@ -2389,7 +2389,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
           maxQuestions: gw.maxQuestions,
           finished: answered.value.finished,
         });
-        // M17 — the 20-question cap reveals the celebrity + facts (no
+        // M17, the 20-question cap reveals the celebrity + facts (no
         // winner) on ANY round; the host then advances the game.
         if (gw.phaseValue === 'revealed') {
           revealGuessWho(room, gw.currentRound >= gw.totalRoundsValue);
@@ -2431,7 +2431,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true, points: answered.value.points, correct: answered.value.correct });
     });
 
-    /** M9 — Guess Who: ask a yes/no question about the secret celebrity. */
+    /** M9, Guess Who: ask a yes/no question about the secret celebrity. */
     socket.on(ClientEvents.askQuestion, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
       if (!room || !isGuessWhoRoom(room)) {
@@ -2453,7 +2453,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         ack?.({
           ok: false,
           error: 'INVALID_PAYLOAD',
-          message: 'question must be 3–140 characters',
+          message: 'question must be 3-140 characters',
         });
         return;
       }
@@ -2478,7 +2478,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true });
     });
 
-    /** M17 — Guess Who: the host advances after a reveal (next round or
+    /** M17, Guess Who: the host advances after a reveal (next round or
      * final results). */
     socket.on(ClientEvents.guessWhoNext, (payload: unknown, ack?: Ack) => {
       const input = validateRoomCodeInput(payload);
@@ -2500,7 +2500,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true });
     });
 
-    /** M9 — Charades: anyone presses Correct! when the team shouts it. */
+    /** M9, Charades: anyone presses Correct! when the team shouts it. */
     socket.on(ClientEvents.markCorrect, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
       if (!room || !isCharadesRoom(room)) {
@@ -2531,7 +2531,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true, score: scored.value.score });
     });
 
-    /** M9 — Charades: host picks the category in the lobby. */
+    /** M9, Charades: host picks the category in the lobby. */
     socket.on(ClientEvents.setCharadesCategory, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
       if (!room || !isCharadesRoom(room)) {

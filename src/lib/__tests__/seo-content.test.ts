@@ -11,7 +11,7 @@ describe('per-game SEO content (M10, PRD §6.2)', () => {
     }
   });
 
-  it('meta descriptions are unique and 150–160 characters', () => {
+  it('meta descriptions are unique and 150-160 characters', () => {
     const descriptions = new Set<string>();
     for (const game of games) {
       const meta = gameContent[game.slug]!.metaDescription;
@@ -22,7 +22,7 @@ describe('per-game SEO content (M10, PRD §6.2)', () => {
     }
   });
 
-  it('body content is 400–600 words per game', () => {
+  it('body content is 400-600 words per game', () => {
     for (const game of games) {
       const content = gameContent[game.slug]!;
       const words = content.sections
@@ -35,7 +35,7 @@ describe('per-game SEO content (M10, PRD §6.2)', () => {
     }
   });
 
-  it('every game has 2–5 FAQ entries with real answers', () => {
+  it('every game has 2-5 FAQ entries with real answers', () => {
     for (const game of games) {
       const faqs = gameContent[game.slug]!.faqs;
       expect(faqs.length, game.slug).toBeGreaterThanOrEqual(2);

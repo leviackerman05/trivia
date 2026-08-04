@@ -1,5 +1,5 @@
 /**
- * M14 — adjustable round timer for solo games. Preset chips (30/40/50/60/70
+ * M14, adjustable round timer for solo games. Preset chips (30/40/50/60/70
  * by default); the choice persists per game via localStorage (solo.ts) and
  * is applied BEFORE the game starts (the island's setup phase), so the
  * clock only ever starts when the player actually begins playing.

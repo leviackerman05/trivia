@@ -1,5 +1,5 @@
 /**
- * Client-side Guess Who state (M9/M17) — pure reducer over the server's
+ * Client-side Guess Who state (M9/M17), pure reducer over the server's
  * guess-who events. The secret celebrity only ever arrives on the
  * ANSWERER's device (D023); everyone else sees the question log. M17 adds
  * multi-round play: 5 rounds, rotating answerer, +1 per correct guess,
@@ -17,7 +17,7 @@ export interface CelebrityView {
   ageRange: string;
   hairColor: string;
   famousFor: string;
-  /** M17 — fun facts revealed after the round. */
+  /** M17, fun facts revealed after the round. */
   facts: string[];
 }
 

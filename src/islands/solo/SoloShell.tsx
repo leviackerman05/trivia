@@ -8,16 +8,16 @@ import {
   soloClientKey,
 } from '../../lib/solo';
 import { fetchLeaderboard, submitScore, type LeaderboardEntry } from '../../lib/api';
-
+import { getDailyGame, recordDailyHistory } from '../../lib/daily';
+import { claimMember, ensureMemberKey, readMemberKey, submitDailyRun } from '../../lib/member';
+import { readNickname, writeNickname } from '../../lib/solo';
 /**
- * Solo game shell (M7) — shared presentational frame for every solo game:
+ * Solo game shell (M7), shared presentational frame for every solo game:
  * header (round, score, daily streak), the game body, and the done view
  * (nickname → leaderboard submit → daily top-5 → share-result image →
  * play again). All persistence (streak, nickname, client key) lives here so
  * the four game islands stay focused on their own mechanics.
  */
-
-const NICKNAME_STORAGE_KEY = 'partybrain:nickname';
 
 export type SoloPhase = 'playing' | 'done';
 
@@ -50,31 +50,49 @@ export default function SoloShell({
   onPlayAgain,
 }: SoloShellProps) {
   const [streak, setStreak] = useState(() => readStreak(slug).count);
-  const [nickname, setNickname] = useState(() =>
-    typeof window === 'undefined' ? '' : (localStorage.getItem(NICKNAME_STORAGE_KEY) ?? '')
-  );
+  const [nickname, setNickname] = useState(() => readNickname());
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'saved' | 'failed'>(
     'idle'
   );
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [shareState, setShareState] = useState<'idle' | 'shared'>('idle');
+  const [memberState, setMemberState] = useState<'guest' | 'claiming' | 'member' | 'failed'>(
+    readMemberKey() ? 'member' : 'guest'
+  );
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const clientKeyRef = useRef<string | null>(null);
 
   const dateKey = dailyDateKey(new Date());
 
   // On completion: bump the streak, generate the idempotency key, load the
-  // daily leaderboard so the player can see where they'd land.
+  // daily leaderboard so the player can see where they'd land, and record
+  // the local history entry for the daily hub.
   useEffect(() => {
     if (phase !== 'done') {
       return;
     }
     setStreak(registerStreak(slug).count);
+    recordDailyHistory(slug, score, dateKey);
     clientKeyRef.current = soloClientKey(slug, dateKey, crypto.randomUUID());
+    // Phase 1.5: members also record a server daily run (same clientKey),
+    // which drives server streaks, history, and personal bests.
+    const memberKey = readMemberKey();
+    if (memberKey && getDailyGame(slug)?.live) {
+      const key = clientKeyRef.current;
+      void submitDailyRun({
+        gameId: slug,
+        memberKey,
+        playerName: readNickname() || 'Player',
+        score,
+        clientKey: key,
+      }).catch(() => {
+        // The run is best-effort; the leaderboard save is the source of truth.
+      });
+    }
     void fetchLeaderboard(slug, 'daily', 5)
       .then((response) => setLeaderboard(response.entries))
       .catch(() => setLeaderboard([]));
-  }, [phase, slug, dateKey]);
+  }, [phase, slug, dateKey, score]);
 
   const saveScore = useCallback(async () => {
     const trimmed = nickname.trim();
@@ -82,7 +100,7 @@ export default function SoloShell({
       return;
     }
     if (typeof window !== 'undefined') {
-      localStorage.setItem(NICKNAME_STORAGE_KEY, trimmed);
+      writeNickname(trimmed);
     }
     setSubmitState('submitting');
     try {
@@ -114,6 +132,19 @@ export default function SoloShell({
     downloadCanvas(canvas, slug);
     setShareState('shared');
   };
+
+  /** One-tap guest to member conversion (Phase 1.5, D047). */
+  const keepProgress = () => {
+    if (memberState !== 'guest') {
+      return;
+    }
+    setMemberState('claiming');
+    claimMember(ensureMemberKey(), nickname.trim() || readNickname() || 'Player')
+      .then(() => setMemberState('member'))
+      .catch(() => setMemberState('failed'));
+  };
+
+  const isClaiming = memberState === 'claiming';
 
   return (
     <div className="flex flex-col gap-5">
@@ -182,7 +213,33 @@ export default function SoloShell({
           )}
           {submitState === 'failed' && (
             <p role="alert" className="text-small font-semibold text-danger-strong">
-              Couldn't save right now — check the server and try again.
+              Couldn't save right now, check the server and try again.
+            </p>
+          )}
+
+          {memberState === 'guest' && (
+            <div className="flex flex-wrap items-center gap-3 rounded-lg border-2 border-dashed border-border bg-surface-muted p-4">
+              <p className="text-small text-ink-muted">
+                Keep your streak and play history across devices, free. No account, one tap.
+              </p>
+              <button
+                type="button"
+                onClick={keepProgress}
+                disabled={isClaiming}
+                className="inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-5 py-2.5 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark disabled:opacity-40"
+              >
+                {isClaiming ? 'Saving…' : 'Keep my progress (free)'}
+              </button>
+            </div>
+          )}
+          {memberState === 'member' && (
+            <p role="status" className="text-small font-semibold text-success-strong">
+              Progress saved! Your streak and history are now synced.
+            </p>
+          )}
+          {memberState === 'failed' && (
+            <p role="alert" className="text-small font-semibold text-danger-strong">
+              Couldn't save right now. Check the server and try again.
             </p>
           )}
 

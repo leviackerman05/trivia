@@ -8,7 +8,7 @@ import { COLOR_PALETTE, DEFAULT_BRUSH_SIZE, DEFAULT_COLOR, type CanvasTool } fro
 import type { SkribblRoundSummary, SkribblScoreEntry } from '../lib/skribbl';
 
 /**
- * Shared-canvas drawing game arena (M5) — powers Skribbl Arena, One Line One
+ * Shared-canvas drawing game arena (M5), powers Skribbl Arena, One Line One
  * Shape, Shadow Sketch, and Draw the Lyric from one island. The lobby is the
  * shared RoomLobbyPanel; round views differ per game via ARENA_CONFIGS.
  * All game state is server-authoritative via useDrawingGame.
@@ -154,7 +154,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
           </span>
         )}
         <span className="rounded-pill bg-tertiary/40 px-4 py-1.5 text-xs font-semibold text-ink">
-          {isDrawer ? `You're drawing — ${game?.name ?? ''}` : `Drawing: ${drawing.drawerName}`}
+          {isDrawer ? `You're drawing, ${game?.name ?? ''}` : `Drawing: ${drawing.drawerName}`}
         </span>
         <button
           type="button"
@@ -219,7 +219,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                 </button>
                 <button
                   type="button"
-                  aria-label="Fill (bucket) — tap the canvas to flood-fill"
+                  aria-label="Fill (bucket), tap the canvas to flood-fill"
                   aria-pressed={tool === 'fill'}
                   onClick={() => {
                     setFillColor(tool === 'eraser' ? '#ffffff' : color);
@@ -303,7 +303,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                 color={color}
                 brushSize={brushSize}
                 tool={tool}
-                ariaLabel={`Shared drawing canvas — ${isDrawer ? 'you are the drawer' : `waiting for ${drawing.drawerName} to draw`}`}
+                ariaLabel={`Shared drawing canvas, ${isDrawer ? 'you are the drawer' : `waiting for ${drawing.drawerName} to draw`}`}
               />
 
               {config.liftWarn && isDrawer && drawing.liftWarnings > 0 && (
@@ -311,7 +311,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                   role="status"
                   className="rounded-md border-2 border-danger/50 bg-danger-soft px-4 py-2 text-small font-semibold text-danger-strong"
                 >
-                  Pen lifted {drawing.liftWarnings}× — 10 seconds deducted each time. Keep the line
+                  Pen lifted {drawing.liftWarnings}×, 10 seconds deducted each time. Keep the line
                   continuous!
                 </p>
               )}
@@ -427,7 +427,7 @@ function DrawerPrompt({
     return isDrawer ? (
       <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 px-5 py-3">
         <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
-          Draw this lyric — the song title is the answer
+          Draw this lyric, the song title is the answer
         </p>
         <p className="mt-1 font-display text-h3 text-ink">“{drawing.drawerData.lyric}”</p>
         {drawing.drawerData.artist && (
@@ -436,7 +436,7 @@ function DrawerPrompt({
       </div>
     ) : (
       <p className="text-small text-ink-muted">
-        {drawing.drawerName} is drawing a lyric — guess the song title!
+        {drawing.drawerName} is drawing a lyric, guess the song title!
       </p>
     );
   }
@@ -444,7 +444,7 @@ function DrawerPrompt({
     return isDrawer ? (
       <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 px-5 py-3">
         <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
-          One continuous line — don't lift the pen!
+          One continuous line, don't lift the pen!
         </p>
         <p className="mt-1 font-display text-h3 text-ink">{drawing.drawerData.object}</p>
       </div>
@@ -463,7 +463,7 @@ function DrawerPrompt({
       </div>
     ) : (
       <p className="text-small text-ink-muted">
-        {drawing.drawerName} is filling in a shadow — the silhouette is revealed at 60s.
+        {drawing.drawerName} is filling in a shadow, the silhouette is revealed at 60s.
       </p>
     );
   }
@@ -505,7 +505,7 @@ function HintRow({
   if (config.banner === 'silhouette' && drawing.revealedSilhouette) {
     return (
       <p aria-live="polite" className="text-center text-body font-semibold text-ink">
-        Silhouette revealed — everyone can see the shadow now!
+        Silhouette revealed, everyone can see the shadow now!
       </p>
     );
   }
@@ -559,7 +559,7 @@ function WordSelectView({
     <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
       <h3 className="font-display text-h3 text-ink">Pick your word</h3>
       <p className="text-body text-ink-muted">
-        Choose one of these — everyone else will try to guess it from your drawing.
+        Choose one of these, everyone else will try to guess it from your drawing.
       </p>
       <div className="grid gap-3 sm:grid-cols-3">
         {choices?.map((word) => (
@@ -602,7 +602,7 @@ function RoundResultsView({
       <div className="flex flex-col gap-2">
         {summary.correct.length === 0 ? (
           <p className="text-body text-ink-muted">
-            Nobody got it this round — {summary.drawerName} drew a stumper!
+            Nobody got it this round, {summary.drawerName} drew a stumper!
           </p>
         ) : (
           <ul className="flex flex-col gap-1">
@@ -628,7 +628,7 @@ function RoundResultsView({
         </button>
       ) : (
         <p className="text-small text-ink-muted">
-          Waiting for the host — the next round starts automatically in a moment.
+          Waiting for the host, the next round starts automatically in a moment.
         </p>
       )}
     </div>
@@ -687,7 +687,7 @@ function GameEndView({
   );
 }
 
-/** M15 — Shadow Sketch host lobby control: pick the silhouette genre. */
+/** M15, Shadow Sketch host lobby control: pick the silhouette genre. */
 const SHADOW_GENRES: { id: string; label: string }[] = [
   { id: 'animals', label: 'Animals' },
   { id: 'food', label: 'Food' },
@@ -712,7 +712,7 @@ function ShadowGenreBlock({
     <div className="rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="font-display text-h4 text-ink">Silhouette category (host)</h3>
       <p className="mt-1 text-small text-ink-muted">
-        Pick a theme — the shadows (and the drawing challenge) come from it.
+        Pick a theme, the shadows (and the drawing challenge) come from it.
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         <button
@@ -785,12 +785,12 @@ function CustomWordsBlock({
     if (result.ok) {
       setFeedback({
         kind: 'ok',
-        text: `${result.count ?? words.length} custom words ready — applied when the game starts.`,
+        text: `${result.count ?? words.length} custom words ready, applied when the game starts.`,
       });
     } else {
       setFeedback({
         kind: 'error',
-        text: 'That list was rejected — use 3–200 words with letters, spaces, hyphens, or apostrophes.',
+        text: 'That list was rejected, use 3-200 words with letters, spaces, hyphens, or apostrophes.',
       });
     }
   };
@@ -799,8 +799,8 @@ function CustomWordsBlock({
     <div className="rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="font-display text-h4 text-ink">Custom words (host)</h3>
       <p className="mt-1 text-small text-ink-muted">
-        Optional: paste your own word list — one per line or comma-separated — to replace the
-        built-in bank.
+        Optional: paste your own word list, one per line or comma-separated, to replace the built-in
+        bank.
       </p>
       <textarea
         value={draft}

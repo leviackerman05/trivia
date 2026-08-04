@@ -28,7 +28,7 @@ interface SpecialRoundStart {
  * scores + rotates → game end) and Guess Who (answerer-only celebrity →
  * question/answer log → guess wins → reveal) over real sockets.
  */
-describe('Charades + Guess Who (M9) — DB-backed socket integration', () => {
+describe('Charades + Guess Who (M9), DB-backed socket integration', () => {
   let httpServer: ReturnType<typeof createHttpServer>;
   let io: SocketServer;
   let engine: RoomEngine;
@@ -194,7 +194,7 @@ describe('Charades + Guess Who (M9) — DB-backed socket integration', () => {
     expect(log.questionCount).toBe(1);
 
     // The answerer cannot guess; a wrong guess continues; a correct one
-    // reveals (M17 — round 1 of 5, so the game keeps going).
+    // reveals (M17, round 1 of 5, so the game keeps going).
     const deniedGuess = await emitAck(host, ClientEvents.sendGuess, { roomCode, text: 'Beyoncé' });
     expect(deniedGuess.error).toBe('NOT_ANSWERER');
     const wrong = await emitAck(guest, ClientEvents.sendGuess, { roomCode, text: 'Rihanna' });
@@ -226,7 +226,7 @@ describe('Charades + Guess Who (M9) — DB-backed socket integration', () => {
     expect(reveal.kind).toBe('guess-who');
     expect(typeof reveal.celebrity?.name).toBe('string');
     expect(Array.isArray(reveal.celebrity?.facts)).toBe(true);
-    // Round 1 of 5: the game is NOT finished — the host advances it.
+    // Round 1 of 5: the game is NOT finished, the host advances it.
     expect(reveal.finished).toBe(false);
   });
 

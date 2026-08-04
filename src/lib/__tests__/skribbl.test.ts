@@ -22,7 +22,7 @@ const stroke = (strokeId: string): Stroke => ({
   tool: 'pen',
 });
 
-describe('skribblReducer — round lifecycle', () => {
+describe('skribblReducer, round lifecycle', () => {
   it('word-select round-start gives the drawer choices and everyone the drawer name', () => {
     const payload: RoundStartPayload = {
       round: 1,
@@ -143,7 +143,7 @@ describe('skribblReducer — round lifecycle', () => {
   });
 });
 
-describe('skribblReducer — strokes', () => {
+describe('skribblReducer, strokes', () => {
   it('appends broadcast strokes, removes by id on undo, clears on clear', () => {
     let state = stateWith();
     state = skribblReducer(state, { type: 'stroke-added', stroke: stroke('a') });
@@ -157,7 +157,7 @@ describe('skribblReducer — strokes', () => {
   });
 });
 
-describe('skribblReducer — results and feedback', () => {
+describe('skribblReducer, results and feedback', () => {
   it('round-end shows the summary and adopts the scoreboard', () => {
     const state = skribblReducer(stateWith({ view: 'drawing' }), {
       type: 'round-end',
@@ -213,13 +213,13 @@ describe('skribblReducer — results and feedback', () => {
     const state = skribblReducer(stateWith(), {
       type: 'guess-result',
       correct: false,
-      message: "You're the drawer — you can't guess your own word!",
+      message: "You're the drawer, you can't guess your own word!",
     });
     expect(state.guessFeedback).toContain("can't guess");
   });
 });
 
-describe('skribblReducer — resync and reset', () => {
+describe('skribblReducer, resync and reset', () => {
   it('resync rebuilds the full state for a mid-game join', () => {
     const state = skribblReducer(stateWith({ view: 'drawing', round: 3 }), {
       type: 'resync',

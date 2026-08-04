@@ -68,7 +68,7 @@ describe('daily challenge selection', () => {
   });
 });
 
-describe('scoring (M18 — owner request: flat 10/0)', () => {
+describe('scoring (M18, owner request: flat 10/0)', () => {
   it('scores 10 for a correct answer regardless of speed', () => {
     expect(scoreTriviaAnswer(15, true)).toBe(10);
     expect(scoreTriviaAnswer(1, true)).toBe(10);
@@ -77,7 +77,7 @@ describe('scoring (M18 — owner request: flat 10/0)', () => {
   it('scores 0 for wrong answers and timeouts', () => {
     expect(scoreTriviaAnswer(10, false)).toBe(0);
     expect(scoreTriviaAnswer(0, false)).toBe(0);
-    // The seconds param is ignored under flat scoring — a correct pick
+    // The seconds param is ignored under flat scoring, a correct pick
     // scores 10 even with no time left on the clock.
     expect(scoreTriviaAnswer(0, true)).toBe(10);
   });

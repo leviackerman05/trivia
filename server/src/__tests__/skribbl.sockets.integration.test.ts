@@ -75,7 +75,7 @@ async function waitForDb<T>(predicate: () => Promise<T | null>, timeoutMs = 4000
  * choices) → drawing (stroke broadcast) → guessing (scoring + hints path) →
  * all rounds → final podium → leaderboard persistence → restart.
  */
-describe('Skribbl Arena full game (M4) — DB-backed socket integration', () => {
+describe('Skribbl Arena full game (M4), DB-backed socket integration', () => {
   let httpServer: ReturnType<typeof createHttpServer>;
   let io: SocketServer;
   let engine: RoomEngine;
@@ -210,7 +210,7 @@ describe('Skribbl Arena full game (M4) — DB-backed socket integration', () => 
         const advanced = await emitAck(host, ClientEvents.nextRound, { roomCode });
         expect(advanced.ok).toBe(true);
         const nextPayloads = [await nextHost, await nextGuest];
-        // Drawer rotates every round — whoever has choices this round is the drawer.
+        // Drawer rotates every round, whoever has choices this round is the drawer.
         const drawerPayload = nextPayloads.find((payload) => Array.isArray(payload.choices));
         const choicesPayload = drawerPayload!;
         const currentDrawer = drawerPayload!.drawerName;
@@ -416,7 +416,7 @@ describe('Skribbl Arena full game (M4) — DB-backed socket integration', () => 
     expect((await emitAck(solo, ClientEvents.nextRound, { roomCode })).ok).toBe(true);
     expect((await nextPromise).round).toBe(2);
 
-    // M9: every room game has a round adapter now — charades starts too.
+    // M9: every room game has a round adapter now, charades starts too.
     const charades = await connect(port);
     const charadesCreated = await emitAck(charades, ClientEvents.createRoom, {
       gameId: 'charades',
@@ -494,7 +494,7 @@ describe('Skribbl Arena full game (M4) — DB-backed socket integration', () => 
     expect(await fillPromise).toMatchObject({ type: 'fill', x: 40, y: 40, color: '#22b14c' });
 
     // Undo after the fill reaches EVERYONE, including the drawer (their own
-    // log must drop the stroke too — this was the broken path).
+    // log must drop the stroke too, this was the broken path).
     const undoPromise = waitFor<{ strokeId: string }>(drawer, ServerEvents.undoStroke);
     await emitAck(drawer, ClientEvents.undoStroke, { roomCode });
     expect((await undoPromise).strokeId).toBe('fill-1');

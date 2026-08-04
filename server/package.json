@@ -1,9 +1,9 @@
 {
-  "name": "@partybrain/server",
-  "version": "0.1.0",
+  "name": "@triviahub/server",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "PartyBrain backend — Express REST + Socket.io real-time rooms + Prisma/PostgreSQL",
+  "description": "TriviaHub backend: Express REST + Socket.io real-time rooms + Prisma/PostgreSQL",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc -p tsconfig.json",

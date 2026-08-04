@@ -1,6 +1,6 @@
 /**
- * Emoji Plot (M7/M14, PRD §5.3) — pure game logic. 10 questions; hints are
- * BUTTON-DRIVEN (M14 — no more auto-hints): a year hint and skribbl-style
+ * Emoji Plot (M7/M14, PRD §5.3), pure game logic. 10 questions; hints are
+ * BUTTON-DRIVEN (M14, no more auto-hints): a year hint and skribbl-style
  * progressive letter reveals. Scoring starts at 100 and drops 50 for the
  * year hint and 10 per revealed letter (floor 10). Acceptance uses
  * fuzzyMatchTitle (ignore "The", Levenshtein ≤ 2, partial titles).

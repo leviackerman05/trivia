@@ -1,4 +1,4 @@
-/** Global FAQs (PRD §6.3) — shared by /faq and the homepage FAQ section. */
+/** Global FAQs (PRD §6.3), shared by /faq and the homepage FAQ section. */
 
 export interface FaqEntry {
   question: string;
@@ -9,30 +9,29 @@ export const globalFaqs: FaqEntry[] = [
   {
     question: 'How do I play party games online with friends?',
     answer:
-      'Open any game, create a room, and share the 6-character room code or link. Friends join from their own devices — phones, tablets, or computers — and play starts the moment everyone is in.',
+      'Open any game, create a room, and share the 6-character room code or link. Friends join from their own devices, phones, tablets, or computers, and play starts the moment everyone is in.',
   },
   {
-    question: 'Do I need to download anything to play PartyBrain games?',
-    answer:
-      'No. Every PartyBrain game runs in your browser. No downloads, no installs, no plugins.',
+    question: 'Do I need to download anything to play TriviaHub games?',
+    answer: 'No. Every TriviaHub game runs in your browser. No downloads, no installs, no plugins.',
   },
   {
-    question: 'Can I play PartyBrain games on my phone?',
+    question: 'Can I play TriviaHub games on my phone?',
     answer:
       'Yes. All games are fully responsive and optimized for touch, including the drawing games and voting games.',
   },
   {
-    question: 'Are PartyBrain games free?',
-    answer: 'Yes, all 18 games are free to play. PartyBrain is supported by advertising.',
+    question: 'Are TriviaHub games free?',
+    answer: 'Yes, all 19 games are free to play. TriviaHub is supported by advertising.',
   },
   {
     question: 'How many players can join a game?',
     answer:
-      'Most rooms support up to 24 players. Voting and solo games work with any group size — from two friends to a full classroom or stream audience.',
+      'Most rooms support up to 24 players. Voting and solo games work with any group size, from two friends to a full classroom or stream audience.',
   },
   {
     question: 'Do I need to create an account?',
-    answer: 'No account needed. Just pick a nickname and join — that’s it.',
+    answer: 'No account needed. Just pick a nickname and join, that’s it.',
   },
   {
     question: 'How do I create a private room?',
@@ -45,8 +44,8 @@ export const globalFaqs: FaqEntry[] = [
       'Voting games like Would You Rather and This or That scale to any group size. Guess Who and Trivia also shine with a full room.',
   },
   {
-    question: 'Can I play PartyBrain games with people in different countries?',
+    question: 'Can I play TriviaHub games with people in different countries?',
     answer:
-      'Yes. As long as everyone can reach the website, distance doesn’t matter — the game runs in real time over the internet.',
+      'Yes. As long as everyone can reach the website, distance doesn’t matter, the game runs in real time over the internet.',
   },
 ];

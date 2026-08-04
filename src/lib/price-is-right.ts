@@ -1,10 +1,10 @@
 /**
- * Price Is Right — E-commerce Edition (M7, PRD §5.8) — pure game logic.
+ * Price Is Right, E-commerce Edition (M7, PRD §5.8), pure game logic.
  * 5 rounds; guess the USD price of a product; scoring is
  * 100 − |Δ|·2 (min 0), and an exact guess is worth 200.
  *
  * Products are emoji cards instead of product photos (PRD §13 content
- * licensing — no scraped images; D031).
+ * licensing, no scraped images; D031).
  */
 
 export interface PriceProduct {

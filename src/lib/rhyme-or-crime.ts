@@ -1,5 +1,5 @@
 /**
- * Rhyme or Crime (M7/M14, PRD §5.2) — pure game logic. The dataset encodes
+ * Rhyme or Crime (M7/M14, PRD §5.2), pure game logic. The dataset encodes
  * the CMU-pronouncing-dictionary work at generation time (prompt + category +
  * valid rhyming answers). Judging is two-tier (M14): dataset answers are
  * authoritative (the dataset knowingly includes puns like witch→peach), and

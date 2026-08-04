@@ -1,7 +1,7 @@
 import { randomInt } from 'node:crypto';
 
 /**
- * Copycat Challenge session engine (PRD §5.4) — transport-agnostic.
+ * Copycat Challenge session engine (PRD §5.4), transport-agnostic.
  * Unique among the drawing games: NO shared canvas and NO guessing. A famous
  * image flashes for 5s, every player draws it from memory on their own
  * private canvas (90s), the gallery is revealed, and the room votes for the
@@ -17,7 +17,7 @@ export const COPYCAT_REVEAL_AFTER_LOAD_MS = 10_000;
 export const COPYCAT_REVEAL_MAX_MS = 30_000;
 export const COPYCAT_DRAW_MS = 90_000;
 export const COPYCAT_VOTE_MS = 30_000;
-/** dataURL length cap — private canvases are uploaded as PNG data URLs. */
+/** dataURL length cap, private canvases are uploaded as PNG data URLs. */
 export const COPYCAT_MAX_IMAGE_CHARS = 400_000;
 
 export type CopycatPhase = 'idle' | 'image-reveal' | 'drawing' | 'gallery' | 'voting' | 'results';
@@ -178,7 +178,7 @@ export class CopycatSession {
   }
 
   /** Gallery → voting phase (gateway timer: 90s or all submitted). Solo
-   * rooms (a testing affordance) reach voting with a single drawing — the
+   * rooms (a testing affordance) reach voting with a single drawing, the
    * self-vote guard already keeps the solo player from casting. */
   beginVoting(): CopycatResult<{ startedAt: number }> {
     if (this.phase !== 'drawing') {

@@ -1,5 +1,5 @@
 /**
- * Shared canvas primitives (DECISIONS D009 — built once for all drawing games).
+ * Shared canvas primitives (DECISIONS D009, built once for all drawing games).
  * Pure, serializable stroke model + replay helpers. The DrawingCanvas
  * component renders; game adapters own the authoritative stroke log.
  * The server mirror validates inbound payloads (server/src/lib/validation.ts);
@@ -15,7 +15,7 @@ export type CanvasTool = 'pen' | 'eraser' | 'fill';
  * (x, y) with the stroke color (segment fields are ignored for fills).
  */
 export interface Stroke {
-  /** Client-generated stroke group id — undo removes the whole stroke. */
+  /** Client-generated stroke group id, undo removes the whole stroke. */
   strokeId: string;
   type?: 'pen' | 'fill';
   x: number;
@@ -27,7 +27,7 @@ export interface Stroke {
   tool: CanvasTool;
 }
 
-/** Logical canvas size — stroke coordinates are resolution-independent. */
+/** Logical canvas size, stroke coordinates are resolution-independent. */
 export const CANVAS_WIDTH = 800;
 export const CANVAS_HEIGHT = 500;
 
@@ -64,7 +64,7 @@ function hexToRgb(hex: string): [number, number, number] {
 /**
  * Flood fill the connected same-color region at logical (x, y) with the
  * given hex color. Operates on the physical bitmap (the context is dpr-
- * scaled, so getImageData ignores the transform) — the dpr is derived from
+ * scaled, so getImageData ignores the transform), the dpr is derived from
  * the canvas backing size vs the logical size.
  */
 export function floodFill(
@@ -158,7 +158,7 @@ interface PathBox {
 
 /**
  * Approximate bounding box of an uppercase-only SVG path (the silhouette
- * dataset is normalized to a 0–100 coordinate space). Control points are
+ * dataset is normalized to a 0-100 coordinate space). Control points are
  * included, which only adds a small margin to the fit. Lowercase commands
  * (relative) are not part of the dataset and are skipped defensively.
  */
@@ -235,7 +235,7 @@ export function pathBBox(path: string): PathBox | null {
         break;
       }
       default: {
-        // Unknown/lowercase command — stop parsing defensively.
+        // Unknown/lowercase command, stop parsing defensively.
         index = tokens.length;
       }
     }
@@ -249,7 +249,7 @@ export function pathBBox(path: string): PathBox | null {
  * same path renders identically on every device.
  */
 export function drawSilhouette(ctx: CanvasRenderingContext2D, path: string): void {
-  // Path2D is a browser API — SSR and Node test envs skip the rendering.
+  // Path2D is a browser API, SSR and Node test envs skip the rendering.
   if (typeof Path2D === 'undefined') {
     return;
   }
@@ -257,7 +257,7 @@ export function drawSilhouette(ctx: CanvasRenderingContext2D, path: string): voi
   try {
     path2d = new Path2D(path);
   } catch {
-    return; // Unparsable path — draw nothing.
+    return; // Unparsable path, draw nothing.
   }
   const box = pathBBox(path);
   if (!box || box.maxX - box.minX <= 0 || box.maxY - box.minY <= 0) {

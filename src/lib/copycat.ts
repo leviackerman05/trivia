@@ -1,5 +1,5 @@
 /**
- * Copycat Challenge client state (M5) — pure reducer over the server's
+ * Copycat Challenge client state (M5), pure reducer over the server's
  * Copycat events (image-reveal → drawing → gallery → voting → results).
  * Unlike the shared-canvas games, the private drawing never leaves this
  * device until it is submitted as a flattened PNG data URL.
@@ -42,11 +42,11 @@ export interface CopycatGameState {
   view: CopycatView;
   myName: string | null;
   image: CopycatImage | null;
-  /** M13 — my device finished loading the reveal image (local flag). */
+  /** M13, my device finished loading the reveal image (local flag). */
   imageLoaded: boolean;
   /** Server-clock deadline of the current phase (ms epoch). */
   endsAt: number | null;
-  /** My private strokes — local only, never broadcast. */
+  /** My private strokes, local only, never broadcast. */
   strokes: Stroke[];
   submitted: boolean;
   drawings: CopycatDrawing[];
@@ -145,7 +145,7 @@ export function copycatReducer(state: CopycatGameState, action: CopycatAction): 
       return {
         ...state,
         submitted: true,
-        feedback: 'Drawing submitted — waiting for the gallery.',
+        feedback: 'Drawing submitted, waiting for the gallery.',
       };
     case 'stroke-added':
       return { ...state, strokes: [...state.strokes, action.stroke] };

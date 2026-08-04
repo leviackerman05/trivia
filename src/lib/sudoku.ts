@@ -1,5 +1,5 @@
 /**
- * Daily Sudoku (M18 — owner request: daily games like other sites) — pure
+ * Daily Sudoku (M18, owner request: daily games like other sites), pure
  * game logic. The puzzle set (400 unique-solution grids, 81 digits each,
  * 0 = empty) is pre-generated offline by scripts/generate-sudoku.mjs; the
  * daily pick is seeded by UTC date so everyone plays the same puzzle.

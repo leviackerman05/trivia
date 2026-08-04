@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '../../components/ui/Card.astro';
+import Chip from '../../components/ui/Chip.astro';
+import Button from '../../components/ui/Button.astro';
+import TriviaSolo from '../../islands/TriviaSolo.tsx';
+import Sudoku from '../../islands/solo/Sudoku.tsx';
+import RhymeOrCrime from '../../islands/solo/RhymeOrCrime.tsx';
+import EmojiPlot from '../../islands/solo/EmojiPlot.tsx';
+import TimelineTussle from '../../islands/solo/TimelineTussle.tsx';
+import PriceIsRight from '../../islands/solo/PriceIsRight.tsx';
+import GenreSwap from '../../islands/solo/GenreSwap.tsx';
+import GenreBender from '../../islands/solo/GenreBender.tsx';
+import { dailyGames, getDailyGame } from '../../lib/daily';
+import { dailyDateKey } from '../../lib/trivia';
+
+export function getStaticPaths() {
+  return dailyGames.map((game) => ({ params: { slug: game.slug } }));
+}
+
+const { slug } = Astro.params;
+const game = getDailyGame(slug)!;
+
+// Phase A: live daily games render their island in daily mode (deterministic
+// per-day content for everyone); planned games show the coming-soon state.
+const dateKey = dailyDateKey(new Date());
+
+const site = Astro.site ?? new URL('https://playtriviahub.com');
+const dailyUrl = new URL(`/daily/${game.slug}`, site).href;
+const homeUrl = new URL('/', site).href;
+
+const jsonLd = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: `${game.name} - TriviaHub`,
+    url: dailyUrl,
+    description: game.description,
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: homeUrl },
+      { '@type': 'ListItem', position: 2, name: 'Daily Games', item: new URL('/daily', site).href },
+      { '@type': 'ListItem', position: 3, name: game.name, item: dailyUrl },
+    ],
+  },
+]);
+---
+
+<BaseLayout
+  title={`${game.name}: Play Today's Challenge | TriviaHub`}
+  description={game.description}
+  canonicalPath={`/daily/${game.slug}`}
+  jsonLd={jsonLd}
+  activeNav="daily"
+>
+  <article class="flex flex-col gap-8">
+    <header class="text-center">
+      <Chip class="mb-4">{game.category} · daily game</Chip>
+      <h1 class="font-display text-h1 text-ink">
+        {game.emoji}
+        {game.name}
+      </h1>
+      <p class="mx-auto mt-3 max-w-2xl text-body text-ink-muted">{game.description}</p>
+    </header>
+
+    <section aria-label={`Play ${game.name}`}>
+      <Card>
+        {game.live && game.slug === 'trivia' && <TriviaSolo client:load />}
+        {game.live && game.slug === 'sudoku' && <Sudoku client:load />}
+        {
+          game.live && game.slug === 'emoji-plot' && (
+            <EmojiPlot client:load dailyDateKey={dateKey} />
+          )
+        }
+        {
+          game.live && game.slug === 'timeline-tussle' && (
+            <TimelineTussle client:load dailyDateKey={dateKey} />
+          )
+        }
+        {
+          game.live && game.slug === 'price-is-right' && (
+            <PriceIsRight client:load dailyDateKey={dateKey} />
+          )
+        }
+        {
+          game.live && game.slug === 'rhyme-or-crime' && (
+            <RhymeOrCrime client:load dailyDateKey={dateKey} />
+          )
+        }
+        {
+          game.live && game.slug === 'genre-swap' && (
+            <GenreSwap client:load dailyDateKey={dateKey} />
+          )
+        }
+        {
+          game.live && game.slug === 'genre-bender' && (
+            <GenreBender client:load dailyDateKey={dateKey} />
+          )
+        }
+        {
+          !game.live && (
+            <div class="flex flex-col items-center gap-4 py-6 text-center">
+              <span aria-hidden="true" class="text-6xl">
+                🚧
+              </span>
+              <h2 class="font-display text-h3 text-ink">Coming soon</h2>
+              <p class="max-w-md text-body text-ink-muted">
+                {game.name} joins the daily hub in the next milestone. Until then, play the solo
+                version of {game.name.toLowerCase()} below.
+              </p>
+              {game.gameSlug && (
+                <Button variant="primary" href={`/game/${game.gameSlug}`}>
+                  Play the solo game
+                </Button>
+              )}
+            </div>
+          )
+        }
+      </Card>
+    </section>
+
+    <section aria-label="How the daily works" class="flex flex-col gap-4">
+      <h2 class="font-display text-h2 text-ink">How the daily works</h2>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+          <h3 class="mb-2 font-display text-h4 text-ink">Seeded for everyone</h3>
+          <p class="text-body text-ink-muted">
+            The challenge is derived from today's UTC date, so every player sees the same puzzle.
+            Fair competition, zero randomness.
+          </p>
+        </article>
+        <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+          <h3 class="mb-2 font-display text-h4 text-ink">One score per day</h3>
+          <p class="text-body text-ink-muted">
+            Your best score for the day is recorded once. Replay as often as you like, but the
+            leaderboard only counts the first completion.
+          </p>
+        </article>
+        <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+          <h3 class="mb-2 font-display text-h4 text-ink">Share the result</h3>
+          <p class="text-body text-ink-muted">
+            Finish the challenge and grab your share card. Streaks, scores, and bragging rights
+            travel in one image.
+          </p>
+        </article>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

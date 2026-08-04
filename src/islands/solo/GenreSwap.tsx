@@ -11,11 +11,12 @@ import {
   pickGenreSwapQuestions,
   type GenreSwapEntry,
 } from '../../lib/genre-swap';
+import { dailyGameSeed } from '../../lib/daily';
 
 /**
- * Genre Swap (M8, PRD §5.9; M14 owner fixes) — a famous movie plot rewritten
+ * Genre Swap (M8, PRD §5.9; M14 owner fixes), a famous movie plot rewritten
  * in a wildly wrong genre; pick the original from four options. The timer is
- * player-chosen (30–70s presets) and only starts when the game starts.
+ * player-chosen (30-70s presets) and only starts when the game starts.
  */
 
 const entries = genreSwapsJson as GenreSwapEntry[];
@@ -24,7 +25,12 @@ const TIMER_OPTIONS = [30, 40, 50, 60, 70];
 
 type Phase = 'setup' | 'playing' | 'done';
 
-export default function GenreSwap() {
+interface Props {
+  /** Phase A: when set, the day's content is deterministic for everyone. */
+  dailyDateKey?: string;
+}
+
+export default function GenreSwap({ dailyDateKey }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('genre-swap', 30));
   const [questions, setQuestions] = useState<GenreSwapEntry[]>([]);
@@ -44,7 +50,9 @@ export default function GenreSwap() {
 
   const start = () => {
     saveTimerSetting('genre-swap', timerSeconds);
-    const seed = Math.floor(Math.random() * 1000);
+    const seed = dailyDateKey
+      ? dailyGameSeed(dailyDateKey, 'genre-swap')
+      : Math.floor(Math.random() * 1000);
     const picked = pickGenreSwapQuestions(entries, GENRE_SWAP_TOTAL_QUESTIONS, seed);
     setQuestions(picked);
     setOptions(picked[0] ? genreSwapOptions(picked[0], allOriginals) : []);
@@ -75,8 +83,8 @@ export default function GenreSwap() {
     setFeedback({
       correct: verdict.correct,
       text: verdict.correct
-        ? `“${question.original}” — +${verdict.points} points!`
-        : `Not quite — it was “${question.original}”.`,
+        ? `“${question.original}”, +${verdict.points} points!`
+        : `Not quite, it was “${question.original}”.`,
     });
     setScore((previous) => previous + verdict.points);
     setResults((previous) => [...previous, { correct: verdict.correct, points: verdict.points }]);
@@ -109,7 +117,7 @@ export default function GenreSwap() {
       <div className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
         <h3 className="font-display text-h3 text-ink">Genre Swap</h3>
         <p className="max-w-xl text-body text-ink-muted">
-          A famous movie plot rewritten in a wildly wrong genre — spot the original. Pick your round
+          A famous movie plot rewritten in a wildly wrong genre, spot the original. Pick your round
           timer; the clock starts when you do.
         </p>
         <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />

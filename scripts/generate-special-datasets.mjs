@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * M9 dataset generator — charades movies + Guess Who celebrities.
+ * M9 dataset generator, charades movies + Guess Who celebrities.
  * Run: node scripts/generate-special-datasets.mjs
- * Movies: 160 Hollywood + 160 Bollywood (titles only — text, licensing-safe).
+ * Movies: 160 Hollywood + 160 Bollywood (titles only, text, licensing-safe).
  * Celebrities: 210 public figures with trait objects (text only, D022-style
  * server-authoritative).
  */
@@ -702,10 +702,10 @@ const CELEBRITIES = [
   ['Hrithik Roshan', 'm', true, 'Actor', 'Indian', '50s', 'black', 'Krrish'],
 ];
 
-/** M17 — fun facts per celebrity (owner request: more movies, scandals,
+/** M17, fun facts per celebrity (owner request: more movies, scandals,
  * news). Accurate common knowledge; keep each fact under ~90 chars. */
 const CELEBRITY_FACTS = {
-  Beyoncé: ['Won 32 Grammys — the most of any artist', 'Headlined Coachella 2018 (Beychella)'],
+  Beyoncé: ['Won 32 Grammys, the most of any artist', 'Headlined Coachella 2018 (Beychella)'],
   'Taylor Swift': [
     'Won Album of the Year four times',
     'Her Eras Tour became the highest-grossing tour ever',
@@ -737,7 +737,7 @@ const CELEBRITY_FACTS = {
   ],
   'Donald Trump': [
     'Was a reality TV host on The Apprentice',
-    'Impeached twice — acquitted both times',
+    'Impeached twice, acquitted both times',
   ],
   'Bill Gates': ['Co-founded Microsoft at 19', 'Left Microsoft to run the Gates Foundation'],
   'Steve Jobs': [
@@ -813,7 +813,7 @@ const CELEBRITY_FACTS = {
     'Was awarded the Bharat Ratna in 2014',
   ],
   Ronaldo: ['Won the Ballon d’Or five times', 'Famous for his “Siu” celebration'],
-  'Lionel Messi': ['Won the World Cup in 2022', 'Has won eight Ballon d’Or awards — a record'],
+  'Lionel Messi': ['Won the World Cup in 2022', 'Has won eight Ballon d’Or awards, a record'],
   Neymar: [
     'The most expensive transfer in football history ($263M)',
     'Wears the number 10 for Brazil',
@@ -854,7 +854,7 @@ const CELEBRITY_FACTS = {
   ],
   'Princess Diana': ['Known as the People’s Princess', 'Championed landmine and AIDS causes'],
   'Queen Elizabeth II': [
-    'Reigned for 70 years — the longest in British history',
+    'Reigned for 70 years, the longest in British history',
     'Met 13 of the 14 most recent US presidents',
   ],
   'Winston Churchill': ['Led Britain through World War II', 'Won the Nobel Prize in Literature'],
@@ -951,7 +951,7 @@ const CELEBRITY_FACTS = {
   ],
   'Walt Disney': ['Created Mickey Mouse in 1928', 'Won 22 Academy Awards'],
   'Jimmy Carter': [
-    'Lived to be 100 — the longest-lived US president',
+    'Lived to be 100, the longest-lived US president',
     'Won the Nobel Peace Prize in 2002',
   ],
   'Joe Biden': ['Is the 46th US president', 'Was a senator for 36 years'],
@@ -970,10 +970,7 @@ const CELEBRITY_FACTS = {
   ],
   'Jay-Z': ['Was the first billionaire rapper', 'Married Beyoncé in 2008'],
   Rihanna: ['Won nine Grammys and launched Fenty Beauty', 'Is a billionaire from her businesses'],
-  Adele: [
-    'Won Album of the Year twice — for 21 and 25',
-    'Her song “Hello” broke streaming records',
-  ],
+  Adele: ['Won Album of the Year twice, for 21 and 25', 'Her song “Hello” broke streaming records'],
   'Ed Sheeran': [
     'Wrote “Shape of You” in a few hours',
     'Has played to over 10 million fans on tour',
@@ -986,7 +983,7 @@ const CELEBRITY_FACTS = {
   'Celine Dion': ['Sang “My Heart Will Go On” for Titanic', 'Performed in Las Vegas for 16 years'],
   'Ariana Grande': ['Has four songs with over a billion streams', 'Started on Broadway in 13'],
   'Billie Eilish': [
-    'Won Album of the Year at 18 — the youngest ever',
+    'Won Album of the Year at 18, the youngest ever',
     'Recorded her debut album in her bedroom',
   ],
   'Bruno Mars': ['Known for hits like “Uptown Funk”', 'Won 15 Grammys'],
@@ -1051,7 +1048,7 @@ const CELEBRITY_FACTS = {
     'Is the son of former F1 driver Jos Verstappen',
   ],
   'Valentino Rossi': ['Won nine motorcycle racing world championships', 'Known as “The Doctor”'],
-  'Tiger Woods': ['Won 15 major golf championships', 'Won the Masters at 21 — the youngest ever'],
+  'Tiger Woods': ['Won 15 major golf championships', 'Won the Masters at 21, the youngest ever'],
   'Novak Djokovic': [
     'Won 24 Grand Slam singles titles',
     'Holds the record for most weeks at world No. 1',
@@ -1075,7 +1072,7 @@ const CELEBRITY_FACTS = {
     'Won two NBA championships with the Warriors',
     'Is one of the most versatile scorers ever',
   ],
-  'Tom Brady': ['Won seven Super Bowls — the most ever', 'Played until age 45'],
+  'Tom Brady': ['Won seven Super Bowls, the most ever', 'Played until age 45'],
   'Patrick Mahomes': ['Won three Super Bowls by age 28', 'Signed a $500M contract in 2020'],
   'Amelia Earhart': [
     'Was the first woman to fly solo across the Atlantic',
@@ -1092,7 +1089,7 @@ const CELEBRITY_FACTS = {
   'Nikola Tesla': ['Invented the AC motor', 'Had a legendary rivalry with Thomas Edison'],
   'Thomas Edison': [
     'Held 1,093 US patents',
-    'Did not actually invent the light bulb — he perfected it',
+    'Did not actually invent the light bulb, he perfected it',
   ],
   'Alexander Graham Bell': [
     'Patented the telephone in 1876',
@@ -1124,7 +1121,7 @@ const CELEBRITY_FACTS = {
     'Played Captain Jack Sparrow in five Pirates films',
     'Was a guitarist before acting',
   ],
-  'Meryl Streep': ['Has 21 Oscar nominations — a record', 'Won three Oscars'],
+  'Meryl Streep': ['Has 21 Oscar nominations, a record', 'Won three Oscars'],
   'Tom Hanks': [
     'Won back-to-back Oscars in 1994 and 1995',
     'Is famous for being the nicest man in Hollywood',
@@ -1185,7 +1182,7 @@ const CELEBRITY_FACTS = {
   'Jim Carrey': ['Was paid $20M for The Cable Guy', 'Is also a painter'],
   'Eddie Murphy': ['Was the highest-paid actor in 2007', 'Began on Saturday Night Live at 19'],
   'Jackie Chan': [
-    'Does his own stunts — many of which broke bones',
+    'Does his own stunts, many of which broke bones',
     'Has a star on the Hollywood Walk of Fame',
   ],
   'Arnold Schwarzenegger': [
@@ -1223,7 +1220,7 @@ const CELEBRITY_FACTS = {
   ],
   'Rishi Sunak': ['Was the UK’s first Hindu prime minister', 'Is a former hedge fund analyst'],
   'Narendra Modi': ['Has been India’s prime minister since 2014', 'Was a tea seller in his youth'],
-  'Mukesh Ambani': ['Is Asia’s richest man', 'Built the world’s most expensive home — Antilia'],
+  'Mukesh Ambani': ['Is Asia’s richest man', 'Built the world’s most expensive home, Antilia'],
   'Ratan Tata': ['Led Tata Group for over 20 years', 'Was known for his philanthropy and humility'],
   'Lata Mangeshkar': ['Recorded over 30,000 songs', 'Was awarded the Bharat Ratna in 2001'],
   'Amitabh Bachchan': [
@@ -1261,7 +1258,7 @@ const celebrities = CELEBRITIES.map(
     ageRange,
     hairColor,
     famousFor,
-    // M17 — fun facts revealed after each Guess Who round (owner request:
+    // M17, fun facts revealed after each Guess Who round (owner request:
     // more movies, scandals, news). Accurate common knowledge; keep short.
     facts: CELEBRITY_FACTS[name] ?? [famousFor],
   })

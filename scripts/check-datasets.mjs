@@ -130,7 +130,7 @@ for (const [path, check, options = {}] of files) {
     }
   } catch (error) {
     failed += 1;
-    console.log(`${path}: FAILED — ${error.message}`);
+    console.log(`${path}: FAILED, ${error.message}`);
   }
 }
 console.log(failed === 0 ? 'ALL DATASETS OK' : `${failed} FILES NEED FIXES`);

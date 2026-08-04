@@ -6,7 +6,7 @@ import { getPrisma, resetPrismaForTests } from '../../lib/prisma.js';
  * Shared DB setup for integration tests. Requires a reachable PostgreSQL
  * (DATABASE_URL): local Docker container or the CI service container.
  * Tests share the dev database but only touch test-owned tables
- * (scores, rooms, room players, daily challenges) — Game rows are seeded
+ * (scores, rooms, room players, daily challenges), Game rows are seeded
  * from the catalog like prisma/seed.ts.
  */
 
@@ -23,9 +23,13 @@ export async function setupTestDb(): Promise<void> {
 export async function resetTestData(): Promise<void> {
   const prisma = getPrisma();
   // Best-effort room persistence can still be in flight from the previous
-  // test's sockets — retry briefly so deletes don't hit FK races.
+  // test's sockets, retry briefly so deletes don't hit FK races.
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
+      // Phase 1.5 tables first (FK children), then the original set.
+      await prisma.dailyRun.deleteMany();
+      await prisma.dailyStreak.deleteMany();
+      await prisma.userProfile.deleteMany();
       await prisma.score.deleteMany();
       await prisma.roomPlayer.deleteMany();
       await prisma.room.deleteMany();

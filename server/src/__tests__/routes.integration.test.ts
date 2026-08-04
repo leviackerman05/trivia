@@ -9,7 +9,7 @@ import { resetTestData, setupTestDb, teardownTestDb } from './helpers/db.js';
 
 const app = createApp();
 
-describe('REST API (PRD §8.1) — DB-backed integration', () => {
+describe('REST API (PRD §8.1), DB-backed integration', () => {
   beforeAll(async () => {
     await setupTestDb();
   }, 30_000);

@@ -12,7 +12,7 @@ import {
   type Stroke,
 } from '../canvas';
 
-/** Minimal 2D context stub — records calls so pure canvas logic is testable. */
+/** Minimal 2D context stub, records calls so pure canvas logic is testable. */
 function fakeContext() {
   const calls: string[] = [];
   const ctx = {
@@ -150,7 +150,7 @@ describe('canvas primitives', () => {
 
 describe('silhouette path bounds (Shadow Sketch)', () => {
   it('computes a bounding box for absolute SVG paths', () => {
-    // heart silhouette from the dataset (0–100 space)
+    // heart silhouette from the dataset (0-100 space)
     const box = pathBBox(
       'M50 32 C50 22 38 14 28 22 C18 30 19 42 28 50 L50 70 L72 50 C81 42 82 30 72 22 C62 14 50 22 50 32 Z'
     );

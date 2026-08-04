@@ -1,9 +1,9 @@
 /**
- * Timeline Tussle (M7/M14, PRD §5.7) — pure game logic. 5 rounds of 3
+ * Timeline Tussle (M7/M14, PRD §5.7), pure game logic. 5 rounds of 3
  * shuffled events; the player orders them (click-select on mobile). M14
  * scoring is per-card: 100 for the perfect order, otherwise ~33 per card in
  * the right position (33 / 66), so a single correct card earns partial
- * credit. Years may be BCE (negative) — sort numerically.
+ * credit. Years may be BCE (negative), sort numerically.
  */
 
 export interface TimelineEvent {

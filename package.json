@@ -1,9 +1,9 @@
 {
-  "name": "partybrain",
-  "version": "0.1.0",
+  "name": "triviahub",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "PartyBrain — free online party games hub (Astro MPA + React islands + Express/Socket.io backend)",
+  "description": "TriviaHub: free online party games, daily challenges, and multiplayer fun (Astro MPA + React islands + Express/Socket.io backend)",
   "engines": {
     "node": ">=22.12.0",
     "pnpm": ">=9"
@@ -15,7 +15,7 @@
     "prebuild": "node scripts/generate-og.mjs",
     "og:generate": "node scripts/generate-og.mjs",
     "preview": "astro preview",
-    "deploy": "astro build && wrangler pages deploy dist",
+    "deploy": "astro build && wrangler pages deploy",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
@@ -24,7 +24,7 @@
     "test:watch": "vitest",
     "smoke": "node scripts/smoke.mjs",
     "prepare": "husky",
-    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:unit && pnpm --filter @partybrain/server test && pnpm --filter @partybrain/server build && pnpm build && pnpm smoke"
+    "verify": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:unit && pnpm --filter @triviahub/server test && pnpm --filter @triviahub/server build && pnpm build && pnpm smoke"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.2",
@@ -55,6 +55,7 @@
     "satori": "^0.29.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.66.0",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.10",
+    "wrangler": "^4.118.0"
   }
 }

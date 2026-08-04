@@ -1,14 +1,14 @@
-# PartyBrain
+# TriviaHub
 
-**Free online party games — play instantly with friends. No downloads. No accounts.**
+**Free online party games, play instantly with friends. No downloads. No accounts.**
 
-PartyBrain is a free online party games hub featuring **18 multiplayer and solo
+TriviaHub is a free online party games hub featuring **18 multiplayer and solo
 games**: drawing games, trivia, word games, voting games, charades, and more.
-Share a room link (or just open a game) and start playing in seconds — perfect
+Share a room link (or just open a game) and start playing in seconds, perfect
 for virtual parties, classrooms, and remote teams.
 
 > **Product spec:** [`docs/PRD.md`](docs/PRD.md) is the source of truth
-> (stack is fixed — "DO NOT DEVIATE", PRD §2). All engineering docs below are
+> (stack is fixed, "DO NOT DEVIATE", PRD §2). All engineering docs below are
 > aligned to it.
 
 ## The 18 Games
@@ -22,7 +22,7 @@ for virtual parties, classrooms, and remote teams.
 | Shadow Sketch       |                   | Genre Swap      |                              |
 |                     |                   | Genre-Bender    |                              |
 
-## Tech Stack (per PRD §2 — DO NOT DEVIATE)
+## Tech Stack (per PRD §2, DO NOT DEVIATE)
 
 - **Frontend:** Astro v5 (MPA, static export) + React islands + Tailwind CSS v4
 - **Backend:** Node.js + Express.js + Socket.io (`/server`)
@@ -33,7 +33,7 @@ for virtual parties, classrooms, and remote teams.
 ## Repo Layout
 
 ```
-partybrain/
+triviahub/
 ├── src/                 # Astro app
 │   ├── pages/           # /, /game/[18 slugs], legal pages, /faq, /404, /500
 │   ├── islands/         # React islands: room/ · drawing/ · voting/ · solo/ · trivia/
@@ -47,14 +47,14 @@ partybrain/
 
 ## Documentation
 
-- [PRD.md](docs/PRD.md) — product requirements (source of truth)
-- [ARCHITECTURE.md](docs/ARCHITECTURE.md) — system design
-- [PROJECT_STATE.md](docs/PROJECT_STATE.md) — project memory (read first)
-- [TODO.md](docs/TODO.md) — milestone roadmap
-- [DECISIONS.md](docs/DECISIONS.md) — decision log (append-only)
-- [TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md) — testing approach
-- [DEVELOPMENT_GUIDE.md](docs/DEVELOPMENT_GUIDE.md) — setup & workflows
-- [CONTRIBUTING.md](CONTRIBUTING.md) — contribution standards
+- [PRD.md](docs/PRD.md), product requirements (source of truth)
+- [ARCHITECTURE.md](docs/ARCHITECTURE.md), system design
+- [PROJECT_STATE.md](docs/PROJECT_STATE.md), project memory (read first)
+- [TODO.md](docs/TODO.md), milestone roadmap
+- [DECISIONS.md](docs/DECISIONS.md), decision log (append-only)
+- [TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md), testing approach
+- [DEVELOPMENT_GUIDE.md](docs/DEVELOPMENT_GUIDE.md), setup & workflows
+- [CONTRIBUTING.md](CONTRIBUTING.md), contribution standards
 
 ## Status
 
@@ -62,15 +62,15 @@ partybrain/
 | --------------------------------------------- | ------------------------------------------- |
 | PRD                                           | ✅ Complete (`docs/PRD.md`)                 |
 | Engineering foundation (docs v2, PRD-aligned) | ✅ Complete                                 |
-| M1 — Astro MPA Scaffold                       | ✅ Complete (verified: `pnpm verify` green) |
-| M2 — Design System + Global Shell             | ⏳ Next milestone                           |
+| M1, Astro MPA Scaffold                        | ✅ Complete (verified: `pnpm verify` green) |
+| M2, Design System + Global Shell              | ⏳ Next milestone                           |
 
 ## Setup (M1+)
 
 ```bash
-pnpm install       # workspace install (Astro app + @partybrain/server)
+pnpm install       # workspace install (Astro app + @triviahub/server)
 pnpm dev           # Astro dev server → http://localhost:4321
-pnpm --filter @partybrain/server dev   # Express + Socket.io → http://localhost:3000
+pnpm --filter @triviahub/server dev   # Express + Socket.io → http://localhost:3000
 ```
 
 Requires Node 22.12+, pnpm 11+, and Docker for local PostgreSQL. See

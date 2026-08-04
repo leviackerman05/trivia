@@ -6,7 +6,7 @@ import { getGame } from '../lib/games';
 import type { CelebrityView, GuessWhoGameState } from '../lib/guess-who';
 
 /**
- * Guess Who? Celebrity Edition arena (M9, PRD §5.17) — the host (answerer)
+ * Guess Who? Celebrity Edition arena (M9, PRD §5.17), the host (answerer)
  * holds a secret celebrity with trait objects; everyone else asks yes/no
  * questions (the answerer judges), sees the question log, and can guess at
  * any time. 20-question cap → reveal. The secret is answerer-only (D023).
@@ -114,7 +114,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
           <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
             <h2 className="font-display text-h2 text-ink">Who is the secret celebrity?</h2>
             <p className="mt-1 text-body text-ink-muted">
-              Ask yes/no questions to narrow it down — you can guess the name at any time.
+              Ask yes/no questions to narrow it down, you can guess the name at any time.
             </p>
             <form onSubmit={ask} className="mt-4 flex flex-col gap-2 sm:flex-row">
               <input
@@ -174,7 +174,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
             <p className="text-body text-ink">
               The last celebrity was{' '}
               <span className="font-display text-h3 text-primary-deep">{gw.revealed.name}</span>{' '}
-              <span className="text-ink-muted">— {gw.revealed.famousFor}</span>
+              <span className="text-ink-muted"> - {gw.revealed.famousFor}</span>
             </p>
           )}
           {gw.scores.length > 0 && (
@@ -232,7 +232,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
   );
 }
 
-/** M17 — between-round reveal: the celebrity, facts, scores, and the
+/** M17, between-round reveal: the celebrity, facts, scores, and the
  * host's advance control ("next celebrity" / "final results"). */
 function RevealView({
   gw,
@@ -377,7 +377,7 @@ function QuestionLog({
     <div className="rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="mb-2 font-display text-h4 text-ink">Question log</h3>
       {questions.length === 0 ? (
-        <p className="text-small text-ink-muted">No questions yet — ask away!</p>
+        <p className="text-small text-ink-muted">No questions yet, ask away!</p>
       ) : (
         <ol className="flex max-h-56 flex-col gap-1 overflow-y-auto pr-1">
           {questions.map((entry, index) => (

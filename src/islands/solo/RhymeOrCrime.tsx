@@ -12,12 +12,13 @@ import {
   RHYME_TOTAL_ROUNDS,
   type RhymeEntry,
 } from '../../lib/rhyme-or-crime';
+import { dailyGameSeed } from '../../lib/daily';
 
 /**
- * Rhyme or Crime (M7, PRD §5.2; M14 owner fixes) — type a word that rhymes
+ * Rhyme or Crime (M7, PRD §5.2; M14 owner fixes), type a word that rhymes
  * with the prompt. Judging is two-tier: dataset answers (puns included) or
  * any CMU-verified rhyme ("hi" rhymes with "pie"). M14: a setup phase lets
- * the player pick the category (or Auto) and the round timer — the clock
+ * the player pick the category (or Auto) and the round timer, the clock
  * only starts when they hit Start; wrong answers are retryable until the
  * timer runs out; Play again resets the input and returns to setup.
  */
@@ -28,7 +29,12 @@ const TIMER_OPTIONS = [30, 40, 50, 60, 70];
 
 type Phase = 'setup' | 'playing' | 'done';
 
-export default function RhymeOrCrime() {
+interface Props {
+  /** Phase A: when set, the day's content is deterministic for everyone. */
+  dailyDateKey?: string;
+}
+
+export default function RhymeOrCrime({ dailyDateKey }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [category, setCategory] = useState<string>('auto');
   const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('rhyme-or-crime', 60));
@@ -55,7 +61,9 @@ export default function RhymeOrCrime() {
       pickRhymeRounds(
         entries,
         RHYME_TOTAL_ROUNDS,
-        Math.floor(Math.random() * 1000),
+        dailyDateKey
+          ? dailyGameSeed(dailyDateKey, 'rhyme-or-crime')
+          : Math.floor(Math.random() * 1000),
         category === 'auto' ? null : category
       )
     );
@@ -107,7 +115,7 @@ export default function RhymeOrCrime() {
       correct: false,
       text: isKnownWord(guess)
         ? `“${guess.trim()}” doesn't rhyme with “${entry.prompt}”. Try another word!`
-        : `I don't know “${guess.trim()}” — try a common word that rhymes with “${entry.prompt}”.`,
+        : `I don't know “${guess.trim()}”, try a common word that rhymes with “${entry.prompt}”.`,
     });
     setDraft('');
   };
@@ -143,7 +151,7 @@ export default function RhymeOrCrime() {
         <h3 className="font-display text-h3 text-ink">Rhyme or Crime</h3>
         <p className="max-w-xl text-body text-ink-muted">
           Type a word that rhymes with the prompt. Pick a category (or Auto for a mixed set) and
-          your round timer — the clock starts when you do.
+          your round timer, the clock starts when you do.
         </p>
         <div className="flex flex-col gap-2">
           <span className="text-small font-semibold text-ink">Category</span>

@@ -9,9 +9,10 @@ import {
   type TimelineEvent,
   type TimelineRound,
 } from '../../lib/timeline-tussle';
+import { dailyGameSeed } from '../../lib/daily';
 
 /**
- * Timeline Tussle (M7, PRD §5.7) — three shuffled historical events; tap the
+ * Timeline Tussle (M7, PRD §5.7), three shuffled historical events; tap the
  * cards in the order you think they happened (click-select works on mobile),
  * submit, get instant feedback with the years revealed. M14 scoring is
  * per-card: 100 perfect, ~33 per card in the right place (66 max for one
@@ -20,7 +21,12 @@ import {
 
 const events = timelineEventsJson as TimelineEvent[];
 
-export default function TimelineTussle() {
+interface Props {
+  /** Phase A: when set, the day's content is deterministic for everyone. */
+  dailyDateKey?: string;
+}
+
+export default function TimelineTussle({ dailyDateKey }: Props) {
   const [round, setRound] = useState<TimelineRound | null>(null);
   const [index, setIndex] = useState(0);
   const [order, setOrder] = useState<number[]>([]);
@@ -33,7 +39,9 @@ export default function TimelineTussle() {
   const seedRef = useRef(0);
 
   useEffect(() => {
-    seedRef.current = Math.floor(Math.random() * 1000);
+    seedRef.current = dailyDateKey
+      ? dailyGameSeed(dailyDateKey, 'timeline-tussle')
+      : Math.floor(Math.random() * 1000);
     setRound(pickTimelineRound(events, seedRef.current, 0));
   }, []);
 
@@ -79,7 +87,10 @@ export default function TimelineTussle() {
   }, [index]);
 
   const playAgain = () => {
-    seedRef.current = Math.floor(Math.random() * 1000);
+    // Daily mode keeps the day's content; solo mode re-rolls.
+    seedRef.current = dailyDateKey
+      ? dailyGameSeed(dailyDateKey, 'timeline-tussle')
+      : Math.floor(Math.random() * 1000);
     setRound(pickTimelineRound(events, seedRef.current, 0));
     setIndex(0);
     setOrder([]);
@@ -103,7 +114,7 @@ export default function TimelineTussle() {
         <p className="text-body text-ink-muted">
           {results.filter((result) => result.correct).length} of {results.length} perfect orders
           {results.some((result) => result.points > 0 && result.points < 100) &&
-            ' — partial credit for close calls!'}
+            ', partial credit for close calls!'}
         </p>
       }
       onPlayAgain={playAgain}
@@ -113,7 +124,7 @@ export default function TimelineTussle() {
           <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
             <p className="font-display text-h3 text-ink">Tap the events in chronological order</p>
             <p className="mt-1 text-small text-ink-muted">
-              Tap again to undo a pick — you need all three before submitting.
+              Tap again to undo a pick, you need all three before submitting.
             </p>
             <ul className="mt-4 flex flex-col gap-3">
               {round.cards.map((card, cardIndex) => {
@@ -175,8 +186,8 @@ export default function TimelineTussle() {
                   {points === 100
                     ? 'Perfect order! +100'
                     : points > 0
-                      ? `${placed} of 3 cards in place — +${points}`
-                      : 'Out of order — +0'}
+                      ? `${placed} of 3 cards in place, +${points}`
+                      : 'Out of order, +0'}
                 </p>
                 <button
                   type="button"

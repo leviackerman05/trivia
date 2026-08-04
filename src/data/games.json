@@ -6,7 +6,13 @@
     "family": "drawing",
     "playable": true,
     "tagline": "Draw the word, race the clock, guess before everyone else.",
-    "description": "One player draws a secret word while everyone else guesses in chat. Fastest guessers score big — the drawer earns points from every correct guess."
+    "description": "One player draws a secret word while everyone else guesses in chat. Fastest guessers score big, the drawer earns points from every correct guess.",
+    "players": "2-24",
+    "durationMinutes": 10,
+    "energy": "high",
+    "featured": true,
+    "isNew": false,
+    "popularity": 10
   },
   {
     "slug": "copycat-challenge",
@@ -15,7 +21,13 @@
     "family": "drawing",
     "playable": true,
     "tagline": "Memorize a masterpiece, then draw it from memory.",
-    "description": "A famous painting flashes for five seconds. Then everyone draws it from memory on their own private canvas and votes on the best (and funniest) results."
+    "description": "A famous painting flashes for five seconds. Then everyone draws it from memory on their own private canvas and votes on the best (and funniest) results.",
+    "players": "3-24",
+    "durationMinutes": 10,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 8
   },
   {
     "slug": "draw-the-lyric",
@@ -23,8 +35,14 @@
     "type": "multiplayer-realtime",
     "family": "drawing",
     "playable": true,
-    "tagline": "Draw the lyric — everyone else guesses the song.",
-    "description": "One player sees a song lyric and draws it on the shared canvas. Everyone else races to name the song title before the timer runs out."
+    "tagline": "Draw the lyric, everyone else guesses the song.",
+    "description": "One player sees a song lyric and draws it on the shared canvas. Everyone else races to name the song title before the timer runs out.",
+    "players": "3-24",
+    "durationMinutes": 10,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 6
   },
   {
     "slug": "one-line-one-shape",
@@ -33,7 +51,13 @@
     "family": "drawing",
     "playable": true,
     "tagline": "Draw it in one continuous line. Lift the pen and lose time.",
-    "description": "Draw an object without ever lifting the pen. Break the line and the clock punishes you — guessers still have to figure out what it is."
+    "description": "Draw an object without ever lifting the pen. Break the line and the clock punishes you, guessers still have to figure out what it is.",
+    "players": "3-24",
+    "durationMinutes": 10,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 5
   },
   {
     "slug": "shadow-sketch",
@@ -41,8 +65,14 @@
     "type": "multiplayer-realtime",
     "family": "drawing",
     "playable": true,
-    "tagline": "Fill in the silhouette — guessers only see your strokes.",
-    "description": "The drawer sees a faint silhouette and must sketch the details that make it recognizable. Guessers watch the drawing appear with no silhouette to help them."
+    "tagline": "Fill in the silhouette, guessers only see your strokes.",
+    "description": "The drawer sees a faint silhouette and must sketch the details that make it recognizable. Guessers watch the drawing appear with no silhouette to help them.",
+    "players": "3-24",
+    "durationMinutes": 10,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 4
   },
   {
     "slug": "would-you-rather",
@@ -52,7 +82,13 @@
     "instantPlay": "one-screen",
     "playable": true,
     "tagline": "Tough choices. Live percentages. Zero wrong answers.",
-    "description": "Answer outrageous dilemmas in real time and watch the percentages swing as the room votes. Submit your own dilemmas to the queue."
+    "description": "Answer outrageous dilemmas in real time and watch the percentages swing as the room votes. Submit your own dilemmas to the queue.",
+    "players": "2-100",
+    "durationMinutes": 5,
+    "energy": "high",
+    "featured": true,
+    "isNew": false,
+    "popularity": 9
   },
   {
     "slug": "most-likely-to",
@@ -61,7 +97,13 @@
     "family": "voting",
     "playable": true,
     "tagline": "Vote for who in the room would actually do it.",
-    "description": "A scenario appears and everyone votes for the player most likely to survive it, cause it, or star in it. Results rank the room from most to least guilty."
+    "description": "A scenario appears and everyone votes for the player most likely to survive it, cause it, or star in it. Results rank the room from most to least guilty.",
+    "players": "3-50",
+    "durationMinutes": 10,
+    "energy": "high",
+    "featured": false,
+    "isNew": false,
+    "popularity": 7
   },
   {
     "slug": "never-have-i-ever",
@@ -70,7 +112,13 @@
     "family": "voting",
     "playable": true,
     "tagline": "Confess, vote, and find out who's the wildest in the room.",
-    "description": "Players take turns confessing things they've never done while everyone votes I HAVE or I HAVE NOT. Running tallies crown the most innocent and the most chaotic."
+    "description": "Players take turns confessing things they've never done while everyone votes I HAVE or I HAVE NOT. Running tallies crown the most innocent and the most chaotic.",
+    "players": "3-50",
+    "durationMinutes": 15,
+    "energy": "high",
+    "featured": false,
+    "isNew": false,
+    "popularity": 8
   },
   {
     "slug": "this-or-that",
@@ -79,7 +127,13 @@
     "family": "voting",
     "playable": true,
     "tagline": "Rapid-fire pairs. Tap your side. Ride the herd.",
-    "description": "Twenty lightning-fast comparisons in two minutes. Vote instantly, watch live bars swing, and build a streak when your pick matches the majority."
+    "description": "Twenty lightning-fast comparisons in two minutes. Vote instantly, watch live bars swing, and build a streak when your pick matches the majority.",
+    "players": "2-50",
+    "durationMinutes": 2,
+    "energy": "high",
+    "featured": false,
+    "isNew": false,
+    "popularity": 6
   },
   {
     "slug": "rhyme-or-crime",
@@ -87,7 +141,13 @@
     "type": "solo",
     "family": "solo",
     "tagline": "A word that rhymes AND fits the category. Sounds easy.",
-    "description": "Match the prompt word with a rhyme that fits the category — a fruit that rhymes with 'witch'? Peach. Five rounds, streaks, and speed bonuses."
+    "description": "Match the prompt word with a rhyme that fits the category, a fruit that rhymes with 'witch'? Peach. Five rounds, streaks, and speed bonuses.",
+    "players": "1",
+    "durationMinutes": 5,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 3
   },
   {
     "slug": "emoji-plot",
@@ -95,7 +155,13 @@
     "type": "solo",
     "family": "solo",
     "tagline": "Decode movies and books from emoji sequences.",
-    "description": "👦⚡🧙🏰 — Harry Potter. Ten emoji movie and book plots to decode, with progressive hints and a create-your-own mode to challenge friends."
+    "description": "👦⚡🧙🏰, Harry Potter. Ten emoji movie and book plots to decode, with progressive hints and a create-your-own mode to challenge friends.",
+    "players": "1",
+    "durationMinutes": 5,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 5
   },
   {
     "slug": "timeline-tussle",
@@ -103,7 +169,13 @@
     "type": "solo",
     "family": "solo",
     "tagline": "Drag three historical events into the right order.",
-    "description": "Three shuffled events, one correct order. Score big for perfect chronology, half for a single swapped pair, and learn something either way."
+    "description": "Three shuffled events, one correct order. Score big for perfect chronology, half for a single swapped pair, and learn something either way.",
+    "players": "1",
+    "durationMinutes": 5,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 4
   },
   {
     "slug": "price-is-right",
@@ -111,7 +183,13 @@
     "type": "solo",
     "family": "solo",
     "tagline": "Guess the price. Don't go over. Get rich in bragging rights.",
-    "description": "Real product, real price, zero shopping. Guess within range on five weird, luxury, and everyday items — exact guesses are worth double."
+    "description": "Real product, real price, zero shopping. Guess within range on five weird, luxury, and everyday items, exact guesses are worth double.",
+    "players": "1",
+    "durationMinutes": 5,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 5
   },
   {
     "slug": "genre-swap",
@@ -119,7 +197,13 @@
     "type": "solo",
     "family": "solo",
     "tagline": "Famous plots, wildly wrong genres.",
-    "description": "Harry Potter as a gritty crime thriller? Ten swapped-genre movie descriptions to identify against the clock."
+    "description": "Harry Potter as a gritty crime thriller? Ten swapped-genre movie descriptions to identify against the clock.",
+    "players": "1",
+    "durationMinutes": 5,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 3
   },
   {
     "slug": "genre-bender",
@@ -127,7 +211,13 @@
     "type": "solo",
     "family": "solo",
     "tagline": "Rap lyrics rewritten as Shakespearean sonnets.",
-    "description": "Identify the song behind a sonnet-ified banger. Ten 'bended' lyrics with optional BPM and year clues for the truly stuck."
+    "description": "Identify the song behind a sonnet-ified banger. Ten 'bended' lyrics with optional BPM and year clues for the truly stuck.",
+    "players": "1",
+    "durationMinutes": 5,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 3
   },
   {
     "slug": "charades",
@@ -136,7 +226,13 @@
     "family": "special",
     "playable": true,
     "tagline": "Act it out. Pass the phone. Keep the streak alive.",
-    "description": "The classic party game, digitized. Hollywood or Bollywood titles, a 60-second timer, and a pass-the-phone flow built for co-located play."
+    "description": "The classic party game, digitized. Hollywood or Bollywood titles, a 60-second timer, and a pass-the-phone flow built for co-located play.",
+    "players": "4-12",
+    "durationMinutes": 10,
+    "energy": "high",
+    "featured": false,
+    "isNew": false,
+    "popularity": 7
   },
   {
     "slug": "guess-who",
@@ -145,7 +241,13 @@
     "family": "special",
     "playable": true,
     "tagline": "Twenty yes/no questions to name the secret celebrity.",
-    "description": "One player holds a secret celebrity. Everyone else asks yes/no questions — alive? actor? — and races to name them before the 20-question reveal."
+    "description": "One player holds a secret celebrity. Everyone else asks yes/no questions, alive? actor?, and races to name them before the 20-question reveal.",
+    "players": "2-20",
+    "durationMinutes": 10,
+    "energy": "low",
+    "featured": false,
+    "isNew": false,
+    "popularity": 6
   },
   {
     "slug": "trivia",
@@ -155,7 +257,13 @@
     "instantPlay": "solo",
     "playable": true,
     "tagline": "Solo daily challenges or a room-wide quiz race.",
-    "description": "525 questions across ten categories. Play the daily trivia solo or race the room — 10 points per correct answer."
+    "description": "525 questions across ten categories. Play the daily trivia solo or race the room, 10 points per correct answer.",
+    "players": "1-50",
+    "durationMinutes": 5,
+    "energy": "low",
+    "featured": true,
+    "isNew": false,
+    "popularity": 10
   },
   {
     "slug": "sudoku",
@@ -164,6 +272,12 @@
     "family": "solo",
     "instantPlay": "solo",
     "tagline": "The same seeded sudoku for everyone, every day.",
-    "description": "A fresh sudoku puzzle every day, seeded by date so everyone plays the same grid. Tap to place numbers, finish the grid, and race the daily leaderboard."
+    "description": "A fresh sudoku puzzle every day, seeded by date so everyone plays the same grid. Tap to place numbers, finish the grid, and race the daily leaderboard.",
+    "players": "1",
+    "durationMinutes": 15,
+    "energy": "low",
+    "featured": true,
+    "isNew": true,
+    "popularity": 9
   }
 ]

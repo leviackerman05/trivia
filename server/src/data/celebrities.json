@@ -8,7 +8,7 @@
     "ageRange": "40s",
     "hairColor": "blonde",
     "famousFor": "Run the World, Lemonade",
-    "facts": ["Won 32 Grammys — the most of any artist", "Headlined Coachella 2018 (Beychella)"]
+    "facts": ["Won 32 Grammys, the most of any artist", "Headlined Coachella 2018 (Beychella)"]
   },
   {
     "name": "Taylor Swift",
@@ -119,7 +119,7 @@
     "ageRange": "70s",
     "hairColor": "blonde",
     "famousFor": "45th & 47th US president",
-    "facts": ["Was a reality TV host on The Apprentice", "Impeached twice — acquitted both times"]
+    "facts": ["Was a reality TV host on The Apprentice", "Impeached twice, acquitted both times"]
   },
   {
     "name": "Bill Gates",
@@ -455,7 +455,7 @@
     "ageRange": "30s",
     "hairColor": "brown",
     "famousFor": "World Cup 2022 win",
-    "facts": ["Won the World Cup in 2022", "Has won eight Ballon d’Or awards — a record"]
+    "facts": ["Won the World Cup in 2022", "Has won eight Ballon d’Or awards, a record"]
   },
   {
     "name": "Neymar",
@@ -653,7 +653,7 @@
     "hairColor": "white",
     "famousFor": "Longest-reigning monarch",
     "facts": [
-      "Reigned for 70 years — the longest in British history",
+      "Reigned for 70 years, the longest in British history",
       "Met 13 of the 14 most recent US presidents"
     ]
   },
@@ -1063,7 +1063,7 @@
     "hairColor": "white",
     "famousFor": "39th US president",
     "facts": [
-      "Lived to be 100 — the longest-lived US president",
+      "Lived to be 100, the longest-lived US president",
       "Won the Nobel Peace Prize in 2002"
     ]
   },
@@ -1163,7 +1163,7 @@
     "hairColor": "blonde",
     "famousFor": "Someone Like You",
     "facts": [
-      "Won Album of the Year twice — for 21 and 25",
+      "Won Album of the Year twice, for 21 and 25",
       "Her song “Hello” broke streaming records"
     ]
   },
@@ -1235,7 +1235,7 @@
     "hairColor": "black",
     "famousFor": "Bad Guy",
     "facts": [
-      "Won Album of the Year at 18 — the youngest ever",
+      "Won Album of the Year at 18, the youngest ever",
       "Recorded her debut album in her bedroom"
     ]
   },
@@ -1498,7 +1498,7 @@
     "ageRange": "40s",
     "hairColor": "black",
     "famousFor": "15 major titles",
-    "facts": ["Won 15 major golf championships", "Won the Masters at 21 — the youngest ever"]
+    "facts": ["Won 15 major golf championships", "Won the Masters at 21, the youngest ever"]
   },
   {
     "name": "Novak Djokovic",
@@ -1609,7 +1609,7 @@
     "ageRange": "40s",
     "hairColor": "brown",
     "famousFor": "Seven Super Bowls",
-    "facts": ["Won seven Super Bowls — the most ever", "Played until age 45"]
+    "facts": ["Won seven Super Bowls, the most ever", "Played until age 45"]
   },
   {
     "name": "Patrick Mahomes",
@@ -1714,7 +1714,7 @@
     "ageRange": "80s",
     "hairColor": "gray",
     "famousFor": "Light bulb",
-    "facts": ["Held 1,093 US patents", "Did not actually invent the light bulb — he perfected it"]
+    "facts": ["Held 1,093 US patents", "Did not actually invent the light bulb, he perfected it"]
   },
   {
     "name": "Alexander Graham Bell",
@@ -1827,7 +1827,7 @@
     "ageRange": "70s",
     "hairColor": "blonde",
     "famousFor": "The Devil Wears Prada",
-    "facts": ["Has 21 Oscar nominations — a record", "Won three Oscars"]
+    "facts": ["Has 21 Oscar nominations, a record", "Won three Oscars"]
   },
   {
     "name": "Tom Hanks",
@@ -2203,7 +2203,7 @@
     "hairColor": "black",
     "famousFor": "Kung fu movies",
     "facts": [
-      "Does his own stunts — many of which broke bones",
+      "Does his own stunts, many of which broke bones",
       "Has a star on the Hollywood Walk of Fame"
     ]
   },
@@ -2412,7 +2412,7 @@
     "ageRange": "60s",
     "hairColor": "gray",
     "famousFor": "Reliance Industries",
-    "facts": ["Is Asia’s richest man", "Built the world’s most expensive home — Antilia"]
+    "facts": ["Is Asia’s richest man", "Built the world’s most expensive home, Antilia"]
   },
   {
     "name": "Ratan Tata",

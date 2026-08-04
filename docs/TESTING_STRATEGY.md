@@ -1,4 +1,4 @@
-# Testing Strategy — PartyBrain
+# Testing Strategy, TriviaHub
 
 > Testing is a first-class deliverable. Every milestone's "Definition of Done"
 > includes its tests. This document defines layers, tooling, and gates, updated
@@ -11,13 +11,13 @@
 
 ```
         ┌──────────────────────────────┐
-        │     E2E (few, multi-client)  │  Playwright — game journeys,
+        │     E2E (few, multi-client)  │  Playwright, game journeys,
         │                              │  multi-browser, mobile viewports
         ├──────────────────────────────┤
         │    Integration (some)        │  Supertest (REST) · socket.io-client
         │                              │  real PostgreSQL (DATABASE_URL)
         ├──────────────────────────────┤
-        │     Unit (many)              │  Vitest — scoring math, validation,
+        │     Unit (many)              │  Vitest, scoring math, validation,
         │                              │  engine state machine, datasets
         └──────────────────────────────┘
 ```
@@ -47,7 +47,7 @@ Guideline ratios: ~70% unit, ~20% integration, ~10% E2E. Never invert.
     Draw the Lyric 45s, Shadow Sketch 60s), one-line lift penalty (−10s),
     voting tallies + anonymous toggle, Charades pass-the-phone rotation,
     Guess Who 20-question reveal.
-  - **Datasets** (`src/data/*.json`): integrity tests — required counts met
+  - **Datasets** (`src/data/*.json`): integrity tests, required counts met
     (PRD §5 sizes), no duplicate entries, required fields present, licensing
     header present, no forbidden content (no real celebrity photos, no URLs
     to non-PD images).
@@ -56,7 +56,7 @@ Guideline ratios: ~70% unit, ~20% integration, ~10% E2E. Never invert.
 ## 2. Integration Testing
 
 - **Tool:** Vitest + Supertest + `socket.io-client` against a **real
-  PostgreSQL** — the configured `DATABASE_URL` (local Docker container or the
+  PostgreSQL**, the configured `DATABASE_URL` (local Docker container or the
   CI `postgres:16` service; DECISIONS D021). Files run serially
   (`fileParallelism: false`) so truncates never race across workers; vitest
   loads `server/.env` locally and silences request logs.
@@ -66,7 +66,7 @@ Guideline ratios: ~70% unit, ~20% integration, ~10% E2E. Never invert.
     `period=daily|weekly|all-time` and pagination, `GET /api/daily-challenge`,
     `POST /api/room/create`, `GET /api/room/:roomCode`.
   - **Socket (multi-client):** two+ `socket.io-client` connections exercise the
-    full PRD §8.2 catalog — `create-room`/`join-room`/`leave-room`/
+    full PRD §8.2 catalog, `create-room`/`join-room`/`leave-room`/
     `start-game`/`game-state-update`; `draw-stroke` broadcast + replay for a
     late joiner; `send-guess` correct/incorrect paths; `cast-vote` tally →
     live percentages → reveal; `chat-message` sanitization.
@@ -96,7 +96,7 @@ Guideline ratios: ~70% unit, ~20% integration, ~10% E2E. Never invert.
   - **SEO journeys:** every `/game/[slug]` renders its SEO section, canonical,
     and JSON-LD; internal related-game links resolve.
 - **Environment:** full local stack (Astro dev/preview + server + PG) with
-  deterministic seeded data. No arbitrary sleeps — wait on UI state or socket
+  deterministic seeded data. No arbitrary sleeps, wait on UI state or socket
   events.
 
 ## 4. Accessibility Testing
@@ -118,13 +118,13 @@ Guideline ratios: ~70% unit, ~20% integration, ~10% E2E. Never invert.
   load < 2 s; images WebP + lazy.
 - **M2 baseline (measured on local production build, 2026-08-04):**
   home **99/100/100/100**, game page **98/100/100/100**; page weights
-  47–57 KB. The 100 KB budget is enforced in `scripts/smoke.mjs` on every
+  47-57 KB. The 100 KB budget is enforced in `scripts/smoke.mjs` on every
   build (CI gate). Full Lighthouse runs in CI land with E2E (M3+); until
   then, re-measure before each milestone review via
   `npx lighthouse` against `pnpm preview`.
 - **Static/CI:** per-island bundle-size budgets (warn +5%, fail +10%) when
   islands land (M3+); Playwright trace on slow game pages.
-- **Load (post-M11):** k6 against staging — room create/join churn, chat/guess
+- **Load (post-M11):** k6 against staging, room create/join churn, chat/guess
   throughput, concurrent sockets (baseline from M3; target TBD), leaderboard
   reads under load, score-write throughput. Single-instance limits are the
   launch envelope; results feed the D016/D017 scale decision.
@@ -135,7 +135,7 @@ Guideline ratios: ~70% unit, ~20% integration, ~10% E2E. Never invert.
 - **Every merge to `main`:** full CI + E2E + Lighthouse; broken E2E blocks
   deploy.
 - **Milestone boundaries:** forever-green E2E list grows; previous milestones'
-  journeys stay green — that list is the regression net.
+  journeys stay green, that list is the regression net.
 - **Flake policy:** a flaky test is a bug. Fix or quarantine with a tracked
   issue and 7-day expiry; never repeatedly retry CI to force green.
 
@@ -160,22 +160,22 @@ Guideline ratios: ~70% unit, ~20% integration, ~10% E2E. Never invert.
   redeploy previous build); server = rolling with healthcheck gate;
   migrations run pre-rollout and are backward-compatible.
 - **Content checks:** sitemap.xml lists all routes; canonical/OG/JSON-LD
-  validate (Google Rich Results test) — part of M10 gate.
+  validate (Google Rich Results test), part of M10 gate.
 
 ---
 
-## CI Gates (every PR — see `.github/workflows/ci.yml`)
+## CI Gates (every PR, see `.github/workflows/ci.yml`)
 
 1. `format:check`
 2. `lint`
 3. `typecheck` (astro check)
 4. `test:unit` (client: registry, routes, SEO artifacts)
-5. `pnpm --filter @partybrain/server db:deploy` (migrations apply on CI Postgres 16)
-6. `pnpm --filter @partybrain/server test` (server unit + integration)
-7. `pnpm --filter @partybrain/server build` (tsc)
+5. `pnpm --filter @triviahub/server db:deploy` (migrations apply on CI Postgres 16)
+6. `pnpm --filter @triviahub/server test` (server unit + integration)
+7. `pnpm --filter @triviahub/server build` (tsc)
 8. `build` (astro static export)
 9. `smoke` (post-build route verification over `dist/`)
-10. E2E + Lighthouse CI (UI/game PRs; always on `main` — planned M3+)
+10. E2E + Lighthouse CI (UI/game PRs; always on `main`, planned M3+)
 
 Red gate blocks merge. Coverage regressions on scoring/engine require explicit
 reviewer sign-off.

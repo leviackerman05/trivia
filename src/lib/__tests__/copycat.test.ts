@@ -20,7 +20,7 @@ const stroke = (strokeId: string): Stroke => ({
   tool: 'pen',
 });
 
-describe('copycatReducer — phase flow', () => {
+describe('copycatReducer, phase flow', () => {
   it('image-reveal shows the image and the deadline', () => {
     const state = copycatReducer(stateWith(), {
       type: 'round-start',
@@ -32,7 +32,7 @@ describe('copycatReducer — phase flow', () => {
     expect(state.view).toBe('image-reveal');
     expect(state.image?.title).toBe('Mona Lisa');
     expect(state.endsAt).toBe(1_750_000_000_000);
-    // M13 — the reveal waits for the image to load, then the server's 10s
+    // M13, the reveal waits for the image to load, then the server's 10s
     // countdown updates the deadline.
     expect(state.imageLoaded).toBe(false);
     const loaded = copycatReducer(state, { type: 'image-loaded' });
@@ -109,7 +109,7 @@ describe('copycatReducer — phase flow', () => {
   });
 });
 
-describe('copycatReducer — private canvas', () => {
+describe('copycatReducer, private canvas', () => {
   it('strokes stay local (add/remove/clear never touch the server log)', () => {
     let state = stateWith();
     state = copycatReducer(state, { type: 'stroke-added', stroke: stroke('a') });
@@ -121,7 +121,7 @@ describe('copycatReducer — private canvas', () => {
   });
 });
 
-describe('copycatReducer — resync', () => {
+describe('copycatReducer, resync', () => {
   it('rebuilds view, image, drawings, and awards for a mid-game join', () => {
     const state = copycatReducer(stateWith({ view: 'drawing' }), {
       type: 'resync',

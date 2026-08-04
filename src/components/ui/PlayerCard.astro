@@ -1,0 +1,61 @@
+---
+/**
+ * PlayerCard: room roster entry (avatar emoji, nickname, role chip,
+ * connection dot). Pure presentational, used by lobbies and results.
+ */
+interface Props {
+  name: string;
+  emoji?: string;
+  role?: 'host' | 'player' | 'spectator';
+  connected?: boolean;
+  score?: number;
+  class?: string;
+}
+
+const {
+  name,
+  emoji = '🙂',
+  role = 'player',
+  connected = true,
+  score,
+  class: className,
+} = Astro.props;
+
+const roleLabels: Record<NonNullable<Props['role']>, string> = {
+  host: 'Host',
+  player: 'Player',
+  spectator: 'Spectator',
+};
+
+const roleTones: Record<NonNullable<Props['role']>, string> = {
+  host: 'bg-warning-soft text-warning-strong',
+  player: 'bg-info-soft text-info-strong',
+  spectator: 'bg-surface-muted text-ink-muted',
+};
+---
+
+<div
+  class={`flex items-center justify-between gap-3 rounded-lg border-2 border-border bg-surface-raised px-4 py-3 shadow-sm ${className ?? ''}`}
+>
+  <span class="flex min-w-0 items-center gap-3">
+    <span aria-hidden="true" class="text-2xl">{emoji}</span>
+    <span class="min-w-0">
+      <span class="block truncate font-semibold text-ink">{name}</span>
+      <span class="flex items-center gap-1.5 text-xs text-ink-muted">
+        <span
+          aria-hidden="true"
+          class:list={[
+            'inline-block h-2 w-2 rounded-pill',
+            connected ? 'bg-success-strong' : 'bg-border-strong',
+          ]}></span>
+        {connected ? 'Connected' : 'Offline'}
+      </span>
+    </span>
+  </span>
+  <span class="flex shrink-0 items-center gap-2">
+    {typeof score === 'number' && <span class="font-mono font-semibold text-ink">{score}</span>}
+    <span class={`rounded-pill px-2.5 py-0.5 text-xs font-semibold ${roleTones[role]}`}>
+      {roleLabels[role]}
+    </span>
+  </span>
+</div>

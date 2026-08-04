@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DailyCard from '../../components/DailyCard.astro';
+import Button from '../../components/ui/Button.astro';
+import DailyHubStatus from '../../islands/daily/DailyHubStatus.tsx';
+import { getLiveDailyGames, getPlannedDailyGames } from '../../lib/daily';
+
+const liveGames = getLiveDailyGames();
+const plannedGames = getPlannedDailyGames();
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://playtriviahub.com/' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Daily Games',
+      item: 'https://playtriviahub.com/daily',
+    },
+  ],
+});
+---
+
+<BaseLayout
+  title="Daily Games: Free Daily Trivia, Sudoku and More | TriviaHub"
+  description="Play today's daily trivia, sudoku, emoji plots, timelines, price guesses, and word games, free. The same challenge for everyone, every day: streaks, daily leaderboards, and share cards. A new set resets at midnight UTC."
+  canonicalPath="/daily"
+  jsonLd={jsonLd}
+  activeNav="daily"
+>
+  <section class="mb-10 text-center">
+    <h1 class="font-display text-h1 text-ink">Today at TriviaHub</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-body text-ink-muted">
+      Eight challenges, one seed per game, resetting at midnight UTC. Play the same daily trivia as
+      your friends, keep your streak alive, and race the leaderboard.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <Button variant="primary" size="large" href="/daily/trivia"> Play today's trivia </Button>
+      <Button variant="ghost" size="large" href="/daily/archive"> View your archive </Button>
+    </div>
+  </section>
+
+  <section aria-label="Your daily progress" class="mb-12">
+    <DailyHubStatus client:load />
+  </section>
+
+  <section aria-label="Live daily games" class="mb-12">
+    <h2 class="mb-5 font-display text-h2 text-ink">Playable today</h2>
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        liveGames.map((game) => (
+          <li>
+            <DailyCard game={game} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section aria-label="Coming soon daily games">
+    <h2 class="mb-5 font-display text-h2 text-ink">Coming to the daily hub</h2>
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        plannedGames.map((game) => (
+          <li>
+            <DailyCard game={game} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section aria-label="How daily games work" class="mt-14 flex flex-col gap-6">
+    <h2 class="font-display text-h2 text-ink">How daily games work</h2>
+    <div class="grid gap-6 sm:grid-cols-3">
+      <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+        <h3 class="mb-2 font-display text-h4 text-ink">1. Same day, same game</h3>
+        <p class="text-body text-ink-muted">
+          Every daily game is seeded by the UTC date, so everyone on earth plays the exact same
+          challenge. No luck, no randomness, a fair race.
+        </p>
+      </article>
+      <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+        <h3 class="mb-2 font-display text-h4 text-ink">2. Streaks build habits</h3>
+        <p class="text-body text-ink-muted">
+          Finish a daily game and your streak grows. Miss a day and it resets, so the daily loop
+          becomes a ritual you protect.
+        </p>
+      </article>
+      <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+        <h3 class="mb-2 font-display text-h4 text-ink">3. Share and compare</h3>
+        <p class="text-body text-ink-muted">
+          Results generate a share card with your score and streak. Send it to friends and let the
+          rivalry write itself.
+        </p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

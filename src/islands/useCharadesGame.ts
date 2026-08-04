@@ -4,7 +4,7 @@ import { getSocket } from '../lib/socket';
 import { ClientEvents, ServerEvents } from '../lib/events';
 import { charadesReducer, initialCharadesState, type CharadesGameState } from '../lib/charades';
 
-/** Charades session hook (M9) — room events + actions over charadesReducer. */
+/** Charades session hook (M9), room events + actions over charadesReducer. */
 
 export interface UseCharadesGame {
   game: CharadesGameState;
@@ -175,7 +175,7 @@ export function useCharadesGame(roomCode: string | null, myName: string | null):
         category,
       });
       if (response.ok) {
-        // M17 — the toggle must reflect the choice immediately (the server
+        // M17, the toggle must reflect the choice immediately (the server
         // only sends the category again when the game starts).
         dispatch({ type: 'category-change', category });
       }

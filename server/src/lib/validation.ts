@@ -1,5 +1,5 @@
 /**
- * Hand-rolled validation helpers (M1 scaffold; ARCHITECTURE §13 — every
+ * Hand-rolled validation helpers (M1 scaffold; ARCHITECTURE §13, every
  * inbound boundary validates). Kept dependency-free by design.
  */
 
@@ -8,7 +8,7 @@ export type ValidationResult<T> = { ok: true; value: T } | { ok: false; error: s
 export const NICKNAME_MAX_LENGTH = 20;
 export const CHAT_MESSAGE_MAX_LENGTH = 300;
 
-/** Strip ASCII control characters (PRD §13 — sanitize nicknames/messages). */
+/** Strip ASCII control characters (PRD §13, sanitize nicknames/messages). */
 function stripControlChars(value: string): string {
   // eslint-disable-next-line no-control-regex
   return value.replace(/[\u0000-\u001f\u007f]/g, '');
@@ -104,6 +104,153 @@ export function validateScoreInput(input: unknown): ValidationResult<ScoreInput>
   return { ok: true, value: { gameId, playerName: name.value, score, clientKey } };
 }
 
+const MEMBER_KEY_PATTERN = /^[A-Za-z0-9-]{8,128}$/;
+const DATE_KEY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+/**
+ * Phase 1.5 (D047): a memberKey is a device-generated opaque id. It is not
+ * a credential, so the shape only needs to be safe for URLs and indexes.
+ */
+export function isMemberKey(value: unknown): value is string {
+  return typeof value === 'string' && MEMBER_KEY_PATTERN.test(value);
+}
+
+export function isDateKey(value: unknown): value is string {
+  return typeof value === 'string' && DATE_KEY_PATTERN.test(value);
+}
+
+export interface DailySubmitInput {
+  gameId: string;
+  memberKey: string;
+  playerName: string;
+  score: number;
+  clientKey: string;
+  tier?: string;
+  durationMs?: number;
+  correctCount?: number;
+  totalCount?: number;
+}
+
+const MAX_TIER_LENGTH = 16;
+const MAX_COUNT = 10_000;
+const MAX_DURATION_MS = 24 * 60 * 60 * 1000;
+
+/** Phase 1.5: POST /api/daily/:gameId/submit body. */
+export function validateDailySubmitInput(input: unknown): ValidationResult<DailySubmitInput> {
+  if (typeof input !== 'object' || input === null || Array.isArray(input)) {
+    return { ok: false, error: 'body must be an object' };
+  }
+  const {
+    gameId,
+    memberKey,
+    playerName,
+    score,
+    clientKey,
+    tier,
+    durationMs,
+    correctCount,
+    totalCount,
+  } = input as Record<string, unknown>;
+
+  if (!isGameId(gameId)) {
+    return { ok: false, error: 'invalid gameId' };
+  }
+  if (!isMemberKey(memberKey)) {
+    return { ok: false, error: 'invalid memberKey' };
+  }
+  const name = sanitizeNickname(playerName);
+  if (!name.ok) {
+    return name;
+  }
+  if (typeof score !== 'number' || !Number.isFinite(score) || !Number.isInteger(score)) {
+    return { ok: false, error: 'score must be an integer' };
+  }
+  if (score < 0 || score > MAX_SCORE) {
+    return { ok: false, error: `score must be between 0 and ${MAX_SCORE}` };
+  }
+  if (!isClientKey(clientKey)) {
+    return { ok: false, error: 'invalid clientKey' };
+  }
+  if (
+    tier !== undefined &&
+    (typeof tier !== 'string' || tier.length === 0 || tier.length > MAX_TIER_LENGTH)
+  ) {
+    return { ok: false, error: 'invalid tier' };
+  }
+  const duration =
+    typeof durationMs === 'number' &&
+    Number.isInteger(durationMs) &&
+    durationMs >= 0 &&
+    durationMs <= MAX_DURATION_MS
+      ? durationMs
+      : undefined;
+  if (durationMs !== undefined && duration === undefined) {
+    return { ok: false, error: 'invalid durationMs' };
+  }
+  const correct =
+    typeof correctCount === 'number' &&
+    Number.isInteger(correctCount) &&
+    correctCount >= 0 &&
+    correctCount <= MAX_COUNT
+      ? correctCount
+      : undefined;
+  const total =
+    typeof totalCount === 'number' &&
+    Number.isInteger(totalCount) &&
+    totalCount >= 0 &&
+    totalCount <= MAX_COUNT
+      ? totalCount
+      : undefined;
+  if (correctCount !== undefined && correct === undefined) {
+    return { ok: false, error: 'invalid correctCount' };
+  }
+  if (totalCount !== undefined && total === undefined) {
+    return { ok: false, error: 'invalid totalCount' };
+  }
+  if (correct !== undefined && total !== undefined && correct > total) {
+    return { ok: false, error: 'correctCount cannot exceed totalCount' };
+  }
+  return {
+    ok: true,
+    value: {
+      gameId,
+      memberKey,
+      playerName: name.value,
+      score,
+      clientKey,
+      tier,
+      durationMs: duration,
+      correctCount: correct,
+      totalCount: total,
+    },
+  };
+}
+
+export interface ClaimInput {
+  memberKey: string;
+  nickname?: string;
+}
+
+/** Phase 1.5: POST /api/me/claim body { memberKey, nickname? }. */
+export function validateClaimInput(input: unknown): ValidationResult<ClaimInput> {
+  if (typeof input !== 'object' || input === null || Array.isArray(input)) {
+    return { ok: false, error: 'body must be an object' };
+  }
+  const { memberKey, nickname } = input as Record<string, unknown>;
+  if (!isMemberKey(memberKey)) {
+    return { ok: false, error: 'invalid memberKey' };
+  }
+  if (nickname === undefined) {
+    return { ok: true, value: { memberKey } };
+  }
+  const name = sanitizeNickname(nickname);
+  if (!name.ok) {
+    return name;
+  }
+  return { ok: true, value: { memberKey, nickname: name.value } };
+}
+
+/** PRD §8.1: POST /api/room/create body { gameId }. */
 export interface RoomCreateInput {
   gameId: string;
 }
@@ -245,7 +392,7 @@ export function validateGuessInput(
   }
   const trimmed = stripControlChars(text).trim();
   if (trimmed.length === 0 || trimmed.length > GUESS_MAX_LENGTH) {
-    return { ok: false, error: 'guess must be 1–60 characters' };
+    return { ok: false, error: 'guess must be 1-60 characters' };
   }
   return { ok: true, value: { roomCode, text: trimmed } };
 }
@@ -266,7 +413,7 @@ export function validateChooseWordInput(
   }
   const trimmed = stripControlChars(word).trim();
   if (trimmed.length === 0 || trimmed.length > 24) {
-    return { ok: false, error: 'word must be 1–24 characters' };
+    return { ok: false, error: 'word must be 1-24 characters' };
   }
   return { ok: true, value: { roomCode, word: trimmed } };
 }
@@ -292,7 +439,7 @@ const PROMPT_TEXT_MAX = 160;
 const STATEMENT_TEXT_MAX = 120;
 
 /**
- * M6 additive submit-prompt payload — two shapes:
+ * M6 additive submit-prompt payload, two shapes:
  * WYR dilemma { roomCode, a, b } or NHIE statement { roomCode, statement }.
  */
 export function validatePromptInput(
@@ -319,7 +466,7 @@ export function validatePromptInput(
       cleanB.length < 3 ||
       cleanB.length > PROMPT_TEXT_MAX
     ) {
-      return { ok: false, error: `dilemma options must be 3–${PROMPT_TEXT_MAX} characters` };
+      return { ok: false, error: `dilemma options must be 3-${PROMPT_TEXT_MAX} characters` };
     }
     return { ok: true, value: { roomCode, a: cleanA, b: cleanB } };
   }
@@ -327,7 +474,7 @@ export function validatePromptInput(
   if (cleanStatement.length < 3 || cleanStatement.length > STATEMENT_TEXT_MAX) {
     return {
       ok: false,
-      error: `statement must be 3–${STATEMENT_TEXT_MAX} characters`,
+      error: `statement must be 3-${STATEMENT_TEXT_MAX} characters`,
     };
   }
   return { ok: true, value: { roomCode, statement: cleanStatement } };

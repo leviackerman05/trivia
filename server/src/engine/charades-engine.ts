@@ -1,7 +1,7 @@
 import { randomInt } from 'node:crypto';
 
 /**
- * Charades session engine (M9, PRD §5.12) — transport-agnostic, co-located
+ * Charades session engine (M9, PRD §5.12), transport-agnostic, co-located
  * play. Rounds rotate the actor (pass-the-phone); the actor's device shows
  * the secret movie title; anyone can press "Correct!" when the team shouts
  * it (self-policed party game); the 60s timer auto-advances with 0 points.

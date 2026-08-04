@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * M15 — Genre Swap dataset rewrite. The owner's report: the old descriptions
+ * M15, Genre Swap dataset rewrite. The owner's report: the old descriptions
  * were the ORIGINAL plot with a genre label ("Frozen as horror" was still
  * Frozen). These are genuine reimaginings: the iconic hook survives (so the
  * answer stays guessable), but the STORY clearly diverges.
@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-/** [original, genre, description] — 150 entries. */
+/** [original, genre, description], 150 entries. */
 const ENTRIES = [
   [
     'Harry Potter',
@@ -44,7 +44,7 @@ const ENTRIES = [
   [
     'Jurassic Park',
     'zombie apocalypse',
-    'An island theme park’s cloned dinosaurs are all dead — except one, and the guests keep turning up hollowed out.',
+    'An island theme park’s cloned dinosaurs are all dead, except one, and the guests keep turning up hollowed out.',
   ],
   [
     'The Matrix',
@@ -59,7 +59,7 @@ const ENTRIES = [
   [
     'The Godfather',
     'mockumentary',
-    'A family-run pasta empire’s eldest son is forced to take over the business after his father’s heart attack — the cameras never leave the kitchen.',
+    'A family-run pasta empire’s eldest son is forced to take over the business after his father’s heart attack, the cameras never leave the kitchen.',
   ],
   [
     'Forrest Gump',
@@ -89,7 +89,7 @@ const ENTRIES = [
   [
     'Jaws',
     'horror',
-    'A beach town’s lifeguards keep finding empty lifejackets, and the new sheriff starts hearing a song in his sleep — from under the pier.',
+    'A beach town’s lifeguards keep finding empty lifejackets, and the new sheriff starts hearing a song in his sleep, from under the pier.',
   ],
   [
     'E.T.',
@@ -154,7 +154,7 @@ const ENTRIES = [
   [
     'Twilight',
     'horror',
-    'A new girl in a rainy town falls for a pale classmate who only eats lunch after dark — and her friends keep disappearing on full moons.',
+    'A new girl in a rainy town falls for a pale classmate who only eats lunch after dark, and her friends keep disappearing on full moons.',
   ],
   [
     'The Hangover',
@@ -229,7 +229,7 @@ const ENTRIES = [
   [
     'The Green Mile',
     'haunted house',
-    'A death-row guard discovers the newest inmate can heal anything — except the warden’s secret.',
+    'A death-row guard discovers the newest inmate can heal anything, except the warden’s secret.',
   ],
   [
     'Spirited Away',
@@ -259,7 +259,7 @@ const ENTRIES = [
   [
     'It',
     'horror',
-    'A town’s children keep losing their bikes to a clown that lives in the sewers — and the adults refuse to look down.',
+    'A town’s children keep losing their bikes to a clown that lives in the sewers, and the adults refuse to look down.',
   ],
   [
     'Joker',
@@ -299,7 +299,7 @@ const ENTRIES = [
   [
     'Pirates of the Caribbean',
     'heist film',
-    'A disgraced captain assembles a crew of thieves to steal a ship that can outrun the navy — from the navy’s own harbor.',
+    'A disgraced captain assembles a crew of thieves to steal a ship that can outrun the navy, from the navy’s own harbor.',
   ],
   [
     'Kung Fu Panda',
@@ -334,12 +334,12 @@ const ENTRIES = [
   [
     'Soul',
     'film noir',
-    'A jazz pianist dies and wakes up in a detective’s body, chasing the thief who stole his life — himself.',
+    'A jazz pianist dies and wakes up in a detective’s body, chasing the thief who stole his life, himself.',
   ],
   [
     'Encanto',
     'superhero saga',
-    'In a magical house, every grandchild gets a power except one — until the house starts failing and only she can save it.',
+    'In a magical house, every grandchild gets a power except one, until the house starts failing and only she can save it.',
   ],
   [
     'Zootopia',
@@ -389,7 +389,7 @@ const ENTRIES = [
   [
     'The Hunger Games',
     'gritty crime thriller',
-    'A district girl volunteers for a televised survival contest, but this year the gamemakers have rigged the odds — against the sponsors.',
+    'A district girl volunteers for a televised survival contest, but this year the gamemakers have rigged the odds, against the sponsors.',
   ],
   [
     'Divergent',
@@ -479,7 +479,7 @@ const ENTRIES = [
   [
     'Planet of the Apes',
     'horror',
-    'Astronauts crash-land on a world where apes rule and humans are hunted — and the apes are very, very polite about it.',
+    'Astronauts crash-land on a world where apes rule and humans are hunted, and the apes are very, very polite about it.',
   ],
   [
     'X-Men',
@@ -689,7 +689,7 @@ const ENTRIES = [
   [
     'Cast Away',
     'buddy comedy',
-    'A package-delivery executive stranded on an island turns his only companion — a volleyball — into a demanding roommate.',
+    'A package-delivery executive stranded on an island turns his only companion, a volleyball, into a demanding roommate.',
   ],
   [
     'The Karate Kid',
@@ -719,7 +719,7 @@ const ENTRIES = [
   [
     'The Sound of Music',
     'haunted house',
-    'A governess arrives at a villa where the children sing in the walls and the captain forbids music — for a reason.',
+    'A governess arrives at a villa where the children sing in the walls and the captain forbids music, for a reason.',
   ],
   [
     'Mary Poppins',

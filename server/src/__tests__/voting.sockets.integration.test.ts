@@ -53,7 +53,7 @@ interface VoteUpdate {
  * statement/rotation flow. Rounds are skipped via the host's next-round so
  * the test runs in well under a second.
  */
-describe('Voting games (M6) — DB-backed socket integration', () => {
+describe('Voting games (M6), DB-backed socket integration', () => {
   let httpServer: ReturnType<typeof createHttpServer>;
   let io: SocketServer;
   let engine: RoomEngine;
@@ -229,7 +229,7 @@ describe('Voting games (M6) — DB-backed socket integration', () => {
     const bob = clients[clients.length - 1]!;
 
     // Alice's turn first (host = Alice). Bob consumes his own start event too
-    // (the events land asynchronously — a late listener would catch the
+    // (the events land asynchronously, a late listener would catch the
     // wrong round).
     const hostStartPromise = waitFor<VotingRoundStart>(host, ServerEvents.roundStart);
     const bobStartPromise = waitFor<VotingRoundStart>(bob, ServerEvents.roundStart);
@@ -281,7 +281,7 @@ describe('Voting games (M6) — DB-backed socket integration', () => {
     expect(first.kind).toBe('this-or-that');
     expect(first.totalRounds).toBe(20);
 
-    // Votes broadcast live updates; no reveal phase for TOT — the next
+    // Votes broadcast live updates; no reveal phase for TOT, the next
     // round-start arrives after the 6s vote timer.
     const update = await voteAndWait(host, bob, roomCode, 'a');
     expect(update.kind).toBe('this-or-that');

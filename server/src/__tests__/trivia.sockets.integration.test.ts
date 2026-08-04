@@ -36,12 +36,12 @@ interface TriviaReveal {
 }
 
 /**
- * M8 journey: two browsers play a Trivia room race over real sockets —
+ * M8 journey: two browsers play a Trivia room race over real sockets.
  * mode toggle (wrong-answers), question round-start (never leaks the
  * answer), answers with speed scoring, all-in reveal, host next, podium
  * with score persistence.
  */
-describe('Trivia room (M8) — DB-backed socket integration', () => {
+describe('Trivia room (M8), DB-backed socket integration', () => {
   let httpServer: ReturnType<typeof createHttpServer>;
   let io: SocketServer;
   let engine: RoomEngine;
@@ -128,7 +128,7 @@ describe('Trivia room (M8) — DB-backed socket integration', () => {
     expect(question.question.options).toHaveLength(4);
     expect(question.totalRounds).toBe(10);
 
-    // Alice answers correctly (index from her own copy — the payload never
+    // Alice answers correctly (index from her own copy, the payload never
     // carries the answer index, so the test just picks a valid index).
     const revealPromise = waitFor<TriviaReveal>(host, ServerEvents.roundReveal);
     const aliceAck = await emitAck(host, ClientEvents.answerQuestion, { roomCode, optionIndex: 0 });

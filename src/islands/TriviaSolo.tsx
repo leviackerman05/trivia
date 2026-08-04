@@ -8,9 +8,12 @@ import {
   type TriviaQuestion,
 } from '../lib/trivia';
 import { SERVER_URL, submitScore } from '../lib/api';
+import { claimMember, ensureMemberKey, readMemberKey, submitDailyRun } from '../lib/member';
+import { readNickname, registerStreak, writeNickname } from '../lib/solo';
+import { recordDailyHistory } from '../lib/daily';
 
 /**
- * Trivia — instant solo play (PRD §5.15, owner request 2026-08-04).
+ * Trivia, instant solo play (PRD §5.15, owner request 2026-08-04).
  * Plays the seeded daily challenge: the same 10 questions for everyone on
  * the same UTC day, 15s per question, speed bonus scoring, score submitted
  * to the global leaderboard with an idempotent clientKey.
@@ -24,13 +27,9 @@ interface QuestionResult {
   points: number;
 }
 
-const NICKNAME_STORAGE_KEY = 'partybrain:nickname';
-
 export default function TriviaSolo() {
   const [phase, setPhase] = useState<Phase>('setup');
-  const [nickname, setNickname] = useState(() =>
-    typeof window === 'undefined' ? '' : (localStorage.getItem(NICKNAME_STORAGE_KEY) ?? '')
-  );
+  const [nickname, setNickname] = useState(() => readNickname());
   const [dateKey, setDateKey] = useState('');
   /** Server-seeded daily questions (M8); falls back to local selection. */
   const [dailyQuestions, setDailyQuestions] = useState<TriviaQuestion[] | null>(null);
@@ -44,6 +43,9 @@ export default function TriviaSolo() {
   const [totalScore, setTotalScore] = useState(0);
   const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'saved' | 'failed'>(
     'idle'
+  );
+  const [memberState, setMemberState] = useState<'guest' | 'claiming' | 'member' | 'failed'>(
+    readMemberKey() ? 'member' : 'guest'
   );
 
   const deadlineRef = useRef(0);
@@ -75,7 +77,7 @@ export default function TriviaSolo() {
         }
       )
       .catch(() => {
-        // Offline/static preview — the local seed is fine.
+        // Offline/static preview, the local seed is fine.
       });
     return () => {
       cancelled = true;
@@ -89,7 +91,7 @@ export default function TriviaSolo() {
       return;
     }
     if (typeof window !== 'undefined') {
-      localStorage.setItem(NICKNAME_STORAGE_KEY, name);
+      writeNickname(name);
     }
     setQuestions(dailyQuestions ?? selectDailyQuestions(new Date()));
     setIndex(0);
@@ -172,6 +174,23 @@ export default function TriviaSolo() {
     const score = finalResults.reduce((sum, result) => sum + result.points, 0);
     setTotalScore(score);
     setPhase('done');
+    // Daily loop: streak + local history so the hub can show progress.
+    registerStreak('trivia');
+    recordDailyHistory('trivia', score, dateKey);
+    // Phase 1.5: members also record a server daily run (same clientKey).
+    const memberKey = readMemberKey();
+    if (memberKey) {
+      const key = triviaClientKey(dateKey, nickname.trim() || 'Player', crypto.randomUUID());
+      void submitDailyRun({
+        gameId: 'trivia',
+        memberKey,
+        playerName: nickname.trim() || 'Player',
+        score,
+        clientKey: key,
+      }).catch(() => {
+        // Best-effort; the leaderboard save is the source of truth.
+      });
+    }
     const playerName = nickname.trim() || 'Player';
     const clientKey = triviaClientKey(dateKey, playerName, crypto.randomUUID());
     clientKeyRef.current = clientKey;
@@ -196,6 +215,19 @@ export default function TriviaSolo() {
       .then(() => setSubmitState('saved'))
       .catch(() => setSubmitState('failed'));
   };
+
+  /** One-tap guest to member conversion (Phase 1.5, D047). */
+  const keepProgress = () => {
+    if (memberState !== 'guest') {
+      return;
+    }
+    setMemberState('claiming');
+    claimMember(ensureMemberKey(), nickname.trim() || readNickname() || 'Player')
+      .then(() => setMemberState('member'))
+      .catch(() => setMemberState('failed'));
+  };
+
+  const isClaiming = memberState === 'claiming';
 
   const bestCategory = () => {
     const perCategory = new Map<string, { correct: number; total: number }>();
@@ -229,7 +261,7 @@ export default function TriviaSolo() {
         </div>
         <p className="max-w-2xl text-body text-ink-muted">
           {TRIVIA_QUESTION_SECONDS} seconds per question, {questions.length || 10} questions, 10
-          points per correct answer. Same questions for everyone today — the leaderboard is the
+          points per correct answer. Same questions for everyone today, the leaderboard is the
           prize.
         </p>
         <form onSubmit={startGame} className="flex max-w-md flex-col gap-3">
@@ -290,10 +322,35 @@ export default function TriviaSolo() {
               onClick={retrySubmit}
               className="rounded-pill border-3 border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
             >
-              Score not saved — tap to retry
+              Score not saved, tap to retry
             </button>
           )}
         </div>
+        {memberState === 'guest' && (
+          <div className="flex flex-wrap items-center gap-3 rounded-lg border-2 border-dashed border-border bg-surface-muted p-4">
+            <p className="text-small text-ink-muted">
+              Keep your streak and play history across devices, free. No account, one tap.
+            </p>
+            <button
+              type="button"
+              onClick={keepProgress}
+              disabled={isClaiming}
+              className="inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-5 py-2.5 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark disabled:opacity-40"
+            >
+              {isClaiming ? 'Saving…' : 'Keep my progress (free)'}
+            </button>
+          </div>
+        )}
+        {memberState === 'member' && (
+          <p role="status" className="text-small font-semibold text-success-strong">
+            Progress saved! Your streak and history are now synced.
+          </p>
+        )}
+        {memberState === 'failed' && (
+          <p role="alert" className="text-small font-semibold text-danger-strong">
+            Couldn't save right now. Check the server and try again.
+          </p>
+        )}
         <div className="flex flex-wrap gap-3">
           <button
             type="button"
@@ -371,7 +428,7 @@ export default function TriviaSolo() {
             {points > 0
               ? `+${points} points`
               : selected === null
-                ? 'Time up — 0 points'
+                ? 'Time up, 0 points'
                 : 'No points'}
           </span>
           <button

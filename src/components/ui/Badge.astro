@@ -1,0 +1,25 @@
+---
+/**
+ * Badge: compact status label for cards (new, popular, featured, beta).
+ * Tone maps to a soft/strong token pair (AA on both themes).
+ */
+interface Props {
+  tone?: 'success' | 'warning' | 'error' | 'info';
+  class?: string;
+}
+
+const { tone = 'info', class: className } = Astro.props;
+
+const tones: Record<NonNullable<Props['tone']>, string> = {
+  success: 'bg-success-soft text-success-strong',
+  warning: 'bg-warning-soft text-warning-strong',
+  error: 'bg-danger-soft text-danger-strong',
+  info: 'bg-info-soft text-info-strong',
+};
+---
+
+<span
+  class={`inline-flex items-center gap-1 rounded-pill px-2.5 py-0.5 text-xs font-semibold ${tones[tone]} ${className ?? ''}`}
+>
+  <slot />
+</span>

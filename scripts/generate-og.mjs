@@ -1,6 +1,6 @@
 /**
- * OG image generator (PRD §6.2 — auto-generated template with game name +
- * PartyBrain logo). Build-time only: renders public/og/{slug}.png at
+ * OG image generator (PRD §6.2, auto-generated template with game name +
+ * TriviaHub wordmark). Build-time only: renders public/og/{slug}.png at
  * 1200x630 from the BounceBox template.
  *
  * Runs automatically before `astro build` (package.json "prebuild") and
@@ -159,7 +159,7 @@ function template({ name, tagline, family }) {
       React.createElement(
         'div',
         { style: { fontFamily: 'Titan One', fontSize: 40, color: '#FF6B6B' } },
-        'PartyBrain'
+        'TriviaHub'
       )
     ),
     React.createElement('div', { style: { flex: 1 } }),
@@ -221,7 +221,7 @@ function template({ name, tagline, family }) {
       React.createElement('div', {
         style: { width: 12, height: 12, borderRadius: 9999, backgroundColor: '#FFE66D' },
       }),
-      'partybrain.com'
+      'playtriviahub.com'
     )
   );
 }
@@ -246,14 +246,14 @@ const entries = [
     fileName: `${game.slug}.png`,
   })),
   {
-    name: 'PartyBrain',
-    tagline: '19 free online party games — play instantly with friends',
+    name: 'TriviaHub',
+    tagline: '19 free party games, daily trivia, and multiplayer fun',
     family: 'special',
     fileName: 'home.png',
   },
   {
-    name: 'PartyBrain',
-    tagline: '19 free online party games — play instantly with friends',
+    name: 'TriviaHub',
+    tagline: '19 free party games, daily trivia, and multiplayer fun',
     family: 'special',
     fileName: 'default.png',
   },

@@ -1,36 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GameCard from '../components/GameCard.astro';
+import DailyCard from '../components/DailyCard.astro';
 import Button from '../components/ui/Button.astro';
 import Chip from '../components/ui/Chip.astro';
 import FAQSection from '../components/FAQSection.astro';
+import RecentlyPlayed from '../islands/RecentlyPlayed.tsx';
 import { games, type GameFamily } from '../lib/games';
+import { getLiveDailyGames } from '../lib/daily';
 import { globalFaqs } from '../data/faqs';
 
-const familySections: { family: GameFamily; label: string }[] = [
-  { family: 'drawing', label: 'Drawing Games' },
-  { family: 'voting', label: 'Voting Games' },
-  { family: 'solo', label: 'Solo Games' },
-  { family: 'special', label: 'Party Classics' },
-  { family: 'quiz', label: 'Quiz' },
+const familySections: { family: GameFamily; label: string; emoji: string }[] = [
+  { family: 'drawing', label: 'Drawing Games', emoji: '🎨' },
+  { family: 'voting', label: 'Voting Games', emoji: '🗳️' },
+  { family: 'solo', label: 'Solo Games', emoji: '🧩' },
+  { family: 'special', label: 'Party Classics', emoji: '🎭' },
+  { family: 'quiz', label: 'Quiz', emoji: '📚' },
 ];
 
-const valueProps = [
-  {
-    title: 'Play with friends',
-    body: 'Create a room, share the code, and everyone jumps in — a perfect fit for video calls, classrooms, and couch co-op.',
-  },
-  {
-    title: '19 party games',
-    body: 'Drawing, voting, trivia, word games, charades and more — five families of party classics in one place.',
-  },
-  {
-    title: 'Daily challenges',
-    body: 'The same seeded challenge for everyone every day, so the daily leaderboard is a fair race.',
-  },
-];
+const liveDaily = getLiveDailyGames();
+const trending = [...games].sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0)).slice(0, 6);
+const newGames = games.filter((game) => game.isNew);
+const multiplayerGames = games.filter((game) => game.type !== 'solo');
 
-// PRD §6.1/§6.3 — FAQPage JSON-LD on the homepage.
+// PRD §6.1/§6.3, FAQPage JSON-LD on the homepage.
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -43,46 +36,136 @@ const jsonLd = JSON.stringify({
 ---
 
 <BaseLayout
-  title="Free Online Party Games | Play with Friends Instantly | PartyBrain"
-  description="Play 19 free online party games with friends — no downloads, no accounts. Drawing games, trivia, word games, and more. Perfect for virtual parties, classrooms, and team building. Start playing in seconds!"
+  title="TriviaHub: Free Party Games, Daily Trivia and Multiplayer Fun"
+  description="Play 19 free online party games with friends, no downloads and no accounts. Daily trivia and sudoku, drawing games, voting games, and multiplayer rooms. Start playing in seconds!"
   canonicalPath="/"
   ogImage="/og/home.png"
   jsonLd={jsonLd}
+  activeNav="home"
 >
   <section class="mb-14 text-center">
-    <Chip variant="status" status="success" class="mb-6">19 free party games · play in seconds</Chip
+    <Chip variant="status" status="success" class="mb-6"
+      >19 free games · daily challenges · play in seconds</Chip
     >
-    <h1 class="font-display text-h1 text-ink">
-      Free Online Party Games — Play Instantly with Friends
+    <h1 class="mx-auto max-w-4xl font-display text-h1 text-ink">
+      Best daily trivia and party games
     </h1>
     <p class="mx-auto mt-4 max-w-2xl text-body text-ink-muted">
-      Drawing games, trivia, word games, voting games, charades and more. Share a room link and
-      start playing in seconds — perfect for virtual parties, classrooms, and remote teams.
+      Play the same daily trivia as everyone else, race friends in drawing and voting rooms, and
+      build a streak worth protecting. Free, in your browser.
     </p>
     <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-      <Button variant="primary" size="large" href="/#games">Browse all games</Button>
-      <Button variant="ghost" size="large" href="/faq">How it works</Button>
+      <Button variant="primary" size="large" href="/daily">Play today's daily</Button>
+      <Button variant="ghost" size="large" href="/#games">Browse all games</Button>
     </div>
   </section>
 
-  <section aria-label="Why PartyBrain" class="mb-14 grid gap-6 sm:grid-cols-3">
+  <section aria-label="Daily games" class="mb-14">
+    <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+      <h2 class="font-display text-h2 text-ink">Today at TriviaHub</h2>
+      <a href="/daily" class="text-small font-semibold text-primary-strong hover:underline">
+        All daily games →
+      </a>
+    </div>
+    <ul class="grid gap-6 sm:grid-cols-2">
+      {
+        liveDaily.slice(0, 3).map((game) => (
+          <li>
+            <DailyCard game={game} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section id="trending" aria-label="Trending games" class="mb-14 scroll-mt-24">
+    <h2 class="mb-5 font-display text-h2 text-ink">Trending now</h2>
+    <ul class="grid gap-3 sm:grid-cols-2">
+      {
+        trending.map((game, index) => (
+          <li>
+            <a
+              href={`/game/${game.slug}`}
+              class="flex items-center gap-4 rounded-lg border-2 border-border bg-surface-raised px-4 py-3 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-secondary hover:shadow-md"
+            >
+              <span class="font-display text-h3 text-primary-deep">{index + 1}</span>
+              <span class="min-w-0">
+                <span class="block truncate font-semibold text-ink">{game.name}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section id="multiplayer" aria-label="Multiplayer games" class="mb-14 scroll-mt-24">
+    <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <h2 class="font-display text-h2 text-ink">Multiplayer rooms</h2>
+        <p class="mt-2 max-w-2xl text-body text-ink-muted">
+          Create a room, share the code, friends jump in from any device, up to 24 players.
+        </p>
+      </div>
+      <a href="/#games" class="text-small font-semibold text-primary-strong hover:underline">
+        All games →
+      </a>
+    </div>
+    <ul class="grid gap-3 sm:grid-cols-2">
+      {
+        multiplayerGames.slice(0, 6).map((game) => (
+          <li>
+            <a
+              href={`/game/${game.slug}`}
+              class="flex items-center justify-between gap-4 rounded-lg border-2 border-border bg-surface-raised px-4 py-3 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-secondary hover:shadow-md"
+            >
+              <span class="min-w-0">
+                <span class="block truncate font-semibold text-ink">{game.name}</span>
+                <span class="block truncate text-xs text-ink-muted">{game.tagline}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section id="new-games" aria-label="New games" class="mb-14 scroll-mt-24">
+    <h2 class="mb-5 font-display text-h2 text-ink">New games</h2>
     {
-      valueProps.map(({ title, body }) => (
-        <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-          <h2 class="mb-2 font-display text-h4 text-ink">{title}</h2>
-          <p class="text-body text-ink-muted">{body}</p>
-        </article>
-      ))
+      newGames.length > 0 ? (
+        <ul class="flex flex-wrap gap-3">
+          {newGames.map((game) => (
+            <li>
+              <a
+                href={`/game/${game.slug}`}
+                class="inline-flex items-center gap-2 rounded-pill border-2 border-border bg-surface-raised px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-secondary hover:text-primary-strong"
+              >
+                {game.name} →
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-body text-ink-muted">Fresh games land here. Check back soon.</p>
+      )
     }
   </section>
 
-  <section id="games" aria-label="All PartyBrain games">
+  <section id="recently-played" aria-label="Recently played" class="mb-14 scroll-mt-24">
+    <h2 class="mb-5 font-display text-h2 text-ink">Recently played</h2>
+    <RecentlyPlayed client:load />
+  </section>
+
+  <section id="games" class="mb-14 scroll-mt-24">
     {
-      familySections.map(({ family, label }) => {
+      familySections.map(({ family, label, emoji }) => {
         const familyGames = games.filter((game) => game.family === family);
         return (
-          <div class="mb-12">
-            <h2 class="mb-5 font-display text-h2 text-ink">{label}</h2>
+          <div id={`games-${family}`} class="mb-12 scroll-mt-24">
+            <h2 class="mb-5 font-display text-h2 text-ink">
+              {emoji} {label}
+            </h2>
             <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {familyGames.map((game) => (
                 <li>
@@ -96,18 +179,19 @@ const jsonLd = JSON.stringify({
     }
   </section>
 
-  <!-- PRD §6.1 — ~600-word keyword-rich content with internal links. -->
-  <section aria-label="About PartyBrain games" class="flex flex-col gap-6">
+  <!-- PRD §6.1, ~600-word keyword-rich content with internal links. -->
+  <section aria-label="About TriviaHub games" class="flex flex-col gap-6">
     <h2 class="font-display text-h2 text-ink">
       The best free online party games, right in your browser
     </h2>
     <p class="max-w-3xl text-body text-ink-muted">
-      PartyBrain is a collection of 19 free online party games designed for the way people actually
+      TriviaHub is a collection of 19 free online party games designed for the way people actually
       play today: across devices, across time zones, and without any setup. Every game runs directly
-      in the browser — there are no downloads, no accounts, and no plugins. If you and your friends
-      can open a link, you can play. That makes PartyBrain the easiest <strong
+      in the browser, with no downloads, no accounts, and no plugins. If you and your friends can
+      open a link, you can play. That makes TriviaHub the easiest <strong
         >browser party games</strong
-      > destination for virtual parties, classrooms, remote teams, and family game nights.
+      > destination for virtual parties, classrooms, remote teams, and family game nights, with daily
+      trivia and sudoku challenges to return to every day.
     </p>
     <p class="max-w-3xl text-body text-ink-muted">
       The heart of the site is the drawing room. If you are looking to{' '}
@@ -185,8 +269,11 @@ const jsonLd = JSON.stringify({
       Every multiplayer game uses a simple room system: create a room, share the code or link, and
       play. Rooms support up to 24 players, and everything is optimized for phones, tablets, and
       desktops, so <strong>virtual party games</strong> feel as natural as passing the phone around a
-      couch. Whether you are hosting a video-call game night, running a classroom warm-up, or building
-      team morale remotely, PartyBrain gets a game started in seconds — free, forever.
+      couch. Whether you are hosting a video-call game night or building team morale remotely, TriviaHub
+      gets a game started in seconds, free, forever. And when the night is over, tomorrow's <a
+        href="/daily"
+        class="font-semibold text-primary-strong underline">daily games</a
+      > are already waiting.
     </p>
   </section>
 

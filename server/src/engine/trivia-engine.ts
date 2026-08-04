@@ -1,10 +1,10 @@
 import { randomInt } from 'node:crypto';
 
 /**
- * Trivia room session engine (M8, PRD §5.15; M18 scoring) —
+ * Trivia room session engine (M8, PRD §5.15; M18 scoring).
  * transport-agnostic. 10 questions, everyone answers the same question
  * within 10s, the reveal shows the correct answer and per-player points,
- * and the game ends with a podium. Modes (M18: simple flat scoring —
+ * and the game ends with a podium. Modes (M18: simple flat scoring.
  * 10 for a correct answer, 0 for a wrong one):
  *
  * - race: correct answers score 10; wrong or missing score 0.
@@ -199,7 +199,7 @@ export class TriviaSession {
     const correct = optionIndex === this.question.answer;
     let points: number;
     if (this.config.mode === 'race') {
-      // M18: flat scoring — 10 for correct, 0 otherwise (owner request).
+      // M18: flat scoring, 10 for correct, 0 otherwise (owner request).
       points = correct ? 10 : 0;
     } else {
       // Wrong Answers Only: the most absurd wrong answer wins.

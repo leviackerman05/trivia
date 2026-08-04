@@ -30,7 +30,7 @@ function startThree() {
   return session;
 }
 
-describe('CopycatSession — lifecycle (PRD §5.4)', () => {
+describe('CopycatSession, lifecycle (PRD §5.4)', () => {
   it('starts in image-reveal with a picked image and requires ≥1 player', () => {
     const session = makeSession();
     expect(session.start([]).ok).toBe(false);

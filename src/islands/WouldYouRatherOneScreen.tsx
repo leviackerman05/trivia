@@ -7,10 +7,10 @@ import {
 } from '../lib/would-you-rather';
 
 /**
- * Would You Rather — one-screen instant play (owner request 2026-08-04).
+ * Would You Rather, one-screen instant play (owner request 2026-08-04).
  * Co-located scorekeeper mode: one shared screen, pass the phone around the
  * room, tap A or B for each vote, watch the live tally swing. Local state
- * only — no room, no backend.
+ * only, no room, no backend.
  */
 
 type Phase = 'intro' | 'voting' | 'done';
@@ -66,8 +66,8 @@ export default function WouldYouRatherOneScreen() {
         <p className="max-w-2xl text-body text-ink-muted">
           Put this screen where everyone can see it. Read each dilemma out loud, then tap{' '}
           <span className="font-semibold text-ink">A</span> or{' '}
-          <span className="font-semibold text-ink">B</span> once per vote — pass the phone around
-          the room and watch the tally swing. No room, no accounts, just opinions.
+          <span className="font-semibold text-ink">B</span> once per vote, pass the phone around the
+          room and watch the tally swing. No room, no accounts, just opinions.
         </p>
         <button
           type="button"
@@ -171,7 +171,7 @@ export default function WouldYouRatherOneScreen() {
       <div className="overflow-hidden rounded-lg border-2 border-border">
         <div
           role="img"
-          aria-label={`Live tally — option A ${percentA}%, option B ${100 - percentA}%`}
+          aria-label={`Live tally, option A ${percentA}%, option B ${100 - percentA}%`}
           className="flex h-10 w-full"
         >
           <div
@@ -192,7 +192,7 @@ export default function WouldYouRatherOneScreen() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-small text-ink-muted">
           Tap <span className="font-semibold text-ink">A</span> or{' '}
-          <span className="font-semibold text-ink">B</span> for every vote — pass the phone around
+          <span className="font-semibold text-ink">B</span> for every vote, pass the phone around
           the room.
         </p>
         <button

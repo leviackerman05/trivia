@@ -19,7 +19,7 @@ export default defineConfig({
   test: {
     environment: 'node',
     include: ['src/**/*.test.ts'],
-    // Integration suites share one dev/CI database — run files serially so
+    // Integration suites share one dev/CI database, run files serially so
     // truncates and seeded data never race across workers.
     fileParallelism: false,
   },

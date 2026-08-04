@@ -1,5 +1,5 @@
 /**
- * Client-side voting-game state (M6) — pure reducer over the server's voting
+ * Client-side voting-game state (M6), pure reducer over the server's voting
  * events, shared by Would You Rather, Most Likely To, Never Have I Ever, and
  * This or That. Server-authoritative: the server owns prompts, options,
  * tallies, reveals, and final scores; this mirror only displays them.
@@ -30,10 +30,10 @@ export interface VotingReveal {
   totalVotes: number;
   winnerId: string | null;
   winnerLabel: string | null;
-  /** Never Have I Ever — aggregate (anonymous) reveal. */
+  /** Never Have I Ever, aggregate (anonymous) reveal. */
   haveCount?: number;
   haveNotCount?: number;
-  /** This or That — majority option id (null on a tie). */
+  /** This or That, majority option id (null on a tie). */
   majorityId?: string | null;
 }
 
@@ -46,25 +46,25 @@ export interface VotingGameState {
   round: number;
   totalRounds: number;
   endsAt: number | null;
-  /** Never Have I Ever — whose turn it is to confess. */
+  /** Never Have I Ever, whose turn it is to confess. */
   statementBy: string | null;
   statement: string | null;
-  /** WYR — player-submitted dilemma from the room queue. */
+  /** WYR, player-submitted dilemma from the room queue. */
   custom: boolean;
   myVote: string | null;
   tallies: VotingTally[];
   reveal: VotingReveal | null;
-  /** This or That — cosmetic streak; resets when you leave the herd. */
+  /** This or That, cosmetic streak; resets when you leave the herd. */
   herdStreak: number;
-  /** This or That — server score at game end. */
+  /** This or That, server score at game end. */
   herdMatches: number;
-  /** Never Have I Ever — server-suggested statements (current turn). */
+  /** Never Have I Ever, server-suggested statements (current turn). */
   suggestions: string[];
-  /** M15 — Never Have I Ever — where statements come from (host choice). */
+  /** M15, Never Have I Ever, where statements come from (host choice). */
   statementSource: 'provided' | 'own' | 'both';
-  /** Never Have I Ever — running wildness tallies. */
+  /** Never Have I Ever, running wildness tallies. */
   wildness: { playerName: string; count: number }[];
-  /** Most Likely To — running crown tallies. */
+  /** Most Likely To, running crown tallies. */
   crowns: { playerName: string; count: number }[];
   /** Game-end summary (kind-specific). */
   endPayload: Record<string, unknown> | null;

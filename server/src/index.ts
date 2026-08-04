@@ -15,7 +15,7 @@ const httpServer = createServer(app);
 const io = attachSocketIo(httpServer, { engine, limiters });
 
 httpServer.listen(config.port, () => {
-  logger.info({ port: config.port }, 'partybrain server listening');
+  logger.info({ port: config.port }, 'triviahub server listening');
 });
 
 // Periodic limiter-bucket cleanup (in-memory maps stay bounded).

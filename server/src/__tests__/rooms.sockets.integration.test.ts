@@ -41,7 +41,7 @@ async function waitForDb<T>(predicate: () => Promise<T | null>, timeoutMs = 3000
   throw new Error('waitForDb timed out');
 }
 
-describe('Socket room lifecycle (PRD §8.2) — DB-backed integration', () => {
+describe('Socket room lifecycle (PRD §8.2), DB-backed integration', () => {
   let httpServer: ReturnType<typeof createHttpServer>;
   let io: SocketServer;
   let engine: RoomEngine;
@@ -156,7 +156,7 @@ describe('Socket room lifecycle (PRD §8.2) — DB-backed integration', () => {
     const advanced = await startPromise;
     expect(advanced.phase).toBe('game-setup');
 
-    // Room + players persisted (best-effort writes land async — poll until
+    // Room + players persisted (best-effort writes land async, poll until
     // BOTH the status and the player rows are durable, or the test flakes).
     const roomRow = await waitForDb(async () => {
       const row = await getPrisma().room.findUnique({

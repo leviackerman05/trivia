@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * M10 — generate the expanded Price Is Right dataset (500–1000 products per
+ * M10, generate the expanded Price Is Right dataset (500-1000 products per
  * owner request). Tuples: [name, searchTerm, emoji, price, blurb].
  * `searchTerm` drives the Commons photo lookup (generic terms find photos
  * for brand-flavored names); emoji is the offline/fallback art (D031).
@@ -39,7 +39,7 @@ const ROWS = [
     'instant pot',
     '🍲',
     99,
-    'Pressure cooker, slow cooker, rice cooker, and more — all in one.',
+    'Pressure cooker, slow cooker, rice cooker, and more, all in one.',
   ],
   ['Stand Mixer', 'stand mixer', '🥣', 299, 'The kitchen workhorse for serious bakers.'],
   [
@@ -49,7 +49,7 @@ const ROWS = [
     129,
     'Barista-level espresso without the barista attitude.',
   ],
-  ['Rice Cooker', 'rice cooker', '🍚', 35, 'Perfect rice every time — foolproof.'],
+  ['Rice Cooker', 'rice cooker', '🍚', 35, 'Perfect rice every time, foolproof.'],
   ['Electric Wine Opener', 'wine opener', '🍷', 30, 'Corks pop with the press of a button.'],
   ['Milk Frother', 'milk frother', '🥛', 20, 'Café-style foam for your home lattes.'],
   ['Sous Vide Machine', 'sous vide', '🥩', 80, 'Restaurant-perfect steak from a water bath.'],
@@ -72,7 +72,7 @@ const ROWS = [
   ['Ramen Kit', 'ramen bowl set', '🍜', 28, 'Noodles, broth, and a dream.'],
   ['Popcorn Machine', 'popcorn machine', '🍿', 79, 'Movie-night theater energy at home.'],
   ['Cotton Candy Maker', 'cotton candy machine', '🍭', 50, 'Sugar spun into joy (and a mess).'],
-  ['Soda Maker', 'soda maker', '🥤', 90, 'Fizz on demand — skip the bottles.'],
+  ['Soda Maker', 'soda maker', '🥤', 90, 'Fizz on demand, skip the bottles.'],
   ['Pizza Oven', 'pizza oven', '🍕', 199, 'Wood-fired flavor in your backyard.'],
   ['Smart Grill', 'smart grill', '🍖', 249, 'Wi-Fi steaks with app-controlled flames.'],
   ['Pizza Scissors', 'pizza cutter', '🍕', 15, 'Scissors designed for pizza. Genius.'],
@@ -163,7 +163,7 @@ const ROWS = [
   ['Pancake Pen', 'pancake batter dispenser', '🥞', 12, 'Draw your breakfast.'],
   ['Egg Poacher', 'egg poacher', '🥚', 18, 'Perfect poached eggs, no vortex.'],
   ['Omelette Maker', 'omelette maker', '🍳', 22, 'Folded eggs on autopilot.'],
-  ['Breakfast Sandwich Maker', 'breakfast sandwich', '🥪', 25, 'Egg, cheese, bagel — assembled.'],
+  ['Breakfast Sandwich Maker', 'breakfast sandwich', '🥪', 25, 'Egg, cheese, bagel, assembled.'],
   ['Coffee Cup Warmer', 'coffee warmer', '☕', 18, 'Never drink cold coffee again.'],
   ['Charcuterie Board', 'charcuterie board', '🧀', 45, 'Boards, meats, cheeses, spread.'],
   ['Wine Aerator', 'wine aerator', '🍷', 20, 'Breathe, wine, breathe.'],
@@ -612,10 +612,10 @@ const ROWS = [
 ];
 
 const CATEGORY_BLURBS = {
-  kitchen: 'Kitchen gadget royalty — part of the set that makes dinner guests ask questions.',
+  kitchen: 'Kitchen gadget royalty, part of the set that makes dinner guests ask questions.',
   electronics: 'The gadget your brain says no to and your heart says yes to.',
   home: 'A home upgrade that sounds like a joke and works like a charm.',
-  outdoors: 'Outdoor gear with a story — great for camping, tailgates, and showing off.',
+  outdoors: 'Outdoor gear with a story, great for camping, tailgates, and showing off.',
 };
 
 function categoryFor(index) {
@@ -629,7 +629,7 @@ const products = ROWS.map(([name, searchTerm, emoji, price, blurb], index) => ({
   name,
   searchTerm: searchTerm ?? name,
   emoji,
-  description: blurb ?? `${name} — ${CATEGORY_BLURBS[categoryFor(index)]}`,
+  description: blurb ?? `${name}, ${CATEGORY_BLURBS[categoryFor(index)]}`,
   price,
 }));
 

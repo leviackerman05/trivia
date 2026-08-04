@@ -1,7 +1,7 @@
 /**
  * Post-build smoke test: serves the production `dist/` output and verifies
  * that the key routes render with expected content. Run AFTER `astro build`
- * (CI does: build → smoke). Deterministic — no Astro internals involved.
+ * (CI does: build → smoke). Deterministic, no Astro internals involved.
  *
  * Usage: pnpm smoke
  */
@@ -32,19 +32,30 @@ if (!existsSync(DIST_DIR)) {
 }
 
 const checks = [
-  { path: '/', contains: 'Free Online Party Games' },
+  { path: '/', contains: 'Today at TriviaHub' },
   { path: '/', contains: 'application/ld+json' },
+  { path: '/daily', contains: 'Today at TriviaHub' },
+  { path: '/daily/trivia', contains: 'Daily Trivia' },
+  { path: '/daily/sudoku', contains: 'Daily Sudoku' },
+  { path: '/daily/emoji-plot', contains: 'Daily Emoji Plot' },
+  { path: '/daily/timeline-tussle', contains: 'Daily Timeline' },
+  { path: '/daily/price-is-right', contains: 'Daily Price Guess' },
+  { path: '/daily/rhyme-or-crime', contains: 'Daily Rhyme' },
+  { path: '/daily/genre-swap', contains: 'Daily Genre Swap' },
+  { path: '/daily/genre-bender', contains: 'Daily Genre-Bender' },
+  { path: '/daily/archive', contains: 'Your daily archive' },
+  { path: '/categories', contains: 'Browse by category' },
   { path: '/faq', contains: 'Frequently Asked Questions' },
   { path: '/faq', contains: 'application/ld+json' },
   { path: '/privacy-policy', contains: 'Privacy Policy' },
   { path: '/terms-and-conditions', contains: 'Terms &amp; Conditions' },
-  { path: '/about-us', contains: 'About PartyBrain' },
+  { path: '/about-us', contains: 'About TriviaHub' },
   { path: '/contact-us', contains: 'Contact Us' },
   { path: '/game/skribbl-arena', contains: 'Skribbl Arena' },
   { path: '/game/trivia', contains: 'More games like this' },
 ];
 
-// PRD §6.2 — every game page ships a 150–160-char meta description and the
+// PRD §6.2, every game page ships a 150-160-char meta description and the
 // WebApplication + FAQPage JSON-LD blocks.
 const GAME_SLUGS = [
   'skribbl-arena',
@@ -71,7 +82,7 @@ const GAME_SLUGS = [
 // PRD §10: static pages < 100 KB total page weight (HTML + CSS + JS, no images).
 const weightChecks = ['/', '/faq', '/game/skribbl-arena'];
 
-// PRD §10: bundle-size budget per game island (shared runtime excluded — it
+// PRD §10: bundle-size budget per game island (shared runtime excluded, it
 // is cached once per visitor; the gate is on the per-island chunks).
 const BUNDLE_BUDGET_BYTES = 300 * 1024;
 const SHARED_RUNTIME_PREFIX = 'client.';
@@ -162,7 +173,7 @@ server.listen(PORT, async () => {
       console.log(`✓ ${path} weight ${(bytes / 1024).toFixed(1)} KB`);
     }
 
-    // PRD §6.2 — per-game meta description length + JSON-LD presence.
+    // PRD §6.2, per-game meta description length + JSON-LD presence.
     for (const slug of GAME_SLUGS) {
       const response = await fetch(`http://localhost:${PORT}/game/${slug}`);
       const html = await response.text();
@@ -172,7 +183,7 @@ server.listen(PORT, async () => {
       }
       const length = meta[1].length;
       if (length < 150 || length > 160) {
-        throw new Error(`/game/${slug} → meta description is ${length} chars (need 150–160)`);
+        throw new Error(`/game/${slug} → meta description is ${length} chars (need 150-160)`);
       }
       if (!html.includes('"WebApplication"') || !html.includes('"FAQPage"')) {
         throw new Error(`/game/${slug} → missing WebApplication/FAQPage JSON-LD`);
@@ -180,7 +191,7 @@ server.listen(PORT, async () => {
       console.log(`✓ /game/${slug} SEO (${length}-char meta + JSON-LD)`);
     }
 
-    // PRD §10 — bundle-size budget per game island chunk.
+    // PRD §10, bundle-size budget per game island chunk.
     for (const file of (await readdir(DIST_DIR + '/_astro')).filter((name) =>
       name.endsWith('.js')
     )) {
@@ -190,7 +201,7 @@ server.listen(PORT, async () => {
       const size = statSync(join(DIST_DIR, '_astro', file)).size;
       if (size > BUNDLE_BUDGET_BYTES) {
         throw new Error(
-          `bundle ${file} is ${(size / 1024).toFixed(1)} KB — over the ${BUNDLE_BUDGET_BYTES / 1024} KB island budget (PRD §10)`
+          `bundle ${file} is ${(size / 1024).toFixed(1)} KB, over the ${BUNDLE_BUDGET_BYTES / 1024} KB island budget (PRD §10)`
         );
       }
     }

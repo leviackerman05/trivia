@@ -13,7 +13,7 @@ import {
 } from '../lib/voting';
 
 /**
- * Voting-game session hook (M6) — socket listeners + actions over the pure
+ * Voting-game session hook (M6), socket listeners + actions over the pure
  * votingReducer. Shared by Would You Rather, Most Likely To, Never Have I
  * Ever, and This or That. `game-resync` on mount/reconnect rebuilds state.
  */
@@ -207,7 +207,7 @@ export function useVotingGame(roomCode: string | null, myName: string | null): U
       } else if (response.error === 'ALREADY_VOTED') {
         dispatch({ type: 'vote-cast', optionId });
       } else {
-        dispatch({ type: 'feedback', text: 'That vote was rejected — try again.' });
+        dispatch({ type: 'feedback', text: 'That vote was rejected, try again.' });
       }
       return { ok: response.ok, error: response.error };
     },
@@ -224,7 +224,7 @@ export function useVotingGame(roomCode: string | null, myName: string | null): U
       if (response.ok) {
         dispatch({
           type: 'feedback',
-          text: 'Added to the queue — it will appear in a future round.',
+          text: 'Added to the queue, it will appear in a future round.',
         });
       }
       return { ok: response.ok, error: response.error };
@@ -240,7 +240,7 @@ export function useVotingGame(roomCode: string | null, myName: string | null): U
       }
       const response = await emitAck(ClientEvents.submitPrompt, { roomCode: code, statement });
       if (!response.ok) {
-        dispatch({ type: 'feedback', text: 'That statement was rejected — 3–120 characters.' });
+        dispatch({ type: 'feedback', text: 'That statement was rejected, 3-120 characters.' });
       }
       return { ok: response.ok, error: response.error };
     },

@@ -3,7 +3,7 @@ import { getPrisma } from '../lib/prisma.js';
 import { validateScoreInput } from '../lib/validation.js';
 import { RateLimiter, ipKey } from '../lib/rate-limit.js';
 
-/** PRD §8.1: POST /api/scores — submit score {gameId, playerName, score}. */
+/** PRD §8.1: POST /api/scores, submit score {gameId, playerName, score}. */
 export function createScoresRouter(scoreLimiter: RateLimiter): Router {
   const router = Router();
 

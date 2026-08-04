@@ -19,7 +19,7 @@ export const config: ServerConfig = {
 
 /**
  * CORS origin policy for Express + Socket.io.
- * Explicit list when configured; otherwise allow all (local development only —
+ * Explicit list when configured; otherwise allow all (local development only.
  * production must set CORS_ORIGIN, enforced at deploy review).
  */
 export function resolveCorsOrigin(): string[] | true {

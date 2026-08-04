@@ -2,7 +2,7 @@ import { Router, type NextFunction, type Request, type Response } from 'express'
 import { getPrisma } from '../lib/prisma.js';
 import { ensureDailyChallenges } from '../lib/daily-seed.js';
 
-/** PRD §8.1: GET /api/daily-challenge — today's daily challenge per solo game. */
+/** PRD §8.1: GET /api/daily-challenge, today's daily challenge per solo game. */
 
 const DAY_MS = 86_400_000;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;

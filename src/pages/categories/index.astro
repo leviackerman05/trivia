@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryCard from '../../components/ui/CategoryCard.astro';
+import { games, type GameFamily } from '../../lib/games';
+
+const families: { family: GameFamily; name: string; emoji: string; description: string }[] = [
+  {
+    family: 'drawing',
+    name: 'Drawing Games',
+    emoji: '🎨',
+    description: 'Sketch, guess, and laugh. Pictionary-style rooms with custom word lists.',
+  },
+  {
+    family: 'voting',
+    name: 'Voting Games',
+    emoji: '🗳️',
+    description: 'Live percentage battles: Would You Rather, Most Likely To, and more.',
+  },
+  {
+    family: 'solo',
+    name: 'Solo Games',
+    emoji: '🧩',
+    description: 'Word puzzles, trivia, and brain teasers with daily streaks and leaderboards.',
+  },
+  {
+    family: 'special',
+    name: 'Party Classics',
+    emoji: '🎭',
+    description: 'Charades and Guess Who, digitized for co-located and remote groups.',
+  },
+  {
+    family: 'quiz',
+    name: 'Quiz Games',
+    emoji: '📚',
+    description: 'Ten categories, 525 questions, solo dailies or a room-wide race.',
+  },
+];
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://playtriviahub.com/' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Categories',
+      item: 'https://playtriviahub.com/categories',
+    },
+  ],
+});
+---
+
+<BaseLayout
+  title="Game Categories: Drawing, Trivia, Voting and More | TriviaHub"
+  description="Browse TriviaHub by category: drawing games, trivia and quiz games, voting games, word games, and party classics. Free to play, no downloads, no accounts."
+  canonicalPath="/categories"
+  jsonLd={jsonLd}
+  activeNav="categories"
+>
+  <section class="mb-10">
+    <h1 class="font-display text-h1 text-ink">Browse by category</h1>
+    <p class="mt-4 max-w-2xl text-body text-ink-muted">
+      Every TriviaHub game fits one of five families. Pick a mood, find your game, and start playing
+      in seconds.
+    </p>
+  </section>
+
+  <section aria-label="Game categories">
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        families.map((family) => {
+          const count = games.filter((game) => game.family === family.family).length;
+          return (
+            <li>
+              <CategoryCard
+                href={`/#games-${family.family}`}
+                name={family.name}
+                emoji={family.emoji}
+                count={count}
+                description={family.description}
+              />
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+
+  <section aria-label="Quick links" class="mt-14">
+    <h2 class="mb-5 font-display text-h2 text-ink">Quick links</h2>
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <li>
+        <a
+          href="/daily"
+          class="block rounded-lg border-2 border-border bg-surface-raised p-5 text-body font-semibold text-ink transition-colors hover:border-secondary hover:text-primary-strong"
+        >
+          Daily Games: today's trivia and sudoku →
+        </a>
+      </li>
+      <li>
+        <a
+          href="/game/trivia"
+          class="block rounded-lg border-2 border-border bg-surface-raised p-5 text-body font-semibold text-ink transition-colors hover:border-secondary hover:text-primary-strong"
+        >
+          Trivia: solo daily or room race →
+        </a>
+      </li>
+      <li>
+        <a
+          href="/game/skribbl-arena"
+          class="block rounded-lg border-2 border-border bg-surface-raised p-5 text-body font-semibold text-ink transition-colors hover:border-secondary hover:text-primary-strong"
+        >
+          Skribbl Arena: drawing rooms up to 24 players →
+        </a>
+      </li>
+    </ul>
+  </section>
+</BaseLayout>

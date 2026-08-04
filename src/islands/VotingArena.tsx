@@ -6,7 +6,7 @@ import { getGame } from '../lib/games';
 import type { VotingGameState, VotingOption } from '../lib/voting';
 
 /**
- * Voting game arena (M6) — one island for all four voting games. Lobby is the
+ * Voting game arena (M6), one island for all four voting games. Lobby is the
  * shared RoomLobbyPanel; rounds render per game via KIND_UI:
  *
  * - Would You Rather: two big dilemma cards (blue A / red B), live bars,
@@ -29,7 +29,7 @@ const KIND_LABELS: Record<string, string> = {
   'this-or-that': 'This or That',
 };
 
-/** M15 — This or That genre buckets (server dataset genres). */
+/** M15, This or That genre buckets (server dataset genres). */
 const TOT_GENRES: { id: string; label: string }[] = [
   { id: 'food', label: 'Food' },
   { id: 'animals', label: 'Animals' },
@@ -43,7 +43,7 @@ const TOT_GENRES: { id: string; label: string }[] = [
   { id: 'lifestyle', label: 'Lifestyle' },
 ];
 
-/** M15 — Never Have I Ever content tiers (super-dirty is NSFW; hosts opt in). */
+/** M15, Never Have I Ever content tiers (super-dirty is NSFW; hosts opt in). */
 const NHIE_TIERS: { id: string; label: string }[] = [
   { id: 'boring', label: 'Boring' },
   { id: 'moderate', label: 'Moderate' },
@@ -231,7 +231,7 @@ export default function VotingArena({ gameSlug }: Props) {
   );
 }
 
-/** Host lobby controls (M15): NHIE tier/source, TOT genre — applied when
+/** Host lobby controls (M15): NHIE tier/source, TOT genre, applied when
  * the game starts via set-voting-config (pendingVotingOptions server-side). */
 function VotingLobbySettings({
   kind,
@@ -298,7 +298,7 @@ function VotingLobbySettings({
             ))}
           </div>
           <p className="text-xs text-ink-muted">
-            Default is Moderate — super-dirty (NSFW) content is off until a host turns it on.
+            Default is Moderate, super-dirty (NSFW) content is off until a host turns it on.
           </p>
         </div>
       </div>
@@ -351,8 +351,8 @@ function VotingLobbySettings({
   return null;
 }
 
-/** Never Have I Ever — current player writes or picks a confession (M15:
- * the host-chosen statementSource drives what the author sees — provided
+/** Never Have I Ever, current player writes or picks a confession (M15:
+ * the host-chosen statementSource drives what the author sees, provided
  * suggestions, free text, or both). */
 function StatementView({
   voting,
@@ -402,7 +402,7 @@ function StatementView({
           ) : (
             <>
               <label htmlFor="nhie-statement" className="text-small font-semibold text-ink">
-                Something you have never done (3–120 characters)
+                Something you have never done (3-120 characters)
               </label>
               <textarea
                 id="nhie-statement"
@@ -433,7 +433,7 @@ function StatementView({
                 onClick={() => void submit()}
                 className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40 sm:self-start"
               >
-                Confess — start the vote
+                Confess, start the vote
               </button>
             </>
           )}
@@ -447,7 +447,7 @@ function StatementView({
   );
 }
 
-/** Voting phase — prompt + options + live bars. */
+/** Voting phase, prompt + options + live bars. */
 function VotingView({
   voting,
   myName,
@@ -527,7 +527,7 @@ function VoteCard({
     kind === 'would-you-rather' ? (index === 0 ? 'bg-blue-500' : 'bg-red-500') : 'bg-primary';
   const accentColor =
     kind === 'would-you-rather' ? (index === 0 ? '#3b82f6' : '#ef4444') : undefined;
-  // M16 — Most Likely To options are player names: give them big, obvious
+  // M16, Most Likely To options are player names: give them big, obvious
   // tap targets (the owner's "clickable area is too small" report).
   const isNameCard = kind === 'most-likely-to';
   return (
@@ -578,7 +578,7 @@ function VoteCard({
   );
 }
 
-/** Revealed phase — percentages, winner, crown, or confession tally. */
+/** Revealed phase, percentages, winner, crown, or confession tally. */
 function RevealView({
   voting,
   myName,
@@ -606,7 +606,7 @@ function RevealView({
         <p className="text-body text-ink">
           <span className="font-display text-h2 text-primary-deep">{reveal.haveCount ?? 0}</span> of{' '}
           <span className="font-semibold">{reveal.totalVotes}</span> player
-          {reveal.totalVotes === 1 ? '' : 's'} have done this —{' '}
+          {reveal.totalVotes === 1 ? '' : 's'} have done this -{' '}
           <span className="font-semibold">{reveal.haveNotCount ?? 0}</span> never have.
         </p>
       ) : (
@@ -661,14 +661,14 @@ function RevealView({
         </button>
       ) : (
         <p className="text-small text-ink-muted">
-          Waiting for the host — the next round starts automatically in a moment.
+          Waiting for the host, the next round starts automatically in a moment.
         </p>
       )}
     </div>
   );
 }
 
-/** Would You Rather — queue a player-submitted dilemma. */
+/** Would You Rather, queue a player-submitted dilemma. */
 function SubmitDilemma({
   onSubmit,
 }: {
@@ -688,7 +688,7 @@ function SubmitDilemma({
           value={a}
           onChange={(event) => setA(event.target.value)}
           maxLength={160}
-          placeholder="Option A — e.g. be able to fly 3 feet off the ground"
+          placeholder="Option A, e.g. be able to fly 3 feet off the ground"
           aria-label="Dilemma option A"
           className="rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
         />
@@ -696,7 +696,7 @@ function SubmitDilemma({
           value={b}
           onChange={(event) => setB(event.target.value)}
           maxLength={160}
-          placeholder="Option B — e.g. teleport to places you've been"
+          placeholder="Option B, e.g. teleport to places you've been"
           aria-label="Dilemma option B"
           className="rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
         />
@@ -772,7 +772,7 @@ function GameEndView({
       {voting.kind === 'this-or-that' && Array.isArray(payload.scores) && (
         <>
           <p className="text-body text-ink-muted">
-            Herd alignment — how often your pick matched the room's majority:
+            Herd alignment, how often your pick matched the room's majority:
           </p>
           <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
             {(payload.scores as { playerName: string; score: number }[]).map((entry, index) => (
@@ -799,7 +799,7 @@ function GameEndView({
       {voting.kind === 'never-have-i-ever' && (
         <>
           <p className="text-body text-ink-muted">
-            Final wildness — the number of confessions the room says you've lived:
+            Final wildness, the number of confessions the room says you've lived:
           </p>
           <Scoreboard voting={voting} myName={myName} />
         </>
@@ -812,7 +812,7 @@ function GameEndView({
       )}
       {voting.kind === 'would-you-rather' && (
         <p className="text-body text-ink-muted">
-          {voting.totalRounds} dilemmas debated — the arguments were the real score.
+          {voting.totalRounds} dilemmas debated, the arguments were the real score.
         </p>
       )}
       {isHost ? (

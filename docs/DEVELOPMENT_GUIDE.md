@@ -1,6 +1,6 @@
-# Development Guide — PartyBrain
+# Development Guide, TriviaHub
 
-> How to work in this repo day to day (v2.1, 2026-08-04 — commands updated for
+> How to work in this repo day to day (v2.1, 2026-08-04, commands updated for
 > the pnpm workspace setup from M1). Read `ARCHITECTURE.md`, `CONTRIBUTING.md`,
 > and `docs/PRD.md` alongside.
 
@@ -11,44 +11,44 @@
 - **Node.js 22.12+** (repo targets Node 26 LTS line; `engines` enforces ≥22.12)
 - **pnpm 11+** (workspace root; `pnpm-workspace.yaml` at the repo root)
 - **Docker** (local PostgreSQL + future testcontainers)
-- **Wrangler** (Cloudflare Pages deploys — `pnpm dlx wrangler` or install once)
+- **Wrangler** (Cloudflare Pages deploys, `pnpm dlx wrangler` or install once)
 - **Git** with GitHub access
 
 ## Initial Setup
 
 ```bash
-git clone <repo-url> partybrain
-cd partybrain
-pnpm install            # workspace install — root Astro app + @partybrain/server
+git clone <repo-url> triviahub
+cd triviahub
+pnpm install            # workspace install, root Astro app + @triviahub/server
 
 # Local PostgreSQL (Docker)
-docker run -d --name partybrain-pg -e POSTGRES_USER=partybrain \
-  -e POSTGRES_PASSWORD=partybrain -e POSTGRES_DB=partybrain \
+docker run -d --name triviahub-pg -e POSTGRES_USER=triviahub \
+  -e POSTGRES_PASSWORD=triviahub -e POSTGRES_DB=triviahub \
   -p 5432:5432 postgres:16
 
 # Env files (server)
 cp server/.env.example server/.env    # DATABASE_URL, PORT, CORS_ORIGIN
 
 # DB (M1+)
-pnpm --filter @partybrain/server db:migrate   # migrate dev
-pnpm --filter @partybrain/server db:seed      # seed 18 games
+pnpm --filter @triviahub/server db:migrate   # migrate dev
+pnpm --filter @triviahub/server db:seed      # seed 18 games
 ```
 
 ## Running the App (M1+)
 
 ```bash
 pnpm dev                    # Astro dev server → http://localhost:4321
-pnpm --filter @partybrain/server dev   # Express + Socket.io → http://localhost:3000
+pnpm --filter @triviahub/server dev   # Express + Socket.io → http://localhost:3000
 ```
 
 - Frontend: http://localhost:4321 (Astro hot reload for pages/islands)
-- Backend: http://localhost:3000 (`/healthz`, `/readyz`, `/api/*` — scores,
+- Backend: http://localhost:3000 (`/healthz`, `/readyz`, `/api/*`, scores,
   leaderboard, daily-challenge, room endpoints live since M3)
 - Socket.io: `ws://localhost:3000` (room events per PRD §8.2)
 
 ## Project Workflow
 
-1. Pick a task from `docs/TODO.md` (current milestone only — never work ahead).
+1. Pick a task from `docs/TODO.md` (current milestone only, never work ahead).
 2. Read the relevant `docs/ARCHITECTURE.md` sections and `docs/DECISIONS.md`
    entries; check the game spec in `docs/PRD.md` §5.
 3. Branch: `feat/<scope>` (see CONTRIBUTING).
@@ -82,7 +82,7 @@ pnpm --filter @partybrain/server dev   # Express + Socket.io → http://localhos
 - **Frontend release:** `pnpm deploy` → `astro build && wrangler pages deploy
 dist` (PRD §12) → Cloudflare Pages serves the static export; rollback =
   redeploy a previous build.
-- **Backend release:** `pnpm --filter @partybrain/server build` → deploy
+- **Backend release:** `pnpm --filter @triviahub/server build` → deploy
   `/server` Docker image to Railway/Render with `DATABASE_URL` + `CORS_ORIGIN`;
   migrations run **before** rollout (`db:deploy`).
 - **Smoke after deploy:** create/join room, submit score, read leaderboard,
@@ -93,17 +93,17 @@ dist` (PRD §12) → Cloudflare Pages serves the static export; rollback =
 
 - **Logs:** structured JSON (pino) in the server; follow request ids through
   REST and socket handlers.
-- **API locally:** `pnpm --filter @partybrain/server dev`; set `LOG_LEVEL=debug`
+- **API locally:** `pnpm --filter @triviahub/server dev`; set `LOG_LEVEL=debug`
   in `server/.env`.
-- **DB:** `pnpm --filter @partybrain/server db:studio`; reset dev data with
-  `pnpm --filter @partybrain/server db:migrate` (or drop the container and
+- **DB:** `pnpm --filter @triviahub/server db:studio`; reset dev data with
+  `pnpm --filter @triviahub/server db:migrate` (or drop the container and
   re-run).
 - **Integration tests** (DB-backed suites) require a reachable PostgreSQL at
-  `DATABASE_URL` — the local Docker container or the CI service. Run
-  `pnpm --filter @partybrain/server test` with the container up.
+  `DATABASE_URL`, the local Docker container or the CI service. Run
+  `pnpm --filter @triviahub/server test` with the container up.
 - **Sockets:** enable client debug (`localStorage.debug = 'socket.io-client*'`);
   the event contract lives in `server/src/lib/events.ts` (client mirror lands
-  M3) — reproduce races in an integration test before touching the engine.
+  M3), reproduce races in an integration test before touching the engine.
 - **Islands (M3+):** Astro dev hot-reloads islands; React DevTools; check
   hydration with `client:load` (an island not appearing = hydration/import
   issue).
@@ -114,31 +114,31 @@ dist` (PRD §12) → Cloudflare Pages serves the static export; rollback =
     `http://localhost:4321`.
   - Socket connects then immediately disconnects: check room-code/nickname
     validation, then rate limits (land in M3).
-  - Leaderboard wrong period (M3+): `playedAt` filtering — verify the index
+  - Leaderboard wrong period (M3+): `playedAt` filtering, verify the index
     and the `?period=` parsing.
   - `pnpm` says "command not found" for server scripts: use
-    `pnpm --filter @partybrain/server <script>`, not `pnpm --dir server …`.
+    `pnpm --filter @triviahub/server <script>`, not `pnpm --dir server …`.
 
 ## Deployment Workflow
 
 - **Frontend (Cloudflare Pages):** GitHub-connected project; every push to
   `main` deploys production, PRs get preview URLs (**`noindex`** via Pages'
-  automatic `X-Robots-Tag: noindex` on preview deployments — PRD §6.4).
+  automatic `X-Robots-Tag: noindex` on preview deployments, PRD §6.4).
   Custom domain + canonical URLs at M11.
 - **Backend (Railway or Render):** Dockerfile in `/server` (M11); managed
   PostgreSQL addon; env vars in the platform secret store (never in git).
-- **Local infra:** Postgres via Docker (`partybrain-pg` container).
+- **Local infra:** Postgres via Docker (`triviahub-pg` container).
 - **Env matrix:** `dev` (local), preview (Pages per-PR), production (Pages +
   Railway/Render). `.env.example` committed; real values in secret stores.
 
 ## Docs Maintenance
 
-- `PROJECT_STATE.md` — update after **every** PR (memory file).
-- `DECISIONS.md` — append on architecture changes; never edit history.
-- `TODO.md` — check off completed tasks; add new scope as new tasks.
-- `ARCHITECTURE.md` — update when system design changes, referencing the new
+- `PROJECT_STATE.md`, update after **every** PR (memory file).
+- `DECISIONS.md`, append on architecture changes; never edit history.
+- `TODO.md`, check off completed tasks; add new scope as new tasks.
+- `ARCHITECTURE.md`, update when system design changes, referencing the new
   decision entry.
-- `PRD.md` — owned by the product owner; engineering proposes amendments, the
+- `PRD.md`, owned by the product owner; engineering proposes amendments, the
   owner approves.
 
 ## Common Commands
@@ -146,19 +146,19 @@ dist` (PRD §12) → Cloudflare Pages serves the static export; rollback =
 ```bash
 pnpm install                              # workspace install (root + server)
 pnpm dev                                  # Astro dev (frontend)
-pnpm --filter @partybrain/server dev      # Express + Socket.io dev
+pnpm --filter @triviahub/server dev      # Express + Socket.io dev
 pnpm verify                               # full gate: format→lint→typecheck→tests→builds→smoke
 pnpm format / pnpm format:check           # Prettier write / check
 pnpm lint                                 # ESLint (whole repo)
 pnpm typecheck                            # astro check
 pnpm test:unit                            # client unit tests (vitest)
-pnpm --filter @partybrain/server test     # server tests (validation/HTTP/socket)
+pnpm --filter @triviahub/server test     # server tests (validation/HTTP/socket)
 pnpm build                                # astro build → dist/ (runs OG generation first)
 pnpm og:generate                          # regenerate public/og/*.png manually
 pnpm smoke                                # post-build smoke over dist/ (+ 100 KB page-weight gate)
 pnpm deploy                               # astro build && wrangler pages deploy dist (M11)
-pnpm --filter @partybrain/server db:migrate   # prisma migrate dev
-pnpm --filter @partybrain/server db:deploy    # prisma migrate deploy (CI/prod)
-pnpm --filter @partybrain/server db:seed      # seed 18 games
-pnpm --filter @partybrain/server db:studio    # Prisma Studio
+pnpm --filter @triviahub/server db:migrate   # prisma migrate dev
+pnpm --filter @triviahub/server db:deploy    # prisma migrate deploy (CI/prod)
+pnpm --filter @triviahub/server db:seed      # seed 18 games
+pnpm --filter @triviahub/server db:studio    # Prisma Studio
 ```

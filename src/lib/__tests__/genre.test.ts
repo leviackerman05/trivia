@@ -65,20 +65,20 @@ describe('Genre Swap logic (PRD §5.9)', () => {
 });
 
 describe('Genre-Bender logic (PRD §5.10)', () => {
-  it('options are title — artist pairs with 3 distractors', () => {
+  it('options are title, artist pairs with 3 distractors', () => {
     const picked = pickGenreBenderQuestions(BENDERS, 4, 0);
     const options = genreBenderOptions(picked[0]!, picked);
     expect(options).toHaveLength(4);
     expect(options).toContain(benderLabel(picked[0]!));
-    expect(options[0]).toMatch(/—/);
+    expect(options[0]).toMatch(/ - /);
   });
 
   it('scores like genre swap', () => {
-    const verdict = judgeGenreBender('Baby Shark — Pinkfong', 'Baby Shark — Pinkfong', 1_000);
+    const verdict = judgeGenreBender('Baby Shark, Pinkfong', 'Baby Shark, Pinkfong', 1_000);
     expect(verdict.correct).toBe(true);
     expect(verdict.points).toBe(15);
-    expect(
-      judgeGenreBender('Old Town Road — Lil Nas X', 'Baby Shark — Pinkfong', 1_000).points
-    ).toBe(0);
+    expect(judgeGenreBender('Old Town Road, Lil Nas X', 'Baby Shark, Pinkfong', 1_000).points).toBe(
+      0
+    );
   });
 });

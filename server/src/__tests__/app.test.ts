@@ -11,7 +11,7 @@ describe('HTTP app (M1 scaffold)', () => {
     expect(response.body).toEqual({ status: 'ok' });
   });
 
-  // /readyz needs a live database — covered in the DB-backed integration suite.
+  // /readyz needs a live database, covered in the DB-backed integration suite.
 
   it('unknown routes return 404 JSON', async () => {
     const response = await request(app).get('/api/not-yet-implemented');

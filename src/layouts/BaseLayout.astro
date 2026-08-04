@@ -10,18 +10,25 @@ interface Props {
   jsonLd?: string;
   /** Wide layout (max-w-7xl) for game pages so the play area gets more room. */
   wide?: boolean;
+  /** Active nav section for aria-current, e.g. "daily" | "games" | "categories". */
+  activeNav?: string;
 }
 
-const { title, description, canonicalPath, ogImage, jsonLd, wide = false } = Astro.props;
+const { title, description, canonicalPath, ogImage, jsonLd, wide = false, activeNav } = Astro.props;
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/#games', label: 'Games' },
-  { href: '/faq', label: 'FAQ' },
-  { href: '/about-us', label: 'About' },
+  { href: '/', label: 'Home', key: 'home' },
+  { href: '/daily', label: 'Daily Games', key: 'daily' },
+  { href: '/#games', label: 'Games', key: 'games' },
+  { href: '/categories', label: 'Categories', key: 'categories' },
+  { href: '/#multiplayer', label: 'Multiplayer', key: 'multiplayer' },
+  { href: '/#new-games', label: 'New Games', key: 'new' },
+  { href: '/#trending', label: 'Trending', key: 'trending' },
 ];
 
 const footerLinks = [
+  { href: '/daily', label: 'Daily Games' },
+  { href: '/categories', label: 'Categories' },
   { href: '/privacy-policy', label: 'Privacy Policy' },
   { href: '/terms-and-conditions', label: 'Terms & Conditions' },
   { href: '/about-us', label: 'About Us' },
@@ -52,7 +59,7 @@ const footerLinks = [
             (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
           document.documentElement.classList.toggle('dark', dark);
         } catch {
-          /* storage blocked — system preference only */
+          /* storage blocked, system preference only */
         }
         window.__pbTheme = function () {
           const html = document.documentElement;
@@ -61,28 +68,38 @@ const footerLinks = [
           try {
             localStorage.setItem('pb-theme', next);
           } catch {
-            /* storage blocked — session-only toggle */
+            /* storage blocked, session-only toggle */
           }
         };
       })();
     </script>
   </head>
   <body class="flex min-h-screen flex-col bg-surface font-body text-body text-ink">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-pill focus:bg-primary-strong focus:px-5 focus:py-3 focus:font-semibold focus:text-white"
+    >
+      Skip to main content
+    </a>
     <header
       class="sticky top-0 z-10 border-b-2 border-dashed border-border bg-surface-raised/95 backdrop-blur"
     >
       <nav
-        class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3"
+        class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3"
         aria-label="Main"
       >
-        <a href="/" class="font-display text-2xl text-primary-strong">PartyBrain</a>
-        <ul class="flex items-center gap-6">
+        <a href="/" class="flex items-center gap-2 font-display text-2xl text-primary-strong">
+          <img src="/favicon.svg" alt="" width="32" height="32" class="h-8 w-8 rounded-lg" />
+          TriviaHub
+        </a>
+        <ul class="flex flex-wrap items-center gap-x-5 gap-y-1">
           {
             navLinks.map((link) => (
               <li>
                 <a
                   href={link.href}
-                  class="text-small font-medium text-ink-muted hover:text-primary-strong"
+                  aria-current={activeNav === link.key ? 'page' : undefined}
+                  class="text-small font-medium text-ink-muted transition-colors hover:text-primary-strong"
                 >
                   {link.label}
                 </a>
@@ -104,7 +121,10 @@ const footerLinks = [
       </nav>
     </header>
 
-    <main class:list={['mx-auto w-full flex-1 px-4 py-10', wide ? 'max-w-7xl' : 'max-w-6xl']}>
+    <main
+      id="main-content"
+      class:list={['mx-auto w-full flex-1 px-4 py-10', wide ? 'max-w-7xl' : 'max-w-6xl']}
+    >
       <slot />
     </main>
 
@@ -112,7 +132,9 @@ const footerLinks = [
       <div
         class="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-8 sm:flex-row sm:justify-between"
       >
-        <p class="text-small text-ink-muted">© 2026 PartyBrain — Free online party games</p>
+        <p class="text-small text-ink-muted">
+          © 2026 TriviaHub. Free party games, daily trivia, multiplayer fun.
+        </p>
         <ul class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           {
             footerLinks.map((link) => (

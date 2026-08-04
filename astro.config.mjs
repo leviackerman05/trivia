@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   // PRD §2/§3/§13: static MPA. No SSR, no SPA shell.
   output: 'static',
-  site: 'https://partybrain.com',
+  site: 'https://playtriviahub.com',
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],

@@ -10,9 +10,10 @@ import {
   scorePriceGuess,
   type PriceProduct,
 } from '../../lib/price-is-right';
+import { dailyGameSeed } from '../../lib/daily';
 
 /**
- * Price Is Right — E-commerce Edition (M7, PRD §5.8; M14 owner fixes) —
+ * Price Is Right, E-commerce Edition (M7, PRD §5.8; M14 owner fixes).
  * guess the USD price of a (very real, very weird) product. M14: no slider,
  * just the numeric input, and the listing copy is quoted as a marketplace
  * excerpt. Scoring 100 − |Δ|·2 (min 0), exact = 200. 5 rounds.
@@ -24,7 +25,12 @@ function formatPrice(value: number): string {
   return `$${value.toLocaleString('en-US')}`;
 }
 
-export default function PriceIsRight() {
+interface Props {
+  /** Phase A: when set, the day's content is deterministic for everyone. */
+  dailyDateKey?: string;
+}
+
+export default function PriceIsRight({ dailyDateKey }: Props) {
   const [rounds, setRounds] = useState<PriceProduct[]>([]);
   const [index, setIndex] = useState(0);
   const [guess, setGuess] = useState(50);
@@ -37,7 +43,9 @@ export default function PriceIsRight() {
   const product = rounds[index];
 
   useEffect(() => {
-    seedRef.current = Math.floor(Math.random() * 1000);
+    seedRef.current = dailyDateKey
+      ? dailyGameSeed(dailyDateKey, 'price-is-right')
+      : Math.floor(Math.random() * 1000);
     setRounds(pickPriceRounds(products, PRICE_TOTAL_ROUNDS, seedRef.current));
   }, []);
 
@@ -67,7 +75,10 @@ export default function PriceIsRight() {
   }, [index, rounds.length]);
 
   const playAgain = () => {
-    seedRef.current = Math.floor(Math.random() * 1000);
+    // Daily mode keeps the day's content; solo mode re-rolls.
+    seedRef.current = dailyDateKey
+      ? dailyGameSeed(dailyDateKey, 'price-is-right')
+      : Math.floor(Math.random() * 1000);
     setRounds(pickPriceRounds(products, PRICE_TOTAL_ROUNDS, seedRef.current));
     setIndex(0);
     setGuess(50);
@@ -88,7 +99,7 @@ export default function PriceIsRight() {
       resultSummary={
         <p className="text-body text-ink-muted">
           {results.filter((result) => result.points === 200).length > 0
-            ? `💰 Exact guesses: ${results.filter((result) => result.points === 200).length} — the pricing oracle!`
+            ? `💰 Exact guesses: ${results.filter((result) => result.points === 200).length}, the pricing oracle!`
             : `${results.filter((result) => result.correct).length} of ${results.length} within half-price`}
         </p>
       }
@@ -164,7 +175,7 @@ export default function PriceIsRight() {
                           : 'text-warning-strong'
                     }`}
                   >
-                    It costs {formatPrice(product.price)} — you were{' '}
+                    It costs {formatPrice(product.price)}, you were{' '}
                     {revealed.delta === 0
                       ? 'exactly right! +200'
                       : `${formatPrice(revealed.delta)} ${guess > product.price ? 'over' : 'under'}. +${revealed.points}`}

@@ -5,7 +5,7 @@ import { useCharadesGame } from './useCharadesGame';
 import { getGame } from '../lib/games';
 
 /**
- * Charades arena (M9, PRD §5.12) — co-located pass-the-phone play. The
+ * Charades arena (M9, PRD §5.12), co-located pass-the-phone play. The
  * actor's device shows the secret movie title; anyone presses "Got it!"
  * when the team shouts the answer (+1); the 60s timer auto-advances. The
  * host picks Hollywood / Bollywood / Mixed in the lobby. The movie title
@@ -129,7 +129,7 @@ export default function CharadesArena({ gameSlug }: Props) {
           {isActor ? (
             <>
               <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
-                You're the actor — act it out!
+                You're the actor, act it out!
               </p>
               <p className="text-center font-display text-h1 text-ink">{charades.movie ?? '…'}</p>
               <p className="text-center text-body text-ink-muted">
@@ -140,15 +140,15 @@ export default function CharadesArena({ gameSlug }: Props) {
             <>
               <p className="font-display text-h2 text-ink">{charades.actor} is acting!</p>
               <p className="text-body text-ink-muted">
-                Shout your guesses — when the team gets it, tap “Got it!”.
+                Shout your guesses, when the team gets it, tap “Got it!”.
               </p>
             </>
           )}
           {charades.lastRound && (
             <p role="status" className="text-body font-semibold text-ink">
               {charades.lastRound.scored
-                ? `✅ Correct! +1 — ${charades.lastRound.nextActor ?? 'the team'} is next.`
-                : `⏱️ Time's up — ${charades.lastRound.nextActor ?? 'the team'} is next.`}
+                ? `✅ Correct! +1, ${charades.lastRound.nextActor ?? 'the team'} is next.`
+                : `⏱️ Time's up, ${charades.lastRound.nextActor ?? 'the team'} is next.`}
             </p>
           )}
           <div className="flex flex-wrap gap-3">
@@ -212,7 +212,7 @@ export default function CharadesArena({ gameSlug }: Props) {
           ))}
           {messages.length === 0 && (
             <li className="text-small text-ink-muted">
-              Guesses can be shouted out loud — or typed here!
+              Guesses can be shouted out loud, or typed here!
             </li>
           )}
         </ul>

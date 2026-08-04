@@ -39,11 +39,11 @@ describe('Daily Sudoku logic (M18)', () => {
   it('validPlacement respects rows, columns, and boxes', () => {
     const grid = [...SOLVED];
     grid[0] = 0; // empty the first cell
-    // 3 is in the first row (col 1) — invalid.
+    // 3 is in the first row (col 1), invalid.
     expect(validPlacement(grid, 0, 0, 3)).toBe(false);
-    // 6 is in the first column (row 1) — invalid.
+    // 6 is in the first column (row 1), invalid.
     expect(validPlacement(grid, 0, 0, 6)).toBe(false);
-    // 5 was the original digit — it fits again.
+    // 5 was the original digit, it fits again.
     expect(validPlacement(grid, 0, 0, 5)).toBe(true);
   });
 
@@ -60,7 +60,7 @@ describe('Daily Sudoku logic (M18)', () => {
   it('conflictCount counts every conflicting cell once', () => {
     const conflict = [...SOLVED];
     conflict[1] = 5; // row conflict with cell 0
-    conflict[10] = 6; // conflicts with (1,0) column-wise? 6 at (1,1) vs 6 at (0,2)? (1,1)=7→6 conflicts with (0,2)=4? no — keep it simple: count >= 1
+    conflict[10] = 6; // conflicts with (1,0) column-wise? 6 at (1,1) vs 6 at (0,2)? (1,1)=7→6 conflicts with (0,2)=4? no, keep it simple: count >= 1
     expect(conflictCount(conflict)).toBeGreaterThanOrEqual(1);
     expect(conflictCount(SOLVED)).toBe(0);
   });

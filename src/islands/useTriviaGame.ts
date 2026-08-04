@@ -13,7 +13,7 @@ import {
 } from '../lib/trivia-room';
 
 /**
- * Trivia room session hook (M8) — socket listeners + actions over the pure
+ * Trivia room session hook (M8), socket listeners + actions over the pure
  * triviaRoomReducer. Mounts on the Trivia page's room section; `game-resync`
  * on mount/reconnect rebuilds state (without the correct answer).
  */

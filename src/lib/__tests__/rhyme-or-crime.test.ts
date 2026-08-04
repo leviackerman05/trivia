@@ -30,14 +30,14 @@ describe('Rhyme or Crime logic (PRD §5.2, M14)', () => {
   });
 
   it('M14: pun dataset answers stay authoritative even when not a real rhyme', () => {
-    // witch → peach is an encoded pun (wɪtʃ vs piːtʃ do NOT rhyme) — the
+    // witch → peach is an encoded pun (wɪtʃ vs piːtʃ do NOT rhyme), the
     // dataset answer must still pass.
     expect(phoneticallyRhymes('witch', 'peach')).toBe(false);
     expect(judgeRhymeAnswer(ENTRIES[0]!, 'peach', 5_000).correct).toBe(true);
   });
 
   it('M14: phonetic judging accepts real rhymes outside the answer list', () => {
-    // The owner report: "pie" + "hi" — both /ay/ — must rhyme.
+    // The owner report: "pie" + "hi", both /ay/, must rhyme.
     expect(phoneticallyRhymes('pie', 'hi')).toBe(true);
     expect(phoneticallyRhymes('cat', 'hat')).toBe(true);
     expect(phoneticallyRhymes('cat', 'dog')).toBe(false);

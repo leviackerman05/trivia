@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DailyArchive from '../../islands/daily/DailyArchive.tsx';
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://playtriviahub.com/' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Daily Games',
+      item: 'https://playtriviahub.com/daily',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Archive',
+      item: 'https://playtriviahub.com/daily/archive',
+    },
+  ],
+});
+---
+
+<BaseLayout
+  title="Daily Game Archive: Your Scores by Day | TriviaHub"
+  description="Your daily game history: scores for daily trivia, sudoku, and more, day by day. See your streaks and personal bests at a glance."
+  canonicalPath="/daily/archive"
+  jsonLd={jsonLd}
+  activeNav="daily"
+>
+  <section class="mb-10">
+    <h1 class="font-display text-h1 text-ink">Your daily archive</h1>
+    <p class="mt-4 max-w-2xl text-body text-ink-muted">
+      Every daily game you finish is recorded here, newest first. Members see history synced across
+      devices; guests see the device-bound record. Tap "Keep my progress" after a daily game to sync
+      for free.
+    </p>
+  </section>
+
+  <section aria-label="Play history">
+    <DailyArchive client:load />
+  </section>
+</BaseLayout>

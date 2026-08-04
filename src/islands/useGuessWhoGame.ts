@@ -11,7 +11,7 @@ import {
   type QuestionEntry,
 } from '../lib/guess-who';
 
-/** Guess Who session hook (M9/M17) — room events + actions over guessWhoReducer. */
+/** Guess Who session hook (M9/M17), room events + actions over guessWhoReducer. */
 
 export interface UseGuessWhoGame {
   game: GuessWhoGameState;
@@ -197,7 +197,7 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
       }
       const response = await emitAck(ClientEvents.askQuestion, { roomCode: code, text });
       if (!response.ok) {
-        dispatch({ type: 'feedback', text: 'That question was rejected — 3–140 characters.' });
+        dispatch({ type: 'feedback', text: 'That question was rejected, 3-140 characters.' });
       }
       return { ok: response.ok, error: response.error };
     },

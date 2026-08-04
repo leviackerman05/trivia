@@ -35,7 +35,7 @@
     "name": "Instant Pot",
     "searchTerm": "instant pot",
     "emoji": "🍲",
-    "description": "Pressure cooker, slow cooker, rice cooker, and more — all in one.",
+    "description": "Pressure cooker, slow cooker, rice cooker, and more, all in one.",
     "price": 99,
     "image": "https://live.staticflickr.com/4317/35361506533_237d18d0d0_b.jpg",
     "credit": {
@@ -71,7 +71,7 @@
     "name": "Rice Cooker",
     "searchTerm": "rice cooker",
     "emoji": "🍚",
-    "description": "Perfect rice every time — foolproof.",
+    "description": "Perfect rice every time, foolproof.",
     "price": 35,
     "image": "https://live.staticflickr.com/115/298104095_b5f1d9c052_b.jpg",
     "credit": {
@@ -271,7 +271,7 @@
     "name": "Soda Maker",
     "searchTerm": "soda maker",
     "emoji": "🥤",
-    "description": "Fizz on demand — skip the bottles.",
+    "description": "Fizz on demand, skip the bottles.",
     "price": 90,
     "image": "https://live.staticflickr.com/3126/3136394088_c3c69b7b71_b.jpg",
     "credit": {
@@ -1234,7 +1234,7 @@
     "name": "Breakfast Sandwich Maker",
     "searchTerm": "breakfast sandwich",
     "emoji": "🥪",
-    "description": "Egg, cheese, bagel — assembled.",
+    "description": "Egg, cheese, bagel, assembled.",
     "price": 25,
     "image": "https://live.staticflickr.com/5075/6941638422_c9d00076b0_b.jpg",
     "credit": {
@@ -4092,7 +4092,7 @@
     "price": 60,
     "image": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Medieval_chafing_dish_%28FindID_546694%29.jpg",
     "credit": {
-      "creator": "National Museums Liverpool , Vanessa Oakden, 2013-02-23 21:13:14",
+      "creator": "National Museums Liverpool, Vanessa Oakden, 2013-02-23 21:13:14",
       "license": "by-sa"
     }
   },

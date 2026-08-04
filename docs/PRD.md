@@ -1,4 +1,4 @@
-You are building a complete, production-ready website called "PartyBrain" — a free online party games hub featuring 18 multiplayer and solo games. The website must be built with Astro.js, use React islands for interactive components, connect to a Node.js + Socket.io backend for real-time games, and be fully optimized for Google SEO and future Google AdSense monetization.
+You are building a complete, production-ready website called "TriviaHub", a free online party games hub featuring 18 multiplayer and solo games. The website must be built with Astro.js, use React islands for interactive components, connect to a Node.js + Socket.io backend for real-time games, and be fully optimized for Google SEO and future Google AdSense monetization.
 
 Follow every instruction below precisely. If any detail is unclear, ask before proceeding.
 
@@ -6,11 +6,11 @@ Follow every instruction below precisely. If any detail is unclear, ask before p
 
 ## 1. VISION & PURPOSE
 
-PartyBrain is a free website where friends, families, and remote teams can play 18 different party games instantly — no downloads, no accounts required, just share a room link and start playing. It competes with skribbl.io, Jackbox Games, and random browser game hubs, but offers more variety, smoother UX, and better mobile support.
+TriviaHub is a free website where friends, families, and remote teams can play 18 different party games instantly, no downloads, no accounts required, just share a room link and start playing. It competes with skribbl.io, Jackbox Games, and random browser game hubs, but offers more variety, smoother UX, and better mobile support.
 
 Target audience: US-based users aged 16-35 looking for virtual party games, classroom icebreakers, or streamer audience games.
 
-Monetization: Google AdSense (applied after traffic reaches 10+ daily users). The site must be built with AdSense compliance from day one — proper legal pages, clean content structure, and fast load times.
+Monetization: Google AdSense (applied after traffic reaches 10+ daily users). The site must be built with AdSense compliance from day one, proper legal pages, clean content structure, and fast load times.
 
 ---
 
@@ -36,13 +36,13 @@ Monetization: Google AdSense (applied after traffic reaches 10+ daily users). Th
 
 ---
 
-## 3. SITE ARCHITECTURE (MPA — Multi-Page Application)
+## 3. SITE ARCHITECTURE (MPA, Multi-Page Application)
 
 Every game gets its own static route: /game/[game-slug]
 
 Required routes:
 
-- / — Homepage (game grid, hero section, 600-word SEO description)
+- /, Homepage (game grid, hero section, 600-word SEO description)
 
 - /game/skribbl-arena
 
@@ -110,7 +110,7 @@ You must build these foundational systems first. All games that share a mechanic
 
 - Create room with unique 6-character alphanumeric code (e.g., "ABC123")
 
-- Join room via code or shared URL (e.g., partybrain.com/room/ABC123)
+- Join room via code or shared URL (e.g., triviahub.com/room/ABC123)
 
 - Player management: join, leave, rejoin, host migration
 
@@ -256,7 +256,7 @@ UI: Lyric banner (drawer only) → Shared canvas → Chat/guess input → Timer 
 
 ### 5.6 One Line, One Shape (Real-time | Drawing | Room)
 
-Core Loop: One player is given an object to draw (e.g., "bicycle," "elephant," "Eiffel Tower"). They must draw it using ONE continuous line — the pen cannot be lifted (touch end / mouse up). The drawing is shared on canvas. Others guess. 60 seconds.
+Core Loop: One player is given an object to draw (e.g., "bicycle," "elephant," "Eiffel Tower"). They must draw it using ONE continuous line, the pen cannot be lifted (touch end / mouse up). The drawing is shared on canvas. Others guess. 60 seconds.
 
 Features:
 
@@ -288,7 +288,7 @@ Features:
 
 UI: Three event cards (draggable) → "Submit Order" button → Feedback overlay → Next round → Final score
 
-### 5.8 Price Is Right — E-commerce Edition (Solo | Trivia)
+### 5.8 Price Is Right, E-commerce Edition (Solo | Trivia)
 
 Core Loop: A real product image from Amazon (or generic e-commerce product) is shown with its description. Player guesses the price in USD. Closest guess without going over wins. 5 rounds.
 
@@ -374,7 +374,7 @@ Features:
 
 - Bollywood: Shah Rukh Khan hits, Aamir Khan classics, recent blockbusters
 
-- Mode: "Pass the phone" — after correct guess, phone is passed to next actor, new word appears
+- Mode: "Pass the phone", after correct guess, phone is passed to next actor, new word appears
 
 - Timer: 60 seconds per word
 
@@ -490,7 +490,7 @@ Features:
 
 - Live percentage bar underneath each option
 
-- Streak: if your choice is the majority, you're "in the herd" — streak counter
+- Streak: if your choice is the majority, you're "in the herd", streak counter
 
 UI: Two cards → Tap to vote → Live bars → Auto-advance after 6 seconds → Final "herd alignment" score
 
@@ -500,11 +500,11 @@ UI: Two cards → Tap to vote → Live bars → Auto-advance after 6 seconds →
 
 ### 6.1 Homepage (/)
 
-- <title>: "Free Online Party Games | Play with Friends Instantly | PartyBrain"
+- <title>: "Free Online Party Games | Play with Friends Instantly | TriviaHub"
 
-- <meta description>: "Play 18 free online party games with friends — no downloads, no accounts. Drawing games, trivia, word games, and more. Perfect for virtual parties, classrooms, and team building. Start playing in seconds!"
+- <meta description>: "Play 18 free online party games with friends, no downloads, no accounts. Drawing games, trivia, word games, and more. Perfect for virtual parties, classrooms, and team building. Start playing in seconds!"
 
-- H1: "Free Online Party Games — Play Instantly with Friends"
+- H1: "Free Online Party Games, Play Instantly with Friends"
 
 - 600-word descriptive content about the website, including keywords: free online party games, browser party games, play pictionary online, virtual party games, multiplayer drawing games, online trivia games, would you rather online, skribbl alternative
 
@@ -514,7 +514,7 @@ UI: Two cards → Tap to vote → Live bars → Auto-advance after 6 seconds →
 
 ### 6.2 Each Game Page (/game/[slug])
 
-- <title>: "[Game Name] — Play Free Online | PartyBrain" (e.g., "Skribbl Arena — Free Online Drawing & Guessing Game | PartyBrain")
+- <title>: "[Game Name], Play Free Online | TriviaHub" (e.g., "Skribbl Arena, Free Online Drawing & Guessing Game | TriviaHub")
 
 - <meta description>: Unique 150-160 character description per game with primary keyword
 
@@ -524,7 +524,7 @@ UI: Two cards → Tap to vote → Live bars → Auto-advance after 6 seconds →
 
 - Game-specific FAQ with JSON-LD
 
-- OG image: auto-generated or template-based image with game name and PartyBrain logo
+- OG image: auto-generated or template-based image with game name and TriviaHub logo
 
 - Internal links to 2-3 related games
 
@@ -534,11 +534,11 @@ Questions to answer with JSON-LD structured data:
 
 - How do I play party games online with friends?
 
-- Do I need to download anything to play PartyBrain games?
+- Do I need to download anything to play TriviaHub games?
 
-- Can I play PartyBrain games on my phone?
+- Can I play TriviaHub games on my phone?
 
-- Are PartyBrain games free?
+- Are TriviaHub games free?
 
 - How many players can join a game?
 
@@ -548,7 +548,7 @@ Questions to answer with JSON-LD structured data:
 
 - What are the best party games for large groups?
 
-- Can I play PartyBrain games with people in different countries?
+- Can I play TriviaHub games with people in different countries?
 
 ### 6.4 Technical SEO
 
@@ -582,7 +582,7 @@ These requirements must be met from day one so AdSense approval is smooth:
 
 - Terms & Conditions page: user responsibilities, intellectual property, liability disclaimers
 
-- About Us page: what PartyBrain is, who built it, why it exists
+- About Us page: what TriviaHub is, who built it, why it exists
 
 - Contact Us page: email address, contact form (static form that sends to a real email or just displays contact info)
 
@@ -600,7 +600,7 @@ These requirements must be met from day one so AdSense approval is smooth:
 
 - No pop-ups, no auto-redirects, no deceptive content
 
-- Fast load times (<2 seconds) — which Astro static pages guarantee
+- Fast load times (<2 seconds), which Astro static pages guarantee
 
 ---
 
@@ -610,15 +610,15 @@ Create this in /server folder:
 
 ### 8.1 API Endpoints (REST)
 
-- POST /api/scores — submit score: { gameId, playerName, score }
+- POST /api/scores, submit score: { gameId, playerName, score }
 
-- GET /api/leaderboard/:gameId — get top scores for a game (daily/weekly/all-time)
+- GET /api/leaderboard/:gameId, get top scores for a game (daily/weekly/all-time)
 
-- GET /api/daily-challenge — get today's daily challenge data for each solo game
+- GET /api/daily-challenge, get today's daily challenge data for each solo game
 
-- POST /api/room/create — create a new room: { gameId } → returns { roomCode }
+- POST /api/room/create, create a new room: { gameId } → returns { roomCode }
 
-- GET /api/room/:roomCode — get room info (players, game type, status)
+- GET /api/room/:roomCode, get room info (players, game type, status)
 
 ### 8.2 Socket.io Events
 
@@ -824,19 +824,19 @@ model DailyChallenge {
 
     Base unit: 8px with generous padding throughout.
 
-    xs: 4px — Inline icon gaps
+    xs: 4px, Inline icon gaps
 
-    sm: 8px — Minimal internal gaps
+    sm: 8px, Minimal internal gaps
 
-    md: 16px — Standard padding
+    md: 16px, Standard padding
 
-    lg: 24px — Card padding, section gaps
+    lg: 24px, Card padding, section gaps
 
-    xl: 32px — Layout margins
+    xl: 32px, Layout margins
 
-    2xl: 48px — Hero spacing
+    2xl: 48px, Hero spacing
 
-    3xl: 64px — Major section breaks
+    3xl: 64px, Major section breaks
 
     All interactive elements receive extra padding (minimum 16px) for easy tapping by small fingers.
 
@@ -1012,19 +1012,19 @@ model DailyChallenge {
 
     Do NOT use any paid or copyrighted images (all images must be public domain, CC0, or self-created SVGs)
 
-    Do NOT make the site a single-page application (SPA) — Astro MPA only
+    Do NOT make the site a single-page application (SPA), Astro MPA only
 
-    Do NOT bundle all game JavaScript on the homepage — each game island loads only on its page
+    Do NOT bundle all game JavaScript on the homepage, each game island loads only on its page
 
-    Do NOT use heavy animation libraries — CSS animations only for performance
+    Do NOT use heavy animation libraries, CSS animations only for performance
 
-    Do NOT include actual AdSense code — use commented placeholders as specified
+    Do NOT include actual AdSense code, use commented placeholders as specified
 
-    Do NOT require user authentication — everything works with just a nickname
+    Do NOT require user authentication, everything works with just a nickname
 
-    Do NOT scrape Amazon or any external site for Price Is Right — use a manually curated static JSON dataset
+    Do NOT scrape Amazon or any external site for Price Is Right, use a manually curated static JSON dataset
 
-    Do NOT use any real celebrity photos for Guess Who — use text descriptions only or public domain images
+    Do NOT use any real celebrity photos for Guess Who, use text descriptions only or public domain images
 
 14. OUTPUT EXPECTATIONS
 

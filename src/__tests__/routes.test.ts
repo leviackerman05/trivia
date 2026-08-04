@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { games } from '../lib/games';
 
 /**
- * Structural route tests — verify PRD §3 routes exist as source files and that
+ * Structural route tests, verify PRD §3 routes exist as source files and that
  * the SEO artifacts (robots.txt, sitemap.xml) cover every route.
  * Render-level verification of the production build lives in
  * scripts/smoke.mjs (run after `astro build` in CI).
@@ -25,7 +25,7 @@ const STATIC_PAGES = [
 ];
 
 const SITEMAP_STATIC_URLS = [
-  'https://partybrain.com/',
+  'https://playtriviahub.com/',
   '/faq',
   '/privacy-policy',
   '/terms-and-conditions',
@@ -54,7 +54,7 @@ describe('PRD §3 required routes', () => {
 describe('SEO artifacts (PRD §6.4)', () => {
   it('robots.txt references the sitemap', () => {
     const robots = readFileSync(join(publicDir, 'robots.txt'), 'utf-8');
-    expect(robots).toContain('Sitemap: https://partybrain.com/sitemap.xml');
+    expect(robots).toContain('Sitemap: https://playtriviahub.com/sitemap.xml');
   });
 
   it('sitemap.xml lists every game page (19) and every static page', () => {

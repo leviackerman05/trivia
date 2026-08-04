@@ -10,10 +10,10 @@ import {
 import { dailyDateKey } from '../../lib/trivia';
 
 /**
- * Daily Sudoku (M18 — owner request) — the same seeded puzzle for everyone
+ * Daily Sudoku (M18, owner request), the same seeded puzzle for everyone
  * on the same UTC day, played in the shared SoloShell (streak, leaderboard,
  * share image). Tap a cell, tap a number; wrong entries can be erased.
- * Completing the puzzle scores a flat 200 — the leaderboard is the race.
+ * Completing the puzzle scores a flat 200, the leaderboard is the race.
  */
 
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -32,7 +32,7 @@ export default function Sudoku() {
 
   const dateKey = dailyDateKey(new Date());
 
-  // Elapsed-time ticker (flavor only — scoring is flat).
+  // Elapsed-time ticker (flavor only, scoring is flat).
   useEffect(() => {
     if (phase !== 'playing') {
       return;
@@ -62,7 +62,7 @@ export default function Sudoku() {
     next[selected] = value;
     setGrid(next);
     if (value !== 0 && !validPlacement(next, row, col, value)) {
-      // Flavor only — the player can fix or erase; no game-over.
+      // Flavor only, the player can fix or erase; no game-over.
       setMistakes((previous) => previous + 1);
     }
     // Completion check: full + valid → done.
@@ -86,7 +86,7 @@ export default function Sudoku() {
       <div className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
         <h3 className="font-display text-h3 text-ink">Daily Sudoku</h3>
         <p className="max-w-xl text-body text-ink-muted">
-          The same puzzle for everyone today ({dateKey}) — finish it to score{' '}
+          The same puzzle for everyone today ({dateKey}), finish it to score{' '}
           {SUDOKU_COMPLETION_POINTS} points on the daily leaderboard. Tap a cell, then tap a number.
         </p>
         <button
@@ -121,7 +121,7 @@ export default function Sudoku() {
         <p className="text-body text-ink-muted">
           Daily puzzle {dateKey} complete in{' '}
           {Math.max(1, Math.floor((Date.now() - startedAtRef.current) / 1000))} seconds
-          {mistakes > 0 && ` — ${mistakes} misplaced ${mistakes === 1 ? 'number' : 'numbers'}`}.
+          {mistakes > 0 && `, ${mistakes} misplaced ${mistakes === 1 ? 'number' : 'numbers'}`}.
         </p>
       }
       onPlayAgain={playAgain}
@@ -193,7 +193,7 @@ export default function Sudoku() {
             </div>
             {conflicts > 0 && (
               <p role="status" className="text-small font-semibold text-warning-strong">
-                {conflicts} {conflicts === 1 ? 'cell has' : 'cells have'} conflicting numbers — fix
+                {conflicts} {conflicts === 1 ? 'cell has' : 'cells have'} conflicting numbers, fix
                 them to finish.
               </p>
             )}

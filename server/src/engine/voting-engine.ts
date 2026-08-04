@@ -1,7 +1,7 @@
 import { randomInt } from 'node:crypto';
 
 /**
- * Voting game session engine (M6, PRD §5.13/5.14/5.16/5.18) —
+ * Voting game session engine (M6, PRD §5.13/5.14/5.16/5.18).
  * transport-agnostic, one session class for all four voting games with
  * kind-specific mechanics:
  *
@@ -10,7 +10,7 @@ import { randomInt } from 'node:crypto';
  *                        to the room queue (gateway-owned).
  * - most-likely-to:      prompt + player names as options, ranked reveal with
  *                        a crown for the round winner; self-votes allowed.
- * - never-have-i-ever:   turn rotation — the current player states something
+ * - never-have-i-ever:   turn rotation, the current player states something
  *                        they've never done (or picks a suggestion), everyone
  *                        else votes I HAVE / I HAVE NOT (aggregate reveal),
  *                        wildness tallies accumulate.
@@ -27,10 +27,10 @@ export type VotingGameKind =
 
 export type VotingPhase = 'idle' | 'statement' | 'voting' | 'revealed' | 'game-end';
 
-/** M15 — Never Have I Ever content tier (host-chosen; default moderate). */
+/** M15, Never Have I Ever content tier (host-chosen; default moderate). */
 export type NhieTier = 'boring' | 'moderate' | 'dirty' | 'super-dirty';
 
-/** M15 — where NHIE statements come from (host-chosen; default both). */
+/** M15, where NHIE statements come from (host-chosen; default both). */
 export type NhieSource = 'provided' | 'own' | 'both';
 
 export type VotingError =
@@ -62,10 +62,10 @@ export interface VotingReveal {
   totalVotes: number;
   winnerId: string | null;
   winnerLabel: string | null;
-  /** Never Have I Ever — aggregate (anonymous) reveal. */
+  /** Never Have I Ever, aggregate (anonymous) reveal. */
   haveCount?: number;
   haveNotCount?: number;
-  /** This or That — majority per round (null on a tie). */
+  /** This or That, majority per round (null on a tie). */
   majorityId?: string | null;
 }
 
@@ -73,7 +73,7 @@ export interface VotingConfig {
   kind: VotingGameKind;
   /** Voting phase duration (ms). */
   voteMs: number;
-  /** Revealed phase duration (ms) — 0 skips the revealed phase (TOT). */
+  /** Revealed phase duration (ms), 0 skips the revealed phase (TOT). */
   revealMs: number;
   /** Never Have I Ever: statement phase duration (ms). */
   statementMs?: number;
@@ -94,14 +94,14 @@ export interface MltPrompt {
 
 export interface NhieSuggestion {
   statement: string;
-  /** M15 — content tier; defaults to 'moderate' when absent. */
+  /** M15, content tier; defaults to 'moderate' when absent. */
   tier?: NhieTier;
 }
 
 export interface TotPair {
   a: string;
   b: string;
-  /** M15 — genre bucket (defaults to 'lifestyle' when absent). */
+  /** M15, genre bucket (defaults to 'lifestyle' when absent). */
   genre?: string;
 }
 
@@ -145,7 +145,7 @@ export class VotingSession {
   private totPairs: TotPair[] = [];
   /** WYR: player-submitted dilemma for the next round (useCustomPrompt). */
   private nextWyrEntry: WyrEntry | null = null;
-  /** M15 — host-chosen content options, applied for the whole game. */
+  /** M15, host-chosen content options, applied for the whole game. */
   private nhieTier: NhieTier = 'moderate';
   private nhieSource: NhieSource = 'both';
   private totGenre: string | null = null;
@@ -275,7 +275,7 @@ export class VotingSession {
   }
 
   /** Suggested statements for the current NHIE turn (pick or write your own).
-   * M15: filtered by the host-chosen tier, with a safe fallback — a tier
+   * M15: filtered by the host-chosen tier, with a safe fallback, a tier
    * with too few entries tops up from the next-safe tier (super-dirty →
    * dirty → moderate → boring), never the other way. */
   suggestionOptions(count = 4): string[] {
@@ -299,7 +299,7 @@ export class VotingSession {
     return picks;
   }
 
-  /** M15 — host-chosen content options for this game (before start). */
+  /** M15, host-chosen content options for this game (before start). */
   setContentOptions(options: {
     nhieTier?: NhieTier;
     nhieSource?: NhieSource;
@@ -319,12 +319,12 @@ export class VotingSession {
     }
   }
 
-  /** M15 — does the current game use server-provided NHIE suggestions? */
+  /** M15, does the current game use server-provided NHIE suggestions? */
   get usesProvidedSuggestions(): boolean {
     return this.nhieSource !== 'own';
   }
 
-  /** M15 — where NHIE statements come from (drives the statement view). */
+  /** M15, where NHIE statements come from (drives the statement view). */
   get statementSource(): NhieSource {
     return this.nhieSource;
   }
@@ -352,7 +352,7 @@ export class VotingSession {
 
   /**
    * Advance to the next round (gateway: after the revealed-phase break).
-   * Returns { finished } — the gateway emits game-end when true.
+   * Returns { finished }, the gateway emits game-end when true.
    */
   next(): VotingResult<{ finished: boolean }> {
     if (this.phase === 'idle' || this.phase === 'game-end') {
@@ -532,7 +532,7 @@ export class VotingSession {
         this.rotationIndex += 1;
         this.statementBy = player.name;
         this.promptTitle = `${player.name}, never have I ever…`;
-        this.promptSubtitle = 'Share something you have never done — others will vote.';
+        this.promptSubtitle = 'Share something you have never done, others will vote.';
         this.options = [
           { id: 'have', label: 'I HAVE' },
           { id: 'have-not', label: 'I HAVE NOT' },
@@ -541,7 +541,7 @@ export class VotingSession {
         break;
       }
       case 'this-or-that': {
-        // M15 — host-chosen genre, topped up from the full pool when the
+        // M15, host-chosen genre, topped up from the full pool when the
         // genre alone is too small to fill the game.
         const pool =
           this.totGenre === null

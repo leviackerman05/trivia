@@ -1,7 +1,7 @@
 import { randomInt } from 'node:crypto';
 
 /**
- * Drawing-game session engine (M5) — powers all four shared-canvas drawing
+ * Drawing-game session engine (M5), powers all four shared-canvas drawing
  * games (Skribbl Arena, One Line One Shape, Shadow Sketch, Draw the Lyric)
  * from one configurable state machine. Transport-agnostic like the
  * RoomEngine: no Socket.io types here, timers are owned by the gateway.
@@ -155,7 +155,7 @@ export class DrawingGameSession {
     return this.entry?.word ?? null;
   }
 
-  /** The full dataset entry (lyric/silhouette/object) — drawer payload only. */
+  /** The full dataset entry (lyric/silhouette/object), drawer payload only. */
   get currentEntry(): DrawingEntry | null {
     return this.entry;
   }
@@ -218,7 +218,7 @@ export class DrawingGameSession {
     return stripped.trim();
   }
 
-  /** Start the game (1+ players allowed — solo rooms are a testing affordance). */
+  /** Start the game (1+ players allowed, solo rooms are a testing affordance). */
   start(playerNames: string[]): DrawingGameResult<{ totalRounds: number }> {
     if (this.phase !== 'idle') {
       return { ok: false, error: 'ALREADY_STARTED' };
@@ -395,7 +395,7 @@ export class DrawingGameSession {
     return guessers.length > 0 && guessers.every((player) => player.guessedThisRound);
   }
 
-  /** Letter hints (skribbl) — first at 30s, last at 45s. */
+  /** Letter hints (skribbl), first at 30s, last at 45s. */
   letterHintsAt(now: number): { firstLetter: string | null; lastLetter: string | null } {
     const startedAt = this.roundStartedAt;
     const word = this.entry?.word;

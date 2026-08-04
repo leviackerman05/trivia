@@ -59,7 +59,7 @@ function make(config: VotingConfig) {
   return new VotingSession(config, DATASETS, { randomInt: (_max) => 0 });
 }
 
-describe('VotingSession — Would You Rather (PRD §5.13)', () => {
+describe('VotingSession, Would You Rather (PRD §5.13)', () => {
   it('starts in voting with a two-option dilemma', () => {
     const session = make(WYR);
     const started = session.start(['Alice', 'Bob']);
@@ -116,7 +116,7 @@ describe('VotingSession — Would You Rather (PRD §5.13)', () => {
   });
 });
 
-describe('VotingSession — Most Likely To (PRD §5.14)', () => {
+describe('VotingSession, Most Likely To (PRD §5.14)', () => {
   it('builds options from player names and allows self-votes', () => {
     const session = make(MLT);
     session.start(['Alice', 'Bob']);
@@ -138,7 +138,7 @@ describe('VotingSession — Most Likely To (PRD §5.14)', () => {
   });
 });
 
-describe('VotingSession — Never Have I Ever (PRD §5.16)', () => {
+describe('VotingSession, Never Have I Ever (PRD §5.16)', () => {
   it('rotates turns and requires the current player to confess', () => {
     const session = make(NHIE);
     session.start(['Alice', 'Bob']);
@@ -165,7 +165,7 @@ describe('VotingSession — Never Have I Ever (PRD §5.16)', () => {
     expect(session.wildnessScores).toEqual([{ playerName: 'Bob', count: 1 }]);
   });
 
-  it('scales rounds with the player count (4–10)', () => {
+  it('scales rounds with the player count (4-10)', () => {
     const solo = make(NHIE);
     solo.start(['Solo']);
     expect(solo.totalRoundsValue).toBe(4);
@@ -182,7 +182,7 @@ describe('VotingSession — Never Have I Ever (PRD §5.16)', () => {
     expect(suggestions).toHaveLength(2); // dataset has 2 entries
   });
 
-  it('M15: tiers filter suggestions — super-dirty only falls back to safer tiers', () => {
+  it('M15: tiers filter suggestions, super-dirty only falls back to safer tiers', () => {
     const session = make(NHIE);
     session.setContentOptions({ nhieTier: 'super-dirty' });
     session.start(['Alice']);
@@ -208,7 +208,7 @@ describe('VotingSession — Never Have I Ever (PRD §5.16)', () => {
   });
 });
 
-describe('VotingSession — This or That (PRD §5.18)', () => {
+describe('VotingSession, This or That (PRD §5.18)', () => {
   it('M15: the host-chosen genre filters the pair pool, with a full-pool fallback', () => {
     const session = make(TOT);
     session.setContentOptions({ totGenre: 'food' });
@@ -260,7 +260,7 @@ describe('VotingSession — This or That (PRD §5.18)', () => {
   });
 });
 
-describe('VotingSession — guards', () => {
+describe('VotingSession, guards', () => {
   it('rejects votes outside the voting phase and unknown players', () => {
     const session = make(WYR);
     session.start(['Alice']);

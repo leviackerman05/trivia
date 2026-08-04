@@ -28,7 +28,7 @@ describe('skribbl word bank (server/src/data/skribbl-words.json)', () => {
       expect(DIFFICULTIES).toContain(entry.difficulty);
       expect(entry.word.length).toBeGreaterThanOrEqual(1);
       expect(entry.word.length).toBeLessThanOrEqual(24);
-      // Letters, spaces, hyphens, apostrophes only — keeps payloads and URLs safe.
+      // Letters, spaces, hyphens, apostrophes only, keeps payloads and URLs safe.
       expect(entry.word, entry.word).toMatch(/^[a-z' -]+$/);
     }
   });

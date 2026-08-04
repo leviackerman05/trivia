@@ -1,7 +1,7 @@
-# Contributing to PartyBrain
+# Contributing to TriviaHub
 
-> How engineers work in this repository (v2, 2026-08-04 — regenerated against
-> `docs/PRD.md`). Living document — propose changes via PR.
+> How engineers work in this repository (v2, 2026-08-04, regenerated against
+> `docs/PRD.md`). Living document, propose changes via PR.
 
 ## Core Principles
 
@@ -11,7 +11,7 @@
 2. **Correctness over speed.** Reviews are thorough.
 3. **Small, reviewable changes.** One logical unit of work per PR.
 4. **Build once, reuse everywhere (PRD §4).** New games configure the shared
-   Room Engine / Drawing Canvas / Voting / Solo Template — never duplicate them.
+   Room Engine / Drawing Canvas / Voting / Solo Template, never duplicate them.
 5. **Server-authoritative.** Clients send intents; the server decides scores,
    guesses, votes, and timers. This is a correctness property.
 6. **SEO & AdSense are engineering requirements.** Every page ships with its
@@ -29,31 +29,31 @@
 - **Validation:** every inbound boundary (REST body, socket payload, query
   param) is validated server-side. Malformed input is rejected and logged.
 - **Socket events:** names and payloads come from the shared event constants
-  (`src/lib/events.ts` ↔ `server/src/lib/events.ts`) — never string literals
+  (`src/lib/events.ts` ↔ `server/src/lib/events.ts`), never string literals
   invented inline. PRD §8.2 names are verbatim.
 - **Tests:** new logic requires tests. See [TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md).
 - **Logging:** structured logs (pino) in the server; no `console.log` in
   committed code.
 - **Content:** datasets must be public-domain/CC0/self-created (PRD §7, §13).
   New datasets need a licensing header + integrity test entry. If content
-  might be copyrighted (lyrics, celebrity photos, scraped images) — stop and
+  might be copyrighted (lyrics, celebrity photos, scraped images), stop and
   flag it; it is a review blocker.
 
 ## Folder Conventions
 
 ```
-src/pages/       Astro routes (file = route) — /, /game/[slug], legal, /faq, /404, /500
-src/islands/     React islands — room/, drawing/, voting/, solo/, trivia/
-src/components/  Astro components — SEOHead, GameCard, FAQSection…
+src/pages/       Astro routes (file = route), /, /game/[slug], legal, /faq, /404, /500
+src/islands/     React islands, room/, drawing/, voting/, solo/, trivia/
+src/components/  Astro components, SEOHead, GameCard, FAQSection…
 src/data/        Static JSON datasets (game content)
 src/lib/         api client, socket client, event constants, game registry
-server/src/      Express + Socket.io — routes/, socket/, engine/, lib/
+server/src/      Express + Socket.io, routes/, socket/, engine/, lib/
 server/prisma/   schema.prisma (PRD §8.3), migrations, seed
 public/          robots.txt, sitemap.xml, _headers, assets
 ```
 
 - Feature-first inside `src/islands/` and `server/src/`.
-- Shared code lives once — copy-paste across games is a review blocker.
+- Shared code lives once, copy-paste across games is a review blocker.
 
 ## Naming Rules
 
@@ -73,7 +73,7 @@ public/          robots.txt, sitemap.xml, _headers, assets
 
 GitHub Flow with trunk-based principles:
 
-1. `main` is always deployable and protected — no direct pushes.
+1. `main` is always deployable and protected, no direct pushes.
 2. Branch from `main`: `feat/<scope>`, `fix/<scope>`, `chore/<scope>`,
    `docs/<scope>`, `refactor/<scope>`, `test/<scope>`.
 3. Small commits with Conventional Commits:
@@ -86,7 +86,7 @@ GitHub Flow with trunk-based principles:
 
 ## Commit Style
 
-- `type(scope): subject` — e.g., `feat(voting): live percentage bars`,
+- `type(scope): subject`, e.g., `feat(voting): live percentage bars`,
   `fix(engine): reject late guesses`, `docs(state): update project state after M4`.
 - Imperative subject, ≤ 72 chars, lowercase; body explains **why**.
 - Reference issues: `Closes #42`.

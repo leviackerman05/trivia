@@ -32,7 +32,7 @@ const roundStart = (overrides: Record<string, unknown> = {}): VotingAction => ({
   },
 });
 
-describe('votingReducer — rounds and votes', () => {
+describe('votingReducer, rounds and votes', () => {
   it('round-start enters the voting view with options and deadline', () => {
     const state = votingReducer(stateWith(), roundStart());
     expect(state.view).toBe('voting');
@@ -132,7 +132,7 @@ describe('votingReducer — rounds and votes', () => {
   });
 });
 
-describe('votingReducer — game end', () => {
+describe('votingReducer, game end', () => {
   it('this-or-that adopts the server herd score and shows the podium', () => {
     const state = votingReducer(
       stateWith({ kind: 'this-or-that', view: 'voting', herdStreak: 4 }),
@@ -182,7 +182,7 @@ describe('votingReducer — game end', () => {
   });
 });
 
-describe('votingReducer — resync and reset', () => {
+describe('votingReducer, resync and reset', () => {
   it('resync rebuilds a mid-game snapshot', () => {
     const state = votingReducer(stateWith({ view: 'voting', round: 3 }), {
       type: 'resync',

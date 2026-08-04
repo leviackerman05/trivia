@@ -1,5 +1,5 @@
 /**
- * Client-side Charades state (M9) — pure reducer over the server's charades
+ * Client-side Charades state (M9), pure reducer over the server's charades
  * events. The movie title only ever arrives on the ACTOR's device (D023).
  */
 
@@ -79,7 +79,7 @@ export function charadesReducer(
     case 'reset':
       return { ...initialCharadesState(), myName: state.myName };
     case 'category-change':
-      // M17 — optimistic local update after the host's set-category ack, so
+      // M17, optimistic local update after the host's set-category ack, so
       // the lobby toggle reflects the choice immediately (the server only
       // echoes the category in the round-start payload).
       return { ...state, category: action.category };

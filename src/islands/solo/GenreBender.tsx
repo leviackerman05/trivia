@@ -12,10 +12,11 @@ import {
   pickGenreBenderQuestions,
   type GenreBenderEntry,
 } from '../../lib/genre-bender';
+import { dailyGameSeed } from '../../lib/daily';
 
 /**
- * Genre-Bender (M8, PRD §5.10; M14 owner fixes) — rap lyrics rewritten as
- * Shakespearean sonnets (paraphrased/original — licensing-safe); name the
+ * Genre-Bender (M8, PRD §5.10; M14 owner fixes), rap lyrics rewritten as
+ * Shakespearean sonnets (paraphrased/original, licensing-safe); name the
  * song + artist from four options. The year clue stays a free hint; the
  * round timer is player-chosen and starts only when the game starts.
  */
@@ -25,7 +26,12 @@ const TIMER_OPTIONS = [30, 40, 50, 60, 70];
 
 type Phase = 'setup' | 'playing' | 'done';
 
-export default function GenreBender() {
+interface Props {
+  /** Phase A: when set, the day's content is deterministic for everyone. */
+  dailyDateKey?: string;
+}
+
+export default function GenreBender({ dailyDateKey }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('genre-bender', 30));
   const [questions, setQuestions] = useState<GenreBenderEntry[]>([]);
@@ -46,7 +52,9 @@ export default function GenreBender() {
 
   const start = () => {
     saveTimerSetting('genre-bender', timerSeconds);
-    const seed = Math.floor(Math.random() * 1000);
+    const seed = dailyDateKey
+      ? dailyGameSeed(dailyDateKey, 'genre-bender')
+      : Math.floor(Math.random() * 1000);
     const picked = pickGenreBenderQuestions(entries, GENRE_BENDER_TOTAL_QUESTIONS, seed);
     setQuestions(picked);
     setOptions(picked[0] ? genreBenderOptions(picked[0], picked) : []);
@@ -75,8 +83,8 @@ export default function GenreBender() {
     setFeedback({
       correct: verdict.correct,
       text: verdict.correct
-        ? `“${benderLabel(question)}” — +${verdict.points} points!`
-        : `Not quite — it was “${benderLabel(question)}”.`,
+        ? `“${benderLabel(question)}”, +${verdict.points} points!`
+        : `Not quite, it was “${benderLabel(question)}”.`,
     });
     setScore((previous) => previous + verdict.points);
     setResults((previous) => [...previous, { correct: verdict.correct, points: verdict.points }]);
@@ -111,7 +119,7 @@ export default function GenreBender() {
       <div className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
         <h3 className="font-display text-h3 text-ink">Genre-Bender</h3>
         <p className="max-w-xl text-body text-ink-muted">
-          A classic lyric rewritten as a Shakespearean sonnet — name the song and artist. Pick your
+          A classic lyric rewritten as a Shakespearean sonnet, name the song and artist. Pick your
           round timer; the clock starts when you do.
         </p>
         <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />

@@ -1,7 +1,7 @@
 import { randomInt } from 'node:crypto';
 
 /**
- * Room Engine — the generic state machine powering all 12 multiplayer games
+ * Room Engine, the generic state machine powering all 12 multiplayer games
  * (PRD §4.1). Transport-agnostic: no Socket.io/Express types here, so it is
  * unit-testable in isolation. The socket gateway (socket/index.ts) is the
  * thin adapter on top.

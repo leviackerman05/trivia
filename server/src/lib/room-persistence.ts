@@ -5,7 +5,7 @@ import type { RoomEngine, RoomState } from '../engine/room-engine.js';
 /**
  * Best-effort room persistence (Room/RoomPlayer rows, PRD §8.3).
  * The in-memory engine is the source of truth for live gameplay; DB writes
- * must never block or break a game — failures are logged, not thrown.
+ * must never block or break a game, failures are logged, not thrown.
  */
 
 function isUniqueViolation(error: unknown): boolean {
