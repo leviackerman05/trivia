@@ -429,7 +429,9 @@ function DrawerPrompt({
         <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
           Draw this lyric, the song title is the answer
         </p>
-        <p className="mt-1 text-lg font-bold tracking-tight text-ink">“{drawing.drawerData.lyric}”</p>
+        <p className="mt-1 text-lg font-bold tracking-tight text-ink">
+          “{drawing.drawerData.lyric}”
+        </p>
         {drawing.drawerData.artist && (
           <p className="text-small text-ink-muted">Artist hint appears at 45s.</p>
         )}
@@ -446,7 +448,9 @@ function DrawerPrompt({
         <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
           One continuous line, don't lift the pen!
         </p>
-        <p className="mt-1 text-lg font-bold tracking-tight text-ink">{drawing.drawerData.object}</p>
+        <p className="mt-1 text-lg font-bold tracking-tight text-ink">
+          {drawing.drawerData.object}
+        </p>
       </div>
     ) : (
       <p className="text-small text-ink-muted">

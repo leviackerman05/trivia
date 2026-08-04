@@ -122,7 +122,9 @@ export default function TimelineTussle({ dailyDateKey }: Props) {
       {round && (
         <>
           <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
-            <p className="text-lg font-bold tracking-tight text-ink">Tap the events in chronological order</p>
+            <p className="text-lg font-bold tracking-tight text-ink">
+              Tap the events in chronological order
+            </p>
             <p className="mt-1 text-small text-ink-muted">
               Tap again to undo a pick, you need all three before submitting.
             </p>

@@ -78,7 +78,9 @@ export default function DailyHubStatus() {
     return (
       <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-lg font-bold tracking-tight text-ink">Welcome back, {member.profile.nickname}</h2>
+          <h2 className="text-lg font-bold tracking-tight text-ink">
+            Welcome back, {member.profile.nickname}
+          </h2>
           <span className="rounded-pill bg-primary/15 px-4 py-1 text-xs font-semibold text-primary-deep">
             {dateKey}
           </span>

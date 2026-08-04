@@ -165,22 +165,22 @@ component and island restyles through the token layer.
 
 ## Palette
 
-| Token | Dark (default) | Light (`:root.light`) |
-| --- | --- | --- |
-| `primary` | `#F38020` | `#F38020` |
-| `primary-strong` (text) | `#F6994F` | `#A85100` |
-| `primary-hover` | `#D36610` | `#D36610` |
-| `secondary` (blue actions) | `#3B82F6` | `#0051C3` |
-| `surface` | `#09090B` | `#FFFFFF` |
-| `surface-raised` | `#131316` | `#FFFFFF` |
-| `surface-muted` | `#1B1B1F` | `#F7F7F8` |
-| `border` | `#27272A` | `#E4E4E7` |
-| `ink` | `#FAFAFA` | `#071428` |
-| `ink-muted` | `#A1A1AA` | `#52525B` |
-| `success` | `#10B981` | `#059669` |
-| `warning` | `#FFAC00` | `#FFAC00` |
-| `error` | `#F87171` | `#DC2626` |
-| `info` | `#38BDF8` | `#0284C7` |
+| Token                      | Dark (default) | Light (`:root.light`) |
+| -------------------------- | -------------- | --------------------- |
+| `primary`                  | `#F38020`      | `#F38020`             |
+| `primary-strong` (text)    | `#F6994F`      | `#A85100`             |
+| `primary-hover`            | `#D36610`      | `#D36610`             |
+| `secondary` (blue actions) | `#3B82F6`      | `#0051C3`             |
+| `surface`                  | `#09090B`      | `#FFFFFF`             |
+| `surface-raised`           | `#131316`      | `#FFFFFF`             |
+| `surface-muted`            | `#1B1B1F`      | `#F7F7F8`             |
+| `border`                   | `#27272A`      | `#E4E4E7`             |
+| `ink`                      | `#FAFAFA`      | `#071428`             |
+| `ink-muted`                | `#A1A1AA`      | `#52525B`             |
+| `success`                  | `#10B981`      | `#059669`             |
+| `warning`                  | `#FFAC00`      | `#FFAC00`             |
+| `error`                    | `#F87171`      | `#DC2626`             |
+| `info`                     | `#38BDF8`      | `#0284C7`             |
 
 ## Type
 

@@ -262,7 +262,9 @@ export default function RoomLobbyPanel({
       <div className="grid gap-5 lg:grid-cols-2">
         <div className="flex flex-col gap-5">
           <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
-            <h3 className="mb-3 text-lg font-bold tracking-tight text-ink">Players ({room.players.length})</h3>
+            <h3 className="mb-3 text-lg font-bold tracking-tight text-ink">
+              Players ({room.players.length})
+            </h3>
             <ul className="flex flex-col divide-y divide-border">
               {room.players.map((player) => (
                 <li
