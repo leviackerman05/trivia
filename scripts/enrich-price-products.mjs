@@ -34,14 +34,16 @@ const BAD_TOKENS = [
 const FREE_LICENSES = new Set(['cc0', 'pdm', 'publicdomain']);
 
 async function searchOpenverse(term, attempt = 0) {
+  // M14 — quoted phrase + the word "product" biases results toward the item
+  // itself instead of random photos that happen to share a word.
   const url =
-    `https://api.openverse.org/v1/images/?q=${encodeURIComponent(term)}` +
-    '&license_type=commercial&page_size=10';
+    `https://api.openverse.org/v1/images/?q=${encodeURIComponent(`"${term}" product`)}` +
+    '&license_type=commercial&page_size=20';
   const response = await fetch(url, {
     headers: { 'User-Agent': 'PartyBrain-dev/1.0 (price-game product images)' },
   });
-  if (response.status === 429 && attempt < 3) {
-    await new Promise((resolve) => setTimeout(resolve, 1500 * (attempt + 1)));
+  if (response.status === 429 && attempt < 4) {
+    await new Promise((resolve) => setTimeout(resolve, 2000 * (attempt + 1)));
     return searchOpenverse(term, attempt + 1);
   }
   if (!response.ok) {
@@ -53,6 +55,8 @@ async function searchOpenverse(term, attempt = 0) {
     title: entry.title ?? '',
     license: entry.license ?? '',
     creator: entry.creator ?? null,
+    width: typeof entry.width === 'number' ? entry.width : 0,
+    height: typeof entry.height === 'number' ? entry.height : 0,
   }));
 }
 
@@ -79,10 +83,21 @@ function pickResult(candidates, productName) {
   const rank = (entry) => {
     const lower = entry.title.toLowerCase();
     const shared = nameTokens.filter((token) => lower.includes(token)).length;
+    // M14 — the image must plausibly BE the product: at least one
+    // significant name token in the title, full-name matches rank highest.
+    if (shared === 0) {
+      return -1;
+    }
     const free = FREE_LICENSES.has(entry.license) ? 2 : 0;
-    return shared * 3 + free;
+    const fullName = lower.includes(productName.toLowerCase()) ? 4 : 0;
+    const size = entry.width >= 640 && entry.height >= 480 ? 1 : 0;
+    return shared * 3 + fullName + size + free;
   };
-  return [...usable].sort((a, b) => rank(b) - rank(a))[0] ?? null;
+  const ranked = usable
+    .map((entry) => ({ entry, rank: rank(entry) }))
+    .filter(({ rank: value }) => value > 0)
+    .sort((a, b) => b.rank - a.rank);
+  return ranked[0]?.entry ?? null;
 }
 
 async function withConcurrency(items, limit, worker) {
@@ -100,11 +115,11 @@ async function withConcurrency(items, limit, worker) {
 }
 
 const products = JSON.parse(readFileSync(path, 'utf8'));
-const todo = products
-  .map((product, index) => ({ product, index }))
-  .filter(({ product }) => !product.image || !product.credit);
+// M14 — re-enrich EVERY product: the first pass's queries returned plenty of
+// off-topic photos, and the improved query + ranking replaces them.
+const todo = products.map((product, index) => ({ product, index }));
 
-const outcomes = await withConcurrency(todo, 8, async ({ product }) => {
+const outcomes = await withConcurrency(todo, 4, async ({ product }) => {
   try {
     const term = product.searchTerm ?? product.name;
     const candidates = await searchOpenverse(term);

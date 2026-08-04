@@ -1,8 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import SoloShell from './SoloShell';
+import TimerPicker from './TimerPicker';
 import genreSwapsJson from '../../data/genre-swaps.json';
+import { useCountdown } from '../../lib/use-countdown';
+import { readTimerSetting, saveTimerSetting } from '../../lib/solo';
 import {
-  GENRE_SWAP_SECONDS,
   GENRE_SWAP_TOTAL_QUESTIONS,
   genreSwapOptions,
   judgeGenreSwap,
@@ -11,15 +13,20 @@ import {
 } from '../../lib/genre-swap';
 
 /**
- * Genre Swap (M8, PRD §5.9) — a famous movie plot rewritten in a wildly
- * wrong genre; pick the original from four options. 10 questions × 20s,
- * +10 correct with a +5 speed bonus under 10s.
+ * Genre Swap (M8, PRD §5.9; M14 owner fixes) — a famous movie plot rewritten
+ * in a wildly wrong genre; pick the original from four options. The timer is
+ * player-chosen (30–70s presets) and only starts when the game starts.
  */
 
 const entries = genreSwapsJson as GenreSwapEntry[];
 const allOriginals = entries.map((entry) => entry.original);
+const TIMER_OPTIONS = [30, 40, 50, 60, 70];
+
+type Phase = 'setup' | 'playing' | 'done';
 
 export default function GenreSwap() {
+  const [phase, setPhase] = useState<Phase>('setup');
+  const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('genre-swap', 30));
   const [questions, setQuestions] = useState<GenreSwapEntry[]>([]);
   const [index, setIndex] = useState(0);
   const [options, setOptions] = useState<string[]>([]);
@@ -27,34 +34,27 @@ export default function GenreSwap() {
   const [locked, setLocked] = useState(false);
   const [score, setScore] = useState(0);
   const [results, setResults] = useState<{ correct: boolean; points: number }[]>([]);
-  const [phase, setPhase] = useState<'playing' | 'done'>('playing');
-  const [, setTick] = useState(0);
-  const deadlineRef = useRef(0);
-  const lockedRef = useRef(false);
 
   const question = questions[index];
+  const remaining = useCountdown(
+    phase === 'playing' && !locked && Boolean(question),
+    timerSeconds,
+    index
+  );
 
-  useEffect(() => {
+  const start = () => {
+    saveTimerSetting('genre-swap', timerSeconds);
     const seed = Math.floor(Math.random() * 1000);
     const picked = pickGenreSwapQuestions(entries, GENRE_SWAP_TOTAL_QUESTIONS, seed);
     setQuestions(picked);
-    if (picked[0]) {
-      setOptions(genreSwapOptions(picked[0], allOriginals));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (phase !== 'playing' || !question || locked) {
-      return;
-    }
-    deadlineRef.current = Date.now() + GENRE_SWAP_SECONDS * 1000;
-    const id = setInterval(() => setTick((tick) => tick + 1), 500);
-    return () => clearInterval(id);
-  }, [phase, question, locked, index]);
-
-  const remaining = question
-    ? Math.max(0, Math.ceil((deadlineRef.current - Date.now()) / 1000))
-    : 0;
+    setOptions(picked[0] ? genreSwapOptions(picked[0], allOriginals) : []);
+    setIndex(0);
+    setScore(0);
+    setResults([]);
+    setFeedback(null);
+    setLocked(false);
+    setPhase('playing');
+  };
 
   useEffect(() => {
     if (phase === 'playing' && question && remaining === 0 && !locked) {
@@ -63,18 +63,15 @@ export default function GenreSwap() {
         text: `Time's up! It was “${question.original}” (as a ${question.genre.toLowerCase()} tale).`,
       });
       setLocked(true);
-      lockedRef.current = true;
     }
   }, [remaining, locked, question, phase]);
 
   const choose = (picked: string) => {
-    if (!question || locked || lockedRef.current) {
+    if (!question || locked) {
       return;
     }
-    lockedRef.current = true;
-    const remainingMs = Math.max(0, deadlineRef.current - Date.now());
-    const elapsed = Math.min(GENRE_SWAP_SECONDS * 1000, GENRE_SWAP_SECONDS * 1000 - remainingMs);
-    const verdict = judgeGenreSwap(picked, question.original, elapsed);
+    const elapsedMs = timerSeconds * 1000 - remaining * 1000;
+    const verdict = judgeGenreSwap(picked, question.original, elapsedMs);
     setFeedback({
       correct: verdict.correct,
       text: verdict.correct
@@ -96,22 +93,36 @@ export default function GenreSwap() {
     setOptions(nextQuestion ? genreSwapOptions(nextQuestion, allOriginals) : []);
     setFeedback(null);
     setLocked(false);
-    lockedRef.current = false;
   }, [index, questions]);
 
   const playAgain = () => {
-    const seed = Math.floor(Math.random() * 1000);
-    const picked = pickGenreSwapQuestions(entries, GENRE_SWAP_TOTAL_QUESTIONS, seed);
-    setQuestions(picked);
-    setOptions(picked[0] ? genreSwapOptions(picked[0], allOriginals) : []);
+    setPhase('setup');
     setIndex(0);
     setScore(0);
     setResults([]);
     setFeedback(null);
     setLocked(false);
-    lockedRef.current = false;
-    setPhase('playing');
   };
+
+  if (phase === 'setup') {
+    return (
+      <div className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+        <h3 className="font-display text-h3 text-ink">Genre Swap</h3>
+        <p className="max-w-xl text-body text-ink-muted">
+          A famous movie plot rewritten in a wildly wrong genre — spot the original. Pick your round
+          timer; the clock starts when you do.
+        </p>
+        <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />
+        <button
+          type="button"
+          onClick={start}
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+        >
+          Start the game
+        </button>
+      </div>
+    );
+  }
 
   return (
     <SoloShell
@@ -161,7 +172,7 @@ export default function GenreSwap() {
                   type="button"
                   disabled={locked}
                   onClick={() => choose(option)}
-                  className={`min-h-14 rounded-lg border-3 px-5 py-3 text-left text-lg font-semibold transition-all disabled:cursor-default ${
+                  className={`min-h-14 rounded-lg border-3 px-5 py-3 text-left text-lg font-semibold transition-colors disabled:cursor-default ${
                     isCorrect
                       ? 'border-success bg-success-soft text-success-strong'
                       : 'border-border bg-surface-raised text-ink hover:border-primary hover:bg-primary/5'

@@ -1,74 +1,68 @@
-import { useCallback, useEffect, useRef, useState, type SyntheticEvent } from 'react';
+import { useCallback, useEffect, useState, type SyntheticEvent } from 'react';
 import SoloShell from './SoloShell';
+import TimerPicker from './TimerPicker';
 import emojiPlotsJson from '../../data/emoji-plots.json';
+import { useCountdown } from '../../lib/use-countdown';
+import { readTimerSetting, saveTimerSetting } from '../../lib/solo';
 import {
-  EMOJI_PLOT_SECONDS,
   EMOJI_TOTAL_QUESTIONS,
   encodeChallenge,
-  firstLetterHint,
-  hintLevelAt,
   judgeEmojiGuess,
   pickEmojiQuestions,
+  revealedTitle,
   scoreEmojiGuess,
-  type EmojiHintLevel,
   type EmojiPlotEntry,
 } from '../../lib/emoji-plot';
 
 /**
- * Emoji Plot (M7, PRD §5.3) — decode movies and books from emoji sequences.
- * 10 questions × 30s; the year hint appears at 15s and the first letter at
- * 25s; scoring is 100 / 50 / 25 by hint level. "Create your own" builds a
- * shareable challenge link (answer base64-obfuscated).
+ * Emoji Plot (M7, PRD §5.3; M14 owner fixes) — decode movies and books from
+ * emoji sequences. Hints are button-driven: a year hint and skribbl-style
+ * progressive letter reveals; the clock starts only when the player starts.
  */
 
 const entries = emojiPlotsJson as EmojiPlotEntry[];
+const TIMER_OPTIONS = [20, 30, 40, 50];
+
+type Phase = 'setup' | 'playing' | 'done';
 
 export default function EmojiPlot() {
+  const [phase, setPhase] = useState<Phase>('setup');
+  const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('emoji-plot', 30));
   const [questions, setQuestions] = useState<EmojiPlotEntry[]>([]);
   const [index, setIndex] = useState(0);
   const [draft, setDraft] = useState('');
   const [feedback, setFeedback] = useState<{ correct: boolean; text: string } | null>(null);
   const [locked, setLocked] = useState(false);
   const [score, setScore] = useState(0);
-  const [hintLevel, setHintLevel] = useState<EmojiHintLevel>('none');
+  const [yearUsed, setYearUsed] = useState(false);
+  const [lettersRevealed, setLettersRevealed] = useState(0);
   const [results, setResults] = useState<{ correct: boolean; points: number }[]>([]);
-  const [phase, setPhase] = useState<'playing' | 'done'>('playing');
-  // Tick state only forces re-renders so the countdown/hints refresh.
-  const [, setTick] = useState(0);
   const [challenge, setChallenge] = useState<{ emoji: string; title: string } | null>(null);
   const [challengeLink, setChallengeLink] = useState<string | null>(null);
-  const startedAtRef = useRef(0);
-  const submittedRef = useRef(false);
 
   const question = questions[index];
+  const remaining = useCountdown(
+    phase === 'playing' && !locked && Boolean(question),
+    timerSeconds,
+    index
+  );
 
-  useEffect(() => {
+  const start = (event: SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    saveTimerSetting('emoji-plot', timerSeconds);
     setQuestions(
       pickEmojiQuestions(entries, EMOJI_TOTAL_QUESTIONS, Math.floor(Math.random() * 1000))
     );
-  }, []);
-
-  useEffect(() => {
-    if (phase !== 'playing' || !question || locked) {
-      return;
-    }
-    startedAtRef.current = Date.now();
-    const id = setInterval(() => setTick((tick) => tick + 1), 500);
-    return () => clearInterval(id);
-  }, [phase, question, locked, index]);
-
-  const elapsed = question ? Date.now() - startedAtRef.current : 0;
-  const remaining = question
-    ? Math.max(0, Math.ceil((EMOJI_PLOT_SECONDS * 1000 - elapsed) / 1000))
-    : 0;
-
-  // Progressive hints: year at 15s, first letter at 25s.
-  useEffect(() => {
-    if (phase !== 'playing' || locked) {
-      return;
-    }
-    setHintLevel(hintLevelAt(elapsed));
-  }, [elapsed, phase, locked]);
+    setIndex(0);
+    setScore(0);
+    setResults([]);
+    setFeedback(null);
+    setLocked(false);
+    setYearUsed(false);
+    setLettersRevealed(0);
+    setDraft('');
+    setPhase('playing');
+  };
 
   // Timeout → reveal.
   useEffect(() => {
@@ -80,20 +74,24 @@ export default function EmojiPlot() {
 
   const submit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!question || locked || submittedRef.current) {
+    if (!question || locked) {
       return;
     }
-    submittedRef.current = true;
-    const level = hintLevelAt(Math.min(elapsed, EMOJI_PLOT_SECONDS * 1000));
-    const correct = judgeEmojiGuess(question, draft, level);
-    const points = correct ? scoreEmojiGuess(level) : 0;
+    const guess = draft;
+    if (!guess.trim()) {
+      return;
+    }
+    const correct = judgeEmojiGuess(question, guess);
+    const points = correct ? scoreEmojiGuess({ yearUsed, lettersRevealed }) : 0;
     setFeedback({
       correct,
       text: correct
         ? `“${question.title}” — +${points} points!`
         : `Not quite. It was “${question.title}”.`,
     });
-    setScore((previous) => previous + points);
+    if (correct) {
+      setScore((previous) => previous + points);
+    }
     setResults((previous) => [...previous, { correct, points }]);
     setLocked(true);
   };
@@ -106,23 +104,21 @@ export default function EmojiPlot() {
     setIndex((previous) => previous + 1);
     setDraft('');
     setFeedback(null);
-    setHintLevel('none');
+    setYearUsed(false);
+    setLettersRevealed(0);
     setLocked(false);
-    submittedRef.current = false;
   }, [index, questions.length]);
 
   const playAgain = () => {
-    setQuestions(
-      pickEmojiQuestions(entries, EMOJI_TOTAL_QUESTIONS, Math.floor(Math.random() * 1000))
-    );
+    setPhase('setup');
     setIndex(0);
     setScore(0);
     setResults([]);
     setFeedback(null);
-    setHintLevel('none');
+    setYearUsed(false);
+    setLettersRevealed(0);
     setLocked(false);
-    submittedRef.current = false;
-    setPhase('playing');
+    setDraft('');
   };
 
   const buildChallenge = (event: SyntheticEvent<HTMLFormElement>) => {
@@ -133,6 +129,28 @@ export default function EmojiPlot() {
     const encoded = encodeChallenge(challenge.emoji.trim(), challenge.title.trim());
     setChallengeLink(`${window.location.origin}/game/emoji-plot?challenge=${encoded}`);
   };
+
+  if (phase === 'setup') {
+    return (
+      <form
+        onSubmit={start}
+        className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm"
+      >
+        <h3 className="font-display text-h3 text-ink">Emoji Plot</h3>
+        <p className="max-w-xl text-body text-ink-muted">
+          Decode the movie or book from its emoji sequence. Hints are yours to take: reveal the year
+          or letters of the title — each hint costs points. The clock starts when you do.
+        </p>
+        <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />
+        <button
+          type="submit"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+        >
+          Start the game
+        </button>
+      </form>
+    );
+  }
 
   return (
     <SoloShell
@@ -213,7 +231,7 @@ export default function EmojiPlot() {
         <>
           <div className="rounded-lg border-2 border-border bg-surface-raised p-6 text-center shadow-sm">
             <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
-              {question.kind === 'movie' ? 'Movie plot' : 'Book plot'} · {question.year}
+              {question.kind === 'movie' ? 'Movie plot' : 'Book plot'}
             </p>
             <p
               className="mt-3 text-5xl leading-relaxed tracking-wider"
@@ -221,17 +239,37 @@ export default function EmojiPlot() {
             >
               {question.emoji}
             </p>
-            {hintLevel === 'letter' && (
-              <p aria-live="polite" className="mt-2 text-body font-semibold text-ink">
-                First letter:{' '}
-                <span className="font-mono text-xl">{firstLetterHint(question.title)}</span>
+            {lettersRevealed > 0 && (
+              <p
+                aria-live="polite"
+                className="mt-3 font-mono text-2xl font-bold tracking-[0.2em] text-ink"
+              >
+                {revealedTitle(question.title, lettersRevealed)}
               </p>
             )}
-            {hintLevel === 'year' && (
+            {yearUsed && (
               <p aria-live="polite" className="mt-2 text-small italic text-ink-muted">
                 Hint: it's from {question.year}.
               </p>
             )}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              disabled={locked || yearUsed}
+              onClick={() => setYearUsed(true)}
+              className="inline-flex min-h-11 items-center justify-center rounded-pill border-2 border-border bg-surface-muted px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-primary/50 disabled:pointer-events-none disabled:opacity-40"
+            >
+              📅 Reveal the year {yearUsed ? `(−50)` : '(−50 pts)'}
+            </button>
+            <button
+              type="button"
+              disabled={locked}
+              onClick={() => setLettersRevealed((count) => count + 1)}
+              className="inline-flex min-h-11 items-center justify-center rounded-pill border-2 border-border bg-surface-muted px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-primary/50 disabled:pointer-events-none disabled:opacity-40"
+            >
+              🔤 Reveal a letter {`(−10 pts each)`}
+            </button>
           </div>
           <form onSubmit={submit} className="flex flex-col gap-3 sm:flex-row">
             <input

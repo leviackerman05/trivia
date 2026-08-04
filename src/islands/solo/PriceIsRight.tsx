@@ -12,10 +12,10 @@ import {
 } from '../../lib/price-is-right';
 
 /**
- * Price Is Right — E-commerce Edition (M7, PRD §5.8) — guess the USD price
- * of a (very real, very weird) product. Slider + number input, reveal with
- * the $ over/under, scoring 100 − |Δ|·2 (min 0), exact = 200. 5 rounds.
- * Products are emoji cards — no scraped product photos (PRD §13, D031).
+ * Price Is Right — E-commerce Edition (M7, PRD §5.8; M14 owner fixes) —
+ * guess the USD price of a (very real, very weird) product. M14: no slider,
+ * just the numeric input, and the listing copy is quoted as a marketplace
+ * excerpt. Scoring 100 − |Δ|·2 (min 0), exact = 200. 5 rounds.
  */
 
 const products = priceProductsJson as PriceProduct[];
@@ -110,7 +110,6 @@ export default function PriceIsRight() {
               </p>
             )}
             <h3 className="mt-3 font-display text-h3 text-ink">{product.name}</h3>
-            <p className="mx-auto mt-1 max-w-md text-body text-ink-muted">{product.description}</p>
             {product.credit && (
               <p className="mt-2 text-xs text-ink-muted">
                 Photo: {product.credit.creator ?? 'Wikimedia Commons'} ·{' '}
@@ -119,7 +118,11 @@ export default function PriceIsRight() {
             )}
           </div>
           <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-            <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
+              📦 From the listing
+            </p>
+            <p className="mt-2 text-body italic text-ink-muted">“{product.description}”</p>
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <label htmlFor="price-guess" className="text-body font-semibold text-ink">
                 What does it cost?
               </label>
@@ -129,24 +132,16 @@ export default function PriceIsRight() {
             </div>
             <input
               id="price-guess"
-              type="range"
-              min={PRICE_MIN}
-              max={PRICE_MAX}
-              value={clampPrice(guess)}
-              disabled={revealed !== null}
-              onChange={(event) => setGuess(Number(event.target.value))}
-              aria-label="Price guess in dollars"
-              className="mt-4 w-full accent-[#ff6b5e]"
-            />
-            <input
               type="number"
               min={PRICE_MIN}
               max={PRICE_MAX}
-              value={guess}
+              value={Number.isFinite(guess) ? guess : ''}
               disabled={revealed !== null}
-              onChange={(event) => setGuess(Number(event.target.value))}
-              aria-label="Price guess in dollars (numeric)"
-              className="mt-3 w-full rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25 sm:w-48"
+              onChange={(event) =>
+                setGuess(event.target.value === '' ? NaN : Number(event.target.value))
+              }
+              aria-label="Price guess in dollars"
+              className="mt-3 w-full rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25 sm:w-56"
             />
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <button

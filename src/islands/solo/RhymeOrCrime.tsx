@@ -1,25 +1,37 @@
-import { useCallback, useEffect, useRef, useState, type SyntheticEvent } from 'react';
+import { useCallback, useEffect, useState, type SyntheticEvent } from 'react';
 import SoloShell from './SoloShell';
+import TimerPicker from './TimerPicker';
 import rhymesJson from '../../data/rhymes.json';
+import { useCountdown } from '../../lib/use-countdown';
+import { readTimerSetting, saveTimerSetting } from '../../lib/solo';
 import {
   applyMultiplier,
+  isKnownWord,
   judgeRhymeAnswer,
   pickRhymeRounds,
-  RHYME_ROUND_SECONDS,
   RHYME_TOTAL_ROUNDS,
   type RhymeEntry,
 } from '../../lib/rhyme-or-crime';
 
 /**
- * Rhyme or Crime (M7, PRD §5.2) — type a word that rhymes with the prompt
- * AND fits the category. 60s per round, 5 rounds; +10 (with a +5 speed
- * bonus under 10s) and a streak multiplier (×2 from 3 consecutive correct,
- * ×3 from 5). The dataset encodes CMU-derived rhyming answers.
+ * Rhyme or Crime (M7, PRD §5.2; M14 owner fixes) — type a word that rhymes
+ * with the prompt. Judging is two-tier: dataset answers (puns included) or
+ * any CMU-verified rhyme ("hi" rhymes with "pie"). M14: a setup phase lets
+ * the player pick the category (or Auto) and the round timer — the clock
+ * only starts when they hit Start; wrong answers are retryable until the
+ * timer runs out; Play again resets the input and returns to setup.
  */
 
 const entries = rhymesJson as RhymeEntry[];
+const categories = [...new Set(entries.map((entry) => entry.category))].sort();
+const TIMER_OPTIONS = [30, 40, 50, 60, 70];
+
+type Phase = 'setup' | 'playing' | 'done';
 
 export default function RhymeOrCrime() {
+  const [phase, setPhase] = useState<Phase>('setup');
+  const [category, setCategory] = useState<string>('auto');
+  const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('rhyme-or-crime', 60));
   const [rounds, setRounds] = useState<RhymeEntry[]>([]);
   const [index, setIndex] = useState(0);
   const [draft, setDraft] = useState('');
@@ -28,28 +40,34 @@ export default function RhymeOrCrime() {
   const [score, setScore] = useState(0);
   const [consecutive, setConsecutive] = useState(0);
   const [results, setResults] = useState<{ correct: boolean; points: number }[]>([]);
-  const [phase, setPhase] = useState<'playing' | 'done'>('playing');
-  const [now, setNow] = useState(() => Date.now());
-  const deadlineRef = useRef(0);
-  const submittedRef = useRef(false);
 
   const entry = rounds[index];
+  const remaining = useCountdown(
+    phase === 'playing' && !locked && Boolean(entry),
+    timerSeconds,
+    index
+  );
 
-  useEffect(() => {
-    setRounds(pickRhymeRounds(entries, RHYME_TOTAL_ROUNDS, Math.floor(Math.random() * 1000)));
-  }, []);
-
-  // Round timer (server-free; the deadline is local for solo play).
-  useEffect(() => {
-    if (phase !== 'playing' || !entry || locked) {
-      return;
-    }
-    deadlineRef.current = Date.now() + RHYME_ROUND_SECONDS * 1000;
-    const id = setInterval(() => setNow(Date.now()), 500);
-    return () => clearInterval(id);
-  }, [phase, entry, locked, index]);
-
-  const remaining = entry ? Math.max(0, Math.ceil((deadlineRef.current - now) / 1000)) : 0;
+  const start = (event: SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    saveTimerSetting('rhyme-or-crime', timerSeconds);
+    setRounds(
+      pickRhymeRounds(
+        entries,
+        RHYME_TOTAL_ROUNDS,
+        Math.floor(Math.random() * 1000),
+        category === 'auto' ? null : category
+      )
+    );
+    setIndex(0);
+    setScore(0);
+    setConsecutive(0);
+    setResults([]);
+    setFeedback(null);
+    setLocked(false);
+    setDraft('');
+    setPhase('playing');
+  };
 
   // Timeout → reveal and move on.
   useEffect(() => {
@@ -62,25 +80,36 @@ export default function RhymeOrCrime() {
 
   const submit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!entry || locked || submittedRef.current) {
+    if (!entry || locked) {
       return;
     }
-    submittedRef.current = true;
-    const remainingMs = Math.max(0, deadlineRef.current - Date.now());
-    const elapsed = Math.min(RHYME_ROUND_SECONDS * 1000, RHYME_ROUND_SECONDS * 1000 - remainingMs);
-    const verdict = judgeRhymeAnswer(entry, draft, elapsed);
-    const nextConsecutive = verdict.correct ? consecutive + 1 : 0;
-    const applied = applyMultiplier(verdict, nextConsecutive);
+    const guess = draft;
+    if (!guess.trim()) {
+      return;
+    }
+    const elapsedMs = timerSeconds * 1000 - remaining * 1000;
+    const verdict = judgeRhymeAnswer(entry, guess, elapsedMs);
+    if (verdict.correct) {
+      const nextConsecutive = consecutive + 1;
+      const applied = applyMultiplier(verdict, nextConsecutive);
+      setFeedback({
+        correct: true,
+        text: `“${guess.trim()}” rhymes with “${entry.prompt}”! +${applied.points} points`,
+      });
+      setConsecutive(nextConsecutive);
+      setScore((previous) => previous + applied.points);
+      setResults((previous) => [...previous, { correct: true, points: applied.points }]);
+      setLocked(true);
+      return;
+    }
+    // Wrong → retryable until the timer runs out (M14 owner fix).
     setFeedback({
-      correct: verdict.correct,
-      text: verdict.correct
-        ? `“${draft.trim()}” rhymes and fits ${entry.category}! +${applied.points} points`
-        : `Not quite — try a word that rhymes with “${entry.prompt}”.`,
+      correct: false,
+      text: isKnownWord(guess)
+        ? `“${guess.trim()}” doesn't rhyme with “${entry.prompt}”. Try another word!`
+        : `I don't know “${guess.trim()}” — try a common word that rhymes with “${entry.prompt}”.`,
     });
-    setConsecutive(nextConsecutive);
-    setScore((previous) => previous + applied.points);
-    setResults((previous) => [...previous, { correct: verdict.correct, points: applied.points }]);
-    setLocked(true);
+    setDraft('');
   };
 
   const next = useCallback(() => {
@@ -92,20 +121,60 @@ export default function RhymeOrCrime() {
     setDraft('');
     setFeedback(null);
     setLocked(false);
-    submittedRef.current = false;
   }, [index, rounds.length]);
 
   const playAgain = () => {
-    setRounds(pickRhymeRounds(entries, RHYME_TOTAL_ROUNDS, Math.floor(Math.random() * 1000)));
+    setPhase('setup');
     setIndex(0);
     setScore(0);
     setConsecutive(0);
     setResults([]);
     setFeedback(null);
     setLocked(false);
-    submittedRef.current = false;
-    setPhase('playing');
+    setDraft('');
   };
+
+  if (phase === 'setup') {
+    return (
+      <form
+        onSubmit={start}
+        className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm"
+      >
+        <h3 className="font-display text-h3 text-ink">Rhyme or Crime</h3>
+        <p className="max-w-xl text-body text-ink-muted">
+          Type a word that rhymes with the prompt. Pick a category (or Auto for a mixed set) and
+          your round timer — the clock starts when you do.
+        </p>
+        <div className="flex flex-col gap-2">
+          <span className="text-small font-semibold text-ink">Category</span>
+          <div role="group" aria-label="Category" className="flex flex-wrap gap-2">
+            {['auto', ...categories].map((option) => (
+              <button
+                key={option}
+                type="button"
+                aria-pressed={category === option}
+                onClick={() => setCategory(option)}
+                className={`inline-flex min-h-11 items-center justify-center rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+                  category === option
+                    ? 'border-primary bg-primary/15 text-primary-deep'
+                    : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'
+                }`}
+              >
+                {option === 'auto' ? 'Auto (mixed)' : option}
+              </button>
+            ))}
+          </div>
+        </div>
+        <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />
+        <button
+          type="submit"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+        >
+          Start the game
+        </button>
+      </form>
+    );
+  }
 
   return (
     <SoloShell
@@ -145,8 +214,7 @@ export default function RhymeOrCrime() {
             </p>
             <p className="mt-2 font-display text-h2 text-ink">“{entry.prompt}”</p>
             <p className="mt-1 text-body text-ink-muted">
-              Type a word that rhymes with <span className="font-semibold">{entry.prompt}</span> AND
-              fits {entry.category}.
+              Type a word that rhymes with <span className="font-semibold">{entry.prompt}</span>.
             </p>
           </div>
           <form onSubmit={submit} className="flex flex-col gap-3 sm:flex-row">

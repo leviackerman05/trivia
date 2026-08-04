@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import SoloShell from './SoloShell';
+import TimerPicker from './TimerPicker';
 import genreBendersJson from '../../data/genre-benders.json';
+import { useCountdown } from '../../lib/use-countdown';
+import { readTimerSetting, saveTimerSetting } from '../../lib/solo';
 import {
   benderLabel,
-  GENRE_BENDER_SECONDS,
   GENRE_BENDER_TOTAL_QUESTIONS,
   genreBenderOptions,
   judgeGenreBender,
@@ -12,14 +14,20 @@ import {
 } from '../../lib/genre-bender';
 
 /**
- * Genre-Bender (M8, PRD §5.10) — rap lyrics rewritten as Shakespearean
- * sonnets (paraphrased/original — licensing-safe); name the song + artist
- * from four options. 10 questions × 20s; the year clue is a free hint.
+ * Genre-Bender (M8, PRD §5.10; M14 owner fixes) — rap lyrics rewritten as
+ * Shakespearean sonnets (paraphrased/original — licensing-safe); name the
+ * song + artist from four options. The year clue stays a free hint; the
+ * round timer is player-chosen and starts only when the game starts.
  */
 
 const entries = genreBendersJson as GenreBenderEntry[];
+const TIMER_OPTIONS = [30, 40, 50, 60, 70];
+
+type Phase = 'setup' | 'playing' | 'done';
 
 export default function GenreBender() {
+  const [phase, setPhase] = useState<Phase>('setup');
+  const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('genre-bender', 30));
   const [questions, setQuestions] = useState<GenreBenderEntry[]>([]);
   const [index, setIndex] = useState(0);
   const [options, setOptions] = useState<string[]>([]);
@@ -28,54 +36,42 @@ export default function GenreBender() {
   const [locked, setLocked] = useState(false);
   const [score, setScore] = useState(0);
   const [results, setResults] = useState<{ correct: boolean; points: number }[]>([]);
-  const [phase, setPhase] = useState<'playing' | 'done'>('playing');
-  const [, setTick] = useState(0);
-  const deadlineRef = useRef(0);
-  const lockedRef = useRef(false);
 
   const question = questions[index];
+  const remaining = useCountdown(
+    phase === 'playing' && !locked && Boolean(question),
+    timerSeconds,
+    index
+  );
 
-  useEffect(() => {
+  const start = () => {
+    saveTimerSetting('genre-bender', timerSeconds);
     const seed = Math.floor(Math.random() * 1000);
     const picked = pickGenreBenderQuestions(entries, GENRE_BENDER_TOTAL_QUESTIONS, seed);
     setQuestions(picked);
-    if (picked[0]) {
-      setOptions(genreBenderOptions(picked[0], picked));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (phase !== 'playing' || !question || locked) {
-      return;
-    }
-    deadlineRef.current = Date.now() + GENRE_BENDER_SECONDS * 1000;
-    const id = setInterval(() => setTick((tick) => tick + 1), 500);
-    return () => clearInterval(id);
-  }, [phase, question, locked, index]);
-
-  const remaining = question
-    ? Math.max(0, Math.ceil((deadlineRef.current - Date.now()) / 1000))
-    : 0;
+    setOptions(picked[0] ? genreBenderOptions(picked[0], picked) : []);
+    setIndex(0);
+    setScore(0);
+    setResults([]);
+    setShowYear(false);
+    setFeedback(null);
+    setLocked(false);
+    setPhase('playing');
+  };
 
   useEffect(() => {
     if (phase === 'playing' && question && remaining === 0 && !locked) {
       setFeedback({ correct: false, text: `Time's up! It was “${benderLabel(question)}”.` });
       setLocked(true);
-      lockedRef.current = true;
     }
   }, [remaining, locked, question, phase]);
 
   const choose = (picked: string) => {
-    if (!question || locked || lockedRef.current) {
+    if (!question || locked) {
       return;
     }
-    lockedRef.current = true;
-    const remainingMs = Math.max(0, deadlineRef.current - Date.now());
-    const elapsed = Math.min(
-      GENRE_BENDER_SECONDS * 1000,
-      GENRE_BENDER_SECONDS * 1000 - remainingMs
-    );
-    const verdict = judgeGenreBender(picked, benderLabel(question), elapsed);
+    const elapsedMs = timerSeconds * 1000 - remaining * 1000;
+    const verdict = judgeGenreBender(picked, benderLabel(question), elapsedMs);
     setFeedback({
       correct: verdict.correct,
       text: verdict.correct
@@ -98,23 +94,37 @@ export default function GenreBender() {
     setShowYear(false);
     setFeedback(null);
     setLocked(false);
-    lockedRef.current = false;
   }, [index, questions]);
 
   const playAgain = () => {
-    const seed = Math.floor(Math.random() * 1000);
-    const picked = pickGenreBenderQuestions(entries, GENRE_BENDER_TOTAL_QUESTIONS, seed);
-    setQuestions(picked);
-    setOptions(picked[0] ? genreBenderOptions(picked[0], picked) : []);
+    setPhase('setup');
     setIndex(0);
     setScore(0);
     setResults([]);
     setShowYear(false);
     setFeedback(null);
     setLocked(false);
-    lockedRef.current = false;
-    setPhase('playing');
   };
+
+  if (phase === 'setup') {
+    return (
+      <div className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+        <h3 className="font-display text-h3 text-ink">Genre-Bender</h3>
+        <p className="max-w-xl text-body text-ink-muted">
+          A classic lyric rewritten as a Shakespearean sonnet — name the song and artist. Pick your
+          round timer; the clock starts when you do.
+        </p>
+        <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />
+        <button
+          type="button"
+          onClick={start}
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+        >
+          Start the game
+        </button>
+      </div>
+    );
+  }
 
   return (
     <SoloShell
@@ -164,7 +174,7 @@ export default function GenreBender() {
             <button
               type="button"
               onClick={() => setShowYear(true)}
-              className="self-start rounded-pill border-2 border-border bg-surface-raised px-4 py-2 text-small font-semibold text-ink transition-colors hover:bg-surface-muted"
+              className="self-start rounded-pill border-2 border-border bg-surface-raised px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-primary/50"
             >
               💡 Show year clue
             </button>
@@ -176,7 +186,7 @@ export default function GenreBender() {
                 type="button"
                 disabled={locked}
                 onClick={() => choose(option)}
-                className="min-h-14 rounded-lg border-3 border-border bg-surface-raised px-5 py-3 text-left text-lg font-semibold text-ink transition-all hover:border-primary hover:bg-primary/5 disabled:cursor-default"
+                className="min-h-14 rounded-lg border-3 border-border bg-surface-raised px-5 py-3 text-left text-lg font-semibold text-ink transition-colors hover:border-primary hover:bg-primary/5 disabled:cursor-default"
               >
                 {option}
               </button>

@@ -1,9 +1,11 @@
 /**
- * Emoji Plot (M7, PRD §5.3) — pure game logic. 10 questions × 30s; hints at
- * 15s (year) and 25s (first letter); scoring 100 / 50 / 25 by hint level.
- * Acceptance uses fuzzyMatchTitle (ignore "The", Levenshtein ≤ 2, partial
- * titles). "Create your own" challenges travel as a shareable URL whose
- * answer is base64-obfuscated so it isn't visible at a glance.
+ * Emoji Plot (M7/M14, PRD §5.3) — pure game logic. 10 questions; hints are
+ * BUTTON-DRIVEN (M14 — no more auto-hints): a year hint and skribbl-style
+ * progressive letter reveals. Scoring starts at 100 and drops 50 for the
+ * year hint and 10 per revealed letter (floor 10). Acceptance uses
+ * fuzzyMatchTitle (ignore "The", Levenshtein ≤ 2, partial titles).
+ * "Create your own" challenges travel as a shareable URL whose answer is
+ * base64-obfuscated so it isn't visible at a glance.
  */
 
 import { fuzzyMatchTitle, normalizeAnswer } from './solo';
@@ -15,21 +17,29 @@ export interface EmojiPlotEntry {
   kind: 'movie' | 'book';
 }
 
-export const EMOJI_PLOT_SECONDS = 30;
-export const EMOJI_YEAR_HINT_MS = 15_000;
-export const EMOJI_LETTER_HINT_MS = 25_000;
 export const EMOJI_TOTAL_QUESTIONS = 10;
 
-export type EmojiHintLevel = 'none' | 'year' | 'letter';
+/** Skribbl-style: reveal letters from the start, blanks elsewhere. */
+export function revealedTitle(title: string, lettersRevealed: number): string {
+  const normalized = normalizeAnswer(title);
+  let revealed = 0;
+  return [...normalized]
+    .map((char) => {
+      if (char === ' ') {
+        return ' ';
+      }
+      if (revealed < lettersRevealed) {
+        revealed += 1;
+        return char;
+      }
+      return '•';
+    })
+    .join('');
+}
 
-export function hintLevelAt(elapsedMs: number): EmojiHintLevel {
-  if (elapsedMs >= EMOJI_LETTER_HINT_MS) {
-    return 'letter';
-  }
-  if (elapsedMs >= EMOJI_YEAR_HINT_MS) {
-    return 'year';
-  }
-  return 'none';
+/** Score: 100 base − 50 for the year hint − 10 per revealed letter (min 10). */
+export function scoreEmojiGuess(options: { yearUsed: boolean; lettersRevealed: number }): number {
+  return Math.max(10, 100 - (options.yearUsed ? 50 : 0) - options.lettersRevealed * 10);
 }
 
 export function pickEmojiQuestions(
@@ -49,29 +59,8 @@ export function pickEmojiQuestions(
   return questions;
 }
 
-export function scoreEmojiGuess(hintLevel: EmojiHintLevel): number {
-  switch (hintLevel) {
-    case 'none':
-      return 100;
-    case 'year':
-      return 50;
-    case 'letter':
-      return 25;
-  }
-}
-
-export function judgeEmojiGuess(
-  entry: EmojiPlotEntry,
-  guess: string,
-  _hintLevel: EmojiHintLevel
-): boolean {
+export function judgeEmojiGuess(entry: EmojiPlotEntry, guess: string): boolean {
   return fuzzyMatchTitle(guess, entry.title);
-}
-
-export function firstLetterHint(title: string): string {
-  const normalized = normalizeAnswer(title);
-  const letters = [...normalized].filter((char) => char !== ' ');
-  return letters[0] ?? '';
 }
 
 /** Encode a create-your-own challenge into a shareable URL fragment. */

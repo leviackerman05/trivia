@@ -1,8 +1,9 @@
 /**
- * Timeline Tussle (M7, PRD §5.7) — pure game logic. 5 rounds of 3 shuffled
- * events; the player orders them (click-select on mobile); scoring is
- * 100 for the perfect order, 50 when exactly one pair is swapped, 0
- * otherwise. Years may be BCE (negative) — sort numerically.
+ * Timeline Tussle (M7/M14, PRD §5.7) — pure game logic. 5 rounds of 3
+ * shuffled events; the player orders them (click-select on mobile). M14
+ * scoring is per-card: 100 for the perfect order, otherwise ~33 per card in
+ * the right position (33 / 66), so a single correct card earns partial
+ * credit. Years may be BCE (negative) — sort numerically.
  */
 
 export interface TimelineEvent {
@@ -39,19 +40,24 @@ export function pickTimelineRound(events: TimelineEvent[], seed = 0, cursor = 0)
   return { cards: shuffled, correctOrder };
 }
 
-export function scoreTimelineOrder(order: number[], correctOrder: number[]): number {
+export function correctPositions(order: number[], correctOrder: number[]): number {
   if (order.length !== correctOrder.length) {
     return 0;
   }
-  if (order.every((cardIndex, position) => cardIndex === correctOrder[position])) {
-    return 100;
-  }
-  // Exactly one swapped adjacent pair: the rest are in place.
-  let misplaced = 0;
+  let correct = 0;
   for (let position = 0; position < order.length; position += 1) {
-    if (order[position] !== correctOrder[position]) {
-      misplaced += 1;
+    if (order[position] === correctOrder[position]) {
+      correct += 1;
     }
   }
-  return misplaced === 2 ? 50 : 0;
+  return correct;
+}
+
+/** Per-card points: 100 when everything is right, ~33 per correct card. */
+export function scoreTimelineOrder(order: number[], correctOrder: number[]): number {
+  const correct = correctPositions(order, correctOrder);
+  if (correct === 0) {
+    return 0;
+  }
+  return Math.round((correct / correctOrder.length) * 100);
 }

@@ -133,6 +133,33 @@ export function soloClientKey(slug: string, dateKey: string, salt: string): stri
   return `${slug}:${dateKey}:${salt}`;
 }
 
+/** M14 — per-game round-timer preference (seconds), persisted locally. */
+const TIMER_PREFIX = 'partybrain:timer:';
+
+export function readTimerSetting(slug: string, fallback: number): number {
+  if (typeof window === 'undefined') {
+    return fallback;
+  }
+  try {
+    const raw = localStorage.getItem(`${TIMER_PREFIX}${slug}`);
+    const parsed = raw === null ? NaN : Number(raw);
+    return Number.isFinite(parsed) && parsed >= 10 && parsed <= 300 ? parsed : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+export function saveTimerSetting(slug: string, seconds: number): void {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  try {
+    localStorage.setItem(`${TIMER_PREFIX}${slug}`, String(seconds));
+  } catch {
+    // Storage full/blocked — best-effort.
+  }
+}
+
 /**
  * Multiple-choice option builder: the correct label plus `count - 1` random
  * distractors from the pool, shuffled (Fisher–Yates with Math.random — solo

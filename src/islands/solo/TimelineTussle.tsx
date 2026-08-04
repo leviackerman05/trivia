@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import SoloShell from './SoloShell';
 import timelineEventsJson from '../../data/timeline-events.json';
 import {
+  correctPositions,
   pickTimelineRound,
   scoreTimelineOrder,
   TIMELINE_TOTAL_ROUNDS,
@@ -12,8 +13,9 @@ import {
 /**
  * Timeline Tussle (M7, PRD §5.7) — three shuffled historical events; tap the
  * cards in the order you think they happened (click-select works on mobile),
- * submit, get instant feedback with the years revealed. Scoring: 100 perfect
- * / 50 one swapped pair / 0 otherwise. 5 rounds.
+ * submit, get instant feedback with the years revealed. M14 scoring is
+ * per-card: 100 perfect, ~33 per card in the right place (66 max for one
+ * misplaced). 5 rounds.
  */
 
 const events = timelineEventsJson as TimelineEvent[];
@@ -23,6 +25,7 @@ export default function TimelineTussle() {
   const [index, setIndex] = useState(0);
   const [order, setOrder] = useState<number[]>([]);
   const [revealed, setRevealed] = useState<number[] | null>(null);
+  const [placed, setPlaced] = useState(0);
   const [points, setPoints] = useState(0);
   const [score, setScore] = useState(0);
   const [results, setResults] = useState<{ correct: boolean; points: number }[]>([]);
@@ -54,10 +57,12 @@ export default function TimelineTussle() {
       return;
     }
     const earned = scoreTimelineOrder(order, round.correctOrder);
+    const placed = correctPositions(order, round.correctOrder);
     setRevealed(round.correctOrder);
     setPoints(earned);
     setScore((previous) => previous + earned);
-    setResults((previous) => [...previous, { correct: earned > 0, points: earned }]);
+    setResults((previous) => [...previous, { correct: earned === 100, points: earned }]);
+    setPlaced(placed);
   };
 
   const next = useCallback(() => {
@@ -69,6 +74,7 @@ export default function TimelineTussle() {
     setRound(pickTimelineRound(events, seedRef.current, index + 1));
     setOrder([]);
     setRevealed(null);
+    setPlaced(0);
     setPoints(0);
   }, [index]);
 
@@ -78,6 +84,7 @@ export default function TimelineTussle() {
     setIndex(0);
     setOrder([]);
     setRevealed(null);
+    setPlaced(0);
     setPoints(0);
     setScore(0);
     setResults([]);
@@ -94,8 +101,9 @@ export default function TimelineTussle() {
       score={score}
       resultSummary={
         <p className="text-body text-ink-muted">
-          {results.filter((result) => result.correct).length} of {results.length} timelines in order
-          {results.some((result) => result.points === 50) && ' — a few were close!'}
+          {results.filter((result) => result.correct).length} of {results.length} perfect orders
+          {results.some((result) => result.points > 0 && result.points < 100) &&
+            ' — partial credit for close calls!'}
         </p>
       }
       onPlayAgain={playAgain}
@@ -159,15 +167,15 @@ export default function TimelineTussle() {
                   className={`text-body font-bold ${
                     points === 100
                       ? 'text-success-strong'
-                      : points === 50
+                      : points > 0
                         ? 'text-warning-strong'
                         : 'text-danger-strong'
                   }`}
                 >
                   {points === 100
                     ? 'Perfect order! +100'
-                    : points === 50
-                      ? 'One pair swapped — +50'
+                    : points > 0
+                      ? `${placed} of 3 cards in place — +${points}`
                       : 'Out of order — +0'}
                 </p>
                 <button

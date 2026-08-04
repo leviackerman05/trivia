@@ -26,11 +26,13 @@ describe('Timeline Tussle logic (PRD §5.7)', () => {
     expect(years.every((year) => year < 0)).toBe(true);
   });
 
-  it('scores 100 for the perfect order, 50 for one swapped pair, 0 otherwise', () => {
+  it('M14: per-card scoring — 100 perfect, ~33 per card in place, 0 otherwise', () => {
     const correct = [0, 1, 2];
     expect(scoreTimelineOrder([0, 1, 2], correct)).toBe(100);
-    expect(scoreTimelineOrder([1, 0, 2], correct)).toBe(50); // adjacent swap
-    expect(scoreTimelineOrder([2, 1, 0], correct)).toBe(50); // outer pair swapped, 2 of 3 in place
+    expect(scoreTimelineOrder([1, 0, 2], correct)).toBe(33); // one card in place
+    expect(scoreTimelineOrder([2, 1, 0], correct)).toBe(33); // only the middle
+    expect(scoreTimelineOrder([0, 2, 1], correct)).toBe(33); // only the first
+    expect(scoreTimelineOrder([2, 0, 1], correct)).toBe(0); // full rotation
     expect(scoreTimelineOrder([1, 2, 0], correct)).toBe(0); // full rotation
     expect(scoreTimelineOrder([0, 2], correct)).toBe(0); // incomplete
   });

@@ -37,6 +37,13 @@ const files = [
     (e) => e.answers.length >= 1 && e.answers.every((a) => /^[a-z]+$/.test(a)),
   ],
   [
+    'src/data/rhyme-phonemes.json',
+    (e) =>
+      typeof e === 'object' &&
+      Object.values(e).every((key) => typeof key === 'string' && key.length >= 1),
+    { map: true },
+  ],
+  [
     'src/data/emoji-plots.json',
     (e) => e.emoji.length >= 3 && e.title.length > 1 && (e.kind === 'movie' || e.kind === 'book'),
   ],
@@ -80,9 +87,20 @@ const files = [
 ];
 
 let failed = 0;
-for (const [path, check] of files) {
+for (const [path, check, options = {}] of files) {
   try {
     const data = JSON.parse(readFileSync(path, 'utf8'));
+    if (options.map) {
+      const values = Object.values(data);
+      if (values.length === 0) throw new Error('empty');
+      const bad = values.filter((e) => !check(e));
+      console.log(`${path}: ${values.length} entries, ${bad.length} invalid`);
+      if (bad.length) {
+        failed += 1;
+        console.log('  bad sample:', JSON.stringify(bad[0]));
+      }
+      continue;
+    }
     if (!Array.isArray(data) || data.length === 0) throw new Error('empty');
     const bad = data.filter((e) => !check(e));
     const seen = new Set();
