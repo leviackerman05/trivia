@@ -126,8 +126,14 @@ The seed is idempotent (19 games upserted from the catalog).
 
 ## 5. DNS summary
 
-- `playtriviahub.com` -> Cloudflare Pages (CNAME/A, automatic via Pages).
-- `api.playtriviahub.com` -> Railway service (CNAME to the Railway domain).
+Verified live 2026-08-04 (`dig` + HTTP checks):
+
+- `playtriviahub.com` -> CNAME `triviahub.pages.dev` (proxied, flattened
+  at the apex; Pages custom domain active).
+- `www.playtriviahub.com` -> CNAME `triviahub.pages.dev` (proxied; Pages
+  custom domain active).
+- `api.playtriviahub.com` -> Railway service (CNAME to the Railway domain;
+  pending backend setup).
 - Keep `robots.txt` and `sitemap.xml` pointing at
   `https://playtriviahub.com` (already updated).
 
@@ -159,7 +165,8 @@ sleeps after 15 min idle, which kills rooms; use the paid tier for launch.
 
 ## 9. Launch checklist (carried in PROJECT_STATE)
 
-- [ ] Cloudflare Pages project live with custom domain
+- [x] Cloudflare Pages project live with custom domain (apex + www
+      verified 200, 2026-08-04)
 - [ ] Railway backend live with healthcheck passing
 - [ ] Production DB migrated + seeded
 - [ ] `CORS_ORIGIN` and `PUBLIC_SERVER_URL` set

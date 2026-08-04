@@ -4,6 +4,29 @@ All notable changes to TriviaHub are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track package
 metadata (`triviahub`, `@triviahub/server`).
 
+## [0.5.2] - 2026-08-04
+
+### Added
+
+- **Live frontend:** Pages project `triviahub` created via the Cloudflare
+  API with the GitHub source attached. Every push to main builds
+  (`pnpm build`) and deploys `dist/` through the standard Pages uploader;
+  no wrangler config or workflow file is required.
+- **Custom domains:** `playtriviahub.com` and `www.playtriviahub.com`
+  attached to the Pages project and active (certificates issued).
+
+### Changed
+
+- `docs/DEPLOYMENT.md`: replaced the dashboard connect instructions (they
+  abort on wrangler workspace detection before the project is created)
+  with the verified API-based setup, and updated the DNS summary and
+  launch checklist.
+
+### Fixed
+
+- `https://playtriviahub.com` and `www.playtriviahub.com` now serve 200;
+  `triviahub.pages.dev` was the only reachable host before.
+
 ## [0.5.1] - 2026-08-04
 
 ### Fixed

@@ -1,7 +1,5 @@
 # Project State, TriviaHub
 
-# Project State, TriviaHub
-
 > **This file is the project's memory.** Updated after **every** implementation
 > step, PR, decision, or milestone. If you read only one file, read this one.
 >
@@ -19,6 +17,12 @@
 
 ## Current Milestone
 
+**Phase F, Launch (frontend done, backend next)**: the frontend is live at
+`https://playtriviahub.com` and `www.playtriviahub.com` (Cloudflare Pages,
+both custom domains active). Git integration deploys on every push to main;
+CI is green on `c4d9540` and later. Remaining: Railway backend + production
+Postgres, migrations and seed (see `docs/DEPLOYMENT.md`).
+
 **Phase A, Daily Expansion ✅ complete (2026-08-04)**: six new live daily
 games from existing engines (Emoji Plot, Timeline, Price, Rhyme, Genre Swap,
 Genre-Bender) via deterministic per-day seeding (D050). Eight dailies total,
@@ -26,7 +30,7 @@ all feeding member streaks, history, and personal bests. Revised sequencing
 adopted (D051); `pnpm verify` green: 144 client + 154 server tests.
 
 **Previous:** Phase 1.5 identity + server streaks; Phase 0/1 foundation.
-Next: Phase B retention loop (XP, weekly challenge), then F launch.
+Next after launch: Phase B retention loop (XP, weekly challenge).
 
 ---
 
