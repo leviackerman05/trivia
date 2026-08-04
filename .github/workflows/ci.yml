@@ -26,14 +26,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 11
-
       - uses: actions/setup-node@v4
         with:
           node-version: 26
-          cache: pnpm
+
+      # pnpm/action-setup cannot download pnpm 11.20.0 (pnpm switched its
+      # GitHub release assets to .tar.gz), and corepack no longer ships with
+      # Node 25+. Install pnpm from the npm registry instead; the version
+      # must match the packageManager field.
+      - name: Install pnpm
+        run: npm install -g pnpm@11.20.0
 
       # Workspace install: root Astro app + @triviahub/server.
       - name: Install dependencies
