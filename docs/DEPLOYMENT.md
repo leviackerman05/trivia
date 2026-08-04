@@ -35,6 +35,13 @@ time (`src/lib/api.ts`). The backend validates browser origins through
 5. Custom domain: `playtriviahub.com` (Cloudflare DNS, proxied).
    Preview deployments on `*.pages.dev` are already noindexed (PRD §6.4).
 
+**Known gotcha (monorepo detection):** the repo root contains
+`pnpm-workspace.yaml`, which makes Pages' application detection fail with
+"detection logic has been run in the root of a workspace". `pages.json` at
+the repo root (explicit framework/buildCommand/outputDirectory) makes
+Pages skip detection, so connecting the repo works. If a half-created
+project is stuck, delete it and reconnect after `pages.json` is on main.
+
 **Alternative (direct upload from a machine with a token):**
 
 ```sh
