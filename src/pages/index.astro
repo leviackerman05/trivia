@@ -4,7 +4,6 @@ import GameCard from '../components/GameCard.astro';
 import DailyCard from '../components/DailyCard.astro';
 import Button from '../components/ui/Button.astro';
 import Chip from '../components/ui/Chip.astro';
-import FAQSection from '../components/FAQSection.astro';
 import RecentlyPlayed from '../islands/RecentlyPlayed.tsx';
 import { games, type GameFamily } from '../lib/games';
 import { getLiveDailyGames } from '../lib/daily';
@@ -277,8 +276,21 @@ const jsonLd = JSON.stringify({
     </p>
   </section>
 
-  <section aria-label="Frequently asked questions" class="flex flex-col gap-4">
-    <h2 class="font-display text-h2 text-ink">Frequently Asked Questions</h2>
-    <FAQSection items={globalFaqs} class="max-w-3xl" />
+  <section
+    aria-label="Frequently asked questions"
+    class="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6"
+  >
+    <div class="min-w-0">
+      <h2 class="text-lg font-bold tracking-tight text-ink">Frequently Asked Questions</h2>
+      <p class="mt-1 text-small text-ink-muted">
+        How to host, join, score, and play every game, answered.
+      </p>
+    </div>
+    <a
+      href="/faq"
+      class="inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-5 text-small font-semibold text-white transition-colors hover:bg-primary-hover"
+    >
+      Visit the FAQ
+    </a>
   </section>
 </BaseLayout>
