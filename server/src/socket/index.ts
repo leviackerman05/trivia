@@ -43,6 +43,8 @@ import {
 } from '../engine/copycat-engine.js';
 import {
   VotingSession,
+  type NhieSource,
+  type NhieTier,
   type VotingConfig,
   type VotingSession as VotingGameSession,
 } from '../engine/voting-engine.js';
@@ -232,9 +234,9 @@ function entriesFrom(gameId: string): DrawingEntry[] {
         data: { object: entry.object },
       }));
     case 'shadow-sketch':
-      return (silhouettesJson as { name: string; path: string }[]).map((entry) => ({
+      return (silhouettesJson as { name: string; path: string; genre?: string }[]).map((entry) => ({
         word: entry.name,
-        data: { name: entry.name, path: entry.path },
+        data: { name: entry.name, path: entry.path, genre: entry.genre ?? 'objects' },
       }));
     case 'draw-the-lyric':
       return (lyricsJson as { title: string; artist: string; lyric: string }[]).map((entry) => ({
@@ -275,6 +277,13 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   const copycatLoaded = new Map<string, Set<string>>();
   /** M13 — Copycat: the post-load 10s timer is scheduled once per reveal. */
   const copycatPostLoadScheduled = new Set<string>();
+  /** M15 — host-chosen voting content options (NHIE tier/source, TOT genre). */
+  const pendingVotingOptions = new Map<
+    string,
+    { nhieTier?: NhieTier; nhieSource?: NhieSource; totGenre?: string | null }
+  >();
+  /** M15 — Shadow Sketch: host-chosen silhouette genre (null = all). */
+  const pendingShadowGenres = new Map<string, string | null>();
 
   function roomOf(socket: Socket): RoomState | undefined {
     return engine.roomsOfSocket(socket.id)[0];
@@ -322,6 +331,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     votingDeadlines.delete(roomCode);
     copycatLoaded.delete(roomCode);
     copycatPostLoadScheduled.delete(roomCode);
+    pendingVotingOptions.delete(roomCode);
+    pendingShadowGenres.delete(roomCode);
   }
 
   function sessionOf(room: RoomState): GameSession | undefined {
@@ -644,6 +655,11 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         reveal: session.lastReveal,
         myVote: session.voteOf(requesterName),
         endsAt: votingDeadlines.get(room.code) ?? null,
+        statementSource: session.statementSource,
+        suggestions:
+          session.phaseValue === 'statement' && session.usesProvidedSuggestions
+            ? session.suggestionOptions(4)
+            : [],
       };
     }
     if (session instanceof TriviaSession) {
@@ -851,18 +867,25 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       totalRounds: session.totalRoundsValue,
       statementBy: session.currentStatementBy,
       statement: session.currentStatement,
+      statementSource: session.statementSource,
+      suggestions: phase === 'statement' ? session.suggestionOptions(4) : [],
       custom,
       endsAt,
     });
   }
 
   function startVoting(room: RoomState): boolean {
+    // M15 — capture the host-chosen content options BEFORE clearing the game.
+    const pending = pendingVotingOptions.get(room.code);
     clearRoomGame(room.code);
     const config = VOTING_CONFIGS[room.gameId];
     if (!config) {
       return false;
     }
     const session = new VotingSession(config, votingDatasetsFor(room.gameId));
+    if (pending) {
+      session.setContentOptions(pending);
+    }
     const players = [...room.players.values()]
       .filter((player) => player.connected)
       .map((player) => player.name);
@@ -894,12 +917,16 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     const roomTimers: RoomTimers = {};
     if (phase === 'statement') {
       roomTimers.statementEnd = setTimeout(() => {
-        // NHIE: idle statement author → server picks a suggestion.
+        // NHIE: idle statement author → auto-advance (a suggestion when
+        // suggestions are on, a neutral skip note when the host chose
+        // own-statements-only).
         const current = votingOf(room);
         if (!current || current.phaseValue !== 'statement' || !current.currentStatementBy) {
           return;
         }
-        const pick = current.suggestionOptions(1)[0];
+        const pick = current.usesProvidedSuggestions
+          ? current.suggestionOptions(1)[0]
+          : 'skipped the statement — ran out of time';
         if (!pick) {
           return;
         }
@@ -1501,11 +1528,18 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
           return;
         }
       } else if (DRAWING_CONFIGS[result.value.gameId]) {
-        // Capture host-pasted words BEFORE clearing the room game state.
+        // Capture host settings BEFORE clearing the room game state.
         const pending = pendingCustomWords.get(result.value.code);
+        const shadowGenre =
+          result.value.gameId === 'shadow-sketch'
+            ? (pendingShadowGenres.get(result.value.code) ?? null)
+            : null;
         clearRoomGame(result.value.code);
+        const allEntries = entriesFrom(result.value.gameId);
         const session = new DrawingGameSession(
-          entriesFrom(result.value.gameId),
+          shadowGenre
+            ? allEntries.filter((entry) => (entry.data.genre as string | undefined) === shadowGenre)
+            : allEntries,
           DRAWING_CONFIGS[result.value.gameId]!
         );
         const players = [...result.value.players.values()]
@@ -1579,6 +1613,36 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         raw.filter((entry) => typeof entry === 'string')
       );
       ack?.({ ok: true, count: validated.value.count });
+    });
+
+    /** M15 — Shadow Sketch: host picks the silhouette genre in the lobby. */
+    socket.on(ClientEvents.setShadowGenre, (payload: unknown, ack?: Ack) => {
+      const input = validateRoomCodeInput(payload);
+      if (!input.ok) {
+        ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: input.error });
+        return;
+      }
+      const room = roomOf(socket);
+      if (!room || room.gameId !== 'shadow-sketch') {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player?.isHost) {
+        ack?.({ ok: false, error: 'NOT_HOST' });
+        return;
+      }
+      if (room.phase !== 'lobby') {
+        ack?.({ ok: false, error: 'INVALID_PHASE' });
+        return;
+      }
+      const raw = payload as { genre?: unknown };
+      if (raw.genre !== null && typeof raw.genre !== 'string') {
+        ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: 'genre must be a string or null' });
+        return;
+      }
+      pendingShadowGenres.set(room.code, raw.genre === null ? null : raw.genre);
+      ack?.({ ok: true });
     });
 
     socket.on(ClientEvents.chooseWord, (payload: unknown, ack?: Ack) => {
@@ -2140,6 +2204,61 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         at: Date.now(),
       });
       ack?.({ ok: true, queued: queue.length });
+    });
+
+    /** M15 — voting games: host picks NHIE tier/source or the TOT genre in
+     * the lobby; applied when the game starts (like pendingCharadesCategories). */
+    socket.on(ClientEvents.setVotingConfig, (payload: unknown, ack?: Ack) => {
+      const input = validateRoomCodeInput(payload);
+      if (!input.ok) {
+        ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: input.error });
+        return;
+      }
+      const room = roomOf(socket);
+      if (!room || !isVotingRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player || !player.isHost) {
+        ack?.({ ok: false, error: 'NOT_HOST' });
+        return;
+      }
+      if (room.phase !== 'lobby') {
+        ack?.({ ok: false, error: 'WRONG_PHASE' });
+        return;
+      }
+      const raw = payload as {
+        nhieTier?: unknown;
+        nhieSource?: unknown;
+        totGenre?: unknown;
+      };
+      const options: { nhieTier?: NhieTier; nhieSource?: NhieSource; totGenre?: string | null } =
+        {};
+      if (room.gameId === 'never-have-i-ever') {
+        if (
+          raw.nhieTier !== undefined &&
+          typeof raw.nhieTier === 'string' &&
+          ['boring', 'moderate', 'dirty', 'super-dirty'].includes(raw.nhieTier)
+        ) {
+          options.nhieTier = raw.nhieTier as NhieTier;
+        }
+        if (
+          raw.nhieSource !== undefined &&
+          typeof raw.nhieSource === 'string' &&
+          ['provided', 'own', 'both'].includes(raw.nhieSource)
+        ) {
+          options.nhieSource = raw.nhieSource as NhieSource;
+        }
+      } else if (room.gameId === 'this-or-that') {
+        if (raw.totGenre === null) {
+          options.totGenre = null;
+        } else if (typeof raw.totGenre === 'string' && raw.totGenre.length <= 20) {
+          options.totGenre = raw.totGenre;
+        }
+      }
+      pendingVotingOptions.set(room.code, options);
+      ack?.({ ok: true });
     });
 
     /**

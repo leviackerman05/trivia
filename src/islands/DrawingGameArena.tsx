@@ -120,6 +120,8 @@ export default function DrawingGameArena({ gameSlug }: Props) {
               isHost={isHost}
               onApply={(words) => gameActions.setCustomWords(words)}
             />
+          ) : gameSlug === 'shadow-sketch' ? (
+            <ShadowGenreBlock isHost={isHost} onSelect={gameActions.setShadowGenre} />
           ) : undefined
         }
       />
@@ -681,6 +683,72 @@ function GameEndView({
       ) : (
         <p className="text-small text-ink-muted">Waiting for the host to start another game.</p>
       )}
+    </div>
+  );
+}
+
+/** M15 — Shadow Sketch host lobby control: pick the silhouette genre. */
+const SHADOW_GENRES: { id: string; label: string }[] = [
+  { id: 'animals', label: 'Animals' },
+  { id: 'food', label: 'Food' },
+  { id: 'nature', label: 'Nature' },
+  { id: 'objects', label: 'Objects' },
+  { id: 'places', label: 'Places' },
+  { id: 'space', label: 'Space & Fantasy' },
+];
+
+function ShadowGenreBlock({
+  isHost,
+  onSelect,
+}: {
+  isHost: boolean;
+  onSelect: (genre: string | null) => Promise<{ ok: boolean; error?: string }>;
+}) {
+  const [genre, setGenre] = useState<string | null>(null);
+  if (!isHost) {
+    return null;
+  }
+  return (
+    <div className="rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
+      <h3 className="font-display text-h4 text-ink">Silhouette category (host)</h3>
+      <p className="mt-1 text-small text-ink-muted">
+        Pick a theme — the shadows (and the drawing challenge) come from it.
+      </p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button
+          type="button"
+          aria-pressed={genre === null}
+          onClick={() => {
+            setGenre(null);
+            void onSelect(null);
+          }}
+          className={`rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+            genre === null
+              ? 'border-primary bg-primary/15 text-primary-deep'
+              : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'
+          }`}
+        >
+          All categories
+        </button>
+        {SHADOW_GENRES.map((option) => (
+          <button
+            key={option.id}
+            type="button"
+            aria-pressed={genre === option.id}
+            onClick={() => {
+              setGenre(option.id);
+              void onSelect(option.id);
+            }}
+            className={`rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+              genre === option.id
+                ? 'border-primary bg-primary/15 text-primary-deep'
+                : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'
+            }`}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

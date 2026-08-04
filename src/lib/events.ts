@@ -28,6 +28,10 @@ export const ClientEvents = {
   copycatImageLoaded: 'copycat-image-loaded',
   // Additive (M6 — voting games: player-submitted prompts)
   submitPrompt: 'submit-prompt',
+  // Additive (M15 — voting games: host-chosen NHIE tier/source, TOT genre)
+  setVotingConfig: 'set-voting-config',
+  // Additive (M15 — Shadow Sketch: host-chosen silhouette genre)
+  setShadowGenre: 'set-shadow-genre',
   // Additive (M8 — Trivia room mode: host mode toggle + answers)
   setTriviaMode: 'set-trivia-mode',
   answerQuestion: 'answer-question',

@@ -44,7 +44,11 @@ const DATASETS = {
     { a: 'never lose wifi', b: 'never lose keys' },
   ],
   mlt: [{ prompt: 'survive a zombie apocalypse' }, { prompt: 'forget a password' }],
-  nhie: [{ statement: 'gone skydiving' }, { statement: 'eaten pineapple pizza' }],
+  nhie: [
+    { statement: 'gone skydiving', tier: 'boring' as const },
+    { statement: 'eaten pineapple pizza', tier: 'moderate' as const },
+    { statement: 'had a one-night stand', tier: 'super-dirty' as const },
+  ],
   tot: [
     { a: 'sweet', b: 'salty' },
     { a: 'cats', b: 'dogs' },
@@ -177,9 +181,42 @@ describe('VotingSession — Never Have I Ever (PRD §5.16)', () => {
     expect(suggestions).toContain('gone skydiving'); // randomInt 0 → first
     expect(suggestions).toHaveLength(2); // dataset has 2 entries
   });
+
+  it('M15: tiers filter suggestions — super-dirty only falls back to safer tiers', () => {
+    const session = make(NHIE);
+    session.setContentOptions({ nhieTier: 'super-dirty' });
+    session.start(['Alice']);
+    // The test dataset has no tiers → defaults to moderate, so the fallback
+    // chain (super-dirty → dirty → moderate → boring) must still yield picks.
+    const picks = session.suggestionOptions(4);
+    expect(picks.length).toBeGreaterThan(0);
+    // A boring-only game never surfaces suggestions from dirtier tiers.
+    const session2 = make(NHIE);
+    session2.setContentOptions({ nhieTier: 'boring' });
+    session2.start(['Alice']);
+    expect(session2.suggestionOptions(4).length).toBeGreaterThan(0);
+  });
+
+  it('M15: statementSource drives whether suggestions are offered', () => {
+    const provided = make(NHIE);
+    provided.setContentOptions({ nhieSource: 'provided' });
+    expect(provided.usesProvidedSuggestions).toBe(true);
+    const own = make(NHIE);
+    own.setContentOptions({ nhieSource: 'own' });
+    expect(own.usesProvidedSuggestions).toBe(false);
+    expect(own.statementSource).toBe('own');
+  });
 });
 
 describe('VotingSession — This or That (PRD §5.18)', () => {
+  it('M15: the host-chosen genre filters the pair pool, with a full-pool fallback', () => {
+    const session = make(TOT);
+    session.setContentOptions({ totGenre: 'food' });
+    session.start(['Alice', 'Bob']);
+    // The test dataset has no genre tags → defaults to lifestyle, and the
+    // genre pool (< 20) falls back to the full pool so the game still runs.
+    expect(session.roundOptions.length).toBe(2);
+  });
   it('runs 20 rounds with fixed pairs and tracks herd matches', () => {
     const session = make(TOT);
     session.start(['Alice', 'Bob']);

@@ -1,212 +1,1002 @@
 [
-  { "statement": "gone skydiving" },
-  { "statement": "eaten a whole pizza by myself" },
-  { "statement": "lied about my age" },
-  { "statement": "sung karaoke in public" },
-  { "statement": "stayed up past 4am" },
-  { "statement": "regifted a present" },
-  { "statement": "fallen asleep in a movie theater" },
-  { "statement": "eaten food off the floor" },
-  { "statement": "talked to myself in public" },
-  { "statement": "cried at a commercial" },
-  { "statement": "binge watched an entire series in one day" },
-  { "statement": "broken a bone" },
-  { "statement": "had stitches" },
-  { "statement": "gotten a tattoo" },
-  { "statement": "gotten a piercing in a weird place" },
-  { "statement": "dyed my hair a crazy color" },
-  { "statement": "gotten a perm" },
-  { "statement": "worn the same outfit two days in a row" },
-  { "statement": "worn socks with sandals" },
-  { "statement": "fallen asleep in class" },
-  { "statement": "gotten in trouble at work" },
-  { "statement": "quit a job without notice" },
-  { "statement": "ghosted someone" },
-  { "statement": "been ghosted" },
-  { "statement": "sent a text to the wrong person" },
-  { "statement": "accidentally liked an old photo on social media" },
-  { "statement": "stalked an ex on social media" },
-  { "statement": "googled my own name" },
-  { "statement": "googled my symptoms and panicked" },
-  { "statement": "made a fake profile" },
-  { "statement": "been catfished" },
-  { "statement": "won something in a raffle" },
-  { "statement": "won a bet" },
-  { "statement": "lost a bet and had to do something embarrassing" },
-  { "statement": "eaten a whole cake by myself" },
-  { "statement": "eaten ice cream for breakfast" },
-  { "statement": "eaten breakfast for dinner" },
-  { "statement": "eaten cereal for dinner" },
-  { "statement": "burned a meal while cooking" },
-  { "statement": "set off the fire alarm while cooking" },
-  { "statement": "ordered food delivery twice in one day" },
-  { "statement": "hidden food in my room" },
-  { "statement": "eaten expired food on purpose" },
-  { "statement": "sniffed milk to check if it was still good" },
-  { "statement": "used someone else's toothbrush" },
-  { "statement": "gone a full day without brushing my teeth" },
-  { "statement": "worn the same socks two days in a row" },
-  { "statement": "reworn a shirt without washing it" },
-  { "statement": "worn jeans multiple times before washing" },
-  { "statement": "showered twice in one day" },
-  { "statement": "skipped a shower for two days" },
-  { "statement": "peed in the ocean" },
-  { "statement": "thrown something in anger" },
-  { "statement": "broken something in anger" },
-  { "statement": "screamed at an inanimate object" },
-  { "statement": "argued with a stranger" },
-  { "statement": "argued with an inanimate object" },
-  { "statement": "talked to my pet like a person" },
-  { "statement": "had a full conversation with my pet" },
-  { "statement": "dressed up my pet" },
-  { "statement": "cried over a fictional character" },
-  { "statement": "fallen in love with a fictional character" },
-  { "statement": "had a crush on a teacher" },
-  { "statement": "had a crush on a celebrity" },
-  { "statement": "kissed a poster of a celebrity" },
-  { "statement": "made a playlist for a crush" },
-  { "statement": "written a love letter" },
-  { "statement": "written a poem" },
-  { "statement": "kept a diary" },
-  { "statement": "read someone else's diary" },
-  { "statement": "snooped through a friend's phone" },
-  { "statement": "gone through someone's search history" },
-  { "statement": "cleared my search history out of shame" },
-  { "statement": "used incognito mode" },
-  { "statement": "lied about being busy" },
-  { "statement": "faked being sick" },
-  { "statement": "faked a phone call to escape a conversation" },
-  { "statement": "pretended not to see someone" },
-  { "statement": "pretended to be asleep" },
-  { "statement": "pretended to be someone I'm not" },
-  { "statement": "worn a costume outside of halloween" },
-  { "statement": "worn pajamas in public" },
-  { "statement": "gone to class in my pajamas" },
-  { "statement": "worn flip flops in winter" },
-  { "statement": "worn a hoodie in summer" },
-  { "statement": "gone outside with wet hair" },
-  { "statement": "gone outside with mismatched socks" },
-  { "statement": "gone out with my shirt inside out" },
-  { "statement": "gone out with toilet paper on my shoe" },
-  { "statement": "had food in my teeth during a meeting" },
-  { "statement": "had a wardrobe malfunction" },
-  { "statement": "gotten my zipper stuck" },
-  { "statement": "gotten stuck in my own clothes" },
-  { "statement": "gotten my head stuck in a fence" },
-  { "statement": "gotten a limb stuck somewhere embarrassing" },
-  { "statement": "walked into a glass door" },
-  { "statement": "tripped up the stairs" },
-  { "statement": "tripped over nothing" },
-  { "statement": "fallen in public" },
-  { "statement": "laughed so hard I cried" },
-  { "statement": "laughed so hard I peed a little" },
-  { "statement": "snorted while laughing" },
-  { "statement": "choked on water in public" },
-  { "statement": "gotten the hiccups in a quiet room" },
-  { "statement": "sneezed during a moment of silence" },
-  { "statement": "burped in public" },
-  { "statement": "farted in an elevator" },
-  { "statement": "blamed a fart on someone else" },
-  { "statement": "blamed the dog for a smell" },
-  { "statement": "told a lie that spiraled out of control" },
-  { "statement": "told a joke and no one laughed" },
-  { "statement": "laughed at a joke I didn't get" },
-  { "statement": "laughed at the wrong moment" },
-  { "statement": "cried at work" },
-  { "statement": "cried in a movie theater" },
-  { "statement": "cried at a wedding" },
-  { "statement": "cried at a birthday party" },
-  { "statement": "cried happy tears" },
-  { "statement": "faked a laugh" },
-  { "statement": "faked being fine when I wasn't" },
-  { "statement": "put on a brave face" },
-  { "statement": "had a public meltdown" },
-  { "statement": "had a panic attack in public" },
-  { "statement": "talked to my ex after the breakup" },
-  { "statement": "stayed friends with an ex" },
-  { "statement": "dated someone from work" },
-  { "statement": "dated a friend's ex" },
-  { "statement": "had a situationship" },
-  { "statement": "been in a long distance relationship" },
-  { "statement": "broken up over text" },
-  { "statement": "been broken up with over text" },
-  { "statement": "fallen for a friend" },
-  { "statement": "had a secret crush for over a year" },
-  { "statement": "been friend zoned" },
-  { "statement": "friend zoned someone" },
-  { "statement": "been on a blind date" },
-  { "statement": "been set up on a date" },
-  { "statement": "gone on a date and left early" },
-  { "statement": "gone on a date with someone I met online" },
-  { "statement": "used a dating app" },
-  { "statement": "matched with someone and never messaged them" },
-  { "statement": "unmatched someone mid conversation" },
-  { "statement": "googled someone before a date" },
-  { "statement": "checked my phone on a date" },
-  { "statement": "been stood up" },
-  { "statement": "stood someone up" },
-  { "statement": "had a date go horribly wrong" },
-  { "statement": "fallen asleep on a date" },
-  { "statement": "told a bad joke on a first date" },
-  { "statement": "paid for a date and regretted it" },
-  { "statement": "split the bill on a date" },
-  { "statement": "lied about my height on a dating app" },
-  { "statement": "used an old photo on a dating app" },
-  { "statement": "deleted and re-downloaded a dating app" },
-  { "statement": "been on a second date with someone I wasn't into" },
-  { "statement": "ghosted a date" },
-  { "statement": "been ghosted by a date" },
-  { "statement": "had a summer fling" },
-  { "statement": "fallen for a friend's sibling" },
-  { "statement": "dated two people from the same friend group" },
-  { "statement": "had a workplace crush" },
-  { "statement": "kissed someone at a party" },
-  { "statement": "made out with a stranger" },
-  { "statement": "slow danced" },
-  { "statement": "danced on a table at a party" },
-  { "statement": "danced alone in my room" },
-  { "statement": "sung in the shower" },
-  { "statement": "had a concert in my car" },
-  { "statement": "performed karaoke sober" },
-  { "statement": "received a standing ovation" },
-  { "statement": "won a talent show" },
-  { "statement": "participated in a talent show" },
-  { "statement": "been in a school play" },
-  { "statement": "forgotten my lines" },
-  { "statement": "flubbed an interview" },
-  { "statement": "lied on my resume" },
-  { "statement": "cried during a job interview" },
-  { "statement": "taken a nap at work" },
-  { "statement": "fallen asleep at my desk" },
-  { "statement": "hidden in a bathroom to avoid work" },
-  { "statement": "had a meeting with my camera off" },
-  { "statement": "forgotten to unmute during a meeting" },
-  { "statement": "worn sweatpants to work" },
-  { "statement": "shown up to work hungover" },
-  { "statement": "called in sick when I wasn't sick" },
-  { "statement": "worked while on vacation" },
-  { "statement": "checked work email on vacation" },
-  { "statement": "dreamed about work" },
-  { "statement": "had a nightmare about work" },
-  { "statement": "eaten lunch alone by choice" },
-  { "statement": "eaten lunch in my car" },
-  { "statement": "eaten lunch at my desk" },
-  { "statement": "brought a tupperware to a party" },
-  { "statement": "taken food home from a party" },
-  { "statement": "hidden snacks in my bag at a party" },
-  { "statement": "eaten a whole tub of ice cream" },
-  { "statement": "eaten pickles straight from the jar" },
-  { "statement": "eaten cookie dough raw" },
-  { "statement": "eaten cake batter straight from the bowl" },
-  { "statement": "licked the mixing bowl clean" },
-  { "statement": "eaten cereal dry" },
-  { "statement": "eaten a crustless sandwich on purpose" },
-  { "statement": "dipped fries in a milkshake" },
-  { "statement": "eaten pizza with pineapple on purpose" },
-  { "statement": "put ketchup on eggs" },
-  { "statement": "eaten a hot dog with a fork and knife" },
-  { "statement": "used a fork to eat pizza" },
-  { "statement": "stolen a sip of a friend's drink" },
-  { "statement": "had a food fight" },
-  { "statement": "drunk milk straight from the carton" }
+  {
+    "statement": "gone skydiving",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten a whole pizza by myself",
+    "tier": "boring"
+  },
+  {
+    "statement": "lied about my age",
+    "tier": "moderate"
+  },
+  {
+    "statement": "sung karaoke in public",
+    "tier": "boring"
+  },
+  {
+    "statement": "stayed up past 4am",
+    "tier": "boring"
+  },
+  {
+    "statement": "regifted a present",
+    "tier": "boring"
+  },
+  {
+    "statement": "fallen asleep in a movie theater",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten food off the floor",
+    "tier": "moderate"
+  },
+  {
+    "statement": "talked to myself in public",
+    "tier": "boring"
+  },
+  {
+    "statement": "cried at a commercial",
+    "tier": "boring"
+  },
+  {
+    "statement": "binge watched an entire series in one day",
+    "tier": "boring"
+  },
+  {
+    "statement": "broken a bone",
+    "tier": "boring"
+  },
+  {
+    "statement": "had stitches",
+    "tier": "boring"
+  },
+  {
+    "statement": "gotten a tattoo",
+    "tier": "moderate"
+  },
+  {
+    "statement": "gotten a piercing in a weird place",
+    "tier": "moderate"
+  },
+  {
+    "statement": "dyed my hair a crazy color",
+    "tier": "boring"
+  },
+  {
+    "statement": "gotten a perm",
+    "tier": "boring"
+  },
+  {
+    "statement": "worn the same outfit two days in a row",
+    "tier": "boring"
+  },
+  {
+    "statement": "worn socks with sandals",
+    "tier": "boring"
+  },
+  {
+    "statement": "fallen asleep in class",
+    "tier": "boring"
+  },
+  {
+    "statement": "gotten in trouble at work",
+    "tier": "boring"
+  },
+  {
+    "statement": "quit a job without notice",
+    "tier": "boring"
+  },
+  {
+    "statement": "ghosted someone",
+    "tier": "moderate"
+  },
+  {
+    "statement": "been ghosted",
+    "tier": "moderate"
+  },
+  {
+    "statement": "sent a text to the wrong person",
+    "tier": "boring"
+  },
+  {
+    "statement": "accidentally liked an old photo on social media",
+    "tier": "boring"
+  },
+  {
+    "statement": "stalked an ex on social media",
+    "tier": "moderate"
+  },
+  {
+    "statement": "googled my own name",
+    "tier": "boring"
+  },
+  {
+    "statement": "googled my symptoms and panicked",
+    "tier": "boring"
+  },
+  {
+    "statement": "made a fake profile",
+    "tier": "moderate"
+  },
+  {
+    "statement": "been catfished",
+    "tier": "moderate"
+  },
+  {
+    "statement": "won something in a raffle",
+    "tier": "boring"
+  },
+  {
+    "statement": "won a bet",
+    "tier": "boring"
+  },
+  {
+    "statement": "lost a bet and had to do something embarrassing",
+    "tier": "moderate"
+  },
+  {
+    "statement": "eaten a whole cake by myself",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten ice cream for breakfast",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten breakfast for dinner",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten cereal for dinner",
+    "tier": "boring"
+  },
+  {
+    "statement": "burned a meal while cooking",
+    "tier": "boring"
+  },
+  {
+    "statement": "set off the fire alarm while cooking",
+    "tier": "boring"
+  },
+  {
+    "statement": "ordered food delivery twice in one day",
+    "tier": "boring"
+  },
+  {
+    "statement": "hidden food in my room",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten expired food on purpose",
+    "tier": "boring"
+  },
+  {
+    "statement": "sniffed milk to check if it was still good",
+    "tier": "boring"
+  },
+  {
+    "statement": "used someone else's toothbrush",
+    "tier": "moderate"
+  },
+  {
+    "statement": "gone a full day without brushing my teeth",
+    "tier": "boring"
+  },
+  {
+    "statement": "worn the same socks two days in a row",
+    "tier": "boring"
+  },
+  {
+    "statement": "reworn a shirt without washing it",
+    "tier": "boring"
+  },
+  {
+    "statement": "worn jeans multiple times before washing",
+    "tier": "boring"
+  },
+  {
+    "statement": "showered twice in one day",
+    "tier": "boring"
+  },
+  {
+    "statement": "skipped a shower for two days",
+    "tier": "boring"
+  },
+  {
+    "statement": "peed in the ocean",
+    "tier": "moderate"
+  },
+  {
+    "statement": "thrown something in anger",
+    "tier": "boring"
+  },
+  {
+    "statement": "broken something in anger",
+    "tier": "boring"
+  },
+  {
+    "statement": "screamed at an inanimate object",
+    "tier": "boring"
+  },
+  {
+    "statement": "argued with a stranger",
+    "tier": "boring"
+  },
+  {
+    "statement": "argued with an inanimate object",
+    "tier": "boring"
+  },
+  {
+    "statement": "talked to my pet like a person",
+    "tier": "boring"
+  },
+  {
+    "statement": "had a full conversation with my pet",
+    "tier": "boring"
+  },
+  {
+    "statement": "dressed up my pet",
+    "tier": "boring"
+  },
+  {
+    "statement": "cried over a fictional character",
+    "tier": "boring"
+  },
+  {
+    "statement": "fallen in love with a fictional character",
+    "tier": "moderate"
+  },
+  {
+    "statement": "had a crush on a teacher",
+    "tier": "moderate"
+  },
+  {
+    "statement": "had a crush on a celebrity",
+    "tier": "moderate"
+  },
+  {
+    "statement": "kissed a poster of a celebrity",
+    "tier": "moderate"
+  },
+  {
+    "statement": "made a playlist for a crush",
+    "tier": "boring"
+  },
+  {
+    "statement": "written a love letter",
+    "tier": "boring"
+  },
+  {
+    "statement": "written a poem",
+    "tier": "boring"
+  },
+  {
+    "statement": "kept a diary",
+    "tier": "boring"
+  },
+  {
+    "statement": "read someone else's diary",
+    "tier": "moderate"
+  },
+  {
+    "statement": "snooped through a friend's phone",
+    "tier": "moderate"
+  },
+  {
+    "statement": "gone through someone's search history",
+    "tier": "boring"
+  },
+  {
+    "statement": "cleared my search history out of shame",
+    "tier": "boring"
+  },
+  {
+    "statement": "used incognito mode",
+    "tier": "moderate"
+  },
+  {
+    "statement": "lied about being busy",
+    "tier": "boring"
+  },
+  {
+    "statement": "faked being sick",
+    "tier": "boring"
+  },
+  {
+    "statement": "faked a phone call to escape a conversation",
+    "tier": "boring"
+  },
+  {
+    "statement": "pretended not to see someone",
+    "tier": "boring"
+  },
+  {
+    "statement": "pretended to be asleep",
+    "tier": "boring"
+  },
+  {
+    "statement": "pretended to be someone I'm not",
+    "tier": "moderate"
+  },
+  {
+    "statement": "worn a costume outside of halloween",
+    "tier": "boring"
+  },
+  {
+    "statement": "worn pajamas in public",
+    "tier": "boring"
+  },
+  {
+    "statement": "gone to class in my pajamas",
+    "tier": "boring"
+  },
+  {
+    "statement": "worn flip flops in winter",
+    "tier": "boring"
+  },
+  {
+    "statement": "worn a hoodie in summer",
+    "tier": "boring"
+  },
+  {
+    "statement": "gone outside with wet hair",
+    "tier": "boring"
+  },
+  {
+    "statement": "gone outside with mismatched socks",
+    "tier": "boring"
+  },
+  {
+    "statement": "gone out with my shirt inside out",
+    "tier": "boring"
+  },
+  {
+    "statement": "gone out with toilet paper on my shoe",
+    "tier": "boring"
+  },
+  {
+    "statement": "had food in my teeth during a meeting",
+    "tier": "boring"
+  },
+  {
+    "statement": "had a wardrobe malfunction",
+    "tier": "moderate"
+  },
+  {
+    "statement": "gotten my zipper stuck",
+    "tier": "boring"
+  },
+  {
+    "statement": "gotten stuck in my own clothes",
+    "tier": "boring"
+  },
+  {
+    "statement": "gotten my head stuck in a fence",
+    "tier": "boring"
+  },
+  {
+    "statement": "gotten a limb stuck somewhere embarrassing",
+    "tier": "boring"
+  },
+  {
+    "statement": "walked into a glass door",
+    "tier": "boring"
+  },
+  {
+    "statement": "tripped up the stairs",
+    "tier": "boring"
+  },
+  {
+    "statement": "tripped over nothing",
+    "tier": "boring"
+  },
+  {
+    "statement": "fallen in public",
+    "tier": "boring"
+  },
+  {
+    "statement": "laughed so hard I cried",
+    "tier": "boring"
+  },
+  {
+    "statement": "laughed so hard I peed a little",
+    "tier": "moderate"
+  },
+  {
+    "statement": "snorted while laughing",
+    "tier": "boring"
+  },
+  {
+    "statement": "choked on water in public",
+    "tier": "boring"
+  },
+  {
+    "statement": "gotten the hiccups in a quiet room",
+    "tier": "boring"
+  },
+  {
+    "statement": "sneezed during a moment of silence",
+    "tier": "boring"
+  },
+  {
+    "statement": "burped in public",
+    "tier": "boring"
+  },
+  {
+    "statement": "farted in an elevator",
+    "tier": "moderate"
+  },
+  {
+    "statement": "blamed a fart on someone else",
+    "tier": "moderate"
+  },
+  {
+    "statement": "blamed the dog for a smell",
+    "tier": "moderate"
+  },
+  {
+    "statement": "told a lie that spiraled out of control",
+    "tier": "moderate"
+  },
+  {
+    "statement": "told a joke and no one laughed",
+    "tier": "boring"
+  },
+  {
+    "statement": "laughed at a joke I didn't get",
+    "tier": "boring"
+  },
+  {
+    "statement": "laughed at the wrong moment",
+    "tier": "boring"
+  },
+  {
+    "statement": "cried at work",
+    "tier": "boring"
+  },
+  {
+    "statement": "cried in a movie theater",
+    "tier": "boring"
+  },
+  {
+    "statement": "cried at a wedding",
+    "tier": "boring"
+  },
+  {
+    "statement": "cried at a birthday party",
+    "tier": "boring"
+  },
+  {
+    "statement": "cried happy tears",
+    "tier": "boring"
+  },
+  {
+    "statement": "faked a laugh",
+    "tier": "boring"
+  },
+  {
+    "statement": "faked being fine when I wasn't",
+    "tier": "boring"
+  },
+  {
+    "statement": "put on a brave face",
+    "tier": "boring"
+  },
+  {
+    "statement": "had a public meltdown",
+    "tier": "moderate"
+  },
+  {
+    "statement": "had a panic attack in public",
+    "tier": "moderate"
+  },
+  {
+    "statement": "talked to my ex after the breakup",
+    "tier": "dirty"
+  },
+  {
+    "statement": "stayed friends with an ex",
+    "tier": "dirty"
+  },
+  {
+    "statement": "dated someone from work",
+    "tier": "dirty"
+  },
+  {
+    "statement": "dated a friend's ex",
+    "tier": "dirty"
+  },
+  {
+    "statement": "had a situationship",
+    "tier": "dirty"
+  },
+  {
+    "statement": "been in a long distance relationship",
+    "tier": "moderate"
+  },
+  {
+    "statement": "broken up over text",
+    "tier": "dirty"
+  },
+  {
+    "statement": "been broken up with over text",
+    "tier": "dirty"
+  },
+  {
+    "statement": "fallen for a friend",
+    "tier": "moderate"
+  },
+  {
+    "statement": "had a secret crush for over a year",
+    "tier": "moderate"
+  },
+  {
+    "statement": "been friend zoned",
+    "tier": "moderate"
+  },
+  {
+    "statement": "friend zoned someone",
+    "tier": "moderate"
+  },
+  {
+    "statement": "been on a blind date",
+    "tier": "moderate"
+  },
+  {
+    "statement": "been set up on a date",
+    "tier": "moderate"
+  },
+  {
+    "statement": "gone on a date and left early",
+    "tier": "moderate"
+  },
+  {
+    "statement": "gone on a date with someone I met online",
+    "tier": "moderate"
+  },
+  {
+    "statement": "used a dating app",
+    "tier": "dirty"
+  },
+  {
+    "statement": "matched with someone and never messaged them",
+    "tier": "moderate"
+  },
+  {
+    "statement": "unmatched someone mid conversation",
+    "tier": "moderate"
+  },
+  {
+    "statement": "googled someone before a date",
+    "tier": "moderate"
+  },
+  {
+    "statement": "checked my phone on a date",
+    "tier": "moderate"
+  },
+  {
+    "statement": "been stood up",
+    "tier": "moderate"
+  },
+  {
+    "statement": "stood someone up",
+    "tier": "moderate"
+  },
+  {
+    "statement": "had a date go horribly wrong",
+    "tier": "moderate"
+  },
+  {
+    "statement": "fallen asleep on a date",
+    "tier": "moderate"
+  },
+  {
+    "statement": "told a bad joke on a first date",
+    "tier": "moderate"
+  },
+  {
+    "statement": "paid for a date and regretted it",
+    "tier": "boring"
+  },
+  {
+    "statement": "split the bill on a date",
+    "tier": "boring"
+  },
+  {
+    "statement": "lied about my height on a dating app",
+    "tier": "moderate"
+  },
+  {
+    "statement": "used an old photo on a dating app",
+    "tier": "moderate"
+  },
+  {
+    "statement": "deleted and re-downloaded a dating app",
+    "tier": "moderate"
+  },
+  {
+    "statement": "been on a second date with someone I wasn't into",
+    "tier": "moderate"
+  },
+  {
+    "statement": "ghosted a date",
+    "tier": "moderate"
+  },
+  {
+    "statement": "been ghosted by a date",
+    "tier": "moderate"
+  },
+  {
+    "statement": "had a summer fling",
+    "tier": "dirty"
+  },
+  {
+    "statement": "fallen for a friend's sibling",
+    "tier": "moderate"
+  },
+  {
+    "statement": "dated two people from the same friend group",
+    "tier": "moderate"
+  },
+  {
+    "statement": "had a workplace crush",
+    "tier": "moderate"
+  },
+  {
+    "statement": "kissed someone at a party",
+    "tier": "dirty"
+  },
+  {
+    "statement": "made out with a stranger",
+    "tier": "dirty"
+  },
+  {
+    "statement": "slow danced",
+    "tier": "boring"
+  },
+  {
+    "statement": "danced on a table at a party",
+    "tier": "moderate"
+  },
+  {
+    "statement": "danced alone in my room",
+    "tier": "boring"
+  },
+  {
+    "statement": "sung in the shower",
+    "tier": "boring"
+  },
+  {
+    "statement": "had a concert in my car",
+    "tier": "boring"
+  },
+  {
+    "statement": "performed karaoke sober",
+    "tier": "boring"
+  },
+  {
+    "statement": "received a standing ovation",
+    "tier": "boring"
+  },
+  {
+    "statement": "won a talent show",
+    "tier": "boring"
+  },
+  {
+    "statement": "participated in a talent show",
+    "tier": "boring"
+  },
+  {
+    "statement": "been in a school play",
+    "tier": "boring"
+  },
+  {
+    "statement": "forgotten my lines",
+    "tier": "boring"
+  },
+  {
+    "statement": "flubbed an interview",
+    "tier": "boring"
+  },
+  {
+    "statement": "lied on my resume",
+    "tier": "moderate"
+  },
+  {
+    "statement": "cried during a job interview",
+    "tier": "boring"
+  },
+  {
+    "statement": "taken a nap at work",
+    "tier": "boring"
+  },
+  {
+    "statement": "fallen asleep at my desk",
+    "tier": "boring"
+  },
+  {
+    "statement": "hidden in a bathroom to avoid work",
+    "tier": "moderate"
+  },
+  {
+    "statement": "had a meeting with my camera off",
+    "tier": "boring"
+  },
+  {
+    "statement": "forgotten to unmute during a meeting",
+    "tier": "boring"
+  },
+  {
+    "statement": "worn sweatpants to work",
+    "tier": "boring"
+  },
+  {
+    "statement": "shown up to work hungover",
+    "tier": "moderate"
+  },
+  {
+    "statement": "called in sick when I wasn't sick",
+    "tier": "boring"
+  },
+  {
+    "statement": "worked while on vacation",
+    "tier": "boring"
+  },
+  {
+    "statement": "checked work email on vacation",
+    "tier": "boring"
+  },
+  {
+    "statement": "dreamed about work",
+    "tier": "boring"
+  },
+  {
+    "statement": "had a nightmare about work",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten lunch alone by choice",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten lunch in my car",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten lunch at my desk",
+    "tier": "boring"
+  },
+  {
+    "statement": "brought a tupperware to a party",
+    "tier": "boring"
+  },
+  {
+    "statement": "taken food home from a party",
+    "tier": "boring"
+  },
+  {
+    "statement": "hidden snacks in my bag at a party",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten a whole tub of ice cream",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten pickles straight from the jar",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten cookie dough raw",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten cake batter straight from the bowl",
+    "tier": "boring"
+  },
+  {
+    "statement": "licked the mixing bowl clean",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten cereal dry",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten a crustless sandwich on purpose",
+    "tier": "boring"
+  },
+  {
+    "statement": "dipped fries in a milkshake",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten pizza with pineapple on purpose",
+    "tier": "boring"
+  },
+  {
+    "statement": "put ketchup on eggs",
+    "tier": "boring"
+  },
+  {
+    "statement": "eaten a hot dog with a fork and knife",
+    "tier": "boring"
+  },
+  {
+    "statement": "used a fork to eat pizza",
+    "tier": "boring"
+  },
+  {
+    "statement": "stolen a sip of a friend's drink",
+    "tier": "boring"
+  },
+  {
+    "statement": "had a food fight",
+    "tier": "boring"
+  },
+  {
+    "statement": "drunk milk straight from the carton",
+    "tier": "boring"
+  },
+  {
+    "statement": "drunk dialed an ex",
+    "tier": "dirty"
+  },
+  {
+    "statement": "had a fake ID",
+    "tier": "dirty"
+  },
+  {
+    "statement": "been to a party I was not invited to",
+    "tier": "dirty"
+  },
+  {
+    "statement": "snuck into a concert or club",
+    "tier": "dirty"
+  },
+  {
+    "statement": "made out with someone I met the same day",
+    "tier": "dirty"
+  },
+  {
+    "statement": "been on dates with two different people in one week",
+    "tier": "dirty"
+  },
+  {
+    "statement": "kissed someone to make someone else jealous",
+    "tier": "dirty"
+  },
+  {
+    "statement": "been caught checking someone out",
+    "tier": "dirty"
+  },
+  {
+    "statement": "stalked my crush’s new partner online",
+    "tier": "dirty"
+  },
+  {
+    "statement": "lied about my age to get served",
+    "tier": "dirty"
+  },
+  {
+    "statement": "been drunk at a family gathering",
+    "tier": "dirty"
+  },
+  {
+    "statement": "vaped or smoked to look cool",
+    "tier": "dirty"
+  },
+  {
+    "statement": "snuck out of the house at night",
+    "tier": "dirty"
+  },
+  {
+    "statement": "thrown a party while the parents were away",
+    "tier": "dirty"
+  },
+  {
+    "statement": "flirted with a server for a freebie",
+    "tier": "dirty"
+  },
+  {
+    "statement": "sent a flirty text to the wrong person",
+    "tier": "dirty"
+  },
+  {
+    "statement": "used a pick-up line that actually worked",
+    "tier": "dirty"
+  },
+  {
+    "statement": "taken a shot just to fit in",
+    "tier": "dirty"
+  },
+  {
+    "statement": "had an awkward first kiss",
+    "tier": "dirty"
+  },
+  {
+    "statement": "been caught staring at someone’s phone",
+    "tier": "dirty"
+  },
+  {
+    "statement": "gone on a date with someone my friends hated",
+    "tier": "dirty"
+  },
+  {
+    "statement": "had a crush on my best friend’s sibling",
+    "tier": "dirty"
+  },
+  {
+    "statement": "slow danced with a stranger",
+    "tier": "dirty"
+  },
+  {
+    "statement": "been the third wheel on purpose",
+    "tier": "dirty"
+  },
+  {
+    "statement": "reused a first date outfit for a second date",
+    "tier": "dirty"
+  },
+  {
+    "statement": "googled how to flirt",
+    "tier": "dirty"
+  },
+  {
+    "statement": "had a one-night stand",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "hooked up with a coworker",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "had a fling with a friend’s ex",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "been to a strip club",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "played a drinking game that got out of hand",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "sent a risqué photo to the wrong person",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "been caught in a compromising position",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "had a dream about someone I should not have",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "searched for my ex at 2am",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "kissed someone to win a dare",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "lied about my body count",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "watched something I would never admit to",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "had a situationship with two people at once",
+    "tier": "super-dirty"
+  },
+  {
+    "statement": "been dared to do something I regret",
+    "tier": "super-dirty"
+  }
 ]

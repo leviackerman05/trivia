@@ -30,19 +30,20 @@ const files = [
   ],
   ['server/src/data/wyr.json', (e) => e.a !== e.b && e.a.length >= 4 && e.b.length >= 4],
   ['server/src/data/most-likely-to.json', (e) => e.prompt.length >= 6],
-  ['server/src/data/never-have-i-ever.json', (e) => e.statement.length >= 4],
-  ['server/src/data/this-or-that.json', (e) => e.a !== e.b && e.a.length >= 1 && e.b.length >= 1],
+  [
+    'server/src/data/never-have-i-ever.json',
+    (e) =>
+      e.statement.length >= 4 && ['boring', 'moderate', 'dirty', 'super-dirty'].includes(e.tier),
+  ],
+  [
+    'server/src/data/this-or-that.json',
+    (e) => e.a !== e.b && e.a.length >= 1 && e.b.length >= 1 && typeof e.genre === 'string',
+  ],
   [
     'src/data/rhymes.json',
     (e) => e.answers.length >= 1 && e.answers.every((a) => /^[a-z]+$/.test(a)),
   ],
-  [
-    'src/data/rhyme-phonemes.json',
-    (e) =>
-      typeof e === 'object' &&
-      Object.values(e).every((key) => typeof key === 'string' && key.length >= 1),
-    { map: true },
-  ],
+  ['src/data/rhyme-phonemes.json', (e) => typeof e === 'string' && e.length >= 1, { map: true }],
   [
     'src/data/emoji-plots.json',
     (e) => e.emoji.length >= 3 && e.title.length > 1 && (e.kind === 'movie' || e.kind === 'book'),

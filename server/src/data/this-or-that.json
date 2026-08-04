@@ -1,322 +1,1602 @@
 [
-  { "a": "sweet", "b": "salty" },
-  { "a": "pizza", "b": "burgers" },
-  { "a": "tacos", "b": "burritos" },
-  { "a": "pancakes", "b": "waffles" },
-  { "a": "fries", "b": "onion rings" },
-  { "a": "chocolate", "b": "vanilla" },
-  { "a": "coffee", "b": "tea" },
-  { "a": "cake", "b": "pie" },
-  { "a": "ice cream", "b": "frozen yogurt" },
-  { "a": "cookies", "b": "brownies" },
-  { "a": "popcorn", "b": "nachos" },
-  { "a": "chips", "b": "dip" },
-  { "a": "pasta", "b": "rice" },
-  { "a": "sushi", "b": "ramen" },
-  { "a": "steak", "b": "lobster" },
-  { "a": "breakfast", "b": "dinner" },
-  { "a": "brunch", "b": "lunch" },
-  { "a": "savory", "b": "sweet" },
-  { "a": "crunchy", "b": "soft" },
-  { "a": "spicy", "b": "mild" },
-  { "a": "hot sauce", "b": "ketchup" },
-  { "a": "mustard", "b": "mayo" },
-  { "a": "pineapple on pizza", "b": "pineapple on pizza is a crime" },
-  { "a": "stuffed crust", "b": "thin crust" },
-  { "a": "deep dish", "b": "new york style" },
-  { "a": "crispy chicken", "b": "grilled chicken" },
-  { "a": "bone in", "b": "boneless" },
-  { "a": "ranch", "b": "blue cheese" },
-  { "a": "guacamole", "b": "salsa" },
-  { "a": "cheese", "b": "chocolate" },
-  { "a": "peanut butter", "b": "jelly" },
-  { "a": "nutella", "b": "peanut butter" },
-  { "a": "cereal", "b": "oatmeal" },
-  { "a": "toast", "b": "bagels" },
-  { "a": "butter", "b": "jam" },
-  { "a": "bacon", "b": "sausage" },
-  { "a": "sunny side up eggs", "b": "scrambled eggs" },
-  { "a": "black coffee", "b": "coffee with cream" },
-  { "a": "latte", "b": "cappuccino" },
-  { "a": "iced coffee", "b": "hot coffee" },
-  { "a": "lemonade", "b": "iced tea" },
-  { "a": "water", "b": "sparkling water" },
-  { "a": "smoothies", "b": "milkshakes" },
-  { "a": "donuts", "b": "croissants" },
-  { "a": "cinnamon rolls", "b": "danishes" },
-  { "a": "candy", "b": "gum" },
-  { "a": "gummy bears", "b": "sour patch kids" },
-  { "a": "mint chocolate chip", "b": "cookies and cream" },
-  { "a": "breadsticks", "b": "garlic knots" },
-  { "a": "loaded fries", "b": "poutine" },
-  { "a": "mac and cheese", "b": "grilled cheese" },
-  { "a": "tomato soup", "b": "broccoli cheddar soup" },
-  { "a": "pancakes", "b": "french toast" },
-  { "a": "burgers", "b": "hot dogs" },
-  { "a": "tacos", "b": "quesadillas" },
-  { "a": "burritos", "b": "bowls" },
-  { "a": "ramen", "b": "pho" },
-  { "a": "sushi", "b": "sashimi" },
-  { "a": "fried rice", "b": "lo mein" },
-  { "a": "dumplings", "b": "spring rolls" },
-  { "a": "mango", "b": "pineapple" },
-  { "a": "apples", "b": "oranges" },
-  { "a": "bananas", "b": "strawberries" },
-  { "a": "watermelon", "b": "cantaloupe" },
-  { "a": "grapes", "b": "cherries" },
-  { "a": "avocado", "b": "tomato" },
-  { "a": "carrots", "b": "celery" },
-  { "a": "broccoli", "b": "cauliflower" },
-  { "a": "brussels sprouts", "b": "asparagus" },
-  { "a": "mashed potatoes", "b": "baked potatoes" },
-  { "a": "sweet potato fries", "b": "regular fries" },
-  { "a": "mozzarella sticks", "b": "onion rings" },
-  { "a": "chicken wings", "b": "chicken tenders" },
-  { "a": "chicken thighs", "b": "chicken breasts" },
-  { "a": "barbecue", "b": "grilled" },
-  { "a": "meal prep", "b": "takeout" },
-  { "a": "home cooking", "b": "restaurant food" },
-  { "a": "leftovers", "b": "fresh food" },
-  { "a": "breakfast for dinner", "b": "dinner for breakfast" },
-  { "a": "eat out", "b": "order in" },
-  { "a": "cooking", "b": "baking" },
-  { "a": "sweet breakfast", "b": "savory breakfast" },
-  { "a": "street food", "b": "fine dining" },
-  { "a": "food trucks", "b": "food courts" },
-  { "a": "eat at the table", "b": "eat on the couch" },
-  { "a": "share food", "b": "keep food to yourself" },
-  { "a": "going back for seconds", "b": "saving room for dessert" },
-  { "a": "cats", "b": "dogs" },
-  { "a": "puppies", "b": "kittens" },
-  { "a": "big dogs", "b": "small dogs" },
-  { "a": "huskies", "b": "golden retrievers" },
-  { "a": "turtles", "b": "tortoises" },
-  { "a": "birds", "b": "fish" },
-  { "a": "hamsters", "b": "guinea pigs" },
-  { "a": "horses", "b": "unicorns" },
-  { "a": "sharks", "b": "dolphins" },
-  { "a": "lions", "b": "tigers" },
-  { "a": "pandas", "b": "koalas" },
-  { "a": "elephants", "b": "giraffes" },
-  { "a": "penguins", "b": "polar bears" },
-  { "a": "owls", "b": "eagles" },
-  { "a": "snakes", "b": "lizards" },
-  { "a": "frogs", "b": "toads" },
-  { "a": "spiders", "b": "scorpions" },
-  { "a": "bees", "b": "wasps" },
-  { "a": "butterflies", "b": "dragonflies" },
-  { "a": "farm animals", "b": "zoo animals" },
-  { "a": "pets", "b": "plants" },
-  { "a": "dog person", "b": "cat person" },
-  { "a": "a talking pet", "b": "a flying pet" },
-  { "a": "octopus", "b": "jellyfish" },
-  { "a": "otters", "b": "seals" },
-  { "a": "ferrets", "b": "hedgehogs" },
-  { "a": "chinchillas", "b": "hamsters" },
-  { "a": "whale watching", "b": "dolphin watching" },
-  { "a": "safaris", "b": "aquariums" },
-  { "a": "a pet alligator", "b": "a pet snake" },
-  { "a": "summer", "b": "winter" },
-  { "a": "spring", "b": "fall" },
-  { "a": "hot weather", "b": "cold weather" },
-  { "a": "rain", "b": "snow" },
-  { "a": "thunderstorms", "b": "blizzards" },
-  { "a": "beach weather", "b": "mountain weather" },
-  { "a": "sunny days", "b": "cloudy days" },
-  { "a": "sunrise", "b": "sunset" },
-  { "a": "full moons", "b": "new moons" },
-  { "a": "starry nights", "b": "cloudy nights" },
-  { "a": "foggy mornings", "b": "rainy afternoons" },
-  { "a": "a hurricane", "b": "an earthquake" },
-  { "a": "heat waves", "b": "cold snaps" },
-  { "a": "humid weather", "b": "dry weather" },
-  { "a": "snow days", "b": "rainy days" },
-  { "a": "winter sports", "b": "summer sports" },
-  { "a": "hot tubs", "b": "saunas" },
-  { "a": "the beach", "b": "the pool" },
-  { "a": "the lake", "b": "the ocean" },
-  { "a": "texting", "b": "calling" },
-  { "a": "email", "b": "instant message" },
-  { "a": "face to face chats", "b": "video calls" },
-  { "a": "voice memos", "b": "texts" },
-  { "a": "group chats", "b": "one on one chats" },
-  { "a": "social media", "b": "real life" },
-  { "a": "instagram", "b": "tiktok" },
-  { "a": "youtube", "b": "netflix" },
-  { "a": "streaming", "b": "cable" },
-  { "a": "laptops", "b": "desktops" },
-  { "a": "tablets", "b": "phones" },
-  { "a": "iphone", "b": "android" },
-  { "a": "mac", "b": "pc" },
-  { "a": "console gaming", "b": "pc gaming" },
-  { "a": "playstation", "b": "xbox" },
-  { "a": "online gaming", "b": "board games" },
-  { "a": "video games", "b": "sports" },
-  { "a": "ebooks", "b": "physical books" },
-  { "a": "audiobooks", "b": "podcasts" },
-  { "a": "playlists", "b": "albums" },
-  { "a": "live concerts", "b": "recorded albums" },
-  { "a": "headphones", "b": "speakers" },
-  { "a": "earbuds", "b": "over ear headphones" },
-  { "a": "a smart home", "b": "a regular home" },
-  { "a": "a robot vacuum", "b": "a regular mop" },
-  { "a": "digital calendars", "b": "paper planners" },
-  { "a": "notes apps", "b": "physical notebooks" },
-  { "a": "dark mode", "b": "light mode" },
-  { "a": "clearing history", "b": "incognito mode" },
-  { "a": "push notifications", "b": "silent mode" },
-  { "a": "do not disturb", "b": "airplane mode" },
-  { "a": "wifi", "b": "cellular data" },
-  { "a": "unlimited data", "b": "unlimited battery" },
-  { "a": "fast charging", "b": "wireless charging" },
-  { "a": "physical keyboards", "b": "touchscreens" },
-  { "a": "mouse", "b": "trackpad" },
-  { "a": "screenshots", "b": "screen recordings" },
-  { "a": "selfies", "b": "group photos" },
-  { "a": "front camera", "b": "back camera" },
-  { "a": "filters", "b": "no filters" },
-  { "a": "posting", "b": "lurking" },
-  { "a": "comments", "b": "dms" },
-  { "a": "likes", "b": "shares" },
-  { "a": "memes", "b": "gifs" },
-  { "a": "autocorrect", "b": "autocomplete" },
-  { "a": "emojis", "b": "kaomoji" },
-  { "a": "voice search", "b": "typing" },
-  { "a": "google", "b": "siri" },
-  { "a": "alexa", "b": "google home" },
-  { "a": "late night gaming", "b": "early morning gaming" },
-  { "a": "arcades", "b": "home consoles" },
-  { "a": "retro games", "b": "new games" },
-  { "a": "marvel", "b": "dc" },
-  { "a": "star wars", "b": "star trek" },
-  { "a": "harry potter", "b": "lord of the rings" },
-  { "a": "disney", "b": "pixar" },
-  { "a": "superheroes", "b": "villains" },
-  { "a": "movies", "b": "tv shows" },
-  { "a": "comedies", "b": "dramas" },
-  { "a": "horror", "b": "thriller" },
-  { "a": "action", "b": "romance" },
-  { "a": "documentaries", "b": "reality tv" },
-  { "a": "reality tv", "b": "scripted tv" },
-  { "a": "binge watching", "b": "weekly episodes" },
-  { "a": "season finales", "b": "season premieres" },
-  { "a": "spoilers", "b": "waiting patiently" },
-  { "a": "subtitles", "b": "dubbed" },
-  { "a": "movie theaters", "b": "home theaters" },
-  { "a": "late night movies", "b": "early morning movies" },
-  { "a": "book first", "b": "movie first" },
-  { "a": "originals", "b": "sequels" },
-  { "a": "reboots", "b": "remakes" },
-  { "a": "live action", "b": "animation" },
-  { "a": "musicals", "b": "operas" },
-  { "a": "concerts", "b": "festivals" },
-  { "a": "front row", "b": "back row" },
-  { "a": "celebrities", "b": "athletes" },
-  { "a": "actors", "b": "singers" },
-  { "a": "pop", "b": "rock" },
-  { "a": "hip hop", "b": "country" },
-  { "a": "indie", "b": "mainstream" },
-  { "a": "kpop", "b": "western pop" },
-  { "a": "live shows", "b": "recorded shows" },
-  { "a": "streaming music", "b": "owning music" },
-  { "a": "sharing memes", "b": "making memes" },
-  { "a": "watching reaction videos", "b": "reacting in real time" },
-  { "a": "fan theories", "b": "official canon" },
-  { "a": "rooting for heroes", "b": "rooting for villains" },
-  { "a": "character arcs", "b": "plot twists" },
-  { "a": "happy endings", "b": "bittersweet endings" },
-  { "a": "beach vacations", "b": "mountain vacations" },
-  { "a": "road trips", "b": "flights" },
-  { "a": "window seats", "b": "aisle seats" },
-  { "a": "travel light", "b": "pack everything" },
-  { "a": "plan everything", "b": "go with the flow" },
-  { "a": "itineraries", "b": "spontaneous travel" },
-  { "a": "solo travel", "b": "group travel" },
-  { "a": "tourist spots", "b": "hidden gems" },
-  { "a": "souvenirs", "b": "photos" },
-  { "a": "hotels", "b": "airbnbs" },
-  { "a": "hostels", "b": "hotels" },
-  { "a": "camping", "b": "glamping" },
-  { "a": "tents", "b": "cabins" },
-  { "a": "city breaks", "b": "nature escapes" },
-  { "a": "passport stamps", "b": "travel photos" },
-  { "a": "packing cubes", "b": "vacuum bags" },
-  { "a": "carry on", "b": "checked bags" },
-  { "a": "red eye flights", "b": "sunrise flights" },
-  { "a": "long layovers", "b": "direct flights" },
-  { "a": "first class", "b": "an extra seat" },
-  { "a": "maps", "b": "gps" },
-  { "a": "famous landmarks", "b": "local food" },
-  { "a": "guided tours", "b": "wandering" },
-  { "a": "cash", "b": "card" },
-  { "a": "debit", "b": "credit" },
-  { "a": "saving", "b": "spending" },
-  { "a": "a budget", "b": "no budget" },
-  { "a": "retire early", "b": "spend now" },
-  { "a": "rent", "b": "own" },
-  { "a": "a house", "b": "an apartment" },
-  { "a": "a car", "b": "a house" },
-  { "a": "new cars", "b": "used cars" },
-  { "a": "coupons", "b": "full price" },
-  { "a": "sale racks", "b": "new arrivals" },
-  { "a": "thrift shopping", "b": "designer shopping" },
-  { "a": "generic brands", "b": "name brands" },
-  { "a": "fast fashion", "b": "timeless pieces" },
-  { "a": "experiences", "b": "stuff" },
-  { "a": "travel now", "b": "save for later" },
-  { "a": "win the lottery", "b": "get a raise" },
-  { "a": "5 dollars now", "b": "100 dollars later" },
-  { "a": "tip generously", "b": "tip nothing" },
-  { "a": "buy one get one", "b": "half off" },
-  { "a": "one big purchase", "b": "many small purchases" },
-  { "a": "big weddings", "b": "small weddings" },
-  { "a": "weddings", "b": "honeymoons" },
-  { "a": "public proposals", "b": "private proposals" },
-  { "a": "surprises", "b": "plans" },
-  { "a": "flowers", "b": "chocolates" },
-  { "a": "gifts", "b": "quality time" },
-  { "a": "love letters", "b": "love texts" },
-  { "a": "date nights", "b": "lazy nights in" },
-  { "a": "movies at home", "b": "dinners out" },
-  { "a": "couples trips", "b": "friend trips" },
-  { "a": "double dates", "b": "group hangouts" },
-  { "a": "texting a crush", "b": "calling a crush" },
-  { "a": "slow burn", "b": "love at first sight" },
-  { "a": "enemies to lovers", "b": "friends to lovers" },
-  { "a": "bad boy types", "b": "golden retriever types" },
-  { "a": "soulmates", "b": "built over time" },
-  { "a": "public affection", "b": "private affection" },
-  { "a": "big gestures", "b": "small gestures" },
-  { "a": "anniversaries", "b": "birthdays" },
-  { "a": "valentines day", "b": "new years eve" },
-  { "a": "mornings", "b": "nights" },
-  { "a": "early risers", "b": "night owls" },
-  { "a": "sleep in", "b": "wake up early" },
-  { "a": "short naps", "b": "full nights of sleep" },
-  { "a": "morning showers", "b": "night showers" },
-  { "a": "baths", "b": "showers" },
-  { "a": "hot showers", "b": "cold showers" },
-  { "a": "hair up", "b": "hair down" },
-  { "a": "messy buns", "b": "ponytails" },
-  { "a": "straight hair", "b": "curly hair" },
-  { "a": "long hair", "b": "short hair" },
-  { "a": "glasses", "b": "contacts" },
-  { "a": "running", "b": "walking" },
-  { "a": "gym workouts", "b": "home workouts" },
-  { "a": "yoga", "b": "pilates" },
-  { "a": "cardio", "b": "strength" },
-  { "a": "stretching", "b": "foam rolling" },
-  { "a": "flip flops", "b": "sneakers" },
-  { "a": "boots", "b": "sandals" },
-  { "a": "heels", "b": "flats" },
-  { "a": "hoodies", "b": "jackets" },
-  { "a": "sweats", "b": "jeans" },
-  { "a": "comfort", "b": "fashion" },
-  { "a": "city living", "b": "country living" },
-  { "a": "decorated walls", "b": "bare walls" },
-  { "a": "cozy clutter", "b": "clean spaces" },
-  { "a": "plants", "b": "art" },
-  { "a": "natural light", "b": "warm lamps" },
-  { "a": "shoes off inside", "b": "shoes on inside" },
-  { "a": "the bed", "b": "the couch" }
+  {
+    "a": "sweet",
+    "b": "salty",
+    "genre": "food"
+  },
+  {
+    "a": "pizza",
+    "b": "burgers",
+    "genre": "food"
+  },
+  {
+    "a": "tacos",
+    "b": "burritos",
+    "genre": "food"
+  },
+  {
+    "a": "pancakes",
+    "b": "waffles",
+    "genre": "food"
+  },
+  {
+    "a": "fries",
+    "b": "onion rings",
+    "genre": "food"
+  },
+  {
+    "a": "chocolate",
+    "b": "vanilla",
+    "genre": "food"
+  },
+  {
+    "a": "coffee",
+    "b": "tea",
+    "genre": "food"
+  },
+  {
+    "a": "cake",
+    "b": "pie",
+    "genre": "food"
+  },
+  {
+    "a": "ice cream",
+    "b": "frozen yogurt",
+    "genre": "food"
+  },
+  {
+    "a": "cookies",
+    "b": "brownies",
+    "genre": "food"
+  },
+  {
+    "a": "popcorn",
+    "b": "nachos",
+    "genre": "food"
+  },
+  {
+    "a": "chips",
+    "b": "dip",
+    "genre": "food"
+  },
+  {
+    "a": "pasta",
+    "b": "rice",
+    "genre": "food"
+  },
+  {
+    "a": "sushi",
+    "b": "ramen",
+    "genre": "food"
+  },
+  {
+    "a": "steak",
+    "b": "lobster",
+    "genre": "food"
+  },
+  {
+    "a": "breakfast",
+    "b": "dinner",
+    "genre": "food"
+  },
+  {
+    "a": "brunch",
+    "b": "lunch",
+    "genre": "food"
+  },
+  {
+    "a": "savory",
+    "b": "sweet",
+    "genre": "food"
+  },
+  {
+    "a": "crunchy",
+    "b": "soft",
+    "genre": "food"
+  },
+  {
+    "a": "spicy",
+    "b": "mild",
+    "genre": "food"
+  },
+  {
+    "a": "hot sauce",
+    "b": "ketchup",
+    "genre": "food"
+  },
+  {
+    "a": "mustard",
+    "b": "mayo",
+    "genre": "food"
+  },
+  {
+    "a": "pineapple on pizza",
+    "b": "pineapple on pizza is a crime",
+    "genre": "food"
+  },
+  {
+    "a": "stuffed crust",
+    "b": "thin crust",
+    "genre": "food"
+  },
+  {
+    "a": "deep dish",
+    "b": "new york style",
+    "genre": "food"
+  },
+  {
+    "a": "crispy chicken",
+    "b": "grilled chicken",
+    "genre": "food"
+  },
+  {
+    "a": "bone in",
+    "b": "boneless",
+    "genre": "food"
+  },
+  {
+    "a": "ranch",
+    "b": "blue cheese",
+    "genre": "food"
+  },
+  {
+    "a": "guacamole",
+    "b": "salsa",
+    "genre": "food"
+  },
+  {
+    "a": "cheese",
+    "b": "chocolate",
+    "genre": "food"
+  },
+  {
+    "a": "peanut butter",
+    "b": "jelly",
+    "genre": "food"
+  },
+  {
+    "a": "nutella",
+    "b": "peanut butter",
+    "genre": "food"
+  },
+  {
+    "a": "cereal",
+    "b": "oatmeal",
+    "genre": "food"
+  },
+  {
+    "a": "toast",
+    "b": "bagels",
+    "genre": "food"
+  },
+  {
+    "a": "butter",
+    "b": "jam",
+    "genre": "food"
+  },
+  {
+    "a": "bacon",
+    "b": "sausage",
+    "genre": "food"
+  },
+  {
+    "a": "sunny side up eggs",
+    "b": "scrambled eggs",
+    "genre": "food"
+  },
+  {
+    "a": "black coffee",
+    "b": "coffee with cream",
+    "genre": "food"
+  },
+  {
+    "a": "latte",
+    "b": "cappuccino",
+    "genre": "food"
+  },
+  {
+    "a": "iced coffee",
+    "b": "hot coffee",
+    "genre": "food"
+  },
+  {
+    "a": "lemonade",
+    "b": "iced tea",
+    "genre": "food"
+  },
+  {
+    "a": "water",
+    "b": "sparkling water",
+    "genre": "food"
+  },
+  {
+    "a": "smoothies",
+    "b": "milkshakes",
+    "genre": "food"
+  },
+  {
+    "a": "donuts",
+    "b": "croissants",
+    "genre": "food"
+  },
+  {
+    "a": "cinnamon rolls",
+    "b": "danishes",
+    "genre": "food"
+  },
+  {
+    "a": "candy",
+    "b": "gum",
+    "genre": "food"
+  },
+  {
+    "a": "gummy bears",
+    "b": "sour patch kids",
+    "genre": "food"
+  },
+  {
+    "a": "mint chocolate chip",
+    "b": "cookies and cream",
+    "genre": "food"
+  },
+  {
+    "a": "breadsticks",
+    "b": "garlic knots",
+    "genre": "food"
+  },
+  {
+    "a": "loaded fries",
+    "b": "poutine",
+    "genre": "food"
+  },
+  {
+    "a": "mac and cheese",
+    "b": "grilled cheese",
+    "genre": "food"
+  },
+  {
+    "a": "tomato soup",
+    "b": "broccoli cheddar soup",
+    "genre": "food"
+  },
+  {
+    "a": "pancakes",
+    "b": "french toast",
+    "genre": "food"
+  },
+  {
+    "a": "burgers",
+    "b": "hot dogs",
+    "genre": "food"
+  },
+  {
+    "a": "tacos",
+    "b": "quesadillas",
+    "genre": "food"
+  },
+  {
+    "a": "burritos",
+    "b": "bowls",
+    "genre": "food"
+  },
+  {
+    "a": "ramen",
+    "b": "pho",
+    "genre": "food"
+  },
+  {
+    "a": "sushi",
+    "b": "sashimi",
+    "genre": "food"
+  },
+  {
+    "a": "fried rice",
+    "b": "lo mein",
+    "genre": "food"
+  },
+  {
+    "a": "dumplings",
+    "b": "spring rolls",
+    "genre": "food"
+  },
+  {
+    "a": "mango",
+    "b": "pineapple",
+    "genre": "food"
+  },
+  {
+    "a": "apples",
+    "b": "oranges",
+    "genre": "food"
+  },
+  {
+    "a": "bananas",
+    "b": "strawberries",
+    "genre": "food"
+  },
+  {
+    "a": "watermelon",
+    "b": "cantaloupe",
+    "genre": "food"
+  },
+  {
+    "a": "grapes",
+    "b": "cherries",
+    "genre": "food"
+  },
+  {
+    "a": "avocado",
+    "b": "tomato",
+    "genre": "food"
+  },
+  {
+    "a": "carrots",
+    "b": "celery",
+    "genre": "food"
+  },
+  {
+    "a": "broccoli",
+    "b": "cauliflower",
+    "genre": "food"
+  },
+  {
+    "a": "brussels sprouts",
+    "b": "asparagus",
+    "genre": "food"
+  },
+  {
+    "a": "mashed potatoes",
+    "b": "baked potatoes",
+    "genre": "food"
+  },
+  {
+    "a": "sweet potato fries",
+    "b": "regular fries",
+    "genre": "food"
+  },
+  {
+    "a": "mozzarella sticks",
+    "b": "onion rings",
+    "genre": "food"
+  },
+  {
+    "a": "chicken wings",
+    "b": "chicken tenders",
+    "genre": "food"
+  },
+  {
+    "a": "chicken thighs",
+    "b": "chicken breasts",
+    "genre": "food"
+  },
+  {
+    "a": "barbecue",
+    "b": "grilled",
+    "genre": "food"
+  },
+  {
+    "a": "meal prep",
+    "b": "takeout",
+    "genre": "food"
+  },
+  {
+    "a": "home cooking",
+    "b": "restaurant food",
+    "genre": "food"
+  },
+  {
+    "a": "leftovers",
+    "b": "fresh food",
+    "genre": "food"
+  },
+  {
+    "a": "breakfast for dinner",
+    "b": "dinner for breakfast",
+    "genre": "food"
+  },
+  {
+    "a": "eat out",
+    "b": "order in",
+    "genre": "food"
+  },
+  {
+    "a": "cooking",
+    "b": "baking",
+    "genre": "food"
+  },
+  {
+    "a": "sweet breakfast",
+    "b": "savory breakfast",
+    "genre": "food"
+  },
+  {
+    "a": "street food",
+    "b": "fine dining",
+    "genre": "food"
+  },
+  {
+    "a": "food trucks",
+    "b": "food courts",
+    "genre": "food"
+  },
+  {
+    "a": "eat at the table",
+    "b": "eat on the couch",
+    "genre": "food"
+  },
+  {
+    "a": "share food",
+    "b": "keep food to yourself",
+    "genre": "food"
+  },
+  {
+    "a": "going back for seconds",
+    "b": "saving room for dessert",
+    "genre": "food"
+  },
+  {
+    "a": "cats",
+    "b": "dogs",
+    "genre": "animals"
+  },
+  {
+    "a": "puppies",
+    "b": "kittens",
+    "genre": "animals"
+  },
+  {
+    "a": "big dogs",
+    "b": "small dogs",
+    "genre": "animals"
+  },
+  {
+    "a": "huskies",
+    "b": "golden retrievers",
+    "genre": "animals"
+  },
+  {
+    "a": "turtles",
+    "b": "tortoises",
+    "genre": "animals"
+  },
+  {
+    "a": "birds",
+    "b": "fish",
+    "genre": "animals"
+  },
+  {
+    "a": "hamsters",
+    "b": "guinea pigs",
+    "genre": "animals"
+  },
+  {
+    "a": "horses",
+    "b": "unicorns",
+    "genre": "animals"
+  },
+  {
+    "a": "sharks",
+    "b": "dolphins",
+    "genre": "animals"
+  },
+  {
+    "a": "lions",
+    "b": "tigers",
+    "genre": "animals"
+  },
+  {
+    "a": "pandas",
+    "b": "koalas",
+    "genre": "animals"
+  },
+  {
+    "a": "elephants",
+    "b": "giraffes",
+    "genre": "animals"
+  },
+  {
+    "a": "penguins",
+    "b": "polar bears",
+    "genre": "animals"
+  },
+  {
+    "a": "owls",
+    "b": "eagles",
+    "genre": "animals"
+  },
+  {
+    "a": "snakes",
+    "b": "lizards",
+    "genre": "animals"
+  },
+  {
+    "a": "frogs",
+    "b": "toads",
+    "genre": "animals"
+  },
+  {
+    "a": "spiders",
+    "b": "scorpions",
+    "genre": "animals"
+  },
+  {
+    "a": "bees",
+    "b": "wasps",
+    "genre": "animals"
+  },
+  {
+    "a": "butterflies",
+    "b": "dragonflies",
+    "genre": "animals"
+  },
+  {
+    "a": "farm animals",
+    "b": "zoo animals",
+    "genre": "animals"
+  },
+  {
+    "a": "pets",
+    "b": "plants",
+    "genre": "animals"
+  },
+  {
+    "a": "dog person",
+    "b": "cat person",
+    "genre": "animals"
+  },
+  {
+    "a": "a talking pet",
+    "b": "a flying pet",
+    "genre": "animals"
+  },
+  {
+    "a": "octopus",
+    "b": "jellyfish",
+    "genre": "animals"
+  },
+  {
+    "a": "otters",
+    "b": "seals",
+    "genre": "animals"
+  },
+  {
+    "a": "ferrets",
+    "b": "hedgehogs",
+    "genre": "animals"
+  },
+  {
+    "a": "chinchillas",
+    "b": "hamsters",
+    "genre": "animals"
+  },
+  {
+    "a": "whale watching",
+    "b": "dolphin watching",
+    "genre": "animals"
+  },
+  {
+    "a": "safaris",
+    "b": "aquariums",
+    "genre": "animals"
+  },
+  {
+    "a": "a pet alligator",
+    "b": "a pet snake",
+    "genre": "animals"
+  },
+  {
+    "a": "summer",
+    "b": "winter",
+    "genre": "nature"
+  },
+  {
+    "a": "spring",
+    "b": "fall",
+    "genre": "nature"
+  },
+  {
+    "a": "hot weather",
+    "b": "cold weather",
+    "genre": "nature"
+  },
+  {
+    "a": "rain",
+    "b": "snow",
+    "genre": "nature"
+  },
+  {
+    "a": "thunderstorms",
+    "b": "blizzards",
+    "genre": "nature"
+  },
+  {
+    "a": "beach weather",
+    "b": "mountain weather",
+    "genre": "nature"
+  },
+  {
+    "a": "sunny days",
+    "b": "cloudy days",
+    "genre": "nature"
+  },
+  {
+    "a": "sunrise",
+    "b": "sunset",
+    "genre": "nature"
+  },
+  {
+    "a": "full moons",
+    "b": "new moons",
+    "genre": "nature"
+  },
+  {
+    "a": "starry nights",
+    "b": "cloudy nights",
+    "genre": "nature"
+  },
+  {
+    "a": "foggy mornings",
+    "b": "rainy afternoons",
+    "genre": "nature"
+  },
+  {
+    "a": "a hurricane",
+    "b": "an earthquake",
+    "genre": "nature"
+  },
+  {
+    "a": "heat waves",
+    "b": "cold snaps",
+    "genre": "nature"
+  },
+  {
+    "a": "humid weather",
+    "b": "dry weather",
+    "genre": "nature"
+  },
+  {
+    "a": "snow days",
+    "b": "rainy days",
+    "genre": "nature"
+  },
+  {
+    "a": "winter sports",
+    "b": "summer sports",
+    "genre": "nature"
+  },
+  {
+    "a": "hot tubs",
+    "b": "saunas",
+    "genre": "nature"
+  },
+  {
+    "a": "the beach",
+    "b": "the pool",
+    "genre": "nature"
+  },
+  {
+    "a": "the lake",
+    "b": "the ocean",
+    "genre": "nature"
+  },
+  {
+    "a": "texting",
+    "b": "calling",
+    "genre": "tech"
+  },
+  {
+    "a": "email",
+    "b": "instant message",
+    "genre": "tech"
+  },
+  {
+    "a": "face to face chats",
+    "b": "video calls",
+    "genre": "tech"
+  },
+  {
+    "a": "voice memos",
+    "b": "texts",
+    "genre": "tech"
+  },
+  {
+    "a": "group chats",
+    "b": "one on one chats",
+    "genre": "tech"
+  },
+  {
+    "a": "social media",
+    "b": "real life",
+    "genre": "tech"
+  },
+  {
+    "a": "instagram",
+    "b": "tiktok",
+    "genre": "tech"
+  },
+  {
+    "a": "youtube",
+    "b": "netflix",
+    "genre": "tech"
+  },
+  {
+    "a": "streaming",
+    "b": "cable",
+    "genre": "tech"
+  },
+  {
+    "a": "laptops",
+    "b": "desktops",
+    "genre": "tech"
+  },
+  {
+    "a": "tablets",
+    "b": "phones",
+    "genre": "tech"
+  },
+  {
+    "a": "iphone",
+    "b": "android",
+    "genre": "tech"
+  },
+  {
+    "a": "mac",
+    "b": "pc",
+    "genre": "tech"
+  },
+  {
+    "a": "console gaming",
+    "b": "pc gaming",
+    "genre": "tech"
+  },
+  {
+    "a": "playstation",
+    "b": "xbox",
+    "genre": "tech"
+  },
+  {
+    "a": "online gaming",
+    "b": "board games",
+    "genre": "tech"
+  },
+  {
+    "a": "video games",
+    "b": "sports",
+    "genre": "tech"
+  },
+  {
+    "a": "ebooks",
+    "b": "physical books",
+    "genre": "tech"
+  },
+  {
+    "a": "audiobooks",
+    "b": "podcasts",
+    "genre": "tech"
+  },
+  {
+    "a": "playlists",
+    "b": "albums",
+    "genre": "tech"
+  },
+  {
+    "a": "live concerts",
+    "b": "recorded albums",
+    "genre": "tech"
+  },
+  {
+    "a": "headphones",
+    "b": "speakers",
+    "genre": "tech"
+  },
+  {
+    "a": "earbuds",
+    "b": "over ear headphones",
+    "genre": "tech"
+  },
+  {
+    "a": "a smart home",
+    "b": "a regular home",
+    "genre": "tech"
+  },
+  {
+    "a": "a robot vacuum",
+    "b": "a regular mop",
+    "genre": "tech"
+  },
+  {
+    "a": "digital calendars",
+    "b": "paper planners",
+    "genre": "tech"
+  },
+  {
+    "a": "notes apps",
+    "b": "physical notebooks",
+    "genre": "tech"
+  },
+  {
+    "a": "dark mode",
+    "b": "light mode",
+    "genre": "tech"
+  },
+  {
+    "a": "clearing history",
+    "b": "incognito mode",
+    "genre": "tech"
+  },
+  {
+    "a": "push notifications",
+    "b": "silent mode",
+    "genre": "tech"
+  },
+  {
+    "a": "do not disturb",
+    "b": "airplane mode",
+    "genre": "tech"
+  },
+  {
+    "a": "wifi",
+    "b": "cellular data",
+    "genre": "tech"
+  },
+  {
+    "a": "unlimited data",
+    "b": "unlimited battery",
+    "genre": "tech"
+  },
+  {
+    "a": "fast charging",
+    "b": "wireless charging",
+    "genre": "tech"
+  },
+  {
+    "a": "physical keyboards",
+    "b": "touchscreens",
+    "genre": "tech"
+  },
+  {
+    "a": "mouse",
+    "b": "trackpad",
+    "genre": "tech"
+  },
+  {
+    "a": "screenshots",
+    "b": "screen recordings",
+    "genre": "tech"
+  },
+  {
+    "a": "selfies",
+    "b": "group photos",
+    "genre": "tech"
+  },
+  {
+    "a": "front camera",
+    "b": "back camera",
+    "genre": "tech"
+  },
+  {
+    "a": "filters",
+    "b": "no filters",
+    "genre": "tech"
+  },
+  {
+    "a": "posting",
+    "b": "lurking",
+    "genre": "tech"
+  },
+  {
+    "a": "comments",
+    "b": "dms",
+    "genre": "tech"
+  },
+  {
+    "a": "likes",
+    "b": "shares",
+    "genre": "tech"
+  },
+  {
+    "a": "memes",
+    "b": "gifs",
+    "genre": "tech"
+  },
+  {
+    "a": "autocorrect",
+    "b": "autocomplete",
+    "genre": "tech"
+  },
+  {
+    "a": "emojis",
+    "b": "kaomoji",
+    "genre": "tech"
+  },
+  {
+    "a": "voice search",
+    "b": "typing",
+    "genre": "tech"
+  },
+  {
+    "a": "google",
+    "b": "siri",
+    "genre": "tech"
+  },
+  {
+    "a": "alexa",
+    "b": "google home",
+    "genre": "tech"
+  },
+  {
+    "a": "late night gaming",
+    "b": "early morning gaming",
+    "genre": "gaming"
+  },
+  {
+    "a": "arcades",
+    "b": "home consoles",
+    "genre": "gaming"
+  },
+  {
+    "a": "retro games",
+    "b": "new games",
+    "genre": "gaming"
+  },
+  {
+    "a": "marvel",
+    "b": "dc",
+    "genre": "entertainment"
+  },
+  {
+    "a": "star wars",
+    "b": "star trek",
+    "genre": "entertainment"
+  },
+  {
+    "a": "harry potter",
+    "b": "lord of the rings",
+    "genre": "entertainment"
+  },
+  {
+    "a": "disney",
+    "b": "pixar",
+    "genre": "entertainment"
+  },
+  {
+    "a": "superheroes",
+    "b": "villains",
+    "genre": "entertainment"
+  },
+  {
+    "a": "movies",
+    "b": "tv shows",
+    "genre": "entertainment"
+  },
+  {
+    "a": "comedies",
+    "b": "dramas",
+    "genre": "entertainment"
+  },
+  {
+    "a": "horror",
+    "b": "thriller",
+    "genre": "entertainment"
+  },
+  {
+    "a": "action",
+    "b": "romance",
+    "genre": "entertainment"
+  },
+  {
+    "a": "documentaries",
+    "b": "reality tv",
+    "genre": "entertainment"
+  },
+  {
+    "a": "reality tv",
+    "b": "scripted tv",
+    "genre": "entertainment"
+  },
+  {
+    "a": "binge watching",
+    "b": "weekly episodes",
+    "genre": "entertainment"
+  },
+  {
+    "a": "season finales",
+    "b": "season premieres",
+    "genre": "entertainment"
+  },
+  {
+    "a": "spoilers",
+    "b": "waiting patiently",
+    "genre": "entertainment"
+  },
+  {
+    "a": "subtitles",
+    "b": "dubbed",
+    "genre": "entertainment"
+  },
+  {
+    "a": "movie theaters",
+    "b": "home theaters",
+    "genre": "entertainment"
+  },
+  {
+    "a": "late night movies",
+    "b": "early morning movies",
+    "genre": "entertainment"
+  },
+  {
+    "a": "book first",
+    "b": "movie first",
+    "genre": "entertainment"
+  },
+  {
+    "a": "originals",
+    "b": "sequels",
+    "genre": "entertainment"
+  },
+  {
+    "a": "reboots",
+    "b": "remakes",
+    "genre": "entertainment"
+  },
+  {
+    "a": "live action",
+    "b": "animation",
+    "genre": "entertainment"
+  },
+  {
+    "a": "musicals",
+    "b": "operas",
+    "genre": "entertainment"
+  },
+  {
+    "a": "concerts",
+    "b": "festivals",
+    "genre": "entertainment"
+  },
+  {
+    "a": "front row",
+    "b": "back row",
+    "genre": "entertainment"
+  },
+  {
+    "a": "celebrities",
+    "b": "athletes",
+    "genre": "entertainment"
+  },
+  {
+    "a": "actors",
+    "b": "singers",
+    "genre": "entertainment"
+  },
+  {
+    "a": "pop",
+    "b": "rock",
+    "genre": "entertainment"
+  },
+  {
+    "a": "hip hop",
+    "b": "country",
+    "genre": "entertainment"
+  },
+  {
+    "a": "indie",
+    "b": "mainstream",
+    "genre": "entertainment"
+  },
+  {
+    "a": "kpop",
+    "b": "western pop",
+    "genre": "entertainment"
+  },
+  {
+    "a": "live shows",
+    "b": "recorded shows",
+    "genre": "entertainment"
+  },
+  {
+    "a": "streaming music",
+    "b": "owning music",
+    "genre": "entertainment"
+  },
+  {
+    "a": "sharing memes",
+    "b": "making memes",
+    "genre": "entertainment"
+  },
+  {
+    "a": "watching reaction videos",
+    "b": "reacting in real time",
+    "genre": "entertainment"
+  },
+  {
+    "a": "fan theories",
+    "b": "official canon",
+    "genre": "entertainment"
+  },
+  {
+    "a": "rooting for heroes",
+    "b": "rooting for villains",
+    "genre": "entertainment"
+  },
+  {
+    "a": "character arcs",
+    "b": "plot twists",
+    "genre": "entertainment"
+  },
+  {
+    "a": "happy endings",
+    "b": "bittersweet endings",
+    "genre": "entertainment"
+  },
+  {
+    "a": "beach vacations",
+    "b": "mountain vacations",
+    "genre": "travel"
+  },
+  {
+    "a": "road trips",
+    "b": "flights",
+    "genre": "travel"
+  },
+  {
+    "a": "window seats",
+    "b": "aisle seats",
+    "genre": "travel"
+  },
+  {
+    "a": "travel light",
+    "b": "pack everything",
+    "genre": "travel"
+  },
+  {
+    "a": "plan everything",
+    "b": "go with the flow",
+    "genre": "travel"
+  },
+  {
+    "a": "itineraries",
+    "b": "spontaneous travel",
+    "genre": "travel"
+  },
+  {
+    "a": "solo travel",
+    "b": "group travel",
+    "genre": "travel"
+  },
+  {
+    "a": "tourist spots",
+    "b": "hidden gems",
+    "genre": "travel"
+  },
+  {
+    "a": "souvenirs",
+    "b": "photos",
+    "genre": "travel"
+  },
+  {
+    "a": "hotels",
+    "b": "airbnbs",
+    "genre": "travel"
+  },
+  {
+    "a": "hostels",
+    "b": "hotels",
+    "genre": "travel"
+  },
+  {
+    "a": "camping",
+    "b": "glamping",
+    "genre": "travel"
+  },
+  {
+    "a": "tents",
+    "b": "cabins",
+    "genre": "travel"
+  },
+  {
+    "a": "city breaks",
+    "b": "nature escapes",
+    "genre": "travel"
+  },
+  {
+    "a": "passport stamps",
+    "b": "travel photos",
+    "genre": "travel"
+  },
+  {
+    "a": "packing cubes",
+    "b": "vacuum bags",
+    "genre": "travel"
+  },
+  {
+    "a": "carry on",
+    "b": "checked bags",
+    "genre": "travel"
+  },
+  {
+    "a": "red eye flights",
+    "b": "sunrise flights",
+    "genre": "travel"
+  },
+  {
+    "a": "long layovers",
+    "b": "direct flights",
+    "genre": "travel"
+  },
+  {
+    "a": "first class",
+    "b": "an extra seat",
+    "genre": "travel"
+  },
+  {
+    "a": "maps",
+    "b": "gps",
+    "genre": "travel"
+  },
+  {
+    "a": "famous landmarks",
+    "b": "local food",
+    "genre": "travel"
+  },
+  {
+    "a": "guided tours",
+    "b": "wandering",
+    "genre": "travel"
+  },
+  {
+    "a": "cash",
+    "b": "card",
+    "genre": "money"
+  },
+  {
+    "a": "debit",
+    "b": "credit",
+    "genre": "money"
+  },
+  {
+    "a": "saving",
+    "b": "spending",
+    "genre": "money"
+  },
+  {
+    "a": "a budget",
+    "b": "no budget",
+    "genre": "money"
+  },
+  {
+    "a": "retire early",
+    "b": "spend now",
+    "genre": "money"
+  },
+  {
+    "a": "rent",
+    "b": "own",
+    "genre": "money"
+  },
+  {
+    "a": "a house",
+    "b": "an apartment",
+    "genre": "money"
+  },
+  {
+    "a": "a car",
+    "b": "a house",
+    "genre": "money"
+  },
+  {
+    "a": "new cars",
+    "b": "used cars",
+    "genre": "money"
+  },
+  {
+    "a": "coupons",
+    "b": "full price",
+    "genre": "money"
+  },
+  {
+    "a": "sale racks",
+    "b": "new arrivals",
+    "genre": "money"
+  },
+  {
+    "a": "thrift shopping",
+    "b": "designer shopping",
+    "genre": "money"
+  },
+  {
+    "a": "generic brands",
+    "b": "name brands",
+    "genre": "money"
+  },
+  {
+    "a": "fast fashion",
+    "b": "timeless pieces",
+    "genre": "money"
+  },
+  {
+    "a": "experiences",
+    "b": "stuff",
+    "genre": "money"
+  },
+  {
+    "a": "travel now",
+    "b": "save for later",
+    "genre": "money"
+  },
+  {
+    "a": "win the lottery",
+    "b": "get a raise",
+    "genre": "money"
+  },
+  {
+    "a": "5 dollars now",
+    "b": "100 dollars later",
+    "genre": "money"
+  },
+  {
+    "a": "tip generously",
+    "b": "tip nothing",
+    "genre": "money"
+  },
+  {
+    "a": "buy one get one",
+    "b": "half off",
+    "genre": "money"
+  },
+  {
+    "a": "one big purchase",
+    "b": "many small purchases",
+    "genre": "money"
+  },
+  {
+    "a": "big weddings",
+    "b": "small weddings",
+    "genre": "love"
+  },
+  {
+    "a": "weddings",
+    "b": "honeymoons",
+    "genre": "love"
+  },
+  {
+    "a": "public proposals",
+    "b": "private proposals",
+    "genre": "love"
+  },
+  {
+    "a": "surprises",
+    "b": "plans",
+    "genre": "love"
+  },
+  {
+    "a": "flowers",
+    "b": "chocolates",
+    "genre": "love"
+  },
+  {
+    "a": "gifts",
+    "b": "quality time",
+    "genre": "love"
+  },
+  {
+    "a": "love letters",
+    "b": "love texts",
+    "genre": "love"
+  },
+  {
+    "a": "date nights",
+    "b": "lazy nights in",
+    "genre": "love"
+  },
+  {
+    "a": "movies at home",
+    "b": "dinners out",
+    "genre": "love"
+  },
+  {
+    "a": "couples trips",
+    "b": "friend trips",
+    "genre": "love"
+  },
+  {
+    "a": "double dates",
+    "b": "group hangouts",
+    "genre": "love"
+  },
+  {
+    "a": "texting a crush",
+    "b": "calling a crush",
+    "genre": "love"
+  },
+  {
+    "a": "slow burn",
+    "b": "love at first sight",
+    "genre": "love"
+  },
+  {
+    "a": "enemies to lovers",
+    "b": "friends to lovers",
+    "genre": "love"
+  },
+  {
+    "a": "bad boy types",
+    "b": "golden retriever types",
+    "genre": "love"
+  },
+  {
+    "a": "soulmates",
+    "b": "built over time",
+    "genre": "love"
+  },
+  {
+    "a": "public affection",
+    "b": "private affection",
+    "genre": "love"
+  },
+  {
+    "a": "big gestures",
+    "b": "small gestures",
+    "genre": "love"
+  },
+  {
+    "a": "anniversaries",
+    "b": "birthdays",
+    "genre": "love"
+  },
+  {
+    "a": "valentines day",
+    "b": "new years eve",
+    "genre": "love"
+  },
+  {
+    "a": "mornings",
+    "b": "nights",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "early risers",
+    "b": "night owls",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "sleep in",
+    "b": "wake up early",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "short naps",
+    "b": "full nights of sleep",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "morning showers",
+    "b": "night showers",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "baths",
+    "b": "showers",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "hot showers",
+    "b": "cold showers",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "hair up",
+    "b": "hair down",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "messy buns",
+    "b": "ponytails",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "straight hair",
+    "b": "curly hair",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "long hair",
+    "b": "short hair",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "glasses",
+    "b": "contacts",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "running",
+    "b": "walking",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "gym workouts",
+    "b": "home workouts",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "yoga",
+    "b": "pilates",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "cardio",
+    "b": "strength",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "stretching",
+    "b": "foam rolling",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "flip flops",
+    "b": "sneakers",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "boots",
+    "b": "sandals",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "heels",
+    "b": "flats",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "hoodies",
+    "b": "jackets",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "sweats",
+    "b": "jeans",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "comfort",
+    "b": "fashion",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "city living",
+    "b": "country living",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "decorated walls",
+    "b": "bare walls",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "cozy clutter",
+    "b": "clean spaces",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "plants",
+    "b": "art",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "natural light",
+    "b": "warm lamps",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "shoes off inside",
+    "b": "shoes on inside",
+    "genre": "lifestyle"
+  },
+  {
+    "a": "the bed",
+    "b": "the couch",
+    "genre": "lifestyle"
+  }
 ]

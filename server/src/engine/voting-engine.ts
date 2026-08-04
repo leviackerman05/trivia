@@ -27,6 +27,12 @@ export type VotingGameKind =
 
 export type VotingPhase = 'idle' | 'statement' | 'voting' | 'revealed' | 'game-end';
 
+/** M15 — Never Have I Ever content tier (host-chosen; default moderate). */
+export type NhieTier = 'boring' | 'moderate' | 'dirty' | 'super-dirty';
+
+/** M15 — where NHIE statements come from (host-chosen; default both). */
+export type NhieSource = 'provided' | 'own' | 'both';
+
 export type VotingError =
   | 'NOT_STARTED'
   | 'ALREADY_STARTED'
@@ -88,11 +94,15 @@ export interface MltPrompt {
 
 export interface NhieSuggestion {
   statement: string;
+  /** M15 — content tier; defaults to 'moderate' when absent. */
+  tier?: NhieTier;
 }
 
 export interface TotPair {
   a: string;
   b: string;
+  /** M15 — genre bucket (defaults to 'lifestyle' when absent). */
+  genre?: string;
 }
 
 interface PlayerState {
@@ -135,6 +145,10 @@ export class VotingSession {
   private totPairs: TotPair[] = [];
   /** WYR: player-submitted dilemma for the next round (useCustomPrompt). */
   private nextWyrEntry: WyrEntry | null = null;
+  /** M15 — host-chosen content options, applied for the whole game. */
+  private nhieTier: NhieTier = 'moderate';
+  private nhieSource: NhieSource = 'both';
+  private totGenre: string | null = null;
 
   constructor(
     config: VotingConfig,
@@ -260,9 +274,20 @@ export class VotingSession {
     return { ok: true, value: { queued: true } };
   }
 
-  /** Suggested statements for the current NHIE turn (pick or write your own). */
+  /** Suggested statements for the current NHIE turn (pick or write your own).
+   * M15: filtered by the host-chosen tier, with a safe fallback — a tier
+   * with too few entries tops up from the next-safe tier (super-dirty →
+   * dirty → moderate → boring), never the other way. */
   suggestionOptions(count = 4): string[] {
-    const copy = [...this.nhieSuggestions];
+    const order: NhieTier[] = ['boring', 'moderate', 'dirty', 'super-dirty'];
+    const start = order.indexOf(this.nhieTier);
+    const pool: NhieSuggestion[] = [];
+    for (let level = start; level >= 0 && pool.length < 60; level -= 1) {
+      pool.push(
+        ...this.nhieSuggestions.filter((entry) => (entry.tier ?? 'moderate') === order[level])
+      );
+    }
+    const copy = [...pool];
     const picks: string[] = [];
     while (picks.length < count && copy.length > 0) {
       const index = this.randomIntFn(copy.length);
@@ -272,6 +297,36 @@ export class VotingSession {
       }
     }
     return picks;
+  }
+
+  /** M15 — host-chosen content options for this game (before start). */
+  setContentOptions(options: {
+    nhieTier?: NhieTier;
+    nhieSource?: NhieSource;
+    totGenre?: string | null;
+  }): void {
+    if (
+      options.nhieTier &&
+      ['boring', 'moderate', 'dirty', 'super-dirty'].includes(options.nhieTier)
+    ) {
+      this.nhieTier = options.nhieTier;
+    }
+    if (options.nhieSource && ['provided', 'own', 'both'].includes(options.nhieSource)) {
+      this.nhieSource = options.nhieSource;
+    }
+    if (options.totGenre !== undefined) {
+      this.totGenre = options.totGenre;
+    }
+  }
+
+  /** M15 — does the current game use server-provided NHIE suggestions? */
+  get usesProvidedSuggestions(): boolean {
+    return this.nhieSource !== 'own';
+  }
+
+  /** M15 — where NHIE statements come from (drives the statement view). */
+  get statementSource(): NhieSource {
+    return this.nhieSource;
   }
 
   start(playerNames: string[]): VotingResult<{ totalRounds: number }> {
@@ -486,7 +541,14 @@ export class VotingSession {
         break;
       }
       case 'this-or-that': {
-        const pair = this.totPairs[this.randomIntFn(this.totPairs.length)];
+        // M15 — host-chosen genre, topped up from the full pool when the
+        // genre alone is too small to fill the game.
+        const pool =
+          this.totGenre === null
+            ? this.totPairs
+            : this.totPairs.filter((pair) => (pair.genre ?? 'lifestyle') === this.totGenre);
+        const usable = pool.length >= 20 ? pool : this.totPairs;
+        const pair = usable[this.randomIntFn(usable.length)];
         if (pair) {
           this.promptTitle = `Round ${this.roundNumber} of ${this.totalRounds}`;
           this.promptSubtitle = null;

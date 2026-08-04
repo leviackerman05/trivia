@@ -60,6 +60,8 @@ export interface VotingGameState {
   herdMatches: number;
   /** Never Have I Ever — server-suggested statements (current turn). */
   suggestions: string[];
+  /** M15 — Never Have I Ever — where statements come from (host choice). */
+  statementSource: 'provided' | 'own' | 'both';
   /** Never Have I Ever — running wildness tallies. */
   wildness: { playerName: string; count: number }[];
   /** Most Likely To — running crown tallies. */
@@ -89,6 +91,7 @@ export function initialVotingState(): VotingGameState {
     herdStreak: 0,
     herdMatches: 0,
     suggestions: [],
+    statementSource: 'both',
     wildness: [],
     crowns: [],
     endPayload: null,
@@ -112,6 +115,7 @@ export type VotingAction =
         custom: boolean;
         endsAt: number;
         suggestions?: string[];
+        statementSource?: 'provided' | 'own' | 'both';
       };
       myName: string;
     }
@@ -162,6 +166,7 @@ export function votingReducer(state: VotingGameState, action: VotingAction): Vot
         statement: payload.statement,
         custom: payload.custom,
         suggestions: payload.suggestions ?? [],
+        statementSource: payload.statementSource ?? 'both',
         wildness: state.wildness,
         crowns: state.crowns,
         herdStreak: streakCarry,

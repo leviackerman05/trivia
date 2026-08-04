@@ -29,6 +29,34 @@ const KIND_LABELS: Record<string, string> = {
   'this-or-that': 'This or That',
 };
 
+/** M15 — This or That genre buckets (server dataset genres). */
+const TOT_GENRES: { id: string; label: string }[] = [
+  { id: 'food', label: 'Food' },
+  { id: 'animals', label: 'Animals' },
+  { id: 'nature', label: 'Nature & Weather' },
+  { id: 'tech', label: 'Tech & Social' },
+  { id: 'gaming', label: 'Gaming' },
+  { id: 'entertainment', label: 'Movies, Music & Shows' },
+  { id: 'travel', label: 'Travel' },
+  { id: 'money', label: 'Money & Shopping' },
+  { id: 'love', label: 'Love & Relationships' },
+  { id: 'lifestyle', label: 'Lifestyle' },
+];
+
+/** M15 — Never Have I Ever content tiers (super-dirty is NSFW; hosts opt in). */
+const NHIE_TIERS: { id: string; label: string }[] = [
+  { id: 'boring', label: 'Boring' },
+  { id: 'moderate', label: 'Moderate' },
+  { id: 'dirty', label: 'Dirty' },
+  { id: 'super-dirty', label: 'Super dirty (NSFW)' },
+];
+
+const NHIE_SOURCES: { id: 'provided' | 'own' | 'both'; label: string }[] = [
+  { id: 'provided', label: 'Provided scenarios' },
+  { id: 'own', label: 'My own statements' },
+  { id: 'both', label: 'Both' },
+];
+
 export default function VotingArena({ gameSlug }: Props) {
   const game = getGame(gameSlug);
   const { status, error, room, messages, actions: roomActions, myName } = useRoom();
@@ -85,6 +113,11 @@ export default function VotingArena({ gameSlug }: Props) {
         actions={roomActions}
         isHost={isHost}
         gamePlayable={game?.playable === true}
+        lobbyExtras={
+          isHost ? (
+            <VotingLobbySettings kind={kind} onConfig={gameActions.setVotingConfig} />
+          ) : undefined
+        }
       />
     );
   }
@@ -195,7 +228,129 @@ export default function VotingArena({ gameSlug }: Props) {
   );
 }
 
-/** Never Have I Ever — current player writes or picks a confession. */
+/** Host lobby controls (M15): NHIE tier/source, TOT genre — applied when
+ * the game starts via set-voting-config (pendingVotingOptions server-side). */
+function VotingLobbySettings({
+  kind,
+  onConfig,
+}: {
+  kind: string;
+  onConfig: (config: {
+    nhieTier?: string;
+    nhieSource?: 'provided' | 'own' | 'both';
+    totGenre?: string | null;
+  }) => Promise<{ ok: boolean; error?: string }>;
+}) {
+  const [nhieTier, setNhieTier] = useState('moderate');
+  const [nhieSource, setNhieSource] = useState<'provided' | 'own' | 'both'>('both');
+  const [totGenre, setTotGenre] = useState<string | null>(null);
+
+  if (kind === 'never-have-i-ever') {
+    return (
+      <div className="flex flex-col gap-4 rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
+        <h3 className="font-display text-h4 text-ink">Statements (host)</h3>
+        <div className="flex flex-col gap-2">
+          <span className="text-small font-semibold text-ink">Where statements come from</span>
+          <div className="flex flex-wrap gap-2">
+            {NHIE_SOURCES.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                aria-pressed={nhieSource === option.id}
+                onClick={() => {
+                  setNhieSource(option.id);
+                  void onConfig({ nhieSource: option.id, nhieTier });
+                }}
+                className={`inline-flex min-h-11 items-center justify-center rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+                  nhieSource === option.id
+                    ? 'border-primary bg-primary/15 text-primary-deep'
+                    : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          <span className="text-small font-semibold text-ink">How spicy?</span>
+          <div className="flex flex-wrap gap-2">
+            {NHIE_TIERS.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                aria-pressed={nhieTier === option.id}
+                onClick={() => {
+                  setNhieTier(option.id);
+                  void onConfig({ nhieTier: option.id, nhieSource });
+                }}
+                className={`inline-flex min-h-11 items-center justify-center rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+                  nhieTier === option.id
+                    ? 'border-primary bg-primary/15 text-primary-deep'
+                    : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-ink-muted">
+            Default is Moderate — super-dirty (NSFW) content is off until a host turns it on.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (kind === 'this-or-that') {
+    return (
+      <div className="flex flex-col gap-3 rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
+        <h3 className="font-display text-h4 text-ink">Category (host)</h3>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            aria-pressed={totGenre === null}
+            onClick={() => {
+              setTotGenre(null);
+              void onConfig({ totGenre: null });
+            }}
+            className={`inline-flex min-h-11 items-center justify-center rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+              totGenre === null
+                ? 'border-primary bg-primary/15 text-primary-deep'
+                : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'
+            }`}
+          >
+            All categories
+          </button>
+          {TOT_GENRES.map((option) => (
+            <button
+              key={option.id}
+              type="button"
+              aria-pressed={totGenre === option.id}
+              onClick={() => {
+                setTotGenre(option.id);
+                void onConfig({ totGenre: option.id });
+              }}
+              className={`inline-flex min-h-11 items-center justify-center rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+                totGenre === option.id
+                  ? 'border-primary bg-primary/15 text-primary-deep'
+                  : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
+/** Never Have I Ever — current player writes or picks a confession (M15:
+ * the host-chosen statementSource drives what the author sees — provided
+ * suggestions, free text, or both). */
 function StatementView({
   voting,
   myName,
@@ -208,12 +363,14 @@ function StatementView({
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
   const isMine = voting.statementBy !== null && voting.statementBy === myName;
-  const submit = async () => {
-    if (draft.trim().length < 3) {
+  const source = voting.statementSource ?? 'both';
+  const submit = async (statement?: string) => {
+    const text = statement ?? draft;
+    if (text.trim().length < 3) {
       return;
     }
     setBusy(true);
-    await onSubmit(draft.trim());
+    await onSubmit(text.trim());
     setBusy(false);
   };
   return (
@@ -222,40 +379,61 @@ function StatementView({
       <p className="text-body text-ink-muted">{voting.prompt.subtitle}</p>
       {isMine ? (
         <>
-          <label htmlFor="nhie-statement" className="text-small font-semibold text-ink">
-            Something you have never done (3–120 characters)
-          </label>
-          <textarea
-            id="nhie-statement"
-            value={draft}
-            onChange={(event) => setDraft(event.target.value)}
-            rows={2}
-            maxLength={120}
-            placeholder="…eaten pineapple on pizza"
-            className="w-full rounded-md border-2 border-border bg-surface-raised px-4 py-3 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
-          />
-          <div className="flex flex-wrap gap-2">
-            {voting.suggestions.map((suggestion) => (
+          {source === 'provided' ? (
+            <>
+              <p className="text-small font-semibold text-ink">Pick one of these confessions:</p>
+              <div className="flex flex-wrap gap-2">
+                {voting.suggestions.map((suggestion) => (
+                  <button
+                    key={suggestion}
+                    type="button"
+                    disabled={busy}
+                    onClick={() => void submit(suggestion)}
+                    className="inline-flex min-h-11 items-center justify-center rounded-pill border-2 border-border bg-surface-raised px-4 py-2 text-small text-ink transition-colors hover:border-primary/50 hover:bg-primary/5 disabled:pointer-events-none disabled:opacity-40"
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <label htmlFor="nhie-statement" className="text-small font-semibold text-ink">
+                Something you have never done (3–120 characters)
+              </label>
+              <textarea
+                id="nhie-statement"
+                value={draft}
+                onChange={(event) => setDraft(event.target.value)}
+                rows={2}
+                maxLength={120}
+                placeholder="…eaten pineapple on pizza"
+                className="w-full rounded-md border-2 border-border bg-surface-raised px-4 py-3 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+              />
+              {source === 'both' && voting.suggestions.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {voting.suggestions.map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      type="button"
+                      onClick={() => setDraft(suggestion)}
+                      className="rounded-pill border-2 border-border bg-surface-raised px-3 py-1.5 text-small text-ink transition-colors hover:bg-primary/10"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              )}
               <button
-                key={suggestion}
                 type="button"
-                onClick={() => {
-                  setDraft(suggestion);
-                }}
-                className="rounded-pill border-2 border-border bg-surface-raised px-3 py-1.5 text-small text-ink transition-colors hover:bg-primary/10"
+                disabled={busy || draft.trim().length < 3}
+                onClick={() => void submit()}
+                className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40 sm:self-start"
               >
-                {suggestion}
+                Confess — start the vote
               </button>
-            ))}
-          </div>
-          <button
-            type="button"
-            disabled={busy || draft.trim().length < 3}
-            onClick={() => void submit()}
-            className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40 sm:self-start"
-          >
-            Confess — start the vote
-          </button>
+            </>
+          )}
         </>
       ) : (
         <p className="text-body font-semibold text-primary-deep">

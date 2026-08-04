@@ -26,6 +26,11 @@ export interface UseVotingGame {
     submitStatement: (statement: string) => Promise<{ ok: boolean; error?: string }>;
     nextRound: () => Promise<{ ok: boolean; error?: string }>;
     restartGame: () => Promise<{ ok: boolean; error?: string }>;
+    setVotingConfig: (config: {
+      nhieTier?: string;
+      nhieSource?: 'provided' | 'own' | 'both';
+      totGenre?: string | null;
+    }) => Promise<{ ok: boolean; error?: string }>;
   };
 }
 
@@ -112,6 +117,7 @@ export function useVotingGame(roomCode: string | null, myName: string | null): U
       custom?: boolean;
       endsAt?: number;
       suggestions?: string[];
+      statementSource?: 'provided' | 'own' | 'both';
     }) => {
       if (
         !payload.kind ||
@@ -137,6 +143,7 @@ export function useVotingGame(roomCode: string | null, myName: string | null): U
           custom: payload.custom === true,
           endsAt: payload.endsAt,
           suggestions: payload.suggestions,
+          statementSource: payload.statementSource ?? 'both',
         },
       });
     };
@@ -258,5 +265,31 @@ export function useVotingGame(roomCode: string | null, myName: string | null): U
     return { ok: response.ok, error: response.error };
   }, [emitAck]);
 
-  return { game, actions: { castVote, submitDilemma, submitStatement, nextRound, restartGame } };
+  const setVotingConfig = useCallback(
+    async (config: {
+      nhieTier?: string;
+      nhieSource?: 'provided' | 'own' | 'both';
+      totGenre?: string | null;
+    }): Promise<{ ok: boolean; error?: string }> => {
+      const code = roomCodeRef.current;
+      if (!code) {
+        return { ok: false, error: 'NOT_IN_ROOM' };
+      }
+      const response = await emitAck(ClientEvents.setVotingConfig, { roomCode: code, ...config });
+      return { ok: response.ok, error: response.error };
+    },
+    [emitAck]
+  );
+
+  return {
+    game,
+    actions: {
+      castVote,
+      submitDilemma,
+      submitStatement,
+      nextRound,
+      restartGame,
+      setVotingConfig,
+    },
+  };
 }

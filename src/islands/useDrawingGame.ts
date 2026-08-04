@@ -33,6 +33,7 @@ export interface UseDrawingGame {
     restartGame: () => Promise<{ ok: boolean; error?: string }>;
     endRoundNow: () => Promise<{ ok: boolean; error?: string }>;
     setCustomWords: (words: string[]) => Promise<{ ok: boolean; error?: string; count?: number }>;
+    setShadowGenre: (genre: string | null) => Promise<{ ok: boolean; error?: string }>;
   };
 }
 
@@ -328,6 +329,18 @@ export function useDrawingGame(roomCode: string | null, myName: string | null): 
     [emitAck]
   );
 
+  const setShadowGenre = useCallback(
+    async (genre: string | null): Promise<{ ok: boolean; error?: string }> => {
+      const code = roomCodeRef.current;
+      if (!code) {
+        return { ok: false, error: 'NOT_IN_ROOM' };
+      }
+      const response = await emitAck(ClientEvents.setShadowGenre, { roomCode: code, genre });
+      return { ok: response.ok, error: response.error };
+    },
+    [emitAck]
+  );
+
   return {
     game,
     actions: {
@@ -342,6 +355,7 @@ export function useDrawingGame(roomCode: string | null, myName: string | null): 
       restartGame,
       endRoundNow,
       setCustomWords,
+      setShadowGenre,
     },
   };
 }
