@@ -702,6 +702,540 @@ const CELEBRITIES = [
   ['Hrithik Roshan', 'm', true, 'Actor', 'Indian', '50s', 'black', 'Krrish'],
 ];
 
+/** M17 — fun facts per celebrity (owner request: more movies, scandals,
+ * news). Accurate common knowledge; keep each fact under ~90 chars. */
+const CELEBRITY_FACTS = {
+  Beyoncé: ['Won 32 Grammys — the most of any artist', 'Headlined Coachella 2018 (Beychella)'],
+  'Taylor Swift': [
+    'Won Album of the Year four times',
+    'Her Eras Tour became the highest-grossing tour ever',
+  ],
+  'Elon Musk': ['Bought Twitter for $44B in 2022', 'Founded SpaceX after PayPal was sold'],
+  'Albert Einstein': [
+    'Won the 1921 Nobel Prize in Physics',
+    'His equation E=mc² was published in 1905',
+  ],
+  'Marie Curie': [
+    'Only person to win Nobel Prizes in two sciences',
+    'Named the element polonium after her homeland',
+  ],
+  'Nelson Mandela': [
+    'Spent 27 years in prison before becoming president',
+    'Won the Nobel Peace Prize in 1993',
+  ],
+  'Michael Jackson': [
+    'Bought the Beatles’ song catalog in 1985',
+    'Thriller is the best-selling album ever',
+  ],
+  'Oprah Winfrey': [
+    'Was the first Black woman to own her own production studio',
+    'Hosted The Oprah Winfrey Show for 25 years',
+  ],
+  'Barack Obama': [
+    'First Black president of the United States',
+    'Won the Nobel Peace Prize in 2009',
+  ],
+  'Donald Trump': [
+    'Was a reality TV host on The Apprentice',
+    'Impeached twice — acquitted both times',
+  ],
+  'Bill Gates': ['Co-founded Microsoft at 19', 'Left Microsoft to run the Gates Foundation'],
+  'Steve Jobs': [
+    'Co-founded Apple in his parents’ garage',
+    'Was fired from Apple in 1985, then returned in 1997',
+  ],
+  'Mark Zuckerberg': ['Founded Facebook from his dorm room', 'Meta owns Instagram and WhatsApp'],
+  'Jeff Bezos': [
+    'Started Amazon as an online bookstore in 1994',
+    'Founded Blue Origin for space travel',
+  ],
+  'Warren Buffett': ['Known as the Oracle of Omaha', 'Vowed to give away 99% of his fortune'],
+  'Leonardo DiCaprio': [
+    'Won his first Oscar for The Revenant (2016)',
+    'A passionate climate change activist',
+  ],
+  'Tom Cruise': [
+    'Has done most of his own stunts',
+    'Starred in Top Gun and Mission Impossible franchises',
+  ],
+  'Brad Pitt': ['Won an Oscar for producing 12 Years a Slave', 'Studied journalism before acting'],
+  'Angelina Jolie': ['Won an Oscar for Girl, Interrupted', 'Served as a UNHCR special envoy'],
+  'Jennifer Lawrence': [
+    'Won an Oscar for Silver Linings Playbook',
+    'Was the highest-paid actress in 2015 and 2016',
+  ],
+  'Scarlett Johansson': [
+    'Played Black Widow in nine Marvel films',
+    'Was the highest-grossing actress of the 2010s',
+  ],
+  'Robert Downey Jr.': [
+    'Was nominated for an Oscar for Chaplin at 27',
+    'Made a comeback as Iron Man after legal troubles',
+  ],
+  'Chris Hemsworth': [
+    'Played Thor in the Marvel Cinematic Universe',
+    'Is a former soap opera star from Australia',
+  ],
+  'Dwayne Johnson': [
+    'Was a WWE wrestler (The Rock) before acting',
+    'Once the highest-paid actor in the world',
+  ],
+  'Will Smith': ['First rapper to win a Grammy', 'Starred in The Fresh Prince of Bel-Air'],
+  'Shah Rukh Khan': ['Known as the King of Bollywood', 'Owns the Kolkata Knight Riders IPL team'],
+  'Aamir Khan': [
+    'His film Dangal grossed over $300M in China',
+    'Known for his perfectionism and method acting',
+  ],
+  'Salman Khan': [
+    'Hosts the reality show Bigg Boss',
+    'His film Sultan was a massive box office hit',
+  ],
+  'Priyanka Chopra': ['Was crowned Miss World in 2000', 'Married singer Nick Jonas in 2018'],
+  'Deepika Padukone': [
+    'Was a badminton player before acting',
+    'One of the highest-paid actresses in India',
+  ],
+  'Alia Bhatt': [
+    'Made her debut in Student of the Year (2012)',
+    'Founded the eco-friendly brand Ed-a-Mamma',
+  ],
+  'Ranbir Kapoor': [
+    'Comes from the famous Kapoor acting family',
+    'Won the Filmfare Best Actor award for Barfi!',
+  ],
+  'Virat Kohli': ['Scored 50+ international centuries', 'Married actress Anushka Sharma in 2017'],
+  'MS Dhoni': [
+    'Captained India to the 2011 World Cup win',
+    'Famous for his helicopter shot and calm demeanor',
+  ],
+  'Sachin Tendulkar': [
+    'First batsman to score 100 international centuries',
+    'Was awarded the Bharat Ratna in 2014',
+  ],
+  Ronaldo: ['Won the Ballon d’Or five times', 'Famous for his “Siu” celebration'],
+  'Lionel Messi': ['Won the World Cup in 2022', 'Has won eight Ballon d’Or awards — a record'],
+  Neymar: [
+    'The most expensive transfer in football history ($263M)',
+    'Wears the number 10 for Brazil',
+  ],
+  'Serena Williams': ['Won 23 Grand Slam singles titles', 'Has won four Olympic gold medals'],
+  'Roger Federer': ['Won 20 Grand Slam singles titles', 'Known for his elegance on the court'],
+  'Rafael Nadal': ['Won the French Open a record 14 times', 'Known as the King of Clay'],
+  'Michael Jordan': [
+    'Won six NBA championships with the Bulls',
+    'His Air Jordan brand is a billion-dollar business',
+  ],
+  'LeBron James': [
+    'All-time leading scorer in NBA history',
+    'Won four NBA championships with three teams',
+  ],
+  'Usain Bolt': [
+    'Holds world records in 100m and 200m',
+    'Once ate 1,000 chicken nuggets at the Olympics',
+  ],
+  'Simone Biles': [
+    'Has 11 Olympic medals and 30 world medals',
+    'Named her floor routine moves after herself',
+  ],
+  'Marilyn Monroe': [
+    'Became a star after modeling for calendars',
+    'Her dress from “The Seven Year Itch” sold for $4.6M',
+  ],
+  'Elvis Presley': ['Known as the King of Rock and Roll', 'Had 18 No. 1 hits in the US'],
+  'John Lennon': ['Was a founding member of The Beatles', 'Wrote “Imagine” in 1971'],
+  'Freddie Mercury': ['Had a four-octave vocal range', 'Wrote “Bohemian Rhapsody” in his bedroom'],
+  'David Bowie': [
+    'Created the alter ego Ziggy Stardust',
+    'His song “Space Oddity” was played in space',
+  ],
+  'Whitney Houston': [
+    'Won 6 Grammys and 22 American Music Awards',
+    'Her cover of “I Will Always Love You” is legendary',
+  ],
+  'Princess Diana': ['Known as the People’s Princess', 'Championed landmine and AIDS causes'],
+  'Queen Elizabeth II': [
+    'Reigned for 70 years — the longest in British history',
+    'Met 13 of the 14 most recent US presidents',
+  ],
+  'Winston Churchill': ['Led Britain through World War II', 'Won the Nobel Prize in Literature'],
+  'Mahatma Gandhi': [
+    'Led India’s independence through nonviolence',
+    'His birthday is celebrated as the International Day of Non-Violence',
+  ],
+  'Mother Teresa': [
+    'Won the Nobel Peace Prize in 1979',
+    'Founded the Missionaries of Charity in Calcutta',
+  ],
+  'Martin Luther King Jr.': [
+    'Gave the “I Have a Dream” speech in 1963',
+    'Won the Nobel Peace Prize in 1964',
+  ],
+  'Rosa Parks': [
+    'Her refusal to give up a bus seat sparked the Montgomery boycott',
+    'Worked as a seamstress and NAACP secretary',
+  ],
+  'Abraham Lincoln': [
+    'Issued the Emancipation Proclamation',
+    'Was the tallest US president at 6 ft 4 in',
+  ],
+  'George Washington': ['Was the first US president', 'Never lived in the White House'],
+  'Napoleon Bonaparte': ['Crowned himself emperor of France', 'Was exiled to the island of Elba'],
+  'Julius Caesar': [
+    'Was assassinated on the Ides of March',
+    'Wrote about his own military campaigns',
+  ],
+  Cleopatra: ['Was the last active pharaoh of Egypt', 'Could reportedly speak several languages'],
+  'William Shakespeare': [
+    'Wrote 37 plays and 154 sonnets',
+    'Invented words like “bedazzled” and “lonely”',
+  ],
+  'Charles Dickens': [
+    'Wrote A Christmas Carol and Oliver Twist',
+    'His novels were often published in serial installments',
+  ],
+  'Jane Austen': [
+    'Wrote Pride and Prejudice and Emma',
+    'Her books were published anonymously during her life',
+  ],
+  'J.K. Rowling': [
+    'The Harry Potter books sold over 500 million copies',
+    'Wrote the first book in a café in Edinburgh',
+  ],
+  'Stephen King': ['Has published over 60 novels', 'His books have sold over 350 million copies'],
+  'Agatha Christie': [
+    'Wrote 66 detective novels',
+    'Her play The Mousetrap ran for decades in London',
+  ],
+  'Pablo Picasso': ['Co-founded the Cubism movement', 'Created over 20,000 artworks'],
+  'Vincent van Gogh': [
+    'Sold only one painting in his lifetime',
+    'His Starry Night was painted from memory',
+  ],
+  'Leonardo da Vinci': ['Painted the Mona Lisa', 'Was also an inventor and anatomist'],
+  'Frida Kahlo': ['Known for her self-portraits', 'Was married to painter Diego Rivera'],
+  'Salvador Dalí': ['Famous for his melting clocks painting', 'Had a pet ocelot named Babou'],
+  Michelangelo: [
+    'Sculpted David and painted the Sistine Chapel ceiling',
+    'Lived to be 88 in the 1500s',
+  ],
+  Mozart: ['Began composing at age 5', 'Wrote over 600 works before dying at 35'],
+  Beethoven: [
+    'Composed his Ninth Symphony while completely deaf',
+    'His Fifth Symphony opens with the famous “da-da-da-dum”',
+  ],
+  Bach: ['Had 20 children', 'Wrote the Brandenburg Concertos'],
+  'Charlie Chaplin': ['Was a star of silent films', 'Co-founded United Artists studio'],
+  'Alfred Hitchcock': [
+    'Known as the Master of Suspense',
+    'Made cameo appearances in all his films',
+  ],
+  'Steven Spielberg': [
+    'Directed Jaws, E.T., and Jurassic Park',
+    'Won three Oscars including Best Director twice',
+  ],
+  'Christopher Nolan': [
+    'Directed Inception, Interstellar, and Oppenheimer',
+    'Famous for practical effects and IMAX cameras',
+  ],
+  'Martin Scorsese': [
+    'Directed Taxi Driver and Goodfellas',
+    'His film The Irishman was 3.5 hours long',
+  ],
+  'Quentin Tarantino': [
+    'His films are known for non-linear storytelling',
+    'Wrote Pulp Fiction in an Amsterdam apartment',
+  ],
+  'Stanley Kubrick': [
+    'Directed 2001: A Space Odyssey',
+    'Was a chess player and photographer before film',
+  ],
+  'Walt Disney': ['Created Mickey Mouse in 1928', 'Won 22 Academy Awards'],
+  'Jimmy Carter': [
+    'Lived to be 100 — the longest-lived US president',
+    'Won the Nobel Peace Prize in 2002',
+  ],
+  'Joe Biden': ['Is the 46th US president', 'Was a senator for 36 years'],
+  'Kamala Harris': [
+    'Was the first female US vice president',
+    'Was California’s attorney general before that',
+  ],
+  'Justin Bieber': ['Was discovered on YouTube at 13', 'His song “Baby” was a global hit in 2010'],
+  Drake: [
+    'Holds records for most Billboard Hot 100 entries',
+    'Started acting on Degrassi as a teen',
+  ],
+  'Kanye West': [
+    'His album My Beautiful Dark Twisted Fantasy is critically acclaimed',
+    'Founded the Yeezy fashion brand',
+  ],
+  'Jay-Z': ['Was the first billionaire rapper', 'Married Beyoncé in 2008'],
+  Rihanna: ['Won nine Grammys and launched Fenty Beauty', 'Is a billionaire from her businesses'],
+  Adele: [
+    'Won Album of the Year twice — for 21 and 25',
+    'Her song “Hello” broke streaming records',
+  ],
+  'Ed Sheeran': [
+    'Wrote “Shape of You” in a few hours',
+    'Has played to over 10 million fans on tour',
+  ],
+  'Lady Gaga': ['Won an Oscar for “Shallow”', 'Won a Grammy for her jazz album with Tony Bennett'],
+  Madonna: [
+    'Is the best-selling female artist of all time',
+    'Her “Vogue” music video defined an era',
+  ],
+  'Celine Dion': ['Sang “My Heart Will Go On” for Titanic', 'Performed in Las Vegas for 16 years'],
+  'Ariana Grande': ['Has four songs with over a billion streams', 'Started on Broadway in 13'],
+  'Billie Eilish': [
+    'Won Album of the Year at 18 — the youngest ever',
+    'Recorded her debut album in her bedroom',
+  ],
+  'Bruno Mars': ['Known for hits like “Uptown Funk”', 'Won 15 Grammys'],
+  'Post Malone': [
+    'His song “Sunflower” was nominated for an Oscar',
+    'Has face tattoos and a passion for Beers',
+  ],
+  'The Weeknd': [
+    'His song “Blinding Lights” is the most-streamed ever on Spotify',
+    'Performed the Super Bowl halftime show in 2021',
+  ],
+  'Harry Styles': [
+    'Was in One Direction before going solo',
+    'Won his first Grammy for “Watermelon Sugar”',
+  ],
+  Shakira: ['Wrote “Waka Waka” for the 2010 World Cup', 'Her hips are famously certified'],
+  'Jennifer Lopez': [
+    'Was the first Latina to earn $1M for a film',
+    'Performed at three Super Bowls',
+  ],
+  'Kim Kardashian': [
+    'Her reality show made her a global brand',
+    'Studied law and passed the baby bar exam',
+  ],
+  'Kylie Jenner': ['Was the youngest self-made billionaire', 'Founded Kylie Cosmetics at 19'],
+  'Cristiano Ronaldo': [
+    'First footballer to score 900+ career goals',
+    'Has the most Instagram followers in the world',
+  ],
+  'Kylian Mbappé': ['Won the World Cup at 19', 'Scored a hat-trick in the 2022 World Cup final'],
+  'Erling Haaland': [
+    'Scored 36 Premier League goals in his first season',
+    'Is the son of former footballer Alfie Haaland',
+  ],
+  'Zinedine Zidane': [
+    'Won the 1998 World Cup with France',
+    'Was named FIFA World Player of the Year three times',
+  ],
+  'Diego Maradona': [
+    'Scored the “Hand of God” goal in 1986',
+    'Won the World Cup with Argentina in 1986',
+  ],
+  Pelé: ['Won three World Cups with Brazil', 'Scored over 1,000 career goals'],
+  'Muhammad Ali': [
+    'Known as “The Greatest”',
+    'Was stripped of his title for refusing the Vietnam draft',
+  ],
+  'Mike Tyson': [
+    'Became the youngest heavyweight champion at 20',
+    'Infamously bit Evander Holyfield’s ear in 1997',
+  ],
+  'Conor McGregor': [
+    'Was the first UFC double champion',
+    'Fought Floyd Mayweather in a $100M boxing match',
+  ],
+  'Lewis Hamilton': [
+    'Won seven Formula 1 championships',
+    'Is the winningest F1 driver of all time',
+  ],
+  'Max Verstappen': [
+    'Won four consecutive F1 titles by age 27',
+    'Is the son of former F1 driver Jos Verstappen',
+  ],
+  'Valentino Rossi': ['Won nine motorcycle racing world championships', 'Known as “The Doctor”'],
+  'Tiger Woods': ['Won 15 major golf championships', 'Won the Masters at 21 — the youngest ever'],
+  'Novak Djokovic': [
+    'Won 24 Grand Slam singles titles',
+    'Holds the record for most weeks at world No. 1',
+  ],
+  'Andy Murray': ['Won three Grand Slam titles', 'Won Olympic gold twice'],
+  'Emma Raducanu': [
+    'Won the US Open in 2021 as a qualifier',
+    'Is the first British woman to win a major since 1977',
+  ],
+  'Naomi Osaka': ['Won four Grand Slam titles', 'Has spoken out about mental health in sport'],
+  'Shaquille O’Neal': ['Won four NBA championships', 'Is 7 ft 1 in and famously huge'],
+  'Kobe Bryant': [
+    'Won five NBA championships with the Lakers',
+    'His 81-point game is the second-highest ever',
+  ],
+  'Stephen Curry': [
+    'Is the NBA’s all-time 3-point leader',
+    'Won four NBA championships with the Warriors',
+  ],
+  'Kevin Durant': [
+    'Won two NBA championships with the Warriors',
+    'Is one of the most versatile scorers ever',
+  ],
+  'Tom Brady': ['Won seven Super Bowls — the most ever', 'Played until age 45'],
+  'Patrick Mahomes': ['Won three Super Bowls by age 28', 'Signed a $500M contract in 2020'],
+  'Amelia Earhart': [
+    'Was the first woman to fly solo across the Atlantic',
+    'Disappeared over the Pacific in 1937',
+  ],
+  'Neil Armstrong': [
+    'First person to walk on the Moon',
+    'His line “one small step” was heard by 600M people',
+  ],
+  'Buzz Aldrin': ['Second person on the Moon', 'Walked on the Moon 19 minutes after Armstrong'],
+  'Stephen Hawking': ['Wrote A Brief History of Time', 'Lived with ALS for 55 years'],
+  'Isaac Newton': ['Formulated the laws of motion and gravity', 'Also invented calculus'],
+  'Charles Darwin': ['Wrote On the Origin of Species', 'His theory of evolution changed biology'],
+  'Nikola Tesla': ['Invented the AC motor', 'Had a legendary rivalry with Thomas Edison'],
+  'Thomas Edison': [
+    'Held 1,093 US patents',
+    'Did not actually invent the light bulb — he perfected it',
+  ],
+  'Alexander Graham Bell': [
+    'Patented the telephone in 1876',
+    'Also helped found National Geographic',
+  ],
+  'The Wright Brothers': [
+    'Made the first powered flight in 1903',
+    'Their flight lasted 12 seconds',
+  ],
+  'Florence Nightingale': ['Founded modern nursing', 'Known as the Lady with the Lamp'],
+  'Helen Keller': ['Was the first deaf-blind person to earn a college degree', 'Wrote 12 books'],
+  'Anne Frank': [
+    'Wrote a diary while hiding from the Nazis',
+    'Her diary was published by her father after the war',
+  ],
+  'Malala Yousafzai': [
+    'Won the Nobel Peace Prize at 17',
+    'Survived an assassination attempt in 2012',
+  ],
+  'Greta Thunberg': [
+    'Started a global climate strike at 15',
+    'Was named Time Person of the Year in 2019',
+  ],
+  'Ruth Bader Ginsburg': [
+    'Was the second female Supreme Court justice',
+    'Known as the Notorious RBG',
+  ],
+  'Johnny Depp': [
+    'Played Captain Jack Sparrow in five Pirates films',
+    'Was a guitarist before acting',
+  ],
+  'Meryl Streep': ['Has 21 Oscar nominations — a record', 'Won three Oscars'],
+  'Tom Hanks': [
+    'Won back-to-back Oscars in 1994 and 1995',
+    'Is famous for being the nicest man in Hollywood',
+  ],
+  'Julia Roberts': ['Won an Oscar for Erin Brockovich', 'Her smile was once insured for $30M'],
+  'Sandra Bullock': ['Won an Oscar for The Blind Side', 'Adopted a son from New Orleans'],
+  'George Clooney': ['Won an Oscar for Syriana', 'Co-founded the tequila brand Casamigos'],
+  'Matt Damon': [
+    'Won an Oscar for co-writing Good Will Hunting',
+    'Is a longtime friend of Ben Affleck',
+  ],
+  'Ben Affleck': ['Won an Oscar for co-writing Good Will Hunting', 'Played Batman in the DCEU'],
+  'Jennifer Aniston': [
+    'Starred in Friends for 10 seasons',
+    'Her haircut in the 90s was called “The Rachel”',
+  ],
+  'Courteney Cox': ['Played Monica in Friends', 'Directed the film Just Before I Go'],
+  'David Schwimmer': ['Played Ross in Friends', 'Voiced Melman in Madagascar'],
+  'Matt LeBlanc': ['Played Joey in Friends', 'Hosted the car show Top Gear'],
+  'Hugh Jackman': ['Played Wolverine for 17 years', 'Sang in The Greatest Showman'],
+  'Ryan Reynolds': ['Played Deadpool', 'Owns a stake in the Wrexham football club'],
+  'Chris Pratt': [
+    'Starred in Guardians of the Galaxy and Jurassic World',
+    'Was a Walmart greeter before acting',
+  ],
+  'Emma Watson': ['Played Hermione in Harry Potter', 'Graduated from Brown University'],
+  'Daniel Radcliffe': [
+    'Played Harry Potter for 10 years',
+    'Has appeared on Broadway multiple times',
+  ],
+  'Rupert Grint': ['Played Ron Weasley', 'Was the richest British actor under 30 in his 20s'],
+  'Keanu Reeves': [
+    'Is famous for his generosity to stunt teams',
+    'Starred in John Wick and The Matrix',
+  ],
+  'Natalie Portman': ['Won an Oscar for Black Swan', 'Has a degree from Harvard'],
+  'Cate Blanchett': ['Won two Oscars', 'Is a UNHCR goodwill ambassador'],
+  'Nicole Kidman': ['Won an Oscar for The Hours', 'Was born in Hawaii and raised in Australia'],
+  'Samuel L. Jackson': [
+    'Is the highest-grossing actor of all time',
+    'Has appeared in over 150 films',
+  ],
+  'Morgan Freeman': [
+    'Has a distinctive voice heard in countless documentaries',
+    'Got his first major film role at 50',
+  ],
+  'Denzel Washington': ['Won two Oscars', 'Was paid $60M for The Equalizer 3'],
+  'Viola Davis': ['Won an Oscar for Fences', 'Is an EGOT winner'],
+  Zendaya: ['Won two Emmys for Euphoria', 'Starred in Dune and Spider-Man'],
+  'Timothée Chalamet': ['Was nominated for an Oscar at 22', 'Is a fan of French cinema and rap'],
+  'Margot Robbie': ['Was nominated for an Oscar for I, Tonya', 'Produced Barbie (2023)'],
+  'Ryan Gosling': [
+    'Was nominated for an Oscar for La La Land',
+    'Was a member of the Mickey Mouse Club',
+  ],
+  'Joaquin Phoenix': ['Won an Oscar for Joker', 'Is a vegan and animal rights activist'],
+  'Adam Sandler': ['His films have grossed over $4B', 'Still performs stand-up comedy tours'],
+  'Jim Carrey': ['Was paid $20M for The Cable Guy', 'Is also a painter'],
+  'Eddie Murphy': ['Was the highest-paid actor in 2007', 'Began on Saturday Night Live at 19'],
+  'Jackie Chan': [
+    'Does his own stunts — many of which broke bones',
+    'Has a star on the Hollywood Walk of Fame',
+  ],
+  'Arnold Schwarzenegger': [
+    'Won Mr. Olympia seven times',
+    'Was governor of California from 2003 to 2011',
+  ],
+  'Sylvester Stallone': ['Wrote Rocky in three days', 'Was nominated for two Oscars for Rocky'],
+  'Bruce Lee': [
+    'Is considered the father of modern martial arts cinema',
+    'His films broke box office records in Asia',
+  ],
+  'Irina Shayk': ['Is a supermodel from Russia', 'Was in a long relationship with Bradley Cooper'],
+  'David Beckham': ['Scored a famous free kick against Greece in 2001', 'Owns Inter Miami CF'],
+  'Zlatan Ibrahimović': ['Scored over 500 career goals', 'Famously said he “doesn’t do auditions”'],
+  'Andrés Iniesta': [
+    'Scored the winning goal in the 2010 World Cup final',
+    'Was a Barcelona legend',
+  ],
+  Xavi: ['Was Barcelona’s midfield maestro', 'Coached Barcelona from 2021 to 2024'],
+  'Wayne Rooney': ['Is Manchester United’s all-time top scorer', 'Debuted for Everton at 16'],
+  'Gary Lineker': ['Never received a yellow or red card', 'Hosts Match of the Day'],
+  'Dwayne “The Rock” Johnson': [
+    'Was a WWE champion before acting',
+    'Once the world’s highest-paid actor',
+  ],
+  'John Cena': ['Has 16 WWE world championship reigns', 'Says “You can’t see me” to opponents'],
+  'The Rock': [
+    'Was a college football player at Miami',
+    'His catchphrase is “Can you smell what The Rock is cooking?”',
+  ],
+  'Angela Merkel': ['Was Germany’s chancellor for 16 years', 'Was a physicist before politics'],
+  'Volodymyr Zelenskyy': [
+    'Was a comedian before becoming president',
+    'Played a president on TV before becoming one',
+  ],
+  'Rishi Sunak': ['Was the UK’s first Hindu prime minister', 'Is a former hedge fund analyst'],
+  'Narendra Modi': ['Has been India’s prime minister since 2014', 'Was a tea seller in his youth'],
+  'Mukesh Ambani': ['Is Asia’s richest man', 'Built the world’s most expensive home — Antilia'],
+  'Ratan Tata': ['Led Tata Group for over 20 years', 'Was known for his philanthropy and humility'],
+  'Lata Mangeshkar': ['Recorded over 30,000 songs', 'Was awarded the Bharat Ratna in 2001'],
+  'Amitabh Bachchan': [
+    'Known as the Shahenshah of Bollywood',
+    'Hosted Kaun Banega Crorepati for years',
+  ],
+  'Hrithik Roshan': [
+    'Debuted in Kaho Naa... Pyaar Hai (2000)',
+    'Is known for his dancing and physique',
+  ],
+};
+
 const movies = [
   ...HOLLYWOOD.map((title) => ({ title, category: 'hollywood' })),
   ...BOLLYWOOD.map((title) => ({ title, category: 'bollywood' })),
@@ -727,6 +1261,9 @@ const celebrities = CELEBRITIES.map(
     ageRange,
     hairColor,
     famousFor,
+    // M17 — fun facts revealed after each Guess Who round (owner request:
+    // more movies, scandals, news). Accurate common knowledge; keep short.
+    facts: CELEBRITY_FACTS[name] ?? [famousFor],
   })
 );
 

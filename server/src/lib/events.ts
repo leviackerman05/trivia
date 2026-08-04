@@ -33,6 +33,8 @@ export const ClientEvents = {
   setVotingConfig: 'set-voting-config',
   // Additive (M15 — Shadow Sketch: host-chosen silhouette genre)
   setShadowGenre: 'set-shadow-genre',
+  // Additive (M17 — Guess Who: host advances after a reveal)
+  guessWhoNext: 'guess-who-next',
   // Additive (M8 — Trivia room mode: host mode toggle + answers)
   setTriviaMode: 'set-trivia-mode',
   answerQuestion: 'answer-question',
@@ -67,6 +69,8 @@ export const ServerEvents = {
   roundStart: 'round-start',
   roundEnd: 'round-end',
   roundReveal: 'round-reveal',
+  // Additive (M17) — Guess Who: celebrity + facts revealed after a round
+  guessReveal: 'guess-reveal',
   gameEnd: 'game-end',
   gameRestart: 'game-restart',
   // Additive — drawing (broadcast: strokes/undo/clear echo to the room)

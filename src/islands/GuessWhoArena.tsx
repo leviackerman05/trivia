@@ -3,7 +3,7 @@ import { useRoom } from './room/useRoom';
 import RoomLobbyPanel from './room/RoomLobbyPanel';
 import { useGuessWhoGame } from './useGuessWhoGame';
 import { getGame } from '../lib/games';
-import type { CelebrityView } from '../lib/guess-who';
+import type { CelebrityView, GuessWhoGameState } from '../lib/guess-who';
 
 /**
  * Guess Who? Celebrity Edition arena (M9, PRD §5.17) — the host (answerer)
@@ -87,7 +87,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
           {room.code}
         </span>
         <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
-          Question {gw.questionCount} of {gw.maxQuestions}
+          Round {gw.round} of {gw.totalRounds} · {gw.questionCount}/{gw.maxQuestions} questions
         </span>
         <span className="rounded-pill bg-tertiary/40 px-4 py-1.5 text-xs font-semibold text-ink">
           {isAnswerer ? 'You hold the secret' : `${gw.answerer} holds the secret`}
@@ -156,31 +156,60 @@ export default function GuessWhoArena({ gameSlug }: Props) {
         </div>
       )}
 
+      {gw.view === 'revealed' && (
+        <RevealView
+          gw={gw}
+          isHost={isHost}
+          myName={myName}
+          onNext={() => void gameActions.nextCelebrity()}
+        />
+      )}
+
       {gw.view === 'game-end' && (
         <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <h2 className="font-display text-h2 text-ink">
-            {gw.winner ? `🎉 ${gw.winner} guessed it!` : 'Time’s up — the secret is out'}
+            {gw.winner ? `🏆 ${gw.winner} wins!` : 'Game over'}
           </h2>
           {gw.revealed && (
             <p className="text-body text-ink">
-              The celebrity was{' '}
+              The last celebrity was{' '}
               <span className="font-display text-h3 text-primary-deep">{gw.revealed.name}</span>{' '}
               <span className="text-ink-muted">— {gw.revealed.famousFor}</span>
             </p>
           )}
-          <p className="text-small text-ink-muted">{gw.questionCount} questions were asked.</p>
+          {gw.scores.length > 0 && (
+            <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
+              {gw.scores.map((entry, index) => (
+                <li
+                  key={entry.playerName}
+                  className="flex min-h-12 items-center justify-between px-4 text-body text-ink"
+                >
+                  <span className="font-semibold">
+                    {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`}{' '}
+                    {entry.playerName}
+                    {entry.playerName === myName && (
+                      <span className="ml-2 rounded-pill bg-primary/15 px-2 py-0.5 text-xs font-semibold text-primary-deep">
+                        You
+                      </span>
+                    )}
+                  </span>
+                  <span className="text-ink-muted">
+                    {entry.score} {entry.score === 1 ? 'guess' : 'guesses'}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          )}
           {isHost ? (
             <button
               type="button"
               onClick={() => void gameActions.restartGame()}
               className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
             >
-              New celebrity
+              Play again
             </button>
           ) : (
-            <p className="text-small text-ink-muted">
-              Waiting for the host to deal a new celebrity.
-            </p>
+            <p className="text-small text-ink-muted">Waiting for the host to start another game.</p>
           )}
         </div>
       )}
@@ -197,6 +226,70 @@ export default function GuessWhoArena({ gameSlug }: Props) {
           className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/** M17 — between-round reveal: the celebrity, facts, scores, and the
+ * host's advance control ("next celebrity" / "final results"). */
+function RevealView({
+  gw,
+  isHost,
+  myName,
+  onNext,
+}: {
+  gw: GuessWhoGameState;
+  isHost: boolean;
+  myName: string | null;
+  onNext: () => void;
+}) {
+  const revealed = gw.revealed;
+  return (
+    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+      <h2 className="font-display text-h2 text-ink">
+        {gw.winner ? `🎉 ${gw.winner} guessed it!` : 'Nobody got it this round'}
+      </h2>
+      {revealed && (
+        <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 p-5">
+          <p className="text-center font-display text-h2 text-primary-deep">{revealed.name}</p>
+          <p className="mt-1 text-center text-body text-ink-muted">{revealed.famousFor}</p>
+          {revealed.facts.length > 0 && (
+            <ul className="mt-3 flex flex-col gap-2">
+              {revealed.facts.map((fact, index) => (
+                <li key={index} className="flex gap-2 text-body text-ink">
+                  <span aria-hidden="true">✨</span>
+                  <span>{fact}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+      {gw.scores.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {gw.scores.map((entry) => (
+            <span
+              key={entry.playerName}
+              className="rounded-pill bg-surface-muted px-3 py-1.5 text-small font-semibold text-ink"
+            >
+              {entry.playerName} {entry.playerName === myName ? '(you)' : ''} · {entry.score}
+            </span>
+          ))}
+        </div>
+      )}
+      {isHost ? (
+        <button
+          type="button"
+          onClick={onNext}
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+        >
+          {gw.revealFinished ? 'See final results' : 'Next celebrity'}
+        </button>
+      ) : (
+        <p className="text-small text-ink-muted">
+          Waiting for the host to deal the next celebrity.
         </p>
       )}
     </div>

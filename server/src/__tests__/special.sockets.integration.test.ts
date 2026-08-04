@@ -193,33 +193,41 @@ describe('Charades + Guess Who (M9) — DB-backed socket integration', () => {
     const log = await answeredPromise;
     expect(log.questionCount).toBe(1);
 
-    // The answerer cannot guess; a wrong guess continues; the right one wins.
+    // The answerer cannot guess; a wrong guess continues; a correct one
+    // reveals (M17 — round 1 of 5, so the game keeps going).
     const deniedGuess = await emitAck(host, ClientEvents.sendGuess, { roomCode, text: 'Beyoncé' });
     expect(deniedGuess.error).toBe('NOT_ANSWERER');
     const wrong = await emitAck(guest, ClientEvents.sendGuess, { roomCode, text: 'Rihanna' });
     expect(wrong.ok).toBe(true);
 
-    const gameEndPromise = waitFor<{
+    const revealPromise = waitFor<{
       kind: string;
-      celebrity: { name: string };
+      celebrity: { name: string; facts: string[] } | null;
       winner: string | null;
-    }>(guest, ServerEvents.gameEnd);
+      finished: boolean;
+    }>(guest, ServerEvents.guessReveal);
     const right = await emitAck(guest, ClientEvents.sendGuess, { roomCode, text: 'Rihanna' });
     expect(right.ok).toBe(true);
     // The guess may or may not match the random celebrity; if it didn't,
-    // force the reveal path by asking 20 questions is too slow — instead
-    // assert the game either ended or is still running.
-    const maybeEnd = await Promise.race([
-      gameEndPromise,
-      new Promise<null>((resolve) => setTimeout(() => resolve(null), 300)),
+    // ask 20 questions to force the reveal cap instead.
+    const reveal = await Promise.race([
+      revealPromise,
+      (async () => {
+        for (let i = 0; i < 20; i += 1) {
+          await emitAck(guest, ClientEvents.askQuestion, {
+            roomCode,
+            text: `Is it question number ${i + 1}?`,
+          });
+          await emitAck(host, ClientEvents.answerQuestion, { roomCode, yes: i % 2 === 0 });
+        }
+        return revealPromise;
+      })(),
     ]);
-    if (maybeEnd) {
-      expect(maybeEnd.kind).toBe('guess-who');
-      expect(typeof maybeEnd.celebrity?.name).toBe('string');
-    } else {
-      // Wrong guess path: game continues.
-      expect(true).toBe(true);
-    }
+    expect(reveal.kind).toBe('guess-who');
+    expect(typeof reveal.celebrity?.name).toBe('string');
+    expect(Array.isArray(reveal.celebrity?.facts)).toBe(true);
+    // Round 1 of 5: the game is NOT finished — the host advances it.
+    expect(reveal.finished).toBe(false);
   });
 
   it('Copycat (M13): the reveal waits for both players to load the image, then counts 10s', async () => {

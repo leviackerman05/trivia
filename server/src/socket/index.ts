@@ -700,11 +700,14 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         view: session.phaseValue,
         kind: 'guess-who',
         answerer: session.answerer,
+        round: session.currentRound,
+        totalRounds: session.totalRoundsValue,
         questionCount: session.questionCount,
         maxQuestions: session.maxQuestions,
         questions: session.questionLog,
         winner: session.winnerValue,
-        // The secret celebrity only goes to the answerer's device.
+        scores: session.scoreTable,
+        // The secret celebrity (with facts) only goes to the answerer's device.
         celebrity: isAnswerer
           ? {
               name: session.secretCelebrity?.name ?? null,
@@ -715,6 +718,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
               ageRange: session.secretCelebrity?.ageRange ?? null,
               hairColor: session.secretCelebrity?.hairColor ?? null,
               famousFor: session.secretCelebrity?.famousFor ?? null,
+              facts: session.secretCelebrity?.facts ?? [],
             }
           : null,
       };
@@ -1313,28 +1317,82 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     if (!engineResult.ok) {
       return false;
     }
+    emitGuessWhoRoundStart(room);
+    broadcastState(room);
+    logger.info({ roomCode: room.code, answerer }, 'guess-who started');
+    return true;
+  }
+
+  /** Round-start for guess-who: the secret celebrity (with M17 facts) is
+   * answerer-only (D023); everyone else gets the base payload. */
+  function emitGuessWhoRoundStart(room: RoomState): void {
+    const session = guessWhoOf(room);
+    if (!session || !session.secretCelebrity) {
+      return;
+    }
+    const answerer = session.answerer ?? '';
     const answererId = roomActorSocketId(room, answerer);
     const base = {
       kind: 'guess-who',
       phase: 'questioning',
       answerer,
+      round: session.currentRound,
+      totalRounds: session.totalRoundsValue,
       questionCount: 0,
       maxQuestions: GUESS_WHO_MAX_QUESTIONS,
+      scores: session.scoreTable,
     };
-    // The secret celebrity is answerer-only (D023): base to everyone except
-    // the answerer, private payload to the answerer's device.
     if (answererId) {
       io.to(room.code).except(answererId).emit(ServerEvents.roundStart, base);
       io.to(answererId).emit(ServerEvents.roundStart, {
         ...base,
-        celebrity: started.value.celebrity,
+        celebrity: session.secretCelebrity,
       });
     } else {
       io.to(room.code).emit(ServerEvents.roundStart, base);
     }
+  }
+
+  /** M17 — a correct guess (or the question cap) reveals the celebrity and
+   * facts to everyone; the host then advances via guess-who-next. */
+  function revealGuessWho(room: RoomState, finished: boolean): void {
+    const session = guessWhoOf(room);
+    if (!session) {
+      return;
+    }
+    const celebrity = session.secretCelebrity;
+    io.to(room.code).emit(ServerEvents.guessReveal, {
+      kind: 'guess-who',
+      celebrity: celebrity
+        ? {
+            name: celebrity.name,
+            famousFor: celebrity.famousFor,
+            facts: celebrity.facts ?? [],
+          }
+        : null,
+      winner: session.winnerValue,
+      scores: session.scoreTable,
+      round: session.currentRound,
+      totalRounds: session.totalRoundsValue,
+      finished,
+    });
+  }
+
+  function advanceGuessWho(room: RoomState): void {
+    const session = guessWhoOf(room);
+    if (!session || session.phaseValue !== 'revealed') {
+      return;
+    }
+    const advanced = session.next();
+    if (!advanced.ok) {
+      return;
+    }
+    if (advanced.value.finished) {
+      finishGuessWho(room);
+      return;
+    }
+    emitGuessWhoRoundStart(room);
     broadcastState(room);
-    logger.info({ roomCode: room.code, answerer }, 'guess-who started');
-    return true;
   }
 
   function finishGuessWho(room: RoomState): void {
@@ -1834,7 +1892,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
             message: `${player.name} guessed it!`,
             at: Date.now(),
           });
-          finishGuessWho(room);
+          // M17 — reveal + facts to everyone; the host advances the game.
+          revealGuessWho(room, guessed.value.finished);
         }
         ack?.({ ok: true });
         return;
@@ -2330,8 +2389,10 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
           maxQuestions: gw.maxQuestions,
           finished: answered.value.finished,
         });
-        if (answered.value.finished) {
-          finishGuessWho(room);
+        // M17 — the 20-question cap reveals the celebrity + facts (no
+        // winner) on ANY round; the host then advances the game.
+        if (gw.phaseValue === 'revealed') {
+          revealGuessWho(room, gw.currentRound >= gw.totalRoundsValue);
         }
         ack?.({ ok: true });
         return;
@@ -2414,6 +2475,28 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         maxQuestions: session.maxQuestions,
         finished: false,
       });
+      ack?.({ ok: true });
+    });
+
+    /** M17 — Guess Who: the host advances after a reveal (next round or
+     * final results). */
+    socket.on(ClientEvents.guessWhoNext, (payload: unknown, ack?: Ack) => {
+      const input = validateRoomCodeInput(payload);
+      if (!input.ok) {
+        ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: input.error });
+        return;
+      }
+      const room = roomOf(socket);
+      if (!room || !isGuessWhoRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player?.isHost) {
+        ack?.({ ok: false, error: 'NOT_HOST' });
+        return;
+      }
+      advanceGuessWho(room);
       ack?.({ ok: true });
     });
 

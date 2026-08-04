@@ -524,21 +524,30 @@ function VoteCard({
     kind === 'would-you-rather' ? (index === 0 ? 'bg-blue-500' : 'bg-red-500') : 'bg-primary';
   const accentColor =
     kind === 'would-you-rather' ? (index === 0 ? '#3b82f6' : '#ef4444') : undefined;
+  // M16 — Most Likely To options are player names: give them big, obvious
+  // tap targets (the owner's "clickable area is too small" report).
+  const isNameCard = kind === 'most-likely-to';
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex min-w-0 flex-col gap-2">
       <button
         type="button"
         disabled={disabled}
         onClick={onVote}
         aria-pressed={voted}
-        className={`flex min-h-28 flex-col items-center justify-center gap-1 rounded-lg border-3 px-5 py-4 text-center shadow-sm transition-all disabled:cursor-default ${
+        className={`flex w-full flex-col items-center justify-center gap-1 overflow-hidden rounded-lg border-3 px-5 py-4 text-center shadow-sm transition-colors disabled:cursor-default ${
+          isNameCard ? 'min-h-32' : 'min-h-28'
+        } ${
           voted
             ? 'border-transparent text-white'
             : 'border-border bg-surface-raised hover:border-primary'
         }`}
         style={voted && accentColor ? { backgroundColor: accentColor } : undefined}
       >
-        <span className="text-xl font-bold leading-snug">{option.label}</span>
+        <span
+          className={`break-words leading-snug ${isNameCard ? 'font-display text-2xl' : 'text-xl'}`}
+        >
+          {option.label}
+        </span>
         {option.label === myName && (
           <span className="rounded-pill bg-surface-raised/20 px-2 py-0.5 text-xs font-semibold">
             You
@@ -613,7 +622,7 @@ function RevealView({
                   <span className="min-w-6 text-lg" aria-hidden="true">
                     {isWinner && voting.kind === 'most-likely-to' ? '👑' : `${index + 1}.`}
                   </span>
-                  <span className="flex-1 font-semibold text-ink">
+                  <span className="min-w-0 flex-1 break-words font-semibold text-ink">
                     {row.label}
                     {row.label === myName && (
                       <span className="ml-2 rounded-pill bg-primary/15 px-2 py-0.5 text-xs font-semibold text-primary-deep">
@@ -621,13 +630,13 @@ function RevealView({
                       </span>
                     )}
                   </span>
-                  <div className="h-3 w-40 overflow-hidden rounded-pill bg-surface-muted">
+                  <div className="hidden h-3 w-40 shrink-0 overflow-hidden rounded-pill bg-surface-muted sm:block">
                     <div
                       className="h-full rounded-pill bg-primary transition-all duration-500"
                       style={{ width: `${percent}%` }}
                     />
                   </div>
-                  <span className="w-16 text-right text-small font-semibold text-ink-muted">
+                  <span className="w-16 shrink-0 text-right text-small font-semibold text-ink-muted">
                     {row.count} · {percent}%
                   </span>
                 </div>

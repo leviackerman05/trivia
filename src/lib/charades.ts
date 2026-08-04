@@ -39,6 +39,7 @@ export function initialCharadesState(): CharadesGameState {
 
 export type CharadesAction =
   | { type: 'reset' }
+  | { type: 'category-change'; category: 'hollywood' | 'bollywood' | 'mixed' }
   | {
       type: 'round-start';
       myName: string;
@@ -77,6 +78,11 @@ export function charadesReducer(
   switch (action.type) {
     case 'reset':
       return { ...initialCharadesState(), myName: state.myName };
+    case 'category-change':
+      // M17 — optimistic local update after the host's set-category ack, so
+      // the lobby toggle reflects the choice immediately (the server only
+      // echoes the category in the round-start payload).
+      return { ...state, category: action.category };
     case 'round-start': {
       const payload = action.payload;
       if (payload.kind !== 'charades' || payload.phase !== 'acting') {

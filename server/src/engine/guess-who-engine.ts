@@ -1,18 +1,18 @@
 import { randomInt } from 'node:crypto';
 
 /**
- * Guess Who? Celebrity Edition session engine (M9, PRD §5.17) —
- * transport-agnostic. The answerer (host) holds a secret celebrity with
- * trait objects; everyone else asks yes/no questions (the ANSWERER judges
- * the answer — the traits help), sees the question log, and can guess the
- * name at any time. 20-question cap → reveal. A correct guess ends the
- * round with the guesser as the winner.
+ * Guess Who? Celebrity Edition session engine (M9/M17, PRD §5.17) —
+ * transport-agnostic. The answerer (rotating each round) holds a secret
+ * celebrity with trait objects; everyone else asks yes/no questions (the
+ * ANSWERER judges — the traits help), sees the question log, and can guess
+ * the name at any time. A correct guess scores +1 and reveals the celebrity
+ * WITH fun facts (M17); the host advances to the next round. 5 rounds, then
+ * the highest scorer wins. 20-question cap per round → reveal.
  *
- * Phases: idle → questioning → game-end (single round per game; restart
- * deals a new celebrity).
+ * Phases: idle → questioning → revealed → … → game-end.
  */
 
-export type GuessWhoPhase = 'idle' | 'questioning' | 'game-end';
+export type GuessWhoPhase = 'idle' | 'questioning' | 'revealed' | 'game-end';
 
 export type GuessWhoError =
   | 'NOT_STARTED'
@@ -35,6 +35,8 @@ export interface Celebrity {
   ageRange: string;
   hairColor: string;
   famousFor: string;
+  /** M17 — fun facts revealed after the round (more movies, awards, trivia). */
+  facts: string[];
 }
 
 export interface QuestionEntry {
@@ -45,6 +47,7 @@ export interface QuestionEntry {
 }
 
 export const GUESS_WHO_MAX_QUESTIONS = 20;
+export const GUESS_WHO_TOTAL_ROUNDS = 5;
 
 export class GuessWhoSession {
   private readonly celebrities: Celebrity[];
@@ -57,6 +60,9 @@ export class GuessWhoSession {
   private questions: QuestionEntry[] = [];
   private winnerName: string | null = null;
   private startedAt = 0;
+  private roundNumber = 0;
+  private totalRounds = GUESS_WHO_TOTAL_ROUNDS;
+  private scores = new Map<string, number>();
 
   constructor(celebrities: Celebrity[], options: { randomInt?: (max: number) => number } = {}) {
     this.celebrities = celebrities;
@@ -96,6 +102,21 @@ export class GuessWhoSession {
     return GUESS_WHO_MAX_QUESTIONS;
   }
 
+  get currentRound(): number {
+    return this.roundNumber;
+  }
+
+  get totalRoundsValue(): number {
+    return this.totalRounds;
+  }
+
+  /** M17 — running scores (guesser +1 per correct guess). */
+  get scoreTable(): { playerName: string; score: number }[] {
+    return [...this.scores.entries()]
+      .map(([playerName, score]) => ({ playerName, score }))
+      .sort((a, b) => b.score - a.score || a.playerName.localeCompare(b.playerName));
+  }
+
   start(playerNames: string[], answererName: string): GuessWhoResult<{ celebrity: Celebrity }> {
     if (this.phase !== 'idle') {
       return { ok: false, error: 'ALREADY_STARTED' };
@@ -111,14 +132,10 @@ export class GuessWhoSession {
     }
     this.players = names.map((name) => ({ name }));
     this.answererName = answererName;
-    const celebrity = this.celebrities[this.randomIntFn(this.celebrities.length)];
-    if (!celebrity) {
-      return { ok: false, error: 'NOT_STARTED' };
-    }
-    this.celebrity = celebrity;
     this.startedAt = Date.now();
-    this.phase = 'questioning';
-    return { ok: true, value: { celebrity } };
+    this.roundNumber = 0;
+    this.beginRound();
+    return { ok: true, value: { celebrity: this.celebrity! } };
   }
 
   /** Anyone except the answerer asks a yes/no question (solo rooms excepted
@@ -163,8 +180,12 @@ export class GuessWhoSession {
     open.answer = yes;
     const answered = this.questionCount;
     if (answered >= GUESS_WHO_MAX_QUESTIONS) {
-      this.phase = 'game-end'; // reveal: nobody guessed in time
-      return { ok: true, value: { number: answered, finished: true } };
+      // M17 — nobody guessed in time: reveal without a winner.
+      this.phase = 'revealed';
+      return {
+        ok: true,
+        value: { number: answered, finished: this.roundNumber >= this.totalRounds },
+      };
     }
     return { ok: true, value: { number: answered, finished: false } };
   }
@@ -172,6 +193,7 @@ export class GuessWhoSession {
   /**
    * A guess from any non-answerer. Accepted when the normalized guess equals
    * the celebrity's full name OR their last name (accents/“the” ignored).
+   * Correct → +1 for the guesser and the round reveals (M17: multi-round).
    */
   submitGuess(
     playerName: string,
@@ -193,21 +215,59 @@ export class GuessWhoSession {
       normalizedGuess === fullName || (lastName.length >= 3 && normalizedGuess === lastName);
     if (correct) {
       this.winnerName = playerName;
-      this.phase = 'game-end';
-      return { ok: true, value: { correct: true, finished: true } };
+      this.scores.set(playerName, (this.scores.get(playerName) ?? 0) + 1);
+      this.phase = 'revealed';
+      return {
+        ok: true,
+        value: { correct: true, finished: this.roundNumber >= this.totalRounds },
+      };
     }
     return { ok: true, value: { correct: false, finished: false } };
   }
 
+  /** M17 — host advances after the reveal: next round or game end. */
+  next(): GuessWhoResult<{ finished: boolean }> {
+    if (this.phase !== 'revealed') {
+      return { ok: false, error: 'WRONG_PHASE' };
+    }
+    if (this.roundNumber >= this.totalRounds) {
+      this.phase = 'game-end';
+      return { ok: true, value: { finished: true } };
+    }
+    this.beginRound();
+    return { ok: true, value: { finished: false } };
+  }
+
   endPayload(): unknown {
+    const top = this.scoreTable[0];
     return {
       kind: 'guess-who',
       celebrity: this.celebrity
         ? { name: this.celebrity.name, famousFor: this.celebrity.famousFor }
         : null,
       questionsAsked: this.questionCount,
-      winner: this.winnerName,
+      winner: top && top.score > 0 ? top.playerName : null,
+      scores: this.scoreTable,
+      rounds: this.roundNumber,
     };
+  }
+
+  private beginRound(): void {
+    this.roundNumber += 1;
+    // M17 — the answerer rotates each round (pass-the-phone fairness).
+    if (this.players.length > 0) {
+      const index = (this.roundNumber - 1) % this.players.length;
+      this.answererName = this.players[index]!.name;
+    }
+    this.questions = [];
+    this.winnerName = null;
+    const celebrity = this.celebrities[this.randomIntFn(this.celebrities.length)];
+    if (!celebrity) {
+      this.phase = 'game-end';
+      return;
+    }
+    this.celebrity = celebrity;
+    this.phase = 'questioning';
   }
 }
 

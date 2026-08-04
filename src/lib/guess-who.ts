@@ -1,10 +1,12 @@
 /**
- * Client-side Guess Who state (M9) — pure reducer over the server's
+ * Client-side Guess Who state (M9/M17) — pure reducer over the server's
  * guess-who events. The secret celebrity only ever arrives on the
- * ANSWERER's device (D023); everyone else sees the question log.
+ * ANSWERER's device (D023); everyone else sees the question log. M17 adds
+ * multi-round play: 5 rounds, rotating answerer, +1 per correct guess,
+ * celebrity facts revealed between rounds.
  */
 
-export type GuessWhoView = 'questioning' | 'game-end';
+export type GuessWhoView = 'questioning' | 'revealed' | 'game-end';
 
 export interface CelebrityView {
   name: string;
@@ -15,6 +17,8 @@ export interface CelebrityView {
   ageRange: string;
   hairColor: string;
   famousFor: string;
+  /** M17 — fun facts revealed after the round. */
+  facts: string[];
 }
 
 export interface QuestionEntry {
@@ -22,6 +26,11 @@ export interface QuestionEntry {
   question: string;
   answer: boolean | null;
   at: number;
+}
+
+export interface GuessWhoScoreRow {
+  playerName: string;
+  score: number;
 }
 
 export interface GuessWhoGameState {
@@ -33,9 +42,15 @@ export interface GuessWhoGameState {
   questions: QuestionEntry[];
   questionCount: number;
   maxQuestions: number;
-  /** Revealed at game end for everyone. */
-  revealed: { name: string; famousFor: string } | null;
+  round: number;
+  totalRounds: number;
+  /** Running scores (+1 per correct guess). */
+  scores: GuessWhoScoreRow[];
+  /** Revealed after each round (celebrity + facts) for everyone. */
+  revealed: { name: string; famousFor: string; facts: string[] } | null;
   winner: string | null;
+  /** True when the reveal was the final round (host sees final results). */
+  revealFinished: boolean;
   feedback: string | null;
 }
 
@@ -48,8 +63,12 @@ export function initialGuessWhoState(): GuessWhoGameState {
     questions: [],
     questionCount: 0,
     maxQuestions: 20,
+    round: 0,
+    totalRounds: 5,
+    scores: [],
     revealed: null,
     winner: null,
+    revealFinished: false,
     feedback: null,
   };
 }
@@ -65,6 +84,9 @@ export type GuessWhoAction =
         answerer: string;
         questionCount: number;
         maxQuestions: number;
+        round: number;
+        totalRounds: number;
+        scores: GuessWhoScoreRow[];
         celebrity?: CelebrityView;
       };
     }
@@ -74,6 +96,17 @@ export type GuessWhoAction =
         questions: QuestionEntry[];
         questionCount: number;
         maxQuestions: number;
+        finished: boolean;
+      };
+    }
+  | {
+      type: 'reveal';
+      payload: {
+        celebrity: { name: string; famousFor: string; facts: string[] } | null;
+        winner: string | null;
+        scores: GuessWhoScoreRow[];
+        round: number;
+        totalRounds: number;
         finished: boolean;
       };
     }
@@ -89,6 +122,9 @@ export type GuessWhoAction =
         maxQuestions: number;
         questions: QuestionEntry[];
         winner: string | null;
+        round: number;
+        totalRounds: number;
+        scores: GuessWhoScoreRow[];
         celebrity: CelebrityView | null;
       };
     };
@@ -113,6 +149,9 @@ export function guessWhoReducer(
         celebrity: payload.celebrity ?? null,
         questionCount: payload.questionCount,
         maxQuestions: payload.maxQuestions,
+        round: payload.round,
+        totalRounds: payload.totalRounds,
+        scores: payload.scores,
       };
     }
     case 'questions-updated':
@@ -122,13 +161,29 @@ export function guessWhoReducer(
         questionCount: action.payload.questionCount,
         maxQuestions: action.payload.maxQuestions,
       };
+    case 'reveal':
+      return {
+        ...state,
+        view: 'revealed',
+        revealed: action.payload.celebrity,
+        winner: action.payload.winner,
+        scores: action.payload.scores,
+        round: action.payload.round,
+        totalRounds: action.payload.totalRounds,
+        revealFinished: action.payload.finished === true,
+        feedback: null,
+      };
     case 'game-end': {
       const celebrity = action.payload.celebrity as { name: string; famousFor: string } | undefined;
+      const scores = Array.isArray(action.payload.scores)
+        ? (action.payload.scores as GuessWhoScoreRow[])
+        : state.scores;
       return {
         ...state,
         view: 'game-end',
-        revealed: celebrity ?? null,
+        revealed: celebrity ? { ...celebrity, facts: [] } : state.revealed,
         winner: typeof action.payload.winner === 'string' ? action.payload.winner : null,
+        scores,
       };
     }
     case 'feedback':
@@ -143,6 +198,9 @@ export function guessWhoReducer(
         questions: action.state.questions,
         questionCount: action.state.questionCount,
         maxQuestions: action.state.maxQuestions,
+        round: action.state.round,
+        totalRounds: action.state.totalRounds,
+        scores: action.state.scores,
         winner: action.state.winner,
       };
     default:

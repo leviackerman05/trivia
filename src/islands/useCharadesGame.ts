@@ -174,6 +174,11 @@ export function useCharadesGame(roomCode: string | null, myName: string | null):
         roomCode: code,
         category,
       });
+      if (response.ok) {
+        // M17 — the toggle must reflect the choice immediately (the server
+        // only sends the category again when the game starts).
+        dispatch({ type: 'category-change', category });
+      }
       return { ok: response.ok, error: response.error };
     },
     [emitAck]

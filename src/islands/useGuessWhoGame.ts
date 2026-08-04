@@ -7,10 +7,11 @@ import {
   initialGuessWhoState,
   type CelebrityView,
   type GuessWhoGameState,
+  type GuessWhoScoreRow,
   type QuestionEntry,
 } from '../lib/guess-who';
 
-/** Guess Who session hook (M9) — room events + actions over guessWhoReducer. */
+/** Guess Who session hook (M9/M17) — room events + actions over guessWhoReducer. */
 
 export interface UseGuessWhoGame {
   game: GuessWhoGameState;
@@ -18,6 +19,7 @@ export interface UseGuessWhoGame {
     askQuestion: (text: string) => Promise<{ ok: boolean; error?: string }>;
     answerYesNo: (yes: boolean) => Promise<{ ok: boolean; error?: string }>;
     submitGuess: (text: string) => Promise<{ ok: boolean; error?: string }>;
+    nextCelebrity: () => Promise<{ ok: boolean; error?: string }>;
     restartGame: () => Promise<{ ok: boolean; error?: string }>;
   };
 }
@@ -33,6 +35,9 @@ interface AckResponse {
     maxQuestions: number;
     questions: QuestionEntry[];
     winner: string | null;
+    round: number;
+    totalRounds: number;
+    scores: GuessWhoScoreRow[];
     celebrity: CelebrityView | null;
   };
 }
@@ -87,6 +92,9 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
       answerer?: string;
       questionCount?: number;
       maxQuestions?: number;
+      round?: number;
+      totalRounds?: number;
+      scores?: GuessWhoScoreRow[];
       celebrity?: CelebrityView;
     }) => {
       if (payload.kind !== 'guess-who' || payload.phase !== 'questioning') {
@@ -101,6 +109,9 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
           answerer: payload.answerer ?? '',
           questionCount: payload.questionCount ?? 0,
           maxQuestions: payload.maxQuestions ?? 20,
+          round: payload.round ?? 1,
+          totalRounds: payload.totalRounds ?? 5,
+          scores: Array.isArray(payload.scores) ? payload.scores : [],
           celebrity: payload.celebrity,
         },
       });
@@ -124,6 +135,30 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
         });
       }
     };
+    const onGuessReveal = (payload: {
+      kind?: string;
+      celebrity?: { name: string; famousFor: string; facts: string[] } | null;
+      winner?: string | null;
+      scores?: GuessWhoScoreRow[];
+      round?: number;
+      totalRounds?: number;
+      finished?: boolean;
+    }) => {
+      if (payload.kind !== 'guess-who') {
+        return;
+      }
+      dispatch({
+        type: 'reveal',
+        payload: {
+          celebrity: payload.celebrity ?? null,
+          winner: payload.winner ?? null,
+          scores: Array.isArray(payload.scores) ? payload.scores : [],
+          round: payload.round ?? 1,
+          totalRounds: payload.totalRounds ?? 5,
+          finished: payload.finished === true,
+        },
+      });
+    };
     const onGameEnd = (payload: Record<string, unknown>) => {
       if (payload.kind === 'guess-who') {
         dispatch({ type: 'game-end', payload });
@@ -137,6 +172,7 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
     socket.on('connect', onConnect);
     socket.on(ServerEvents.roundStart, onRoundStart);
     socket.on(ServerEvents.roundReveal, onQuestions);
+    socket.on(ServerEvents.guessReveal, onGuessReveal);
     socket.on(ServerEvents.gameEnd, onGameEnd);
     socket.on(ServerEvents.gameRestart, onGameRestart);
 
@@ -146,6 +182,7 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
       socket.off('connect', onConnect);
       socket.off(ServerEvents.roundStart, onRoundStart);
       socket.off(ServerEvents.roundReveal, onQuestions);
+      socket.off(ServerEvents.guessReveal, onGuessReveal);
       socket.off(ServerEvents.gameEnd, onGameEnd);
       socket.off(ServerEvents.gameRestart, onGameRestart);
       socketRef.current = null;
@@ -194,6 +231,15 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
     [emitAck]
   );
 
+  const nextCelebrity = useCallback(async () => {
+    const code = roomCodeRef.current;
+    if (!code) {
+      return { ok: false, error: 'NOT_IN_ROOM' };
+    }
+    const response = await emitAck(ClientEvents.guessWhoNext, { roomCode: code });
+    return { ok: response.ok, error: response.error };
+  }, [emitAck]);
+
   const restartGame = useCallback(async () => {
     const code = roomCodeRef.current;
     if (!code) {
@@ -203,5 +249,8 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
     return { ok: response.ok, error: response.error };
   }, [emitAck]);
 
-  return { game, actions: { askQuestion, answerYesNo, submitGuess, restartGame } };
+  return {
+    game,
+    actions: { askQuestion, answerYesNo, submitGuess, nextCelebrity, restartGame },
+  };
 }

@@ -71,9 +71,10 @@ const celebrity = {
   ageRange: '40s',
   hairColor: 'blonde',
   famousFor: 'Lemonade',
+  facts: ['Won 32 Grammys', 'Headlined Coachella 2018'],
 };
 
-describe('guessWhoReducer (PRD §5.17)', () => {
+describe('guessWhoReducer (PRD §5.17, M17)', () => {
   it('round-start gives the answerer the secret and everyone the log', () => {
     const answerer = guessWhoReducer(guessWhoWith(), {
       type: 'round-start',
@@ -84,6 +85,9 @@ describe('guessWhoReducer (PRD §5.17)', () => {
         answerer: 'Me',
         questionCount: 0,
         maxQuestions: 20,
+        round: 1,
+        totalRounds: 5,
+        scores: [],
         celebrity,
       },
     });
@@ -97,9 +101,14 @@ describe('guessWhoReducer (PRD §5.17)', () => {
         answerer: 'Alice',
         questionCount: 0,
         maxQuestions: 20,
+        round: 2,
+        totalRounds: 5,
+        scores: [{ playerName: 'Bob', score: 1 }],
       },
     });
     expect(questioner.celebrity).toBeNull();
+    expect(questioner.round).toBe(2);
+    expect(questioner.scores[0]?.score).toBe(1);
   });
 
   it('questions-updated grows the log with answers', () => {
@@ -116,6 +125,35 @@ describe('guessWhoReducer (PRD §5.17)', () => {
     expect(state.questionCount).toBe(1);
   });
 
+  it('M17: reveal shows the celebrity, facts, scores, and the next-round flag', () => {
+    const state = guessWhoReducer(guessWhoWith(), {
+      type: 'reveal',
+      payload: {
+        celebrity: { name: 'Beyoncé', famousFor: 'Lemonade', facts: ['Won 32 Grammys'] },
+        winner: 'Bob',
+        scores: [{ playerName: 'Bob', score: 1 }],
+        round: 2,
+        totalRounds: 5,
+        finished: false,
+      },
+    });
+    expect(state.view).toBe('revealed');
+    expect(state.revealed?.facts).toContain('Won 32 Grammys');
+    expect(state.revealFinished).toBe(false);
+    const last = guessWhoReducer(state, {
+      type: 'reveal',
+      payload: {
+        celebrity: { name: 'Beyoncé', famousFor: 'Lemonade', facts: [] },
+        winner: 'Bob',
+        scores: [{ playerName: 'Bob', score: 1 }],
+        round: 5,
+        totalRounds: 5,
+        finished: true,
+      },
+    });
+    expect(last.revealFinished).toBe(true);
+  });
+
   it('game-end reveals the celebrity and winner to everyone', () => {
     const state = guessWhoReducer(guessWhoWith({ questionCount: 5 }), {
       type: 'game-end',
@@ -124,11 +162,13 @@ describe('guessWhoReducer (PRD §5.17)', () => {
         celebrity: { name: 'Beyoncé', famousFor: 'Lemonade' },
         questionsAsked: 5,
         winner: 'Bob',
+        scores: [{ playerName: 'Bob', score: 2 }],
       },
     });
     expect(state.view).toBe('game-end');
     expect(state.revealed?.name).toBe('Beyoncé');
     expect(state.winner).toBe('Bob');
+    expect(state.scores[0]?.score).toBe(2);
   });
 
   it('reset clears the secret', () => {

@@ -12,7 +12,9 @@ const files = [
       /^[a-z' -]+$/.test(e.name) &&
       typeof e.path === 'string' &&
       e.path.startsWith('M') &&
-      e.path.length <= 200,
+      e.path.length <= 400 &&
+      typeof e.genre === 'string' &&
+      ['animals', 'nature', 'food', 'objects', 'places', 'space'].includes(e.genre),
   ],
   [
     'server/src/data/lyrics.json',
@@ -83,7 +85,10 @@ const files = [
       (e.gender === 'm' || e.gender === 'f') &&
       typeof e.alive === 'boolean' &&
       e.profession.length >= 3 &&
-      e.famousFor.length >= 3,
+      e.famousFor.length >= 3 &&
+      Array.isArray(e.facts) &&
+      e.facts.length >= 1 &&
+      e.facts.every((fact) => typeof fact === 'string' && fact.length >= 10),
   ],
 ];
 

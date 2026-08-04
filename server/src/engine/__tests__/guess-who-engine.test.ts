@@ -11,6 +11,7 @@ const CELEBRITIES: Celebrity[] = [
     ageRange: '40s',
     hairColor: 'blonde',
     famousFor: 'Lemonade',
+    facts: ['Won 32 Grammys', 'Headlined Coachella 2018'],
   },
   {
     name: 'Will Smith',
@@ -21,6 +22,7 @@ const CELEBRITIES: Celebrity[] = [
     ageRange: '50s',
     hairColor: 'black',
     famousFor: 'Men in Black',
+    facts: ['First rapper to win a Grammy', 'Starred in The Fresh Prince of Bel-Air'],
   },
   {
     name: 'Marie Curie',
@@ -31,6 +33,10 @@ const CELEBRITIES: Celebrity[] = [
     ageRange: '60s',
     hairColor: 'brown',
     famousFor: 'Radioactivity',
+    facts: [
+      'Only person to win Nobel Prizes in two sciences',
+      'Named an element after her homeland',
+    ],
   },
 ];
 
@@ -38,7 +44,7 @@ function make(random: (max: number) => number = (_max) => 0) {
   return new GuessWhoSession(CELEBRITIES, { randomInt: random });
 }
 
-describe('GuessWhoSession (PRD §5.17)', () => {
+describe('GuessWhoSession (PRD §5.17, M17)', () => {
   it('starts with the host as the answerer holding a secret celebrity', () => {
     const session = make();
     const started = session.start(['Alice', 'Bob'], 'Alice');
@@ -46,6 +52,8 @@ describe('GuessWhoSession (PRD §5.17)', () => {
     expect(session.answerer).toBe('Alice');
     expect(session.secretCelebrity?.name).toBe('Beyoncé');
     expect(session.phaseValue).toBe('questioning');
+    expect(session.totalRoundsValue).toBe(5);
+    expect(session.currentRound).toBe(1);
   });
 
   it('questioners ask, the answerer answers, and the log grows', () => {
@@ -64,22 +72,58 @@ describe('GuessWhoSession (PRD §5.17)', () => {
     expect(session.answerQuestion('Bob', false).ok).toBe(false);
   });
 
-  it('a correct guess ends the round with the guesser as winner (last name ok)', () => {
+  it('M17: a correct guess scores +1, reveals, and advances to the NEXT round', () => {
     const session = make();
     session.start(['Alice', 'Bob'], 'Alice');
     const wrong = session.submitGuess('Bob', 'Rihanna');
     expect(ok2(wrong)).toEqual({ correct: false, finished: false });
     const right = session.submitGuess('Bob', 'Beyoncé');
-    expect(ok2(right)).toEqual({ correct: true, finished: true });
-    expect(session.phaseValue).toBe('game-end');
+    // Round 1 of 5 → the game continues after the reveal.
+    expect(ok2(right)).toEqual({ correct: true, finished: false });
+    expect(session.phaseValue).toBe('revealed');
     expect(session.winnerValue).toBe('Bob');
-    // Last-name matching: Will Smith → "smith" (randomInt 1 → Will Smith).
-    const session2 = make(() => 1);
-    session2.start(['Alice', 'Bob'], 'Alice');
-    expect(ok2(session2.submitGuess('Bob', 'smith')).correct).toBe(true);
+    expect(session.scoreTable[0]).toEqual({ playerName: 'Bob', score: 1 });
+    // The host advances → round 2, answerer rotates to Bob.
+    const advanced = session.next();
+    expect(ok2(advanced).finished).toBe(false);
+    expect(session.phaseValue).toBe('questioning');
+    expect(session.currentRound).toBe(2);
+    expect(session.answerer).toBe('Bob');
+    expect(session.questionCount).toBe(0);
   });
 
-  it('reveals after 20 answered questions', () => {
+  it('M17: five correct guesses finish the game with a winner and scores', () => {
+    const session = make();
+    session.start(['Alice', 'Bob'], 'Alice');
+    let finished = false;
+    // The answerer rotates each round (Alice, Bob, Alice, Bob, Alice), so
+    // the non-answerer guesses: Bob on odd rounds, Alice on even rounds.
+    for (let round = 1; round <= 5; round += 1) {
+      const guesser = round % 2 === 1 ? 'Bob' : 'Alice';
+      const guessed = session.submitGuess(guesser, 'Beyoncé');
+      if (round < 5) {
+        expect(ok2(guessed).finished).toBe(false);
+        session.next();
+      } else {
+        finished = ok2(guessed).finished;
+      }
+    }
+    expect(finished).toBe(true);
+    const payload = session.endPayload() as {
+      kind: string;
+      celebrity: { name: string };
+      winner: string;
+      scores: { playerName: string; score: number }[];
+      rounds: number;
+    };
+    expect(payload.kind).toBe('guess-who');
+    expect(payload.celebrity.name).toBe('Beyoncé');
+    expect(payload.winner).toBe('Bob');
+    expect(payload.scores[0]).toEqual({ playerName: 'Bob', score: 3 });
+    expect(payload.rounds).toBe(5);
+  });
+
+  it('reveals after 20 answered questions on any round (no winner)', () => {
     const session = make();
     session.start(['Alice', 'Bob'], 'Alice');
     let finished = false;
@@ -90,12 +134,13 @@ describe('GuessWhoSession (PRD §5.17)', () => {
         finished = true;
       }
     }
-    expect(finished).toBe(true);
-    expect(session.phaseValue).toBe('game-end');
+    // The cap on round 1 reveals but does NOT finish the game.
+    expect(finished).toBe(false);
+    expect(session.phaseValue).toBe('revealed');
     expect(session.winnerValue).toBeNull();
-    const payload = session.endPayload() as { kind: string; celebrity: { name: string } };
-    expect(payload.kind).toBe('guess-who');
-    expect(payload.celebrity.name).toBe('Beyoncé');
+    const advanced = session.next();
+    expect(ok2(advanced).finished).toBe(false);
+    expect(session.currentRound).toBe(2);
   });
 
   it('rejects the 21st question and solo rooms let the answerer participate', () => {

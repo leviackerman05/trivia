@@ -7,7 +7,8 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "blonde",
-    "famousFor": "Run the World, Lemonade"
+    "famousFor": "Run the World, Lemonade",
+    "facts": ["Won 32 Grammys — the most of any artist", "Headlined Coachella 2018 (Beychella)"]
   },
   {
     "name": "Taylor Swift",
@@ -17,7 +18,11 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "blonde",
-    "famousFor": "Eras Tour, folklore"
+    "famousFor": "Eras Tour, folklore",
+    "facts": [
+      "Won Album of the Year four times",
+      "Her Eras Tour became the highest-grossing tour ever"
+    ]
   },
   {
     "name": "Elon Musk",
@@ -27,7 +32,8 @@
     "nationality": "South African",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Tesla, SpaceX, X"
+    "famousFor": "Tesla, SpaceX, X",
+    "facts": ["Bought Twitter for $44B in 2022", "Founded SpaceX after PayPal was sold"]
   },
   {
     "name": "Albert Einstein",
@@ -37,7 +43,8 @@
     "nationality": "German",
     "ageRange": "70s",
     "hairColor": "white",
-    "famousFor": "Theory of relativity"
+    "famousFor": "Theory of relativity",
+    "facts": ["Won the 1921 Nobel Prize in Physics", "His equation E=mc² was published in 1905"]
   },
   {
     "name": "Marie Curie",
@@ -47,7 +54,11 @@
     "nationality": "Polish",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Radioactivity research"
+    "famousFor": "Radioactivity research",
+    "facts": [
+      "Only person to win Nobel Prizes in two sciences",
+      "Named the element polonium after her homeland"
+    ]
   },
   {
     "name": "Nelson Mandela",
@@ -57,7 +68,11 @@
     "nationality": "South African",
     "ageRange": "90s",
     "hairColor": "gray",
-    "famousFor": "Ending apartheid"
+    "famousFor": "Ending apartheid",
+    "facts": [
+      "Spent 27 years in prison before becoming president",
+      "Won the Nobel Peace Prize in 1993"
+    ]
   },
   {
     "name": "Michael Jackson",
@@ -67,7 +82,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "Thriller"
+    "famousFor": "Thriller",
+    "facts": ["Bought the Beatles’ song catalog in 1985", "Thriller is the best-selling album ever"]
   },
   {
     "name": "Oprah Winfrey",
@@ -77,7 +93,11 @@
     "nationality": "American",
     "ageRange": "70s",
     "hairColor": "black",
-    "famousFor": "The Oprah Winfrey Show"
+    "famousFor": "The Oprah Winfrey Show",
+    "facts": [
+      "Was the first Black woman to own her own production studio",
+      "Hosted The Oprah Winfrey Show for 25 years"
+    ]
   },
   {
     "name": "Barack Obama",
@@ -87,7 +107,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "gray",
-    "famousFor": "44th US president"
+    "famousFor": "44th US president",
+    "facts": ["First Black president of the United States", "Won the Nobel Peace Prize in 2009"]
   },
   {
     "name": "Donald Trump",
@@ -97,7 +118,8 @@
     "nationality": "American",
     "ageRange": "70s",
     "hairColor": "blonde",
-    "famousFor": "45th & 47th US president"
+    "famousFor": "45th & 47th US president",
+    "facts": ["Was a reality TV host on The Apprentice", "Impeached twice — acquitted both times"]
   },
   {
     "name": "Bill Gates",
@@ -107,7 +129,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "gray",
-    "famousFor": "Microsoft"
+    "famousFor": "Microsoft",
+    "facts": ["Co-founded Microsoft at 19", "Left Microsoft to run the Gates Foundation"]
   },
   {
     "name": "Steve Jobs",
@@ -117,7 +140,11 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Apple"
+    "famousFor": "Apple",
+    "facts": [
+      "Co-founded Apple in his parents’ garage",
+      "Was fired from Apple in 1985, then returned in 1997"
+    ]
   },
   {
     "name": "Mark Zuckerberg",
@@ -127,7 +154,8 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "Facebook"
+    "famousFor": "Facebook",
+    "facts": ["Founded Facebook from his dorm room", "Meta owns Instagram and WhatsApp"]
   },
   {
     "name": "Jeff Bezos",
@@ -137,7 +165,11 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "gray",
-    "famousFor": "Amazon"
+    "famousFor": "Amazon",
+    "facts": [
+      "Started Amazon as an online bookstore in 1994",
+      "Founded Blue Origin for space travel"
+    ]
   },
   {
     "name": "Warren Buffett",
@@ -147,7 +179,8 @@
     "nationality": "American",
     "ageRange": "90s",
     "hairColor": "gray",
-    "famousFor": "Berkshire Hathaway"
+    "famousFor": "Berkshire Hathaway",
+    "facts": ["Known as the Oracle of Omaha", "Vowed to give away 99% of his fortune"]
   },
   {
     "name": "Leonardo DiCaprio",
@@ -157,7 +190,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "blonde",
-    "famousFor": "Titanic, The Revenant"
+    "famousFor": "Titanic, The Revenant",
+    "facts": ["Won his first Oscar for The Revenant (2016)", "A passionate climate change activist"]
   },
   {
     "name": "Tom Cruise",
@@ -167,7 +201,11 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Mission: Impossible"
+    "famousFor": "Mission: Impossible",
+    "facts": [
+      "Has done most of his own stunts",
+      "Starred in Top Gun and Mission Impossible franchises"
+    ]
   },
   {
     "name": "Brad Pitt",
@@ -177,7 +215,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "blonde",
-    "famousFor": "Fight Club, Once Upon a Time in Hollywood"
+    "famousFor": "Fight Club, Once Upon a Time in Hollywood",
+    "facts": ["Won an Oscar for producing 12 Years a Slave", "Studied journalism before acting"]
   },
   {
     "name": "Angelina Jolie",
@@ -187,7 +226,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Maleficent, Lara Croft"
+    "famousFor": "Maleficent, Lara Croft",
+    "facts": ["Won an Oscar for Girl, Interrupted", "Served as a UNHCR special envoy"]
   },
   {
     "name": "Jennifer Lawrence",
@@ -197,7 +237,11 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "blonde",
-    "famousFor": "The Hunger Games"
+    "famousFor": "The Hunger Games",
+    "facts": [
+      "Won an Oscar for Silver Linings Playbook",
+      "Was the highest-paid actress in 2015 and 2016"
+    ]
   },
   {
     "name": "Scarlett Johansson",
@@ -207,7 +251,11 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "blonde",
-    "famousFor": "Black Widow"
+    "famousFor": "Black Widow",
+    "facts": [
+      "Played Black Widow in nine Marvel films",
+      "Was the highest-grossing actress of the 2010s"
+    ]
   },
   {
     "name": "Robert Downey Jr.",
@@ -217,7 +265,11 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Iron Man"
+    "famousFor": "Iron Man",
+    "facts": [
+      "Was nominated for an Oscar for Chaplin at 27",
+      "Made a comeback as Iron Man after legal troubles"
+    ]
   },
   {
     "name": "Chris Hemsworth",
@@ -227,7 +279,11 @@
     "nationality": "Australian",
     "ageRange": "40s",
     "hairColor": "blonde",
-    "famousFor": "Thor"
+    "famousFor": "Thor",
+    "facts": [
+      "Played Thor in the Marvel Cinematic Universe",
+      "Is a former soap opera star from Australia"
+    ]
   },
   {
     "name": "Dwayne Johnson",
@@ -237,7 +293,11 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "Jumanji, WWE"
+    "famousFor": "Jumanji, WWE",
+    "facts": [
+      "Was a WWE wrestler (The Rock) before acting",
+      "Once the highest-paid actor in the world"
+    ]
   },
   {
     "name": "Will Smith",
@@ -247,7 +307,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "The Fresh Prince, Men in Black"
+    "famousFor": "The Fresh Prince, Men in Black",
+    "facts": ["First rapper to win a Grammy", "Starred in The Fresh Prince of Bel-Air"]
   },
   {
     "name": "Shah Rukh Khan",
@@ -257,7 +318,8 @@
     "nationality": "Indian",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "King of Bollywood"
+    "famousFor": "King of Bollywood",
+    "facts": ["Known as the King of Bollywood", "Owns the Kolkata Knight Riders IPL team"]
   },
   {
     "name": "Aamir Khan",
@@ -267,7 +329,11 @@
     "nationality": "Indian",
     "ageRange": "60s",
     "hairColor": "black",
-    "famousFor": "Dangal, 3 Idiots"
+    "famousFor": "Dangal, 3 Idiots",
+    "facts": [
+      "His film Dangal grossed over $300M in China",
+      "Known for his perfectionism and method acting"
+    ]
   },
   {
     "name": "Salman Khan",
@@ -277,7 +343,8 @@
     "nationality": "Indian",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "Dabangg"
+    "famousFor": "Dabangg",
+    "facts": ["Hosts the reality show Bigg Boss", "His film Sultan was a massive box office hit"]
   },
   {
     "name": "Priyanka Chopra",
@@ -287,7 +354,8 @@
     "nationality": "Indian",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "Quantico, Bajirao Mastani"
+    "famousFor": "Quantico, Bajirao Mastani",
+    "facts": ["Was crowned Miss World in 2000", "Married singer Nick Jonas in 2018"]
   },
   {
     "name": "Deepika Padukone",
@@ -297,7 +365,8 @@
     "nationality": "Indian",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Padmaavat"
+    "famousFor": "Padmaavat",
+    "facts": ["Was a badminton player before acting", "One of the highest-paid actresses in India"]
   },
   {
     "name": "Alia Bhatt",
@@ -307,7 +376,11 @@
     "nationality": "Indian",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Gangubai Kathiawadi"
+    "famousFor": "Gangubai Kathiawadi",
+    "facts": [
+      "Made her debut in Student of the Year (2012)",
+      "Founded the eco-friendly brand Ed-a-Mamma"
+    ]
   },
   {
     "name": "Ranbir Kapoor",
@@ -317,7 +390,11 @@
     "nationality": "Indian",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "Animal"
+    "famousFor": "Animal",
+    "facts": [
+      "Comes from the famous Kapoor acting family",
+      "Won the Filmfare Best Actor award for Barfi!"
+    ]
   },
   {
     "name": "Virat Kohli",
@@ -327,7 +404,8 @@
     "nationality": "Indian",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Indian cricket captain"
+    "famousFor": "Indian cricket captain",
+    "facts": ["Scored 50+ international centuries", "Married actress Anushka Sharma in 2017"]
   },
   {
     "name": "MS Dhoni",
@@ -337,7 +415,11 @@
     "nationality": "Indian",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "World Cup 2011 win"
+    "famousFor": "World Cup 2011 win",
+    "facts": [
+      "Captained India to the 2011 World Cup win",
+      "Famous for his helicopter shot and calm demeanor"
+    ]
   },
   {
     "name": "Sachin Tendulkar",
@@ -347,7 +429,11 @@
     "nationality": "Indian",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "100 international centuries"
+    "famousFor": "100 international centuries",
+    "facts": [
+      "First batsman to score 100 international centuries",
+      "Was awarded the Bharat Ratna in 2014"
+    ]
   },
   {
     "name": "Ronaldo",
@@ -357,7 +443,8 @@
     "nationality": "Portuguese",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "Five Ballon d’Or awards"
+    "famousFor": "Five Ballon d’Or awards",
+    "facts": ["Won the Ballon d’Or five times", "Famous for his “Siu” celebration"]
   },
   {
     "name": "Lionel Messi",
@@ -367,7 +454,8 @@
     "nationality": "Argentine",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "World Cup 2022 win"
+    "famousFor": "World Cup 2022 win",
+    "facts": ["Won the World Cup in 2022", "Has won eight Ballon d’Or awards — a record"]
   },
   {
     "name": "Neymar",
@@ -377,7 +465,11 @@
     "nationality": "Brazilian",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Samba football"
+    "famousFor": "Samba football",
+    "facts": [
+      "The most expensive transfer in football history ($263M)",
+      "Wears the number 10 for Brazil"
+    ]
   },
   {
     "name": "Serena Williams",
@@ -387,7 +479,8 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "23 Grand Slam titles"
+    "famousFor": "23 Grand Slam titles",
+    "facts": ["Won 23 Grand Slam singles titles", "Has won four Olympic gold medals"]
   },
   {
     "name": "Roger Federer",
@@ -397,7 +490,8 @@
     "nationality": "Swiss",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "20 Grand Slam titles"
+    "famousFor": "20 Grand Slam titles",
+    "facts": ["Won 20 Grand Slam singles titles", "Known for his elegance on the court"]
   },
   {
     "name": "Rafael Nadal",
@@ -407,7 +501,8 @@
     "nationality": "Spanish",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "Clay-court king"
+    "famousFor": "Clay-court king",
+    "facts": ["Won the French Open a record 14 times", "Known as the King of Clay"]
   },
   {
     "name": "Michael Jordan",
@@ -417,7 +512,11 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "black",
-    "famousFor": "Six NBA titles"
+    "famousFor": "Six NBA titles",
+    "facts": [
+      "Won six NBA championships with the Bulls",
+      "His Air Jordan brand is a billion-dollar business"
+    ]
   },
   {
     "name": "LeBron James",
@@ -427,7 +526,11 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "NBA all-time scorer"
+    "famousFor": "NBA all-time scorer",
+    "facts": [
+      "All-time leading scorer in NBA history",
+      "Won four NBA championships with three teams"
+    ]
   },
   {
     "name": "Usain Bolt",
@@ -437,7 +540,11 @@
     "nationality": "Jamaican",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "World-record 100m"
+    "famousFor": "World-record 100m",
+    "facts": [
+      "Holds world records in 100m and 200m",
+      "Once ate 1,000 chicken nuggets at the Olympics"
+    ]
   },
   {
     "name": "Simone Biles",
@@ -447,7 +554,11 @@
     "nationality": "American",
     "ageRange": "20s",
     "hairColor": "black",
-    "famousFor": "Most decorated gymnast"
+    "famousFor": "Most decorated gymnast",
+    "facts": [
+      "Has 11 Olympic medals and 30 world medals",
+      "Named her floor routine moves after herself"
+    ]
   },
   {
     "name": "Marilyn Monroe",
@@ -457,7 +568,11 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "blonde",
-    "famousFor": "Hollywood icon"
+    "famousFor": "Hollywood icon",
+    "facts": [
+      "Became a star after modeling for calendars",
+      "Her dress from “The Seven Year Itch” sold for $4.6M"
+    ]
   },
   {
     "name": "Elvis Presley",
@@ -467,7 +582,8 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "King of Rock and Roll"
+    "famousFor": "King of Rock and Roll",
+    "facts": ["Known as the King of Rock and Roll", "Had 18 No. 1 hits in the US"]
   },
   {
     "name": "John Lennon",
@@ -477,7 +593,8 @@
     "nationality": "British",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "The Beatles"
+    "famousFor": "The Beatles",
+    "facts": ["Was a founding member of The Beatles", "Wrote “Imagine” in 1971"]
   },
   {
     "name": "Freddie Mercury",
@@ -487,7 +604,8 @@
     "nationality": "British",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "Queen"
+    "famousFor": "Queen",
+    "facts": ["Had a four-octave vocal range", "Wrote “Bohemian Rhapsody” in his bedroom"]
   },
   {
     "name": "David Bowie",
@@ -497,7 +615,8 @@
     "nationality": "British",
     "ageRange": "60s",
     "hairColor": "red",
-    "famousFor": "Ziggy Stardust"
+    "famousFor": "Ziggy Stardust",
+    "facts": ["Created the alter ego Ziggy Stardust", "His song “Space Oddity” was played in space"]
   },
   {
     "name": "Whitney Houston",
@@ -507,7 +626,11 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "I Will Always Love You"
+    "famousFor": "I Will Always Love You",
+    "facts": [
+      "Won 6 Grammys and 22 American Music Awards",
+      "Her cover of “I Will Always Love You” is legendary"
+    ]
   },
   {
     "name": "Princess Diana",
@@ -517,7 +640,8 @@
     "nationality": "British",
     "ageRange": "30s",
     "hairColor": "blonde",
-    "famousFor": "The People’s Princess"
+    "famousFor": "The People’s Princess",
+    "facts": ["Known as the People’s Princess", "Championed landmine and AIDS causes"]
   },
   {
     "name": "Queen Elizabeth II",
@@ -527,7 +651,11 @@
     "nationality": "British",
     "ageRange": "90s",
     "hairColor": "white",
-    "famousFor": "Longest-reigning monarch"
+    "famousFor": "Longest-reigning monarch",
+    "facts": [
+      "Reigned for 70 years — the longest in British history",
+      "Met 13 of the 14 most recent US presidents"
+    ]
   },
   {
     "name": "Winston Churchill",
@@ -537,7 +665,8 @@
     "nationality": "British",
     "ageRange": "80s",
     "hairColor": "gray",
-    "famousFor": "WWII UK prime minister"
+    "famousFor": "WWII UK prime minister",
+    "facts": ["Led Britain through World War II", "Won the Nobel Prize in Literature"]
   },
   {
     "name": "Mahatma Gandhi",
@@ -547,7 +676,11 @@
     "nationality": "Indian",
     "ageRange": "70s",
     "hairColor": "gray",
-    "famousFor": "Indian independence"
+    "famousFor": "Indian independence",
+    "facts": [
+      "Led India’s independence through nonviolence",
+      "His birthday is celebrated as the International Day of Non-Violence"
+    ]
   },
   {
     "name": "Mother Teresa",
@@ -557,7 +690,11 @@
     "nationality": "Albanian",
     "ageRange": "80s",
     "hairColor": "white",
-    "famousFor": "Charity work in Kolkata"
+    "famousFor": "Charity work in Kolkata",
+    "facts": [
+      "Won the Nobel Peace Prize in 1979",
+      "Founded the Missionaries of Charity in Calcutta"
+    ]
   },
   {
     "name": "Martin Luther King Jr.",
@@ -567,7 +704,8 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Civil rights movement"
+    "famousFor": "Civil rights movement",
+    "facts": ["Gave the “I Have a Dream” speech in 1963", "Won the Nobel Peace Prize in 1964"]
   },
   {
     "name": "Rosa Parks",
@@ -577,7 +715,11 @@
     "nationality": "American",
     "ageRange": "90s",
     "hairColor": "gray",
-    "famousFor": "Montgomery bus boycott"
+    "famousFor": "Montgomery bus boycott",
+    "facts": [
+      "Her refusal to give up a bus seat sparked the Montgomery boycott",
+      "Worked as a seamstress and NAACP secretary"
+    ]
   },
   {
     "name": "Abraham Lincoln",
@@ -587,7 +729,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Ending slavery in the US"
+    "famousFor": "Ending slavery in the US",
+    "facts": ["Issued the Emancipation Proclamation", "Was the tallest US president at 6 ft 4 in"]
   },
   {
     "name": "George Washington",
@@ -597,7 +740,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "white",
-    "famousFor": "First US president"
+    "famousFor": "First US president",
+    "facts": ["Was the first US president", "Never lived in the White House"]
   },
   {
     "name": "Napoleon Bonaparte",
@@ -607,7 +751,8 @@
     "nationality": "French",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "French emperor"
+    "famousFor": "French emperor",
+    "facts": ["Crowned himself emperor of France", "Was exiled to the island of Elba"]
   },
   {
     "name": "Julius Caesar",
@@ -617,7 +762,8 @@
     "nationality": "Roman",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Roman dictator"
+    "famousFor": "Roman dictator",
+    "facts": ["Was assassinated on the Ides of March", "Wrote about his own military campaigns"]
   },
   {
     "name": "Cleopatra",
@@ -627,7 +773,8 @@
     "nationality": "Egyptian",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Last pharaoh of Egypt"
+    "famousFor": "Last pharaoh of Egypt",
+    "facts": ["Was the last active pharaoh of Egypt", "Could reportedly speak several languages"]
   },
   {
     "name": "William Shakespeare",
@@ -637,7 +784,8 @@
     "nationality": "British",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Romeo and Juliet"
+    "famousFor": "Romeo and Juliet",
+    "facts": ["Wrote 37 plays and 154 sonnets", "Invented words like “bedazzled” and “lonely”"]
   },
   {
     "name": "Charles Dickens",
@@ -647,7 +795,11 @@
     "nationality": "British",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "A Christmas Carol"
+    "famousFor": "A Christmas Carol",
+    "facts": [
+      "Wrote A Christmas Carol and Oliver Twist",
+      "His novels were often published in serial installments"
+    ]
   },
   {
     "name": "Jane Austen",
@@ -657,7 +809,11 @@
     "nationality": "British",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "Pride and Prejudice"
+    "famousFor": "Pride and Prejudice",
+    "facts": [
+      "Wrote Pride and Prejudice and Emma",
+      "Her books were published anonymously during her life"
+    ]
   },
   {
     "name": "J.K. Rowling",
@@ -667,7 +823,11 @@
     "nationality": "British",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Harry Potter"
+    "famousFor": "Harry Potter",
+    "facts": [
+      "The Harry Potter books sold over 500 million copies",
+      "Wrote the first book in a café in Edinburgh"
+    ]
   },
   {
     "name": "Stephen King",
@@ -677,7 +837,8 @@
     "nationality": "American",
     "ageRange": "70s",
     "hairColor": "gray",
-    "famousFor": "The Shining, It"
+    "famousFor": "The Shining, It",
+    "facts": ["Has published over 60 novels", "His books have sold over 350 million copies"]
   },
   {
     "name": "Agatha Christie",
@@ -687,7 +848,8 @@
     "nationality": "British",
     "ageRange": "80s",
     "hairColor": "gray",
-    "famousFor": "Murder on the Orient Express"
+    "famousFor": "Murder on the Orient Express",
+    "facts": ["Wrote 66 detective novels", "Her play The Mousetrap ran for decades in London"]
   },
   {
     "name": "Pablo Picasso",
@@ -697,7 +859,8 @@
     "nationality": "Spanish",
     "ageRange": "90s",
     "hairColor": "gray",
-    "famousFor": "Cubism"
+    "famousFor": "Cubism",
+    "facts": ["Co-founded the Cubism movement", "Created over 20,000 artworks"]
   },
   {
     "name": "Vincent van Gogh",
@@ -707,7 +870,8 @@
     "nationality": "Dutch",
     "ageRange": "30s",
     "hairColor": "red",
-    "famousFor": "Starry Night"
+    "famousFor": "Starry Night",
+    "facts": ["Sold only one painting in his lifetime", "His Starry Night was painted from memory"]
   },
   {
     "name": "Leonardo da Vinci",
@@ -717,7 +881,8 @@
     "nationality": "Italian",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Mona Lisa"
+    "famousFor": "Mona Lisa",
+    "facts": ["Painted the Mona Lisa", "Was also an inventor and anatomist"]
   },
   {
     "name": "Frida Kahlo",
@@ -727,7 +892,8 @@
     "nationality": "Mexican",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "Self-portraits"
+    "famousFor": "Self-portraits",
+    "facts": ["Known for her self-portraits", "Was married to painter Diego Rivera"]
   },
   {
     "name": "Salvador Dalí",
@@ -737,7 +903,8 @@
     "nationality": "Spanish",
     "ageRange": "80s",
     "hairColor": "black",
-    "famousFor": "Surrealism"
+    "famousFor": "Surrealism",
+    "facts": ["Famous for his melting clocks painting", "Had a pet ocelot named Babou"]
   },
   {
     "name": "Michelangelo",
@@ -747,7 +914,11 @@
     "nationality": "Italian",
     "ageRange": "80s",
     "hairColor": "brown",
-    "famousFor": "Sistine Chapel"
+    "famousFor": "Sistine Chapel",
+    "facts": [
+      "Sculpted David and painted the Sistine Chapel ceiling",
+      "Lived to be 88 in the 1500s"
+    ]
   },
   {
     "name": "Mozart",
@@ -757,7 +928,8 @@
     "nationality": "Austrian",
     "ageRange": "30s",
     "hairColor": "blonde",
-    "famousFor": "Classical music"
+    "famousFor": "Classical music",
+    "facts": ["Began composing at age 5", "Wrote over 600 works before dying at 35"]
   },
   {
     "name": "Beethoven",
@@ -767,7 +939,11 @@
     "nationality": "German",
     "ageRange": "50s",
     "hairColor": "gray",
-    "famousFor": "Symphony No. 5"
+    "famousFor": "Symphony No. 5",
+    "facts": [
+      "Composed his Ninth Symphony while completely deaf",
+      "His Fifth Symphony opens with the famous “da-da-da-dum”"
+    ]
   },
   {
     "name": "Bach",
@@ -777,7 +953,8 @@
     "nationality": "German",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Baroque music"
+    "famousFor": "Baroque music",
+    "facts": ["Had 20 children", "Wrote the Brandenburg Concertos"]
   },
   {
     "name": "Charlie Chaplin",
@@ -787,7 +964,8 @@
     "nationality": "British",
     "ageRange": "80s",
     "hairColor": "brown",
-    "famousFor": "The Tramp"
+    "famousFor": "The Tramp",
+    "facts": ["Was a star of silent films", "Co-founded United Artists studio"]
   },
   {
     "name": "Alfred Hitchcock",
@@ -797,7 +975,8 @@
     "nationality": "British",
     "ageRange": "80s",
     "hairColor": "gray",
-    "famousFor": "Psycho"
+    "famousFor": "Psycho",
+    "facts": ["Known as the Master of Suspense", "Made cameo appearances in all his films"]
   },
   {
     "name": "Steven Spielberg",
@@ -807,7 +986,11 @@
     "nationality": "American",
     "ageRange": "70s",
     "hairColor": "brown",
-    "famousFor": "Jaws, E.T., Jurassic Park"
+    "famousFor": "Jaws, E.T., Jurassic Park",
+    "facts": [
+      "Directed Jaws, E.T., and Jurassic Park",
+      "Won three Oscars including Best Director twice"
+    ]
   },
   {
     "name": "Christopher Nolan",
@@ -817,7 +1000,11 @@
     "nationality": "British",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Inception, Dark Knight"
+    "famousFor": "Inception, Dark Knight",
+    "facts": [
+      "Directed Inception, Interstellar, and Oppenheimer",
+      "Famous for practical effects and IMAX cameras"
+    ]
   },
   {
     "name": "Martin Scorsese",
@@ -827,7 +1014,8 @@
     "nationality": "American",
     "ageRange": "80s",
     "hairColor": "gray",
-    "famousFor": "Goodfellas, Taxi Driver"
+    "famousFor": "Goodfellas, Taxi Driver",
+    "facts": ["Directed Taxi Driver and Goodfellas", "His film The Irishman was 3.5 hours long"]
   },
   {
     "name": "Quentin Tarantino",
@@ -837,7 +1025,11 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Pulp Fiction"
+    "famousFor": "Pulp Fiction",
+    "facts": [
+      "His films are known for non-linear storytelling",
+      "Wrote Pulp Fiction in an Amsterdam apartment"
+    ]
   },
   {
     "name": "Stanley Kubrick",
@@ -847,7 +1039,8 @@
     "nationality": "American",
     "ageRange": "70s",
     "hairColor": "brown",
-    "famousFor": "2001: A Space Odyssey"
+    "famousFor": "2001: A Space Odyssey",
+    "facts": ["Directed 2001: A Space Odyssey", "Was a chess player and photographer before film"]
   },
   {
     "name": "Walt Disney",
@@ -857,7 +1050,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Disney empire"
+    "famousFor": "Disney empire",
+    "facts": ["Created Mickey Mouse in 1928", "Won 22 Academy Awards"]
   },
   {
     "name": "Jimmy Carter",
@@ -867,7 +1061,11 @@
     "nationality": "American",
     "ageRange": "90s",
     "hairColor": "white",
-    "famousFor": "39th US president"
+    "famousFor": "39th US president",
+    "facts": [
+      "Lived to be 100 — the longest-lived US president",
+      "Won the Nobel Peace Prize in 2002"
+    ]
   },
   {
     "name": "Joe Biden",
@@ -877,7 +1075,8 @@
     "nationality": "American",
     "ageRange": "80s",
     "hairColor": "white",
-    "famousFor": "46th US president"
+    "famousFor": "46th US president",
+    "facts": ["Is the 46th US president", "Was a senator for 36 years"]
   },
   {
     "name": "Kamala Harris",
@@ -887,7 +1086,11 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "black",
-    "famousFor": "US vice president"
+    "famousFor": "US vice president",
+    "facts": [
+      "Was the first female US vice president",
+      "Was California’s attorney general before that"
+    ]
   },
   {
     "name": "Justin Bieber",
@@ -897,7 +1100,8 @@
     "nationality": "Canadian",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "Baby, Sorry"
+    "famousFor": "Baby, Sorry",
+    "facts": ["Was discovered on YouTube at 13", "His song “Baby” was a global hit in 2010"]
   },
   {
     "name": "Drake",
@@ -907,7 +1111,11 @@
     "nationality": "Canadian",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "God’s Plan"
+    "famousFor": "God’s Plan",
+    "facts": [
+      "Holds records for most Billboard Hot 100 entries",
+      "Started acting on Degrassi as a teen"
+    ]
   },
   {
     "name": "Kanye West",
@@ -917,7 +1125,11 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "Graduation, Yeezy"
+    "famousFor": "Graduation, Yeezy",
+    "facts": [
+      "His album My Beautiful Dark Twisted Fantasy is critically acclaimed",
+      "Founded the Yeezy fashion brand"
+    ]
   },
   {
     "name": "Jay-Z",
@@ -927,7 +1139,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "Empire State of Mind"
+    "famousFor": "Empire State of Mind",
+    "facts": ["Was the first billionaire rapper", "Married Beyoncé in 2008"]
   },
   {
     "name": "Rihanna",
@@ -937,7 +1150,8 @@
     "nationality": "Barbadian",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Umbrella, Fenty"
+    "famousFor": "Umbrella, Fenty",
+    "facts": ["Won nine Grammys and launched Fenty Beauty", "Is a billionaire from her businesses"]
   },
   {
     "name": "Adele",
@@ -947,7 +1161,11 @@
     "nationality": "British",
     "ageRange": "30s",
     "hairColor": "blonde",
-    "famousFor": "Someone Like You"
+    "famousFor": "Someone Like You",
+    "facts": [
+      "Won Album of the Year twice — for 21 and 25",
+      "Her song “Hello” broke streaming records"
+    ]
   },
   {
     "name": "Ed Sheeran",
@@ -957,7 +1175,8 @@
     "nationality": "British",
     "ageRange": "30s",
     "hairColor": "red",
-    "famousFor": "Shape of You"
+    "famousFor": "Shape of You",
+    "facts": ["Wrote “Shape of You” in a few hours", "Has played to over 10 million fans on tour"]
   },
   {
     "name": "Lady Gaga",
@@ -967,7 +1186,8 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "blonde",
-    "famousFor": "Poker Face, A Star Is Born"
+    "famousFor": "Poker Face, A Star Is Born",
+    "facts": ["Won an Oscar for “Shallow”", "Won a Grammy for her jazz album with Tony Bennett"]
   },
   {
     "name": "Madonna",
@@ -977,7 +1197,11 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "blonde",
-    "famousFor": "Queen of Pop"
+    "famousFor": "Queen of Pop",
+    "facts": [
+      "Is the best-selling female artist of all time",
+      "Her “Vogue” music video defined an era"
+    ]
   },
   {
     "name": "Celine Dion",
@@ -987,7 +1211,8 @@
     "nationality": "Canadian",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "My Heart Will Go On"
+    "famousFor": "My Heart Will Go On",
+    "facts": ["Sang “My Heart Will Go On” for Titanic", "Performed in Las Vegas for 16 years"]
   },
   {
     "name": "Ariana Grande",
@@ -997,7 +1222,8 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "Thank U, Next"
+    "famousFor": "Thank U, Next",
+    "facts": ["Has four songs with over a billion streams", "Started on Broadway in 13"]
   },
   {
     "name": "Billie Eilish",
@@ -1007,7 +1233,11 @@
     "nationality": "American",
     "ageRange": "20s",
     "hairColor": "black",
-    "famousFor": "Bad Guy"
+    "famousFor": "Bad Guy",
+    "facts": [
+      "Won Album of the Year at 18 — the youngest ever",
+      "Recorded her debut album in her bedroom"
+    ]
   },
   {
     "name": "Bruno Mars",
@@ -1017,7 +1247,8 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Uptown Funk"
+    "famousFor": "Uptown Funk",
+    "facts": ["Known for hits like “Uptown Funk”", "Won 15 Grammys"]
   },
   {
     "name": "Post Malone",
@@ -1027,7 +1258,11 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "blonde",
-    "famousFor": "Circles"
+    "famousFor": "Circles",
+    "facts": [
+      "His song “Sunflower” was nominated for an Oscar",
+      "Has face tattoos and a passion for Beers"
+    ]
   },
   {
     "name": "The Weeknd",
@@ -1037,7 +1272,11 @@
     "nationality": "Canadian",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Blinding Lights"
+    "famousFor": "Blinding Lights",
+    "facts": [
+      "His song “Blinding Lights” is the most-streamed ever on Spotify",
+      "Performed the Super Bowl halftime show in 2021"
+    ]
   },
   {
     "name": "Harry Styles",
@@ -1047,7 +1286,11 @@
     "nationality": "British",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "As It Was"
+    "famousFor": "As It Was",
+    "facts": [
+      "Was in One Direction before going solo",
+      "Won his first Grammy for “Watermelon Sugar”"
+    ]
   },
   {
     "name": "Shakira",
@@ -1057,7 +1300,8 @@
     "nationality": "Colombian",
     "ageRange": "40s",
     "hairColor": "blonde",
-    "famousFor": "Hips Don’t Lie"
+    "famousFor": "Hips Don’t Lie",
+    "facts": ["Wrote “Waka Waka” for the 2010 World Cup", "Her hips are famously certified"]
   },
   {
     "name": "Jennifer Lopez",
@@ -1067,7 +1311,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "On the Floor"
+    "famousFor": "On the Floor",
+    "facts": ["Was the first Latina to earn $1M for a film", "Performed at three Super Bowls"]
   },
   {
     "name": "Kim Kardashian",
@@ -1077,7 +1322,11 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "Keeping Up with the Kardashians"
+    "famousFor": "Keeping Up with the Kardashians",
+    "facts": [
+      "Her reality show made her a global brand",
+      "Studied law and passed the baby bar exam"
+    ]
   },
   {
     "name": "Kylie Jenner",
@@ -1087,7 +1336,8 @@
     "nationality": "American",
     "ageRange": "20s",
     "hairColor": "brown",
-    "famousFor": "Kylie Cosmetics"
+    "famousFor": "Kylie Cosmetics",
+    "facts": ["Was the youngest self-made billionaire", "Founded Kylie Cosmetics at 19"]
   },
   {
     "name": "Cristiano Ronaldo",
@@ -1097,7 +1347,11 @@
     "nationality": "Portuguese",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "Five Champions Leagues"
+    "famousFor": "Five Champions Leagues",
+    "facts": [
+      "First footballer to score 900+ career goals",
+      "Has the most Instagram followers in the world"
+    ]
   },
   {
     "name": "Kylian Mbappé",
@@ -1107,7 +1361,8 @@
     "nationality": "French",
     "ageRange": "20s",
     "hairColor": "black",
-    "famousFor": "World Cup 2018 win"
+    "famousFor": "World Cup 2018 win",
+    "facts": ["Won the World Cup at 19", "Scored a hat-trick in the 2022 World Cup final"]
   },
   {
     "name": "Erling Haaland",
@@ -1117,7 +1372,11 @@
     "nationality": "Norwegian",
     "ageRange": "20s",
     "hairColor": "blonde",
-    "famousFor": "Goal machine"
+    "famousFor": "Goal machine",
+    "facts": [
+      "Scored 36 Premier League goals in his first season",
+      "Is the son of former footballer Alfie Haaland"
+    ]
   },
   {
     "name": "Zinedine Zidane",
@@ -1127,7 +1386,11 @@
     "nationality": "French",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "1998 World Cup win"
+    "famousFor": "1998 World Cup win",
+    "facts": [
+      "Won the 1998 World Cup with France",
+      "Was named FIFA World Player of the Year three times"
+    ]
   },
   {
     "name": "Diego Maradona",
@@ -1137,7 +1400,8 @@
     "nationality": "Argentine",
     "ageRange": "60s",
     "hairColor": "black",
-    "famousFor": "Hand of God goal"
+    "famousFor": "Hand of God goal",
+    "facts": ["Scored the “Hand of God” goal in 1986", "Won the World Cup with Argentina in 1986"]
   },
   {
     "name": "Pelé",
@@ -1147,7 +1411,8 @@
     "nationality": "Brazilian",
     "ageRange": "80s",
     "hairColor": "black",
-    "famousFor": "Three World Cups"
+    "famousFor": "Three World Cups",
+    "facts": ["Won three World Cups with Brazil", "Scored over 1,000 career goals"]
   },
   {
     "name": "Muhammad Ali",
@@ -1157,7 +1422,8 @@
     "nationality": "American",
     "ageRange": "70s",
     "hairColor": "black",
-    "famousFor": "Float like a butterfly"
+    "famousFor": "Float like a butterfly",
+    "facts": ["Known as “The Greatest”", "Was stripped of his title for refusing the Vietnam draft"]
   },
   {
     "name": "Mike Tyson",
@@ -1167,7 +1433,11 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "Youngest heavyweight champ"
+    "famousFor": "Youngest heavyweight champ",
+    "facts": [
+      "Became the youngest heavyweight champion at 20",
+      "Infamously bit Evander Holyfield’s ear in 1997"
+    ]
   },
   {
     "name": "Conor McGregor",
@@ -1177,7 +1447,11 @@
     "nationality": "Irish",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "UFC double champion"
+    "famousFor": "UFC double champion",
+    "facts": [
+      "Was the first UFC double champion",
+      "Fought Floyd Mayweather in a $100M boxing match"
+    ]
   },
   {
     "name": "Lewis Hamilton",
@@ -1187,7 +1461,8 @@
     "nationality": "British",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "Seven F1 titles"
+    "famousFor": "Seven F1 titles",
+    "facts": ["Won seven Formula 1 championships", "Is the winningest F1 driver of all time"]
   },
   {
     "name": "Max Verstappen",
@@ -1197,7 +1472,11 @@
     "nationality": "Dutch",
     "ageRange": "20s",
     "hairColor": "blonde",
-    "famousFor": "F1 world champion"
+    "famousFor": "F1 world champion",
+    "facts": [
+      "Won four consecutive F1 titles by age 27",
+      "Is the son of former F1 driver Jos Verstappen"
+    ]
   },
   {
     "name": "Valentino Rossi",
@@ -1207,7 +1486,8 @@
     "nationality": "Italian",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "Nine MotoGP titles"
+    "famousFor": "Nine MotoGP titles",
+    "facts": ["Won nine motorcycle racing world championships", "Known as “The Doctor”"]
   },
   {
     "name": "Tiger Woods",
@@ -1217,7 +1497,8 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "15 major titles"
+    "famousFor": "15 major titles",
+    "facts": ["Won 15 major golf championships", "Won the Masters at 21 — the youngest ever"]
   },
   {
     "name": "Novak Djokovic",
@@ -1227,7 +1508,8 @@
     "nationality": "Serbian",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "24 Grand Slam titles"
+    "famousFor": "24 Grand Slam titles",
+    "facts": ["Won 24 Grand Slam singles titles", "Holds the record for most weeks at world No. 1"]
   },
   {
     "name": "Andy Murray",
@@ -1237,7 +1519,8 @@
     "nationality": "British",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "Three Grand Slams"
+    "famousFor": "Three Grand Slams",
+    "facts": ["Won three Grand Slam titles", "Won Olympic gold twice"]
   },
   {
     "name": "Emma Raducanu",
@@ -1247,7 +1530,11 @@
     "nationality": "British",
     "ageRange": "20s",
     "hairColor": "brown",
-    "famousFor": "US Open 2021 win"
+    "famousFor": "US Open 2021 win",
+    "facts": [
+      "Won the US Open in 2021 as a qualifier",
+      "Is the first British woman to win a major since 1977"
+    ]
   },
   {
     "name": "Naomi Osaka",
@@ -1257,7 +1544,8 @@
     "nationality": "Japanese",
     "ageRange": "20s",
     "hairColor": "black",
-    "famousFor": "Four Grand Slams"
+    "famousFor": "Four Grand Slams",
+    "facts": ["Won four Grand Slam titles", "Has spoken out about mental health in sport"]
   },
   {
     "name": "Shaquille O’Neal",
@@ -1267,7 +1555,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "NBA dominance"
+    "famousFor": "NBA dominance",
+    "facts": ["Won four NBA championships", "Is 7 ft 1 in and famously huge"]
   },
   {
     "name": "Kobe Bryant",
@@ -1277,7 +1566,11 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "Five NBA titles"
+    "famousFor": "Five NBA titles",
+    "facts": [
+      "Won five NBA championships with the Lakers",
+      "His 81-point game is the second-highest ever"
+    ]
   },
   {
     "name": "Stephen Curry",
@@ -1287,7 +1580,11 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Three-point revolution"
+    "famousFor": "Three-point revolution",
+    "facts": [
+      "Is the NBA’s all-time 3-point leader",
+      "Won four NBA championships with the Warriors"
+    ]
   },
   {
     "name": "Kevin Durant",
@@ -1297,7 +1594,11 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "NBA champion"
+    "famousFor": "NBA champion",
+    "facts": [
+      "Won two NBA championships with the Warriors",
+      "Is one of the most versatile scorers ever"
+    ]
   },
   {
     "name": "Tom Brady",
@@ -1307,7 +1608,8 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "Seven Super Bowls"
+    "famousFor": "Seven Super Bowls",
+    "facts": ["Won seven Super Bowls — the most ever", "Played until age 45"]
   },
   {
     "name": "Patrick Mahomes",
@@ -1317,7 +1619,8 @@
     "nationality": "American",
     "ageRange": "20s",
     "hairColor": "black",
-    "famousFor": "Super Bowl MVP"
+    "famousFor": "Super Bowl MVP",
+    "facts": ["Won three Super Bowls by age 28", "Signed a $500M contract in 2020"]
   },
   {
     "name": "Amelia Earhart",
@@ -1327,7 +1630,11 @@
     "nationality": "American",
     "ageRange": "30s",
     "hairColor": "blonde",
-    "famousFor": "First woman to fly the Atlantic"
+    "famousFor": "First woman to fly the Atlantic",
+    "facts": [
+      "Was the first woman to fly solo across the Atlantic",
+      "Disappeared over the Pacific in 1937"
+    ]
   },
   {
     "name": "Neil Armstrong",
@@ -1337,7 +1644,11 @@
     "nationality": "American",
     "ageRange": "80s",
     "hairColor": "brown",
-    "famousFor": "First man on the Moon"
+    "famousFor": "First man on the Moon",
+    "facts": [
+      "First person to walk on the Moon",
+      "His line “one small step” was heard by 600M people"
+    ]
   },
   {
     "name": "Buzz Aldrin",
@@ -1347,7 +1658,8 @@
     "nationality": "American",
     "ageRange": "90s",
     "hairColor": "white",
-    "famousFor": "Apollo 11"
+    "famousFor": "Apollo 11",
+    "facts": ["Second person on the Moon", "Walked on the Moon 19 minutes after Armstrong"]
   },
   {
     "name": "Stephen Hawking",
@@ -1357,7 +1669,8 @@
     "nationality": "British",
     "ageRange": "70s",
     "hairColor": "brown",
-    "famousFor": "A Brief History of Time"
+    "famousFor": "A Brief History of Time",
+    "facts": ["Wrote A Brief History of Time", "Lived with ALS for 55 years"]
   },
   {
     "name": "Isaac Newton",
@@ -1367,7 +1680,8 @@
     "nationality": "British",
     "ageRange": "80s",
     "hairColor": "gray",
-    "famousFor": "Laws of motion"
+    "famousFor": "Laws of motion",
+    "facts": ["Formulated the laws of motion and gravity", "Also invented calculus"]
   },
   {
     "name": "Charles Darwin",
@@ -1377,7 +1691,8 @@
     "nationality": "British",
     "ageRange": "70s",
     "hairColor": "brown",
-    "famousFor": "Theory of evolution"
+    "famousFor": "Theory of evolution",
+    "facts": ["Wrote On the Origin of Species", "His theory of evolution changed biology"]
   },
   {
     "name": "Nikola Tesla",
@@ -1387,7 +1702,8 @@
     "nationality": "Serbian",
     "ageRange": "80s",
     "hairColor": "brown",
-    "famousFor": "AC electricity"
+    "famousFor": "AC electricity",
+    "facts": ["Invented the AC motor", "Had a legendary rivalry with Thomas Edison"]
   },
   {
     "name": "Thomas Edison",
@@ -1397,7 +1713,8 @@
     "nationality": "American",
     "ageRange": "80s",
     "hairColor": "gray",
-    "famousFor": "Light bulb"
+    "famousFor": "Light bulb",
+    "facts": ["Held 1,093 US patents", "Did not actually invent the light bulb — he perfected it"]
   },
   {
     "name": "Alexander Graham Bell",
@@ -1407,7 +1724,8 @@
     "nationality": "British",
     "ageRange": "70s",
     "hairColor": "brown",
-    "famousFor": "Telephone"
+    "famousFor": "Telephone",
+    "facts": ["Patented the telephone in 1876", "Also helped found National Geographic"]
   },
   {
     "name": "The Wright Brothers",
@@ -1417,7 +1735,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "First airplane flight"
+    "famousFor": "First airplane flight",
+    "facts": ["Made the first powered flight in 1903", "Their flight lasted 12 seconds"]
   },
   {
     "name": "Florence Nightingale",
@@ -1427,7 +1746,8 @@
     "nationality": "British",
     "ageRange": "90s",
     "hairColor": "brown",
-    "famousFor": "Modern nursing"
+    "famousFor": "Modern nursing",
+    "facts": ["Founded modern nursing", "Known as the Lady with the Lamp"]
   },
   {
     "name": "Helen Keller",
@@ -1437,7 +1757,8 @@
     "nationality": "American",
     "ageRange": "80s",
     "hairColor": "brown",
-    "famousFor": "Deafblind advocate"
+    "famousFor": "Deafblind advocate",
+    "facts": ["Was the first deaf-blind person to earn a college degree", "Wrote 12 books"]
   },
   {
     "name": "Anne Frank",
@@ -1447,7 +1768,11 @@
     "nationality": "German",
     "ageRange": "10s",
     "hairColor": "brown",
-    "famousFor": "The Diary of a Young Girl"
+    "famousFor": "The Diary of a Young Girl",
+    "facts": [
+      "Wrote a diary while hiding from the Nazis",
+      "Her diary was published by her father after the war"
+    ]
   },
   {
     "name": "Malala Yousafzai",
@@ -1457,7 +1782,8 @@
     "nationality": "Pakistani",
     "ageRange": "20s",
     "hairColor": "black",
-    "famousFor": "Girls’ education"
+    "famousFor": "Girls’ education",
+    "facts": ["Won the Nobel Peace Prize at 17", "Survived an assassination attempt in 2012"]
   },
   {
     "name": "Greta Thunberg",
@@ -1467,7 +1793,8 @@
     "nationality": "Swedish",
     "ageRange": "20s",
     "hairColor": "blonde",
-    "famousFor": "Climate strikes"
+    "famousFor": "Climate strikes",
+    "facts": ["Started a global climate strike at 15", "Was named Time Person of the Year in 2019"]
   },
   {
     "name": "Ruth Bader Ginsburg",
@@ -1477,7 +1804,8 @@
     "nationality": "American",
     "ageRange": "80s",
     "hairColor": "white",
-    "famousFor": "US Supreme Court justice"
+    "famousFor": "US Supreme Court justice",
+    "facts": ["Was the second female Supreme Court justice", "Known as the Notorious RBG"]
   },
   {
     "name": "Johnny Depp",
@@ -1487,7 +1815,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Pirates of the Caribbean"
+    "famousFor": "Pirates of the Caribbean",
+    "facts": ["Played Captain Jack Sparrow in five Pirates films", "Was a guitarist before acting"]
   },
   {
     "name": "Meryl Streep",
@@ -1497,7 +1826,8 @@
     "nationality": "American",
     "ageRange": "70s",
     "hairColor": "blonde",
-    "famousFor": "The Devil Wears Prada"
+    "famousFor": "The Devil Wears Prada",
+    "facts": ["Has 21 Oscar nominations — a record", "Won three Oscars"]
   },
   {
     "name": "Tom Hanks",
@@ -1507,7 +1837,11 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Forrest Gump"
+    "famousFor": "Forrest Gump",
+    "facts": [
+      "Won back-to-back Oscars in 1994 and 1995",
+      "Is famous for being the nicest man in Hollywood"
+    ]
   },
   {
     "name": "Julia Roberts",
@@ -1517,7 +1851,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Pretty Woman"
+    "famousFor": "Pretty Woman",
+    "facts": ["Won an Oscar for Erin Brockovich", "Her smile was once insured for $30M"]
   },
   {
     "name": "Sandra Bullock",
@@ -1527,7 +1862,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "blonde",
-    "famousFor": "Gravity, Speed"
+    "famousFor": "Gravity, Speed",
+    "facts": ["Won an Oscar for The Blind Side", "Adopted a son from New Orleans"]
   },
   {
     "name": "George Clooney",
@@ -1537,7 +1873,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "gray",
-    "famousFor": "Ocean’s Eleven"
+    "famousFor": "Ocean’s Eleven",
+    "facts": ["Won an Oscar for Syriana", "Co-founded the tequila brand Casamigos"]
   },
   {
     "name": "Matt Damon",
@@ -1547,7 +1884,11 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Bourne series"
+    "famousFor": "Bourne series",
+    "facts": [
+      "Won an Oscar for co-writing Good Will Hunting",
+      "Is a longtime friend of Ben Affleck"
+    ]
   },
   {
     "name": "Ben Affleck",
@@ -1557,7 +1898,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Argo"
+    "famousFor": "Argo",
+    "facts": ["Won an Oscar for co-writing Good Will Hunting", "Played Batman in the DCEU"]
   },
   {
     "name": "Jennifer Aniston",
@@ -1567,7 +1909,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "blonde",
-    "famousFor": "Friends"
+    "famousFor": "Friends",
+    "facts": ["Starred in Friends for 10 seasons", "Her haircut in the 90s was called “The Rachel”"]
   },
   {
     "name": "Courteney Cox",
@@ -1577,7 +1920,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Friends"
+    "famousFor": "Friends",
+    "facts": ["Played Monica in Friends", "Directed the film Just Before I Go"]
   },
   {
     "name": "David Schwimmer",
@@ -1587,7 +1931,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Friends"
+    "famousFor": "Friends",
+    "facts": ["Played Ross in Friends", "Voiced Melman in Madagascar"]
   },
   {
     "name": "Matt LeBlanc",
@@ -1597,7 +1942,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Friends"
+    "famousFor": "Friends",
+    "facts": ["Played Joey in Friends", "Hosted the car show Top Gear"]
   },
   {
     "name": "Hugh Jackman",
@@ -1607,7 +1953,8 @@
     "nationality": "Australian",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Wolverine"
+    "famousFor": "Wolverine",
+    "facts": ["Played Wolverine for 17 years", "Sang in The Greatest Showman"]
   },
   {
     "name": "Ryan Reynolds",
@@ -1617,7 +1964,8 @@
     "nationality": "Canadian",
     "ageRange": "40s",
     "hairColor": "red",
-    "famousFor": "Deadpool"
+    "famousFor": "Deadpool",
+    "facts": ["Played Deadpool", "Owns a stake in the Wrexham football club"]
   },
   {
     "name": "Chris Pratt",
@@ -1627,7 +1975,11 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "Guardians of the Galaxy"
+    "famousFor": "Guardians of the Galaxy",
+    "facts": [
+      "Starred in Guardians of the Galaxy and Jurassic World",
+      "Was a Walmart greeter before acting"
+    ]
   },
   {
     "name": "Emma Watson",
@@ -1637,7 +1989,8 @@
     "nationality": "British",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "Hermione Granger"
+    "famousFor": "Hermione Granger",
+    "facts": ["Played Hermione in Harry Potter", "Graduated from Brown University"]
   },
   {
     "name": "Daniel Radcliffe",
@@ -1647,7 +2000,8 @@
     "nationality": "British",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "Harry Potter"
+    "famousFor": "Harry Potter",
+    "facts": ["Played Harry Potter for 10 years", "Has appeared on Broadway multiple times"]
   },
   {
     "name": "Rupert Grint",
@@ -1657,7 +2011,8 @@
     "nationality": "British",
     "ageRange": "30s",
     "hairColor": "red",
-    "famousFor": "Ron Weasley"
+    "famousFor": "Ron Weasley",
+    "facts": ["Played Ron Weasley", "Was the richest British actor under 30 in his 20s"]
   },
   {
     "name": "Keanu Reeves",
@@ -1667,7 +2022,8 @@
     "nationality": "Canadian",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "John Wick, The Matrix"
+    "famousFor": "John Wick, The Matrix",
+    "facts": ["Is famous for his generosity to stunt teams", "Starred in John Wick and The Matrix"]
   },
   {
     "name": "Natalie Portman",
@@ -1677,7 +2033,8 @@
     "nationality": "Israeli",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "Black Swan"
+    "famousFor": "Black Swan",
+    "facts": ["Won an Oscar for Black Swan", "Has a degree from Harvard"]
   },
   {
     "name": "Cate Blanchett",
@@ -1687,7 +2044,8 @@
     "nationality": "Australian",
     "ageRange": "50s",
     "hairColor": "blonde",
-    "famousFor": "Elizabeth"
+    "famousFor": "Elizabeth",
+    "facts": ["Won two Oscars", "Is a UNHCR goodwill ambassador"]
   },
   {
     "name": "Nicole Kidman",
@@ -1697,7 +2055,8 @@
     "nationality": "Australian",
     "ageRange": "50s",
     "hairColor": "red",
-    "famousFor": "Moulin Rouge"
+    "famousFor": "Moulin Rouge",
+    "facts": ["Won an Oscar for The Hours", "Was born in Hawaii and raised in Australia"]
   },
   {
     "name": "Samuel L. Jackson",
@@ -1707,7 +2066,8 @@
     "nationality": "American",
     "ageRange": "70s",
     "hairColor": "black",
-    "famousFor": "Pulp Fiction"
+    "famousFor": "Pulp Fiction",
+    "facts": ["Is the highest-grossing actor of all time", "Has appeared in over 150 films"]
   },
   {
     "name": "Morgan Freeman",
@@ -1717,7 +2077,11 @@
     "nationality": "American",
     "ageRange": "80s",
     "hairColor": "gray",
-    "famousFor": "The Shawshank Redemption"
+    "famousFor": "The Shawshank Redemption",
+    "facts": [
+      "Has a distinctive voice heard in countless documentaries",
+      "Got his first major film role at 50"
+    ]
   },
   {
     "name": "Denzel Washington",
@@ -1727,7 +2091,8 @@
     "nationality": "American",
     "ageRange": "70s",
     "hairColor": "black",
-    "famousFor": "Training Day"
+    "famousFor": "Training Day",
+    "facts": ["Won two Oscars", "Was paid $60M for The Equalizer 3"]
   },
   {
     "name": "Viola Davis",
@@ -1737,7 +2102,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "How to Get Away with Murder"
+    "famousFor": "How to Get Away with Murder",
+    "facts": ["Won an Oscar for Fences", "Is an EGOT winner"]
   },
   {
     "name": "Zendaya",
@@ -1747,7 +2113,8 @@
     "nationality": "American",
     "ageRange": "20s",
     "hairColor": "black",
-    "famousFor": "Euphoria, Dune"
+    "famousFor": "Euphoria, Dune",
+    "facts": ["Won two Emmys for Euphoria", "Starred in Dune and Spider-Man"]
   },
   {
     "name": "Timothée Chalamet",
@@ -1757,7 +2124,8 @@
     "nationality": "American",
     "ageRange": "20s",
     "hairColor": "brown",
-    "famousFor": "Dune, Wonka"
+    "famousFor": "Dune, Wonka",
+    "facts": ["Was nominated for an Oscar at 22", "Is a fan of French cinema and rap"]
   },
   {
     "name": "Margot Robbie",
@@ -1767,7 +2135,8 @@
     "nationality": "Australian",
     "ageRange": "30s",
     "hairColor": "blonde",
-    "famousFor": "Barbie"
+    "famousFor": "Barbie",
+    "facts": ["Was nominated for an Oscar for I, Tonya", "Produced Barbie (2023)"]
   },
   {
     "name": "Ryan Gosling",
@@ -1777,7 +2146,8 @@
     "nationality": "Canadian",
     "ageRange": "40s",
     "hairColor": "blonde",
-    "famousFor": "La La Land, Barbie"
+    "famousFor": "La La Land, Barbie",
+    "facts": ["Was nominated for an Oscar for La La Land", "Was a member of the Mickey Mouse Club"]
   },
   {
     "name": "Joaquin Phoenix",
@@ -1787,7 +2157,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Joker"
+    "famousFor": "Joker",
+    "facts": ["Won an Oscar for Joker", "Is a vegan and animal rights activist"]
   },
   {
     "name": "Adam Sandler",
@@ -1797,7 +2168,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Happy Gilmore"
+    "famousFor": "Happy Gilmore",
+    "facts": ["His films have grossed over $4B", "Still performs stand-up comedy tours"]
   },
   {
     "name": "Jim Carrey",
@@ -1807,7 +2179,8 @@
     "nationality": "Canadian",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "The Mask"
+    "famousFor": "The Mask",
+    "facts": ["Was paid $20M for The Cable Guy", "Is also a painter"]
   },
   {
     "name": "Eddie Murphy",
@@ -1817,7 +2190,8 @@
     "nationality": "American",
     "ageRange": "60s",
     "hairColor": "black",
-    "famousFor": "Coming to America"
+    "famousFor": "Coming to America",
+    "facts": ["Was the highest-paid actor in 2007", "Began on Saturday Night Live at 19"]
   },
   {
     "name": "Jackie Chan",
@@ -1827,7 +2201,11 @@
     "nationality": "Chinese",
     "ageRange": "70s",
     "hairColor": "black",
-    "famousFor": "Kung fu movies"
+    "famousFor": "Kung fu movies",
+    "facts": [
+      "Does his own stunts — many of which broke bones",
+      "Has a star on the Hollywood Walk of Fame"
+    ]
   },
   {
     "name": "Arnold Schwarzenegger",
@@ -1837,7 +2215,8 @@
     "nationality": "Austrian",
     "ageRange": "70s",
     "hairColor": "brown",
-    "famousFor": "Terminator"
+    "famousFor": "Terminator",
+    "facts": ["Won Mr. Olympia seven times", "Was governor of California from 2003 to 2011"]
   },
   {
     "name": "Sylvester Stallone",
@@ -1847,7 +2226,8 @@
     "nationality": "American",
     "ageRange": "70s",
     "hairColor": "black",
-    "famousFor": "Rocky, Rambo"
+    "famousFor": "Rocky, Rambo",
+    "facts": ["Wrote Rocky in three days", "Was nominated for two Oscars for Rocky"]
   },
   {
     "name": "Bruce Lee",
@@ -1857,7 +2237,11 @@
     "nationality": "Chinese",
     "ageRange": "30s",
     "hairColor": "black",
-    "famousFor": "Enter the Dragon"
+    "famousFor": "Enter the Dragon",
+    "facts": [
+      "Is considered the father of modern martial arts cinema",
+      "His films broke box office records in Asia"
+    ]
   },
   {
     "name": "Irina Shayk",
@@ -1867,7 +2251,8 @@
     "nationality": "Russian",
     "ageRange": "30s",
     "hairColor": "brown",
-    "famousFor": "Supermodel"
+    "famousFor": "Supermodel",
+    "facts": ["Is a supermodel from Russia", "Was in a long relationship with Bradley Cooper"]
   },
   {
     "name": "David Beckham",
@@ -1877,7 +2262,8 @@
     "nationality": "British",
     "ageRange": "50s",
     "hairColor": "brown",
-    "famousFor": "Manchester United"
+    "famousFor": "Manchester United",
+    "facts": ["Scored a famous free kick against Greece in 2001", "Owns Inter Miami CF"]
   },
   {
     "name": "Zlatan Ibrahimović",
@@ -1887,7 +2273,8 @@
     "nationality": "Swedish",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "Bicycle kicks"
+    "famousFor": "Bicycle kicks",
+    "facts": ["Scored over 500 career goals", "Famously said he “doesn’t do auditions”"]
   },
   {
     "name": "Andrés Iniesta",
@@ -1897,7 +2284,8 @@
     "nationality": "Spanish",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "2010 World Cup winner"
+    "famousFor": "2010 World Cup winner",
+    "facts": ["Scored the winning goal in the 2010 World Cup final", "Was a Barcelona legend"]
   },
   {
     "name": "Xavi",
@@ -1907,7 +2295,8 @@
     "nationality": "Spanish",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "Barcelona midfield"
+    "famousFor": "Barcelona midfield",
+    "facts": ["Was Barcelona’s midfield maestro", "Coached Barcelona from 2021 to 2024"]
   },
   {
     "name": "Wayne Rooney",
@@ -1917,7 +2306,8 @@
     "nationality": "British",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "England top scorer"
+    "famousFor": "England top scorer",
+    "facts": ["Is Manchester United’s all-time top scorer", "Debuted for Everton at 16"]
   },
   {
     "name": "Gary Lineker",
@@ -1927,7 +2317,8 @@
     "nationality": "British",
     "ageRange": "60s",
     "hairColor": "brown",
-    "famousFor": "Match of the Day host"
+    "famousFor": "Match of the Day host",
+    "facts": ["Never received a yellow or red card", "Hosts Match of the Day"]
   },
   {
     "name": "Dwayne \"The Rock\" Johnson",
@@ -1937,7 +2328,8 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "Red Notice"
+    "famousFor": "Red Notice",
+    "facts": ["Red Notice"]
   },
   {
     "name": "John Cena",
@@ -1947,7 +2339,8 @@
     "nationality": "American",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "You can’t see me"
+    "famousFor": "You can’t see me",
+    "facts": ["Has 16 WWE world championship reigns", "Says “You can’t see me” to opponents"]
   },
   {
     "name": "The Rock",
@@ -1957,7 +2350,11 @@
     "nationality": "American",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "WWE legend"
+    "famousFor": "WWE legend",
+    "facts": [
+      "Was a college football player at Miami",
+      "His catchphrase is “Can you smell what The Rock is cooking?”"
+    ]
   },
   {
     "name": "Angela Merkel",
@@ -1967,7 +2364,8 @@
     "nationality": "German",
     "ageRange": "70s",
     "hairColor": "blonde",
-    "famousFor": "German chancellor"
+    "famousFor": "German chancellor",
+    "facts": ["Was Germany’s chancellor for 16 years", "Was a physicist before politics"]
   },
   {
     "name": "Volodymyr Zelenskyy",
@@ -1977,7 +2375,11 @@
     "nationality": "Ukrainian",
     "ageRange": "40s",
     "hairColor": "brown",
-    "famousFor": "Ukraine wartime leader"
+    "famousFor": "Ukraine wartime leader",
+    "facts": [
+      "Was a comedian before becoming president",
+      "Played a president on TV before becoming one"
+    ]
   },
   {
     "name": "Rishi Sunak",
@@ -1987,7 +2389,8 @@
     "nationality": "British",
     "ageRange": "40s",
     "hairColor": "black",
-    "famousFor": "UK prime minister"
+    "famousFor": "UK prime minister",
+    "facts": ["Was the UK’s first Hindu prime minister", "Is a former hedge fund analyst"]
   },
   {
     "name": "Narendra Modi",
@@ -1997,7 +2400,8 @@
     "nationality": "Indian",
     "ageRange": "70s",
     "hairColor": "gray",
-    "famousFor": "Indian prime minister"
+    "famousFor": "Indian prime minister",
+    "facts": ["Has been India’s prime minister since 2014", "Was a tea seller in his youth"]
   },
   {
     "name": "Mukesh Ambani",
@@ -2007,7 +2411,8 @@
     "nationality": "Indian",
     "ageRange": "60s",
     "hairColor": "gray",
-    "famousFor": "Reliance Industries"
+    "famousFor": "Reliance Industries",
+    "facts": ["Is Asia’s richest man", "Built the world’s most expensive home — Antilia"]
   },
   {
     "name": "Ratan Tata",
@@ -2017,7 +2422,8 @@
     "nationality": "Indian",
     "ageRange": "80s",
     "hairColor": "gray",
-    "famousFor": "Tata Group"
+    "famousFor": "Tata Group",
+    "facts": ["Led Tata Group for over 20 years", "Was known for his philanthropy and humility"]
   },
   {
     "name": "Lata Mangeshkar",
@@ -2027,7 +2433,8 @@
     "nationality": "Indian",
     "ageRange": "90s",
     "hairColor": "black",
-    "famousFor": "Nightingale of India"
+    "famousFor": "Nightingale of India",
+    "facts": ["Recorded over 30,000 songs", "Was awarded the Bharat Ratna in 2001"]
   },
   {
     "name": "Amitabh Bachchan",
@@ -2037,7 +2444,8 @@
     "nationality": "Indian",
     "ageRange": "80s",
     "hairColor": "gray",
-    "famousFor": "Shahenshah of Bollywood"
+    "famousFor": "Shahenshah of Bollywood",
+    "facts": ["Known as the Shahenshah of Bollywood", "Hosted Kaun Banega Crorepati for years"]
   },
   {
     "name": "Hrithik Roshan",
@@ -2047,6 +2455,7 @@
     "nationality": "Indian",
     "ageRange": "50s",
     "hairColor": "black",
-    "famousFor": "Krrish"
+    "famousFor": "Krrish",
+    "facts": ["Debuted in Kaho Naa... Pyaar Hai (2000)", "Is known for his dancing and physique"]
   }
 ]
