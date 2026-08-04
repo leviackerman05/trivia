@@ -24,23 +24,30 @@ time (`src/lib/api.ts`). The backend validates browser origins through
 
 ## 2. Frontend: Cloudflare Pages
 
-**Primary path (git integration, zero tokens):**
+**Primary path (direct upload + CI, works with this pnpm monorepo):**
 
-1. Cloudflare dashboard, Workers & Pages, Create, Pages, connect the GitHub
-   repo (`leviackerman05/trivia`).
-2. Project name: `triviahub`. Framework preset: Astro.
-3. Build command: `pnpm build`. Output directory: `dist`.
-   (pnpm is picked up from the `packageManager` field.)
-4. Environment variables (production): `PUBLIC_SERVER_URL=https://api.playtriviahub.com`.
-5. Custom domain: `playtriviahub.com` (Cloudflare DNS, proxied).
+1. Cloudflare dashboard, Workers & Pages, Create, Pages, choose **Direct
+   Upload** (do NOT connect the repo; git detection errors on pnpm
+   workspaces). Project name: `triviahub`.
+2. Create an API token: My Profile -> API Tokens -> Create Token ->
+   template "Edit Cloudflare Workers" (covers Pages), or a custom token
+   with `Cloudflare Pages: Edit` on the account.
+3. GitHub repo -> Settings -> Secrets and variables -> Actions:
+   - `CLOUDFLARE_API_TOKEN` (the token)
+   - `CLOUDFLARE_ACCOUNT_ID` (dashboard URL account id)
+4. Push to main: `.github/workflows/deploy.yml` builds with
+   `PUBLIC_SERVER_URL=https://api.playtriviahub.com` and runs
+   `wrangler pages deploy dist --project-name triviahub` (Direct Upload
+   projects skip application detection entirely).
+5. Custom domain: project -> Custom domains -> `playtriviahub.com`.
    Preview deployments on `*.pages.dev` are already noindexed (PRD §6.4).
 
-**Known gotcha (monorepo detection):** the repo root contains
-`pnpm-workspace.yaml`, which makes Pages' application detection fail with
-"detection logic has been run in the root of a workspace". `pages.json` at
-the repo root (explicit framework/buildCommand/outputDirectory) makes
-Pages skip detection, so connecting the repo works. If a half-created
-project is stuck, delete it and reconnect after `pages.json` is on main.
+**Alternative (git integration):** only if Cloudflare's application
+detection stops choking on `pnpm-workspace.yaml` ("detection logic has
+been run in the root of a workspace"). `pages.json` at the repo root
+provides explicit build settings but did not bypass the connect-flow
+detection error; the Direct Upload + CI path above is the supported route
+for monorepos today.
 
 **Alternative (direct upload from a machine with a token):**
 
