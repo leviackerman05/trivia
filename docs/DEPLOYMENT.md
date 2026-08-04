@@ -24,31 +24,69 @@ time (`src/lib/api.ts`). The backend validates browser origins through
 
 ## 2. Frontend: Cloudflare Pages
 
-**Path (git integration; verified 2026-08-04):**
+**Path (git integration via API; verified 2026-08-04):**
 
-1. Cloudflare dashboard, Workers & Pages, Create, Pages, connect the GitHub
-   repo (`leviackerman05/trivia`). If the workspace detection error appears
-   during connect, continue to the build configuration form and fill it
-   manually (auto-detection failing is not a blocker).
-2. Build configuration (Settings, Builds & deployments):
-   - Root directory: `/` (the Astro app lives at the repo root)
-   - Framework preset: Astro
-   - Build command: `pnpm build`
-   - Build output directory: `dist`
-   - Environment variables (production):
-     `PUBLIC_SERVER_URL=https://api.playtriviahub.com`
-   - Build system: V2 (required for monorepo root-directory support)
-3. Save and Deploy. Preview deployments on `*.pages.dev` are already
-   noindexed (PRD §6.4). Custom domain: `playtriviahub.com`.
+The Pages project is created and connected to GitHub through the Cloudflare
+API, because the dashboard connect flow runs wrangler workspace detection
+and aborts with "detection logic has been run in the root of a workspace"
+before the project is created. The API path skips detection entirely.
 
-**Why there is no `wrangler.toml` or `pages.json` in the repo:** when the
-root directory contains a wrangler config, Build System V2 switches the
-deploy step to `npx wrangler deploy`, and wrangler re-runs the workspace
-application detection, which fails with "detection logic has been run in the
-root of a workspace". Removing the config restores the standard Pages
-uploader, which deploys `dist/` directly. Local CLI uploads use the
-explicit flag form: `pnpm deploy` runs `wrangler pages deploy
---project-name triviahub` (no config file needed).
+1. Authenticate wrangler: `pnpm exec wrangler login` (browser OAuth).
+2. Read the account id: `pnpm exec wrangler whoami --json`.
+3. Create the project with the GitHub source attached. This requires the
+   Cloudflare GitHub app to be installed on the repo (the earlier dashboard
+   attempt installed it). Example request:
+
+   ```sh
+   curl -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/pages/projects" \
+     -H "Authorization: Bearer $CF_TOKEN" -H "Content-Type: application/json" \
+     --data '{
+       "name": "triviahub",
+       "production_branch": "main",
+       "build_config": {
+         "build_command": "pnpm build",
+         "destination_dir": "dist",
+         "root_dir": "/"
+       },
+       "deployment_configs": {
+         "production": {
+           "env_vars": {
+             "PUBLIC_SERVER_URL": { "value": "https://api.playtriviahub.com" }
+           }
+         },
+         "preview": {
+           "env_vars": {
+             "PUBLIC_SERVER_URL": { "value": "https://api.playtriviahub.com" }
+           }
+         }
+       },
+       "source": {
+         "type": "github",
+         "config": {
+           "owner": "leviackerman05",
+           "repo_name": "trivia",
+           "production_branch": "main"
+         }
+       }
+     }'
+   ```
+
+4. Push to main. Every push triggers a production build (`pnpm build`)
+   and deploys `dist/` with the standard uploader. No wrangler config, no
+   deploy command, and no workflow file are needed.
+5. Attach the custom domain: `playtriviahub.com` (same Cloudflare zone as
+   the account, so it verifies automatically).
+
+**Notes:**
+
+- Do not add `wrangler.toml` or `pages.json` at the repo root. With either
+  present, Build System V2 runs `npx wrangler deploy` as the deploy step,
+  which re-runs workspace detection and fails with the detection error.
+- A Direct Uploads project (created via `wrangler pages project create`)
+  cannot switch to git integration later; the API rejects the update with
+  "You cannot update the `source` object in a Direct Uploads project".
+  Recreate the project with the `source` field instead.
+- Preview deployments on `*.pages.dev` are already noindexed (PRD §6.4).
 
 **Alternative (direct upload from a machine with a token):**
 
@@ -58,7 +96,8 @@ export CLOUDFLARE_ACCOUNT_ID=...
 PUBLIC_SERVER_URL=https://api.playtriviahub.com pnpm deploy
 ```
 
-`wrangler.toml` pins the project name (`triviahub`) and output dir.
+`pnpm deploy` runs `wrangler pages deploy --project-name triviahub`
+(explicit project name, no config file needed).
 
 ## 3. Backend: Railway
 
