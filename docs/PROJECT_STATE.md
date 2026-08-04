@@ -11,16 +11,98 @@
 
 ## Current Milestone
 
-**M10 — SEO Content + AdSense Compliance + Performance ✅ complete** — the
-final build milestone. **M11 (deployment) stays deprioritized** until the
-owner asks; no active milestone is in flight.
+**M12–M18 (owner feedback pass 2026-08-04) ✅ complete** — dark mode,
+gameplay fixes, dataset depth, and the new Daily Sudoku are all shipped.
+**M11 (deployment) stays deprioritized** until the owner asks; no active
+milestone is in flight.
 
-All roadmapped milestones M1–M10 are ✅ complete — **all 18 games playable**
-and AdSense-ready.
+All roadmapped build work M1–M18 is ✅ complete — **19 games** (18 party
+games + Daily Sudoku), AdSense-ready, all `pnpm verify` gates green.
 
 ---
 
 ## Completed Work
+
+### Milestone 18 — Trivia + Daily Games (owner feedback 2026-08-04) ✅
+
+- [x] **Trivia**: dataset 210 → **525 questions across 10 categories**
+      (Geography, Movies, Music, Food, Technology added); flat scoring —
+      **10 points correct / 0 wrong** in solo + room (Wrong Answers Only
+      inverts); rebranded **Daily Trivia**; question card layout; SEO
+      content updated
+- [x] **Daily Sudoku (19th game)**: `scripts/generate-sudoku.mjs` — 400
+      pre-generated unique-solution puzzles (backtracking + uniqueness
+      verification, 28–32 clues, deterministic); `pickDailySudoku` seeds by
+      UTC date; `Sudoku.tsx` island (tap-to-fill, red conflict highlight,
+      flat 200 points, SoloShell streak/leaderboard/share); catalog + page + SEO content + OG + sitemap wired
+- [x] **Verification:** `pnpm verify` green — **136 client + 134 server
+      tests**, 19 game pages in smoke (SEO + budgets)
+
+### Milestone 17 — Charades + Guess Who (owner feedback 2026-08-04) ✅
+
+- [x] Charades category toggle reflects the host's pick immediately
+      (optimistic local update after the ack — D023 secret pattern unchanged)
+- [x] **Guess Who is a 5-round game (D041):** rotating answerer, +1 per
+      correct guess, between-round reveal with **celebrity facts** (all 205
+      celebrities, 1–2 curated facts each), host `guess-who-next` advance,
+      final podium with scores; the 20-question cap reveals on any round
+- [x] Voting UI polish: MLT cards bigger (min-h-32), overflow-safe vote +
+      reveal rows (break-words, mobile hides the bar)
+- [x] **Verification:** `pnpm verify` green (129 client + 134 server)
+
+### Milestone 16 — Voting Game UI (owner feedback 2026-08-04) ✅
+
+- [x] Landed with M17's commit (bigger MLT tap targets, overflow-safe cards)
+
+### Milestone 15 — Data-Driven Games (owner feedback 2026-08-04) ✅
+
+- [x] **NHIE (D040):** 250 statements tagged boring/moderate/dirty/
+      super-dirty (NSFW host opt-in, default moderate); host picks tier +
+      statement source (provided/own/both) in the lobby; safe-tier fallback
+- [x] **This or That**: 320 pairs tagged across 10 genres; host category
+      selector (engine tops up when a genre is small)
+- [x] **Shadow Sketch**: 144 silhouettes tagged into 6 genres + 34 new
+      detailed multi-part silhouettes; host genre selector
+- [x] **Genre Swap**: all 150 descriptions rewritten as genuine
+      reimaginings (the old ones were the original plots with genre labels)
+- [x] **Genre-Bender**: 70 → 200 entries (130 new paraphrases,
+      licensing-safe)
+- [x] **Price Is Right images**: Openverse re-enrichment with quoted queries + relevance ranking (186 replaced; 524/536 with photos)
+- [x] **Verification:** `pnpm verify` green (128 client + 133 server)
+
+### Milestone 14 — Solo Game Fixes (owner feedback 2026-08-04) ✅
+
+- [x] **Timer bug fixed everywhere (D037):** deadlines in state via
+      `useCountdown` — no more instant "Time's up!" on Rhyme/Emoji/Genre
+      Swap/Genre-Bender; setup phases with adjustable timers (30–70s
+      presets, persisted)
+- [x] **Rhyme or Crime**: CMU phonetic judging (`rhyme-phonemes.json`,
+      4,133 words) — "hi" rhymes with "pie"; retryable wrong answers;
+      category picker (Auto + 8); play-again clears the input
+- [x] **Emoji Plot**: hint buttons (year −50, letter −10 each, skribbl-style
+      reveal); play-again clears the input
+- [x] **Timeline Tussle**: per-card scoring (33/66/100) with correct-position
+      counts
+- [x] **Price Is Right**: no slider (numeric input only), listing-style copy
+- [x] **Verification:** `pnpm verify` green (128 client + 130 server)
+
+### Milestone 13 — Drawing Games (owner feedback 2026-08-04) ✅
+
+- [x] Skribbl family: word hint at the TOP-CENTER of the play area
+      (skribbl-style, text-4xl/5xl); wider game page enlarges the canvas
+- [x] **Copycat reveal**: waits for every player's image
+      (`copycat-image-loaded` ack) then a 10s countdown (30s cap); loading
+      placeholder; resync includes the image
+- [x] **Verification:** `pnpm verify` green (127 client + 130 server)
+
+### Milestone 12 — Global UX Overhaul (owner feedback 2026-08-04) ✅
+
+- [x] **Dark mode (D036):** semantic tokens + `:root.dark` swap, no-FOUC
+      theme script + header toggle, full hardcoded-color sweep (23 files)
+- [x] Layout: `wide` game pages (max-w-7xl); hover-height jank removed
+      (GameCard/ui/Card); hero value props replaced ("no downloads" etc.
+      removed per owner)
+- [x] **Verification:** `pnpm verify` green (127 client + 129 server)
 
 ### Milestone 9 — Charades + Guess Who ✅ (verified 2026-08-04)
 
@@ -356,7 +438,7 @@ and AdSense-ready.
 
 ## In Progress
 
-None — M10 is complete and committed. Awaiting owner direction (M11
+None — M12–M18 are complete and committed. Awaiting owner direction (M11
 remains deprioritized).
 
 ---
@@ -374,7 +456,7 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 
 ## Known Bugs
 
-- None known. All suites green (127 client + 129 server).
+- None known. All suites green (136 client + 134 server).
 
 ---
 
@@ -384,8 +466,8 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
   loose difficulty labels and some non-drawable entries (hand-generated
   lists). A curation pass is still queued (backlog); gameplay is unaffected
   (3 random choices per round).
-- **Trivia dataset:** 100 questions vs PRD's 500+ target — expansion lands
-  with M8 (room mode + daily challenge).
+- **Trivia dataset:** 525 questions across 10 categories — at the PRD's
+  500+ target; further expansion is content work, not a fix.
 - **Canvas repaint:** full-log repaint per segment (rAF-coalesced) — fine for
   one drawer; revisit if a drawing game needs livelier multi-drawer strokes.
 - **Drawer disconnect mid-round:** the round runs to the 60s timeout with no
@@ -412,6 +494,9 @@ Full roadmap: [TODO.md](TODO.md). Highlights:
 | GA4 real ID           | Google Analytics account (placeholder stays commented) |
 | Live domain + deploy  | M11 (owner: deprioritized for now)                     |
 | Draw the Lyric lyrics | Open question #2 (licensing — paraphrased/PD only)     |
+| NHIE super-dirty tier | ⚠ AdSense-policy risk (D040) — shipped default-safe,   |
+
+                         host opt-in; revisit if AdSense objects            |
 
 ---
 
@@ -444,12 +529,12 @@ CI budgets, browser-level axe/Lighthouse audits, Google Rich Results
 validation, AdSense application, GA4 real ID, CSP hardening, runbook.
 
 Until then, backlog items are fair game on request (word-bank curation,
-trivia dataset expansion, Playwright E2E).
+Playwright E2E, sudoku difficulty bands).
 
 ---
 
 ## Next Recommended Prompt
 
 > **Next recommended prompt:** M11 deployment is deferred by the owner.
-> Suggested: _"Continue with the backlog"_ (word-bank curation, trivia
-> dataset expansion to 500+, Playwright E2E) — or ask to start M11.
+> Suggested: _"Continue with the backlog"_ (word-bank curation, Playwright
+> E2E, sudoku difficulty bands) — or ask to start M11.

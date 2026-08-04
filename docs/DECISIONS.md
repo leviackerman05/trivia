@@ -882,3 +882,126 @@ workspace package.
 - **Future impact:** game pages are AdSense-ready; adding a future game
   requires adding its `game-content.ts` entry (enforced by tests + smoke);
   structured data gets final validation in Google Rich Results at M11.
+
+---
+
+## D036 — M12 dark mode: semantic token swap under `:root.dark` (2026-08-04)
+
+- **Decision:** Dark mode is a semantic-token swap: `global.css` defines
+  surface/border/status tokens (light values in `@theme`, dark values under
+  `:root.dark`), a no-FOUC inline script in `BaseLayout` applies the class
+  before paint, and a header toggle flips it (localStorage + system
+  preference). Every hardcoded color in components/islands was swept to
+  tokens (23 files); the shared drawing canvas stays white by design.
+- **Reason:** the owner asked for site-wide dark mode; Tailwind v4 utilities
+  reference the theme CSS variables, so one class on `<html>` flips
+  everything without a class per component.
+- **Alternatives considered:** per-component dark: variants (rejected —
+  hundreds of call sites); a second stylesheet (rejected — token swap is
+  simpler and composable).
+- **Tradeoffs:** components must keep using tokens (lint-friendly but
+  convention-enforced); status colors were re-paired (soft/strong) for WCAG
+  contrast on dark surfaces.
+- **Date:** 2026-08-04
+- **Future impact:** any new UI must use tokens or it will be unreadable in
+  dark mode; the `.dark` class is the theme contract.
+
+---
+
+## D037 — M14 solo timers: setup phases + per-game presets (2026-08-04)
+
+- **Decision:** Timed solo games (Rhyme, Emoji Plot, Genre Swap,
+  Genre-Bender) now open with a setup phase: the player picks the round
+  timer (30/40/50/60/70s presets, persisted per game in localStorage) and
+  the clock starts only when they press Start. Round deadlines moved from
+  refs into state (`useCountdown`) — the old ref pattern computed
+  `remaining = 0` on a round's first render and fired "Time's up!"
+  instantly (the owner's report).
+- **Reason:** two bugs from one pattern: the false timeout, and the clock
+  starting before the player was ready.
+- **Alternatives considered:** gating timers on visibility/scroll (rejected
+  — setup phases are simpler and give the player explicit control).
+- **Tradeoffs:** one extra tap before playing; solo scores are comparable
+  only within the same timer setting (leaderboards are per game, not per
+  timer — accepted).
+- **Date:** 2026-08-04
+- **Future impact:** the `useCountdown` + `TimerPicker` pair is the template
+  for any future timed solo game.
+
+---
+
+## D038 — M18 trivia: flat 10-point scoring + 525-question dataset (2026-08-04)
+
+- **Decision:** Trivia scoring is flat in both modes: 10 points for a
+  correct answer, 0 for wrong/timeout (Wrong Answers Only inverts: wrong =
+  10, correct = 0). The speed bonus is gone. The dataset grew 210 → 525
+  questions across 10 categories (Geography, Movies, Music, Food,
+  Technology added), mirrored to client + server.
+- **Reason:** the owner asked for "10 points for correct answer no point
+  for wrong" and a much larger dataset with genres.
+- **Alternatives considered:** keeping the speed bonus (rejected — the
+  owner explicitly wanted simple); per-category daily packs (deferred).
+- **Tradeoffs:** the daily leaderboard is now a right-answer race; existing
+  scores on the old scale were never migrated (the site is pre-launch).
+- **Date:** 2026-08-04
+- **Future impact:** scoring changes are cheap now and expensive after
+  launch — locked in.
+
+---
+
+## D039 — M18 Daily Sudoku: pre-generated unique-solution puzzles (2026-08-04)
+
+- **Decision:** Sudoku is the 19th game (owner: "add a daily sudoku and what
+  not"). `scripts/generate-sudoku.mjs` pre-generates 400 medium puzzles
+  (28–32 clues) with a backtracking solver that VERIFIES uniqueness;
+  `pickDailySudoku` seeds the daily pick by UTC date; completion scores a
+  flat 200. Puzzles ship as a compact 65 KB dataset (prettier-ignored).
+- **Reason:** runtime generation needs a solver + uniqueness check per
+  request; offline generation keeps the client tiny and deterministic.
+- **Alternatives considered:** runtime generation (rejected — complexity +
+  non-determinism); a hand-written puzzle pack (rejected — 400 is too many).
+- **Tradeoffs:** the 400-puzzle pool repeats roughly yearly (fine for a
+  daily game); difficulty is single-band (medium).
+- **Date:** 2026-08-04
+- **Future impact:** the generator can re-run with new seeds/difficulties;
+  daily-games branding is now a pattern (Daily Trivia + Daily Sudoku).
+
+---
+
+## D040 — M15 NHIE tiers incl. NSFW — default-safe, host opt-in (2026-08-04)
+
+- **Decision:** Never Have I Ever statements are tagged
+  boring/moderate/dirty/super-dirty (250 statements; ~14 super-dirty,
+  NSFW). The host picks the tier and the statement source (provided / own /
+  both) in the lobby; the DEFAULT tier is moderate. Engine suggestion pools
+  fall back to safer tiers, never dirtier ones.
+- **Reason:** the owner asked for a boring→super-dirty scale and a
+  provided-vs-own choice.
+- **Alternatives considered:** leaving NSFW out (rejected — explicit ask);
+  filtering by room age (no accounts exist to filter on).
+- **Tradeoffs:** ⚠ **NSFW content is an AdSense-policy risk** — defaulting
+  to moderate and requiring host opt-in is the mitigation; if AdSense
+  approval becomes an issue, the super-dirty tier can be dropped from the
+  dataset without code changes.
+- **Date:** 2026-08-04
+- **Future impact:** flagged in Blocked Tasks; revisit at M11/AdSense.
+
+---
+
+## D041 — M17 Guess Who: 5-round rotation with celebrity facts (2026-08-04)
+
+- **Decision:** Guess Who is now a 5-round game: the answerer rotates each
+  round (pass-the-phone), a correct guess scores +1 and reveals the
+  celebrity with 1–2 curated facts (all 205 celebrities), the host advances
+  via a new `guess-who-next` event, and the game ends with a podium. The
+  actor-only/answerer-only secret pattern (D023) is unchanged.
+- **Reason:** the owner asked how to get to the next celebrity and wanted
+  richer celebrity info (movies, scandals, news).
+- **Alternatives considered:** auto-advance after a fixed reveal timer
+  (rejected — hosts drive the pace at the table); one fact per celebrity
+  (rejected — two is the floor for a reveal card).
+- **Tradeoffs:** facts are curated common knowledge (a few may age); the
+  answerer rotating means the host isn't always the answerer.
+- **Date:** 2026-08-04
+- **Future impact:** the reveal/advance event pattern is the template for
+  any future round-based party game.

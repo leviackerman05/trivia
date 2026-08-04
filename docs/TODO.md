@@ -403,6 +403,119 @@ rollback path documented.
 
 ---
 
+## Milestone 12 — Global UX Overhaul (owner feedback 2026-08-04) ✅
+
+Working app: the whole site got more room, calmer hover states, and a dark mode.
+
+- [x] Dark mode: semantic tokens (surface-raised/muted, border, border-strong,
+      success/warning/danger soft+strong pairs) swap under `:root.dark`;
+      no-FOUC theme script in BaseLayout head + header toggle; persisted in
+      localStorage; system-preference default; full hardcoded-color sweep of
+      all 23 components/islands (drawing canvas stays white by design)
+- [x] Layout: BaseLayout gains a `wide` prop — game pages render at max-w-7xl
+      so the play area gets real space; content pages at max-w-6xl
+- [x] Hover jank removed: GameCard + ui/Card no longer translate on hover
+      (color/shadow only — the "containers changing heights" report)
+- [x] Hero cleanup: "No downloads / No accounts / Any device" cards replaced
+      with real value props; chip claim removed (owner: "that's a given")
+- [x] Verification: `pnpm verify` green (127 client + 129 server)
+
+## Milestone 13 — Drawing Games (owner feedback 2026-08-04) ✅
+
+Working app: skribbl-style word placement + a Copycat reveal nobody can miss.
+
+- [x] Skribbl family: the word hint (dots + first/last letters) moved to the
+      TOP-CENTER of the play area and enlarged (text-4xl/5xl), skribbl-style;
+      canvas + toolbar sit below; the wider game page enlarges the canvas
+- [x] Copycat: reveal phase now waits for EVERY player's image to load
+      (`copycat-image-loaded` ack), then counts down 10s (fallback cap 30s so
+      a stuck player can't hang the room); loading placeholder + countdown
+      only after the image is on the device; resync includes the image
+- [x] Verification: `pnpm verify` green (127 client + 130 server — new
+      Copycat socket journey + reducer cases)
+
+## Milestone 14 — Solo Game Fixes (owner feedback 2026-08-04) ✅
+
+Working app: no more instant "Time's up!", and smarter judges everywhere.
+
+- [x] Timer bug fixed across Rhyme/Emoji/Genre-Swap/Genre-Bender: deadlines
+      moved into state (`useCountdown`) — the first render of a round can no
+      longer false-fire "Time's up!" (the root cause of the owner report)
+- [x] Setup phases with adjustable timers (30/40/50/60/70 presets, persisted
+      per game): Rhyme or Crime (60s default), Emoji Plot (30s), Genre Swap
+      (30s), Genre-Bender (30s) — the clock only starts when the player does
+- [x] Rhyme or Crime: CMU phonetic judging (`rhyme-phonemes.json`, 4,133
+      words — "hi" now rhymes with "pie"), wrong answers are retryable,
+      category picker (Auto + 8 categories), play-again clears the input
+- [x] Emoji Plot: hint BUTTONS instead of auto-hints — reveal the year (−50)
+      or letters one at a time (−10 each, skribbl-style); play-again clears
+      the input
+- [x] Timeline Tussle: per-card scoring (33/66/100, partial credit) with
+      correct-position counts — no more misleading "3 of 5 correct"
+- [x] Price Is Right: slider removed (numeric input only), listing-style copy
+      quoted under the product, images re-enriched via Openverse with quoted
+      queries + relevance ranking (186 replaced; 524/536 have photos)
+- [x] Verification: `pnpm verify` green (128 client + 130 server)
+
+## Milestone 15 — Data-Driven Games (owner feedback 2026-08-04) ✅
+
+Working app: every dataset game got its requested depth + controls.
+
+- [x] Never Have I Ever: 250 statements tagged boring/moderate/dirty/
+      super-dirty (NSFW — host opt-in, default moderate); host picks the
+      tier AND the statement source (provided / own / both) in the lobby;
+      provided-only mode submits suggestions directly
+- [x] This or That: 320 pairs tagged across 10 genres; host picks a category
+      in the lobby (engine tops up from the full pool when a genre is small)
+- [x] Shadow Sketch: all 144 silhouettes tagged into 6 genres + 34 new
+      detailed multi-part silhouettes (horse, dragon, unicorn, fountain…);
+      host picks the category in the lobby
+- [x] Genre Swap: all 150 descriptions rewritten as genuine reimaginings
+      (the old ones were the original plots with a genre label)
+- [x] Genre-Bender: expanded 70 → 200 entries (130 new Shakespearean
+      paraphrases; lyrics still paraphrased/original — licensing-safe)
+- [x] Verification: `pnpm verify` green (128 client + 133 server)
+
+## Milestone 16 — Voting Game UI (owner feedback 2026-08-04) ✅
+
+Working app: bigger tap targets, no overflowing cards.
+
+- [x] Most Likely To vote cards are larger (min-h-32, display font) — the
+      "clickable area is too small" report
+- [x] All vote cards + reveal rows are overflow-safe: break-words, min-w-0,
+      mobile hides the reveal bar instead of crushing the name
+- [x] Landed with M17's commit
+
+## Milestone 17 — Charades + Guess Who (owner feedback 2026-08-04) ✅
+
+Working app: the toggle actually toggles, and Guess Who is a real game now.
+
+- [x] Charades: category toggle updates optimistically after the ack (the
+      lobby control was acked server-side but never reflected client-side)
+- [x] Guess Who: 5-round game with rotating answerer, +1 per correct guess,
+      between-round reveal with celebrity FACTS (all 205 celebrities have
+      1–2 curated facts), host "Next celebrity" control, final podium with
+      scores; question-cap reveals on any round
+- [x] Verification: `pnpm verify` green (129 client + 134 server)
+
+## Milestone 18 — Trivia + Daily Games (owner feedback 2026-08-04) ✅
+
+Working app: a proper daily-games corner.
+
+- [x] Trivia: dataset 210 → 525 questions across 10 categories (Geography,
+      Movies, Music, Food, Technology added); flat 10-point scoring (0 for
+      wrong) in solo + room modes (Wrong Answers Only inverts); rebranded
+      "Daily Trivia"; question card layout; SEO content updated
+- [x] Daily Sudoku (new 19th game): 400 pre-generated unique-solution
+      puzzles (backtracking generator with uniqueness verification), seeded
+      daily pick, tap-to-fill UI with red conflict highlighting, flat 200
+      points on completion, SoloShell streaks/leaderboard/share, full SEO
+      content + OG image + sitemap entry
+- [x] Verification: `pnpm verify` green (136 client + 134 server, 19 game
+      pages in smoke)
+
+---
+
 ## Future / Backlog (not scheduled)
 
 - [ ] Redis + Socket.io adapter (multi-instance backend, D017)
