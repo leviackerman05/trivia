@@ -167,9 +167,12 @@ sleeps after 15 min idle, which kills rooms; use the paid tier for launch.
 
 - [x] Cloudflare Pages project live with custom domain (apex + www
       verified 200, 2026-08-04)
-- [ ] Railway backend live with healthcheck passing
-- [ ] Production DB migrated + seeded
-- [ ] `CORS_ORIGIN` and `PUBLIC_SERVER_URL` set
+- [x] Railway backend live with healthcheck passing (`readyz` 200,
+      2026-08-04)
+- [x] Production DB migrated + seeded (2026-08-04)
+- [x] `CORS_ORIGIN` and `PUBLIC_SERVER_URL` set (bundle verified)
+- [ ] Browser smoke test: daily game score on the live leaderboard,
+      two-device room over WebSocket
 - [ ] Search Console domain + sitemap submitted
 - [ ] AdSense application (blocked on ~10 daily users, PRD §1)
 - [ ] GA4 real ID (placeholder stays commented until account exists)

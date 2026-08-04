@@ -17,11 +17,14 @@
 
 ## Current Milestone
 
-**Phase F, Launch (frontend done, backend next)**: the frontend is live at
-`https://playtriviahub.com` and `www.playtriviahub.com` (Cloudflare Pages,
-both custom domains active). Git integration deploys on every push to main;
-CI is green on `c4d9540` and later. Remaining: Railway backend + production
-Postgres, migrations and seed (see `docs/DEPLOYMENT.md`).
+**Phase F, Launch (live)**: frontend at `https://playtriviahub.com` and
+`www.playtriviahub.com` (Cloudflare Pages, both custom domains active),
+backend at `https://api.playtriviahub.com` (Railway, `readyz` 200, CORS
+verified, frontend bundle points at the API). Migrations applied and the
+19-game catalog seeded on the production Postgres; the score flow was
+verified end to end (claim, submit, idempotent retry, leaderboard).
+Remaining: browser smoke test (daily game + two-device room), Search
+Console submission, launch checklist in `docs/DEPLOYMENT.md` §9.
 
 **Phase A, Daily Expansion ✅ complete (2026-08-04)**: six new live daily
 games from existing engines (Emoji Plot, Timeline, Price, Rhyme, Genre Swap,

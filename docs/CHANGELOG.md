@@ -4,6 +4,21 @@ All notable changes to TriviaHub are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track package
 metadata (`triviahub`, `@triviahub/server`).
 
+## [0.5.3] - 2026-08-04
+
+### Added
+
+- **Live backend:** Railway service (`triviahubserver`) running the
+  `server/Dockerfile`, production Postgres migrated and seeded (19-game
+  catalog). Custom domain `api.playtriviahub.com` resolves to the service
+  (CNAME, proxied).
+
+### Fixed
+
+- Deployed frontend bundle inlines `https://api.playtriviahub.com`
+  (verified in the served `api.*.js` chunk); CORS accepts
+  `https://playtriviahub.com`.
+
 ## [0.5.2] - 2026-08-04
 
 ### Added
