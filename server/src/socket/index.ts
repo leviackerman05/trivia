@@ -34,7 +34,8 @@ import {
 import {
   COPYCAT_AWARDS,
   COPYCAT_DRAW_MS,
-  COPYCAT_REVEAL_MS,
+  COPYCAT_REVEAL_AFTER_LOAD_MS,
+  COPYCAT_REVEAL_MAX_MS,
   COPYCAT_VOTE_MS,
   CopycatSession,
   type CopycatAward,
@@ -270,6 +271,10 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   const pendingCharadesCategories = new Map<string, CharadesCategory>();
   /** Voting phase deadlines (ms epoch) so resync can rebuild client timers. */
   const votingDeadlines = new Map<string, number>();
+  /** M13 — Copycat: players whose image finished loading (reveal waits). */
+  const copycatLoaded = new Map<string, Set<string>>();
+  /** M13 — Copycat: the post-load 10s timer is scheduled once per reveal. */
+  const copycatPostLoadScheduled = new Set<string>();
 
   function roomOf(socket: Socket): RoomState | undefined {
     return engine.roomsOfSocket(socket.id)[0];
@@ -315,6 +320,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     pendingTriviaModes.delete(roomCode);
     pendingCharadesCategories.delete(roomCode);
     votingDeadlines.delete(roomCode);
+    copycatLoaded.delete(roomCode);
+    copycatPostLoadScheduled.delete(roomCode);
   }
 
   function sessionOf(room: RoomState): GameSession | undefined {
@@ -742,32 +749,42 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       return false;
     }
     sessions.set(room.code, session);
-    const endsAt = Date.now() + COPYCAT_REVEAL_MS;
+    const endsAt = Date.now() + COPYCAT_REVEAL_MAX_MS;
     io.to(room.code).emit(ServerEvents.roundStart, {
       phase: 'image-reveal',
       image: { title: started.value.image.title, url: started.value.image.url },
       endsAt,
     });
+    // Fallback cap: a stuck player can't hang the room forever.
     const roomTimers: RoomTimers = {
-      reveal: setTimeout(() => {
-        const begun = session.beginDrawing();
-        if (!begun.ok) {
-          return;
-        }
-        const drawEndsAt = Date.now() + COPYCAT_DRAW_MS;
-        io.to(room.code).emit(ServerEvents.roundStart, {
-          phase: 'drawing',
-          endsAt: drawEndsAt,
-        });
-        timers.set(room.code, {
-          drawEnd: setTimeout(() => {
-            openGallery(room);
-          }, COPYCAT_DRAW_MS),
-        });
-      }, COPYCAT_REVEAL_MS),
+      reveal: setTimeout(() => advanceToDrawing(room), COPYCAT_REVEAL_MAX_MS),
     };
     timers.set(room.code, roomTimers);
     return true;
+  }
+
+  /** M13 — reveal ends only when every connected player's image has loaded
+   * (then 10s to study it). Scheduled by the image-loaded handler; the 30s
+   * fallback in startCopycat stays as the stuck-player safety net. */
+  function advanceToDrawing(room: RoomState): void {
+    const session = copycatOf(room);
+    if (!session || session.phaseValue !== 'image-reveal') {
+      return;
+    }
+    const begun = session.beginDrawing();
+    if (!begun.ok) {
+      return;
+    }
+    const drawEndsAt = Date.now() + COPYCAT_DRAW_MS;
+    io.to(room.code).emit(ServerEvents.roundStart, {
+      phase: 'drawing',
+      endsAt: drawEndsAt,
+    });
+    timers.set(room.code, {
+      drawEnd: setTimeout(() => {
+        openGallery(room);
+      }, COPYCAT_DRAW_MS),
+    });
   }
 
   function openGallery(room: RoomState): void {
@@ -1898,7 +1915,49 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true });
     });
 
-    // --- Copycat Challenge events (M5) --------------------------------------
+    // --- Copycat Challenge events (M5/M13) ----------------------------------
+
+    socket.on(ClientEvents.copycatImageLoaded, (payload: unknown, ack?: Ack) => {
+      const input = validateRoomCodeInput(payload);
+      if (!input.ok) {
+        ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: input.error });
+        return;
+      }
+      const room = roomOf(socket);
+      if (!room || !isCopycatRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const session = copycatOf(room);
+      if (!session || session.phaseValue !== 'image-reveal') {
+        ack?.({ ok: false });
+        return;
+      }
+      const loaded = copycatLoaded.get(room.code) ?? new Set<string>();
+      loaded.add(player.name);
+      copycatLoaded.set(room.code, loaded);
+      // Every connected player has the image → 10s to study it, then draw.
+      const connected = [...room.players.values()]
+        .filter((entry) => entry.connected)
+        .every((entry) => loaded.has(entry.name));
+      if (connected && !copycatPostLoadScheduled.has(room.code)) {
+        copycatPostLoadScheduled.add(room.code);
+        clearTimers(room.code);
+        timers.set(room.code, {
+          reveal: setTimeout(() => advanceToDrawing(room), COPYCAT_REVEAL_AFTER_LOAD_MS),
+        });
+        io.to(room.code).emit(ServerEvents.roundTimer, {
+          phase: 'image-reveal',
+          endsAt: Date.now() + COPYCAT_REVEAL_AFTER_LOAD_MS,
+        });
+      }
+      ack?.({ ok: true });
+    });
 
     socket.on(ClientEvents.submitDrawing, (payload: unknown, ack?: Ack) => {
       const input = validateRoomCodeInput(payload);

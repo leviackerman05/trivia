@@ -221,4 +221,40 @@ describe('Charades + Guess Who (M9) — DB-backed socket integration', () => {
       expect(true).toBe(true);
     }
   });
+
+  it('Copycat (M13): the reveal waits for both players to load the image, then counts 10s', async () => {
+    const { host, guest, roomCode } = await joinRoom('copycat-challenge');
+
+    const hostReveal = waitFor<{ phase: string; image: { url: string }; endsAt: number }>(
+      host,
+      ServerEvents.roundStart
+    );
+    const guestReveal = waitFor<{ phase: string; image: { url: string }; endsAt: number }>(
+      guest,
+      ServerEvents.roundStart
+    );
+    const started = await emitAck(host, ClientEvents.startGame, { roomCode });
+    expect(started.ok).toBe(true);
+
+    const [hostRound, _guestRound] = [await hostReveal, await guestReveal];
+    expect(hostRound.phase).toBe('image-reveal');
+    expect(hostRound.image.url).toBeTruthy();
+    // Fallback cap first (30s); the post-load 10s timer overrides it.
+    expect(hostRound.endsAt).toBeGreaterThan(Date.now() + 10_000);
+
+    // Only one player loaded → no round-timer yet.
+    await emitAck(host, ClientEvents.copycatImageLoaded, { roomCode });
+    const timerPromise = waitFor<{ phase: string; endsAt: number }>(host, ServerEvents.roundTimer);
+    // The guest loads now → both loaded → the 10s countdown starts.
+    await emitAck(guest, ClientEvents.copycatImageLoaded, { roomCode });
+    const timer = await timerPromise;
+    expect(timer.phase).toBe('image-reveal');
+    expect(timer.endsAt).toBeGreaterThan(Date.now() + 5_000);
+    expect(timer.endsAt).toBeLessThanOrEqual(Date.now() + 10_500);
+
+    // The reveal then advances to the drawing phase (10s after both loaded).
+    const drawPromise = waitFor<{ phase: string }>(guest, ServerEvents.roundStart, 15_000);
+    const draw = await drawPromise;
+    expect(draw.phase).toBe('drawing');
+  }, 20_000);
 });

@@ -32,6 +32,13 @@ describe('copycatReducer — phase flow', () => {
     expect(state.view).toBe('image-reveal');
     expect(state.image?.title).toBe('Mona Lisa');
     expect(state.endsAt).toBe(1_750_000_000_000);
+    // M13 — the reveal waits for the image to load, then the server's 10s
+    // countdown updates the deadline.
+    expect(state.imageLoaded).toBe(false);
+    const loaded = copycatReducer(state, { type: 'image-loaded' });
+    expect(loaded.imageLoaded).toBe(true);
+    const timed = copycatReducer(loaded, { type: 'round-timer', endsAt: 1_750_000_010_000 });
+    expect(timed.endsAt).toBe(1_750_000_010_000);
   });
 
   it('drawing phase resets the private canvas and keeps the image', () => {

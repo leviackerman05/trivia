@@ -24,6 +24,9 @@ export const ClientEvents = {
   // Additive (M5 — one-line lift penalty + Copycat private drawings)
   strokeLift: 'stroke-lift',
   submitDrawing: 'submit-drawing',
+  // Additive (M13) — Copycat: the reveal waits for every player's image
+  // to finish loading, then counts down 10s (no more missed images).
+  copycatImageLoaded: 'copycat-image-loaded',
   // Additive (M6 — voting games: player-submitted prompts)
   submitPrompt: 'submit-prompt',
   // Additive (M8 — Trivia room mode: host mode toggle + answers)

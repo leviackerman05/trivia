@@ -137,6 +137,11 @@ export function useCopycatGame(roomCode: string | null, myName: string | null): 
     const onConnect = () => {
       void resync();
     };
+    const onRoundTimer = (payload: { phase?: string; endsAt?: number }) => {
+      if (payload.phase === 'image-reveal' && typeof payload.endsAt === 'number') {
+        dispatch({ type: 'round-timer', endsAt: payload.endsAt });
+      }
+    };
 
     socket.on('connect', onConnect);
     socket.on(ServerEvents.roundStart, onRoundStart);
@@ -146,6 +151,7 @@ export function useCopycatGame(roomCode: string | null, myName: string | null): 
     socket.on(ServerEvents.voteReveal, onVoteReveal);
     socket.on(ServerEvents.gameEnd, onGameEnd);
     socket.on(ServerEvents.gameRestart, onGameRestart);
+    socket.on(ServerEvents.roundTimer, onRoundTimer);
 
     void resync();
 
@@ -158,9 +164,31 @@ export function useCopycatGame(roomCode: string | null, myName: string | null): 
       socket.off(ServerEvents.voteReveal, onVoteReveal);
       socket.off(ServerEvents.gameEnd, onGameEnd);
       socket.off(ServerEvents.gameRestart, onGameRestart);
+      socket.off(ServerEvents.roundTimer, onRoundTimer);
       socketRef.current = null;
     };
   }, [roomCode, myName, resync]);
+
+  // M13 — preload the reveal image the moment the round starts, then tell
+  // the server. The reveal countdown only begins once every player has the
+  // image (server-side), so nobody misses it to a slow connection.
+  useEffect(() => {
+    if (game.view !== 'image-reveal' || !game.image || game.imageLoaded) {
+      return;
+    }
+    const img = new Image();
+    img.decoding = 'async';
+    const done = () => {
+      dispatch({ type: 'image-loaded' });
+      const code = roomCodeRef.current;
+      if (code) {
+        socketRef.current?.emit(ClientEvents.copycatImageLoaded, { roomCode: code });
+      }
+    };
+    img.onload = done;
+    img.onerror = done;
+    img.src = game.image.url;
+  }, [game.view, game.image, game.imageLoaded]);
 
   const addStroke = useCallback((stroke: Stroke) => {
     dispatch({ type: 'stroke-added', stroke });

@@ -42,6 +42,8 @@ export interface CopycatGameState {
   view: CopycatView;
   myName: string | null;
   image: CopycatImage | null;
+  /** M13 — my device finished loading the reveal image (local flag). */
+  imageLoaded: boolean;
   /** Server-clock deadline of the current phase (ms epoch). */
   endsAt: number | null;
   /** My private strokes — local only, never broadcast. */
@@ -61,6 +63,7 @@ export function initialCopycatState(): CopycatGameState {
     view: 'image-reveal',
     myName: null,
     image: null,
+    imageLoaded: false,
     endsAt: null,
     strokes: [],
     submitted: false,
@@ -74,6 +77,8 @@ export function initialCopycatState(): CopycatGameState {
 
 export type CopycatAction =
   | { type: 'reset' }
+  | { type: 'image-loaded' }
+  | { type: 'round-timer'; endsAt: number }
   | {
       type: 'round-start';
       phase: 'image-reveal' | 'drawing';
@@ -106,12 +111,17 @@ export function copycatReducer(state: CopycatGameState, action: CopycatAction): 
   switch (action.type) {
     case 'reset':
       return { ...initialCopycatState(), myName: state.myName };
+    case 'image-loaded':
+      return { ...state, imageLoaded: true };
+    case 'round-timer':
+      return { ...state, endsAt: action.endsAt };
     case 'round-start':
       return {
         ...state,
         view: action.phase,
         myName: action.myName,
         image: action.phase === 'image-reveal' ? (action.image ?? state.image) : state.image,
+        imageLoaded: false,
         endsAt: action.endsAt,
         strokes: [],
         submitted: false,

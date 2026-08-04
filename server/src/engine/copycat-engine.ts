@@ -8,10 +8,13 @@ import { randomInt } from 'node:crypto';
  * Most Recognizable / Funniest / Most Abstract drawing.
  *
  * Phases: idle → image-reveal → drawing → gallery → voting → results.
- * Timers (5s reveal, 90s draw, 30s vote) are owned by the gateway.
+ * The reveal waits until every player's image has loaded, then counts down
+ * 10s (capped at 30s so a stuck player can't hang the room); drawing is 90s
+ * and voting 30s. Timers are owned by the gateway.
  */
 
-export const COPYCAT_REVEAL_MS = 5_000;
+export const COPYCAT_REVEAL_AFTER_LOAD_MS = 10_000;
+export const COPYCAT_REVEAL_MAX_MS = 30_000;
 export const COPYCAT_DRAW_MS = 90_000;
 export const COPYCAT_VOTE_MS = 30_000;
 /** dataURL length cap — private canvases are uploaded as PNG data URLs. */

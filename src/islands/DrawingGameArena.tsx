@@ -182,6 +182,9 @@ export default function DrawingGameArena({ gameSlug }: Props) {
 
           {drawing.view === 'drawing' && (
             <div className="flex flex-col gap-3">
+              {/* The word sits at the top-center of the play area, skribbl-style. */}
+              <HintRow config={config} drawing={drawing} />
+
               <div className="flex flex-wrap items-center gap-2">
                 {COLOR_PALETTE.map((swatch) => (
                   <button
@@ -300,8 +303,6 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                 tool={tool}
                 ariaLabel={`Shared drawing canvas — ${isDrawer ? 'you are the drawer' : `waiting for ${drawing.drawerName} to draw`}`}
               />
-
-              <HintRow config={config} drawing={drawing} />
 
               {config.liftWarn && isDrawer && drawing.liftWarnings > 0 && (
                 <p
@@ -477,7 +478,7 @@ type SkribblGameStateLike = {
   drawerName: string | null;
 };
 
-/** Word-length dots + letters (skribbl), artist hint (lyric), or reveal note. */
+/** The word (skribbl-style, top-center), artist hint, or silhouette reveal. */
 function HintRow({
   config,
   drawing,
@@ -494,22 +495,25 @@ function HintRow({
 }) {
   if (config.banner === 'lyric' && drawing.artistHint) {
     return (
-      <p aria-live="polite" className="text-body font-semibold text-ink">
+      <p aria-live="polite" className="text-center text-body font-semibold text-ink">
         Artist hint: {drawing.artistHint}
       </p>
     );
   }
   if (config.banner === 'silhouette' && drawing.revealedSilhouette) {
     return (
-      <p aria-live="polite" className="text-body font-semibold text-ink">
+      <p aria-live="polite" className="text-center text-body font-semibold text-ink">
         Silhouette revealed — everyone can see the shadow now!
       </p>
     );
   }
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-col items-center gap-2">
       {config.banner === null && (
-        <span className="flex gap-1 font-mono text-2xl font-semibold tracking-[0.35em] text-ink">
+        <p
+          aria-live="polite"
+          className="flex gap-2 font-mono text-4xl font-bold tracking-[0.3em] text-ink sm:text-5xl"
+        >
           {Array.from({ length: drawing.wordLength ?? 0 }, (_, index) => {
             const last = (drawing.wordLength ?? 1) - 1;
             if (drawing.firstLetter && index === 0) {
@@ -520,9 +524,9 @@ function HintRow({
             }
             return <span key={index}>•</span>;
           })}
-        </span>
+        </p>
       )}
-      <span aria-live="polite" className="text-small text-ink-muted">
+      <span aria-live="polite" className="text-body text-ink-muted">
         {drawing.guessFeedback ?? 'Guess the word before the timer runs out!'}
       </span>
     </div>

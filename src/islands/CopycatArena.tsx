@@ -141,16 +141,33 @@ export default function CopycatArena({ gameSlug }: Props) {
       {copycat.view === 'image-reveal' && copycat.image && (
         <div className="flex flex-col items-center gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <h2 className="font-display text-h2 text-ink">Memorize this!</h2>
-          <p className="text-body text-ink-muted">
-            {copycat.image.kind === 'painting' ? 'A famous painting' : 'An iconic photo'} —{' '}
-            <span className="font-semibold text-primary-deep">{copycat.image.title}</span>. It
-            disappears in {secondsLeft}s — then draw it from memory.
-          </p>
-          <img
-            src={copycat.image.url}
-            alt={copycat.image.title}
-            className="max-h-96 rounded-lg border-2 border-border object-contain shadow-sm"
-          />
+          {!copycat.imageLoaded ? (
+            <div
+              role="status"
+              className="flex min-h-64 w-full max-w-2xl flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-border bg-surface-muted p-8 text-center"
+            >
+              <span className="text-4xl" aria-hidden="true">
+                🖼️
+              </span>
+              <p className="font-display text-h3 text-ink">Loading the image…</p>
+              <p className="text-small text-ink-muted">
+                The timer starts as soon as every player has it — no more missing the reveal.
+              </p>
+            </div>
+          ) : (
+            <>
+              <p className="text-body text-ink-muted">
+                {copycat.image.kind === 'painting' ? 'A famous painting' : 'An iconic photo'} —{' '}
+                <span className="font-semibold text-primary-deep">{copycat.image.title}</span>. It
+                disappears in {secondsLeft}s — then draw it from memory.
+              </p>
+              <img
+                src={copycat.image.url}
+                alt={copycat.image.title}
+                className="max-h-96 rounded-lg border-2 border-border object-contain shadow-sm"
+              />
+            </>
+          )}
         </div>
       )}
 

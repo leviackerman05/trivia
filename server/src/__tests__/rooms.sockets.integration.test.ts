@@ -156,13 +156,20 @@ describe('Socket room lifecycle (PRD §8.2) — DB-backed integration', () => {
     const advanced = await startPromise;
     expect(advanced.phase).toBe('game-setup');
 
-    // Room + players persisted (best-effort writes land async — poll).
+    // Room + players persisted (best-effort writes land async — poll until
+    // BOTH the status and the player rows are durable, or the test flakes).
     const roomRow = await waitForDb(async () => {
       const row = await getPrisma().room.findUnique({
         where: { code: roomCode },
         include: { players: true },
       });
-      return row?.status === 'in-progress' ? row : null;
+      const names = (row?.players ?? []).map((p) => p.playerName).sort();
+      return row?.status === 'in-progress' &&
+        names.length === 2 &&
+        names[0] === 'Guest' &&
+        names[1] === 'Host'
+        ? row
+        : null;
     });
     expect(roomRow.status).toBe('in-progress');
     expect(roomRow.players.map((p) => p.playerName).sort()).toEqual(['Guest', 'Host']);
