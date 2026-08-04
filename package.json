@@ -15,7 +15,7 @@
     "prebuild": "node scripts/generate-og.mjs",
     "og:generate": "node scripts/generate-og.mjs",
     "preview": "astro preview",
-    "deploy": "astro build && wrangler pages deploy",
+    "deploy": "astro build && wrangler pages deploy --project-name triviahub",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",

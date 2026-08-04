@@ -24,33 +24,31 @@ time (`src/lib/api.ts`). The backend validates browser origins through
 
 ## 2. Frontend: Cloudflare Pages
 
-**Primary path (git integration; monorepo support requires Build System V2):**
+**Path (git integration; verified 2026-08-04):**
 
 1. Cloudflare dashboard, Workers & Pages, Create, Pages, connect the GitHub
-   repo (`leviackerman05/trivia`).
-2. When the workspace detection error appears ("application detection logic
-   has been run in the root of a workspace"), it is the auto-detection step
-   failing, not the end of the flow: continue to the build configuration
-   form and fill it manually (docs: monorepos page, Root directory).
-3. Build configuration:
+   repo (`leviackerman05/trivia`). If the workspace detection error appears
+   during connect, continue to the build configuration form and fill it
+   manually (auto-detection failing is not a blocker).
+2. Build configuration (Settings, Builds & deployments):
    - Root directory: `/` (the Astro app lives at the repo root)
    - Framework preset: Astro
    - Build command: `pnpm build`
    - Build output directory: `dist`
    - Environment variables (production):
      `PUBLIC_SERVER_URL=https://api.playtriviahub.com`
-4. Verify the project uses Build System V2 (Settings, Builds & deployments,
-   Build system; V2 is the default for new projects and is required for
-   monorepo root-directory support).
-5. Save and Deploy. Preview deployments on `*.pages.dev` are already
+   - Build system: V2 (required for monorepo root-directory support)
+3. Save and Deploy. Preview deployments on `*.pages.dev` are already
    noindexed (PRD §6.4). Custom domain: `playtriviahub.com`.
 
-**Fallback (direct upload + CI, bypasses git detection entirely):**
-`.github/workflows/deploy.yml` (enabled by adding `CLOUDFLARE_API_TOKEN`
-and `CLOUDFLARE_ACCOUNT_ID` repo secrets) builds with
-`PUBLIC_SERVER_URL=https://api.playtriviahub.com` and runs
-`wrangler pages deploy dist --project-name triviahub` against a
-Direct-Upload project. Use this if git integration is ever blocked.
+**Why there is no `wrangler.toml` or `pages.json` in the repo:** when the
+root directory contains a wrangler config, Build System V2 switches the
+deploy step to `npx wrangler deploy`, and wrangler re-runs the workspace
+application detection, which fails with "detection logic has been run in the
+root of a workspace". Removing the config restores the standard Pages
+uploader, which deploys `dist/` directly. Local CLI uploads use the
+explicit flag form: `pnpm deploy` runs `wrangler pages deploy
+--project-name triviahub` (no config file needed).
 
 **Alternative (direct upload from a machine with a token):**
 

@@ -1,8 +1,0 @@
-# Cloudflare Pages config (M11, D052).
-# `pnpm deploy` builds dist/ and runs `wrangler pages deploy`, which reads
-# this file. The primary production path is the Pages git integration
-# (dashboard: project triviahub, build pnpm build, output dist); this file
-# also supports direct uploads from a machine with CLOUDFLARE_API_TOKEN.
-name = "triviahub"
-compatibility_date = "2026-08-04"
-pages_build_output_dir = "dist"
