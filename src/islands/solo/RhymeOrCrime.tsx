@@ -120,7 +120,9 @@ export default function RhymeOrCrime() {
           <span
             aria-live="polite"
             className={`rounded-pill px-4 py-1.5 font-mono text-sm font-semibold ${
-              remaining <= 10 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+              remaining <= 10
+                ? 'bg-danger-soft text-danger-strong'
+                : 'bg-success-soft text-success-strong'
             }`}
           >
             {remaining}s
@@ -137,7 +139,7 @@ export default function RhymeOrCrime() {
     >
       {entry && (
         <>
-          <div className="rounded-lg border-2 border-gray-200 bg-white p-6 text-center shadow-sm">
+          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 text-center shadow-sm">
             <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
               Category: {entry.category}
             </p>
@@ -155,7 +157,7 @@ export default function RhymeOrCrime() {
               disabled={locked}
               placeholder="Your rhyme…"
               aria-label="Your rhyme"
-              className="min-w-0 flex-1 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+              className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
             />
             <button
               type="submit"
@@ -170,8 +172,8 @@ export default function RhymeOrCrime() {
               role="status"
               className={`rounded-md border-2 px-4 py-2 text-body font-semibold ${
                 feedback.correct
-                  ? 'border-green-300 bg-green-50 text-green-700'
-                  : 'border-red-300 bg-red-50 text-red-700'
+                  ? 'border-success/50 bg-success-soft text-success-strong'
+                  : 'border-danger/50 bg-danger-soft text-danger-strong'
               }`}
             >
               {feedback.text}

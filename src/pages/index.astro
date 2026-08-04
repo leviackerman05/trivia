@@ -17,16 +17,16 @@ const familySections: { family: GameFamily; label: string }[] = [
 
 const valueProps = [
   {
-    title: 'No downloads',
-    body: 'Every game runs right in your browser. Nothing to install, nothing to update.',
+    title: 'Play with friends',
+    body: 'Create a room, share the code, and everyone jumps in — a perfect fit for video calls, classrooms, and couch co-op.',
   },
   {
-    title: 'No accounts',
-    body: 'Pick a nickname and play. One link is all your friends need to join.',
+    title: '18 party games',
+    body: 'Drawing, voting, trivia, word games, charades and more — five families of party classics in one place.',
   },
   {
-    title: 'Any device',
-    body: 'Phones, tablets, laptops — games are built mobile-first with touch in mind.',
+    title: 'Daily challenges',
+    body: 'The same seeded challenge for everyone every day, so the daily leaderboard is a fair race.',
   },
 ];
 
@@ -50,8 +50,7 @@ const jsonLd = JSON.stringify({
   jsonLd={jsonLd}
 >
   <section class="mb-14 text-center">
-    <Chip variant="status" status="success" class="mb-6"
-      >18 free games · no downloads · no accounts</Chip
+    <Chip variant="status" status="success" class="mb-6">18 free party games · play in seconds</Chip
     >
     <h1 class="font-display text-h1 text-ink">
       Free Online Party Games — Play Instantly with Friends
@@ -69,7 +68,7 @@ const jsonLd = JSON.stringify({
   <section aria-label="Why PartyBrain" class="mb-14 grid gap-6 sm:grid-cols-3">
     {
       valueProps.map(({ title, body }) => (
-        <article class="rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+        <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <h2 class="mb-2 font-display text-h4 text-ink">{title}</h2>
           <p class="text-body text-ink-muted">{body}</p>
         </article>

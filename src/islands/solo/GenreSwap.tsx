@@ -126,7 +126,9 @@ export default function GenreSwap() {
           <span
             aria-live="polite"
             className={`rounded-pill px-4 py-1.5 font-mono text-sm font-semibold ${
-              remaining <= 5 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+              remaining <= 5
+                ? 'bg-danger-soft text-danger-strong'
+                : 'bg-success-soft text-success-strong'
             }`}
           >
             {remaining}s
@@ -142,7 +144,7 @@ export default function GenreSwap() {
     >
       {question && (
         <>
-          <div className="rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
             <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
               Now a {question.genre.toLowerCase()} story
             </p>
@@ -161,8 +163,8 @@ export default function GenreSwap() {
                   onClick={() => choose(option)}
                   className={`min-h-14 rounded-lg border-3 px-5 py-3 text-left text-lg font-semibold transition-all disabled:cursor-default ${
                     isCorrect
-                      ? 'border-green-400 bg-green-50 text-green-800'
-                      : 'border-gray-200 bg-white text-ink hover:border-primary hover:bg-primary/5'
+                      ? 'border-success bg-success-soft text-success-strong'
+                      : 'border-border bg-surface-raised text-ink hover:border-primary hover:bg-primary/5'
                   }`}
                 >
                   {option}
@@ -175,8 +177,8 @@ export default function GenreSwap() {
               role="status"
               className={`rounded-md border-2 px-4 py-2 text-body font-semibold ${
                 feedback.correct
-                  ? 'border-green-300 bg-green-50 text-green-700'
-                  : 'border-red-300 bg-red-50 text-red-700'
+                  ? 'border-success/50 bg-success-soft text-success-strong'
+                  : 'border-danger/50 bg-danger-soft text-danger-strong'
               }`}
             >
               {feedback.text}

@@ -122,7 +122,7 @@ export default function SoloShell({
           {name}
         </span>
         {phase === 'playing' && (
-          <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
+          <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
             Round {round} of {totalRounds}
           </span>
         )}
@@ -130,7 +130,7 @@ export default function SoloShell({
           Score: {score}
         </span>
         {streak > 0 && (
-          <span className="rounded-pill bg-amber-100 px-4 py-1.5 text-xs font-semibold text-amber-800">
+          <span className="rounded-pill bg-amber-100 px-4 py-1.5 text-xs font-semibold text-warning-strong">
             🔥 {streak}-day streak
           </span>
         )}
@@ -140,7 +140,7 @@ export default function SoloShell({
       {phase === 'playing' ? (
         <div className="flex flex-col gap-4">{children}</div>
       ) : (
-        <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <h2 className="font-display text-h2 text-ink">Game over!</h2>
           <p className="text-body text-ink-muted">
             You scored <span className="font-display text-h3 text-primary-deep">{score}</span>{' '}
@@ -164,7 +164,7 @@ export default function SoloShell({
                   maxLength={20}
                   placeholder="Your name on the leaderboard"
                   aria-label="Nickname"
-                  className="min-w-0 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25 sm:w-72"
+                  className="min-w-0 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25 sm:w-72"
                 />
               </label>
               <button
@@ -176,20 +176,20 @@ export default function SoloShell({
               </button>
             </form>
           ) : (
-            <p role="status" className="text-small font-semibold text-green-700">
+            <p role="status" className="text-small font-semibold text-success-strong">
               Score saved to the daily leaderboard!
             </p>
           )}
           {submitState === 'failed' && (
-            <p role="alert" className="text-small font-semibold text-red-700">
+            <p role="alert" className="text-small font-semibold text-danger-strong">
               Couldn't save right now — check the server and try again.
             </p>
           )}
 
           {leaderboard.length > 0 && (
-            <div className="rounded-lg border-2 border-gray-100 p-4">
+            <div className="rounded-lg border-2 border-border p-4">
               <h3 className="mb-2 font-display text-h4 text-ink">Today's top scores</h3>
-              <ol className="flex flex-col divide-y-2 divide-dashed divide-gray-100">
+              <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
                 {leaderboard.map((entry) => (
                   <li
                     key={entry.rank}

@@ -123,7 +123,7 @@ export default function RoomLobbyPanel({
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
           <form
             onSubmit={handleCreate}
-            className="flex flex-1 flex-col gap-3 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm"
+            className="flex flex-1 flex-col gap-3 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm"
           >
             <h3 className="font-display text-h4 text-ink">Create a room</h3>
             <label className="flex flex-col gap-1.5">
@@ -133,7 +133,7 @@ export default function RoomLobbyPanel({
                 onChange={(event) => setNickname(event.target.value)}
                 maxLength={20}
                 placeholder="e.g. PartyPanda"
-                className="rounded-md border-2 border-gray-200 bg-white px-4 py-3 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="rounded-md border-2 border-border bg-surface-raised px-4 py-3 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
               />
             </label>
             <button
@@ -156,7 +156,7 @@ export default function RoomLobbyPanel({
 
           <form
             onSubmit={handleJoin}
-            className="flex flex-1 flex-col gap-3 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm"
+            className="flex flex-1 flex-col gap-3 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm"
           >
             <h3 className="font-display text-h4 text-ink">Join a room</h3>
             <label className="flex flex-col gap-1.5">
@@ -167,7 +167,7 @@ export default function RoomLobbyPanel({
                 placeholder="ABC123"
                 maxLength={6}
                 aria-label="Room code"
-                className="rounded-md border-2 border-gray-200 bg-white px-4 py-3 font-mono text-lg uppercase tracking-[0.3em] text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="rounded-md border-2 border-border bg-surface-raised px-4 py-3 font-mono text-lg uppercase tracking-[0.3em] text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
               />
             </label>
             <label className="flex flex-col gap-1.5">
@@ -177,7 +177,7 @@ export default function RoomLobbyPanel({
                 onChange={(event) => setNickname(event.target.value)}
                 maxLength={20}
                 placeholder="e.g. PartyPanda"
-                className="rounded-md border-2 border-gray-200 bg-white px-4 py-3 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="rounded-md border-2 border-border bg-surface-raised px-4 py-3 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
               />
             </label>
             <button
@@ -192,7 +192,7 @@ export default function RoomLobbyPanel({
 
         {lobbyExtras}
 
-        <div className="rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+        <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <div className="mb-3 flex items-center justify-between">
             <h3 className="font-display text-h4 text-ink">Top players — {game?.name}</h3>
             <button
@@ -206,7 +206,7 @@ export default function RoomLobbyPanel({
           {leaderboard.length === 0 ? (
             <p className="text-body text-ink-muted">No scores yet — be the first on the board!</p>
           ) : (
-            <ol className="flex flex-col divide-y-2 divide-dashed divide-gray-200">
+            <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
               {leaderboard.map((entry) => (
                 <li
                   key={entry.rank}
@@ -225,7 +225,7 @@ export default function RoomLobbyPanel({
         {error && (
           <p
             role="alert"
-            className="rounded-md border-2 border-red-500 bg-red-50 px-4 py-3 text-body text-red-700"
+            className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
           >
             {error}
           </p>
@@ -247,7 +247,7 @@ export default function RoomLobbyPanel({
         >
           {copied ? 'Link copied!' : 'Copy invite link'}
         </button>
-        <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
+        <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
           {PHASE_LABELS[room.phase]}
         </span>
         <button
@@ -261,9 +261,9 @@ export default function RoomLobbyPanel({
 
       <div className="grid gap-5 lg:grid-cols-2">
         <div className="flex flex-col gap-5">
-          <div className="rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
             <h3 className="mb-3 font-display text-h4 text-ink">Players ({room.players.length})</h3>
-            <ul className="flex flex-col divide-y-2 divide-dashed divide-gray-200">
+            <ul className="flex flex-col divide-y-2 divide-dashed divide-border">
               {room.players.map((player) => (
                 <li
                   key={player.name}
@@ -306,7 +306,7 @@ export default function RoomLobbyPanel({
           )}
         </div>
 
-        <div className="flex flex-col rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <h3 className="mb-3 font-display text-h4 text-ink">Room chat</h3>
           <ul
             aria-live="polite"
@@ -332,7 +332,7 @@ export default function RoomLobbyPanel({
               maxLength={300}
               placeholder="Type a message…"
               aria-label="Chat message"
-              className="min-w-0 flex-1 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+              className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
             />
             <button
               type="submit"
@@ -348,7 +348,7 @@ export default function RoomLobbyPanel({
       {error && (
         <p
           role="alert"
-          className="rounded-md border-2 border-red-500 bg-red-50 px-4 py-3 text-body text-red-700"
+          className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
         </p>

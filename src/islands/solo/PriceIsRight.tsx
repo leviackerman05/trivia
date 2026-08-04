@@ -96,13 +96,13 @@ export default function PriceIsRight() {
     >
       {product && (
         <>
-          <div className="rounded-lg border-2 border-gray-200 bg-white p-6 text-center shadow-sm">
+          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 text-center shadow-sm">
             {product.image ? (
               <img
                 src={product.image}
                 alt={product.name}
                 loading="lazy"
-                className="mx-auto max-h-56 rounded-lg border-2 border-gray-100 object-contain"
+                className="mx-auto max-h-56 rounded-lg border-2 border-border object-contain"
               />
             ) : (
               <p className="text-6xl" aria-hidden="true">
@@ -118,7 +118,7 @@ export default function PriceIsRight() {
               </p>
             )}
           </div>
-          <div className="rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <label htmlFor="price-guess" className="text-body font-semibold text-ink">
                 What does it cost?
@@ -146,7 +146,7 @@ export default function PriceIsRight() {
               disabled={revealed !== null}
               onChange={(event) => setGuess(Number(event.target.value))}
               aria-label="Price guess in dollars (numeric)"
-              className="mt-3 w-full rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25 sm:w-48"
+              className="mt-3 w-full rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25 sm:w-48"
             />
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <button
@@ -163,10 +163,10 @@ export default function PriceIsRight() {
                     role="status"
                     className={`text-body font-bold ${
                       revealed.points === 200
-                        ? 'text-green-700'
+                        ? 'text-success-strong'
                         : revealed.delta === 0
-                          ? 'text-green-700'
-                          : 'text-amber-700'
+                          ? 'text-success-strong'
+                          : 'text-warning-strong'
                     }`}
                   >
                     It costs {formatPrice(product.price)} — you were{' '}

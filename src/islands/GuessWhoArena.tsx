@@ -86,7 +86,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
         <span className="rounded-pill bg-primary/20 px-5 py-2 font-mono text-lg font-semibold tracking-[0.25em] text-primary-deep">
           {room.code}
         </span>
-        <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
+        <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
           Question {gw.questionCount} of {gw.maxQuestions}
         </span>
         <span className="rounded-pill bg-tertiary/40 px-4 py-1.5 text-xs font-semibold text-ink">
@@ -111,7 +111,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
 
       {gw.view === 'questioning' && !isAnswerer && (
         <div className="flex flex-col gap-4">
-          <div className="rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
             <h2 className="font-display text-h2 text-ink">Who is the secret celebrity?</h2>
             <p className="mt-1 text-body text-ink-muted">
               Ask yes/no questions to narrow it down — you can guess the name at any time.
@@ -123,7 +123,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
                 maxLength={140}
                 placeholder="Are they alive? Are they an actor?"
                 aria-label="Yes/no question"
-                className="min-w-0 flex-1 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
               />
               <button
                 type="submit"
@@ -140,7 +140,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
                 maxLength={60}
                 placeholder="Guess the name…"
                 aria-label="Celebrity guess"
-                className="min-w-0 flex-1 rounded-md border-2 border-dashed border-primary/50 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-primary focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="min-w-0 flex-1 rounded-md border-2 border-dashed border-primary/50 bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-primary focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
               />
               <button
                 type="submit"
@@ -157,7 +157,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
       )}
 
       {gw.view === 'game-end' && (
-        <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <h2 className="font-display text-h2 text-ink">
             {gw.winner ? `🎉 ${gw.winner} guessed it!` : 'Time’s up — the secret is out'}
           </h2>
@@ -186,7 +186,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
       )}
 
       {gw.feedback && (
-        <p role="status" className="text-small font-semibold text-red-700">
+        <p role="status" className="text-small font-semibold text-danger-strong">
           {gw.feedback}
         </p>
       )}
@@ -194,7 +194,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
       {error && (
         <p
           role="alert"
-          className="rounded-md border-2 border-red-500 bg-red-50 px-4 py-3 text-body text-red-700"
+          className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
         </p>
@@ -214,7 +214,7 @@ function AnswererView({
   onAnswer: (yes: boolean) => void;
 }) {
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
       <h2 className="font-display text-h3 text-ink">You hold the secret</h2>
       {celebrity && (
         <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 p-5">
@@ -281,7 +281,7 @@ function QuestionLog({
   questions: { playerName: string; question: string; answer: boolean | null }[];
 }) {
   return (
-    <div className="rounded-lg border-2 border-gray-200 bg-white p-5 shadow-sm">
+    <div className="rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="mb-2 font-display text-h4 text-ink">Question log</h3>
       {questions.length === 0 ? (
         <p className="text-small text-ink-muted">No questions yet — ask away!</p>
@@ -294,8 +294,8 @@ function QuestionLog({
                 <span
                   className={
                     entry.answer
-                      ? 'ml-1 font-semibold text-green-700'
-                      : 'ml-1 font-semibold text-red-600'
+                      ? 'ml-1 font-semibold text-success-strong'
+                      : 'ml-1 font-semibold text-danger-strong'
                   }
                 >
                   → {entry.answer ? 'Yes' : 'No'}

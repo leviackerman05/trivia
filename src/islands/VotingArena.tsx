@@ -97,14 +97,16 @@ export default function VotingArena({ gameSlug }: Props) {
         <span className="rounded-pill bg-primary/20 px-5 py-2 font-mono text-lg font-semibold tracking-[0.25em] text-primary-deep">
           {room.code}
         </span>
-        <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
+        <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
           {KIND_LABELS[kind] ?? 'Voting'} · Round {voting.round} of {voting.totalRounds}
         </span>
         {(voting.view === 'voting' || voting.view === 'statement') && (
           <span
             aria-live="polite"
             className={`rounded-pill px-4 py-1.5 font-mono text-sm font-semibold ${
-              secondsLeft <= 10 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+              secondsLeft <= 10
+                ? 'bg-danger-soft text-danger-strong'
+                : 'bg-success-soft text-success-strong'
             }`}
           >
             {secondsLeft}s
@@ -166,7 +168,7 @@ export default function VotingArena({ gameSlug }: Props) {
           {voting.feedback && (
             <p
               role="status"
-              className="rounded-md border-2 border-green-300 bg-green-50 px-4 py-2 text-small font-semibold text-green-700"
+              className="rounded-md border-2 border-success/50 bg-success-soft px-4 py-2 text-small font-semibold text-success-strong"
             >
               {voting.feedback}
             </p>
@@ -175,7 +177,7 @@ export default function VotingArena({ gameSlug }: Props) {
           {error && (
             <p
               role="alert"
-              className="rounded-md border-2 border-red-500 bg-red-50 px-4 py-3 text-body text-red-700"
+              className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
             >
               {error}
             </p>
@@ -215,7 +217,7 @@ function StatementView({
     setBusy(false);
   };
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
       <h2 className="font-display text-h3 text-ink">{voting.prompt.title}</h2>
       <p className="text-body text-ink-muted">{voting.prompt.subtitle}</p>
       {isMine ? (
@@ -230,7 +232,7 @@ function StatementView({
             rows={2}
             maxLength={120}
             placeholder="…eaten pineapple on pizza"
-            className="w-full rounded-md border-2 border-gray-200 bg-white px-4 py-3 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+            className="w-full rounded-md border-2 border-border bg-surface-raised px-4 py-3 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
           />
           <div className="flex flex-wrap gap-2">
             {voting.suggestions.map((suggestion) => (
@@ -240,7 +242,7 @@ function StatementView({
                 onClick={() => {
                   setDraft(suggestion);
                 }}
-                className="rounded-pill border-2 border-gray-300 bg-white px-3 py-1.5 text-small text-ink transition-colors hover:bg-primary/10"
+                className="rounded-pill border-2 border-border bg-surface-raised px-3 py-1.5 text-small text-ink transition-colors hover:bg-primary/10"
               >
                 {suggestion}
               </button>
@@ -278,7 +280,7 @@ function VotingView({
 }) {
   const tallies = new Map(voting.tallies.map((row) => [row.optionId, row.count]));
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
       <h2 className="font-display text-h2 text-ink">{voting.prompt.title}</h2>
       {voting.prompt.subtitle && (
         <p className="text-body text-ink-muted">{voting.prompt.subtitle}</p>
@@ -352,20 +354,24 @@ function VoteCard({
         onClick={onVote}
         aria-pressed={voted}
         className={`flex min-h-28 flex-col items-center justify-center gap-1 rounded-lg border-3 px-5 py-4 text-center shadow-sm transition-all disabled:cursor-default ${
-          voted ? 'border-transparent text-white' : 'border-gray-300 bg-white hover:border-primary'
+          voted
+            ? 'border-transparent text-white'
+            : 'border-border bg-surface-raised hover:border-primary'
         }`}
         style={voted && accentColor ? { backgroundColor: accentColor } : undefined}
       >
         <span className="text-xl font-bold leading-snug">{option.label}</span>
         {option.label === myName && (
-          <span className="rounded-pill bg-white/20 px-2 py-0.5 text-xs font-semibold">You</span>
+          <span className="rounded-pill bg-surface-raised/20 px-2 py-0.5 text-xs font-semibold">
+            You
+          </span>
         )}
         {voted && (
           <span className="text-xs font-semibold uppercase tracking-wide">✓ Your pick</span>
         )}
       </button>
       <div
-        className="flex h-5 items-center gap-2 overflow-hidden rounded-pill bg-gray-100"
+        className="flex h-5 items-center gap-2 overflow-hidden rounded-pill bg-surface-muted"
         role="progressbar"
         aria-valuenow={percent}
         aria-valuemin={0}
@@ -402,7 +408,7 @@ function RevealView({
   }
   const sorted = [...reveal.tallies].sort((a, b) => b.count - a.count);
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
       <h2 className="font-display text-h3 text-ink">
         {voting.kind === 'never-have-i-ever' ? 'The verdict' : 'The results'}
       </h2>
@@ -423,7 +429,7 @@ function RevealView({
                 <div
                   key={row.optionId}
                   className={`flex items-center gap-3 rounded-lg border-2 px-4 py-2 ${
-                    isWinner ? 'border-primary bg-primary/10' : 'border-gray-100'
+                    isWinner ? 'border-primary bg-primary/10' : 'border-border'
                   }`}
                 >
                   <span className="min-w-6 text-lg" aria-hidden="true">
@@ -437,7 +443,7 @@ function RevealView({
                       </span>
                     )}
                   </span>
-                  <div className="h-3 w-40 overflow-hidden rounded-pill bg-gray-100">
+                  <div className="h-3 w-40 overflow-hidden rounded-pill bg-surface-muted">
                     <div
                       className="h-full rounded-pill bg-primary transition-all duration-500"
                       style={{ width: `${percent}%` }}
@@ -482,7 +488,7 @@ function SubmitDilemma({
   const [b, setB] = useState('');
   const [busy, setBusy] = useState(false);
   return (
-    <div className="rounded-lg border-2 border-dashed border-gray-300 bg-white p-5 shadow-sm">
+    <div className="rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="font-display text-h4 text-ink">Submit your own dilemma</h3>
       <p className="mt-1 text-small text-ink-muted">
         It joins the room's queue and appears in a future round.
@@ -494,7 +500,7 @@ function SubmitDilemma({
           maxLength={160}
           placeholder="Option A — e.g. be able to fly 3 feet off the ground"
           aria-label="Dilemma option A"
-          className="rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+          className="rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
         />
         <input
           value={b}
@@ -502,7 +508,7 @@ function SubmitDilemma({
           maxLength={160}
           placeholder="Option B — e.g. teleport to places you've been"
           aria-label="Dilemma option B"
-          className="rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+          className="rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
         />
       </div>
       <button
@@ -529,12 +535,12 @@ function Scoreboard({ voting, myName }: { voting: VotingGameState; myName: strin
   const rows = voting.kind === 'never-have-i-ever' ? voting.wildness : voting.crowns;
   const title = voting.kind === 'never-have-i-ever' ? 'Wildness score' : 'Crown count';
   return (
-    <div className="rounded-lg border-2 border-gray-200 bg-white p-5 shadow-sm">
+    <div className="rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="mb-2 font-display text-h4 text-ink">{title}</h3>
       {rows.length === 0 ? (
         <p className="text-small text-ink-muted">No tallies yet.</p>
       ) : (
-        <ol className="flex flex-col divide-y-2 divide-dashed divide-gray-200">
+        <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
           {rows.map((row) => (
             <li
               key={row.playerName}
@@ -571,14 +577,14 @@ function GameEndView({
 }) {
   const payload = voting.endPayload ?? {};
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
       <h2 className="font-display text-h2 text-ink">Game over!</h2>
       {voting.kind === 'this-or-that' && Array.isArray(payload.scores) && (
         <>
           <p className="text-body text-ink-muted">
             Herd alignment — how often your pick matched the room's majority:
           </p>
-          <ol className="flex flex-col divide-y-2 divide-dashed divide-gray-200">
+          <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
             {(payload.scores as { playerName: string; score: number }[]).map((entry, index) => (
               <li
                 key={entry.playerName}
@@ -651,7 +657,7 @@ function ChatPanel({
     }
   };
   return (
-    <div className="flex flex-col rounded-lg border-2 border-gray-200 bg-white p-5 shadow-sm">
+    <div className="flex flex-col rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="mb-2 font-display text-h4 text-ink">Room chat</h3>
       <ul aria-live="polite" className="flex max-h-48 min-h-24 flex-col gap-2 overflow-y-auto pr-1">
         {messages.map((message, index) => (
@@ -674,7 +680,7 @@ function ChatPanel({
           maxLength={300}
           placeholder="Type a message…"
           aria-label="Chat message"
-          className="min-w-0 flex-1 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+          className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
         />
         <button
           type="submit"

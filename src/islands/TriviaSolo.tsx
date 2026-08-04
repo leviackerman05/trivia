@@ -239,7 +239,7 @@ export default function TriviaSolo() {
               onChange={(event) => setNickname(event.target.value)}
               maxLength={20}
               placeholder="e.g. QuizWhiz"
-              className="rounded-md border-2 border-gray-200 bg-white px-4 py-3 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+              className="rounded-md border-2 border-border bg-surface-raised px-4 py-3 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
             />
           </label>
           <button
@@ -263,7 +263,7 @@ export default function TriviaSolo() {
           <span className="rounded-pill bg-primary/20 px-4 py-1.5 text-xs font-semibold text-primary-deep">
             {dateKey}
           </span>
-          <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
+          <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
             {correctCount}/{results.length} correct
           </span>
         </div>
@@ -279,7 +279,7 @@ export default function TriviaSolo() {
             <span className="text-small text-ink-muted">Saving your score…</span>
           )}
           {submitState === 'saved' && (
-            <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
+            <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
               Score saved to the leaderboard
             </span>
           )}
@@ -320,7 +320,9 @@ export default function TriviaSolo() {
         <span
           aria-live="polite"
           className={`ml-auto rounded-pill px-4 py-1.5 font-mono text-sm font-semibold ${
-            remaining <= 5 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+            remaining <= 5
+              ? 'bg-danger-soft text-danger-strong'
+              : 'bg-success-soft text-success-strong'
           }`}
         >
           {remaining}s
@@ -337,11 +339,11 @@ export default function TriviaSolo() {
             'inline-flex min-h-14 items-center justify-center rounded-pill border-3 bg-transparent px-6 py-3 text-lg font-semibold transition-colors';
           if (isRevealed) {
             if (isCorrectOption) {
-              classes += ' border-green-600 bg-green-100 text-green-900';
+              classes += ' border-success bg-success-soft text-success-strong';
             } else if (isPicked) {
-              classes += ' border-red-500 bg-red-100 text-red-800';
+              classes += ' border-danger bg-danger-soft text-danger-strong';
             } else {
-              classes += ' border-gray-200 text-ink-muted opacity-60';
+              classes += ' border-border text-ink-muted opacity-60';
             }
           } else {
             classes +=

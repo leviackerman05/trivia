@@ -24,12 +24,26 @@
   --color-secondary-dark: #3dbeb5;
   --color-tertiary: #ffe66d;
   --color-surface: #ffffff;
+  /* M12 — semantic surfaces/borders (dark mode swaps these under :root.dark). */
+  --color-surface-raised: #ffffff;
+  --color-surface-muted: #f7f4f1;
+  --color-border: #e5e7eb;
+  --color-border-strong: #9ca3af;
   --color-success: #4ecdc4;
   --color-warning: #ffe66d;
   --color-error: #ff6b6b;
   --color-info: #60a5fa;
   --color-ink: #2d2d2d;
   --color-ink-muted: #6b6b6b;
+  /* Status soft/strong pairs (M12) — readable on both themes (WCAG AA). */
+  --color-success-soft: #dcfce7;
+  --color-success-strong: #15803d;
+  --color-warning-soft: #fef3c7;
+  --color-warning-strong: #92400e;
+  --color-danger-soft: #fee2e2;
+  --color-danger-strong: #b91c1c;
+  --color-info-soft: #dbeafe;
+  --color-info-strong: #1d4ed8;
 
   /* Typography (PRD §11) */
   --font-display: 'Titan One', 'Comic Sans MS', sans-serif;
@@ -63,6 +77,39 @@
   --shadow-coral: 0 4px 14px rgb(255 107 107 / 0.35);
   --shadow-teal: 0 4px 14px rgb(78 205 196 / 0.35);
   --shadow-sunny: 0 4px 14px rgb(255 230 109 / 0.4);
+}
+
+/* Dark theme (M12) — semantic tokens swap under the `.dark` class; all
+   components use tokens, so the whole site flips. Set by the theme script
+   in BaseLayout (no-FOUC) + the header toggle; persists in localStorage. */
+:root.dark {
+  color-scheme: dark;
+  --color-surface: #141419;
+  --color-surface-raised: #1c1c23;
+  --color-surface-muted: #26262e;
+  --color-border: #34343e;
+  --color-border-strong: #5a5a66;
+  --color-ink: #f1f1f4;
+  --color-ink-muted: #a3a3ad;
+  --color-primary-strong: #ff8a7a;
+  --color-primary-deep: #ff9d8f;
+  --color-primary-hover: #ff6b6b;
+  --color-success-soft: rgb(74 222 128 / 0.16);
+  --color-success-strong: #4ade80;
+  --color-warning-soft: rgb(251 191 36 / 0.16);
+  --color-warning-strong: #fbbf24;
+  --color-danger-soft: rgb(248 113 113 / 0.16);
+  --color-danger-strong: #f87171;
+  --color-info-soft: rgb(96 165 250 / 0.16);
+  --color-info-strong: #93c5fd;
+  --color-secondary: #5ed5cc;
+  --color-secondary-dark: #4ecdc4;
+  --shadow-sm: 0 2px 4px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 10px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 8px 20px rgb(0 0 0 / 0.55);
+  --shadow-coral: 0 4px 14px rgb(255 107 107 / 0.25);
+  --shadow-teal: 0 4px 14px rgb(78 205 196 / 0.25);
+  --shadow-sunny: 0 4px 14px rgb(255 230 109 / 0.25);
 }
 
 @layer base {

@@ -108,7 +108,7 @@ export default function CopycatArena({ gameSlug }: Props) {
         <span className="rounded-pill bg-primary/20 px-5 py-2 font-mono text-lg font-semibold tracking-[0.25em] text-primary-deep">
           {room.code}
         </span>
-        <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
+        <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
           {copycat.view === 'image-reveal' && 'Memorize this!'}
           {copycat.view === 'drawing' && 'Draw it from memory'}
           {copycat.view === 'gallery' && 'Gallery'}
@@ -121,7 +121,9 @@ export default function CopycatArena({ gameSlug }: Props) {
           <span
             aria-live="polite"
             className={`rounded-pill px-4 py-1.5 font-mono text-sm font-semibold ${
-              secondsLeft <= 10 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+              secondsLeft <= 10
+                ? 'bg-danger-soft text-danger-strong'
+                : 'bg-success-soft text-success-strong'
             }`}
           >
             {secondsLeft}s
@@ -137,7 +139,7 @@ export default function CopycatArena({ gameSlug }: Props) {
       </div>
 
       {copycat.view === 'image-reveal' && copycat.image && (
-        <div className="flex flex-col items-center gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col items-center gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <h2 className="font-display text-h2 text-ink">Memorize this!</h2>
           <p className="text-body text-ink-muted">
             {copycat.image.kind === 'painting' ? 'A famous painting' : 'An iconic photo'} —{' '}
@@ -147,7 +149,7 @@ export default function CopycatArena({ gameSlug }: Props) {
           <img
             src={copycat.image.url}
             alt={copycat.image.title}
-            className="max-h-96 rounded-lg border-2 border-gray-200 object-contain shadow-sm"
+            className="max-h-96 rounded-lg border-2 border-border object-contain shadow-sm"
           />
         </div>
       )}
@@ -166,7 +168,7 @@ export default function CopycatArena({ gameSlug }: Props) {
                   setTool('pen');
                 }}
                 className={`h-9 w-9 rounded-full border-2 transition-transform hover:scale-110 ${
-                  color === swatch && tool === 'pen' ? 'scale-110 border-ink' : 'border-gray-300'
+                  color === swatch && tool === 'pen' ? 'scale-110 border-ink' : 'border-border'
                 }`}
                 style={{ backgroundColor: swatch }}
               />
@@ -179,12 +181,12 @@ export default function CopycatArena({ gameSlug }: Props) {
               className={`inline-flex h-9 min-w-14 items-center justify-center rounded-pill border-2 px-3 text-xs font-semibold ${
                 tool === 'eraser'
                   ? 'border-ink bg-secondary text-white'
-                  : 'border-gray-300 bg-white text-ink hover:bg-gray-100'
+                  : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
               }`}
             >
               Eraser
             </button>
-            <span className="mx-1 h-6 w-px bg-gray-300" aria-hidden="true" />
+            <span className="mx-1 h-6 w-px bg-border" aria-hidden="true" />
             {BRUSH_SIZES.map((size) => (
               <button
                 key={size}
@@ -195,7 +197,7 @@ export default function CopycatArena({ gameSlug }: Props) {
                 className={`inline-flex h-9 w-9 items-center justify-center rounded-pill border-2 ${
                   brushSize === size
                     ? 'border-ink bg-primary/15'
-                    : 'border-gray-300 bg-white hover:bg-gray-100'
+                    : 'border-border bg-surface-raised hover:bg-surface-muted'
                 }`}
               >
                 <span
@@ -205,18 +207,18 @@ export default function CopycatArena({ gameSlug }: Props) {
                 />
               </button>
             ))}
-            <span className="mx-1 h-6 w-px bg-gray-300" aria-hidden="true" />
+            <span className="mx-1 h-6 w-px bg-border" aria-hidden="true" />
             <button
               type="button"
               onClick={() => gameActions.removeStroke(copycat.strokes.at(-1)?.strokeId ?? '')}
-              className="rounded-pill border-2 border-gray-300 bg-white px-3 py-1.5 text-xs font-semibold text-ink hover:bg-gray-100"
+              className="rounded-pill border-2 border-border bg-surface-raised px-3 py-1.5 text-xs font-semibold text-ink hover:bg-surface-muted"
             >
               Undo
             </button>
             <button
               type="button"
               onClick={() => gameActions.clearCanvas()}
-              className="rounded-pill border-2 border-red-300 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-700 hover:bg-red-100"
+              className="rounded-pill border-2 border-danger/50 bg-danger-soft px-3 py-1.5 text-xs font-semibold text-danger-strong hover:bg-danger-soft"
             >
               Clear
             </button>
@@ -242,7 +244,7 @@ export default function CopycatArena({ gameSlug }: Props) {
           {copycat.feedback && (
             <p
               role="status"
-              className="rounded-md border-2 border-green-300 bg-green-50 px-4 py-2 text-small font-semibold text-green-700"
+              className="rounded-md border-2 border-success/50 bg-success-soft px-4 py-2 text-small font-semibold text-success-strong"
             >
               {copycat.feedback}
             </p>
@@ -259,7 +261,7 @@ export default function CopycatArena({ gameSlug }: Props) {
       {error && (
         <p
           role="alert"
-          className="rounded-md border-2 border-red-500 bg-red-50 px-4 py-3 text-body text-red-700"
+          className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
         </p>
@@ -306,12 +308,12 @@ function GalleryView({
         {copycat.drawings.map((drawing) => (
           <li
             key={drawing.playerName}
-            className="flex flex-col gap-2 rounded-lg border-2 border-gray-200 bg-white p-3 shadow-sm"
+            className="flex flex-col gap-2 rounded-lg border-2 border-border bg-surface-raised p-3 shadow-sm"
           >
             <button
               type="button"
               onClick={() => setEnlarged(drawing.image)}
-              className="overflow-hidden rounded-md border-2 border-gray-100 bg-white transition-transform hover:scale-[1.02]"
+              className="overflow-hidden rounded-md border-2 border-border bg-surface-raised transition-transform hover:scale-[1.02]"
               aria-label={`Enlarge ${drawing.playerName}'s drawing`}
             >
               <img
@@ -344,8 +346,8 @@ function GalleryView({
                         mine === drawing.playerName
                           ? 'border-primary bg-primary/20 text-primary-deep'
                           : disabled
-                            ? 'border-gray-200 bg-gray-50 text-ink-muted opacity-60'
-                            : 'border-gray-300 bg-white text-ink hover:bg-primary/10'
+                            ? 'border-border bg-surface-muted text-ink-muted opacity-60'
+                            : 'border-border bg-surface-raised text-ink hover:bg-primary/10'
                       }`}
                     >
                       {mine === drawing.playerName
@@ -370,7 +372,7 @@ function GalleryView({
           <img
             src={enlarged}
             alt="Enlarged drawing"
-            className="max-h-[85vh] max-w-full rounded-lg border-4 border-white bg-white object-contain shadow-xl"
+            className="max-h-[85vh] max-w-full rounded-lg border-4 border-white bg-surface-raised object-contain shadow-xl"
           />
         </button>
       )}
@@ -381,7 +383,7 @@ function GalleryView({
 /** Live vote tallies per category (updates arrive on every cast vote). */
 function LiveTally({ copycat }: { copycat: CopycatGameState }) {
   return (
-    <div className="flex flex-col gap-3 rounded-lg border-2 border-gray-200 bg-white p-5 shadow-sm">
+    <div className="flex flex-col gap-3 rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="font-display text-h4 text-ink">Live tallies</h3>
       {(Object.keys(COPYCAT_AWARD_LABELS) as CopycatAward[]).map((category) => {
         const votes = copycat.tallies[category] ?? [];
@@ -401,7 +403,7 @@ function LiveTally({ copycat }: { copycat: CopycatGameState }) {
                 {votes.map((row) => (
                   <div key={row.playerName} className="flex items-center gap-2">
                     <span className="w-24 truncate text-small text-ink">{row.playerName}</span>
-                    <div className="h-3 flex-1 overflow-hidden rounded-pill bg-gray-100">
+                    <div className="h-3 flex-1 overflow-hidden rounded-pill bg-surface-muted">
                       <div
                         className="h-full rounded-pill bg-primary transition-all duration-300"
                         style={{
@@ -436,7 +438,7 @@ function AwardsView({ copycat }: { copycat: CopycatGameState }) {
         {awards.map((award) => (
           <div
             key={award.category}
-            className="flex flex-col gap-3 rounded-lg border-2 border-gray-200 bg-white p-5 text-center shadow-sm"
+            className="flex flex-col gap-3 rounded-lg border-2 border-border bg-surface-raised p-5 text-center shadow-sm"
           >
             <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
               {COPYCAT_AWARD_LABELS[award.category]}
@@ -478,7 +480,7 @@ function ChatBox({
   onSend: (event: SyntheticEvent<HTMLFormElement>) => void;
 }) {
   return (
-    <div className="flex flex-col rounded-lg border-2 border-gray-200 bg-white p-5 shadow-sm">
+    <div className="flex flex-col rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="mb-2 font-display text-h4 text-ink">Room chat</h3>
       <ul aria-live="polite" className="flex max-h-48 min-h-24 flex-col gap-2 overflow-y-auto pr-1">
         {messages.map((message, index) => (
@@ -503,7 +505,7 @@ function ChatBox({
           maxLength={300}
           placeholder="Type a message…"
           aria-label="Chat message"
-          className="min-w-0 flex-1 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+          className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
         />
         <button
           type="submit"

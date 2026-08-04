@@ -10,7 +10,7 @@ const { game } = Astro.props;
 
 <a
   href={`/game/${game.slug}`}
-  class="flex h-full flex-col gap-3 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm transition duration-150 hover:-translate-y-1 hover:border-secondary hover:shadow-md"
+  class="flex h-full flex-col gap-3 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm transition-colors hover:border-secondary hover:shadow-md"
 >
   <h2 class="font-display text-h3 text-ink">{game.name}</h2>
   <p class="text-body text-ink-muted">{game.tagline}</p>

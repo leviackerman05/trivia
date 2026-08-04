@@ -96,7 +96,7 @@ export default function CharadesArena({ gameSlug }: Props) {
         <span className="rounded-pill bg-primary/20 px-5 py-2 font-mono text-lg font-semibold tracking-[0.25em] text-primary-deep">
           {room.code}
         </span>
-        <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
+        <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
           {CATEGORY_LABELS[charades.category] ?? 'Mixed'} · Round {charades.round} of{' '}
           {charades.totalRounds}
         </span>
@@ -104,7 +104,9 @@ export default function CharadesArena({ gameSlug }: Props) {
           <span
             aria-live="polite"
             className={`rounded-pill px-4 py-1.5 font-mono text-sm font-semibold ${
-              secondsLeft <= 10 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+              secondsLeft <= 10
+                ? 'bg-danger-soft text-danger-strong'
+                : 'bg-success-soft text-success-strong'
             }`}
           >
             {secondsLeft}s
@@ -123,7 +125,7 @@ export default function CharadesArena({ gameSlug }: Props) {
       </div>
 
       {charades.view === 'acting' && (
-        <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           {isActor ? (
             <>
               <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
@@ -171,7 +173,7 @@ export default function CharadesArena({ gameSlug }: Props) {
       )}
 
       {charades.view === 'game-end' && (
-        <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <h2 className="font-display text-h2 text-ink">
             {charades.score > 0 ? `🎭 The team scored ${charades.score}!` : 'Game over'}
           </h2>
@@ -193,7 +195,7 @@ export default function CharadesArena({ gameSlug }: Props) {
         </div>
       )}
 
-      <div className="flex flex-col rounded-lg border-2 border-gray-200 bg-white p-5 shadow-sm">
+      <div className="flex flex-col rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
         <h3 className="mb-2 font-display text-h4 text-ink">Room chat</h3>
         <ul
           aria-live="polite"
@@ -231,7 +233,7 @@ export default function CharadesArena({ gameSlug }: Props) {
             maxLength={300}
             placeholder="Type a guess…"
             aria-label="Chat message"
-            className="min-w-0 flex-1 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+            className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
           />
           <button
             type="submit"
@@ -246,7 +248,7 @@ export default function CharadesArena({ gameSlug }: Props) {
       {error && (
         <p
           role="alert"
-          className="rounded-md border-2 border-red-500 bg-red-50 px-4 py-3 text-body text-red-700"
+          className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
         </p>
@@ -264,7 +266,7 @@ function CategoryToggle({
   onSelect: (category: 'hollywood' | 'bollywood' | 'mixed') => void;
 }) {
   return (
-    <div className="rounded-lg border-2 border-dashed border-gray-300 bg-white p-5 shadow-sm">
+    <div className="rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="font-display text-h4 text-ink">Category (host)</h3>
       <div className="mt-3 flex flex-wrap gap-2">
         {(['hollywood', 'bollywood', 'mixed'] as const).map((option) => (
@@ -276,7 +278,7 @@ function CategoryToggle({
             className={`rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
               category === option
                 ? 'border-primary bg-primary/15 text-primary-deep'
-                : 'border-gray-300 bg-white text-ink hover:bg-gray-100'
+                : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
             }`}
           >
             {CATEGORY_LABELS[option]}

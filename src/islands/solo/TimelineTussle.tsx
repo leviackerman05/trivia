@@ -102,7 +102,7 @@ export default function TimelineTussle() {
     >
       {round && (
         <>
-          <div className="rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
             <p className="font-display text-h3 text-ink">Tap the events in chronological order</p>
             <p className="mt-1 text-small text-ink-muted">
               Tap again to undo a pick — you need all three before submitting.
@@ -122,17 +122,17 @@ export default function TimelineTussle() {
                       aria-pressed={placed}
                       className={`flex w-full items-center gap-4 rounded-lg border-2 px-5 py-4 text-left transition-all ${
                         correct
-                          ? 'border-green-400 bg-green-50'
+                          ? 'border-success bg-success-soft'
                           : wrong
-                            ? 'border-red-300 bg-red-50'
+                            ? 'border-danger/50 bg-danger-soft'
                             : placed
                               ? 'border-primary bg-primary/10'
-                              : 'border-gray-200 bg-white hover:border-primary'
+                              : 'border-border bg-surface-raised hover:border-primary'
                       }`}
                     >
                       <span
                         className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-pill font-mono text-lg font-bold ${
-                          placed ? 'bg-primary text-white' : 'bg-gray-100 text-ink-muted'
+                          placed ? 'bg-primary text-white' : 'bg-surface-muted text-ink-muted'
                         }`}
                       >
                         {placed ? position + 1 : '·'}
@@ -141,7 +141,7 @@ export default function TimelineTussle() {
                       {revealed !== null && (
                         <span
                           className={`font-mono text-sm font-bold ${
-                            correct ? 'text-green-700' : 'text-red-600'
+                            correct ? 'text-success-strong' : 'text-danger-strong'
                           }`}
                         >
                           {card.year > 0 ? card.year : `${Math.abs(card.year)} BCE`}
@@ -158,10 +158,10 @@ export default function TimelineTussle() {
                   role="status"
                   className={`text-body font-bold ${
                     points === 100
-                      ? 'text-green-700'
+                      ? 'text-success-strong'
                       : points === 50
-                        ? 'text-amber-700'
-                        : 'text-red-600'
+                        ? 'text-warning-strong'
+                        : 'text-danger-strong'
                   }`}
                 >
                   {points === 100

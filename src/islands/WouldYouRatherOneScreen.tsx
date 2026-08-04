@@ -91,7 +91,7 @@ export default function WouldYouRatherOneScreen() {
     return (
       <div className="flex flex-col gap-5">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
+          <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
             {summary.votes} votes across {summary.dilemmas} dilemmas
           </span>
           <span className="rounded-pill bg-primary/20 px-4 py-1.5 text-xs font-semibold text-primary-deep">
@@ -106,7 +106,7 @@ export default function WouldYouRatherOneScreen() {
             <span className="w-14 text-right text-ink-muted">{aWins} dilemmas won</span>
           </li>
           <li className="flex items-center gap-3 rounded-md bg-red-50 px-4 py-3 text-body text-ink">
-            <span className="font-semibold text-red-700">Option B</span>
+            <span className="font-semibold text-danger-strong">Option B</span>
             <span className="ml-auto font-semibold">{summary.pickB} votes</span>
             <span className="w-14 text-right text-ink-muted">{bWins} dilemmas won</span>
           </li>
@@ -162,13 +162,13 @@ export default function WouldYouRatherOneScreen() {
         <button
           type="button"
           onClick={() => castVote('b')}
-          className="inline-flex min-h-20 items-center justify-center rounded-lg border-3 border-red-500 bg-red-500 px-6 py-4 text-lg font-semibold text-white transition-colors hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300"
+          className="inline-flex min-h-20 items-center justify-center rounded-lg border-3 border-danger bg-danger-soft0 px-6 py-4 text-lg font-semibold text-white transition-colors hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300"
         >
           B
         </button>
       </div>
 
-      <div className="overflow-hidden rounded-lg border-2 border-gray-200">
+      <div className="overflow-hidden rounded-lg border-2 border-border">
         <div
           role="img"
           aria-label={`Live tally — option A ${percentA}%, option B ${100 - percentA}%`}

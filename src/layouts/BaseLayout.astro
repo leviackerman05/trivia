@@ -8,9 +8,11 @@ interface Props {
   canonicalPath: string;
   ogImage?: string;
   jsonLd?: string;
+  /** Wide layout (max-w-7xl) for game pages so the play area gets more room. */
+  wide?: boolean;
 }
 
-const { title, description, canonicalPath, ogImage, jsonLd } = Astro.props;
+const { title, description, canonicalPath, ogImage, jsonLd, wide = false } = Astro.props;
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -39,23 +41,40 @@ const footerLinks = [
       jsonLd={jsonLd}
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!--
-      Google Analytics placeholder (PRD §7).
-      Replace with the real GA4 ID once the account exists:
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXX');
-      </script>
-    -->
+    <!-- Theme (M12): apply before paint (no FOUC); localStorage overrides the
+         system preference; the header toggle calls window.__pbTheme(). -->
+    <script is:inline>
+      (function () {
+        try {
+          const stored = localStorage.getItem('pb-theme');
+          const dark =
+            stored === 'dark' ||
+            (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
+        } catch {
+          /* storage blocked — system preference only */
+        }
+        window.__pbTheme = function () {
+          const html = document.documentElement;
+          const next = html.classList.contains('dark') ? 'light' : 'dark';
+          html.classList.toggle('dark', next === 'dark');
+          try {
+            localStorage.setItem('pb-theme', next);
+          } catch {
+            /* storage blocked — session-only toggle */
+          }
+        };
+      })();
+    </script>
   </head>
   <body class="flex min-h-screen flex-col bg-surface font-body text-body text-ink">
     <header
-      class="sticky top-0 z-10 border-b-2 border-dashed border-gray-200 bg-white/95 backdrop-blur"
+      class="sticky top-0 z-10 border-b-2 border-dashed border-border bg-surface-raised/95 backdrop-blur"
     >
-      <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3" aria-label="Main">
+      <nav
+        class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3"
+        aria-label="Main"
+      >
         <a href="/" class="font-display text-2xl text-primary-strong">PartyBrain</a>
         <ul class="flex items-center gap-6">
           {
@@ -70,17 +89,28 @@ const footerLinks = [
               </li>
             ))
           }
+          <li>
+            <button
+              type="button"
+              onclick="window.__pbTheme && window.__pbTheme()"
+              aria-label="Toggle dark mode"
+              class="inline-flex h-10 w-10 items-center justify-center rounded-pill border-2 border-border bg-surface-muted text-lg transition-colors hover:border-primary/50"
+            >
+              <span class="dark:hidden" aria-hidden="true">🌙</span>
+              <span class="hidden dark:inline" aria-hidden="true">☀️</span>
+            </button>
+          </li>
         </ul>
       </nav>
     </header>
 
-    <main class="mx-auto w-full max-w-5xl flex-1 px-4 py-10">
+    <main class:list={['mx-auto w-full flex-1 px-4 py-10', wide ? 'max-w-7xl' : 'max-w-6xl']}>
       <slot />
     </main>
 
-    <footer class="border-t-2 border-dashed border-gray-200 bg-white">
+    <footer class="border-t-2 border-dashed border-border bg-surface-raised">
       <div
-        class="mx-auto flex max-w-5xl flex-col items-center gap-4 px-4 py-8 sm:flex-row sm:justify-between"
+        class="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-8 sm:flex-row sm:justify-between"
       >
         <p class="text-small text-ink-muted">© 2026 PartyBrain — Free online party games</p>
         <ul class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
@@ -96,11 +126,5 @@ const footerLinks = [
         </ul>
       </div>
     </footer>
-
-    <!--
-      AdSense ad unit placeholder (PRD §7). Keep commented out until AdSense
-      approval. One slot per game page, placed near the game island:
-      <div class="ad-container"></div>
-    -->
   </body>
 </html>

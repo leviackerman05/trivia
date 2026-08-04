@@ -147,7 +147,9 @@ export default function EmojiPlot() {
           <span
             aria-live="polite"
             className={`rounded-pill px-4 py-1.5 font-mono text-sm font-semibold ${
-              remaining <= 10 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+              remaining <= 10
+                ? 'bg-danger-soft text-danger-strong'
+                : 'bg-success-soft text-success-strong'
             }`}
           >
             {remaining}s
@@ -159,7 +161,7 @@ export default function EmojiPlot() {
           <p className="text-body text-ink-muted">
             {results.filter((result) => result.correct).length} of {results.length} plots decoded
           </p>
-          <div className="rounded-lg border-2 border-dashed border-gray-300 p-4">
+          <div className="rounded-lg border-2 border-dashed border-border p-4">
             <h3 className="font-display text-h4 text-ink">Create your own</h3>
             <p className="mt-1 text-small text-ink-muted">
               Make an emoji plot and challenge a friend with a shareable link.
@@ -173,7 +175,7 @@ export default function EmojiPlot() {
                 maxLength={40}
                 placeholder="👦⚡🧙🏰"
                 aria-label="Your emoji sequence"
-                className="min-w-0 flex-1 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
               />
               <input
                 value={challenge?.title ?? ''}
@@ -183,7 +185,7 @@ export default function EmojiPlot() {
                 maxLength={80}
                 placeholder="Harry Potter"
                 aria-label="The answer title"
-                className="min-w-0 flex-1 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
               />
               <button
                 type="submit"
@@ -193,7 +195,10 @@ export default function EmojiPlot() {
               </button>
             </form>
             {challengeLink && (
-              <p role="status" className="mt-2 break-all text-small font-semibold text-green-700">
+              <p
+                role="status"
+                className="mt-2 break-all text-small font-semibold text-success-strong"
+              >
                 <a href={challengeLink} className="underline">
                   {challengeLink}
                 </a>
@@ -206,7 +211,7 @@ export default function EmojiPlot() {
     >
       {question && (
         <>
-          <div className="rounded-lg border-2 border-gray-200 bg-white p-6 text-center shadow-sm">
+          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 text-center shadow-sm">
             <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
               {question.kind === 'movie' ? 'Movie plot' : 'Book plot'} · {question.year}
             </p>
@@ -236,7 +241,7 @@ export default function EmojiPlot() {
               disabled={locked}
               placeholder="What's the title?"
               aria-label="Your guess"
-              className="min-w-0 flex-1 rounded-md border-2 border-gray-200 bg-white px-4 py-2.5 text-lg text-ink transition-colors hover:border-gray-400 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+              className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
             />
             <button
               type="submit"
@@ -251,8 +256,8 @@ export default function EmojiPlot() {
               role="status"
               className={`rounded-md border-2 px-4 py-2 text-body font-semibold ${
                 feedback.correct
-                  ? 'border-green-300 bg-green-50 text-green-700'
-                  : 'border-red-300 bg-red-50 text-red-700'
+                  ? 'border-success/50 bg-success-soft text-success-strong'
+                  : 'border-danger/50 bg-danger-soft text-danger-strong'
               }`}
             >
               {feedback.text}

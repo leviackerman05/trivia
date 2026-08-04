@@ -83,7 +83,7 @@ export default function TriviaArena({ gameSlug }: Props) {
         <span className="rounded-pill bg-primary/20 px-5 py-2 font-mono text-lg font-semibold tracking-[0.25em] text-primary-deep">
           {room.code}
         </span>
-        <span className="rounded-pill bg-green-100 px-4 py-1.5 text-xs font-semibold text-green-800">
+        <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
           {trivia.mode === 'wrong-answers' ? 'Wrong Answers Only' : 'Race mode'} · Question{' '}
           {trivia.round} of {trivia.totalRounds}
         </span>
@@ -91,7 +91,9 @@ export default function TriviaArena({ gameSlug }: Props) {
           <span
             aria-live="polite"
             className={`rounded-pill px-4 py-1.5 font-mono text-sm font-semibold ${
-              secondsLeft <= 3 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+              secondsLeft <= 3
+                ? 'bg-danger-soft text-danger-strong'
+                : 'bg-success-soft text-success-strong'
             }`}
           >
             {secondsLeft}s
@@ -107,7 +109,7 @@ export default function TriviaArena({ gameSlug }: Props) {
       </div>
 
       {trivia.view === 'question' && trivia.question && (
-        <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
           <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
             {trivia.question.category}
           </p>
@@ -131,7 +133,7 @@ export default function TriviaArena({ gameSlug }: Props) {
                   className={`min-h-14 rounded-lg border-3 px-5 py-3 text-left text-lg font-semibold transition-all disabled:cursor-default ${
                     picked
                       ? 'border-primary bg-primary/15 text-primary-deep'
-                      : 'border-gray-200 bg-white text-ink hover:border-primary hover:bg-primary/5'
+                      : 'border-border bg-surface-raised text-ink hover:border-primary hover:bg-primary/5'
                   }`}
                 >
                   <span className="mr-2 font-mono text-sm text-ink-muted">
@@ -163,9 +165,9 @@ export default function TriviaArena({ gameSlug }: Props) {
         />
       )}
 
-      <div className="rounded-lg border-2 border-gray-200 bg-white p-5 shadow-sm">
+      <div className="rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
         <h3 className="mb-2 font-display text-h4 text-ink">Scoreboard</h3>
-        <ol className="flex flex-col divide-y-2 divide-dashed divide-gray-200">
+        <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
           {trivia.scores.map((entry, index) => (
             <li
               key={entry.playerName}
@@ -188,7 +190,7 @@ export default function TriviaArena({ gameSlug }: Props) {
       {error && (
         <p
           role="alert"
-          className="rounded-md border-2 border-red-500 bg-red-50 px-4 py-3 text-body text-red-700"
+          className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
         </p>
@@ -206,7 +208,7 @@ function ModeToggle({
   onSelect: (mode: TriviaMode) => void;
 }) {
   return (
-    <div className="rounded-lg border-2 border-dashed border-gray-300 bg-white p-5 shadow-sm">
+    <div className="rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="font-display text-h4 text-ink">Game mode (host)</h3>
       <div className="mt-3 flex flex-wrap gap-2">
         <button
@@ -216,7 +218,7 @@ function ModeToggle({
           className={`rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
             mode === 'race'
               ? 'border-primary bg-primary/15 text-primary-deep'
-              : 'border-gray-300 bg-white text-ink hover:bg-gray-100'
+              : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
           }`}
         >
           🏁 Race mode — fastest correct wins
@@ -228,7 +230,7 @@ function ModeToggle({
           className={`rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
             mode === 'wrong-answers'
               ? 'border-primary bg-primary/15 text-primary-deep'
-              : 'border-gray-300 bg-white text-ink hover:bg-gray-100'
+              : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
           }`}
         >
           🤡 Wrong Answers Only — the worst answer wins
@@ -250,11 +252,11 @@ function RevealView({
 }) {
   const question = trivia.question;
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
       <h2 className="font-display text-h3 text-ink">The answer</h2>
       {question && trivia.correctIndex !== null && (
         <p className="text-body text-ink">
-          <span className="font-semibold text-green-700">
+          <span className="font-semibold text-success-strong">
             {question.options[trivia.correctIndex]}
           </span>{' '}
           {trivia.mode === 'wrong-answers' && (
@@ -269,9 +271,9 @@ function RevealView({
           <li key={result.playerName} className="text-body text-ink">
             <span className="font-semibold">{result.playerName}</span>{' '}
             {result.correct ? (
-              <span className="text-green-700">✓ +{result.points}</span>
+              <span className="text-success-strong">✓ +{result.points}</span>
             ) : (
-              <span className="text-red-600">✗ +{result.points}</span>
+              <span className="text-danger-strong">✗ +{result.points}</span>
             )}
           </li>
         ))}
@@ -307,11 +309,11 @@ function PodiumView({
 }) {
   const final = trivia.finalScores ?? [];
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-gray-200 bg-white p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
       <h2 className="font-display text-h2 text-ink">
         {trivia.winner ? `🏆 ${trivia.winner} wins!` : 'Game over'}
       </h2>
-      <ol className="flex flex-col divide-y-2 divide-dashed divide-gray-200">
+      <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
         {final.map((entry, index) => (
           <li
             key={entry.playerName}

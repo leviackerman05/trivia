@@ -12,7 +12,7 @@ interface Props {
 const { rows, class: className } = Astro.props;
 ---
 
-<ul class={`flex flex-col divide-y-2 divide-dashed divide-gray-200 ${className ?? ''}`}>
+<ul class={`flex flex-col divide-y-2 divide-dashed divide-border ${className ?? ''}`}>
   {
     rows?.map((row) => (
       <li class="flex min-h-14 items-center px-5 text-lg text-ink transition-colors hover:bg-[#fff5f5]">
