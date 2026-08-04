@@ -4,6 +4,23 @@ All notable changes to TriviaHub are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track package
 metadata (`triviahub`, `@triviahub/server`).
 
+## [0.5.1] - 2026-08-04
+
+### Fixed
+
+- **CI pnpm install:** `pnpm/action-setup` cannot download pnpm 11.20.0
+  (pnpm switched GitHub release assets to .tar.gz), and corepack no longer
+  ships with Node 25+. CI now installs pnpm from the npm registry
+  (`npm install -g pnpm@11.20.0`) matching the `packageManager` field.
+- **Cloudflare Pages deploy:** removed `wrangler.toml` and `pages.json` from
+  the repo root. Their presence made Pages Build System V2 run
+  `npx wrangler deploy`, which re-runs workspace detection at the monorepo
+  root and fails. The standard Pages uploader now deploys `dist/` directly;
+  `pnpm deploy` remains for manual direct uploads with an explicit
+  `--project-name`.
+- Removed `.github/workflows/deploy.yml` (direct-upload fallback) to avoid
+  double deployments; git integration is the only deploy path.
+
 ## [0.5.0] - 2026-08-04
 
 ### Added
