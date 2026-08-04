@@ -132,24 +132,24 @@ export default function CopycatArena({ gameSlug }: Props) {
         <button
           type="button"
           onClick={() => roomActions.leaveRoom()}
-          className="ml-auto rounded-pill border-3 border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
+          className="ml-auto rounded-pill border border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
         >
           Leave room
         </button>
       </div>
 
       {copycat.view === 'image-reveal' && copycat.image && (
-        <div className="flex flex-col items-center gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+        <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
           <h2 className="font-display text-h2 text-ink">Memorize this!</h2>
           {!copycat.imageLoaded ? (
             <div
               role="status"
-              className="flex min-h-64 w-full max-w-2xl flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-border bg-surface-muted p-8 text-center"
+              className="flex min-h-64 w-full max-w-2xl flex-col items-center justify-center gap-3 rounded-lg border  border-border bg-surface-muted p-8 text-center"
             >
               <span className="text-4xl" aria-hidden="true">
                 🖼️
               </span>
-              <p className="font-display text-h3 text-ink">Loading the image…</p>
+              <p className="text-lg font-bold tracking-tight text-ink">Loading the image…</p>
               <p className="text-small text-ink-muted">
                 The timer starts as soon as every player has it, no more missing the reveal.
               </p>
@@ -164,7 +164,7 @@ export default function CopycatArena({ gameSlug }: Props) {
               <img
                 src={copycat.image.url}
                 alt={copycat.image.title}
-                className="max-h-96 rounded-lg border-2 border-border object-contain shadow-sm"
+                className="max-h-96 rounded-lg border border-border object-contain shadow-sm"
               />
             </>
           )}
@@ -184,7 +184,7 @@ export default function CopycatArena({ gameSlug }: Props) {
                   setColor(swatch);
                   setTool('pen');
                 }}
-                className={`h-9 w-9 rounded-full border-2 transition-transform hover:scale-110 ${
+                className={`h-9 w-9 rounded-full border transition-transform hover:scale-110 ${
                   color === swatch && tool === 'pen' ? 'scale-110 border-ink' : 'border-border'
                 }`}
                 style={{ backgroundColor: swatch }}
@@ -195,7 +195,7 @@ export default function CopycatArena({ gameSlug }: Props) {
               aria-label="Eraser"
               aria-pressed={tool === 'eraser'}
               onClick={() => setTool('eraser')}
-              className={`inline-flex h-9 min-w-14 items-center justify-center rounded-pill border-2 px-3 text-xs font-semibold ${
+              className={`inline-flex h-9 min-w-14 items-center justify-center rounded-pill border px-3 text-xs font-semibold ${
                 tool === 'eraser'
                   ? 'border-ink bg-secondary text-white'
                   : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
@@ -211,7 +211,7 @@ export default function CopycatArena({ gameSlug }: Props) {
                 aria-label={`Brush size ${size}`}
                 aria-pressed={brushSize === size}
                 onClick={() => setBrushSize(size)}
-                className={`inline-flex h-9 w-9 items-center justify-center rounded-pill border-2 ${
+                className={`inline-flex h-9 w-9 items-center justify-center rounded-pill border ${
                   brushSize === size
                     ? 'border-ink bg-primary/15'
                     : 'border-border bg-surface-raised hover:bg-surface-muted'
@@ -228,14 +228,14 @@ export default function CopycatArena({ gameSlug }: Props) {
             <button
               type="button"
               onClick={() => gameActions.removeStroke(copycat.strokes.at(-1)?.strokeId ?? '')}
-              className="rounded-pill border-2 border-border bg-surface-raised px-3 py-1.5 text-xs font-semibold text-ink hover:bg-surface-muted"
+              className="rounded-pill border border-border bg-surface-raised px-3 py-1.5 text-xs font-semibold text-ink hover:bg-surface-muted"
             >
               Undo
             </button>
             <button
               type="button"
               onClick={() => gameActions.clearCanvas()}
-              className="rounded-pill border-2 border-danger/50 bg-danger-soft px-3 py-1.5 text-xs font-semibold text-danger-strong hover:bg-danger-soft"
+              className="rounded-pill border border-danger/50 bg-danger-soft px-3 py-1.5 text-xs font-semibold text-danger-strong hover:bg-danger-soft"
             >
               Clear
             </button>
@@ -243,7 +243,7 @@ export default function CopycatArena({ gameSlug }: Props) {
               type="button"
               disabled={submitDisabled}
               onClick={() => void submit()}
-              className="ml-auto inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-6 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
+              className="ml-auto inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-6 text-small font-semibold text-white  transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
             >
               {copycat.submitted ? 'Submitted ✓' : 'Submit my drawing'}
             </button>
@@ -261,7 +261,7 @@ export default function CopycatArena({ gameSlug }: Props) {
           {copycat.feedback && (
             <p
               role="status"
-              className="rounded-md border-2 border-success/50 bg-success-soft px-4 py-2 text-small font-semibold text-success-strong"
+              className="rounded-md border border-success/50 bg-success-soft px-4 py-2 text-small font-semibold text-success-strong"
             >
               {copycat.feedback}
             </p>
@@ -278,7 +278,7 @@ export default function CopycatArena({ gameSlug }: Props) {
       {error && (
         <p
           role="alert"
-          className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
+          className="rounded-md border border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
         </p>
@@ -314,7 +314,7 @@ function GalleryView({
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <h2 className="font-display text-h3 text-ink">The gallery</h2>
+        <h2 className="text-lg font-bold tracking-tight text-ink">The gallery</h2>
         <p className="text-body text-ink-muted">
           {copycat.view === 'gallery'
             ? "Everyone's drawings, revealed. Voting starts in a moment…"
@@ -325,12 +325,12 @@ function GalleryView({
         {copycat.drawings.map((drawing) => (
           <li
             key={drawing.playerName}
-            className="flex flex-col gap-2 rounded-lg border-2 border-border bg-surface-raised p-3 shadow-sm"
+            className="flex flex-col gap-2 rounded-lg border border-border bg-surface-raised p-3 shadow-sm"
           >
             <button
               type="button"
               onClick={() => setEnlarged(drawing.image)}
-              className="overflow-hidden rounded-md border-2 border-border bg-surface-raised transition-transform hover:scale-[1.02]"
+              className="overflow-hidden rounded-md border border-border bg-surface-raised transition-transform hover:scale-[1.02]"
               aria-label={`Enlarge ${drawing.playerName}'s drawing`}
             >
               <img
@@ -359,7 +359,7 @@ function GalleryView({
                       type="button"
                       disabled={disabled}
                       onClick={() => void onVote(category, drawing.playerName)}
-                      className={`rounded-pill border-2 px-3 py-1.5 text-xs font-semibold transition-colors ${
+                      className={`rounded-pill border px-3 py-1.5 text-xs font-semibold transition-colors ${
                         mine === drawing.playerName
                           ? 'border-primary bg-primary/20 text-primary-deep'
                           : disabled
@@ -400,8 +400,8 @@ function GalleryView({
 /** Live vote tallies per category (updates arrive on every cast vote). */
 function LiveTally({ copycat }: { copycat: CopycatGameState }) {
   return (
-    <div className="flex flex-col gap-3 rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
-      <h3 className="font-display text-h4 text-ink">Live tallies</h3>
+    <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface-raised p-5 shadow-sm">
+      <h3 className="text-lg font-bold tracking-tight text-ink">Live tallies</h3>
       {(Object.keys(COPYCAT_AWARD_LABELS) as CopycatAward[]).map((category) => {
         const votes = copycat.tallies[category] ?? [];
         const total = votes.reduce((sum, row) => sum + row.count, 0);
@@ -455,15 +455,15 @@ function AwardsView({ copycat }: { copycat: CopycatGameState }) {
         {awards.map((award) => (
           <div
             key={award.category}
-            className="flex flex-col gap-3 rounded-lg border-2 border-border bg-surface-raised p-5 text-center shadow-sm"
+            className="flex flex-col gap-3 rounded-lg border border-border bg-surface-raised p-5 text-center shadow-sm"
           >
             <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
               {COPYCAT_AWARD_LABELS[award.category]}
             </p>
             {award.winner ? (
-              <p className="font-display text-h3 text-ink">👑 {award.winner}</p>
+              <p className="text-lg font-bold tracking-tight text-ink">👑 {award.winner}</p>
             ) : (
-              <p className="font-display text-h3 text-ink-muted">No votes</p>
+              <p className="text-lg font-bold tracking-tight text-ink-muted">No votes</p>
             )}
             <ol className="flex flex-col gap-1">
               {award.votes.map((row) => (
@@ -497,8 +497,8 @@ function ChatBox({
   onSend: (event: SyntheticEvent<HTMLFormElement>) => void;
 }) {
   return (
-    <div className="flex flex-col rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
-      <h3 className="mb-2 font-display text-h4 text-ink">Room chat</h3>
+    <div className="flex flex-col rounded-lg border border-border bg-surface-raised p-5 shadow-sm">
+      <h3 className="mb-2 text-lg font-bold tracking-tight text-ink">Room chat</h3>
       <ul aria-live="polite" className="flex max-h-48 min-h-24 flex-col gap-2 overflow-y-auto pr-1">
         {messages.map((message, index) => (
           <li
@@ -522,12 +522,12 @@ function ChatBox({
           maxLength={300}
           placeholder="Type a message…"
           aria-label="Chat message"
-          className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+          className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
         />
         <button
           type="submit"
           disabled={!draft.trim()}
-          className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-pill bg-secondary px-5 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
+          className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-pill bg-secondary px-5 text-small font-semibold text-white  transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
         >
           Send
         </button>

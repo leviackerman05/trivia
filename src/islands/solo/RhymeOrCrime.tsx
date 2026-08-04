@@ -146,9 +146,9 @@ export default function RhymeOrCrime({ dailyDateKey }: Props) {
     return (
       <form
         onSubmit={start}
-        className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm"
+        className="flex flex-col gap-5 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm"
       >
-        <h3 className="font-display text-h3 text-ink">Rhyme or Crime</h3>
+        <h3 className="text-lg font-bold tracking-tight text-ink">Rhyme or Crime</h3>
         <p className="max-w-xl text-body text-ink-muted">
           Type a word that rhymes with the prompt. Pick a category (or Auto for a mixed set) and
           your round timer, the clock starts when you do.
@@ -162,7 +162,7 @@ export default function RhymeOrCrime({ dailyDateKey }: Props) {
                 type="button"
                 aria-pressed={category === option}
                 onClick={() => setCategory(option)}
-                className={`inline-flex min-h-11 items-center justify-center rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+                className={`inline-flex min-h-11 items-center justify-center rounded-pill border px-4 py-2 text-small font-semibold transition-colors ${
                   category === option
                     ? 'border-primary bg-primary/15 text-primary-deep'
                     : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'
@@ -176,7 +176,7 @@ export default function RhymeOrCrime({ dailyDateKey }: Props) {
         <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />
         <button
           type="submit"
-          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
         >
           Start the game
         </button>
@@ -216,7 +216,7 @@ export default function RhymeOrCrime({ dailyDateKey }: Props) {
     >
       {entry && (
         <>
-          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 text-center shadow-sm">
+          <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 text-center shadow-sm">
             <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
               Category: {entry.category}
             </p>
@@ -233,12 +233,12 @@ export default function RhymeOrCrime({ dailyDateKey }: Props) {
               disabled={locked}
               placeholder="Your rhyme…"
               aria-label="Your rhyme"
-              className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+              className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
             />
             <button
               type="submit"
               disabled={locked || !draft.trim()}
-              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
+              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
             >
               Submit rhyme
             </button>
@@ -246,7 +246,7 @@ export default function RhymeOrCrime({ dailyDateKey }: Props) {
           {feedback && (
             <p
               role="status"
-              className={`rounded-md border-2 px-4 py-2 text-body font-semibold ${
+              className={`rounded-md border px-4 py-2 text-body font-semibold ${
                 feedback.correct
                   ? 'border-success/50 bg-success-soft text-success-strong'
                   : 'border-danger/50 bg-danger-soft text-danger-strong'
@@ -259,7 +259,7 @@ export default function RhymeOrCrime({ dailyDateKey }: Props) {
             <button
               type="button"
               onClick={next}
-              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-secondary px-7 py-3 text-lg font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark sm:self-start"
+              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-secondary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-secondary-dark sm:self-start"
             >
               {index + 1 >= rounds.length ? 'See my score' : 'Next round'}
             </button>

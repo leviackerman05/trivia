@@ -4,6 +4,27 @@ All notable changes to TriviaHub are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track package
 metadata (`triviahub`, `@triviahub/server`).
 
+## [0.6.0] - 2026-08-04
+
+### Changed
+
+- **Design system switch (Cloudflare Cloud Identity):** dark-first palette
+  (`#09090B` surface, `#F38020` orange primary, `#0051C3` blue secondary,
+  Inter type at 400-800, consistent 8px radii, 1px hairlines, 2px emerald
+  focus rings, `rgba(0,0,0,0.8)` dialog scrims). All tokens live in
+  `src/styles/global.css`; every component and island restyles through them.
+  Light theme moves to `:root.light` (dark is now the default).
+- **Fonts:** replaced `@fontsource/poppins` + `@fontsource/titan-one` with
+  `@fontsource/inter`; OG generator now renders Inter on the dark canvas.
+- **Mobile UX:** bottom tab bar (Home, Daily, Games, Categories, Play),
+  safe-area aware; compact header; touch targets ≥44px; `overflow-x: clip`;
+  tighter card padding on small screens; input and answer-button sizing
+  reduced for phones.
+- Components restyled: Button, Card, Chip, Badge, Dialog, Input, Tabs,
+  GameCard, DailyCard, FAQSection, checkbox/radio, room lobby, solo shells.
+- Fixed a pre-existing invalid class (`bg-danger-soft0`) and hardcoded
+  blue/red values in WouldYouRatherOneScreen (now token-driven).
+
 ## [0.5.3] - 2026-08-04
 
 ### Added

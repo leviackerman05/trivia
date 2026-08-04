@@ -21,21 +21,15 @@ const catalog = JSON.parse(await readFile(join(root, 'src', 'data', 'games.json'
 const FONT_DIR = join(root, 'node_modules', '@fontsource');
 const fonts = [
   {
-    name: 'Titan One',
-    data: await readFile(join(FONT_DIR, 'titan-one', 'files', 'titan-one-latin-400-normal.woff')),
+    name: 'Inter',
+    data: await readFile(join(FONT_DIR, 'inter', 'files', 'inter-latin-400-normal.woff')),
     weight: 400,
     style: 'normal',
   },
   {
-    name: 'Poppins',
-    data: await readFile(join(FONT_DIR, 'poppins', 'files', 'poppins-latin-400-normal.woff')),
-    weight: 400,
-    style: 'normal',
-  },
-  {
-    name: 'Poppins',
-    data: await readFile(join(FONT_DIR, 'poppins', 'files', 'poppins-latin-600-normal.woff')),
-    weight: 600,
+    name: 'Inter',
+    data: await readFile(join(FONT_DIR, 'inter', 'files', 'inter-latin-800-normal.woff')),
+    weight: 800,
     style: 'normal',
   },
 ];
@@ -55,8 +49,8 @@ function logoMark() {
       style: {
         width: 64,
         height: 64,
-        borderRadius: 16,
-        backgroundColor: '#FF6B6B',
+        borderRadius: 14,
+        backgroundColor: '#F38020',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -72,7 +66,7 @@ function logoMark() {
         width: 20,
         height: 20,
         borderRadius: 9999,
-        backgroundColor: '#FF6B6B',
+        backgroundColor: '#F38020',
       },
     }),
     React.createElement('div', {
@@ -83,7 +77,7 @@ function logoMark() {
         width: 10,
         height: 10,
         borderRadius: 9999,
-        backgroundColor: '#FFE66D',
+        backgroundColor: '#3B82F6',
       },
     }),
     React.createElement('div', {
@@ -94,7 +88,7 @@ function logoMark() {
         width: 8,
         height: 8,
         borderRadius: 9999,
-        backgroundColor: '#4ECDC4',
+        backgroundColor: '#FFAC00',
       },
     })
   );
@@ -112,8 +106,8 @@ function template({ name, tagline, family }) {
         height: 630,
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#FFFFFF',
-        fontFamily: 'Poppins',
+        backgroundColor: '#09090B',
+        fontFamily: 'Inter',
         padding: '64px 80px',
         position: 'relative',
         overflow: 'hidden',
@@ -127,7 +121,7 @@ function template({ name, tagline, family }) {
         width: 340,
         height: 340,
         borderRadius: 9999,
-        backgroundColor: 'rgba(255,107,107,0.12)',
+        backgroundColor: 'rgba(243,128,32,0.12)',
       },
     }),
     React.createElement('div', {
@@ -138,7 +132,7 @@ function template({ name, tagline, family }) {
         width: 44,
         height: 44,
         borderRadius: 9999,
-        backgroundColor: '#FFE66D',
+        backgroundColor: '#FFAC00',
       },
     }),
     React.createElement('div', {
@@ -149,7 +143,7 @@ function template({ name, tagline, family }) {
         width: 22,
         height: 22,
         borderRadius: 9999,
-        backgroundColor: '#4ECDC4',
+        backgroundColor: '#3B82F6',
       },
     }),
     React.createElement(
@@ -158,8 +152,18 @@ function template({ name, tagline, family }) {
       logoMark(),
       React.createElement(
         'div',
-        { style: { fontFamily: 'Titan One', fontSize: 40, color: '#FF6B6B' } },
-        'TriviaHub'
+        {
+          style: {
+            display: 'flex',
+            alignItems: 'center',
+            fontFamily: 'Inter',
+            fontWeight: 800,
+            fontSize: 40,
+            color: '#FAFAFA',
+          },
+        },
+        'Trivia',
+        React.createElement('span', { style: { color: '#F38020' } }, 'Hub')
       )
     ),
     React.createElement('div', { style: { flex: 1 } }),
@@ -171,10 +175,10 @@ function template({ name, tagline, family }) {
           display: 'flex',
           alignItems: 'center',
           padding: '8px 24px',
-          borderRadius: 9999,
-          backgroundColor: 'rgba(255,107,107,0.2)',
-          border: '2px solid rgba(255,107,107,0.4)',
-          color: '#B83232',
+          borderRadius: 8,
+          backgroundColor: 'rgba(243,128,32,0.15)',
+          border: '1px solid rgba(243,128,32,0.4)',
+          color: '#F6994F',
           fontSize: 22,
           fontWeight: 600,
         },
@@ -185,10 +189,12 @@ function template({ name, tagline, family }) {
       'div',
       {
         style: {
-          fontFamily: 'Titan One',
+          fontFamily: 'Inter',
+          fontWeight: 800,
           fontSize: nameSize,
-          color: '#2D2D2D',
+          color: '#FAFAFA',
           lineHeight: 1.15,
+          letterSpacing: '-0.02em',
           marginTop: 18,
           maxWidth: 1000,
         },
@@ -200,7 +206,7 @@ function template({ name, tagline, family }) {
       {
         style: {
           fontSize: 28,
-          color: '#6B6B6B',
+          color: '#A1A1AA',
           lineHeight: 1.45,
           marginTop: 16,
           maxWidth: 880,
@@ -211,15 +217,15 @@ function template({ name, tagline, family }) {
     React.createElement('div', { style: { flex: 1 } }),
     React.createElement(
       'div',
-      { style: { display: 'flex', alignItems: 'center', gap: 10, color: '#9CA3AF', fontSize: 24 } },
+      { style: { display: 'flex', alignItems: 'center', gap: 10, color: '#71717A', fontSize: 24 } },
       React.createElement('div', {
-        style: { width: 12, height: 12, borderRadius: 9999, backgroundColor: '#FF6B6B' },
+        style: { width: 12, height: 12, borderRadius: 9999, backgroundColor: '#F38020' },
       }),
       React.createElement('div', {
-        style: { width: 12, height: 12, borderRadius: 9999, backgroundColor: '#4ECDC4' },
+        style: { width: 12, height: 12, borderRadius: 9999, backgroundColor: '#3B82F6' },
       }),
       React.createElement('div', {
-        style: { width: 12, height: 12, borderRadius: 9999, backgroundColor: '#FFE66D' },
+        style: { width: 12, height: 12, borderRadius: 9999, backgroundColor: '#FFAC00' },
       }),
       'playtriviahub.com'
     )

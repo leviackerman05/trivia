@@ -121,8 +121,8 @@ export default function TimelineTussle({ dailyDateKey }: Props) {
     >
       {round && (
         <>
-          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-            <p className="font-display text-h3 text-ink">Tap the events in chronological order</p>
+          <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+            <p className="text-lg font-bold tracking-tight text-ink">Tap the events in chronological order</p>
             <p className="mt-1 text-small text-ink-muted">
               Tap again to undo a pick, you need all three before submitting.
             </p>
@@ -139,7 +139,7 @@ export default function TimelineTussle({ dailyDateKey }: Props) {
                       onClick={() => toggleCard(cardIndex)}
                       disabled={revealed !== null}
                       aria-pressed={placed}
-                      className={`flex w-full items-center gap-4 rounded-lg border-2 px-5 py-4 text-left transition-all ${
+                      className={`flex w-full items-center gap-4 rounded-lg border px-5 py-4 text-left transition-all ${
                         correct
                           ? 'border-success bg-success-soft'
                           : wrong
@@ -192,7 +192,7 @@ export default function TimelineTussle({ dailyDateKey }: Props) {
                 <button
                   type="button"
                   onClick={next}
-                  className="ml-auto inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-6 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark"
+                  className="ml-auto inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-6 text-small font-semibold text-white  transition-colors hover:bg-secondary-dark"
                 >
                   {index + 1 >= TIMELINE_TOTAL_ROUNDS ? 'See my score' : 'Next round'}
                 </button>
@@ -202,7 +202,7 @@ export default function TimelineTussle({ dailyDateKey }: Props) {
                 type="button"
                 disabled={order.length !== 3}
                 onClick={submit}
-                className="mt-4 inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
+                className="mt-4 inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
               >
                 Submit order
               </button>

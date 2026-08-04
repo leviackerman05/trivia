@@ -15,17 +15,17 @@ const { items, class: className } = Astro.props;
 <div class={`flex flex-col gap-3 ${className ?? ''}`}>
   {
     items.map((item) => (
-      <details class="group rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm transition-colors open:border-secondary open:shadow-md">
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold text-ink [&::-webkit-details-marker]:hidden">
+      <details class="group rounded-lg border border-border bg-surface-raised p-4 shadow-sm transition-colors open:border-primary/50 open:shadow-md sm:p-6">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
           {item.question}
           <span
             aria-hidden="true"
-            class="grid size-8 shrink-0 place-items-center rounded-pill bg-primary/20 text-primary-strong transition-transform duration-200 group-open:rotate-45"
+            class="grid size-8 shrink-0 place-items-center rounded-md bg-primary/20 text-primary-strong transition-transform duration-200 group-open:rotate-45"
           >
             +
           </span>
         </summary>
-        <p class="mt-3 text-lg text-ink-muted">{item.answer}</p>
+        <p class="mt-3 text-small text-ink-muted">{item.answer}</p>
       </details>
     ))
   }

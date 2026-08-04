@@ -17,6 +17,14 @@
 
 ## Current Milestone
 
+**Design system switch (2026-08-04)**: adopted the Cloudflare Cloud
+Identity visual language (dark-first `#09090B` + orange `#F38020` + Inter,
+8px radii, 2px focus rings) via a token rewrite in `src/styles/global.css`;
+light theme moved to `:root.light`; mobile bottom tab bar; touch-target,
+input, and card fixes across game islands. `pnpm build` green (42 pages),
+144 client tests pass. Live at `https://playtriviahub.com` (auto-deploys on
+every push).
+
 **Phase F, Launch (live)**: frontend at `https://playtriviahub.com` and
 `www.playtriviahub.com` (Cloudflare Pages, both custom domains active),
 backend at `https://api.playtriviahub.com` (Railway, `readyz` 200, CORS

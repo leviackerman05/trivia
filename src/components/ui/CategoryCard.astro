@@ -17,7 +17,7 @@ const { href, name, emoji, count, description, class: className } = Astro.props;
 
 <a
   href={href}
-  class={`group flex h-full flex-col gap-3 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-secondary hover:shadow-md ${className ?? ''}`}
+  class={`group flex h-full flex-col gap-3 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md ${className ?? ''}`}
 >
   <span class="flex items-center justify-between gap-3">
     <span aria-hidden="true" class="text-4xl">{emoji}</span>
@@ -26,6 +26,6 @@ const { href, name, emoji, count, description, class: className } = Astro.props;
       {count === 1 ? 'game' : 'games'}
     </span>
   </span>
-  <h2 class="font-display text-h3 text-ink group-hover:text-primary-strong">{name}</h2>
+  <h2 class="text-lg font-bold tracking-tight text-ink group-hover:text-primary-strong">{name}</h2>
   <p class="text-body text-ink-muted">{description}</p>
 </a>

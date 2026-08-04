@@ -47,7 +47,7 @@ const jsonLd = JSON.stringify({
     <Chip variant="status" status="success" class="mb-6"
       >19 free games · daily challenges · play in seconds</Chip
     >
-    <h1 class="mx-auto max-w-4xl font-display text-h1 text-ink">
+    <h1 class="mx-auto max-w-4xl font-display text-h1 font-extrabold tracking-tight text-ink">
       Best daily trivia and party games
     </h1>
     <p class="mx-auto mt-4 max-w-2xl text-body text-ink-muted">
@@ -67,7 +67,7 @@ const jsonLd = JSON.stringify({
         All daily games →
       </a>
     </div>
-    <ul class="grid gap-6 sm:grid-cols-2">
+    <ul class="grid gap-4 sm:gap-6 sm:grid-cols-2">
       {
         liveDaily.slice(0, 3).map((game) => (
           <li>
@@ -86,7 +86,7 @@ const jsonLd = JSON.stringify({
           <li>
             <a
               href={`/game/${game.slug}`}
-              class="flex items-center gap-4 rounded-lg border-2 border-border bg-surface-raised px-4 py-3 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-secondary hover:shadow-md"
+              class="flex items-center gap-4 rounded-lg border border-border bg-surface-raised px-4 py-3 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md"
             >
               <span class="font-display text-h3 text-primary-deep">{index + 1}</span>
               <span class="min-w-0">
@@ -117,7 +117,7 @@ const jsonLd = JSON.stringify({
           <li>
             <a
               href={`/game/${game.slug}`}
-              class="flex items-center justify-between gap-4 rounded-lg border-2 border-border bg-surface-raised px-4 py-3 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-secondary hover:shadow-md"
+              class="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface-raised px-4 py-3 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md"
             >
               <span class="min-w-0">
                 <span class="block truncate font-semibold text-ink">{game.name}</span>
@@ -139,7 +139,7 @@ const jsonLd = JSON.stringify({
             <li>
               <a
                 href={`/game/${game.slug}`}
-                class="inline-flex items-center gap-2 rounded-pill border-2 border-border bg-surface-raised px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-secondary hover:text-primary-strong"
+                class="inline-flex items-center gap-2 rounded-pill border border-border bg-surface-raised px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary-strong"
               >
                 {game.name} →
               </a>
@@ -166,7 +166,7 @@ const jsonLd = JSON.stringify({
             <h2 class="mb-5 font-display text-h2 text-ink">
               {emoji} {label}
             </h2>
-            <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ul class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {familyGames.map((game) => (
                 <li>
                   <GameCard game={game} />
@@ -180,7 +180,7 @@ const jsonLd = JSON.stringify({
   </section>
 
   <!-- PRD §6.1, ~600-word keyword-rich content with internal links. -->
-  <section aria-label="About TriviaHub games" class="flex flex-col gap-6">
+  <section aria-label="About TriviaHub games" class="flex flex-col gap-4 sm:gap-6">
     <h2 class="font-display text-h2 text-ink">
       The best free online party games, right in your browser
     </h2>

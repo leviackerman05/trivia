@@ -102,14 +102,14 @@ export default function TriviaArena({ gameSlug }: Props) {
         <button
           type="button"
           onClick={() => roomActions.leaveRoom()}
-          className="ml-auto rounded-pill border-3 border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
+          className="ml-auto rounded-pill border border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
         >
           Leave room
         </button>
       </div>
 
       {trivia.view === 'question' && trivia.question && (
-        <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+        <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
           <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
             {trivia.question.category}
           </p>
@@ -130,7 +130,7 @@ export default function TriviaArena({ gameSlug }: Props) {
                   disabled={disabled}
                   onClick={() => void gameActions.answer(index)}
                   aria-pressed={picked}
-                  className={`min-h-14 rounded-lg border-3 px-5 py-3 text-left text-lg font-semibold transition-all disabled:cursor-default ${
+                  className={`min-h-14 rounded-lg border px-5 py-3 text-left text-lg font-semibold transition-all disabled:cursor-default ${
                     picked
                       ? 'border-primary bg-primary/15 text-primary-deep'
                       : 'border-border bg-surface-raised text-ink hover:border-primary hover:bg-primary/5'
@@ -165,9 +165,9 @@ export default function TriviaArena({ gameSlug }: Props) {
         />
       )}
 
-      <div className="rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
-        <h3 className="mb-2 font-display text-h4 text-ink">Scoreboard</h3>
-        <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
+      <div className="rounded-lg border border-border bg-surface-raised p-5 shadow-sm">
+        <h3 className="mb-2 text-lg font-bold tracking-tight text-ink">Scoreboard</h3>
+        <ol className="flex flex-col divide-y divide-border">
           {trivia.scores.map((entry, index) => (
             <li
               key={entry.playerName}
@@ -190,7 +190,7 @@ export default function TriviaArena({ gameSlug }: Props) {
       {error && (
         <p
           role="alert"
-          className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
+          className="rounded-md border border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
         </p>
@@ -208,14 +208,14 @@ function ModeToggle({
   onSelect: (mode: TriviaMode) => void;
 }) {
   return (
-    <div className="rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
-      <h3 className="font-display text-h4 text-ink">Game mode (host)</h3>
+    <div className="rounded-lg border  border-border bg-surface-raised p-5 shadow-sm">
+      <h3 className="text-lg font-bold tracking-tight text-ink">Game mode (host)</h3>
       <div className="mt-3 flex flex-wrap gap-2">
         <button
           type="button"
           aria-pressed={mode === 'race'}
           onClick={() => onSelect('race')}
-          className={`rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+          className={`rounded-pill border px-4 py-2 text-small font-semibold transition-colors ${
             mode === 'race'
               ? 'border-primary bg-primary/15 text-primary-deep'
               : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
@@ -227,7 +227,7 @@ function ModeToggle({
           type="button"
           aria-pressed={mode === 'wrong-answers'}
           onClick={() => onSelect('wrong-answers')}
-          className={`rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+          className={`rounded-pill border px-4 py-2 text-small font-semibold transition-colors ${
             mode === 'wrong-answers'
               ? 'border-primary bg-primary/15 text-primary-deep'
               : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
@@ -252,8 +252,8 @@ function RevealView({
 }) {
   const question = trivia.question;
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-      <h2 className="font-display text-h3 text-ink">The answer</h2>
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+      <h2 className="text-lg font-bold tracking-tight text-ink">The answer</h2>
       {question && trivia.correctIndex !== null && (
         <p className="text-body text-ink">
           <span className="font-semibold text-success-strong">
@@ -282,7 +282,7 @@ function RevealView({
         <button
           type="button"
           onClick={onNext}
-          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
         >
           {trivia.round >= trivia.totalRounds ? 'See the podium' : 'Next question'}
         </button>
@@ -309,11 +309,11 @@ function PodiumView({
 }) {
   const final = trivia.finalScores ?? [];
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
       <h2 className="font-display text-h2 text-ink">
         {trivia.winner ? `🏆 ${trivia.winner} wins!` : 'Game over'}
       </h2>
-      <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
+      <ol className="flex flex-col divide-y divide-border">
         {final.map((entry, index) => (
           <li
             key={entry.playerName}
@@ -336,7 +336,7 @@ function PodiumView({
         <button
           type="button"
           onClick={onRestart}
-          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
         >
           Play again
         </button>

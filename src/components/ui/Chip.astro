@@ -20,9 +20,9 @@ const statusClasses: Record<NonNullable<Props['status']>, string> = {
 ---
 
 <span
-  class={`inline-flex items-center gap-1.5 rounded-pill px-4 py-1.5 text-xs font-semibold ${
+  class={`inline-flex items-center gap-1.5 rounded-md px-3.5 py-1.5 text-xs font-semibold ${
     variant === 'filter'
-      ? 'border-2 border-primary/40 bg-primary/20 text-primary-deep'
+      ? 'border border-primary/40 bg-primary/15 text-primary-strong'
       : statusClasses[status]
   } ${className ?? ''}`}
 >

@@ -12,11 +12,11 @@ interface Props {
 
 const { elevated = false, hover = true, class: className } = Astro.props;
 
-const surface = 'rounded-lg bg-surface-raised p-6';
-const defaultCard = 'border-2 border-border shadow-sm';
+const surface = 'rounded-lg bg-surface-raised p-4 sm:p-6';
+const defaultCard = 'border border-border shadow-sm';
 const elevatedCard = 'border-0 shadow-md';
-const hoverClasses = hover ? 'transition-colors hover:shadow-md' : '';
-const hoverBorder = elevated ? '' : 'hover:border-secondary';
+const hoverClasses = hover ? 'transition-all duration-150 hover:shadow-md' : '';
+const hoverBorder = elevated ? '' : 'hover:border-primary/50';
 ---
 
 <div

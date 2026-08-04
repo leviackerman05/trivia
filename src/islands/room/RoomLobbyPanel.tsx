@@ -119,13 +119,13 @@ export default function RoomLobbyPanel({
 
   if (!room) {
     return (
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4 sm:gap-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
           <form
             onSubmit={handleCreate}
-            className="flex flex-1 flex-col gap-3 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm"
+            className="flex flex-1 flex-col gap-3 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm"
           >
-            <h3 className="font-display text-h4 text-ink">Create a room</h3>
+            <h3 className="text-lg font-bold tracking-tight text-ink">Create a room</h3>
             <label className="flex flex-col gap-1.5">
               <span className="text-small font-semibold text-ink">Your nickname</span>
               <input
@@ -133,13 +133,13 @@ export default function RoomLobbyPanel({
                 onChange={(event) => setNickname(event.target.value)}
                 maxLength={20}
                 placeholder="e.g. PartyPanda"
-                className="rounded-md border-2 border-border bg-surface-raised px-4 py-3 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
               />
             </label>
             <button
               type="submit"
               disabled={busy || !nickname.trim()}
-              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
+              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
             >
               {busy ? 'Creating…' : `Create ${game?.name ?? 'game'} room`}
             </button>
@@ -156,9 +156,9 @@ export default function RoomLobbyPanel({
 
           <form
             onSubmit={handleJoin}
-            className="flex flex-1 flex-col gap-3 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm"
+            className="flex flex-1 flex-col gap-3 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm"
           >
-            <h3 className="font-display text-h4 text-ink">Join a room</h3>
+            <h3 className="text-lg font-bold tracking-tight text-ink">Join a room</h3>
             <label className="flex flex-col gap-1.5">
               <span className="text-small font-semibold text-ink">Room code</span>
               <input
@@ -167,7 +167,7 @@ export default function RoomLobbyPanel({
                 placeholder="ABC123"
                 maxLength={6}
                 aria-label="Room code"
-                className="rounded-md border-2 border-border bg-surface-raised px-4 py-3 font-mono text-lg uppercase tracking-[0.3em] text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="rounded-md border border-border bg-surface-raised px-4 py-3 font-mono text-lg uppercase tracking-[0.3em] text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
               />
             </label>
             <label className="flex flex-col gap-1.5">
@@ -177,13 +177,13 @@ export default function RoomLobbyPanel({
                 onChange={(event) => setNickname(event.target.value)}
                 maxLength={20}
                 placeholder="e.g. PartyPanda"
-                className="rounded-md border-2 border-border bg-surface-raised px-4 py-3 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
               />
             </label>
             <button
               type="submit"
               disabled={busy || !nickname.trim() || joinCode.length !== 6}
-              className="inline-flex min-h-12 items-center justify-center rounded-pill border-3 border-primary bg-transparent px-7 py-3 text-lg font-semibold text-primary-strong transition-colors hover:bg-primary/15 disabled:pointer-events-none disabled:opacity-40"
+              className="inline-flex min-h-12 items-center justify-center rounded-pill border border-primary bg-transparent px-7 py-3 text-lg font-semibold text-primary-strong transition-colors hover:bg-primary/15 disabled:pointer-events-none disabled:opacity-40"
             >
               {busy ? 'Joining…' : 'Join room'}
             </button>
@@ -192,13 +192,13 @@ export default function RoomLobbyPanel({
 
         {lobbyExtras}
 
-        <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+        <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
           <div className="mb-3 flex items-center justify-between">
-            <h3 className="font-display text-h4 text-ink">Top players, {game?.name}</h3>
+            <h3 className="text-lg font-bold tracking-tight text-ink">Top players, {game?.name}</h3>
             <button
               type="button"
               onClick={() => void loadLeaderboard()}
-              className="rounded-pill border-2 border-primary/40 bg-primary/20 px-4 py-1.5 text-xs font-semibold text-primary-deep transition-colors hover:bg-primary/30"
+              className="rounded-pill border border-primary/40 bg-primary/20 px-4 py-1.5 text-xs font-semibold text-primary-deep transition-colors hover:bg-primary/30"
             >
               Refresh
             </button>
@@ -206,7 +206,7 @@ export default function RoomLobbyPanel({
           {leaderboard.length === 0 ? (
             <p className="text-body text-ink-muted">No scores yet, be the first on the board!</p>
           ) : (
-            <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
+            <ol className="flex flex-col divide-y divide-border">
               {leaderboard.map((entry) => (
                 <li
                   key={entry.rank}
@@ -225,7 +225,7 @@ export default function RoomLobbyPanel({
         {error && (
           <p
             role="alert"
-            className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
+            className="rounded-md border border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
           >
             {error}
           </p>
@@ -243,7 +243,7 @@ export default function RoomLobbyPanel({
         <button
           type="button"
           onClick={() => void handleCopyLink()}
-          className="rounded-pill border-2 border-primary/40 bg-primary/20 px-4 py-2 text-xs font-semibold text-primary-deep transition-colors hover:bg-primary/30"
+          className="rounded-pill border border-primary/40 bg-primary/20 px-4 py-2 text-xs font-semibold text-primary-deep transition-colors hover:bg-primary/30"
         >
           {copied ? 'Link copied!' : 'Copy invite link'}
         </button>
@@ -253,7 +253,7 @@ export default function RoomLobbyPanel({
         <button
           type="button"
           onClick={() => actions.leaveRoom()}
-          className="ml-auto rounded-pill border-3 border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
+          className="ml-auto rounded-pill border border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
         >
           Leave room
         </button>
@@ -261,9 +261,9 @@ export default function RoomLobbyPanel({
 
       <div className="grid gap-5 lg:grid-cols-2">
         <div className="flex flex-col gap-5">
-          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-            <h3 className="mb-3 font-display text-h4 text-ink">Players ({room.players.length})</h3>
-            <ul className="flex flex-col divide-y-2 divide-dashed divide-border">
+          <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+            <h3 className="mb-3 text-lg font-bold tracking-tight text-ink">Players ({room.players.length})</h3>
+            <ul className="flex flex-col divide-y divide-border">
               {room.players.map((player) => (
                 <li
                   key={player.name}
@@ -291,7 +291,7 @@ export default function RoomLobbyPanel({
             type="button"
             disabled={!isHost || room.phase !== 'lobby' || busy || !gamePlayable}
             onClick={() => void run(() => actions.startGame())}
-            className="inline-flex min-h-14 items-center justify-center rounded-pill bg-primary-strong px-9 py-4 text-xl font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
+            className="inline-flex min-h-14 items-center justify-center rounded-pill bg-primary px-9 py-4 text-xl font-semibold text-white  transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
           >
             {room.phase === 'lobby' ? 'Start game' : 'Game in progress…'}
           </button>
@@ -306,8 +306,8 @@ export default function RoomLobbyPanel({
           )}
         </div>
 
-        <div className="flex flex-col rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-          <h3 className="mb-3 font-display text-h4 text-ink">Room chat</h3>
+        <div className="flex flex-col rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+          <h3 className="mb-3 text-lg font-bold tracking-tight text-ink">Room chat</h3>
           <ul
             aria-live="polite"
             className="flex max-h-64 min-h-32 flex-col gap-2 overflow-y-auto pr-1"
@@ -332,12 +332,12 @@ export default function RoomLobbyPanel({
               maxLength={300}
               placeholder="Type a message…"
               aria-label="Chat message"
-              className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+              className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
             />
             <button
               type="submit"
               disabled={!chatDraft.trim()}
-              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-pill bg-secondary px-5 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
+              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-pill bg-secondary px-5 text-small font-semibold text-white  transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
             >
               Send
             </button>
@@ -348,7 +348,7 @@ export default function RoomLobbyPanel({
       {error && (
         <p
           role="alert"
-          className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
+          className="rounded-md border border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
         </p>

@@ -76,9 +76,9 @@ export default function DailyHubStatus() {
       member.streaks.find((streak) => streak.scope === slug);
 
     return (
-      <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+      <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="font-display text-h3 text-ink">Welcome back, {member.profile.nickname}</h2>
+          <h2 className="text-lg font-bold tracking-tight text-ink">Welcome back, {member.profile.nickname}</h2>
           <span className="rounded-pill bg-primary/15 px-4 py-1 text-xs font-semibold text-primary-deep">
             {dateKey}
           </span>
@@ -144,9 +144,9 @@ export default function DailyHubStatus() {
   }
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="font-display text-h3 text-ink">Your day at TriviaHub</h2>
+        <h2 className="text-lg font-bold tracking-tight text-ink">Your day at TriviaHub</h2>
         <span className="rounded-pill bg-primary/15 px-4 py-1 text-xs font-semibold text-primary-deep">
           {dateKey}
         </span>
@@ -194,7 +194,7 @@ export default function DailyHubStatus() {
       </div>
 
       {!memberKey && (
-        <div className="flex flex-wrap items-center gap-3 rounded-lg border-2 border-dashed border-border bg-surface-muted p-4">
+        <div className="flex flex-wrap items-center gap-3 rounded-lg border  border-border bg-surface-muted p-4">
           <p className="text-small text-ink-muted">
             Keep your streaks and history across devices, free. No account, one tap.
           </p>
@@ -202,7 +202,7 @@ export default function DailyHubStatus() {
             type="button"
             onClick={claim}
             disabled={claimState === 'claiming'}
-            className="inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-5 py-2.5 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark disabled:opacity-40"
+            className="inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-5 py-2.5 text-small font-semibold text-white  transition-colors hover:bg-secondary-dark disabled:opacity-40"
           >
             {claimState === 'claiming' ? 'Saving…' : 'Keep my progress (free)'}
           </button>

@@ -272,13 +272,13 @@ export default function TriviaSolo() {
               onChange={(event) => setNickname(event.target.value)}
               maxLength={20}
               placeholder="e.g. QuizWhiz"
-              className="rounded-md border-2 border-border bg-surface-raised px-4 py-3 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+              className="rounded-md border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
             />
           </label>
           <button
             type="submit"
             disabled={!nickname.trim()}
-            className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
+            className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
           >
             Start the daily trivia
           </button>
@@ -320,14 +320,14 @@ export default function TriviaSolo() {
             <button
               type="button"
               onClick={retrySubmit}
-              className="rounded-pill border-3 border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
+              className="rounded-pill border border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
             >
               Score not saved, tap to retry
             </button>
           )}
         </div>
         {memberState === 'guest' && (
-          <div className="flex flex-wrap items-center gap-3 rounded-lg border-2 border-dashed border-border bg-surface-muted p-4">
+          <div className="flex flex-wrap items-center gap-3 rounded-lg border  border-border bg-surface-muted p-4">
             <p className="text-small text-ink-muted">
               Keep your streak and play history across devices, free. No account, one tap.
             </p>
@@ -335,7 +335,7 @@ export default function TriviaSolo() {
               type="button"
               onClick={keepProgress}
               disabled={isClaiming}
-              className="inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-5 py-2.5 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark disabled:opacity-40"
+              className="inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-5 py-2.5 text-small font-semibold text-white  transition-colors hover:bg-secondary-dark disabled:opacity-40"
             >
               {isClaiming ? 'Saving…' : 'Keep my progress (free)'}
             </button>
@@ -355,7 +355,7 @@ export default function TriviaSolo() {
           <button
             type="button"
             onClick={() => setPhase('setup')}
-            className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover"
+            className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover"
           >
             Play again
           </button>
@@ -367,7 +367,7 @@ export default function TriviaSolo() {
   const question = questions[index];
   const isRevealed = selected !== null || lockedRef.current;
   return (
-    <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+    <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
       <div className="flex flex-wrap items-center gap-3">
         <span className="rounded-pill bg-primary/20 px-4 py-1.5 text-xs font-semibold text-primary-deep">
           Question {index + 1} of {questions.length}
@@ -387,14 +387,14 @@ export default function TriviaSolo() {
         </span>
       </div>
 
-      <h3 className="mt-4 font-display text-h3 text-ink">{question?.question}</h3>
+      <h3 className="mt-4 text-lg font-bold tracking-tight text-ink">{question?.question}</h3>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {question?.options.map((option, optionIndex) => {
           const isCorrectOption = optionIndex === correctIndex;
           const isPicked = optionIndex === selected;
           let classes =
-            'inline-flex min-h-14 items-center justify-center rounded-pill border-3 bg-transparent px-6 py-3 text-lg font-semibold transition-colors';
+            'inline-flex min-h-14 items-center justify-center rounded-md border bg-transparent px-4 py-3 text-base font-semibold transition-colors sm:px-6 sm:text-lg';
           if (isRevealed) {
             if (isCorrectOption) {
               classes += ' border-success bg-success-soft text-success-strong';
@@ -405,7 +405,7 @@ export default function TriviaSolo() {
             }
           } else {
             classes +=
-              ' border-primary/50 text-primary-strong hover:bg-primary/15 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25';
+              ' border-primary/50 text-primary-strong hover:bg-primary/15 focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30';
           }
           return (
             <button
@@ -434,7 +434,7 @@ export default function TriviaSolo() {
           <button
             type="button"
             onClick={nextQuestion}
-            className="ml-auto inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover"
+            className="ml-auto inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover"
           >
             {index + 1 >= questions.length ? 'See results' : 'Next question'}
           </button>

@@ -95,7 +95,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
         <button
           type="button"
           onClick={() => roomActions.leaveRoom()}
-          className="ml-auto rounded-pill border-3 border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
+          className="ml-auto rounded-pill border border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
         >
           Leave room
         </button>
@@ -111,7 +111,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
 
       {gw.view === 'questioning' && !isAnswerer && (
         <div className="flex flex-col gap-4">
-          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+          <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
             <h2 className="font-display text-h2 text-ink">Who is the secret celebrity?</h2>
             <p className="mt-1 text-body text-ink-muted">
               Ask yes/no questions to narrow it down, you can guess the name at any time.
@@ -123,12 +123,12 @@ export default function GuessWhoArena({ gameSlug }: Props) {
                 maxLength={140}
                 placeholder="Are they alive? Are they an actor?"
                 aria-label="Yes/no question"
-                className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
               />
               <button
                 type="submit"
                 disabled={!questionDraft.trim()}
-                className="inline-flex min-h-12 items-center justify-center rounded-pill bg-secondary px-6 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
+                className="inline-flex min-h-12 items-center justify-center rounded-pill bg-secondary px-6 text-small font-semibold text-white  transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
               >
                 Ask
               </button>
@@ -140,12 +140,12 @@ export default function GuessWhoArena({ gameSlug }: Props) {
                 maxLength={60}
                 placeholder="Guess the name…"
                 aria-label="Celebrity guess"
-                className="min-w-0 flex-1 rounded-md border-2 border-dashed border-primary/50 bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-primary focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="min-w-0 flex-1 rounded-md border  border-primary/50 bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-primary focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
               />
               <button
                 type="submit"
                 disabled={!guessDraft.trim()}
-                className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-6 text-small font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
+                className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-6 text-small font-semibold text-white  transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
               >
                 Guess!
               </button>
@@ -166,7 +166,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
       )}
 
       {gw.view === 'game-end' && (
-        <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+        <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
           <h2 className="font-display text-h2 text-ink">
             {gw.winner ? `🏆 ${gw.winner} wins!` : 'Game over'}
           </h2>
@@ -178,7 +178,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
             </p>
           )}
           {gw.scores.length > 0 && (
-            <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
+            <ol className="flex flex-col divide-y divide-border">
               {gw.scores.map((entry, index) => (
                 <li
                   key={entry.playerName}
@@ -204,7 +204,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
             <button
               type="button"
               onClick={() => void gameActions.restartGame()}
-              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
             >
               Play again
             </button>
@@ -223,7 +223,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
       {error && (
         <p
           role="alert"
-          className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
+          className="rounded-md border border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
         </p>
@@ -247,12 +247,12 @@ function RevealView({
 }) {
   const revealed = gw.revealed;
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
       <h2 className="font-display text-h2 text-ink">
         {gw.winner ? `🎉 ${gw.winner} guessed it!` : 'Nobody got it this round'}
       </h2>
       {revealed && (
-        <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 p-5">
+        <div className="rounded-lg border  border-primary/50 bg-primary/10 p-5">
           <p className="text-center font-display text-h2 text-primary-deep">{revealed.name}</p>
           <p className="mt-1 text-center text-body text-ink-muted">{revealed.famousFor}</p>
           {revealed.facts.length > 0 && (
@@ -283,7 +283,7 @@ function RevealView({
         <button
           type="button"
           onClick={onNext}
-          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
         >
           {gw.revealFinished ? 'See final results' : 'Next celebrity'}
         </button>
@@ -307,10 +307,10 @@ function AnswererView({
   onAnswer: (yes: boolean) => void;
 }) {
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-      <h2 className="font-display text-h3 text-ink">You hold the secret</h2>
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+      <h2 className="text-lg font-bold tracking-tight text-ink">You hold the secret</h2>
       {celebrity && (
-        <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 p-5">
+        <div className="rounded-lg border  border-primary/50 bg-primary/10 p-5">
           <p className="text-center font-display text-h2 text-primary-deep">{celebrity.name}</p>
           <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-1 text-body text-ink sm:grid-cols-3">
             <li>
@@ -347,14 +347,14 @@ function AnswererView({
             <button
               type="button"
               onClick={() => onAnswer(true)}
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-pill bg-green-600 px-6 text-lg font-bold text-white shadow-teal transition-colors hover:bg-green-700"
+              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-pill bg-green-600 px-6 text-lg font-bold text-white  transition-colors hover:bg-green-700"
             >
               ✅ Yes
             </button>
             <button
               type="button"
               onClick={() => onAnswer(false)}
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-pill bg-red-600 px-6 text-lg font-bold text-white shadow-coral transition-colors hover:bg-red-700"
+              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-pill bg-red-600 px-6 text-lg font-bold text-white  transition-colors hover:bg-red-700"
             >
               ❌ No
             </button>
@@ -374,8 +374,8 @@ function QuestionLog({
   questions: { playerName: string; question: string; answer: boolean | null }[];
 }) {
   return (
-    <div className="rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
-      <h3 className="mb-2 font-display text-h4 text-ink">Question log</h3>
+    <div className="rounded-lg border border-border bg-surface-raised p-5 shadow-sm">
+      <h3 className="mb-2 text-lg font-bold tracking-tight text-ink">Question log</h3>
       {questions.length === 0 ? (
         <p className="text-small text-ink-muted">No questions yet, ask away!</p>
       ) : (

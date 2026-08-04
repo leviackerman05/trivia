@@ -48,7 +48,7 @@ const jsonLd = JSON.stringify({
 
   <section aria-label="Live daily games" class="mb-12">
     <h2 class="mb-5 font-display text-h2 text-ink">Playable today</h2>
-    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
         liveGames.map((game) => (
           <li>
@@ -61,7 +61,7 @@ const jsonLd = JSON.stringify({
 
   <section aria-label="Coming soon daily games">
     <h2 class="mb-5 font-display text-h2 text-ink">Coming to the daily hub</h2>
-    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
         plannedGames.map((game) => (
           <li>
@@ -72,25 +72,25 @@ const jsonLd = JSON.stringify({
     </ul>
   </section>
 
-  <section aria-label="How daily games work" class="mt-14 flex flex-col gap-6">
+  <section aria-label="How daily games work" class="mt-14 flex flex-col gap-4 sm:gap-6">
     <h2 class="font-display text-h2 text-ink">How daily games work</h2>
-    <div class="grid gap-6 sm:grid-cols-3">
-      <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-        <h3 class="mb-2 font-display text-h4 text-ink">1. Same day, same game</h3>
+    <div class="grid gap-4 sm:gap-6 sm:grid-cols-3">
+      <article class="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold tracking-tight text-ink">1. Same day, same game</h3>
         <p class="text-body text-ink-muted">
           Every daily game is seeded by the UTC date, so everyone on earth plays the exact same
           challenge. No luck, no randomness, a fair race.
         </p>
       </article>
-      <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-        <h3 class="mb-2 font-display text-h4 text-ink">2. Streaks build habits</h3>
+      <article class="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold tracking-tight text-ink">2. Streaks build habits</h3>
         <p class="text-body text-ink-muted">
           Finish a daily game and your streak grows. Miss a day and it resets, so the daily loop
           becomes a ritual you protect.
         </p>
       </article>
-      <article class="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-        <h3 class="mb-2 font-display text-h4 text-ink">3. Share and compare</h3>
+      <article class="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+        <h3 class="mb-2 text-lg font-bold tracking-tight text-ink">3. Share and compare</h3>
         <p class="text-body text-ink-muted">
           Results generate a share card with your score and streak. Send it to friends and let the
           rivalry write itself.

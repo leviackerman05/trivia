@@ -114,8 +114,8 @@ export default function GenreSwap({ dailyDateKey }: Props) {
 
   if (phase === 'setup') {
     return (
-      <div className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-        <h3 className="font-display text-h3 text-ink">Genre Swap</h3>
+      <div className="flex flex-col gap-5 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+        <h3 className="text-lg font-bold tracking-tight text-ink">Genre Swap</h3>
         <p className="max-w-xl text-body text-ink-muted">
           A famous movie plot rewritten in a wildly wrong genre, spot the original. Pick your round
           timer; the clock starts when you do.
@@ -124,7 +124,7 @@ export default function GenreSwap({ dailyDateKey }: Props) {
         <button
           type="button"
           onClick={start}
-          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
         >
           Start the game
         </button>
@@ -163,7 +163,7 @@ export default function GenreSwap({ dailyDateKey }: Props) {
     >
       {question && (
         <>
-          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+          <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
             <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
               Now a {question.genre.toLowerCase()} story
             </p>
@@ -180,7 +180,7 @@ export default function GenreSwap({ dailyDateKey }: Props) {
                   type="button"
                   disabled={locked}
                   onClick={() => choose(option)}
-                  className={`min-h-14 rounded-lg border-3 px-5 py-3 text-left text-lg font-semibold transition-colors disabled:cursor-default ${
+                  className={`min-h-14 rounded-lg border px-5 py-3 text-left text-lg font-semibold transition-colors disabled:cursor-default ${
                     isCorrect
                       ? 'border-success bg-success-soft text-success-strong'
                       : 'border-border bg-surface-raised text-ink hover:border-primary hover:bg-primary/5'
@@ -194,7 +194,7 @@ export default function GenreSwap({ dailyDateKey }: Props) {
           {feedback && (
             <p
               role="status"
-              className={`rounded-md border-2 px-4 py-2 text-body font-semibold ${
+              className={`rounded-md border px-4 py-2 text-body font-semibold ${
                 feedback.correct
                   ? 'border-success/50 bg-success-soft text-success-strong'
                   : 'border-danger/50 bg-danger-soft text-danger-strong'
@@ -207,7 +207,7 @@ export default function GenreSwap({ dailyDateKey }: Props) {
             <button
               type="button"
               onClick={next}
-              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-secondary px-7 py-3 text-lg font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark sm:self-start"
+              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-secondary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-secondary-dark sm:self-start"
             >
               {index + 1 >= questions.length ? 'See my score' : 'Next plot'}
             </button>

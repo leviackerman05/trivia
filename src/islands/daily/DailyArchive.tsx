@@ -39,11 +39,11 @@ export default function DailyArchive() {
 
   if (withPlays.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-lg border-2 border-dashed border-border bg-surface-raised px-6 py-12 text-center">
+      <div className="flex flex-col items-center gap-3 rounded-lg border  border-border bg-surface-raised px-6 py-12 text-center">
         <span aria-hidden="true" className="text-5xl">
           📅
         </span>
-        <h2 className="font-display text-h3 text-ink">No daily plays recorded yet</h2>
+        <h2 className="text-lg font-bold tracking-tight text-ink">No daily plays recorded yet</h2>
         <p className="max-w-md text-body text-ink-muted">
           Finish a daily game and your score for each day appears here.
         </p>
@@ -67,7 +67,7 @@ export default function DailyArchive() {
               .sort((a, b) => b.dateKey.localeCompare(a.dateKey));
         return (
           <section key={game.slug} aria-label={`${game.name} history`}>
-            <h2 className="mb-3 font-display text-h3 text-ink">
+            <h2 className="mb-3 text-lg font-bold tracking-tight text-ink">
               {game.emoji} {game.name}
             </h2>
             <table className="w-full max-w-xl text-left text-small">

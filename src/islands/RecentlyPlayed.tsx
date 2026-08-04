@@ -39,7 +39,7 @@ export default function RecentlyPlayed() {
         <li key={game.slug}>
           <a
             href={game.instantPlay ? `/game/${game.slug}` : `/game/${game.slug}`}
-            className="inline-flex items-center gap-2 rounded-pill border-2 border-border bg-surface-raised px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-secondary hover:text-primary-strong"
+            className="inline-flex items-center gap-2 rounded-pill border border-border bg-surface-raised px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary-strong"
           >
             {game.name} →
           </a>

@@ -28,7 +28,7 @@ const activeTab = initial ?? firstTab;
           aria-selected={tab.id === activeTab ? 'true' : 'false'}
           tabindex={tab.id === activeTab ? '0' : '-1'}
           data-tab-button={tab.id}
-          class="rounded-pill border-2 border-border bg-surface-muted px-5 py-2.5 text-small font-semibold text-ink-muted transition-colors aria-selected:border-primary aria-selected:bg-primary/15 aria-selected:text-primary-strong"
+          class="rounded-md border border-border bg-surface-muted px-4 py-2.5 text-small font-semibold text-ink-muted transition-colors aria-selected:border-primary aria-selected:bg-primary/15 aria-selected:text-primary-strong"
         >
           {tab.label}
         </button>

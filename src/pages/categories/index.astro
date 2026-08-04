@@ -67,7 +67,7 @@ const jsonLd = JSON.stringify({
   </section>
 
   <section aria-label="Game categories">
-    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
         families.map((family) => {
           const count = games.filter((game) => game.family === family.family).length;
@@ -93,7 +93,7 @@ const jsonLd = JSON.stringify({
       <li>
         <a
           href="/daily"
-          class="block rounded-lg border-2 border-border bg-surface-raised p-5 text-body font-semibold text-ink transition-colors hover:border-secondary hover:text-primary-strong"
+          class="block rounded-lg border border-border bg-surface-raised p-5 text-body font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary-strong"
         >
           Daily Games: today's trivia and sudoku →
         </a>
@@ -101,7 +101,7 @@ const jsonLd = JSON.stringify({
       <li>
         <a
           href="/game/trivia"
-          class="block rounded-lg border-2 border-border bg-surface-raised p-5 text-body font-semibold text-ink transition-colors hover:border-secondary hover:text-primary-strong"
+          class="block rounded-lg border border-border bg-surface-raised p-5 text-body font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary-strong"
         >
           Trivia: solo daily or room race →
         </a>
@@ -109,7 +109,7 @@ const jsonLd = JSON.stringify({
       <li>
         <a
           href="/game/skribbl-arena"
-          class="block rounded-lg border-2 border-border bg-surface-raised p-5 text-body font-semibold text-ink transition-colors hover:border-secondary hover:text-primary-strong"
+          class="block rounded-lg border border-border bg-surface-raised p-5 text-body font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary-strong"
         >
           Skribbl Arena: drawing rooms up to 24 players →
         </a>

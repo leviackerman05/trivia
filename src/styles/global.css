@@ -1,139 +1,147 @@
 /* TriviaHub global styles, Tailwind CSS v4 (CSS-first config). */
-/* BounceBox design system per PRD §11. */
+/* Design system: Cloudflare Cloud Identity (dark-first, Inter, orange
+   #F38020 accent, blue #0051C3 secondary, 8px radii, 2px focus rings). */
 
 @import 'tailwindcss';
 
 /* Self-hosted fonts (performance: no external font CDN). */
-@import '@fontsource/poppins/400.css';
-@import '@fontsource/poppins/500.css';
-@import '@fontsource/poppins/600.css';
-@import '@fontsource/poppins/700.css';
-@import '@fontsource/titan-one/400.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/inter/800.css';
 
 @theme {
-  /* BounceBox palette (PRD §11) */
-  --color-primary: #ff6b6b;
-  --color-primary-dark: #e85d5d;
-  /* Accessible coral scale (WCAG AA, PRD §11 colors fail contrast for text):
-     primary-strong = text on white (4.6:1), primary-deep = text on light
-     coral fills (4.7:1), primary-hover = button hover state. See DECISIONS D019. */
-  --color-primary-strong: #d93636;
-  --color-primary-deep: #b83232;
-  --color-primary-hover: #c93d3d;
-  --color-secondary: #4ecdc4;
-  --color-secondary-dark: #3dbeb5;
-  --color-tertiary: #ffe66d;
-  --color-surface: #ffffff;
-  /* M12, semantic surfaces/borders (dark mode swaps these under :root.dark). */
-  --color-surface-raised: #ffffff;
-  --color-surface-muted: #f7f4f1;
-  --color-border: #e5e7eb;
-  --color-border-strong: #9ca3af;
-  --color-success: #4ecdc4;
-  --color-warning: #ffe66d;
-  --color-error: #ff6b6b;
-  --color-info: #60a5fa;
-  --color-ink: #2d2d2d;
-  --color-ink-muted: #6b6b6b;
-  /* Status soft/strong pairs (M12), readable on both themes (WCAG AA). */
-  --color-success-soft: #dcfce7;
-  --color-success-strong: #15803d;
-  --color-warning-soft: #fef3c7;
-  --color-warning-strong: #92400e;
-  --color-danger-soft: #fee2e2;
-  --color-danger-strong: #b91c1c;
-  --color-info-soft: #dbeafe;
-  --color-info-strong: #1d4ed8;
+  /* Cloudflare brand palette. Dark values are the base (dark-first);
+     :root.light swaps the semantic tokens below. */
+  --color-primary: #f38020;
+  --color-primary-dark: #d36610;
+  --color-primary-strong: #f6994f; /* text on dark surfaces */
+  --color-primary-deep: #ffc28c; /* brighter text on dark surfaces */
+  --color-primary-hover: #d36610;
+  --color-secondary: #3b82f6; /* blue actions, readable on dark */
+  --color-secondary-dark: #2563eb; /* blue hover on dark */
+  --color-tertiary: #ffac00; /* amber accents (dates, score) */
 
-  /* Typography (PRD §11) */
-  --font-display: 'Titan One', 'Comic Sans MS', sans-serif;
-  --font-body: 'Poppins', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+  /* Surfaces (dark theme), Cloudflare Cloud Identity */
+  --color-surface: #09090b;
+  --color-surface-raised: #131316;
+  --color-surface-muted: #1b1b1f;
+  --color-border: #27272a;
+  --color-border-strong: #3f3f46;
 
-  --text-h1: 48px;
-  --text-h1--line-height: 1.2;
-  --text-h2: 36px;
+  /* Text */
+  --color-ink: #fafafa;
+  --color-ink-muted: #a1a1aa;
+
+  /* Status (soft/strong pairs read on dark surfaces) */
+  --color-success: #10b981;
+  --color-warning: #ffac00;
+  --color-error: #f87171;
+  --color-info: #38bdf8;
+  --color-success-soft: rgb(52 211 153 / 0.12);
+  --color-success-strong: #34d399;
+  --color-warning-soft: rgb(251 191 36 / 0.12);
+  --color-warning-strong: #fbbf24;
+  --color-danger-soft: rgb(248 113 113 / 0.12);
+  --color-danger-strong: #f87171;
+  --color-info-soft: rgb(56 189 248 / 0.12);
+  --color-info-strong: #7dd3fc;
+
+  /* Typography: Inter everywhere, tight display tracking (-0.02em). */
+  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --text-h1: 36px;
+  --text-h1--line-height: 1.15;
+  --text-h2: 28px;
   --text-h2--line-height: 1.2;
-  --text-h3: 28px;
-  --text-h3--line-height: 1.25;
-  --text-h4: 22px;
-  --text-h4--line-height: 1.3;
-  --text-body: 18px;
+  --text-h3: 22px;
+  --text-h3--line-height: 1.3;
+  --text-h4: 18px;
+  --text-h4--line-height: 1.35;
+  --text-body: 16px;
   --text-body--line-height: 1.5;
-  --text-small: 16px;
+  --text-small: 14px;
   --text-small--line-height: 1.5;
-  --text-xs: 14px;
+  --text-xs: 12px;
   --text-xs--line-height: 1.4;
 
-  /* Radii (PRD §11) */
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-pill: 9999px;
+  /* Radii: consistent 8px rounded system (Cloudflare "rounded").
+     The pill token stays at 8px so legacy pill utilities match. */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 8px;
 
-  /* Elevation (PRD §11) */
-  --shadow-sm: 0 2px 4px rgb(0 0 0 / 0.08);
-  --shadow-md: 0 4px 10px rgb(0 0 0 / 0.12);
-  --shadow-lg: 0 8px 20px rgb(0 0 0 / 0.15);
-  --shadow-coral: 0 4px 14px rgb(255 107 107 / 0.35);
-  --shadow-teal: 0 4px 14px rgb(78 205 196 / 0.35);
-  --shadow-sunny: 0 4px 14px rgb(255 230 109 / 0.4);
+  /* Elevation (dark) */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 8px 24px rgb(0 0 0 / 0.6);
 }
 
-/* Dark theme (M12), semantic tokens swap under the `.dark` class; all
-   components use tokens, so the whole site flips. Set by the theme script
-   in BaseLayout (no-FOUC) + the header toggle; persists in localStorage. */
-:root.dark {
-  color-scheme: dark;
-  --color-surface: #141419;
-  --color-surface-raised: #1c1c23;
-  --color-surface-muted: #26262e;
-  --color-border: #34343e;
-  --color-border-strong: #5a5a66;
-  --color-ink: #f1f1f4;
-  --color-ink-muted: #a3a3ad;
-  --color-primary-strong: #ff8a7a;
-  --color-primary-deep: #ff9d8f;
-  --color-primary-hover: #ff6b6b;
-  --color-success-soft: rgb(74 222 128 / 0.16);
-  --color-success-strong: #4ade80;
-  --color-warning-soft: rgb(251 191 36 / 0.16);
-  --color-warning-strong: #fbbf24;
-  --color-danger-soft: rgb(248 113 113 / 0.16);
-  --color-danger-strong: #f87171;
-  --color-info-soft: rgb(96 165 250 / 0.16);
-  --color-info-strong: #93c5fd;
-  --color-secondary: #5ed5cc;
-  --color-secondary-dark: #4ecdc4;
-  --shadow-sm: 0 2px 4px rgb(0 0 0 / 0.4);
-  --shadow-md: 0 4px 10px rgb(0 0 0 / 0.5);
-  --shadow-lg: 0 8px 20px rgb(0 0 0 / 0.55);
-  --shadow-coral: 0 4px 14px rgb(255 107 107 / 0.25);
-  --shadow-teal: 0 4px 14px rgb(78 205 196 / 0.25);
-  --shadow-sunny: 0 4px 14px rgb(255 230 109 / 0.25);
+/* Light theme (Cloudflare light: white base, #fafafa surface-900). */
+:root.light {
+  color-scheme: light;
+  --color-primary: #f38020;
+  --color-primary-dark: #d36610;
+  --color-primary-strong: #a85100; /* text on light surfaces */
+  --color-primary-deep: #c2410c;
+  --color-primary-hover: #d36610;
+  --color-secondary: #0051c3;
+  --color-secondary-dark: #1e40af;
+  --color-tertiary: #ffac00;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-muted: #f7f7f8;
+  --color-border: #e4e4e7;
+  --color-border-strong: #a1a1aa;
+  --color-ink: #071428;
+  --color-ink-muted: #52525b;
+  --color-success: #059669;
+  --color-warning: #ffac00;
+  --color-error: #dc2626;
+  --color-info: #0284c7;
+  --color-success-soft: #ecfdf5;
+  --color-success-strong: #047857;
+  --color-warning-soft: #fffbeb;
+  --color-warning-strong: #b45309;
+  --color-danger-soft: #fef2f2;
+  --color-danger-strong: #b91c1c;
+  --color-info-soft: #eff6ff;
+  --color-info-strong: #1d4ed8;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 8px 24px rgb(0 0 0 / 0.1);
 }
 
 @layer base {
   html {
+    color-scheme: dark;
     font-family: var(--font-body);
     color: var(--color-ink);
     background: var(--color-surface);
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
+    /* Never let a wide island or long word break the layout on mobile. */
+    overflow-x: clip;
   }
 
-  /* Color is never the only signal for correct/incorrect (a11y). */
+  /* Cloudflare focus contract: 2px emerald ring on keyboard navigation,
+     never removed by gradient or border styling. */
   :focus-visible {
-    outline: 3px solid var(--color-primary);
+    outline: 2px solid var(--color-success);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
   ::selection {
-    background: var(--color-tertiary);
-    color: var(--color-ink);
+    background: var(--color-primary);
+    color: #ffffff;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -148,14 +156,14 @@
 }
 
 @layer components {
-  /* Custom checkbox per PRD §11: 24px, 8px radius, 3px border,
-     teal fill + white checkmark, teal focus ring. */
+  /* Custom checkbox: 24px, 8px radius, 1px border, orange fill + white
+     checkmark, emerald focus ring. */
   .pb-checkbox {
     appearance: none;
     width: 24px;
     height: 24px;
     border-radius: 8px;
-    border: 3px solid var(--color-ink-muted);
+    border: 2px solid var(--color-ink-muted);
     background: var(--color-surface);
     cursor: pointer;
     transition:
@@ -164,15 +172,15 @@
     flex-shrink: 0;
   }
   .pb-checkbox:hover {
-    border-color: #a1a1aa;
+    border-color: var(--color-border-strong);
   }
   .pb-checkbox:focus-visible {
-    outline: 4px solid rgb(78 205 196 / 0.25);
+    outline: 2px solid var(--color-success);
     outline-offset: 2px;
   }
   .pb-checkbox:checked {
-    background-color: var(--color-secondary);
-    border-color: var(--color-secondary);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E");
     background-size: 70%;
     background-position: center;
@@ -183,13 +191,13 @@
     cursor: not-allowed;
   }
 
-  /* Custom radio per PRD §11: 24px circle, 3px border, teal dot, teal ring. */
+  /* Custom radio: 24px circle, 2px border, orange dot, emerald ring. */
   .pb-radio {
     appearance: none;
     width: 24px;
     height: 24px;
     border-radius: 9999px;
-    border: 3px solid var(--color-ink-muted);
+    border: 2px solid var(--color-ink-muted);
     background: var(--color-surface);
     cursor: pointer;
     transition:
@@ -198,15 +206,15 @@
     flex-shrink: 0;
   }
   .pb-radio:hover {
-    border-color: #a1a1aa;
+    border-color: var(--color-border-strong);
   }
   .pb-radio:focus-visible {
-    outline: 4px solid rgb(78 205 196 / 0.25);
+    outline: 2px solid var(--color-success);
     outline-offset: 2px;
   }
   .pb-radio:checked {
-    background-color: var(--color-secondary);
-    border-color: var(--color-secondary);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
     box-shadow: inset 0 0 0 5px var(--color-surface);
   }
   .pb-radio:disabled {

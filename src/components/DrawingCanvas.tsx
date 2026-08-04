@@ -208,7 +208,7 @@ export default function DrawingCanvas({
       onPointerMove={handlePointerMove}
       onPointerUp={endStroke}
       onPointerCancel={endStroke}
-      className={`w-full rounded-lg border-2 border-border bg-white ${
+      className={`w-full rounded-lg border border-border bg-white ${
         enabled ? 'cursor-crosshair' : 'cursor-not-allowed'
       }`}
       style={{ aspectRatio: `${CANVAS_WIDTH} / ${CANVAS_HEIGHT}`, touchAction: 'none' }}

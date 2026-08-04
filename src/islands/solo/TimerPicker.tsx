@@ -28,7 +28,7 @@ export default function TimerPicker({
             type="button"
             aria-pressed={value === seconds}
             onClick={() => onChange(seconds)}
-            className={`inline-flex min-h-11 min-w-16 items-center justify-center rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+            className={`inline-flex min-h-11 min-w-16 items-center justify-center rounded-pill border px-4 py-2 text-small font-semibold transition-colors ${
               value === seconds
                 ? 'border-primary bg-primary/15 text-primary-deep'
                 : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'

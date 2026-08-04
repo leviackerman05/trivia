@@ -107,20 +107,20 @@ export default function PriceIsRight({ dailyDateKey }: Props) {
     >
       {product && (
         <>
-          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 text-center shadow-sm">
+          <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 text-center shadow-sm">
             {product.image ? (
               <img
                 src={product.image}
                 alt={product.name}
                 loading="lazy"
-                className="mx-auto max-h-56 rounded-lg border-2 border-border object-contain"
+                className="mx-auto max-h-56 rounded-lg border border-border object-contain"
               />
             ) : (
               <p className="text-6xl" aria-hidden="true">
                 {product.emoji}
               </p>
             )}
-            <h3 className="mt-3 font-display text-h3 text-ink">{product.name}</h3>
+            <h3 className="mt-3 text-lg font-bold tracking-tight text-ink">{product.name}</h3>
             {product.credit && (
               <p className="mt-2 text-xs text-ink-muted">
                 Photo: {product.credit.creator ?? 'Wikimedia Commons'} ·{' '}
@@ -128,7 +128,7 @@ export default function PriceIsRight({ dailyDateKey }: Props) {
               </p>
             )}
           </div>
-          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+          <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
             <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
               📦 From the listing
             </p>
@@ -152,14 +152,14 @@ export default function PriceIsRight({ dailyDateKey }: Props) {
                 setGuess(event.target.value === '' ? NaN : Number(event.target.value))
               }
               aria-label="Price guess in dollars"
-              className="mt-3 w-full rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25 sm:w-56"
+              className="mt-3 w-full rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30 sm:w-56"
             />
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <button
                 type="button"
                 disabled={revealed !== null || !Number.isFinite(guess)}
                 onClick={submit}
-                className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
+                className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
               >
                 Lock it in
               </button>
@@ -183,7 +183,7 @@ export default function PriceIsRight({ dailyDateKey }: Props) {
                   <button
                     type="button"
                     onClick={next}
-                    className="inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-6 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark"
+                    className="inline-flex min-h-11 items-center justify-center rounded-pill bg-secondary px-6 text-small font-semibold text-white  transition-colors hover:bg-secondary-dark"
                   >
                     {index + 1 >= rounds.length ? 'See my score' : 'Next product'}
                   </button>

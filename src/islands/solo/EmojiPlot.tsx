@@ -144,9 +144,9 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
     return (
       <form
         onSubmit={start}
-        className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm"
+        className="flex flex-col gap-5 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm"
       >
-        <h3 className="font-display text-h3 text-ink">Emoji Plot</h3>
+        <h3 className="text-lg font-bold tracking-tight text-ink">Emoji Plot</h3>
         <p className="max-w-xl text-body text-ink-muted">
           Decode the movie or book from its emoji sequence. Hints are yours to take: reveal the year
           or letters of the title, each hint costs points. The clock starts when you do.
@@ -154,7 +154,7 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
         <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />
         <button
           type="submit"
-          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
         >
           Start the game
         </button>
@@ -189,8 +189,8 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
           <p className="text-body text-ink-muted">
             {results.filter((result) => result.correct).length} of {results.length} plots decoded
           </p>
-          <div className="rounded-lg border-2 border-dashed border-border p-4">
-            <h3 className="font-display text-h4 text-ink">Create your own</h3>
+          <div className="rounded-lg border  border-border p-4">
+            <h3 className="text-lg font-bold tracking-tight text-ink">Create your own</h3>
             <p className="mt-1 text-small text-ink-muted">
               Make an emoji plot and challenge a friend with a shareable link.
             </p>
@@ -203,7 +203,7 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
                 maxLength={40}
                 placeholder="👦⚡🧙🏰"
                 aria-label="Your emoji sequence"
-                className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
               />
               <input
                 value={challenge?.title ?? ''}
@@ -213,11 +213,11 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
                 maxLength={80}
                 placeholder="Harry Potter"
                 aria-label="The answer title"
-                className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
               />
               <button
                 type="submit"
-                className="inline-flex min-h-11 items-center justify-center rounded-pill border-3 border-primary bg-transparent px-5 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
+                className="inline-flex min-h-11 items-center justify-center rounded-pill border border-primary bg-transparent px-5 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
               >
                 Create link
               </button>
@@ -239,7 +239,7 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
     >
       {question && (
         <>
-          <div className="rounded-lg border-2 border-border bg-surface-raised p-6 text-center shadow-sm">
+          <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 text-center shadow-sm">
             <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
               {question.kind === 'movie' ? 'Movie plot' : 'Book plot'}
             </p>
@@ -268,7 +268,7 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
               type="button"
               disabled={locked || yearUsed}
               onClick={() => setYearUsed(true)}
-              className="inline-flex min-h-11 items-center justify-center rounded-pill border-2 border-border bg-surface-muted px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-primary/50 disabled:pointer-events-none disabled:opacity-40"
+              className="inline-flex min-h-11 items-center justify-center rounded-pill border border-border bg-surface-muted px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-primary/50 disabled:pointer-events-none disabled:opacity-40"
             >
               📅 Reveal the year {yearUsed ? `(−50)` : '(−50 pts)'}
             </button>
@@ -276,7 +276,7 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
               type="button"
               disabled={locked}
               onClick={() => setLettersRevealed((count) => count + 1)}
-              className="inline-flex min-h-11 items-center justify-center rounded-pill border-2 border-border bg-surface-muted px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-primary/50 disabled:pointer-events-none disabled:opacity-40"
+              className="inline-flex min-h-11 items-center justify-center rounded-pill border border-border bg-surface-muted px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-primary/50 disabled:pointer-events-none disabled:opacity-40"
             >
               🔤 Reveal a letter {`(−10 pts each)`}
             </button>
@@ -289,12 +289,12 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
               disabled={locked}
               placeholder="What's the title?"
               aria-label="Your guess"
-              className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+              className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
             />
             <button
               type="submit"
               disabled={locked || !draft.trim()}
-              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
+              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
             >
               Guess
             </button>
@@ -302,7 +302,7 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
           {feedback && (
             <p
               role="status"
-              className={`rounded-md border-2 px-4 py-2 text-body font-semibold ${
+              className={`rounded-md border px-4 py-2 text-body font-semibold ${
                 feedback.correct
                   ? 'border-success/50 bg-success-soft text-success-strong'
                   : 'border-danger/50 bg-danger-soft text-danger-strong'
@@ -315,7 +315,7 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
             <button
               type="button"
               onClick={next}
-              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-secondary px-7 py-3 text-lg font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark sm:self-start"
+              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-secondary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-secondary-dark sm:self-start"
             >
               {index + 1 >= questions.length ? 'See my score' : 'Next plot'}
             </button>

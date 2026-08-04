@@ -159,7 +159,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
         <button
           type="button"
           onClick={() => roomActions.leaveRoom()}
-          className="ml-auto rounded-pill border-3 border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
+          className="ml-auto rounded-pill border border-primary bg-transparent px-4 py-2 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
         >
           Leave room
         </button>
@@ -177,8 +177,8 @@ export default function DrawingGameArena({ gameSlug }: Props) {
           )}
 
           {!config.wordSelect && drawing.view === 'word-select' && (
-            <div className="flex flex-col items-center gap-3 rounded-lg border-2 border-dashed border-border bg-surface-raised p-10 text-center shadow-sm">
-              <p className="font-display text-h3 text-ink">Setting up the round…</p>
+            <div className="flex flex-col items-center gap-3 rounded-lg border  border-border bg-surface-raised p-10 text-center shadow-sm">
+              <p className="text-lg font-bold tracking-tight text-ink">Setting up the round…</p>
             </div>
           )}
 
@@ -198,7 +198,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                       setColor(swatch);
                       setTool('pen');
                     }}
-                    className={`h-9 w-9 rounded-full border-2 transition-transform hover:scale-110 ${
+                    className={`h-9 w-9 rounded-full border transition-transform hover:scale-110 ${
                       color === swatch && tool === 'pen' ? 'scale-110 border-ink' : 'border-border'
                     }`}
                     style={{ backgroundColor: swatch }}
@@ -209,7 +209,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                   aria-label="Eraser"
                   aria-pressed={tool === 'eraser'}
                   onClick={() => setTool('eraser')}
-                  className={`inline-flex h-9 min-w-14 items-center justify-center rounded-pill border-2 px-3 text-xs font-semibold ${
+                  className={`inline-flex h-9 min-w-14 items-center justify-center rounded-pill border px-3 text-xs font-semibold ${
                     tool === 'eraser'
                       ? 'border-ink bg-secondary text-white'
                       : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
@@ -225,7 +225,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                     setFillColor(tool === 'eraser' ? '#ffffff' : color);
                     setTool('fill');
                   }}
-                  className={`inline-flex h-9 min-w-14 items-center justify-center rounded-pill border-2 px-3 text-xs font-semibold ${
+                  className={`inline-flex h-9 min-w-14 items-center justify-center rounded-pill border px-3 text-xs font-semibold ${
                     tool === 'fill'
                       ? 'border-ink bg-secondary text-white'
                       : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
@@ -241,7 +241,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                     aria-label={`Brush size ${size}`}
                     aria-pressed={brushSize === size}
                     onClick={() => setBrushSize(size)}
-                    className={`inline-flex h-9 w-9 items-center justify-center rounded-pill border-2 ${
+                    className={`inline-flex h-9 w-9 items-center justify-center rounded-pill border ${
                       brushSize === size
                         ? 'border-ink bg-primary/15'
                         : 'border-border bg-surface-raised hover:bg-surface-muted'
@@ -258,14 +258,14 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                 <button
                   type="button"
                   onClick={() => void gameActions.undoStroke()}
-                  className="rounded-pill border-2 border-border bg-surface-raised px-3 py-1.5 text-xs font-semibold text-ink hover:bg-surface-muted"
+                  className="rounded-pill border border-border bg-surface-raised px-3 py-1.5 text-xs font-semibold text-ink hover:bg-surface-muted"
                 >
                   Undo
                 </button>
                 <button
                   type="button"
                   onClick={() => void gameActions.clearCanvas()}
-                  className="rounded-pill border-2 border-danger/50 bg-danger-soft px-3 py-1.5 text-xs font-semibold text-danger-strong hover:bg-danger-soft"
+                  className="rounded-pill border border-danger/50 bg-danger-soft px-3 py-1.5 text-xs font-semibold text-danger-strong hover:bg-danger-soft"
                 >
                   Clear
                 </button>
@@ -273,7 +273,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                   <button
                     type="button"
                     onClick={() => void gameActions.endRoundNow()}
-                    className="ml-auto rounded-pill border-2 border-secondary bg-secondary px-3 py-1.5 text-xs font-semibold text-white hover:bg-secondary-dark"
+                    className="ml-auto rounded-pill border border-secondary bg-secondary px-3 py-1.5 text-xs font-semibold text-white hover:bg-secondary-dark"
                   >
                     End round now
                   </button>
@@ -309,7 +309,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
               {config.liftWarn && isDrawer && drawing.liftWarnings > 0 && (
                 <p
                   role="status"
-                  className="rounded-md border-2 border-danger/50 bg-danger-soft px-4 py-2 text-small font-semibold text-danger-strong"
+                  className="rounded-md border border-danger/50 bg-danger-soft px-4 py-2 text-small font-semibold text-danger-strong"
                 >
                   Pen lifted {drawing.liftWarnings}×, 10 seconds deducted each time. Keep the line
                   continuous!
@@ -339,9 +339,9 @@ export default function DrawingGameArena({ gameSlug }: Props) {
         </div>
 
         <div className="flex flex-col gap-5">
-          <div className="rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
-            <h3 className="mb-2 font-display text-h4 text-ink">Scores</h3>
-            <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
+          <div className="rounded-lg border border-border bg-surface-raised p-5 shadow-sm">
+            <h3 className="mb-2 text-lg font-bold tracking-tight text-ink">Scores</h3>
+            <ol className="flex flex-col divide-y divide-border">
               {sortedScores.map((entry, index) => (
                 <li
                   key={entry.name}
@@ -361,8 +361,8 @@ export default function DrawingGameArena({ gameSlug }: Props) {
             </ol>
           </div>
 
-          <div className="flex flex-col rounded-lg border-2 border-border bg-surface-raised p-5 shadow-sm">
-            <h3 className="mb-2 font-display text-h4 text-ink">Room chat</h3>
+          <div className="flex flex-col rounded-lg border border-border bg-surface-raised p-5 shadow-sm">
+            <h3 className="mb-2 text-lg font-bold tracking-tight text-ink">Room chat</h3>
             <ul
               aria-live="polite"
               className="flex max-h-64 min-h-32 flex-col gap-2 overflow-y-auto pr-1"
@@ -387,12 +387,12 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                 maxLength={300}
                 placeholder={drawing.view === 'drawing' ? 'Type your guess…' : 'Type a message…'}
                 aria-label={drawing.view === 'drawing' ? 'Guess' : 'Chat message'}
-                className="min-w-0 flex-1 rounded-md border-2 border-border bg-surface-raised px-4 py-2.5 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
               />
               <button
                 type="submit"
                 disabled={!chatDraft.trim()}
-                className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-pill bg-secondary px-5 text-small font-semibold text-white shadow-teal transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
+                className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-pill bg-secondary px-5 text-small font-semibold text-white  transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
               >
                 Send
               </button>
@@ -404,7 +404,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
       {error && (
         <p
           role="alert"
-          className="rounded-md border-2 border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
+          className="rounded-md border border-danger bg-danger-soft px-4 py-3 text-body text-danger-strong"
         >
           {error}
         </p>
@@ -425,11 +425,11 @@ function DrawerPrompt({
 }) {
   if (config.banner === 'lyric') {
     return isDrawer ? (
-      <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 px-5 py-3">
+      <div className="rounded-lg border  border-primary/50 bg-primary/10 px-5 py-3">
         <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
           Draw this lyric, the song title is the answer
         </p>
-        <p className="mt-1 font-display text-h3 text-ink">“{drawing.drawerData.lyric}”</p>
+        <p className="mt-1 text-lg font-bold tracking-tight text-ink">“{drawing.drawerData.lyric}”</p>
         {drawing.drawerData.artist && (
           <p className="text-small text-ink-muted">Artist hint appears at 45s.</p>
         )}
@@ -442,11 +442,11 @@ function DrawerPrompt({
   }
   if (config.banner === 'object') {
     return isDrawer ? (
-      <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 px-5 py-3">
+      <div className="rounded-lg border  border-primary/50 bg-primary/10 px-5 py-3">
         <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
           One continuous line, don't lift the pen!
         </p>
-        <p className="mt-1 font-display text-h3 text-ink">{drawing.drawerData.object}</p>
+        <p className="mt-1 text-lg font-bold tracking-tight text-ink">{drawing.drawerData.object}</p>
       </div>
     ) : (
       <p className="text-small text-ink-muted">
@@ -456,7 +456,7 @@ function DrawerPrompt({
   }
   if (config.banner === 'silhouette') {
     return isDrawer ? (
-      <div className="rounded-lg border-2 border-dashed border-primary/50 bg-primary/10 px-5 py-3">
+      <div className="rounded-lg border  border-primary/50 bg-primary/10 px-5 py-3">
         <p className="text-small font-semibold uppercase tracking-wide text-primary-deep">
           Draw the details INSIDE the shadow to make it recognizable
         </p>
@@ -549,15 +549,15 @@ function WordSelectView({
 }) {
   if (!isDrawer) {
     return (
-      <div className="flex flex-col items-center gap-3 rounded-lg border-2 border-dashed border-border bg-surface-raised p-10 text-center shadow-sm">
-        <p className="font-display text-h3 text-ink">Waiting for the drawer…</p>
+      <div className="flex flex-col items-center gap-3 rounded-lg border  border-border bg-surface-raised p-10 text-center shadow-sm">
+        <p className="text-lg font-bold tracking-tight text-ink">Waiting for the drawer…</p>
         <p className="text-body text-ink-muted">{drawerName} is picking a word.</p>
       </div>
     );
   }
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-      <h3 className="font-display text-h3 text-ink">Pick your word</h3>
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+      <h3 className="text-lg font-bold tracking-tight text-ink">Pick your word</h3>
       <p className="text-body text-ink-muted">
         Choose one of these, everyone else will try to guess it from your drawing.
       </p>
@@ -567,7 +567,7 @@ function WordSelectView({
             key={word}
             type="button"
             onClick={() => onChoose(word)}
-            className="inline-flex min-h-16 items-center justify-center rounded-pill border-3 border-primary bg-surface-raised px-6 py-3 text-xl font-semibold text-primary-strong transition-colors hover:bg-primary/15 focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+            className="inline-flex min-h-16 items-center justify-center rounded-pill border border-primary bg-surface-raised px-6 py-3 text-xl font-semibold text-primary-strong transition-colors hover:bg-primary/15 focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
           >
             {word}
           </button>
@@ -595,8 +595,8 @@ function RoundResultsView({
     return null;
   }
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-      <h3 className="font-display text-h3 text-ink">
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+      <h3 className="text-lg font-bold tracking-tight text-ink">
         The answer was <span className="text-primary-deep">{summary.word}</span>
       </h3>
       <div className="flex flex-col gap-2">
@@ -622,7 +622,7 @@ function RoundResultsView({
         <button
           type="button"
           onClick={onNext}
-          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
         >
           {round >= totalRounds ? 'See final results' : 'Next round'}
         </button>
@@ -649,11 +649,11 @@ function GameEndView({
 }) {
   const final = finalScores ?? [];
   return (
-    <div className="flex flex-col gap-4 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
       <h3 className="font-display text-h2 text-ink">
         {final[0] ? `${final[0].playerName} wins!` : 'Game over'}
       </h3>
-      <ol className="flex flex-col divide-y-2 divide-dashed divide-border">
+      <ol className="flex flex-col divide-y divide-border">
         {final.map((entry, index) => (
           <li
             key={entry.playerName}
@@ -676,7 +676,7 @@ function GameEndView({
         <button
           type="button"
           onClick={onRestart}
-          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
         >
           Play again
         </button>
@@ -709,8 +709,8 @@ function ShadowGenreBlock({
     return null;
   }
   return (
-    <div className="rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
-      <h3 className="font-display text-h4 text-ink">Silhouette category (host)</h3>
+    <div className="rounded-lg border  border-border bg-surface-raised p-5 shadow-sm">
+      <h3 className="text-lg font-bold tracking-tight text-ink">Silhouette category (host)</h3>
       <p className="mt-1 text-small text-ink-muted">
         Pick a theme, the shadows (and the drawing challenge) come from it.
       </p>
@@ -722,7 +722,7 @@ function ShadowGenreBlock({
             setGenre(null);
             void onSelect(null);
           }}
-          className={`rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+          className={`rounded-pill border px-4 py-2 text-small font-semibold transition-colors ${
             genre === null
               ? 'border-primary bg-primary/15 text-primary-deep'
               : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'
@@ -739,7 +739,7 @@ function ShadowGenreBlock({
               setGenre(option.id);
               void onSelect(option.id);
             }}
-            className={`rounded-pill border-2 px-4 py-2 text-small font-semibold transition-colors ${
+            className={`rounded-pill border px-4 py-2 text-small font-semibold transition-colors ${
               genre === option.id
                 ? 'border-primary bg-primary/15 text-primary-deep'
                 : 'border-border bg-surface-muted text-ink-muted hover:border-primary/50 hover:text-ink'
@@ -796,8 +796,8 @@ function CustomWordsBlock({
   };
 
   return (
-    <div className="rounded-lg border-2 border-dashed border-border bg-surface-raised p-5 shadow-sm">
-      <h3 className="font-display text-h4 text-ink">Custom words (host)</h3>
+    <div className="rounded-lg border  border-border bg-surface-raised p-5 shadow-sm">
+      <h3 className="text-lg font-bold tracking-tight text-ink">Custom words (host)</h3>
       <p className="mt-1 text-small text-ink-muted">
         Optional: paste your own word list, one per line or comma-separated, to replace the built-in
         bank.
@@ -809,14 +809,14 @@ function CustomWordsBlock({
         maxLength={4000}
         placeholder={'pizza\nastronaut\nbanana'}
         aria-label="Custom word list"
-        className="mt-3 w-full rounded-md border-2 border-border bg-surface-raised px-4 py-3 text-lg text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-4 focus:ring-primary/25"
+        className="mt-3 w-full rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
       />
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <button
           type="button"
           disabled={applying || !draft.trim()}
           onClick={() => void apply()}
-          className="inline-flex min-h-11 items-center justify-center rounded-pill border-3 border-primary bg-transparent px-5 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15 disabled:pointer-events-none disabled:opacity-40"
+          className="inline-flex min-h-11 items-center justify-center rounded-pill border border-primary bg-transparent px-5 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15 disabled:pointer-events-none disabled:opacity-40"
         >
           {applying ? 'Applying…' : 'Apply word list'}
         </button>

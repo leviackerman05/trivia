@@ -153,3 +153,65 @@ The final decision, already approved with the domain
 5. **It is safe.** The pattern "TriviaHub" is less collision-prone than
    TriviaParty, TriviaWorld, or TriviaTime (all crowded), and it carries no
    negative connotation in any target market.
+
+---
+
+# Visual Identity: Cloudflare Cloud Identity (2026-08-04)
+
+Adopted the Cloudflare Cloud Identity design system (owner-approved switch,
+replacing the BounceBox coral/teal palette from PRD §11). Everything below
+lives in `src/styles/global.css` as Tailwind v4 `@theme` tokens, so every
+component and island restyles through the token layer.
+
+## Palette
+
+| Token | Dark (default) | Light (`:root.light`) |
+| --- | --- | --- |
+| `primary` | `#F38020` | `#F38020` |
+| `primary-strong` (text) | `#F6994F` | `#A85100` |
+| `primary-hover` | `#D36610` | `#D36610` |
+| `secondary` (blue actions) | `#3B82F6` | `#0051C3` |
+| `surface` | `#09090B` | `#FFFFFF` |
+| `surface-raised` | `#131316` | `#FFFFFF` |
+| `surface-muted` | `#1B1B1F` | `#F7F7F8` |
+| `border` | `#27272A` | `#E4E4E7` |
+| `ink` | `#FAFAFA` | `#071428` |
+| `ink-muted` | `#A1A1AA` | `#52525B` |
+| `success` | `#10B981` | `#059669` |
+| `warning` | `#FFAC00` | `#FFAC00` |
+| `error` | `#F87171` | `#DC2626` |
+| `info` | `#38BDF8` | `#0284C7` |
+
+## Type
+
+- Inter everywhere (self-hosted via `@fontsource/inter`, 400/500/600/700/800).
+- Display/headings: Inter 700-800 with `tracking-tight` (-0.02em).
+- Mono: JetBrains Mono for room codes, timers, and score digits.
+- Base 16px body; 14px small; 12px xs.
+
+## Shape, focus, elevation
+
+- Radii: consistent 8px rounded system (`rounded-md` 8px, `rounded-lg` 12px;
+  the legacy `rounded-pill` utility maps to 8px so buttons, chips, and tags
+  stay consistent with the Cloudflare look).
+- Focus: 2px emerald ring (`#059669`) on `:focus-visible`, offset 2px,
+  never removed by hover styling (WCAG 2.2 AA target).
+- Borders: 1px hairlines (`--color-border`); no dashed borders in the UI.
+- Overlays: `rgba(0,0,0,0.8)` scrim with `backdrop-blur-sm` on dialogs.
+- Motion: hover lifts (translate + shadow) on cards, 150ms transitions,
+  `prefers-reduced-motion` disables all animation.
+
+## Theme
+
+- Dark-first: `#09090B` is the default; the header toggle flips `:root.light`
+  (persisted as `pb-theme` in localStorage; the no-FOUC script in
+  `BaseLayout.astro` runs before paint).
+
+## Mobile
+
+- Bottom tab bar (Home, Daily, Games, Categories, Play) on phones, safe-area
+  aware, hidden from `lg` up; the desktop nav lives in the sticky header.
+- Touch targets ≥44px on all controls; `overflow-x: clip` on body so no
+  island can break the layout; card padding tightens to 16px on mobile.
+- OG images (scripts/generate-og.mjs) match: dark canvas `#09090B`, Inter,
+  orange logo mark, playtriviahub.com footer.

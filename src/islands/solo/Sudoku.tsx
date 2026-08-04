@@ -83,8 +83,8 @@ export default function Sudoku() {
 
   if (phase === 'setup') {
     return (
-      <div className="flex flex-col gap-5 rounded-lg border-2 border-border bg-surface-raised p-6 shadow-sm">
-        <h3 className="font-display text-h3 text-ink">Daily Sudoku</h3>
+      <div className="flex flex-col gap-5 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
+        <h3 className="text-lg font-bold tracking-tight text-ink">Daily Sudoku</h3>
         <p className="max-w-xl text-body text-ink-muted">
           The same puzzle for everyone today ({dateKey}), finish it to score{' '}
           {SUDOKU_COMPLETION_POINTS} points on the daily leaderboard. Tap a cell, then tap a number.
@@ -92,7 +92,7 @@ export default function Sudoku() {
         <button
           type="button"
           onClick={start}
-          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary-strong px-7 py-3 text-lg font-semibold text-white shadow-coral transition-colors hover:bg-primary-hover sm:self-start"
+          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
         >
           Start the puzzle
         </button>
@@ -130,7 +130,7 @@ export default function Sudoku() {
         <div
           role="grid"
           aria-label="Sudoku grid"
-          className="grid w-full max-w-md grid-cols-9 overflow-hidden rounded-lg border-2 border-ink"
+          className="grid w-full max-w-md grid-cols-9 overflow-hidden rounded-lg border border-ink"
         >
           {grid.map((digit, index) => {
             const row = Math.floor(index / 9);
@@ -177,7 +177,7 @@ export default function Sudoku() {
                   key={digit}
                   type="button"
                   onClick={() => place(digit)}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-pill border-2 border-border bg-surface-muted text-lg font-bold text-ink transition-colors hover:border-primary/50 hover:bg-primary/10"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-pill border border-border bg-surface-muted text-lg font-bold text-ink transition-colors hover:border-primary/50 hover:bg-primary/10"
                 >
                   {digit}
                 </button>
@@ -186,7 +186,7 @@ export default function Sudoku() {
                 type="button"
                 onClick={() => place(0)}
                 aria-label="Erase the selected cell"
-                className="inline-flex h-11 items-center justify-center rounded-pill border-2 border-danger/50 bg-danger-soft px-4 text-sm font-semibold text-danger-strong transition-colors hover:bg-danger-soft/70"
+                className="inline-flex h-11 items-center justify-center rounded-pill border border-danger/50 bg-danger-soft px-4 text-sm font-semibold text-danger-strong transition-colors hover:bg-danger-soft/70"
               >
                 ✕ Erase
               </button>
