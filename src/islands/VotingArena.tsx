@@ -115,7 +115,10 @@ export default function VotingArena({ gameSlug }: Props) {
         gamePlayable={game?.playable === true}
         lobbyExtras={
           isHost ? (
-            <VotingLobbySettings kind={kind} onConfig={gameActions.setVotingConfig} />
+            // Use the PAGE slug, not voting.kind: the reducer's kind is the
+            // initial 'would-you-rather' until the game starts, which made
+            // the tier/genre settings invisible in the lobby (M19 fix).
+            <VotingLobbySettings kind={gameSlug} onConfig={gameActions.setVotingConfig} />
           ) : undefined
         }
       />
