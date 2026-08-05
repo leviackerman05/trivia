@@ -421,7 +421,8 @@ export default function WorldPeek() {
       ? 'absolute inset-0'
       : showImage
         ? 'absolute inset-0 z-30 bg-surface'
-        : 'absolute bottom-3 right-3 z-20 h-40 w-60 overflow-hidden rounded-lg border border-border shadow-lg sm:h-48 sm:w-72';
+        : // [D063] mobile: bottom-sheet panel; desktop (sm+): corner inset.
+          'absolute inset-x-3 bottom-3 z-20 h-36 overflow-hidden rounded-lg border border-border shadow-lg sm:inset-x-auto sm:right-3 sm:h-48 sm:w-72';
 
   return (
     <SoloShell

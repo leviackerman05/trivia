@@ -7,8 +7,9 @@
  * only ever contains entries with a resolved Mapillary pano.
  *
  * Stages (each separately runnable, deterministic re-runs):
- *   --sample   S0-S2: region slate → Overpass street-node sampling →
- *              landmark exclusion. Writes the candidate cache.
+ *   --sample   S0-S2: region slate → OSM street-way sampling (member nodes
+ *              of residential/primary/secondary/tertiary ways) → landmark
+ *              exclusion. Writes the candidate cache.
  *   --resolve  S3:    Mapillary pano-ID lookup per candidate (~1 rps,
  *              retry + backoff; MAPILLARY_TOKEN from build env).
  *   --apply    S4:    write world-peek-places.json (resolved entries ONLY)
@@ -21,7 +22,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DATASET_PATH = join(root, 'src/data/world-peek-places.json');
@@ -331,15 +332,103 @@ function bboxFor(city, radiusKm) {
 }
 
 // ---------------------------------------------------------------------------
-// S1 — OSM sampling (Overpass). Deterministic seeded pick per city.
+// S1 — OSM sampling. Street geometry lives on WAYS in OSM (nodes tagged
+// highway=residential/primary/secondary/tertiary are crossings/signals), so
+// each city query pulls street ways inside the box and every member node is
+// a candidate coordinate. Overpass first, OSM API map endpoint fallback;
+// deterministic seeded pick per city (re-runs stable).
+
+/** Parse OSM XML (map endpoint) into a node map + way list. */
+function parseOsmXml(xml) {
+  const nodeMap = new Map();
+  const ways = [];
+  // Atomic element match: a self-closing <node .../> / <way .../> or a
+  // tagged <node ...>...</node> / <way ...>...</way>. The backreference
+  // keeps the lazy span from swallowing sibling elements.
+  const elementPattern = /<(node|way)\b[^>]*?(?:\/>|>[\s\S]*?<\/\1>)/g;
+  // \b keeps id="..." from matching inside uid="..." (the node id is
+  // set BEFORE uid in the attribute list, so the uid match would win).
+  const attrPattern = /\bid="(\d+)"|lat="([-\d.]+)"|lon="([-\d.]+)"/g;
+  const tagPattern = /<tag k="([^"]+)" v="([^"]*)"\/>/g;
+  const ndPattern = /<nd ref="(\d+)"\/>/g;
+  let match;
+  while ((match = elementPattern.exec(xml)) !== null) {
+    const element = match[0];
+    const attrs = {};
+    let attr;
+    attrPattern.lastIndex = 0;
+    while ((attr = attrPattern.exec(element)) !== null) {
+      if (attr[1] !== undefined) attrs.id = Number(attr[1]);
+      else if (attr[2] !== undefined) attrs.lat = Number(attr[2]);
+      else if (attr[3] !== undefined) attrs.lon = Number(attr[3]);
+    }
+    if (attrs.id === undefined) {
+      continue;
+    }
+    const tags = {};
+    let tagMatch;
+    tagPattern.lastIndex = 0;
+    while ((tagMatch = tagPattern.exec(element)) !== null) {
+      tags[tagMatch[1]] = tagMatch[2];
+    }
+    if (match[1] === 'node') {
+      if (attrs.lat === undefined || attrs.lon === undefined) {
+        continue;
+      }
+      nodeMap.set(attrs.id, { id: attrs.id, lat: attrs.lat, lon: attrs.lon, tags });
+    } else {
+      const nd = [];
+      let ndMatch;
+      ndPattern.lastIndex = 0;
+      while ((ndMatch = ndPattern.exec(element)) !== null) {
+        nd.push(Number(ndMatch[1]));
+      }
+      ways.push({ id: attrs.id, tags, nd });
+    }
+  }
+  return { nodeMap, ways };
+}
+
+/**
+ * Collapse street ways into deduped candidate points: every member node of
+ * every eligible way, landmark-excluded at both the way and node level. The
+ * way's street name rides along so picks can carry a reveal label.
+ */
+function streetNodesFromWays(ways, nodeMap) {
+  const points = [];
+  const seenIds = new Set();
+  for (const way of ways) {
+    if (!/^(residential|primary|secondary|tertiary)$/.test(way.tags.highway ?? '')) {
+      continue;
+    }
+    if (isLandmarkNode(way)) {
+      continue;
+    }
+    const name = typeof way.tags.name === 'string' ? way.tags.name : null;
+    for (const ref of way.nd) {
+      const node = nodeMap.get(ref);
+      if (!node || seenIds.has(node.id)) {
+        continue;
+      }
+      if (isLandmarkNode(node)) {
+        continue;
+      }
+      seenIds.add(node.id);
+      points.push({ id: node.id, lat: node.lat, lon: node.lon, tags: node.tags, name });
+    }
+  }
+  return points;
+}
 
 async function overpassStreetNodes(city, radiusKm) {
   const bbox = bboxFor(city, radiusKm);
+  // Ways + their member nodes: `out tags` emits the ways, `>` adds members
+  // to the result set, `out skel` emits them with coordinates.
   const query =
     `[out:json][timeout:30];` +
-    `(node["highway"~"^(residential|primary|secondary|tertiary)$"]` +
+    `(way["highway"~"^(residential|primary|secondary|tertiary)$"]` +
     `(${bbox.south.toFixed(5)},${bbox.west.toFixed(5)},${bbox.north.toFixed(5)},${bbox.east.toFixed(5)}));` +
-    `out tags;`;
+    `out tags;>;out skel;`;
   for (const endpoint of OVERPASS_ENDPOINTS) {
     for (let attempt = 0; attempt < MAX_RETRIES; attempt += 1) {
       try {
@@ -364,11 +453,26 @@ async function overpassStreetNodes(city, radiusKm) {
           continue;
         }
         const body = JSON.parse(text);
-        const nodes = (body.elements ?? []).filter((element) => element.type === 'node');
-        if (nodes.length === 0) {
+        const nodeMap = new Map(
+          (body.elements ?? [])
+            .filter((element) => element.type === 'node')
+            .map((element) => [
+              element.id,
+              { id: element.id, lat: element.lat, lon: element.lon, tags: element.tags ?? {} },
+            ])
+        );
+        const ways = (body.elements ?? [])
+          .filter((element) => element.type === 'way')
+          .map((element) => ({
+            id: element.id,
+            tags: element.tags ?? {},
+            nd: element.nodes ?? [],
+          }));
+        const points = streetNodesFromWays(ways, nodeMap);
+        if (points.length === 0) {
           throw new Error(`empty result on ${endpoint}`);
         }
-        return nodes;
+        return points;
       } catch {
         if (attempt === MAX_RETRIES - 1) {
           break; // try the next endpoint
@@ -378,39 +482,6 @@ async function overpassStreetNodes(city, radiusKm) {
     }
   }
   return [];
-}
-
-/** Parse OSM XML nodes (with tags) into the shared candidate shape. */
-function parseOsmXml(xml) {
-  const nodes = [];
-  // Atomic element match: a self-closing <node .../> or a tagged
-  // <node ...>...</node> — never let the lazy span swallow siblings.
-  const elementPattern = /<node\b[^>]*?(?:\/>|>[\s\S]*?<\/node>)/g;
-  const attrPattern = /id="(\d+)"|lat="([-\d.]+)"|lon="([-\d.]+)"/g;
-  const tagPattern = /<tag k="([^"]+)" v="([^"]*)"\/>/g;
-  let match;
-  while ((match = elementPattern.exec(xml)) !== null) {
-    const element = match[0];
-    const attrs = {};
-    let attr;
-    attrPattern.lastIndex = 0;
-    while ((attr = attrPattern.exec(element)) !== null) {
-      if (attr[1] !== undefined) attrs.id = Number(attr[1]);
-      else if (attr[2] !== undefined) attrs.lat = Number(attr[2]);
-      else if (attr[3] !== undefined) attrs.lon = Number(attr[3]);
-    }
-    if (attrs.id === undefined || attrs.lat === undefined || attrs.lon === undefined) {
-      continue;
-    }
-    const tags = {};
-    let tagMatch;
-    tagPattern.lastIndex = 0;
-    while ((tagMatch = tagPattern.exec(element)) !== null) {
-      tags[tagMatch[1]] = tagMatch[2];
-    }
-    nodes.push({ id: attrs.id, lat: attrs.lat, lon: attrs.lon, tags });
-  }
-  return nodes;
 }
 
 /** OSM API map endpoint: small boxes, shrink on the 50k-node overflow. */
@@ -442,13 +513,12 @@ async function osmApiStreetNodes(city, radiusKm) {
     if (!response.ok) {
       throw new Error(`OSM API HTTP ${response.status} for ${city.city}`);
     }
-    const nodes = parseOsmXml(text).filter((node) =>
-      /^(residential|primary|secondary|tertiary)$/.test(node.tags.highway ?? '')
-    );
-    if (nodes.length === 0) {
+    const { nodeMap, ways } = parseOsmXml(text);
+    const points = streetNodesFromWays(ways, nodeMap);
+    if (points.length === 0) {
       throw new Error(`no street nodes in ${city.city} box`);
     }
-    return nodes;
+    return points;
   }
   return [];
 }
@@ -495,7 +565,7 @@ function pickCandidates(nodes, city, count) {
       region: city.region,
       lat: node.lat,
       lon: node.lon,
-      osmName: typeof node.tags?.name === 'string' ? node.tags.name : null,
+      osmName: typeof node.name === 'string' ? node.name : null,
     });
   }
   return picked;
@@ -599,6 +669,59 @@ function difficultyFor(lat, lon) {
   return (fnv1a(`${lat.toFixed(6)}:${lon.toFixed(6)}`) % 3) + 1;
 }
 
+/** ISO-3166 alpha-2 → display name, for the reveal label (S0 slate only). */
+const COUNTRY_NAMES = {
+  ZA: 'South Africa',
+  KE: 'Kenya',
+  GH: 'Ghana',
+  NG: 'Nigeria',
+  EG: 'Egypt',
+  MA: 'Morocco',
+  ET: 'Ethiopia',
+  UG: 'Uganda',
+  SN: 'Senegal',
+  US: 'United States',
+  MX: 'Mexico',
+  CA: 'Canada',
+  BR: 'Brazil',
+  AR: 'Argentina',
+  CO: 'Colombia',
+  PE: 'Peru',
+  CL: 'Chile',
+  JP: 'Japan',
+  TH: 'Thailand',
+  SG: 'Singapore',
+  ID: 'Indonesia',
+  PH: 'Philippines',
+  KR: 'South Korea',
+  MY: 'Malaysia',
+  IN: 'India',
+  VN: 'Vietnam',
+  TW: 'Taiwan',
+  GB: 'United Kingdom',
+  FR: 'France',
+  DE: 'Germany',
+  ES: 'Spain',
+  IT: 'Italy',
+  NL: 'Netherlands',
+  CZ: 'Czechia',
+  AT: 'Austria',
+  HU: 'Hungary',
+  AU: 'Australia',
+  NZ: 'New Zealand',
+};
+
+/**
+ * Reveal label: street + city when the sampled way has a name, else
+ * city + country. Never a monument name (S2 guarantees the source).
+ */
+export function placeLabel(candidate) {
+  if (typeof candidate.osmName === 'string' && candidate.osmName.length > 0) {
+    return `${candidate.osmName}, ${candidate.city}`;
+  }
+  return `${candidate.city}, ${COUNTRY_NAMES[candidate.country] ?? candidate.country}`;
+}
+
 async function applyStage() {
   const candidates = readJsonOr(CANDIDATES_PATH, []);
   const resolved = candidates.filter((candidate) => candidate.resolved === true);
@@ -640,6 +763,7 @@ async function applyStage() {
   }
   const entries = resolved.map((candidate) => ({
     id: candidate.id,
+    place: placeLabel(candidate),
     lat: candidate.lat,
     lon: candidate.lon,
     region: candidate.region,
@@ -672,9 +796,14 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(
-    `world-peek pipeline failed: ${error instanceof Error ? error.message : String(error)}`
-  );
-  process.exit(1);
-});
+// Direct-run only: importing this module (e.g. from the dataset test for
+// REGIONS / LANDMARK_BLOCKLIST / placeLabel) must not run the pipeline.
+const isDirectRun = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isDirectRun) {
+  main().catch((error) => {
+    console.error(
+      `world-peek pipeline failed: ${error instanceof Error ? error.message : String(error)}`
+    );
+    process.exit(1);
+  });
+}
