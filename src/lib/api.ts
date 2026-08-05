@@ -1,3 +1,5 @@
+import type { DrawingGalleryResponse } from './daily-drawing';
+
 /**
  * Typed API client for the TriviaHub backend (PRD §8.1 endpoints).
  * Islands use these helpers; errors surface as ApiError with a stable code.
@@ -108,4 +110,93 @@ export async function fetchLeaderboard(
   return apiFetch<LeaderboardResponse>(
     `/api/leaderboard/${encodeURIComponent(gameId)}?period=${period}&limit=${limit}`
   );
+}
+
+// --- Daily Drawing gallery (DAILY-DESIGN §4.2, contract table §5.1) ---
+
+export interface DrawingSubmissionInput {
+  memberKey: string;
+  playerName: string;
+  dateKey: string;
+  promptIndex: number;
+  image: string; // PNG data URL
+}
+
+/** Upload response: 201 created, or 200 when the day's entry already exists. */
+export interface DrawingUploadResult {
+  submission: {
+    id: string;
+    dateKey: string;
+    promptIndex: number;
+    playerName: string;
+    votes: number;
+  };
+}
+
+/**
+ * Upload a drawing. Retries are safe because the endpoint is idempotent
+ * per (dateKey, memberKey) — same policy as submitScore: retry 5xx and
+ * network errors only, never 4xx.
+ */
+export async function uploadDrawingSubmission(
+  input: DrawingSubmissionInput,
+  retries = 2
+): Promise<DrawingUploadResult> {
+  let lastError: unknown;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      return await apiFetch<DrawingUploadResult>('/api/drawing/submissions', {
+        method: 'POST',
+        body: JSON.stringify(input),
+      });
+    } catch (error) {
+      lastError = error;
+      if (error instanceof ApiError && error.status < 500) {
+        throw error;
+      }
+      if (attempt < retries) {
+        await sleep(250 * 2 ** attempt);
+      }
+    }
+  }
+  throw lastError;
+}
+
+/** Gallery read: visible submissions votes-desc, `mine`/`voted` for the member. */
+export async function fetchDrawingGallery(opts: {
+  dateKey: string;
+  promptIndex: number;
+  memberKey?: string;
+}): Promise<DrawingGalleryResponse> {
+  const params = new URLSearchParams({
+    dateKey: opts.dateKey,
+    promptIndex: String(opts.promptIndex),
+  });
+  if (opts.memberKey) {
+    params.set('memberKey', opts.memberKey);
+  }
+  return apiFetch<DrawingGalleryResponse>(`/api/drawing/submissions?${params.toString()}`);
+}
+
+/** Vote: 201 first vote, 200 duplicate (no double count, server derives it). */
+export async function voteDrawingSubmission(
+  id: string,
+  memberKey: string
+): Promise<{ votes: number; duplicate: boolean }> {
+  return apiFetch(`/api/drawing/submissions/${encodeURIComponent(id)}/vote`, {
+    method: 'POST',
+    body: JSON.stringify({ memberKey }),
+  });
+}
+
+/** Flag: idempotent per submission+member; 3 distinct flags auto-hide. */
+export async function flagDrawingSubmission(
+  id: string,
+  memberKey: string,
+  reason?: string
+): Promise<{ flagged: boolean; duplicate: boolean; hidden: boolean }> {
+  return apiFetch(`/api/drawing/submissions/${encodeURIComponent(id)}/flag`, {
+    method: 'POST',
+    body: JSON.stringify({ memberKey, ...(reason ? { reason } : {}) }),
+  });
 }

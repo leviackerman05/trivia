@@ -5,6 +5,10 @@ import {
   CANVAS_WIDTH,
   COLOR_PALETTE,
   DEFAULT_COLOR,
+  DRAWING_DATA_URL_MAX_CHARS,
+  DRAWING_EXPORT_MAX_DIM,
+  DRAWING_UPLOAD_MAX_BYTES,
+  fitWithinMaxDim,
   floodFill,
   pathBBox,
   removeStrokeById,
@@ -176,6 +180,36 @@ describe('silhouette path bounds (Shadow Sketch)', () => {
     const { ctx, calls } = fakeContext();
     replayStrokes(ctx, [stroke()], 'M50 32 Z');
     expect(calls).toContain('fillRect 0 0 800 500');
+  });
+});
+
+describe('drawing export fit (DAILY-DESIGN §4.1)', () => {
+  it('preserves aspect and caps the longest side at maxDim', () => {
+    const fit = fitWithinMaxDim(2000, 1250, DRAWING_EXPORT_MAX_DIM);
+    expect(Math.max(fit.width, fit.height)).toBeLessThanOrEqual(DRAWING_EXPORT_MAX_DIM);
+    expect(fit.width / fit.height).toBeCloseTo(2000 / 1250, 5);
+  });
+
+  it('never upscales smaller canvases', () => {
+    expect(fitWithinMaxDim(800, 500, DRAWING_EXPORT_MAX_DIM)).toEqual({ width: 800, height: 500 });
+    expect(fitWithinMaxDim(1024, 640, 1024)).toEqual({ width: 1024, height: 640 });
+    expect(fitWithinMaxDim(100, 100, 1024)).toEqual({ width: 100, height: 100 });
+  });
+
+  it('fits portrait canvases on the height', () => {
+    const fit = fitWithinMaxDim(500, 2000, DRAWING_EXPORT_MAX_DIM);
+    expect(fit.height).toBe(DRAWING_EXPORT_MAX_DIM);
+    expect(fit.width).toBe(256);
+  });
+
+  it('returns degenerate sizes untouched', () => {
+    expect(fitWithinMaxDim(0, 500, 1024)).toEqual({ width: 0, height: 500 });
+  });
+
+  it('exposes the client mirror of the server caps', () => {
+    expect(DRAWING_EXPORT_MAX_DIM).toBe(1024);
+    expect(DRAWING_UPLOAD_MAX_BYTES).toBe(1_000_000);
+    expect(DRAWING_DATA_URL_MAX_CHARS).toBe(1_400_000);
   });
 });
 

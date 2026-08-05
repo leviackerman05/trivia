@@ -4,6 +4,15 @@ All notable changes to TriviaHub are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versions track package
 metadata (`triviahub`, `@triviahub/server`).
 
+## [Unreleased]
+
+### Changed
+
+- **Homepage page weight 110 → 92 KB:** latin-only Inter font subsets
+  (`src/styles/global.css`) and a compact homepage FAQ card
+  (`src/pages/index.astro`), keeping the page under the 100 KB smoke-gate
+  budget.
+
 ## [0.6.0] - 2026-08-04
 
 ### Changed

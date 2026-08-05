@@ -1,0 +1,192 @@
+[
+  {
+    "title": "Happy",
+    "artist": "Pharrell Williams",
+    "year": 2013,
+    "genre": "pop",
+    "emoji": "🎉😄🕺",
+    "bpm": 160,
+    "difficulty": 1,
+    "options": ["Happy", "Get Lucky", "Uptown Funk", "Shake It Off"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/happy"
+  },
+  {
+    "title": "Sweet Caroline",
+    "artist": "Neil Diamond",
+    "year": 1969,
+    "genre": "pop",
+    "emoji": "🍬👏🍻",
+    "bpm": 126,
+    "difficulty": 1,
+    "options": ["Sweet Caroline", "American Pie", "Piano Man", "Brown Eyed Girl"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/sweet-caroline"
+  },
+  {
+    "title": "Bohemian Rhapsody",
+    "artist": "Queen",
+    "year": 1975,
+    "genre": "rock",
+    "emoji": "🎸🎹🖤",
+    "bpm": 144,
+    "difficulty": 1,
+    "options": [
+      "Bohemian Rhapsody",
+      "Stairway to Heaven",
+      "Sweet Child o' Mine",
+      "Don't Stop Me Now"
+    ],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/bohemian-rhapsody"
+  },
+  {
+    "title": "I Will Always Love You",
+    "artist": "Whitney Houston",
+    "year": 1992,
+    "genre": "pop",
+    "emoji": "💔🎤👋",
+    "bpm": 132,
+    "difficulty": 1,
+    "options": ["I Will Always Love You", "My Heart Will Go On", "Hero", "Greatest Love of All"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/i-will-always-love-you"
+  },
+  {
+    "title": "Let It Go",
+    "artist": "Idina Menzel",
+    "year": 2013,
+    "genre": "pop",
+    "emoji": "❄️👑🎵",
+    "bpm": 137,
+    "difficulty": 1,
+    "options": ["Let It Go", "Into the Unknown", "Part of Your World", "A Whole New World"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/let-it-go"
+  },
+  {
+    "title": "Don't Stop Believin'",
+    "artist": "Journey",
+    "year": 1981,
+    "genre": "rock",
+    "emoji": "🎹🌃🚂",
+    "bpm": 118,
+    "difficulty": 2,
+    "options": ["Don't Stop Believin'", "Livin' on a Prayer", "Take On Me", "Eye of the Tiger"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/dont-stop-believin"
+  },
+  {
+    "title": "Billie Jean",
+    "artist": "Michael Jackson",
+    "year": 1983,
+    "genre": "pop",
+    "emoji": "🕺👟🌙",
+    "bpm": 117,
+    "difficulty": 2,
+    "options": ["Billie Jean", "Thriller", "Beat It", "Smooth Criminal"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/billie-jean"
+  },
+  {
+    "title": "Smells Like Teen Spirit",
+    "artist": "Nirvana",
+    "year": 1991,
+    "genre": "rock",
+    "emoji": "🤘🎸😤",
+    "bpm": 117,
+    "difficulty": 2,
+    "options": ["Smells Like Teen Spirit", "Come as You Are", "Heart-Shaped Box", "In Bloom"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/smells-like-teen-spirit"
+  },
+  {
+    "title": "Sweet Dreams (Are Made of This)",
+    "artist": "Eurythmics",
+    "year": 1983,
+    "genre": "synthpop",
+    "emoji": "💤🎛️🌌",
+    "bpm": 126,
+    "difficulty": 2,
+    "options": [
+      "Sweet Dreams (Are Made of This)",
+      "Blue Monday",
+      "Tainted Love",
+      "Don't You Want Me"
+    ],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/sweet-dreams"
+  },
+  {
+    "title": "Respect",
+    "artist": "Aretha Franklin",
+    "year": 1967,
+    "genre": "soul",
+    "emoji": "👑🎤🙌",
+    "bpm": 116,
+    "difficulty": 2,
+    "options": ["Respect", "Think", "(You Make Me Feel Like) A Natural Woman", "Chain of Fools"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/respect"
+  },
+  {
+    "title": "Baba O'Riley",
+    "artist": "The Who",
+    "year": 1971,
+    "genre": "rock",
+    "emoji": "🎻🚗🌄",
+    "bpm": 130,
+    "difficulty": 3,
+    "options": ["Baba O'Riley", "Won't Get Fooled Again", "My Generation", "Pinball Wizard"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/baba-oriley"
+  },
+  {
+    "title": "Mr. Brightside",
+    "artist": "The Killers",
+    "year": 2004,
+    "genre": "rock",
+    "emoji": "💔🕺👀",
+    "bpm": 148,
+    "difficulty": 3,
+    "options": ["Mr. Brightside", "Somebody Told Me", "When You Were Young", "Read My Mind"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/mr-brightside"
+  },
+  {
+    "title": "Take Five",
+    "artist": "The Dave Brubeck Quartet",
+    "year": 1959,
+    "genre": "jazz",
+    "emoji": "🎷🖐️⏱️",
+    "bpm": 174,
+    "difficulty": 3,
+    "options": ["Take Five", "Blue Rondo à la Turk", "So What", "My Favorite Things"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/take-five"
+  },
+  {
+    "title": "Time",
+    "artist": "Pink Floyd",
+    "year": 1973,
+    "genre": "progressive rock",
+    "emoji": "⏰🎹🌊",
+    "bpm": 120,
+    "difficulty": 3,
+    "options": ["Time", "Money", "Wish You Were Here", "Comfortably Numb"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/time-pink-floyd"
+  },
+  {
+    "title": "Toxic",
+    "artist": "Britney Spears",
+    "year": 2003,
+    "genre": "pop",
+    "emoji": "☣️💋🕺",
+    "bpm": 132,
+    "difficulty": 3,
+    "options": ["Toxic", "...Baby One More Time", "Oops!... I Did It Again", "Womanizer"],
+    "answer": 0,
+    "bpmSource": "https://songbpm.com/toxic"
+  }
+]

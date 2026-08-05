@@ -1265,3 +1265,50 @@ workspace package.
 - **Date:** 2026-08-04
 - **Future impact:** migration of the DB stays additive (D006); the domain
   is fixed at playtriviahub.com everywhere (D043).
+
+---
+
+## D053, M19 four daily games: engines + drawing gallery subsystem (2026-08-05)
+
+- **Decision:** the four `live:false` dailies (geography, movies, music,
+  drawing) ship as design-scoped in `docs/DAILY-DESIGN.md`: three pure
+  client engines on the Phase A seeded-pick pattern (D050) + a
+  server-persisted drawing gallery. Drawing is the first user-content
+  subsystem: `DrawingSubmission` / `DrawingVote` / `DrawingFlag` tables
+  (additive), four REST endpoints, flag-and-remove moderation (owner pick,
+  §0 of DAILY-SCOPE), flat 100 completion scoring with votes excluded from
+  the leaderboard. Three resolutions ratified: flag idempotency via
+  `@@unique([submissionId, memberKey])` (a `flagCount` int alone is
+  flag-spammable); a route-scoped `express.json({ limit: '1.5mb' })` parser
+  registered **before** the global 32 KB parser in `app.ts` (verified: the
+  global default was 32 KB, not 100 KB, and would reject uploads before the
+  router); gallery reads capped at `take 50` + `total`, votes desc, with
+  additive `mine`/`voted` flags per row (the scope's minimal shape cannot
+  express the "yours" marker acceptance criterion). The error middleware
+  gains status preservation so parser 413s surface as `PAYLOAD_TOO_LARGE`,
+  not 500.
+- **Reason:** the owner confirmed the defaults slate and resolved §9
+  (flat 100 drawing score, region cap P1, defaults slate) on 2026-08-05;
+  the four games are the last `live:false` entries in `src/lib/daily.ts`
+  and complete the 12-daily hub. Drawing's gallery is the AdSense-sensitive
+  surface (user-generated content), so moderation-by-flag is the cheapest
+  compliant model (scope §3.2).
+- **Alternatives considered:** flagCount-only moderation (rejected, spam
+  door); pre-approval gallery (rejected, heavy, owner picked flag-and-remove);
+  raising the global body limit to 1.5 MB (rejected, weakens every route's
+  early reject); R2 object storage for images (deferred by scope §6,
+  Postgres text is the MVP, revisit at gallery scale).
+- **Tradeoffs:** a bad drawing is visible until 3 distinct member flags
+  (bounded by per-day rotation); vote/flag identity is a device memberKey
+  (D047), so single-key spam is impossible but key regeneration is not
+  stopped — accepted at v1, same trust model as the leaderboard; gallery
+  JSON payloads can reach several MB at 50 images (bounded by the 1024 px
+  client cap + lazy rendering, flagged for R2 thumbnails).
+- **Date:** 2026-08-05
+- **Future impact:** the drawing gallery is the first server-persisted
+  user content — the moderation pattern (rows + unique constraints +
+  status flags) is the template for Phase C social content (profiles,
+  friend posts); `pickDistinct` (`src/lib/pick.ts`) becomes the shared pick
+  primitive for every future daily (Phase E `GameDefinition`); the
+  body-parser ordering pattern in `app.ts` is the precedent for any future
+  large-payload route.

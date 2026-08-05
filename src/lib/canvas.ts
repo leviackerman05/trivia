@@ -288,3 +288,64 @@ export function drawSilhouette(ctx: CanvasRenderingContext2D, path: string): voi
 export function removeStrokeById(strokes: Stroke[], strokeId: string): Stroke[] {
   return strokes.filter((stroke) => stroke.strokeId !== strokeId);
 }
+
+/**
+ * Daily Drawing export caps (DAILY-DESIGN §4.1, mirrors the server
+ * validators): 1024 px on the longest side, ≤1 MB decoded PNG, ≤1.4M
+ * base64 chars on the wire. The gallery reads stay mobile-friendly.
+ */
+export const DRAWING_EXPORT_MAX_DIM = 1024;
+export const DRAWING_UPLOAD_MAX_BYTES = 1_000_000;
+export const DRAWING_DATA_URL_MAX_CHARS = 1_400_000;
+
+/**
+ * Aspect-preserving fit: downscale only, never upscale, longest side
+ * capped at maxDim. Pure math so it is testable without a DOM.
+ */
+export function fitWithinMaxDim(
+  w: number,
+  h: number,
+  maxDim: number
+): { width: number; height: number } {
+  if (w <= 0 || h <= 0) {
+    return { width: w, height: h };
+  }
+  const longest = Math.max(w, h);
+  if (longest <= maxDim) {
+    return { width: w, height: h };
+  }
+  const scale = maxDim / longest;
+  return { width: Math.round(w * scale), height: Math.round(h * scale) };
+}
+
+/**
+ * Export a canvas element as a downscaled PNG data URL + decoded byte
+ * count. The source is already white-filled and replay-consistent (the
+ * DrawingCanvas rAF repaint); the offscreen canvas is fitted by
+ * fitWithinMaxDim and encoded via toBlob + FileReader. DOM-only.
+ */
+export async function exportCanvasPng(
+  source: HTMLCanvasElement,
+  maxDim = DRAWING_EXPORT_MAX_DIM
+): Promise<{ dataUrl: string; bytes: number }> {
+  const fit = fitWithinMaxDim(source.width, source.height, maxDim);
+  const canvas = document.createElement('canvas');
+  canvas.width = fit.width;
+  canvas.height = fit.height;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    throw new Error('2d context unavailable for PNG export');
+  }
+  ctx.drawImage(source, 0, 0, fit.width, fit.height);
+  const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
+  if (!blob) {
+    throw new Error('PNG export failed');
+  }
+  const dataUrl = await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(new Error('PNG export failed'));
+    reader.readAsDataURL(blob);
+  });
+  return { dataUrl, bytes: blob.size };
+}

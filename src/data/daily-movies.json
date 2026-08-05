@@ -1,0 +1,122 @@
+[
+  {
+    "title": "The Godfather",
+    "year": 1972,
+    "genre": "crime",
+    "real": "An aging crime patriarch hands his empire to his reluctant youngest son, who must harden himself to hold the family together.",
+    "fake": "A mild-mannered botanist inherits his uncle's florist shop and discovers the flower business is run by rival mafia families.",
+    "difficulty": 1
+  },
+  {
+    "title": "Titanic",
+    "year": 1997,
+    "genre": "romance",
+    "real": "A penniless artist wins passage on the world's grandest ocean liner and falls for a society girl engaged to another man, days before the ship's fatal collision.",
+    "fake": "A lighthouse keeper and a traveling circus performer fall in love while a storm strands their ships in the same harbor for a week.",
+    "difficulty": 1
+  },
+  {
+    "title": "Jaws",
+    "year": 1975,
+    "genre": "thriller",
+    "real": "A resort town's summer season is threatened when a great white shark attacks swimmers, forcing a police chief, a scientist, and a salty fisherman to hunt it down.",
+    "fake": "A seaside hotel's new chef must feed a fussy food critic while the town's annual sandcastle contest spirals out of control.",
+    "difficulty": 1
+  },
+  {
+    "title": "Jurassic Park",
+    "year": 1993,
+    "genre": "sci-fi",
+    "real": "An eccentric billionaire brings dinosaurs back to life on a remote island theme park, and a visiting team must survive when the power fails.",
+    "fake": "A zoo veterinarian inherits a safari park full of oversized reptiles and must teach them circus tricks to save it from foreclosure.",
+    "difficulty": 1
+  },
+  {
+    "title": "The Lion King",
+    "year": 1994,
+    "genre": "animation",
+    "real": "A young lion prince is exiled after his uncle seizes the throne, and he must return years later to reclaim his pride's kingdom.",
+    "fake": "A city cat travels to the countryside to visit relatives and accidentally wins a county fair talent show with his singing.",
+    "difficulty": 1
+  },
+  {
+    "title": "Inception",
+    "year": 2010,
+    "genre": "sci-fi",
+    "real": "A thief who steals secrets from inside dreams is hired to plant an idea in a target's mind, a job that requires building dreams within dreams.",
+    "fake": "A locksmith who specializes in hotel safes is hired to hide a priceless gem inside a bank vault that only opens during thunderstorms.",
+    "difficulty": 2
+  },
+  {
+    "title": "The Shawshank Redemption",
+    "year": 1994,
+    "genre": "drama",
+    "real": "A banker wrongly sentenced to life in prison forms a quiet friendship and a decades-long plan to escape and reclaim his freedom.",
+    "fake": "An accountant joins a monastery and discovers the order's books are decades out of balance, launching a gentle audit that changes the abbey.",
+    "difficulty": 2
+  },
+  {
+    "title": "Forrest Gump",
+    "year": 1994,
+    "genre": "drama",
+    "real": "A gentle man with a low IQ drifts through decades of American history, touching the lives of everyone he meets while chasing the girl he loves.",
+    "fake": "A small-town mail carrier delivers letters to the wrong houses for forty years, unknowingly reuniting long-lost families.",
+    "difficulty": 2
+  },
+  {
+    "title": "Pulp Fiction",
+    "year": 1994,
+    "genre": "crime",
+    "real": "Two hitmen, a boxer, and a gangster's wife cross paths in a series of interlocking stories set in a seedy Los Angeles underworld.",
+    "fake": "Three barbers in a quiet suburb discover their shop was built on a forgotten bank vault and plot a gentle heist between haircuts.",
+    "difficulty": 2
+  },
+  {
+    "title": "Spirited Away",
+    "year": 2001,
+    "genre": "animation",
+    "real": "A sullen ten-year-old girl wanders into a spirit world and must work in a bathhouse for ghosts to free her transformed parents.",
+    "fake": "A schoolgirl's summer job at a seaside diner turns magical when the regulars turn out to be retired circus performers who speak only in riddles.",
+    "difficulty": 2
+  },
+  {
+    "title": "The Matrix",
+    "year": 1999,
+    "genre": "sci-fi",
+    "real": "A hacker learns the world he knows is a computer simulation and joins a small crew of rebels fighting the machines that imprisoned humanity.",
+    "fake": "A computer repairman discovers his town's power grid is secretly controlled by a rival repair shop and leads a neighborhood protest.",
+    "difficulty": 3
+  },
+  {
+    "title": "Schindler's List",
+    "year": 1993,
+    "genre": "drama",
+    "real": "A German businessman saves more than a thousand Jewish workers from the Holocaust by employing them in his factories during World War II.",
+    "fake": "A factory owner in postwar Europe builds a chain of bakeries and accidentally becomes the region's most beloved radio sponsor.",
+    "difficulty": 3
+  },
+  {
+    "title": "Seven Samurai",
+    "year": 1954,
+    "genre": "action",
+    "real": "A farming village hires seven masterless warriors to defend it from a band of raiders who return each harvest to steal the crops.",
+    "fake": "A retired fencing master opens a school for village children and stages an annual tournament that unites rival farm families.",
+    "difficulty": 3
+  },
+  {
+    "title": "2001: A Space Odyssey",
+    "year": 1968,
+    "genre": "sci-fi",
+    "real": "A mysterious black monolith guides humanity's evolution, and a voyage to Jupiter goes wrong when the ship's computer begins killing the crew.",
+    "fake": "A stargazing astronomer builds a giant telescope in his garden and discovers a small comet orbiting his own house.",
+    "difficulty": 3
+  },
+  {
+    "title": "Amélie",
+    "year": 2001,
+    "genre": "comedy",
+    "real": "A shy Parisian waitress secretly improves the lives of people around her through playful schemes, until she must face her own happiness.",
+    "fake": "A timid florist in Lyon spends her days rearranging customers' bouquets so that every delivery tells a tiny love story.",
+    "difficulty": 3
+  }
+]

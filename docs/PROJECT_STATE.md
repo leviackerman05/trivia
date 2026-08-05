@@ -17,6 +17,55 @@
 
 ## Current Milestone
 
+**M19, Four daily games: geography, movies, music, drawing (2026-08-05)** —
+Tech Lead design delivered in `docs/DAILY-DESIGN.md` (design only, no
+production code): three pure client engines on the Phase A seeded-pick
+pattern (D050) + the drawing gallery subsystem — the first server-persisted
+user content (2-3 new tables, 4 new endpoints, flag-and-remove moderation,
+flat 100 drawing score; D053). Owner confirmed the defaults slate (§0/§9 of
+`docs/DAILY-SCOPE.md`). Backend and frontend task briefs are inside
+DAILY-DESIGN §10, ready to hand off; sequencing: engines + server first,
+content authoring (690 entries) parallel, registry/surface last.
+
+> ✅ **Server track done (B1–B5, 2026-08-05):** `add_drawing_gallery`
+> migration (DrawingSubmission/Vote/Flag, additive per D006), validators
+> (§5.3), 4 rate limiters (§5.2), `routes/drawing.ts` with all 5 endpoints
+> (§5.1: idempotent uploads, ±1-day dateKey window, 409 own-submission,
+> 3-flag auto-hide, `ADMIN_TOKEN` delete, UserProfile upsert), the 1.5 MB
+> path-scoped parser + 413-preserving error middleware (R2), and the daily
+> registry at 12 live games. Server suite green: 190 tests (was 154), build
+> green.
+
+> ✅ **Frontend track done (F1–F8, 2026-08-05):** shared picker `pickDistinct`
+> (F1, golden-tested against `pickEmojiQuestions`); geography/movies/music
+> engines with seeded balance rules (region cap, 4–6 real mix, 3/4/3 tiers)
+> and the drawing prompt picker (F2–F5); canvas export helpers
+> (`fitWithinMaxDim`, `exportCanvasPng`) and the four drawing API clients
+> against the §5.1 contract (F6); four daily islands plus `SoloShell`
+> `correctCount`/`totalCount` props and the `[slug].astro` branches (F7);
+> registry flip to 12 live / zero planned, "Twelve challenges" copy, sitemap
+> and smoke entries (F8). Client suite green: **187 tests** (was 144),
+> lockstep 12 = 12, `pnpm build` green (42 pages), smoke green
+> (`/daily/drawing` 61 KB < 100 KB budget; all island bundles < 300 KB).
+> Sample datasets (15 entries/game) are live; **F9 content authoring
+> pending** (full 120/300/120/150 datasets and the dataset QA volume gates).
+> No-touch fence held: zero diffs in `src/styles/global.css`,
+> `src/components/ui/*`, and `src/components/DrawingCanvas.tsx`.
+
+> ⚠ **Parallel track:** the design-merge branch (theme/pills/gradients)
+> runs in parallel and is **not** a dependency. This phase must **NOT touch
+> `src/styles/global.css` or the design-system kit in `src/components/ui/`**
+> (diff-review gate). `src/components/DrawingCanvas.tsx` is a game
+> component and is reused read-only.
+
+> ✅ **QA gate verified (2026-08-05):** full `pnpm verify` green — format,
+> lint, typecheck, 187 client + 190 server tests, both builds (42 pages),
+> smoke with page-weight + bundle budgets (homepage 94.5 KB, `/daily/drawing`
+> 61.1 KB). Two gate findings fixed: homepage 110 → 92 KB perf commit
+> (`e744e01`), and the five new design/scope docs Prettier-formatted.
+> Remaining: F9 content authoring (690 entries) and the design-merge branch
+> (owner picks pending: light-first, pills, gradients).
+
 **Design system switch (2026-08-04)**: adopted the Cloudflare Cloud
 Identity visual language (dark-first `#09090B` + orange `#F38020` + Inter,
 8px radii, 2px focus rings) via a token rewrite in `src/styles/global.css`;

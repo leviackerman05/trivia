@@ -25,7 +25,7 @@ const jsonLd = JSON.stringify({
 
 <BaseLayout
   title="Daily Games: Free Daily Trivia, Sudoku and More | TriviaHub"
-  description="Play today's daily trivia, sudoku, emoji plots, timelines, price guesses, and word games, free. The same challenge for everyone, every day: streaks, daily leaderboards, and share cards. A new set resets at midnight UTC."
+  description="Play today's daily trivia, sudoku, emoji plots, timelines, price guesses, word, geography, movie, music, and drawing games, free. The same challenge for everyone, every day: streaks, daily leaderboards, and share cards. A new set resets at midnight UTC."
   canonicalPath="/daily"
   jsonLd={jsonLd}
   activeNav="daily"
@@ -33,7 +33,7 @@ const jsonLd = JSON.stringify({
   <section class="mb-10 text-center">
     <h1 class="font-display text-h1 text-ink">Today at TriviaHub</h1>
     <p class="mx-auto mt-4 max-w-2xl text-body text-ink-muted">
-      Eight challenges, one seed per game, resetting at midnight UTC. Play the same daily trivia as
+      Twelve challenges, one seed per game, resetting at midnight UTC. Play the same daily games as
       your friends, keep your streak alive, and race the leaderboard.
     </p>
     <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -60,16 +60,20 @@ const jsonLd = JSON.stringify({
   </section>
 
   <section aria-label="Coming soon daily games">
-    <h2 class="mb-5 font-display text-h2 text-ink">Coming to the daily hub</h2>
-    <ul class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        plannedGames.map((game) => (
-          <li>
-            <DailyCard game={game} />
-          </li>
-        ))
-      }
-    </ul>
+    {
+      plannedGames.length > 0 && (
+        <>
+          <h2 class="mb-5 font-display text-h2 text-ink">Coming to the daily hub</h2>
+          <ul class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {plannedGames.map((game) => (
+              <li>
+                <DailyCard game={game} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
   </section>
 
   <section aria-label="How daily games work" class="mt-14 flex flex-col gap-4 sm:gap-6">

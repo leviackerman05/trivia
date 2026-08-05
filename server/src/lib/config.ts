@@ -2,6 +2,8 @@ export interface ServerConfig {
   port: number;
   corsOrigins: string[];
   databaseUrl: string;
+  /** M19: admin moderation token (env ADMIN_TOKEN) for drawing deletes. */
+  adminToken: string;
 }
 
 function readEnv(name: string): string | undefined {
@@ -15,6 +17,7 @@ export const config: ServerConfig = {
     .map((origin) => origin.trim())
     .filter(Boolean),
   databaseUrl: readEnv('DATABASE_URL') ?? '',
+  adminToken: readEnv('ADMIN_TOKEN') ?? '',
 };
 
 /**

@@ -17,6 +17,11 @@ export const LIVE_DAILY_GAMES = [
   'rhyme-or-crime',
   'genre-swap',
   'genre-bender',
+  // M19 (DAILY-DESIGN §7): the four coming-soon dailies flip live together.
+  'geography',
+  'movies',
+  'music',
+  'drawing',
 ] as const;
 
 export type LiveDailyGameSlug = (typeof LIVE_DAILY_GAMES)[number];

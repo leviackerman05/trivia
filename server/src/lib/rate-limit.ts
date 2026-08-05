@@ -54,6 +54,12 @@ export interface Limiters {
   scoreSubmit: RateLimiter;
   dailySubmit: RateLimiter;
   memberClaim: RateLimiter;
+  // M19 drawing gallery (DAILY-DESIGN §5.2): generous per-IP buckets; the
+  // per-member unique constraints are the real anti-spam gates (R1).
+  drawingUpload: RateLimiter;
+  drawingRead: RateLimiter;
+  drawingVote: RateLimiter;
+  drawingFlag: RateLimiter;
 }
 
 /** Production defaults (per IP per minute). Tune with real traffic. */
@@ -69,5 +75,9 @@ export function createDefaultLimiters(): Limiters {
     // Phase 1.5: daily runs are one per game per day; 30/min per IP is generous.
     dailySubmit: new RateLimiter(60_000, 30),
     memberClaim: new RateLimiter(60_000, 10),
+    drawingUpload: new RateLimiter(60_000, 10),
+    drawingRead: new RateLimiter(60_000, 120),
+    drawingVote: new RateLimiter(60_000, 60),
+    drawingFlag: new RateLimiter(60_000, 20),
   };
 }

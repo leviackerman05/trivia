@@ -5,6 +5,7 @@ import { createDailyChallengeRouter } from './daily-challenge.js';
 import { createRoomRouter } from './room.js';
 import { createMeRouter } from './me.js';
 import { createDailyRouter } from './daily.js';
+import { createDrawingRouter } from './drawing.js';
 import type { Limiters } from '../lib/rate-limit.js';
 import type { RoomEngine } from '../engine/room-engine.js';
 
@@ -22,6 +23,16 @@ export function createApiRouter(deps: ApiDeps): Router {
   // Phase 1.5: account-lite identity + server streaks (D047/D048).
   router.use(createMeRouter(deps.limiters.memberClaim));
   router.use(createDailyRouter(deps.limiters.dailySubmit));
+  // M19: drawing gallery — uploads/votes/flags/read (DAILY-DESIGN §5.1).
+  router.use(
+    '/drawing',
+    createDrawingRouter({
+      upload: deps.limiters.drawingUpload,
+      read: deps.limiters.drawingRead,
+      vote: deps.limiters.drawingVote,
+      flag: deps.limiters.drawingFlag,
+    })
+  );
 
   // JSON 404 for unknown API endpoints.
   router.use((_req, res) => {

@@ -43,6 +43,10 @@ const checks = [
   { path: '/daily/rhyme-or-crime', contains: 'Daily Rhyme' },
   { path: '/daily/genre-swap', contains: 'Daily Genre Swap' },
   { path: '/daily/genre-bender', contains: 'Daily Genre-Bender' },
+  { path: '/daily/geography', contains: 'Daily Geography' },
+  { path: '/daily/movies', contains: 'Daily Movie' },
+  { path: '/daily/music', contains: 'Daily Music' },
+  { path: '/daily/drawing', contains: 'Daily Drawing' },
   { path: '/daily/archive', contains: 'Your daily archive' },
   { path: '/categories', contains: 'Browse by category' },
   { path: '/faq', contains: 'Frequently Asked Questions' },
@@ -80,7 +84,7 @@ const GAME_SLUGS = [
 ];
 
 // PRD §10: static pages < 100 KB total page weight (HTML + CSS + JS, no images).
-const weightChecks = ['/', '/faq', '/game/skribbl-arena'];
+const weightChecks = ['/', '/faq', '/game/skribbl-arena', '/daily/drawing'];
 
 // PRD §10: bundle-size budget per game island (shared runtime excluded, it
 // is cached once per visitor; the gate is on the per-island chunks).

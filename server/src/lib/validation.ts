@@ -479,3 +479,121 @@ export function validatePromptInput(
   }
   return { ok: true, value: { roomCode, statement: cleanStatement } };
 }
+
+/**
+ * M19 drawing gallery (DAILY-DESIGN §5.3). Submission ids are Prisma
+ * cuid-shaped; the pattern is loose enough to survive id-format changes,
+ * strict enough to reject path garbage.
+ */
+export function isSubmissionId(value: unknown): value is string {
+  return typeof value === 'string' && /^[A-Za-z0-9]{8,64}$/.test(value);
+}
+
+const MAX_PROMPT_INDEX = 10_000;
+const IMAGE_DATA_URL_PATTERN = /^data:image\/png;base64,[A-Za-z0-9+/=\s]+$/;
+const MAX_IMAGE_DATA_URL_CHARS = 1_400_000;
+const MAX_IMAGE_BYTES = 1_000_000;
+const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+const FLAG_REASON_MAX_LENGTH = 200;
+
+/**
+ * M19: POST /api/drawing/submissions body. The server has no prompt
+ * dataset — the client seed is the source of truth — so promptIndex only
+ * needs to be a bounded integer. The image rules make the size cap real
+ * (chars ≠ bytes) and reject non-PNG data URLs without image decoding.
+ */
+export interface DrawingSubmissionInput {
+  memberKey: string;
+  playerName: string;
+  dateKey: string;
+  promptIndex: number;
+  image: string;
+}
+
+export function validateDrawingSubmissionInput(
+  input: unknown
+): ValidationResult<DrawingSubmissionInput> {
+  if (typeof input !== 'object' || input === null || Array.isArray(input)) {
+    return { ok: false, error: 'body must be an object' };
+  }
+  const { memberKey, playerName, dateKey, promptIndex, image } = input as Record<string, unknown>;
+
+  if (!isMemberKey(memberKey)) {
+    return { ok: false, error: 'invalid memberKey' };
+  }
+  const name = sanitizeNickname(playerName);
+  if (!name.ok) {
+    return name;
+  }
+  if (!isDateKey(dateKey)) {
+    return { ok: false, error: 'invalid dateKey' };
+  }
+  if (
+    typeof promptIndex !== 'number' ||
+    !Number.isInteger(promptIndex) ||
+    promptIndex < 0 ||
+    promptIndex > MAX_PROMPT_INDEX
+  ) {
+    return { ok: false, error: `promptIndex must be an integer between 0 and ${MAX_PROMPT_INDEX}` };
+  }
+  if (typeof image !== 'string' || !IMAGE_DATA_URL_PATTERN.test(image)) {
+    return { ok: false, error: 'image must be a base64 PNG data URL' };
+  }
+  if (image.length > MAX_IMAGE_DATA_URL_CHARS) {
+    return { ok: false, error: 'image too large' };
+  }
+  const decoded = Buffer.from(image.slice('data:image/png;base64,'.length), 'base64');
+  if (decoded.length > MAX_IMAGE_BYTES) {
+    return { ok: false, error: 'image too large' };
+  }
+  if (!decoded.subarray(0, PNG_SIGNATURE.length).equals(PNG_SIGNATURE)) {
+    return { ok: false, error: 'image must be a PNG' };
+  }
+  return {
+    ok: true,
+    value: { memberKey, playerName: name.value, dateKey, promptIndex, image },
+  };
+}
+
+/** M19: POST /api/drawing/submissions/:id/vote body { memberKey }. */
+export interface DrawingVoteInput {
+  memberKey: string;
+}
+
+export function validateDrawingVoteInput(input: unknown): ValidationResult<DrawingVoteInput> {
+  if (typeof input !== 'object' || input === null || Array.isArray(input)) {
+    return { ok: false, error: 'body must be an object' };
+  }
+  const { memberKey } = input as Record<string, unknown>;
+  if (!isMemberKey(memberKey)) {
+    return { ok: false, error: 'invalid memberKey' };
+  }
+  return { ok: true, value: { memberKey } };
+}
+
+/** M19: POST /api/drawing/submissions/:id/flag body { memberKey, reason? }. */
+export interface DrawingFlagInput {
+  memberKey: string;
+  reason?: string;
+}
+
+export function validateDrawingFlagInput(input: unknown): ValidationResult<DrawingFlagInput> {
+  if (typeof input !== 'object' || input === null || Array.isArray(input)) {
+    return { ok: false, error: 'body must be an object' };
+  }
+  const { memberKey, reason } = input as Record<string, unknown>;
+  if (!isMemberKey(memberKey)) {
+    return { ok: false, error: 'invalid memberKey' };
+  }
+  if (reason === undefined) {
+    return { ok: true, value: { memberKey } };
+  }
+  if (typeof reason !== 'string') {
+    return { ok: false, error: 'invalid reason' };
+  }
+  const cleanReason = stripControlChars(reason).trim();
+  if (cleanReason.length > FLAG_REASON_MAX_LENGTH) {
+    return { ok: false, error: `reason must be at most ${FLAG_REASON_MAX_LENGTH} characters` };
+  }
+  return { ok: true, value: { memberKey, reason: cleanReason === '' ? undefined : cleanReason } };
+}

@@ -1,0 +1,78 @@
+[
+  {
+    "prompt": "A penguin riding a unicycle through a snowstorm",
+    "emoji": "🐧",
+    "category": "animals",
+    "difficulty": 2,
+    "constraints": ["no_text", "no_letters"]
+  },
+  { "prompt": "A cat wearing a tiny crown", "emoji": "🐱", "category": "animals", "difficulty": 1 },
+  { "prompt": "A snail racing a tortoise", "emoji": "🐌", "category": "animals", "difficulty": 2 },
+  {
+    "prompt": "A slice of pizza doing yoga",
+    "emoji": "🍕",
+    "category": "food",
+    "difficulty": 2,
+    "constraints": ["no_text"]
+  },
+  { "prompt": "A teacup that grew legs", "emoji": "🍵", "category": "food", "difficulty": 1 },
+  { "prompt": "A melting ice cream tower", "emoji": "🍦", "category": "food", "difficulty": 3 },
+  {
+    "prompt": "A flying umbrella over a rainy city",
+    "emoji": "☂️",
+    "category": "objects",
+    "difficulty": 3,
+    "constraints": ["no_text"]
+  },
+  {
+    "prompt": "A rubber duck the size of a house",
+    "emoji": "🦆",
+    "category": "objects",
+    "difficulty": 2
+  },
+  {
+    "prompt": "A key that unlocks the moon",
+    "emoji": "🔑",
+    "category": "objects",
+    "difficulty": 3,
+    "constraints": ["no_letters"]
+  },
+  {
+    "prompt": "A dragon learning to knit",
+    "emoji": "🐉",
+    "category": "fantasy",
+    "difficulty": 3,
+    "constraints": ["no_text", "no_letters"]
+  },
+  {
+    "prompt": "A wizard's hat full of stars",
+    "emoji": "🎩",
+    "category": "fantasy",
+    "difficulty": 2
+  },
+  {
+    "prompt": "A friendly ghost delivering mail",
+    "emoji": "👻",
+    "category": "fantasy",
+    "difficulty": 1
+  },
+  {
+    "prompt": "A hot air balloon shaped like a watermelon",
+    "emoji": "🎈",
+    "category": "transport",
+    "difficulty": 2
+  },
+  {
+    "prompt": "A submarine driven by goldfish",
+    "emoji": "🚢",
+    "category": "transport",
+    "difficulty": 3,
+    "constraints": ["no_text"]
+  },
+  {
+    "prompt": "A bicycle built for a bear and a bee",
+    "emoji": "🚲",
+    "category": "transport",
+    "difficulty": 1
+  }
+]

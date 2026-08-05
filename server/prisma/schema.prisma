@@ -117,3 +117,53 @@ model DailyStreak {
 
   @@unique([userId, scope])
 }
+
+// M19 drawing gallery (DAILY-DESIGN §6, additive): the first server-persisted
+// user content. Rows are the source of truth for votes/flags; the counters on
+// the submission are denormalized for cheap top-50 reads and the 3-flag check.
+// One submission per member per UTC day (idempotent uploads, D049 pattern).
+
+model DrawingSubmission {
+  id          String    @id @default(cuid())
+  dateKey     String // UTC "YYYY-MM-DD" (matches dailyDateKey)
+  promptIndex Int
+  memberKey   String // device memberKey (D047); not a credential
+  playerName  String // sanitized, ≤20 chars (sanitizeNickname)
+  image       String // PNG data URL, ≤1 MB decoded; client downscales to ≤1024 px
+  votes       Int       @default(0) // denormalized; derives from DrawingVote rows
+  flagCount   Int       @default(0) // denormalized; derives from DrawingFlag rows
+  status      String    @default("visible") // visible | flagged | removed
+  createdAt   DateTime  @default(now())
+
+  voteRows    DrawingVote[]
+  flagRows    DrawingFlag[]
+
+  // One submission per member per day — idempotent uploads (D049 pattern).
+  @@unique([dateKey, memberKey])
+  // Gallery query: (dateKey, visible) filtered, ordered by votes desc.
+  // votes included in the index per ARCHITECTURE §11 implementation notes.
+  @@index([dateKey, status, votes])
+}
+
+model DrawingVote {
+  id           String            @id @default(cuid())
+  submissionId String
+  submission   DrawingSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  memberKey    String
+  createdAt    DateTime          @default(now())
+
+  @@unique([submissionId, memberKey]) // one vote per member per submission (R1)
+  @@index([memberKey]) // votedByMe lookups for the gallery read
+}
+
+model DrawingFlag {
+  id           String            @id @default(cuid())
+  submissionId String
+  submission   DrawingSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  memberKey    String
+  reason       String? // sanitized, ≤200 chars
+  createdAt    DateTime          @default(now())
+
+  @@unique([submissionId, memberKey]) // one flag per member per submission (R1)
+  @@index([submissionId])
+}

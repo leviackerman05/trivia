@@ -230,6 +230,36 @@ describe('REST API (PRD §8.1), DB-backed integration', () => {
     });
   });
 
+  describe('POST /api/daily/:gameId/submit — new M19 live games', () => {
+    it('accepts a geography run and surfaces streak + personal best via /api/me', async () => {
+      const memberKey = 'test-member-geo-0001';
+      const submit = await request(app).post('/api/daily/geography/submit').send({
+        gameId: 'geography',
+        memberKey,
+        playerName: 'Aditi',
+        score: 100,
+        clientKey: 'test-daily-geo-0001',
+      });
+      expect(submit.status).toBe(201);
+      expect(submit.body.accepted).toBe(true);
+      expect(submit.body.streaks).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ scope: 'geography', current: 1, longest: 1 }),
+          expect.objectContaining({ scope: 'grand', current: 1, longest: 1 }),
+        ])
+      );
+
+      const me = await request(app).get(`/api/me?memberKey=${memberKey}`);
+      expect(me.status).toBe(200);
+      expect(me.body.personalBests).toEqual([
+        expect.objectContaining({ gameId: 'geography', bestScore: 100, plays: 1 }),
+      ]);
+      expect(me.body.recentRuns).toEqual([
+        expect.objectContaining({ gameId: 'geography', score: 100 }),
+      ]);
+    });
+  });
+
   describe('/readyz', () => {
     it('reports ready when the database answers', async () => {
       const response = await request(app).get('/readyz');

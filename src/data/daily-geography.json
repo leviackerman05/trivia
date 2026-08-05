@@ -1,0 +1,202 @@
+[
+  {
+    "place": "Serengeti National Park, Tanzania",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Serengeti_landscape_Tanzania.jpg",
+    "credit": { "creator": "Bjørn Christian Tørrissen", "license": "by-sa" },
+    "options": [
+      "Serengeti National Park, Tanzania",
+      "Kruger National Park, South Africa",
+      "Maasai Mara, Kenya",
+      "Etosha National Park, Namibia"
+    ],
+    "answer": 0,
+    "hint": "A vast savanna famous for the great wildebeest migration",
+    "region": "africa"
+  },
+  {
+    "place": "Victoria Falls, Zambia and Zimbabwe",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Victoria_Falls_aerial_view.jpg",
+    "options": [
+      "Victoria Falls, Zambia and Zimbabwe",
+      "Iguazú Falls, Argentina and Brazil",
+      "Niagara Falls, Canada and USA",
+      "Angel Falls, Venezuela"
+    ],
+    "answer": 0,
+    "hint": "Known locally as Mosi-oa-Tunya, the smoke that thunders",
+    "region": "africa"
+  },
+  {
+    "place": "Giza Pyramid Complex, Egypt",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Pyramids_of_Giza,_Egypt.jpg",
+    "credit": { "creator": "Ricardo Liberato", "license": "by-sa" },
+    "options": [
+      "Giza Pyramid Complex, Egypt",
+      "Saqqara, Egypt",
+      "Valley of the Kings, Egypt",
+      "Abu Simbel, Egypt"
+    ],
+    "answer": 0,
+    "hint": "The last surviving wonder of the ancient world",
+    "region": "africa"
+  },
+  {
+    "place": "Grand Canyon, Arizona, USA",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Grand_Canyon_view_from_Pima_Point_2010.jpg",
+    "credit": { "creator": "Tuxyso", "license": "by-sa" },
+    "options": [
+      "Grand Canyon, Arizona, USA",
+      "Bryce Canyon, Utah, USA",
+      "Zion Canyon, Utah, USA",
+      "Glen Canyon, Arizona, USA"
+    ],
+    "answer": 0,
+    "hint": "A mile-deep river gorge carved by the Colorado River",
+    "region": "americas"
+  },
+  {
+    "place": "Machu Picchu, Peru",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Machu_Picchu,_Peru.jpg",
+    "credit": { "creator": "Allard Schmidt", "license": "by" },
+    "options": [
+      "Machu Picchu, Peru",
+      "Choquequirao, Peru",
+      "Ollantaytambo, Peru",
+      "Sacsayhuamán, Peru"
+    ],
+    "answer": 0,
+    "hint": "A 15th-century Inca citadel high above the Urubamba valley",
+    "region": "americas"
+  },
+  {
+    "place": "Iguazú Falls, Argentina and Brazil",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Iguazu_Falls,_Argentina.jpg",
+    "options": [
+      "Iguazú Falls, Argentina and Brazil",
+      "Cataratas del Laja, Chile",
+      "Salto del Guairá, Paraguay",
+      "Kaieteur Falls, Guyana"
+    ],
+    "answer": 0,
+    "hint": "A 275-cascade horseshoe on the border of two countries",
+    "region": "americas"
+  },
+  {
+    "place": "Taj Mahal, Agra, India",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Taj_Mahal_(Edited).jpeg",
+    "credit": { "creator": "Yann Forget", "license": "by-sa" },
+    "options": [
+      "Taj Mahal, Agra, India",
+      "Qutub Minar, Delhi, India",
+      "Hawa Mahal, Jaipur, India",
+      "Gol Gumbaz, Karnataka, India"
+    ],
+    "answer": 0,
+    "hint": "A white marble mausoleum built by an emperor for his wife",
+    "region": "asia"
+  },
+  {
+    "place": "Great Wall of China",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+    "credit": { "creator": "Evan Zebaugh", "license": "by" },
+    "options": [
+      "Great Wall of China",
+      "Ming Xiaoling, Nanjing, China",
+      "Potala Palace, Tibet, China",
+      "Forbidden City, Beijing, China"
+    ],
+    "answer": 0,
+    "hint": "A fortification stretching thousands of kilometers across northern China",
+    "region": "asia"
+  },
+  {
+    "place": "Mount Fuji, Japan",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Fuji,_Japan.jpg",
+    "options": [
+      "Mount Fuji, Japan",
+      "Mount Aso, Japan",
+      "Mount Tate, Japan",
+      "Mount Hakone, Japan"
+    ],
+    "answer": 0,
+    "hint": "Japan's highest peak, a symmetrical snow-capped stratovolcano",
+    "region": "asia"
+  },
+  {
+    "place": "Santorini, Greece",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Santorini_caldera.jpg",
+    "credit": { "creator": "Milosh Kitchovitch", "license": "by" },
+    "options": ["Santorini, Greece", "Mykonos, Greece", "Bodrum, Turkey", "Malta"],
+    "answer": 0,
+    "hint": "A Cycladic island whose caldera villages are painted white",
+    "region": "europe"
+  },
+  {
+    "place": "Eiffel Tower, Paris, France",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Eiffel_Tower_from_the_Champ_de_Mars.jpg",
+    "options": [
+      "Eiffel Tower, Paris, France",
+      "Tour Montparnasse, Paris, France",
+      "Basilica of Sacré-Cœur, Paris, France",
+      "La Défense, Paris, France"
+    ],
+    "answer": 0,
+    "hint": "A wrought-iron lattice tower built for the 1889 World's Fair",
+    "region": "europe"
+  },
+  {
+    "place": "Colosseum, Rome, Italy",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Colosseum_in_Rome,_Italy_-_April_2007.jpg",
+    "credit": { "creator": "David Iliff", "license": "by-sa" },
+    "options": [
+      "Colosseum, Rome, Italy",
+      "Pantheon, Rome, Italy",
+      "Circus Maximus, Rome, Italy",
+      "Baths of Caracalla, Rome, Italy"
+    ],
+    "answer": 0,
+    "hint": "A 50,000-seat amphitheater where gladiators once fought",
+    "region": "europe"
+  },
+  {
+    "place": "Sydney Opera House, Australia",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Opera_House_Sydney.jpg",
+    "credit": { "creator": "Stefan Thiesen", "license": "by-sa" },
+    "options": [
+      "Sydney Opera House, Australia",
+      "Sydney Harbour Bridge, Australia",
+      "Melbourne Arts Centre, Australia",
+      "Brisbane City Hall, Australia"
+    ],
+    "answer": 0,
+    "hint": "A white-sailed performing arts center on a harbor point",
+    "region": "oceania"
+  },
+  {
+    "place": "Uluru, Northern Territory, Australia",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Uluru,_Northern_Territory.jpg",
+    "options": [
+      "Uluru, Northern Territory, Australia",
+      "Kata Tjuta, Northern Territory, Australia",
+      "Mount Augustus, Western Australia",
+      "Kangaroo Island, South Australia"
+    ],
+    "answer": 0,
+    "hint": "A massive sandstone monolith sacred to the Anangu people",
+    "region": "oceania"
+  },
+  {
+    "place": "Bora Bora, French Polynesia",
+    "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bora_Bora,_French_Polynesia.jpg",
+    "credit": { "creator": "Dmitrij Naumov", "license": "by" },
+    "options": [
+      "Bora Bora, French Polynesia",
+      "Moorea, French Polynesia",
+      "Tahiti, French Polynesia",
+      "Fiji"
+    ],
+    "answer": 0,
+    "hint": "A volcanic island ringed by a turquoise lagoon and motus",
+    "region": "oceania"
+  }
+]

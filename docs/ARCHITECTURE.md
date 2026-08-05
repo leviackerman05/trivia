@@ -305,18 +305,25 @@ cast-vote {option} ──▶ server tallies ──▶ broadcast percentages (liv
 
 ## 9. API Architecture (REST, PRD §8.1)
 
-| Endpoint                       | Purpose                                       | Notes                                                              |
-| ------------------------------ | --------------------------------------------- | ------------------------------------------------------------------ |
-| `POST /api/scores`             | Submit score `{gameId, playerName, score}`    | Validated; gameId must exist; playerName sanitized & length-capped |
-| `GET /api/leaderboard/:gameId` | Top scores, `?period=daily\|weekly\|all-time` | Indexed query on `Score`                                           |
-| `GET /api/daily-challenge`     | Today's daily challenge per solo game         | From `DailyChallenge` table; seeded daily                          |
-| `POST /api/room/create`        | `{gameId}` → `{roomCode}`                     | Creates Room + assigns host                                        |
-| `GET /api/room/:roomCode`      | Room info (players, game type, status)        | Read-only public info                                              |
+| Endpoint                         | Purpose                                         | Notes                                                              |
+| -------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------ |
+| `POST /api/scores`               | Submit score `{gameId, playerName, score}`      | Validated; gameId must exist; playerName sanitized & length-capped |
+| `GET /api/leaderboard/:gameId`   | Top scores, `?period=daily\|weekly\|all-time`   | Indexed query on `Score`                                           |
+| `GET /api/daily-challenge`       | Today's daily challenge per solo game           | From `DailyChallenge` table; seeded daily                          |
+| `POST /api/room/create`          | `{gameId}` → `{roomCode}`                       | Creates Room + assigns host                                        |
+| `GET /api/room/:roomCode`        | Room info (players, game type, status)          | Read-only public info                                              |
+| `POST /api/me/claim`             | One-tap guest → member `{memberKey, nickname?}` | Idempotent upsert; no passwords, no PII (D047)                     |
+| `GET /api/me`                    | Member read-model `?memberKey=`                 | Profile, streaks, personal bests, recent runs (D047)               |
+| `POST /api/daily/:gameId/submit` | Record member daily run + streak transition     | Idempotent; one run per member per game per day (D048/D049)        |
 
 Conventions: JSON only; consistent error shape `{error: {code, message}}`;
 CORS allowlist (Cloudflare Pages domain + localhost); no versioning in the URL
 (PRD defines `/api/*` verbatim, any future versioning is additive); optional
 idempotency for score submission (client-generated key) to survive retries.
+
+> The full reference — request/response shapes, validation rules, rate
+> limits, error codes, and the Socket.io event contract — lives in
+> [`docs/API.md`](API.md).
 
 ---
 

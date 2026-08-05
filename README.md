@@ -49,6 +49,7 @@ triviahub/
 
 - [PRD.md](docs/PRD.md), product requirements (source of truth)
 - [ARCHITECTURE.md](docs/ARCHITECTURE.md), system design
+- [API.md](docs/API.md), REST + Socket.io API reference
 - [PROJECT_STATE.md](docs/PROJECT_STATE.md), project memory (read first)
 - [TODO.md](docs/TODO.md), milestone roadmap
 - [DECISIONS.md](docs/DECISIONS.md), decision log (append-only)

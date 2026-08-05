@@ -4,21 +4,25 @@ import {
   dailyGameSeed,
   getDailyGame,
   getLiveDailyGames,
+  getPlannedDailyGames,
   playedToday,
   type DailyHistory,
 } from '../daily';
 import { EMOJI_TOTAL_QUESTIONS, pickEmojiQuestions } from '../emoji-plot';
 
-describe('daily registry (Phase A)', () => {
-  it('exposes 8 live daily games with unique slugs', () => {
+describe('daily registry (Phase A + M19)', () => {
+  it('exposes 12 live daily games with unique slugs', () => {
     const live = getLiveDailyGames();
-    expect(live).toHaveLength(8);
+    expect(live).toHaveLength(12);
     expect(new Set(live.map((game) => game.slug)).size).toBe(live.length);
   });
 
-  it('maps every planned game to a playable fallback', () => {
-    const planned = getLiveDailyGames();
-    for (const game of planned) {
+  it('has zero planned games (the four M19 dailies are live)', () => {
+    expect(getPlannedDailyGames()).toHaveLength(0);
+  });
+
+  it('resolves every daily slug to a registry entry', () => {
+    for (const game of getLiveDailyGames()) {
       expect(getDailyGame(game.slug)).toBeDefined();
     }
   });

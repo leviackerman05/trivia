@@ -26,7 +26,9 @@ export async function resetTestData(): Promise<void> {
   // test's sockets, retry briefly so deletes don't hit FK races.
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
-      // Phase 1.5 tables first (FK children), then the original set.
+      // M19 drawing tables first (cascade clears votes/flags), then the
+      // Phase 1.5 tables (FK children), then the original set.
+      await prisma.drawingSubmission.deleteMany();
       await prisma.dailyRun.deleteMany();
       await prisma.dailyStreak.deleteMany();
       await prisma.userProfile.deleteMany();

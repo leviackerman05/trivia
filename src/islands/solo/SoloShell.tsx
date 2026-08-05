@@ -34,6 +34,10 @@ interface SoloShellProps {
   children: ReactNode;
   /** Game-specific stats for the done view. */
   resultSummary?: ReactNode;
+  /** Member-run accuracy (DAILY-DESIGN §3.5): forwarded to submitDailyRun
+   * when defined; default undefined keeps existing islands unchanged. */
+  correctCount?: number;
+  totalCount?: number;
   onPlayAgain: () => void;
 }
 
@@ -47,6 +51,8 @@ export default function SoloShell({
   headerExtra,
   children,
   resultSummary,
+  correctCount,
+  totalCount,
   onPlayAgain,
 }: SoloShellProps) {
   const [streak, setStreak] = useState(() => readStreak(slug).count);
@@ -85,6 +91,8 @@ export default function SoloShell({
         playerName: readNickname() || 'Player',
         score,
         clientKey: key,
+        correctCount,
+        totalCount,
       }).catch(() => {
         // The run is best-effort; the leaderboard save is the source of truth.
       });
@@ -92,7 +100,7 @@ export default function SoloShell({
     void fetchLeaderboard(slug, 'daily', 5)
       .then((response) => setLeaderboard(response.entries))
       .catch(() => setLeaderboard([]));
-  }, [phase, slug, dateKey, score]);
+  }, [phase, slug, dateKey, score, correctCount, totalCount]);
 
   const saveScore = useCallback(async () => {
     const trimmed = nickname.trim();
