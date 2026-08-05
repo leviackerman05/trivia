@@ -1,1 +1,174 @@
-{}
+{
+  "pike-place-seattle": {
+    "panoId": "580636760934539",
+    "distanceM": 383
+  },
+  "kensington-market-toronto": {
+    "panoId": "296912435363315",
+    "distanceM": 14
+  },
+  "plateau-montreal": {
+    "panoId": "1873387046428763",
+    "distanceM": 60
+  },
+  "wicker-park-chicago": {
+    "panoId": "668524485152059",
+    "distanceM": 28
+  },
+  "gastown-vancouver": {
+    "panoId": "436295985854424",
+    "distanceM": 320
+  },
+  "williamsburg-brooklyn": {
+    "panoId": "1336564817235220",
+    "distanceM": 51
+  },
+  "mission-san-francisco": {
+    "panoId": "214829354843721",
+    "distanceM": 1
+  },
+  "rino-denver": {
+    "panoId": "1381831459751835",
+    "distanceM": 4
+  },
+  "little-havana-miami": {
+    "panoId": "151376253596242",
+    "distanceM": 31
+  },
+  "shoreditch-london": {
+    "panoId": "1410822402972477",
+    "distanceM": 19
+  },
+  "canal-saint-martin-paris": {
+    "panoId": "486221729386705",
+    "distanceM": 56
+  },
+  "kreuzberg-berlin": {
+    "panoId": "1589112782303863",
+    "distanceM": 25
+  },
+  "jordaan-amsterdam": {
+    "panoId": "2621018891621611",
+    "distanceM": 10
+  },
+  "alfama-lisbon": {
+    "panoId": "515865559570596",
+    "distanceM": 201
+  },
+  "vinohrady-prague": {
+    "panoId": "204443168190081",
+    "distanceM": 87
+  },
+  "temple-bar-dublin": {
+    "panoId": "1007508637406750",
+    "distanceM": 267
+  },
+  "district-vii-budapest": {
+    "panoId": "1750947256275505",
+    "distanceM": 51
+  },
+  "exarcheia-athens": {
+    "panoId": "331941252329483",
+    "distanceM": 42
+  },
+  "leith-edinburgh": {
+    "panoId": "1475370523223005",
+    "distanceM": 217
+  },
+  "ribeira-porto": {
+    "panoId": "681723339914603",
+    "distanceM": 11
+  },
+  "neubau-vienna": {
+    "panoId": "1395261742142003",
+    "distanceM": 256
+  },
+  "saint-gilles-brussels": {
+    "panoId": "1240076578057986",
+    "distanceM": 11
+  },
+  "sodermalms-stockholm": {
+    "panoId": "2010767232809609",
+    "distanceM": 60
+  },
+  "shimokitazawa-tokyo": {
+    "panoId": "464453461284671",
+    "distanceM": 234
+  },
+  "hongdae-seoul": {
+    "panoId": "693495633655068",
+    "distanceM": 211
+  },
+  "yaowarat-bangkok": {
+    "panoId": "1884354531743399",
+    "distanceM": 29
+  },
+  "old-quarter-hanoi": {
+    "panoId": "1025668325295347",
+    "distanceM": 38
+  },
+  "kampong-glam-singapore": {
+    "panoId": "1050490339957540",
+    "distanceM": 35
+  },
+  "ximending-taipei": {
+    "panoId": "378766763402217",
+    "distanceM": 7
+  },
+  "bukit-bintang-kuala-lumpur": {
+    "panoId": "2967143063525343",
+    "distanceM": 23
+  },
+  "binondo-manila": {
+    "panoId": "441185378544588",
+    "distanceM": 30
+  },
+  "district-one-saigon": {
+    "panoId": "2631931116964013",
+    "distanceM": 67
+  },
+  "kemang-jakarta": {
+    "panoId": "850915416901582",
+    "distanceM": 308
+  },
+  "bkk1-phnom-penh": {
+    "panoId": "735838034579571",
+    "distanceM": 11
+  },
+  "palermo-buenos-aires": {
+    "panoId": "1992865387815815",
+    "distanceM": 66
+  },
+  "la-candelaria-bogota": {
+    "panoId": "1110673819439655",
+    "distanceM": 14
+  },
+  "barranco-lima": {
+    "panoId": "1336110337176859",
+    "distanceM": 52
+  },
+  "bellavista-santiago": {
+    "panoId": "1963262104277580",
+    "distanceM": 45
+  },
+  "medina-marrakech": {
+    "panoId": "310105617255384",
+    "distanceM": 299
+  },
+  "westlands-nairobi": {
+    "panoId": "4203115479953321",
+    "distanceM": 146
+  },
+  "newtown-sydney": {
+    "panoId": "201789255094241",
+    "distanceM": 110
+  },
+  "ponsonby-auckland": {
+    "panoId": "235916171899594",
+    "distanceM": 35
+  },
+  "west-end-brisbane": {
+    "panoId": "504282080718234",
+    "distanceM": 18
+  }
+}

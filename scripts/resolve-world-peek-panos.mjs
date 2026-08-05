@@ -30,9 +30,16 @@ const PANOS_PATH = join(root, 'src/data/world-peek-panos.json');
 const ENV_PATH = join(root, '.env');
 
 // Max distance for a usable pano (~2 city blocks).
-const MAX_DISTANCE_M = 250;
-// Half-width of the search bbox in degrees (~0.004° ≈ 440 m).
-const BBOX_HALF = 0.004;
+// Half-width of the search bbox in degrees. Mapillary's /images bbox
+// caps the area (0.004° half was rejected with HTTP 400 "reduce the
+// amount of data"); 0.001° half (~220 m) is verified working.
+// Fallback ladder: rung 0 stays tight (≤250 m), rung 1 widens to
+// ~440 m and accepts panos up to 500 m away.
+const BBOX_RUNGS = [
+  { half: 0.001, maxDistanceM: 250 },
+  { half: 0.002, maxDistanceM: 500 },
+  { half: 0.003, maxDistanceM: 800 },
+];
 const REQUEST_GAP_MS = 400;
 
 // Minimal .env loader (dotenv-free, project has no deps for this).
@@ -51,19 +58,31 @@ function loadEnv() {
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function searchNear(accessToken, lon, lat) {
-  const bbox = [lon - BBOX_HALF, lat - BBOX_HALF, lon + BBOX_HALF, lat + BBOX_HALF].join(',');
-  const url =
-    'https://graph.mapillary.com/search' +
-    `?fields=id,is_pano,is_primary,computed_geometry&bbox=${bbox}&limit=100` +
-    `&access_token=${encodeURIComponent(accessToken)}`;
-  const response = await fetch(url, {
-    headers: { 'User-Agent': 'trivia-site/1.0 (world-peek resolve)' },
-  });
-  if (!response.ok) {
-    throw new Error(`Mapillary search HTTP ${response.status}`);
+  for (const rung of BBOX_RUNGS) {
+    const bbox = [lon - rung.half, lat - rung.half, lon + rung.half, lat + rung.half].join(',');
+    const url =
+      'https://graph.mapillary.com/images' +
+      `?fields=id,is_pano,is_primary,computed_geometry&bbox=${bbox}&limit=100&is_pano=true`;
+    const response = await fetch(url, {
+      headers: { 'User-Agent': 'trivia-site/1.0 (world-peek resolve)', Authorization: `OAuth ${accessToken}` },
+    });
+    if (!response.ok) {
+      continue; // rung rejected (bbox too wide) — try the next
+    }
+    const data = await response.json();
+    const panos = data.data ?? [];
+    if (panos.length === 0) {
+      continue;
+    }
+    const nearest = panos
+      .map((pano) => ({ pano, distanceM: distanceM(lat, lon, pano.computed_geometry?.coordinates?.[1], pano.computed_geometry?.coordinates?.[0]) }))
+      .filter((item) => Number.isFinite(item.distanceM) && item.distanceM <= rung.maxDistanceM)
+      .sort((a, b) => a.distanceM - b.distanceM || Number(b.pano.is_primary === true) - Number(a.pano.is_primary === true))[0];
+    if (nearest) {
+      return nearest;
+    }
   }
-  const data = await response.json();
-  return data.data ?? [];
+  return null;
 }
 
 function distanceM(lat1, lon1, lat2, lon2) {
@@ -97,9 +116,9 @@ const resolved = {};
 const unresolved = [];
 
 for (const place of places) {
-  let candidates;
+  let nearest;
   try {
-    candidates = await searchNear(accessToken, place.lon, place.lat);
+    nearest = await searchNear(accessToken, place.lon, place.lat);
   } catch (error) {
     console.warn(`  [warn] ${place.id}: ${error.message}`);
     unresolved.push(place.id);
@@ -107,34 +126,13 @@ for (const place of places) {
     continue;
   }
 
-  const scored = candidates
-    .filter((image) => image.is_pano === true)
-    .map((image) => {
-      const [lon, lat] = image.computed_geometry?.coordinates ?? [NaN, NaN];
-      return {
-        panoId: image.id,
-        lat,
-        lon,
-        isPrimary: image.is_primary === true,
-        distance: distanceM(place.lat, place.lon, lat, lon),
-      };
-    })
-    .filter((candidate) => Number.isFinite(candidate.distance))
-    .sort(
-      (a, b) =>
-        a.distance - b.distance ||
-        Number(b.isPrimary) - Number(a.isPrimary) ||
-        a.panoId.localeCompare(b.panoId)
-    );
-
-  const best = scored.find((candidate) => candidate.distance <= MAX_DISTANCE_M);
-  if (best) {
-    resolved[place.id] = { panoId: best.panoId, distanceM: Math.round(best.distance) };
-    console.log(`  ✓ ${place.id}: pano ${best.panoId} at ${Math.round(best.distance)} m`);
+  if (nearest) {
+    resolved[place.id] = { panoId: nearest.pano.id, distanceM: Math.round(nearest.distanceM) };
+    console.log(`  ✓ ${place.id}: pano ${nearest.pano.id} at ${Math.round(nearest.distanceM)} m`);
   } else {
     unresolved.push(place.id);
     console.warn(
-      `  ✗ ${place.id}: no pano within ${MAX_DISTANCE_M} m (${scored[0]?.distance ? Math.round(scored[0].distance) + ' m nearest' : 'no coverage'})`
+      `  ✗ ${place.id}: no pano within ${BBOX_RUNGS[BBOX_RUNGS.length - 1].maxDistanceM} m (no coverage)`
     );
   }
   await sleep(REQUEST_GAP_MS);
