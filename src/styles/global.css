@@ -255,6 +255,41 @@
     stroke-linejoin: round;
     vertical-align: -0.125em;
   }
+  /* Homepage list rows (trending/multiplayer strips) and chip links
+     (new-games pills): shared combos replace the repeated utility strings
+     that were pushing the homepage over the 100 KB budget (PRD §10).
+     Values mirror the utilities they replace (radius-lg, shadow-sm/md,
+     150ms ease-out transition). */
+  .pb-row-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-raised);
+    padding: 0.75rem 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 150ms ease-out;
+  }
+  .pb-row-link:hover {
+    box-shadow: var(--shadow-md);
+  }
+  .pb-chip-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-raised);
+    padding: 0.5rem 1rem;
+    font-size: var(--text-small);
+    font-weight: 600;
+    color: var(--color-ink);
+    transition: box-shadow 150ms ease-out;
+  }
+  .pb-chip-link:hover {
+    box-shadow: var(--shadow-md);
+  }
   /* World Peek simplified map (PLAN-SCOPE R5): ocean = soft surface,
      land = raised surface + hairline stroke. Token-resolved, so the dark
      theme inverts automatically (ink-family surfaces). */

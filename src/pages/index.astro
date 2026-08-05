@@ -22,11 +22,12 @@ const trending = [...games].sort((a, b) => (b.popularity ?? 0) - (a.popularity ?
 const newGames = games.filter((game) => game.isNew);
 const multiplayerGames = games.filter((game) => game.type !== 'solo');
 
-// PRD §6.1/§6.3, FAQPage JSON-LD on the homepage.
+// PRD §6.1/§6.3, FAQPage JSON-LD on the homepage. The homepage only needs
+// a summary; the /faq page carries the full 9-question list (globalFaqs).
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: globalFaqs.map((faq) => ({
+  mainEntity: globalFaqs.slice(0, 5).map((faq) => ({
     '@type': 'Question',
     name: faq.question,
     acceptedAnswer: { '@type': 'Answer', text: faq.answer },
@@ -83,10 +84,7 @@ const jsonLd = JSON.stringify({
       {
         trending.map((game, index) => (
           <li>
-            <a
-              href={`/game/${game.slug}`}
-              class="flex items-center gap-4 rounded-lg border border-border bg-surface-raised px-4 py-3 shadow-sm transition-shadow duration-150 hover:shadow-md"
-            >
+            <a href={`/game/${game.slug}`} class="pb-row-link">
               <span class="font-display text-h3 text-primary-deep">{index + 1}</span>
               <span class="min-w-0">
                 <span class="block truncate font-semibold text-ink">{game.name}</span>
@@ -114,10 +112,7 @@ const jsonLd = JSON.stringify({
       {
         multiplayerGames.slice(0, 6).map((game) => (
           <li>
-            <a
-              href={`/game/${game.slug}`}
-              class="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface-raised px-4 py-3 shadow-sm transition-shadow duration-150 hover:shadow-md"
-            >
+            <a href={`/game/${game.slug}`} class="pb-row-link">
               <span class="min-w-0">
                 <span class="block truncate font-semibold text-ink">{game.name}</span>
                 <span class="block truncate text-xs text-ink-muted">{game.tagline}</span>
@@ -136,10 +131,7 @@ const jsonLd = JSON.stringify({
         <ul class="flex flex-wrap gap-3">
           {newGames.map((game) => (
             <li>
-              <a
-                href={`/game/${game.slug}`}
-                class="inline-flex items-center gap-2 rounded-pill border border-border bg-surface-raised px-4 py-2 text-small font-semibold text-ink transition-shadow duration-150 hover:shadow-md"
-              >
+              <a href={`/game/${game.slug}`} class="pb-chip-link">
                 {game.name} →
               </a>
             </li>

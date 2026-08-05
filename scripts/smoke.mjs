@@ -153,6 +153,25 @@ const server = createServer(async (req, res) => {
   }
 });
 
+// Pre-flight: if another server (usually `pnpm dev`) already holds the
+// port, the dual IPv4/IPv6 bind lets this script start anyway, and the
+// fetches below measure the dev server's heavier HTML instead of dist/ —
+// a false budget failure (observed ~111 KB vs ~96 KB on the homepage).
+try {
+  const probe = await fetch(`http://localhost:${PORT}`, {
+    signal: AbortSignal.timeout(1000),
+  });
+  if (probe.ok) {
+    console.error(
+      `Smoke aborted: port ${PORT} is already serving (likely a dev server). ` +
+        `Kill it first, e.g. pkill -f 'astro.mjs dev', then re-run.`
+    );
+    process.exit(1);
+  }
+} catch {
+  // Nothing listening — safe to start.
+}
+
 server.listen(PORT, async () => {
   console.log(`Smoke server on http://localhost:${PORT}`);
   try {
