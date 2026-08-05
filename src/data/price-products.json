@@ -1403,18 +1403,6 @@
     }
   },
   {
-    "name": "Jigger Set",
-    "searchTerm": "jigger",
-    "emoji": "🥃",
-    "description": "Measure twice, pour once.",
-    "price": 12,
-    "image": "https://live.staticflickr.com/4089/5050545620_70149f2675_b.jpg",
-    "credit": {
-      "creator": "Moving Mountains Trust",
-      "license": "by"
-    }
-  },
-  {
     "name": "Muddler",
     "searchTerm": "muddler",
     "emoji": "🌿",
