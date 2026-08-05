@@ -188,8 +188,31 @@ export default function WorldPeek() {
         setPanoStatus('error');
       }
     }, 20000);
+    // mapillary-js won't start loading until the container has a real
+    // size; if the LOOK overlay reports 0×0 at mount (fixed-context
+    // timing), the image never fetches and the round times out. Wait a
+    // few frames for a measurable container before constructing.
+    const waitForSize = (maxFrames = 10): Promise<void> =>
+      new Promise((resolve) => {
+        const tick = (frame: number) => {
+          if (cancelled) {
+            return;
+          }
+          if ((el.clientWidth > 0 && el.clientHeight > 0) || frame >= maxFrames) {
+            resolve();
+            return;
+          }
+          requestAnimationFrame(() => tick(frame + 1));
+        };
+        tick(0);
+      });
+
     void import('mapillary-js')
-      .then(({ Viewer: MapillaryViewer }) => {
+      .then(async ({ Viewer: MapillaryViewer }) => {
+        if (cancelled) {
+          return;
+        }
+        await waitForSize();
         if (cancelled) {
           return;
         }
