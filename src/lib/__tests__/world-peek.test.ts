@@ -15,21 +15,31 @@ import {
 
 const entries = placesJson as WorldPeekPlace[];
 
-describe('World Peek dataset (sample, 12 entries; full pool = content lot L7)', () => {
-  it('has 12+ entries with valid coordinates and regions', () => {
-    expect(entries.length).toBeGreaterThanOrEqual(12);
+describe('World Peek coordinate pool (D062/D063: 62 everyday places; full pool = content lot L7)', () => {
+  it('has 50+ entries with valid coordinates, regions, and difficulty', () => {
+    expect(entries.length).toBeGreaterThanOrEqual(50);
     for (const entry of entries) {
+      expect(entry.id.trim().length).toBeGreaterThan(0);
       expect(entry.lat).toBeGreaterThanOrEqual(-90);
       expect(entry.lat).toBeLessThanOrEqual(90);
       expect(entry.lon).toBeGreaterThanOrEqual(-180);
       expect(entry.lon).toBeLessThanOrEqual(180);
       expect(entry.region.trim().length).toBeGreaterThan(0);
-      expect(entry.image.startsWith('https://')).toBe(true);
+      expect([1, 2, 3]).toContain(entry.difficulty);
+      // Coordinate pool contract: no imagery, no landmark claims.
+      expect('image' in entry).toBe(false);
+      expect('credit' in entry).toBe(false);
+      expect(entry.place.length).toBeGreaterThan(3);
     }
   });
 
-  it('places are unique', () => {
+  it('ids and places are unique', () => {
+    expect(new Set(entries.map((entry) => entry.id)).size).toBe(entries.length);
     expect(new Set(entries.map((entry) => entry.place)).size).toBe(entries.length);
+  });
+
+  it('covers several regions', () => {
+    expect(new Set(entries.map((entry) => entry.region)).size).toBeGreaterThanOrEqual(5);
   });
 });
 

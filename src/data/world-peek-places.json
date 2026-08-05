@@ -1,98 +1,498 @@
 [
   {
-    "place": "Eiffel Tower, Paris",
-    "lat": 48.8584,
-    "lon": 2.2945,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "Europe"
+    "id": "pike-place-seattle",
+    "place": "Pike Place, Seattle",
+    "lat": 47.6097,
+    "lon": -122.342,
+    "region": "North America",
+    "difficulty": 2
   },
   {
-    "place": "Statue of Liberty, New York",
-    "lat": 40.6892,
-    "lon": -74.0445,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Statue_of_Liberty,_NY.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "North America"
+    "id": "south-congress-austin",
+    "place": "South Congress, Austin",
+    "lat": 30.2469,
+    "lon": -97.7526,
+    "region": "North America",
+    "difficulty": 2
   },
   {
-    "place": "Taj Mahal, Agra",
-    "lat": 27.1751,
-    "lon": 78.0421,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Taj_Mahal_(Edited).jpeg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "Asia"
+    "id": "kensington-market-toronto",
+    "place": "Kensington Market, Toronto",
+    "lat": 43.6548,
+    "lon": -79.4006,
+    "region": "North America",
+    "difficulty": 1
   },
   {
-    "place": "Great Wall of China, Mutianyu",
-    "lat": 40.4319,
-    "lon": 116.5704,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/The_Great_Wall_at_Mutianyu.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "Asia"
+    "id": "plateau-montreal",
+    "place": "Plateau, Montreal",
+    "lat": 45.5238,
+    "lon": -73.5817,
+    "region": "North America",
+    "difficulty": 2
   },
   {
-    "place": "Machu Picchu, Peru",
-    "lat": -13.1631,
-    "lon": -72.545,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Machu_Picchu,_Peru.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "South America"
+    "id": "roma-norte-mexico-city",
+    "place": "Roma Norte, Mexico City",
+    "lat": 19.4194,
+    "lon": -99.16,
+    "region": "North America",
+    "difficulty": 2
   },
   {
-    "place": "Pyramids of Giza, Egypt",
-    "lat": 29.9792,
-    "lon": 31.1342,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/All_Gizah_Pyramids.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "Africa"
+    "id": "wicker-park-chicago",
+    "place": "Wicker Park, Chicago",
+    "lat": 41.9102,
+    "lon": -87.677,
+    "region": "North America",
+    "difficulty": 2
   },
   {
-    "place": "Sydney Opera House",
-    "lat": -33.8568,
-    "lon": 151.2153,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Sydney_Opera_House_-_Dec_2008.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "Oceania"
+    "id": "gastown-vancouver",
+    "place": "Gastown, Vancouver",
+    "lat": 49.2842,
+    "lon": -123.111,
+    "region": "North America",
+    "difficulty": 1
   },
   {
-    "place": "Mount Fuji, Japan",
-    "lat": 35.3606,
-    "lon": 138.7274,
-    "image": "https://upload.wikimedia.org/wikipedia/commons/5/57/Red_Fuji_southern_wind_clear_morning.jpg",
-    "credit": { "creator": "Katsushika Hokusai", "license": "public domain" },
-    "region": "Asia"
+    "id": "williamsburg-brooklyn",
+    "place": "Williamsburg, Brooklyn",
+    "lat": 40.7081,
+    "lon": -73.9573,
+    "region": "North America",
+    "difficulty": 2
   },
   {
-    "place": "Colosseum, Rome",
-    "lat": 41.8902,
-    "lon": 12.4922,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Colosseum_in_Rome,_Italy_-_April_2007.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "Europe"
+    "id": "mission-san-francisco",
+    "place": "Mission District, San Francisco",
+    "lat": 37.7599,
+    "lon": -122.4148,
+    "region": "North America",
+    "difficulty": 1
   },
   {
-    "place": "Christ the Redeemer, Rio de Janeiro",
-    "lat": -22.9519,
-    "lon": -43.2105,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Cristo_Redentor_-_Rio_de_Janeiro,_Brasil.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "South America"
+    "id": "french-quarter-new-orleans",
+    "place": "French Quarter, New Orleans",
+    "lat": 29.9584,
+    "lon": -90.063,
+    "region": "North America",
+    "difficulty": 1
   },
   {
-    "place": "Grand Canyon, Arizona",
-    "lat": 36.1069,
-    "lon": -112.1129,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Grand_Canyon_Arizona.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "North America"
+    "id": "rino-denver",
+    "place": "River North, Denver",
+    "lat": 39.7589,
+    "lon": -104.988,
+    "region": "North America",
+    "difficulty": 3
   },
   {
-    "place": "Stonehenge, England",
-    "lat": 51.1789,
-    "lon": -1.8262,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Stonehenge2007_07_30.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
-    "region": "Europe"
+    "id": "little-havana-miami",
+    "place": "Little Havana, Miami",
+    "lat": 25.7739,
+    "lon": -80.22,
+    "region": "North America",
+    "difficulty": 2
+  },
+  {
+    "id": "shoreditch-london",
+    "place": "Shoreditch, London",
+    "lat": 51.5255,
+    "lon": -0.078,
+    "region": "Europe",
+    "difficulty": 1
+  },
+  {
+    "id": "canal-saint-martin-paris",
+    "place": "Canal Saint-Martin, Paris",
+    "lat": 48.8698,
+    "lon": 2.367,
+    "region": "Europe",
+    "difficulty": 1
+  },
+  {
+    "id": "gracia-barcelona",
+    "place": "Gràcia, Barcelona",
+    "lat": 41.4036,
+    "lon": 2.157,
+    "region": "Europe",
+    "difficulty": 2
+  },
+  {
+    "id": "kreuzberg-berlin",
+    "place": "Kreuzberg, Berlin",
+    "lat": 52.4981,
+    "lon": 13.4183,
+    "region": "Europe",
+    "difficulty": 2
+  },
+  {
+    "id": "jordaan-amsterdam",
+    "place": "Jordaan, Amsterdam",
+    "lat": 52.3713,
+    "lon": 4.877,
+    "region": "Europe",
+    "difficulty": 2
+  },
+  {
+    "id": "alfama-lisbon",
+    "place": "Alfama, Lisbon",
+    "lat": 38.712,
+    "lon": -9.13,
+    "region": "Europe",
+    "difficulty": 2
+  },
+  {
+    "id": "trastevere-rome",
+    "place": "Trastevere, Rome",
+    "lat": 41.889,
+    "lon": 12.47,
+    "region": "Europe",
+    "difficulty": 1
+  },
+  {
+    "id": "vinohrady-prague",
+    "place": "Vinohrady, Prague",
+    "lat": 50.0755,
+    "lon": 14.4378,
+    "region": "Europe",
+    "difficulty": 2
+  },
+  {
+    "id": "norrebro-copenhagen",
+    "place": "Nørrebro, Copenhagen",
+    "lat": 55.691,
+    "lon": 12.549,
+    "region": "Europe",
+    "difficulty": 2
+  },
+  {
+    "id": "temple-bar-dublin",
+    "place": "Temple Bar, Dublin",
+    "lat": 53.3455,
+    "lon": -6.264,
+    "region": "Europe",
+    "difficulty": 1
+  },
+  {
+    "id": "district-vii-budapest",
+    "place": "District VII, Budapest",
+    "lat": 47.4979,
+    "lon": 19.06,
+    "region": "Europe",
+    "difficulty": 2
+  },
+  {
+    "id": "exarcheia-athens",
+    "place": "Exarcheia, Athens",
+    "lat": 37.988,
+    "lon": 23.735,
+    "region": "Europe",
+    "difficulty": 3
+  },
+  {
+    "id": "leith-edinburgh",
+    "place": "Leith, Edinburgh",
+    "lat": 55.974,
+    "lon": -3.17,
+    "region": "Europe",
+    "difficulty": 3
+  },
+  {
+    "id": "ribeira-porto",
+    "place": "Ribeira, Porto",
+    "lat": 41.141,
+    "lon": -8.613,
+    "region": "Europe",
+    "difficulty": 1
+  },
+  {
+    "id": "malasana-madrid",
+    "place": "Malasaña, Madrid",
+    "lat": 40.426,
+    "lon": -3.705,
+    "region": "Europe",
+    "difficulty": 1
+  },
+  {
+    "id": "neubau-vienna",
+    "place": "Neubau, Vienna",
+    "lat": 48.202,
+    "lon": 16.35,
+    "region": "Europe",
+    "difficulty": 2
+  },
+  {
+    "id": "saint-gilles-brussels",
+    "place": "Saint-Gilles, Brussels",
+    "lat": 50.827,
+    "lon": 4.345,
+    "region": "Europe",
+    "difficulty": 3
+  },
+  {
+    "id": "sodermalms-stockholm",
+    "place": "Södermalm, Stockholm",
+    "lat": 59.316,
+    "lon": 18.07,
+    "region": "Europe",
+    "difficulty": 2
+  },
+  {
+    "id": "shimokitazawa-tokyo",
+    "place": "Shimokitazawa, Tokyo",
+    "lat": 35.661,
+    "lon": 139.667,
+    "region": "Asia",
+    "difficulty": 2
+  },
+  {
+    "id": "hongdae-seoul",
+    "place": "Hongdae, Seoul",
+    "lat": 37.556,
+    "lon": 126.923,
+    "region": "Asia",
+    "difficulty": 2
+  },
+  {
+    "id": "yaowarat-bangkok",
+    "place": "Yaowarat, Bangkok",
+    "lat": 13.74,
+    "lon": 100.51,
+    "region": "Asia",
+    "difficulty": 2
+  },
+  {
+    "id": "old-quarter-hanoi",
+    "place": "Old Quarter, Hanoi",
+    "lat": 21.034,
+    "lon": 105.85,
+    "region": "Asia",
+    "difficulty": 2
+  },
+  {
+    "id": "kampong-glam-singapore",
+    "place": "Kampong Glam, Singapore",
+    "lat": 1.301,
+    "lon": 103.859,
+    "region": "Asia",
+    "difficulty": 2
+  },
+  {
+    "id": "ximending-taipei",
+    "place": "Ximending, Taipei",
+    "lat": 25.043,
+    "lon": 121.506,
+    "region": "Asia",
+    "difficulty": 1
+  },
+  {
+    "id": "bandra-west-mumbai",
+    "place": "Bandra West, Mumbai",
+    "lat": 19.06,
+    "lon": 72.835,
+    "region": "Asia",
+    "difficulty": 3
+  },
+  {
+    "id": "hauz-khas-delhi",
+    "place": "Hauz Khas, Delhi",
+    "lat": 28.554,
+    "lon": 77.201,
+    "region": "Asia",
+    "difficulty": 3
+  },
+  {
+    "id": "bukit-bintang-kuala-lumpur",
+    "place": "Bukit Bintang, Kuala Lumpur",
+    "lat": 3.146,
+    "lon": 101.71,
+    "region": "Asia",
+    "difficulty": 2
+  },
+  {
+    "id": "binondo-manila",
+    "place": "Binondo, Manila",
+    "lat": 14.601,
+    "lon": 120.974,
+    "region": "Asia",
+    "difficulty": 2
+  },
+  {
+    "id": "district-one-saigon",
+    "place": "District 1, Ho Chi Minh City",
+    "lat": 10.776,
+    "lon": 106.7,
+    "region": "Asia",
+    "difficulty": 2
+  },
+  {
+    "id": "kemang-jakarta",
+    "place": "Kemang, Jakarta",
+    "lat": -6.26,
+    "lon": 106.81,
+    "region": "Asia",
+    "difficulty": 3
+  },
+  {
+    "id": "thamel-kathmandu",
+    "place": "Thamel, Kathmandu",
+    "lat": 27.715,
+    "lon": 85.312,
+    "region": "Asia",
+    "difficulty": 2
+  },
+  {
+    "id": "bkk1-phnom-penh",
+    "place": "BKK1, Phnom Penh",
+    "lat": 11.556,
+    "lon": 104.928,
+    "region": "Asia",
+    "difficulty": 3
+  },
+  {
+    "id": "palermo-buenos-aires",
+    "place": "Palermo, Buenos Aires",
+    "lat": -34.588,
+    "lon": -58.43,
+    "region": "South America",
+    "difficulty": 2
+  },
+  {
+    "id": "vila-madalena-sao-paulo",
+    "place": "Vila Madalena, São Paulo",
+    "lat": -23.555,
+    "lon": -46.689,
+    "region": "South America",
+    "difficulty": 2
+  },
+  {
+    "id": "santa-teresa-rio",
+    "place": "Santa Teresa, Rio de Janeiro",
+    "lat": -22.921,
+    "lon": -43.184,
+    "region": "South America",
+    "difficulty": 2
+  },
+  {
+    "id": "la-candelaria-bogota",
+    "place": "La Candelaria, Bogotá",
+    "lat": 4.597,
+    "lon": -74.073,
+    "region": "South America",
+    "difficulty": 2
+  },
+  {
+    "id": "barranco-lima",
+    "place": "Barranco, Lima",
+    "lat": -12.147,
+    "lon": -77.021,
+    "region": "South America",
+    "difficulty": 2
+  },
+  {
+    "id": "bellavista-santiago",
+    "place": "Bellavista, Santiago",
+    "lat": -33.436,
+    "lon": -70.634,
+    "region": "South America",
+    "difficulty": 2
+  },
+  {
+    "id": "medina-marrakech",
+    "place": "Medina, Marrakech",
+    "lat": 31.626,
+    "lon": -7.989,
+    "region": "Africa",
+    "difficulty": 2
+  },
+  {
+    "id": "bo-kaap-cape-town",
+    "place": "Bo-Kaap, Cape Town",
+    "lat": -33.922,
+    "lon": 18.415,
+    "region": "Africa",
+    "difficulty": 2
+  },
+  {
+    "id": "westlands-nairobi",
+    "place": "Westlands, Nairobi",
+    "lat": -1.267,
+    "lon": 36.806,
+    "region": "Africa",
+    "difficulty": 3
+  },
+  {
+    "id": "zamalek-cairo",
+    "place": "Zamalek, Cairo",
+    "lat": 30.061,
+    "lon": 31.218,
+    "region": "Africa",
+    "difficulty": 3
+  },
+  {
+    "id": "osu-accra",
+    "place": "Osu, Accra",
+    "lat": 5.555,
+    "lon": -0.175,
+    "region": "Africa",
+    "difficulty": 3
+  },
+  {
+    "id": "maboneng-johannesburg",
+    "place": "Maboneng, Johannesburg",
+    "lat": -26.204,
+    "lon": 28.057,
+    "region": "Africa",
+    "difficulty": 3
+  },
+  {
+    "id": "fitzroy-melbourne",
+    "place": "Fitzroy, Melbourne",
+    "lat": -37.798,
+    "lon": 144.978,
+    "region": "Oceania",
+    "difficulty": 2
+  },
+  {
+    "id": "newtown-sydney",
+    "place": "Newtown, Sydney",
+    "lat": -33.898,
+    "lon": 151.18,
+    "region": "Oceania",
+    "difficulty": 2
+  },
+  {
+    "id": "ponsonby-auckland",
+    "place": "Ponsonby, Auckland",
+    "lat": -36.858,
+    "lon": 174.746,
+    "region": "Oceania",
+    "difficulty": 2
+  },
+  {
+    "id": "cuba-street-wellington",
+    "place": "Cuba Street, Wellington",
+    "lat": -41.294,
+    "lon": 174.776,
+    "region": "Oceania",
+    "difficulty": 1
+  },
+  {
+    "id": "west-end-brisbane",
+    "place": "West End, Brisbane",
+    "lat": -27.481,
+    "lon": 153.011,
+    "region": "Oceania",
+    "difficulty": 3
+  },
+  {
+    "id": "northbridge-perth",
+    "place": "Northbridge, Perth",
+    "lat": -31.949,
+    "lon": 115.857,
+    "region": "Oceania",
+    "difficulty": 2
   }
 ]

@@ -42,7 +42,8 @@ export type IconName =
   | 'sparkles'
   | 'bolt'
   | 'snowflake'
-  | 'tools';
+  | 'tools'
+  | 'x';
 
 /** Inner SVG markup per icon (stroke currentColor, 32×32 viewBox). */
 export const ICON_PATHS: Record<IconName, string> = {
@@ -100,6 +101,7 @@ export const ICON_PATHS: Record<IconName, string> = {
     '<path d="M16 4v24M5.5 10.5l21 11M26.5 10.5l-21 11M16 4l-2.2 2.2M16 4l2.2 2.2M16 28l-2.2-2.2M16 28l2.2-2.2M5.5 10.5l3.1.4M26.5 10.5l-3.1.4M26.5 21.5l-3.1-.4M5.5 21.5l3.1-.4"/>',
   tools:
     '<path d="M13.5 5.5a7 7 0 0 0 9.7 9.7l3.3 3.3-3 3-3.3-3.3a7 7 0 0 0-9.7-9.7l3.2 3.2 3-3Z"/>',
+  x: '<path d="M8 8l16 16M24 8 8 24"/>',
 };
 
 /** [R3] Game-family chrome icons: drawing, party (voting+special merged), solo, quiz. */

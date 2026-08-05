@@ -92,6 +92,8 @@ const weightChecks = ['/', '/faq', '/game/skribbl-arena', '/daily/drawing'];
 // PRD §10: bundle-size budget per game island (shared runtime excluded, it
 // is cached once per visitor; the gate is on the per-island chunks).
 const BUNDLE_BUDGET_BYTES = 300 * 1024;
+// D062: mapillary-js lazy vendor chunk ceiling (raw; ~265 KB gzipped).
+const LAZY_VENDOR_BUDGET_BYTES = 1.2 * 1024 * 1024;
 const SHARED_RUNTIME_PREFIX = 'client.';
 
 /**
@@ -226,9 +228,14 @@ server.listen(PORT, async () => {
         continue; // one-time shared runtime (React + socket client)
       }
       const size = statSync(join(DIST_DIR, '_astro', file)).size;
-      if (size > BUNDLE_BUDGET_BYTES) {
+      // D062: the mapillary-js viewer is a lazy-loaded vendor chunk, only
+      // pulled by the World Peek island when a round starts (~1 MB raw /
+      // ~265 KB gzip). It cannot fit the 300 KB authored-code gate, so it
+      // gets its own explicit ceiling so it can't silently regress.
+      const budget = file.startsWith('mapillary') ? LAZY_VENDOR_BUDGET_BYTES : BUNDLE_BUDGET_BYTES;
+      if (size > budget) {
         throw new Error(
-          `bundle ${file} is ${(size / 1024).toFixed(1)} KB, over the ${BUNDLE_BUDGET_BYTES / 1024} KB island budget (PRD §10)`
+          `bundle ${file} is ${(size / 1024).toFixed(1)} KB, over the ${budget / 1024} KB budget (PRD §10)`
         );
       }
     }

@@ -215,6 +215,14 @@
     line-height: var(--text-body--line-height);
     /* Never let a wide island or long word break the layout on mobile. */
     overflow-x: clip;
+    /* [D063] game surfaces: no scroll chaining (the World Peek map/pano
+       swallows gestures without yanking the page). */
+    overscroll-behavior-y: contain;
+  }
+
+  html {
+    /* [D063] smooth anchor scrolling site-wide (Airbnb direction). */
+    scroll-behavior: smooth;
   }
 
   /* Focus contract [OWNER d7]: 2px solid ink ring + 2px offset on light

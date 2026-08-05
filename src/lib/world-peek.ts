@@ -1,9 +1,12 @@
 /**
- * World Peek (PLAN-SCOPE R5, M23): solo-only at launch, no daily registry
- * entry ('geo' token deferred). Seeded rounds from a lat/lon photo pool;
- * the player pins the guessed location on a self-made simplified SVG world
- * map and scores by distance. The full 200+ photo pool is content lot L7;
- * this ships against the 12-entry sample dataset.
+ * World Peek (PLAN-SCOPE R5, M23 + D062/D063): solo-only at launch, no
+ * daily registry entry ('geo' token deferred). Seeded rounds from a
+ * coordinate pool of everyday places; each round plays a 360° panorama
+ * (Mapillary pano ID resolved at build time, D062) that the player studies
+ * before pinning their guess on a light-tile Leaflet map. Distance-based
+ * scoring (D061): dotted great-circle line + km label on the reveal. The
+ * full 2,000+ coordinate lot is content lot L7; this ships a 62-entry
+ * everyday-place sample.
  *
  * Never "GeoGuessr" on-page (trademark-safe): the game is "World Peek".
  */
@@ -11,14 +14,19 @@
 import { pickDistinct } from './pick';
 
 export interface WorldPeekPlace {
+  /** Stable slug used to look up the build-time-resolved pano (D062). */
+  id: string;
+  /** Human-readable area label shown on the reveal (no monument names). */
   place: string;
   lat: number;
   lon: number;
-  /** Remote image (Wikimedia Commons Special:FilePath); content lot swaps. */
-  image: string;
-  credit?: { creator: string; license: string };
   region: string;
+  /** 1 (distinctive urban) to 3 (hard-to-place suburb/street). */
+  difficulty: 1 | 2 | 3;
 }
+
+/** Build-time-resolved Mapillary pano per place id (D062). */
+export type WorldPeekPanoMap = Record<string, { panoId: string; distanceM: number }>;
 
 export interface WorldPeekRound {
   entry: WorldPeekPlace;

@@ -1,0 +1,680 @@
+#!/usr/bin/env node
+/**
+ * World Peek content pool generator (D063, PLAN-SCOPE R5).
+ *
+ * Same pipeline discipline as the D056 price resolver: nothing unresolved
+ * ships; every output is reviewable. The game dataset (world-peek-places.json)
+ * only ever contains entries with a resolved Mapillary pano.
+ *
+ * Stages (each separately runnable, deterministic re-runs):
+ *   --sample   S0-S2: region slate → Overpass street-node sampling →
+ *              landmark exclusion. Writes the candidate cache.
+ *   --resolve  S3:    Mapillary pano-ID lookup per candidate (~1 rps,
+ *              retry + backoff; MAPILLARY_TOKEN from build env).
+ *   --apply    S4:    write world-peek-places.json (resolved entries ONLY)
+ *              + scripts/.cache/ review list + per-region resolve rates.
+ *
+ * Default (no flag): sample → resolve → apply.
+ * --full: target 2,000+ entries (40/city); default is the 50-entry sample
+ * (1/city, all five regions covered).
+ */
+
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const DATASET_PATH = join(root, 'src/data/world-peek-places.json');
+const CACHE_DIR = join(root, 'scripts/.cache');
+const REVIEW_PATH = join(CACHE_DIR, 'world-peek-review.json');
+const CANDIDATES_PATH = join(CACHE_DIR, 'world-peek-candidates.json');
+
+const OVERPASS_ENDPOINTS = [
+  'https://overpass-api.de/api/interpreter',
+  'https://overpass.osm.ch/api/interpreter',
+];
+const OSM_API_MAP = 'https://api.openstreetmap.org/api/0.6/map';
+const MAPILLARY_GRAPH = 'https://graph.mapillary.com/images';
+const OSM_USER_AGENT = 'TriviaHub-dev/1.0 (world-peek content pipeline)';
+const RPS_DELAY_MS = 1000;
+const MAX_RETRIES = 4;
+const FULL_TARGET_PER_CITY = 40; // 50 cities × 40 = 2,000
+const SAMPLE_PER_CITY = 1;
+// OSM API map endpoint caps responses at 50k nodes; boxes start small and
+// shrink on overflow so dense cities still sample.
+const OSM_START_RADIUS_KM = 2;
+const OSM_MIN_RADIUS_KM = 0.5;
+
+// ---------------------------------------------------------------------------
+// S0 — region slate (D058 region quota: every region covered; ≥15 per cell
+// at the full 2,000-entry target). Cities are chosen for street-level
+// imagery availability — the Mapillary resolution constraint.
+
+export const REGIONS = ['africa', 'americas', 'asia', 'europe', 'oceania'];
+
+export const CITY_SLATE = [
+  // --- africa (10) ---
+  { city: 'Cape Town', country: 'ZA', region: 'africa', lat: -33.9249, lon: 18.4241, radiusKm: 4 },
+  {
+    city: 'Johannesburg',
+    country: 'ZA',
+    region: 'africa',
+    lat: -26.2041,
+    lon: 28.0473,
+    radiusKm: 4,
+  },
+  { city: 'Nairobi', country: 'KE', region: 'africa', lat: -1.2921, lon: 36.8219, radiusKm: 4 },
+  { city: 'Accra', country: 'GH', region: 'africa', lat: 5.6037, lon: -0.187, radiusKm: 3 },
+  { city: 'Lagos', country: 'NG', region: 'africa', lat: 6.5244, lon: 3.3792, radiusKm: 4 },
+  { city: 'Cairo', country: 'EG', region: 'africa', lat: 30.0444, lon: 31.2357, radiusKm: 4 },
+  { city: 'Marrakesh', country: 'MA', region: 'africa', lat: 31.6295, lon: -7.9811, radiusKm: 3 },
+  { city: 'Addis Ababa', country: 'ET', region: 'africa', lat: 9.03, lon: 38.74, radiusKm: 3 },
+  { city: 'Kampala', country: 'UG', region: 'africa', lat: 0.3476, lon: 32.5825, radiusKm: 3 },
+  { city: 'Dakar', country: 'SN', region: 'africa', lat: 14.7167, lon: -17.4677, radiusKm: 3 },
+  // --- americas (10) ---
+  { city: 'New York', country: 'US', region: 'americas', lat: 40.7128, lon: -74.006, radiusKm: 5 },
+  {
+    city: 'San Francisco',
+    country: 'US',
+    region: 'americas',
+    lat: 37.7749,
+    lon: -122.4194,
+    radiusKm: 4,
+  },
+  {
+    city: 'Mexico City',
+    country: 'MX',
+    region: 'americas',
+    lat: 19.4326,
+    lon: -99.1332,
+    radiusKm: 4,
+  },
+  { city: 'Toronto', country: 'CA', region: 'americas', lat: 43.6532, lon: -79.3832, radiusKm: 4 },
+  {
+    city: 'Vancouver',
+    country: 'CA',
+    region: 'americas',
+    lat: 49.2827,
+    lon: -123.1207,
+    radiusKm: 4,
+  },
+  {
+    city: 'São Paulo',
+    country: 'BR',
+    region: 'americas',
+    lat: -23.5505,
+    lon: -46.6333,
+    radiusKm: 4,
+  },
+  {
+    city: 'Buenos Aires',
+    country: 'AR',
+    region: 'americas',
+    lat: -34.6037,
+    lon: -58.3816,
+    radiusKm: 4,
+  },
+  { city: 'Bogotá', country: 'CO', region: 'americas', lat: 4.711, lon: -74.0721, radiusKm: 4 },
+  { city: 'Lima', country: 'PE', region: 'americas', lat: -12.0464, lon: -77.0428, radiusKm: 3 },
+  {
+    city: 'Santiago',
+    country: 'CL',
+    region: 'americas',
+    lat: -33.4489,
+    lon: -70.6693,
+    radiusKm: 3,
+  },
+  // --- asia (10) ---
+  { city: 'Tokyo', country: 'JP', region: 'asia', lat: 35.6762, lon: 139.6503, radiusKm: 5 },
+  { city: 'Bangkok', country: 'TH', region: 'asia', lat: 13.7563, lon: 100.5018, radiusKm: 4 },
+  { city: 'Singapore', country: 'SG', region: 'asia', lat: 1.3521, lon: 103.8198, radiusKm: 4 },
+  { city: 'Jakarta', country: 'ID', region: 'asia', lat: -6.2088, lon: 106.8456, radiusKm: 4 },
+  { city: 'Manila', country: 'PH', region: 'asia', lat: 14.5995, lon: 120.9842, radiusKm: 4 },
+  { city: 'Seoul', country: 'KR', region: 'asia', lat: 37.5665, lon: 126.978, radiusKm: 4 },
+  { city: 'Kuala Lumpur', country: 'MY', region: 'asia', lat: 3.139, lon: 101.6869, radiusKm: 4 },
+  { city: 'Delhi', country: 'IN', region: 'asia', lat: 28.6139, lon: 77.209, radiusKm: 4 },
+  {
+    city: 'Ho Chi Minh City',
+    country: 'VN',
+    region: 'asia',
+    lat: 10.8231,
+    lon: 106.6297,
+    radiusKm: 4,
+  },
+  { city: 'Taipei', country: 'TW', region: 'asia', lat: 25.033, lon: 121.5654, radiusKm: 3 },
+  // --- europe (10) ---
+  { city: 'London', country: 'GB', region: 'europe', lat: 51.5074, lon: -0.1278, radiusKm: 5 },
+  { city: 'Paris', country: 'FR', region: 'europe', lat: 48.8566, lon: 2.3522, radiusKm: 4 },
+  { city: 'Berlin', country: 'DE', region: 'europe', lat: 52.52, lon: 13.405, radiusKm: 4 },
+  { city: 'Madrid', country: 'ES', region: 'europe', lat: 40.4168, lon: -3.7038, radiusKm: 4 },
+  { city: 'Rome', country: 'IT', region: 'europe', lat: 41.9028, lon: 12.4964, radiusKm: 4 },
+  { city: 'Amsterdam', country: 'NL', region: 'europe', lat: 52.3676, lon: 4.9041, radiusKm: 3 },
+  { city: 'Prague', country: 'CZ', region: 'europe', lat: 50.0755, lon: 14.4378, radiusKm: 3 },
+  { city: 'Vienna', country: 'AT', region: 'europe', lat: 48.2082, lon: 16.3738, radiusKm: 3 },
+  { city: 'Barcelona', country: 'ES', region: 'europe', lat: 41.3874, lon: 2.1686, radiusKm: 4 },
+  { city: 'Budapest', country: 'HU', region: 'europe', lat: 47.4979, lon: 19.0402, radiusKm: 3 },
+  // --- oceania (10) ---
+  { city: 'Sydney', country: 'AU', region: 'oceania', lat: -33.8688, lon: 151.2093, radiusKm: 4 },
+  {
+    city: 'Melbourne',
+    country: 'AU',
+    region: 'oceania',
+    lat: -37.8136,
+    lon: 144.9631,
+    radiusKm: 4,
+  },
+  { city: 'Brisbane', country: 'AU', region: 'oceania', lat: -27.4698, lon: 153.0251, radiusKm: 4 },
+  { city: 'Perth', country: 'AU', region: 'oceania', lat: -31.9505, lon: 115.8605, radiusKm: 4 },
+  { city: 'Adelaide', country: 'AU', region: 'oceania', lat: -34.9285, lon: 138.6007, radiusKm: 3 },
+  { city: 'Hobart', country: 'AU', region: 'oceania', lat: -42.8821, lon: 147.3272, radiusKm: 3 },
+  { city: 'Auckland', country: 'NZ', region: 'oceania', lat: -36.8509, lon: 174.7645, radiusKm: 4 },
+  {
+    city: 'Wellington',
+    country: 'NZ',
+    region: 'oceania',
+    lat: -41.2866,
+    lon: 174.7756,
+    radiusKm: 3,
+  },
+  {
+    city: 'Christchurch',
+    country: 'NZ',
+    region: 'oceania',
+    lat: -43.5321,
+    lon: 172.6362,
+    radiusKm: 3,
+  },
+  { city: 'Honolulu', country: 'US', region: 'oceania', lat: 21.3069, lon: -157.8583, radiusKm: 3 },
+];
+
+// ---------------------------------------------------------------------------
+// S2 — landmark exclusion. The blocklist is name-based (substring, folded);
+// tag-based exclusions catch the rest. Exported so the dataset test can
+// assert zero blocklist hits.
+
+export const LANDMARK_BLOCKLIST = [
+  'eiffel tower',
+  'leaning tower',
+  'pisa',
+  'taj mahal',
+  'statue of liberty',
+  'sydney opera house',
+  'big ben',
+  'colosseum',
+  'great wall',
+  'machu picchu',
+  'great pyramid',
+  'sphinx',
+  'stonehenge',
+  'golden gate bridge',
+  'sagrada',
+  'notre-dame',
+  'notre dame',
+  'burj khalifa',
+  'empire state',
+  'christ the redeemer',
+  'acropolis',
+  'brandenburg gate',
+  "st. peter's basilica",
+  'tower of london',
+  'mount rushmore',
+  'niagara falls',
+  'table mountain',
+  'uluru',
+  'harbour bridge',
+  'london eye',
+  'buckingham palace',
+  'louvre',
+  'alhambra',
+  'kremlin',
+  'hermitage',
+  'parthenon',
+  'angkor wat',
+  'petra',
+  'chichen itza',
+  'stadium of light',
+  'space needle',
+  'wembley',
+  'camp nou',
+  'santuario',
+];
+
+const NOTABLE_NATURAL = new Set([
+  'peak',
+  'volcano',
+  'cliff',
+  'cave_entrance',
+  'bay',
+  'cape',
+  'waterfall',
+  'hill',
+  'rock',
+  'stone',
+  'geyser',
+]);
+
+const NOTABLE_MAN_MADE = new Set(['tower', 'lighthouse', 'monument', 'mast', 'obelisk']);
+
+const NOTABLE_TOURISM = new Set([
+  'attraction',
+  'museum',
+  'viewpoint',
+  'zoo',
+  'aquarium',
+  'gallery',
+  'theme_park',
+]);
+
+/** True when an OSM node must be excluded from the game pool (S2). */
+export function isLandmarkNode(node) {
+  const tags = node.tags ?? {};
+  if (typeof tags.tourism === 'string' && NOTABLE_TOURISM.has(tags.tourism)) {
+    return true;
+  }
+  if (typeof tags.historic === 'string' && tags.historic.length > 0) {
+    return true;
+  }
+  if (typeof tags.natural === 'string' && NOTABLE_NATURAL.has(tags.natural)) {
+    return true;
+  }
+  if (typeof tags.man_made === 'string' && NOTABLE_MAN_MADE.has(tags.man_made)) {
+    return true;
+  }
+  if (typeof tags.name === 'string') {
+    const name = tags.name.toLowerCase();
+    return LANDMARK_BLOCKLIST.some((token) => name.includes(token));
+  }
+  return false;
+}
+
+// ---------------------------------------------------------------------------
+// Deterministic helpers (in-repo PRNG patterns, no new deps).
+
+function fnv1a(value) {
+  let hash = 2166136261;
+  for (let i = 0; i < value.length; i += 1) {
+    hash ^= value.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function mulberry32(seed) {
+  let state = seed >>> 0;
+  return () => {
+    state = (state + 0x6d2b79f5) >>> 0;
+    let t = state;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const slugify = (value) =>
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+function bboxFor(city, radiusKm) {
+  const dLat = radiusKm / 111;
+  const dLon = radiusKm / (111 * Math.cos((city.lat * Math.PI) / 180));
+  return {
+    south: city.lat - dLat,
+    west: city.lon - dLon,
+    north: city.lat + dLat,
+    east: city.lon + dLon,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// S1 — OSM sampling (Overpass). Deterministic seeded pick per city.
+
+async function overpassStreetNodes(city, radiusKm) {
+  const bbox = bboxFor(city, radiusKm);
+  const query =
+    `[out:json][timeout:30];` +
+    `(node["highway"~"^(residential|primary|secondary|tertiary)$"]` +
+    `(${bbox.south.toFixed(5)},${bbox.west.toFixed(5)},${bbox.north.toFixed(5)},${bbox.east.toFixed(5)}));` +
+    `out tags;`;
+  for (const endpoint of OVERPASS_ENDPOINTS) {
+    for (let attempt = 0; attempt < MAX_RETRIES; attempt += 1) {
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `data=${encodeURIComponent(query)}`,
+        });
+        const text = await response.text();
+        // Rate-limited instances answer with an HTML error page (HTTP 200/406
+        // with a "rate_limited" remark) — treat as retryable.
+        if (
+          response.status === 429 ||
+          response.status === 406 ||
+          !response.ok ||
+          text.includes('rate_limited')
+        ) {
+          if (attempt === MAX_RETRIES - 1) {
+            throw new Error(`rate-limited on ${endpoint}`);
+          }
+          await sleep(RPS_DELAY_MS * 2 ** attempt * 2);
+          continue;
+        }
+        const body = JSON.parse(text);
+        const nodes = (body.elements ?? []).filter((element) => element.type === 'node');
+        if (nodes.length === 0) {
+          throw new Error(`empty result on ${endpoint}`);
+        }
+        return nodes;
+      } catch {
+        if (attempt === MAX_RETRIES - 1) {
+          break; // try the next endpoint
+        }
+        await sleep(RPS_DELAY_MS * 2 ** attempt * 2);
+      }
+    }
+  }
+  return [];
+}
+
+/** Parse OSM XML nodes (with tags) into the shared candidate shape. */
+function parseOsmXml(xml) {
+  const nodes = [];
+  // Atomic element match: a self-closing <node .../> or a tagged
+  // <node ...>...</node> — never let the lazy span swallow siblings.
+  const elementPattern = /<node\b[^>]*?(?:\/>|>[\s\S]*?<\/node>)/g;
+  const attrPattern = /id="(\d+)"|lat="([-\d.]+)"|lon="([-\d.]+)"/g;
+  const tagPattern = /<tag k="([^"]+)" v="([^"]*)"\/>/g;
+  let match;
+  while ((match = elementPattern.exec(xml)) !== null) {
+    const element = match[0];
+    const attrs = {};
+    let attr;
+    attrPattern.lastIndex = 0;
+    while ((attr = attrPattern.exec(element)) !== null) {
+      if (attr[1] !== undefined) attrs.id = Number(attr[1]);
+      else if (attr[2] !== undefined) attrs.lat = Number(attr[2]);
+      else if (attr[3] !== undefined) attrs.lon = Number(attr[3]);
+    }
+    if (attrs.id === undefined || attrs.lat === undefined || attrs.lon === undefined) {
+      continue;
+    }
+    const tags = {};
+    let tagMatch;
+    tagPattern.lastIndex = 0;
+    while ((tagMatch = tagPattern.exec(element)) !== null) {
+      tags[tagMatch[1]] = tagMatch[2];
+    }
+    nodes.push({ id: attrs.id, lat: attrs.lat, lon: attrs.lon, tags });
+  }
+  return nodes;
+}
+
+/** OSM API map endpoint: small boxes, shrink on the 50k-node overflow. */
+async function osmApiStreetNodes(city, radiusKm) {
+  let radius = Math.min(radiusKm, OSM_START_RADIUS_KM);
+  while (radius >= OSM_MIN_RADIUS_KM) {
+    const bbox = bboxFor(city, radius);
+    const url =
+      `${OSM_API_MAP}?bbox=${bbox.west.toFixed(5)},${bbox.south.toFixed(5)},` +
+      `${bbox.east.toFixed(5)},${bbox.north.toFixed(5)}`;
+    let response;
+    let text = '';
+    for (let attempt = 0; attempt < MAX_RETRIES; attempt += 1) {
+      response = await fetch(url, { headers: { 'User-Agent': OSM_USER_AGENT } });
+      text = await response.text();
+      if (response.status === 429 || response.status >= 500) {
+        if (attempt === MAX_RETRIES - 1) {
+          throw new Error(`OSM API rate-limited for ${city.city}`);
+        }
+        await sleep(RPS_DELAY_MS * 2 ** attempt * 2);
+        continue;
+      }
+      break;
+    }
+    if (text.includes('You requested too many nodes')) {
+      radius /= 2;
+      continue;
+    }
+    if (!response.ok) {
+      throw new Error(`OSM API HTTP ${response.status} for ${city.city}`);
+    }
+    const nodes = parseOsmXml(text).filter((node) =>
+      /^(residential|primary|secondary|tertiary)$/.test(node.tags.highway ?? '')
+    );
+    if (nodes.length === 0) {
+      throw new Error(`no street nodes in ${city.city} box`);
+    }
+    return nodes;
+  }
+  return [];
+}
+
+/** S1 — sample street nodes for a city (Overpass first, OSM API fallback). */
+async function fetchStreetNodes(city, radiusKm) {
+  const overpass = await overpassStreetNodes(city, radiusKm);
+  if (overpass.length > 0) {
+    return overpass;
+  }
+  return osmApiStreetNodes(city, radiusKm);
+}
+
+function pickCandidates(nodes, city, count) {
+  const usable = nodes.filter((node) => !isLandmarkNode(node));
+  if (usable.length === 0) {
+    return [];
+  }
+  const rand = mulberry32(fnv1a(`world-peek:${city.city}:${city.region}`));
+  const picked = [];
+  const seen = new Set();
+  // Deterministic shuffle-pick without replacement (bounded tries).
+  const order = usable.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(rand() * (i + 1));
+    const swap = order[i];
+    order[i] = order[j];
+    order[j] = swap;
+  }
+  for (const index of order) {
+    if (picked.length >= count) {
+      break;
+    }
+    const node = usable[index];
+    const key = `${node.lat.toFixed(5)},${node.lon.toFixed(5)}`;
+    if (seen.has(key)) {
+      continue; // exact-coordinate duplicates never ship twice
+    }
+    seen.add(key);
+    picked.push({
+      id: `wp-${slugify(city.city)}-${String(picked.length + 1).padStart(2, '0')}`,
+      city: city.city,
+      country: city.country,
+      region: city.region,
+      lat: node.lat,
+      lon: node.lon,
+      osmName: typeof node.tags?.name === 'string' ? node.tags.name : null,
+    });
+  }
+  return picked;
+}
+
+// ---------------------------------------------------------------------------
+// S3 — Mapillary pano resolution (token-gated; ~1 rps, retry + backoff).
+
+async function mapillaryPano(lat, lon) {
+  const token = process.env.MAPILLARY_TOKEN;
+  if (!token) {
+    return { ok: false, reason: 'token-missing' };
+  }
+  const d = 0.001; // ~110 m window around the coordinate
+  const url =
+    `${MAPILLARY_GRAPH}?access_token=${encodeURIComponent(token)}` +
+    `&fields=id&bbox=${lon - d},${lat - d},${lon + d},${lat + d}&is_pano=true&limit=5`;
+  for (let attempt = 0; attempt < MAX_RETRIES; attempt += 1) {
+    try {
+      const response = await fetch(url);
+      if (response.status === 429 || response.status >= 500) {
+        if (attempt === MAX_RETRIES - 1) {
+          return { ok: false, reason: `mapillary-http-${response.status}` };
+        }
+        await sleep(RPS_DELAY_MS * 2 ** attempt);
+        continue;
+      }
+      if (!response.ok) {
+        return { ok: false, reason: `mapillary-http-${response.status}` };
+      }
+      const body = await response.json();
+      const pano = body?.data?.[0];
+      if (!pano?.id) {
+        return { ok: false, reason: 'no-pano' };
+      }
+      return { ok: true, panoId: pano.id };
+    } catch {
+      if (attempt === MAX_RETRIES - 1) {
+        return { ok: false, reason: 'mapillary-unreachable' };
+      }
+      await sleep(RPS_DELAY_MS * 2 ** attempt);
+    }
+  }
+  return { ok: false, reason: 'mapillary-unreachable' };
+}
+
+// ---------------------------------------------------------------------------
+
+function readJsonOr(path, fallback) {
+  try {
+    return JSON.parse(readFileSync(path, 'utf8'));
+  } catch {
+    return fallback;
+  }
+}
+
+async function sampleStage(full) {
+  mkdirSync(CACHE_DIR, { recursive: true });
+  const perCity = full ? FULL_TARGET_PER_CITY : SAMPLE_PER_CITY;
+  const radiusKm = full ? undefined : OSM_START_RADIUS_KM;
+  const candidates = [];
+  for (const city of CITY_SLATE) {
+    const nodes = await fetchStreetNodes(city, radiusKm ?? city.radiusKm);
+    const picked = pickCandidates(nodes, city, perCity);
+    candidates.push(...picked);
+    console.log(
+      `sampled ${picked.length}/${perCity} from ${nodes.length} street nodes in ${city.city} (${city.region})`
+    );
+    await sleep(1500); // be polite to the shared OSM quotas
+  }
+  writeFileSync(CANDIDATES_PATH, JSON.stringify(candidates, null, 2) + '\n');
+  console.log(`candidates: ${candidates.length} (${full ? 'full' : 'sample'} mode)`);
+}
+
+async function resolveStage() {
+  const candidates = readJsonOr(CANDIDATES_PATH, []);
+  if (candidates.length === 0) {
+    console.log('No candidates cached — run the sample stage first.');
+    return;
+  }
+  let resolved = 0;
+  for (const candidate of candidates) {
+    const result = await mapillaryPano(candidate.lat, candidate.lon);
+    if (result.ok) {
+      candidate.panoId = result.panoId;
+      candidate.resolved = true;
+      resolved += 1;
+    } else {
+      candidate.resolved = false;
+      candidate.unresolvedReason = result.reason;
+    }
+    await sleep(RPS_DELAY_MS); // ~1 rps pacing
+  }
+  writeFileSync(CANDIDATES_PATH, JSON.stringify(candidates, null, 2) + '\n');
+  console.log(
+    `resolve: ${resolved}/${candidates.length} (${process.env.MAPILLARY_TOKEN ? 'token present' : 'token missing'})`
+  );
+}
+
+function difficultyFor(lat, lon) {
+  return (fnv1a(`${lat.toFixed(6)}:${lon.toFixed(6)}`) % 3) + 1;
+}
+
+async function applyStage() {
+  const candidates = readJsonOr(CANDIDATES_PATH, []);
+  const resolved = candidates.filter((candidate) => candidate.resolved === true);
+  const review = { generatedAt: new Date().toISOString(), perRegion: {} };
+  for (const region of REGIONS) {
+    const rows = candidates.filter((candidate) => candidate.region === region);
+    const ok = rows.filter((row) => row.resolved);
+    review.perRegion[region] = {
+      sampled: rows.length,
+      resolved: ok.length,
+      rate: rows.length === 0 ? 0 : Math.round((ok.length / rows.length) * 1000) / 10,
+      unresolved: rows
+        .filter((row) => !row.resolved)
+        .map((row) => ({
+          id: row.id,
+          city: row.city,
+          lat: row.lat,
+          lon: row.lon,
+          reason: row.unresolvedReason ?? 'unknown',
+        })),
+    };
+    const rate = review.perRegion[region].rate;
+    if (rate < 70) {
+      console.warn(
+        `⚠ ${region}: ${rate}% pano coverage (< 70%) — ${ok.length}/${rows.length} — balance the pool or revise the slate`
+      );
+    } else {
+      console.log(`✓ ${region}: ${rate}% pano coverage (${ok.length}/${rows.length})`);
+    }
+  }
+  mkdirSync(CACHE_DIR, { recursive: true });
+  writeFileSync(REVIEW_PATH, JSON.stringify(review, null, 2) + '\n');
+
+  if (resolved.length === 0) {
+    console.log(
+      'No resolved entries — the game dataset is NOT written (nothing unresolved ships).'
+    );
+    return;
+  }
+  const entries = resolved.map((candidate) => ({
+    id: candidate.id,
+    lat: candidate.lat,
+    lon: candidate.lon,
+    region: candidate.region,
+    difficulty: difficultyFor(candidate.lat, candidate.lon),
+    panoId: candidate.panoId,
+    resolved: true,
+  }));
+  writeFileSync(DATASET_PATH, JSON.stringify(entries, null, 2) + '\n');
+  console.log(`world-peek-places.json: ${entries.length} resolved entries shipped`);
+}
+
+// ---------------------------------------------------------------------------
+
+const full = process.argv.includes('--full');
+const mode = process.argv.find((arg) => arg.startsWith('--')) ?? '--all';
+
+async function main() {
+  if (mode === '--sample' || mode === '--all') {
+    await sampleStage(full);
+  }
+  if (mode === '--resolve' || mode === '--all') {
+    await resolveStage();
+  }
+  if (mode === '--apply' || mode === '--all') {
+    await applyStage();
+  }
+  if (!['--sample', '--resolve', '--apply', '--all'].includes(mode)) {
+    console.error('Usage: node scripts/sample-world-peeks.mjs [--sample|--resolve|--apply|--full]');
+    process.exit(1);
+  }
+}
+
+main().catch((error) => {
+  console.error(
+    `world-peek pipeline failed: ${error instanceof Error ? error.message : String(error)}`
+  );
+  process.exit(1);
+});
