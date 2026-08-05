@@ -1,7 +1,7 @@
 import gamesJson from '../data/games.json';
 
 /**
- * Game catalog, single source of truth for the Trivia in Games games.
+ * Game catalog, single source of truth for the Trivia & Games games.
  * Mirrors PRD §5 slugs verbatim; consumed by the homepage grid, per-game
  * pages, and the server seed (server/prisma/seed.ts reads the same JSON).
  */

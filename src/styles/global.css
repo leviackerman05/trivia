@@ -1,4 +1,4 @@
-/* TriviaHub global styles, Tailwind CSS v4 (CSS-first config). */
+/* Trivia & Games global styles, Tailwind CSS v4 (CSS-first config). */
 /* Design system: Airbnb direction (docs/DESIGN-AIRBNB.md, owner decisions
    2026-08-05) — light-first, Rausch #ff385c primary, Inter, 8px control
    radii / 14px cards, single hover-float shadow, 2px ink focus rings.
@@ -289,18 +289,6 @@
   }
   .pb-chip-link:hover {
     box-shadow: var(--shadow-md);
-  }
-  /* World Peek simplified map (PLAN-SCOPE R5): ocean = soft surface,
-     land = raised surface + hairline stroke. Token-resolved, so the dark
-     theme inverts automatically (ink-family surfaces). */
-  .wp-map {
-    background: var(--color-surface-muted);
-  }
-  .wp-land {
-    fill: var(--color-surface-raised);
-    stroke: var(--color-border);
-    stroke-width: 1;
-    stroke-linejoin: round;
   }
   /* Custom checkbox [OWNER d5]: 24px, 8px radius, 1px border, Rausch fill
      + white checkmark, ink focus ring. */

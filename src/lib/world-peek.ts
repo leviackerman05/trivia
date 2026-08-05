@@ -274,6 +274,65 @@ export function mapPoint(lon: number, lat: number): { x: number; y: number } {
   return { x: lon + 180, y: 90 - lat };
 }
 
+export interface GeoPoint {
+  lat: number;
+  lon: number;
+}
+
+/**
+ * Great-circle interpolation (D061): n evenly spaced points along the
+ * shortest great-circle arc between two places, endpoints included. Points
+ * are returned as (lat, lon) degree pairs — the equirectangular coordinate
+ * space — and follow the true great circle via spherical interpolation
+ * (slerp on unit vectors), so a Leaflet polyline of these points reads as
+ * the geodesic. Antipodal endpoints (every arc is valid) fall back to a
+ * stable linear lat/lon interpolation.
+ */
+export function greatCirclePoints(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number,
+  n = 100
+): GeoPoint[] {
+  const count = Math.max(2, Math.floor(n));
+  const toVec = (lat: number, lon: number): [number, number, number] => {
+    const phi = (lat * Math.PI) / 180;
+    const lambda = (lon * Math.PI) / 180;
+    return [Math.cos(phi) * Math.cos(lambda), Math.cos(phi) * Math.sin(lambda), Math.sin(phi)];
+  };
+  const v1 = toVec(lat1, lon1);
+  const v2 = toVec(lat2, lon2);
+  const dot = Math.min(1, Math.max(-1, v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2]));
+  const theta = Math.acos(dot);
+  const points: GeoPoint[] = [];
+  for (let i = 0; i < count; i += 1) {
+    const t = i / (count - 1);
+    let x: number;
+    let y: number;
+    let z: number;
+    if (theta < 1e-9) {
+      [x, y, z] = v1;
+    } else if (Math.PI - theta < 1e-9) {
+      // Antipodal: every great circle works; use a stable linear fallback.
+      x = v1[0] + t * (v2[0] - v1[0]);
+      y = v1[1] + t * (v2[1] - v1[1]);
+      z = v1[2] + t * (v2[2] - v1[2]);
+    } else {
+      const s1 = Math.sin((1 - t) * theta) / Math.sin(theta);
+      const s2 = Math.sin(t * theta) / Math.sin(theta);
+      x = s1 * v1[0] + s2 * v2[0];
+      y = s1 * v1[1] + s2 * v2[1];
+      z = s1 * v1[2] + s2 * v2[2];
+    }
+    points.push({
+      lat: (Math.asin(Math.min(1, Math.max(-1, z))) * 180) / Math.PI,
+      lon: (Math.atan2(y, x) * 180) / Math.PI,
+    });
+  }
+  return points;
+}
+
 /** Convert a click/press position (fractional of the rendered box) to lon/lat. */
 export function pointToLonLat(fx: number, fy: number): { lon: number; lat: number } {
   return { lon: fx * 360 - 180, lat: 90 - fy * 180 };

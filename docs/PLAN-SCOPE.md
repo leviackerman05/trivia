@@ -1,9 +1,10 @@
 # Plan Scope: "Trivia" Program (M21–M22)
 
-> Program plan (2026-08-05; amended by CEO follow-ups #1-#3 — all
+> Program plan (2026-08-05; amended by CEO follow-ups #1-#4 — all
 > follow-up requirements are **launch-blocking** unless marked otherwise).
-> Source of truth for the owner-approved slate: rebrand to **"Trivia in
-> Games"** (CEO follow-up #3 supersedes "Trivia" and "Trivia and Games"),
+> Source of truth for the owner-approved slate: rebrand to **"Trivia &
+> Games"** (CEO follow-up #4: ampersand wordmark; supersedes "Trivia in
+> Games", "Trivia", and "Trivia and Games"),
 > real card images, family restructure, World Peek, hub restructure to 7
 > owner-curated dailies, Daily Chess, Daily Wordle, topic trivia, true
 > answer randomization, year-range filters, mobile sweep, streak-box
@@ -54,7 +55,7 @@ CEO R7 (competitor research) = plan R21 · CEO R8 (hub restructure) = plan
 R18 · CEO R9 (chess) = plan R19 · CEO R10 (Wordle) = plan R20 · CEO R11
 (GeoGuessr research) = plan R22.
 
-### R1 — Rebrand: TriviaHub → "Trivia in Games"
+### R1 — Rebrand: TriviaHub → "Trivia & Games"
 
 - **Intent:** the brand is simply "Trivia" (owner decision 2026-08-05;
   supersedes "Trivia and Games"); never "TriviaHub" in user-facing copy.

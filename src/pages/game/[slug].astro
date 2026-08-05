@@ -47,7 +47,7 @@ const jsonLd = JSON.stringify([
   {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: `${game.name} - Trivia in Games`,
+    name: `${game.name} - Trivia & Games`,
     url: gameUrl,
     description: seo.metaDescription,
     applicationCategory: 'GameApplication',
@@ -93,7 +93,7 @@ const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku';
 ---
 
 <BaseLayout
-  title={`${game.name} - Play Free Online | Trivia in Games`}
+  title={`${game.name} - Play Free Online | Trivia & Games`}
   description={seo.metaDescription}
   canonicalPath={`/game/${game.slug}`}
   ogImage={`/og/${game.slug}.png`}

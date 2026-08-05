@@ -12,18 +12,18 @@ export const globalFaqs: FaqEntry[] = [
       'Open any game, create a room, and share the 6-character room code or link. Friends join from their own devices, phones, tablets, or computers, and play starts the moment everyone is in.',
   },
   {
-    question: 'Do I need to download anything to play Trivia in Games games?',
+    question: 'Do I need to download anything to play Trivia & Games games?',
     answer:
-      'No. Every Trivia in Games game runs in your browser. No downloads, no installs, no plugins.',
+      'No. Every Trivia & Games game runs in your browser. No downloads, no installs, no plugins.',
   },
   {
-    question: 'Can I play Trivia in Games games on my phone?',
+    question: 'Can I play Trivia & Games games on my phone?',
     answer:
       'Yes. All games are fully responsive and optimized for touch, including the drawing games and voting games.',
   },
   {
-    question: 'Are Trivia in Games games free?',
-    answer: 'Yes, all 20 games are free to play. Trivia in Games is supported by advertising.',
+    question: 'Are Trivia & Games games free?',
+    answer: 'Yes, all 20 games are free to play. Trivia & Games is supported by advertising.',
   },
   {
     question: 'How many players can join a game?',
@@ -45,7 +45,7 @@ export const globalFaqs: FaqEntry[] = [
       'Voting games like Would You Rather and This or That scale to any group size. Guess Who and Trivia also shine with a full room.',
   },
   {
-    question: 'Can I play Trivia in Games games with people in different countries?',
+    question: 'Can I play Trivia & Games games with people in different countries?',
     answer:
       'Yes. As long as everyone can reach the website, distance doesn’t matter, the game runs in real time over the internet.',
   },

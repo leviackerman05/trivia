@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import placesJson from '../../data/world-peek-places.json';
 import {
+  greatCirclePoints,
   haversineKm,
   mapPoint,
   pickWorldPeekRounds,
@@ -78,6 +79,50 @@ describe('scoreGuess (1000 pts minus distance penalty, exact = bonus)', () => {
     expect(scoreGuess(1000)).toBe(WORLD_PEEK_MAX_SCORE - 100);
     expect(scoreGuess(10000)).toBe(0);
     expect(scoreGuess(50000)).toBe(0);
+  });
+});
+
+describe('greatCirclePoints (D061 great-circle interpolation)', () => {
+  it('returns n points with exact endpoints', () => {
+    // Paris -> Sydney
+    const points = greatCirclePoints(48.8566, 2.3522, -33.8688, 151.2093, 100);
+    expect(points).toHaveLength(100);
+    expect(points[0]).toEqual({ lat: 48.8566, lon: 2.3522 });
+    const last = points[points.length - 1]!;
+    expect(last.lat).toBeCloseTo(-33.8688, 5);
+    expect(last.lon).toBeCloseTo(151.2093, 5);
+  });
+
+  it('midpoint is roughly halfway along the great circle', () => {
+    const points = greatCirclePoints(48.8566, 2.3522, -33.8688, 151.2093, 101);
+    const mid = points[50]!;
+    const d1 = haversineKm(48.8566, 2.3522, mid.lat, mid.lon);
+    const d2 = haversineKm(-33.8688, 151.2093, mid.lat, mid.lon);
+    expect(Math.abs(d1 - d2)).toBeLessThan(1); // equidistant to both ends
+    const total = haversineKm(48.8566, 2.3522, -33.8688, 151.2093);
+    expect(d1).toBeCloseTo(total / 2, 0); // half the Paris-Sydney distance
+  });
+
+  it('crosses the antimeridian on the short arc, not through lon 0', () => {
+    // 179E -> 179W on the equator: the short great circle is 2° across the
+    // ±180 meridian, so every intermediate longitude stays near ±180.
+    const points = greatCirclePoints(0, 179, 0, -179, 101);
+    for (const p of points) {
+      expect(Math.abs(p.lon)).toBeGreaterThan(178);
+    }
+    expect(Math.abs(Math.abs(points[50]!.lon) - 180)).toBeLessThan(1);
+  });
+
+  it('polyline length approximates the great-circle distance', () => {
+    const points = greatCirclePoints(48.8566, 2.3522, -33.8688, 151.2093, 100);
+    let sum = 0;
+    for (let i = 1; i < points.length; i += 1) {
+      const a = points[i - 1]!;
+      const b = points[i]!;
+      sum += haversineKm(a.lat, a.lon, b.lat, b.lon);
+    }
+    const total = haversineKm(48.8566, 2.3522, -33.8688, 151.2093);
+    expect(sum).toBeCloseTo(total, 0);
   });
 });
 
