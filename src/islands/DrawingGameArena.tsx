@@ -387,7 +387,7 @@ export default function DrawingGameArena({ gameSlug }: Props) {
                 maxLength={300}
                 placeholder={drawing.view === 'drawing' ? 'Type your guess…' : 'Type a message…'}
                 aria-label={drawing.view === 'drawing' ? 'Guess' : 'Chat message'}
-                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
               />
               <button
                 type="submit"
@@ -571,7 +571,7 @@ function WordSelectView({
             key={word}
             type="button"
             onClick={() => onChoose(word)}
-            className="inline-flex min-h-16 items-center justify-center rounded-pill border border-primary bg-surface-raised px-6 py-3 text-xl font-semibold text-primary-strong transition-colors hover:bg-primary/15 focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+            className="inline-flex min-h-16 items-center justify-center rounded-pill border border-primary bg-surface-raised px-6 py-3 text-xl font-semibold text-primary-strong transition-colors hover:bg-primary/15"
           >
             {word}
           </button>
@@ -813,7 +813,7 @@ function CustomWordsBlock({
         maxLength={4000}
         placeholder={'pizza\nastronaut\nbanana'}
         aria-label="Custom word list"
-        className="mt-3 w-full rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+        className="mt-3 w-full rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
       />
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <button

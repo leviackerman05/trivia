@@ -58,6 +58,32 @@ content authoring (690 entries) parallel, registry/surface last.
 > (diff-review gate). `src/components/DrawingCanvas.tsx` is a game
 > component and is reused read-only.
 
+**Airbnb direction restyle (branch `design-airbnb`, 2026-08-05)** — owner-
+approved: replace the Cloudflare Cloud Identity system (dark-first orange)
+with the light-first Airbnb direction per `docs/DESIGN-AIRBNB.md`
+(decisions 1–12 confirmed, no re-litigation). Token-layer rewrite +
+component-style updates only — zero layout/markup restructuring, zero game-
+logic change.
+
+> ✅ **Implemented:** `src/styles/global.css` rewritten light-first (Rausch
+> `#ff385c` primary, ink `#222222`, hairlines `#dddddd`/`#ebebeb`, Airbnb
+> type scale 28/22/21/20 mapped onto h1–h4, radii ladder, single elevation
+> tier, 2px ink focus ring 16:1 light / inverted dark, 50% scrim, status
+> colors carried over per decision 6, provenance comment per token). Dark
+> theme kept as an optional `.dark` toggle, restyled on the same Airbnb
+> tokens (ink `#222222` surfaces, white text, Rausch accents). UI kit swept
+> (Button Rausch 8px + ink-outline secondary, Badge/Chip pills, Card flat +
+> hover-float, Input 2px ink focus no glow, Dialog 50% scrim, StatCard /
+> PlayerCard / CategoryCard / LeaderboardTable type scale). Focus-ring sweep
+> (emerald ring → ink) across all islands; SoloShell results score mapped to
+> the 64/700 rating-display token; theme-color + manifest → `#ff385c`.
+> Gates: `pnpm verify` green (format, lint, typecheck, 187 client + 190
+> server tests, build 42 pages, smoke incl. page-weight + bundle budgets).
+> One-off axe scan (local, CI untouched): `/game/trivia` 0 violations,
+> `/daily` 1, `/` 2 — all remaining are the white-on-`#ff385c` CTA labels
+> (3.52:1, owner decision 1 verbatim; see DESIGN-AIRBNB status section).
+> Preview URL via Cloudflare Pages git integration on the pushed branch.
+
 > ✅ **QA gate verified (2026-08-05):** full `pnpm verify` green — format,
 > lint, typecheck, 187 client + 190 server tests, both builds (42 pages),
 > smoke with page-weight + bundle budgets (homepage 94.5 KB, `/daily/drawing`

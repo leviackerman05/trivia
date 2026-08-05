@@ -55,26 +55,24 @@ const footerLinks = [
       jsonLd={jsonLd}
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- Theme (dark-first per the Cloudflare design system): apply before
-         paint (no FOUC); localStorage overrides the default; the header
-         toggle calls window.__pbTheme(). -->
+    <!-- Theme (light-first per the Airbnb direction, OWNER d2): the dark
+         theme is an explicit .dark class; localStorage overrides the
+         default; the header toggle calls window.__pbTheme(). -->
     <script is:inline>
       (function () {
         try {
           const stored = localStorage.getItem('pb-theme');
-          const light =
-            stored === 'light' ||
-            (!stored && window.matchMedia('(prefers-color-scheme: light)').matches);
-          document.documentElement.classList.toggle('light', light);
+          const dark = stored === 'dark';
+          document.documentElement.classList.toggle('dark', dark);
         } catch {
-          /* storage blocked, dark default */
+          /* storage blocked, light default */
         }
         window.__pbTheme = function () {
           const html = document.documentElement;
-          const next = html.classList.contains('light');
-          html.classList.toggle('light', !next);
+          const next = html.classList.contains('dark');
+          html.classList.toggle('dark', !next);
           try {
-            localStorage.setItem('pb-theme', next ? 'dark' : 'light');
+            localStorage.setItem('pb-theme', next ? 'light' : 'dark');
           } catch {
             /* storage blocked, session-only toggle */
           }
@@ -96,7 +94,7 @@ const footerLinks = [
       >
         <a href="/" class="flex items-center gap-2 text-lg font-extrabold tracking-tight text-ink">
           <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
-          Trivia<span class="text-primary">Hub</span>
+          Trivia<span class="text-primary-deep">Hub</span>
         </a>
         <ul class="hidden items-center gap-1 lg:flex">
           {
@@ -116,11 +114,11 @@ const footerLinks = [
         <button
           type="button"
           onclick="window.__pbTheme && window.__pbTheme()"
-          aria-label="Toggle dark mode"
+          aria-label="Toggle theme"
           class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-surface-muted text-base transition-colors hover:border-primary/50"
         >
-          <span class="light:hidden" aria-hidden="true">☀️</span>
-          <span class="hidden light:inline" aria-hidden="true">🌙</span>
+          <span class="dark:hidden" aria-hidden="true">🌙</span>
+          <span class="hidden dark:inline" aria-hidden="true">☀️</span>
         </button>
       </nav>
     </header>
@@ -129,7 +127,8 @@ const footerLinks = [
       id="main-content"
       class:list={[
         'mx-auto w-full flex-1 px-4 pb-24 pt-6 md:pb-12 md:pt-10',
-        wide ? 'max-w-7xl' : 'max-w-6xl',
+        // [AIRBNB d9] ~1280px content cap site-wide (was 1152 editorial).
+        wide ? 'max-w-7xl' : 'max-w-7xl',
       ]}
     >
       <slot />
@@ -168,7 +167,7 @@ const footerLinks = [
               <a
                 href={tab.href}
                 aria-current={activeNav === tab.key ? 'page' : undefined}
-                class="flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-medium text-ink-muted transition-colors aria-current:text-primary"
+                class="flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-medium text-ink-muted transition-colors aria-current:text-primary-deep"
               >
                 <span aria-hidden="true" class="text-base">
                   {tab.emoji}

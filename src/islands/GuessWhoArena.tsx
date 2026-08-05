@@ -123,7 +123,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
                 maxLength={140}
                 placeholder="Are they alive? Are they an actor?"
                 aria-label="Yes/no question"
-                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
               />
               <button
                 type="submit"
@@ -140,7 +140,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
                 maxLength={60}
                 placeholder="Guess the name…"
                 aria-label="Celebrity guess"
-                className="min-w-0 flex-1 rounded-md border  border-primary/50 bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-primary focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+                className="min-w-0 flex-1 rounded-md border  border-primary/50 bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-primary focus:ring-2 focus:ring-ink"
               />
               <button
                 type="submit"

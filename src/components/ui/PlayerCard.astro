@@ -54,7 +54,7 @@ const roleTones: Record<NonNullable<Props['role']>, string> = {
   </span>
   <span class="flex shrink-0 items-center gap-2">
     {typeof score === 'number' && <span class="font-mono font-semibold text-ink">{score}</span>}
-    <span class={`rounded-pill px-2.5 py-0.5 text-xs font-semibold ${roleTones[role]}`}>
+    <span class={`rounded-pill px-2.5 py-0.5 text-badge ${roleTones[role]}`}>
       {roleLabels[role]}
     </span>
   </span>

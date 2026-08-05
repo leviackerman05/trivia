@@ -122,6 +122,7 @@ export default function DailyHubStatus() {
           {weekDays.map((day) => (
             <span
               key={day}
+              role="img"
               title={day}
               aria-label={`${day}: ${runDays.has(day) ? 'played' : 'not played'}`}
               className={`h-3 w-3 rounded-full ${
@@ -184,6 +185,7 @@ export default function DailyHubStatus() {
           return (
             <span
               key={day}
+              role="img"
               title={day}
               aria-label={`${day}: ${playedThatDay ? 'played' : 'not played'}`}
               className={`h-3 w-3 rounded-full ${

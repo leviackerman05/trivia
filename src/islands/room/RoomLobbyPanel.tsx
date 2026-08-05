@@ -133,7 +133,7 @@ export default function RoomLobbyPanel({
                 onChange={(event) => setNickname(event.target.value)}
                 maxLength={20}
                 placeholder="e.g. PartyPanda"
-                className="rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+                className="rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
               />
             </label>
             <button
@@ -167,7 +167,7 @@ export default function RoomLobbyPanel({
                 placeholder="ABC123"
                 maxLength={6}
                 aria-label="Room code"
-                className="rounded-md border border-border bg-surface-raised px-4 py-3 font-mono text-lg uppercase tracking-[0.3em] text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+                className="rounded-md border border-border bg-surface-raised px-4 py-3 font-mono text-lg uppercase tracking-[0.3em] text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
               />
             </label>
             <label className="flex flex-col gap-1.5">
@@ -177,7 +177,7 @@ export default function RoomLobbyPanel({
                 onChange={(event) => setNickname(event.target.value)}
                 maxLength={20}
                 placeholder="e.g. PartyPanda"
-                className="rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+                className="rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
               />
             </label>
             <button
@@ -334,7 +334,7 @@ export default function RoomLobbyPanel({
               maxLength={300}
               placeholder="Type a message…"
               aria-label="Chat message"
-              className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+              className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
             />
             <button
               type="submit"
