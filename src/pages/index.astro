@@ -67,7 +67,7 @@ const jsonLd = JSON.stringify({
         All daily games →
       </a>
     </div>
-    <ul class="grid gap-4 sm:gap-6 sm:grid-cols-2">
+    <ul class="grid gap-4 sm:gap-6 sm:grid-cols-3">
       {
         liveDaily.slice(0, 3).map((game) => (
           <li>
@@ -243,7 +243,8 @@ const jsonLd = JSON.stringify({
       >, swap genres in{' '}
       <a href="/game/genre-swap" class="font-semibold text-primary-strong underline">Genre Swap</a>,
       and test their geography instincts in{' '}
-      <a href="/game/world-peek" class="font-semibold text-primary-strong underline">World Peek</a>.
+      <a href="/game/placeguessr" class="font-semibold text-primary-strong underline">Placeguessr</a
+      >.
     </p>
     <p class="max-w-3xl text-body text-ink-muted">
       Every multiplayer game uses a simple room system: create a room, share the code or link, and

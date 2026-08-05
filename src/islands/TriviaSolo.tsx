@@ -31,7 +31,16 @@ interface QuestionResult {
 
 export default function TriviaSolo() {
   const [phase, setPhase] = useState<Phase>('setup');
-  const [nickname, setNickname] = useState(() => readNickname());
+  // Empty on purpose during SSR AND the first client render: readNickname()
+  // can't see localStorage server-side, so initializing with the stored
+  // name caused a hydration mismatch (the SSR-rendered Start button stayed
+  // disabled even after the client filled the input). The mount effect
+  // below hydrates the saved name after the tree is attached.
+  const [nickname, setNickname] = useState('');
+
+  useEffect(() => {
+    setNickname(readNickname());
+  }, []);
   const [dateKey, setDateKey] = useState('');
   /** Server-seeded daily questions (M8); falls back to local selection. */
   const [dailyQuestions, setDailyQuestions] = useState<TriviaQuestion[] | null>(null);

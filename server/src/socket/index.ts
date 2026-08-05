@@ -61,10 +61,22 @@ import {
 } from '../engine/charades-engine.js';
 import {
   GuessWhoSession,
-  GUESS_WHO_MAX_QUESTIONS,
+  GUESS_WHO_HINT_1_MS,
+  GUESS_WHO_HINT_2_MS,
+  GUESS_WHO_ROUND_MS,
+  GUESS_WHO_TOTAL_ROUNDS,
   type Celebrity,
   type GuessWhoSession as GuessWhoGameSession,
 } from '../engine/guess-who-engine.js';
+import {
+  buildGuessWhoDeck,
+  GUESS_WHO_DEFAULT_FILTER,
+  GUESS_WHO_GENRES,
+  GUESS_WHO_REGIONS,
+  toWireClue,
+  type GuessWhoFilter,
+} from '../lib/guess-who-deck.js';
+import { hashString } from '../lib/random.js';
 import { PLAYABLE_ROOM_GAMES } from '../lib/game-registry.js';
 import { shuffleTriviaDeck } from '../lib/trivia-options.js';
 
@@ -86,6 +98,8 @@ import type { CharadesMovie } from '../engine/charades-engine.js';
 export interface SocketGatewayDeps {
   engine: RoomEngine;
   limiters: Limiters;
+  /** D064: injectable celebrity pool for tests; production uses celebrities.json. */
+  celebrities?: Celebrity[];
 }
 
 interface Ack {
@@ -114,6 +128,9 @@ interface RoomTimers {
   statementEnd?: NodeJS.Timeout;
   questionEnd?: NodeJS.Timeout;
   actingEnd?: NodeJS.Timeout;
+  guessWhoHint1?: NodeJS.Timeout;
+  guessWhoHint2?: NodeJS.Timeout;
+  guessWhoRoundEnd?: NodeJS.Timeout;
 }
 
 /** A live game session: drawing, Copycat, voting, Trivia, Charades, Guess Who. */
@@ -261,6 +278,9 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     cors: { origin: resolveCorsOrigin() },
   });
 
+  /** D064: the celebrity pool the Guess Who deck builder draws from. */
+  const celebrityPool = deps.celebrities ?? (celebritiesJson as Celebrity[]);
+
   /** roomCode → live game session (drawing games + copycat + voting). */
   const sessions = new Map<string, GameSession>();
   const timers = new Map<string, RoomTimers>();
@@ -272,8 +292,17 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
   const pendingTriviaModes = new Map<string, TriviaMode>();
   /** Host-chosen Charades category, applied when the game starts. */
   const pendingCharadesCategories = new Map<string, CharadesCategory>();
+  /** D064, host-chosen Guess Who region+genre filter, applied at start. */
+  const pendingGuessWhoFilters = new Map<string, GuessWhoFilter>();
+  /** D064, per-room game serial for the deck seed (architect fix 3): read +
+   * incremented at startGuessWho, deleted ONLY at room teardown — never in
+   * clearRoomGame (which runs on every start). Room codes are not reused,
+   * so a fresh room starts at serial 1 by construction. */
+  const guessWhoGameSerials = new Map<string, number>();
   /** Voting phase deadlines (ms epoch) so resync can rebuild client timers. */
   const votingDeadlines = new Map<string, number>();
+  /** Owner redesign: guess-who round deadline (ms epoch) for resync. */
+  const guessWhoDeadlines = new Map<string, number>();
   /** M13, Copycat: players whose image finished loading (reveal waits). */
   const copycatLoaded = new Map<string, Set<string>>();
   /** M13, Copycat: the post-load 10s timer is scheduled once per reveal. */
@@ -329,7 +358,11 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     pendingPrompts.delete(roomCode);
     pendingTriviaModes.delete(roomCode);
     pendingCharadesCategories.delete(roomCode);
+    pendingGuessWhoFilters.delete(roomCode);
+    // D064: guessWhoGameSerials deliberately NOT cleared here (architect
+    // fix 3) — it must survive restarts so rematches re-deal.
     votingDeadlines.delete(roomCode);
+    guessWhoDeadlines.delete(roomCode);
     copycatLoaded.delete(roomCode);
     copycatPostLoadScheduled.delete(roomCode);
     pendingVotingOptions.delete(roomCode);
@@ -376,6 +409,30 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
 
   function isGuessWhoRoom(room: RoomState): boolean {
     return room.gameId === 'guess-who';
+  }
+
+  /** D064: pool counts for the lobby chips (the "hide empty cells"
+   * contract) — legacy rows count as 'row', matching the deck builder. */
+  function emitGuessWhoFilterOptions(room: RoomState): void {
+    const regionCounts = new Map<string, number>();
+    const genreCounts = new Map<string, number>();
+    for (const entry of celebrityPool) {
+      const region = entry.region ?? 'row';
+      regionCounts.set(region, (regionCounts.get(region) ?? 0) + 1);
+      if (entry.genre) {
+        genreCounts.set(entry.genre, (genreCounts.get(entry.genre) ?? 0) + 1);
+      }
+    }
+    io.to(room.code).emit(ServerEvents.guessWhoFilterOptions, {
+      regions: [
+        { value: 'all', count: celebrityPool.length },
+        ...GUESS_WHO_REGIONS.map((value) => ({ value, count: regionCounts.get(value) ?? 0 })),
+      ],
+      genres: [
+        { value: 'all', count: celebrityPool.length },
+        ...GUESS_WHO_GENRES.map((value) => ({ value, count: genreCounts.get(value) ?? 0 })),
+      ],
+    });
   }
 
   function isTriviaRoom(room: RoomState): boolean {
@@ -696,32 +753,18 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       };
     }
     if (session instanceof GuessWhoSession) {
-      const isAnswerer = session.answerer === requesterName;
       return {
         view: session.phaseValue,
         kind: 'guess-who',
-        answerer: session.answerer,
         round: session.currentRound,
         totalRounds: session.totalRoundsValue,
-        questionCount: session.questionCount,
-        maxQuestions: session.maxQuestions,
-        questions: session.questionLog,
-        winner: session.winnerValue,
         scores: session.scoreTable,
-        // The secret celebrity (with facts) only goes to the answerer's device.
-        celebrity: isAnswerer
-          ? {
-              name: session.secretCelebrity?.name ?? null,
-              gender: session.secretCelebrity?.gender ?? null,
-              alive: session.secretCelebrity?.alive ?? null,
-              profession: session.secretCelebrity?.profession ?? null,
-              nationality: session.secretCelebrity?.nationality ?? null,
-              ageRange: session.secretCelebrity?.ageRange ?? null,
-              hairColor: session.secretCelebrity?.hairColor ?? null,
-              famousFor: session.secretCelebrity?.famousFor ?? null,
-              facts: session.secretCelebrity?.facts ?? [],
-            }
-          : null,
+        winner: session.winnerValue,
+        // Owner redesign: the traits + facts go to EVERYONE (the name is
+        // server-only during questioning; the pattern reveals it slowly).
+        clue: toWireClue(session.secretCelebrity),
+        namePattern: session.namePatternAt(Date.now()),
+        endsAt: guessWhoDeadlines.get(room.code) ?? null,
       };
     }
     const hints = session.letterHintsAt(Date.now());
@@ -1306,66 +1349,120 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     logger.info({ roomCode: room.code, score }, 'charades finished');
   }
 
-  function startGuessWho(room: RoomState): boolean {
+  /** D064: start one Guess Who game with a deterministic deck. Returns the
+   * applied filter (all/all after the defensive fallback), or null when the
+   * start failed. The serial survives clearRoomGame — rematches re-deal. */
+  function startGuessWho(room: RoomState): GuessWhoFilter | null {
+    // Capture the host-chosen filter BEFORE clearing the room game state.
+    const filter = pendingGuessWhoFilters.get(room.code) ?? GUESS_WHO_DEFAULT_FILTER;
+    const serial = (guessWhoGameSerials.get(room.code) ?? 0) + 1;
+    guessWhoGameSerials.set(room.code, serial);
+    const seed = hashString(`${room.code}:${serial}`);
+    let appliedFilter = filter;
+    let deck = buildGuessWhoDeck(celebrityPool, filter, GUESS_WHO_TOTAL_ROUNDS, seed);
+    if (deck.length < GUESS_WHO_TOTAL_ROUNDS) {
+      // Defensive fallback (§3.4): a race between the lobby counts and the
+      // start can't fail the game — rebuild from the full pool.
+      appliedFilter = GUESS_WHO_DEFAULT_FILTER;
+      deck = buildGuessWhoDeck(celebrityPool, appliedFilter, GUESS_WHO_TOTAL_ROUNDS, seed);
+      logger.warn(
+        { roomCode: room.code, filter, deckSize: deck.length },
+        'guess-who filter yielded fewer than 5 — fell back to all/all'
+      );
+    }
     clearRoomGame(room.code);
-    const session = new GuessWhoSession(celebritiesJson as Celebrity[]);
+    const session = new GuessWhoSession(deck, { pickMode: 'sequential' });
     const players = [...room.players.values()]
       .filter((player) => player.connected)
       .map((player) => player.name);
-    const host = [...room.players.values()].find((player) => player.isHost && player.connected);
-    const answerer = host?.name ?? players[0] ?? '';
-    const started = session.start(players, answerer);
+    const started = session.start(players);
     if (!started.ok) {
-      return false;
+      return null;
     }
     sessions.set(room.code, session);
     const engineResult = engine.transition(room, 'in-progress');
     if (!engineResult.ok) {
-      return false;
+      return null;
     }
     emitGuessWhoRoundStart(room);
     broadcastState(room);
-    logger.info({ roomCode: room.code, answerer }, 'guess-who started');
-    return true;
+    scheduleGuessWhoRoundTimers(room);
+    logger.info({ roomCode: room.code, serial, filter: appliedFilter }, 'guess-who started');
+    return appliedFilter;
   }
 
-  /** Round-start for guess-who: the secret celebrity (with M17 facts) is
-   * answerer-only (D023); everyone else gets the base payload. */
+  /** Round-start for guess-who (owner redesign): the celebrity's traits + facts
+   * go to EVERYONE — the name never leaves the server during questioning
+   * (not even to the host). The name hint is a Skribbl-style pattern. */
   function emitGuessWhoRoundStart(room: RoomState): void {
     const session = guessWhoOf(room);
     if (!session || !session.secretCelebrity) {
       return;
     }
-    const answerer = session.answerer ?? '';
-    const answererId = roomActorSocketId(room, answerer);
-    const base = {
+    io.to(room.code).emit(ServerEvents.roundStart, {
       kind: 'guess-who',
       phase: 'questioning',
-      answerer,
       round: session.currentRound,
       totalRounds: session.totalRoundsValue,
-      questionCount: 0,
-      maxQuestions: GUESS_WHO_MAX_QUESTIONS,
       scores: session.scoreTable,
-    };
-    if (answererId) {
-      io.to(room.code).except(answererId).emit(ServerEvents.roundStart, base);
-      io.to(answererId).emit(ServerEvents.roundStart, {
-        ...base,
-        celebrity: session.secretCelebrity,
-      });
-    } else {
-      io.to(room.code).emit(ServerEvents.roundStart, base);
-    }
+      clue: toWireClue(session.secretCelebrity),
+      namePattern: session.namePatternAt(Date.now()),
+      endsAt: Date.now() + GUESS_WHO_ROUND_MS,
+    });
+    guessWhoDeadlines.set(room.code, Date.now() + GUESS_WHO_ROUND_MS);
   }
 
-  /** M17, a correct guess (or the question cap) reveals the celebrity and
-   * facts to everyone; the host then advances via guess-who-next. */
+  /** Round timer + Skribbl-style letter reveals (owner redesign). */
+  function scheduleGuessWhoRoundTimers(room: RoomState): void {
+    const session = guessWhoOf(room);
+    if (!session || session.phaseValue !== 'questioning') {
+      return;
+    }
+    clearTimers(room.code);
+    const roomTimers: RoomTimers = {
+      guessWhoHint1: setTimeout(() => {
+        const current = guessWhoOf(room);
+        if (!current || current.phaseValue !== 'questioning') {
+          return;
+        }
+        io.to(room.code).emit(ServerEvents.roundHint, {
+          round: current.currentRound,
+          pattern: current.namePatternAt(Date.now()),
+        });
+      }, GUESS_WHO_HINT_1_MS),
+      guessWhoHint2: setTimeout(() => {
+        const current = guessWhoOf(room);
+        if (!current || current.phaseValue !== 'questioning') {
+          return;
+        }
+        io.to(room.code).emit(ServerEvents.roundHint, {
+          round: current.currentRound,
+          pattern: current.namePatternAt(Date.now()),
+        });
+      }, GUESS_WHO_HINT_2_MS),
+      guessWhoRoundEnd: setTimeout(() => {
+        const current = guessWhoOf(room);
+        if (!current || current.phaseValue !== 'questioning') {
+          return;
+        }
+        const timedOut = current.revealOnTimeout();
+        if (timedOut.ok) {
+          revealGuessWho(room, timedOut.value.finished);
+        }
+      }, GUESS_WHO_ROUND_MS),
+    };
+    timers.set(room.code, roomTimers);
+  }
+
+  /** M17/owner redesign, a correct guess or the round timeout reveals the
+   * celebrity and facts to everyone; the host then advances via
+   * guess-who-next. */
   function revealGuessWho(room: RoomState, finished: boolean): void {
     const session = guessWhoOf(room);
     if (!session) {
       return;
     }
+    clearTimers(room.code);
     const celebrity = session.secretCelebrity;
     io.to(room.code).emit(ServerEvents.guessReveal, {
       kind: 'guess-who',
@@ -1399,6 +1496,7 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     }
     emitGuessWhoRoundStart(room);
     broadcastState(room);
+    scheduleGuessWhoRoundTimers(room);
   }
 
   function finishGuessWho(room: RoomState): void {
@@ -1495,6 +1593,11 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       }
 
       broadcastState(room);
+      // D064: idempotent lobby counts for Guess Who rooms (host join at
+      // creation included — there is no separate room-created emit).
+      if (isGuessWhoRoom(room)) {
+        emitGuessWhoFilterOptions(room);
+      }
       io.to(room.code).emit(rejoined ? ServerEvents.playerReconnected : ServerEvents.playerJoined, {
         playerName: player.name,
       });
@@ -1527,6 +1630,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
 
       if (result.value.becameEmpty) {
         clearRoomGame(room.code);
+        // D064: the serial dies with the room (teardown-only lifecycle).
+        guessWhoGameSerials.delete(room.code);
         scheduleEviction();
         logger.info({ roomCode: room.code }, 'room empty, eviction scheduled');
       } else {
@@ -1566,6 +1671,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       broadcastState(result.value);
       logger.info({ roomCode: result.value.code }, 'game started');
 
+      // D064: echoed in the start ack so the lobby/round header can show it.
+      let guessWhoAppliedFilter: GuessWhoFilter | null = null;
       if (isCopycatRoom(result.value)) {
         if (!startCopycat(result.value)) {
           ack?.({ ok: false, error: 'NOT_ENOUGH_PLAYERS' });
@@ -1587,10 +1694,12 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
           return;
         }
       } else if (isGuessWhoRoom(result.value)) {
-        if (!startGuessWho(result.value)) {
+        const appliedFilter = startGuessWho(result.value);
+        if (!appliedFilter) {
           ack?.({ ok: false, error: 'NOT_ENOUGH_PLAYERS' });
           return;
         }
+        guessWhoAppliedFilter = appliedFilter;
       } else if (DRAWING_CONFIGS[result.value.gameId]) {
         // Capture host settings BEFORE clearing the room game state.
         const pending = pendingCustomWords.get(result.value.code);
@@ -1630,7 +1739,11 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
           beginDrawing(result.value);
         }
       }
-      ack?.({ ok: true, state: engine.toPublicState(result.value) });
+      ack?.({
+        ok: true,
+        state: engine.toPublicState(result.value),
+        ...(guessWhoAppliedFilter ? { filter: guessWhoAppliedFilter } : {}),
+      });
     });
 
     // --- Shared-canvas drawing game events (M4/M5) ---------------------------
@@ -2358,7 +2471,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true });
     });
 
-    /** M8/M9, answer-question: Trivia option picks + Guess Who yes/no. */
+    /** M8, Trivia: option picks. (Guess Who's yes/no answerer role was
+     * removed in the owner redesign — nobody holds the secret name.) */
     socket.on(ClientEvents.answerQuestion, (payload: unknown, ack?: Ack) => {
       const room = roomOf(socket);
       if (!room) {
@@ -2368,39 +2482,6 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       const player = room.players.get(socket.id);
       if (!player) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
-        return;
-      }
-
-      // M9, Guess Who: the answerer answers the latest question (yes/no).
-      if (isGuessWhoRoom(room)) {
-        const gw = guessWhoOf(room);
-        if (!gw) {
-          ack?.({ ok: false, error: 'NOT_STARTED' });
-          return;
-        }
-        const yes = (payload as { yes?: unknown }).yes;
-        if (typeof yes !== 'boolean') {
-          ack?.({ ok: false, error: 'INVALID_PAYLOAD', message: 'yes must be a boolean' });
-          return;
-        }
-        const answered = gw.answerQuestion(player.name, yes);
-        if (!answered.ok) {
-          ack?.({ ok: false, error: answered.error });
-          return;
-        }
-        io.to(room.code).emit(ServerEvents.roundReveal, {
-          kind: 'guess-who',
-          questions: gw.questionLog,
-          questionCount: gw.questionCount,
-          maxQuestions: gw.maxQuestions,
-          finished: answered.value.finished,
-        });
-        // M17, the 20-question cap reveals the celebrity + facts (no
-        // winner) on ANY round; the host then advances the game.
-        if (gw.phaseValue === 'revealed') {
-          revealGuessWho(room, gw.currentRound >= gw.totalRoundsValue);
-        }
-        ack?.({ ok: true });
         return;
       }
 
@@ -2437,51 +2518,10 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true, points: answered.value.points, correct: answered.value.correct });
     });
 
-    /** M9, Guess Who: ask a yes/no question about the secret celebrity. */
-    socket.on(ClientEvents.askQuestion, (payload: unknown, ack?: Ack) => {
-      const room = roomOf(socket);
-      if (!room || !isGuessWhoRoom(room)) {
-        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
-        return;
-      }
-      const player = room.players.get(socket.id);
-      if (!player) {
-        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
-        return;
-      }
-      const session = guessWhoOf(room);
-      if (!session) {
-        ack?.({ ok: false, error: 'NOT_STARTED' });
-        return;
-      }
-      const text = (payload as { text?: unknown }).text;
-      if (typeof text !== 'string' || text.trim().length < 3 || text.trim().length > 140) {
-        ack?.({
-          ok: false,
-          error: 'INVALID_PAYLOAD',
-          message: 'question must be 3-140 characters',
-        });
-        return;
-      }
-      const asked = session.askQuestion(player.name, text);
-      if (!asked.ok) {
-        ack?.({ ok: false, error: asked.error });
-        return;
-      }
-      io.to(room.code).emit(ServerEvents.chatMessage, {
-        kind: 'message',
-        playerName: player.name,
-        message: `Q${asked.value.number}: ${text.trim()}`,
-        at: Date.now(),
-      });
-      io.to(room.code).emit(ServerEvents.roundReveal, {
-        kind: 'guess-who',
-        questions: session.questionLog,
-        questionCount: session.questionCount,
-        maxQuestions: session.maxQuestions,
-        finished: false,
-      });
-      ack?.({ ok: true });
+    /** M9, Guess Who: the yes/no question system was removed in the owner
+     * redesign (the name is hidden from everyone; letters reveal instead). */
+    socket.on(ClientEvents.askQuestion, (_payload: unknown, ack?: Ack) => {
+      ack?.({ ok: false, error: 'NOT_IN_ROOM' });
     });
 
     /** M17, Guess Who: the host advances after a reveal (next round or
@@ -2566,6 +2606,46 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       ack?.({ ok: true });
     });
 
+    /** D064, Guess Who: host picks the region+genre filter in the lobby;
+     * applied (with the deterministic deck) when the game starts. */
+    socket.on(ClientEvents.setGuessWhoFilter, (payload: unknown, ack?: Ack) => {
+      const room = roomOf(socket);
+      if (!room || !isGuessWhoRoom(room)) {
+        ack?.({ ok: false, error: 'NOT_IN_ROOM' });
+        return;
+      }
+      const player = room.players.get(socket.id);
+      if (!player?.isHost) {
+        ack?.({ ok: false, error: 'NOT_HOST' });
+        return;
+      }
+      if (room.phase !== 'lobby') {
+        ack?.({ ok: false, error: 'INVALID_PHASE' });
+        return;
+      }
+      const region = (payload as { region?: unknown }).region;
+      const genre = (payload as { genre?: unknown }).genre;
+      const regionOk =
+        region === 'all' ||
+        (typeof region === 'string' && (GUESS_WHO_REGIONS as readonly string[]).includes(region));
+      const genreOk =
+        genre === 'all' ||
+        (typeof genre === 'string' && (GUESS_WHO_GENRES as readonly string[]).includes(genre));
+      if (!regionOk || !genreOk) {
+        ack?.({
+          ok: false,
+          error: 'INVALID_PAYLOAD',
+          message: 'region must be all|bollywood|hollywood|row and genre a known value',
+        });
+        return;
+      }
+      pendingGuessWhoFilters.set(room.code, {
+        region: region as GuessWhoFilter['region'],
+        genre: genre as GuessWhoFilter['genre'],
+      });
+      ack?.({ ok: true });
+    });
+
     socket.on(ClientEvents.gameResync, (payload: unknown, ack?: Ack) => {
       const input = validateRoomCodeInput(payload);
       if (!input.ok) {
@@ -2635,6 +2715,8 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
         }
         if (room.players.size === 0) {
           clearRoomGame(room.code);
+          // D064: teardown-only serial lifecycle (architect fix 3).
+          guessWhoGameSerials.delete(room.code);
           scheduleEviction();
         }
       }

@@ -1,13 +1,14 @@
 import { randomInt } from 'node:crypto';
 
 /**
- * Guess Who? Celebrity Edition session engine (M9/M17, PRD §5.17).
- * transport-agnostic. The answerer (rotating each round) holds a secret
- * celebrity with trait objects; everyone else asks yes/no questions (the
- * ANSWERER judges, the traits help), sees the question log, and can guess
- * the name at any time. A correct guess scores +1 and reveals the celebrity
- * WITH fun facts (M17); the host advances to the next round. 5 rounds, then
- * the highest scorer wins. 20-question cap per round → reveal.
+ * Guess Who? Celebrity Edition session engine (M9/M17, PRD §5.17, owner
+ * redesign 2026-08-06): NOBODY holds the secret name — not even the host.
+ * Every player sees the celebrity's traits + facts, a 60s round timer runs,
+ * letters of the name reveal progressively (Skribbl-style), and anyone can
+ * guess the name (the server verifies). A correct guess scores +1 and
+ * reveals the celebrity WITH fun facts (M17); the host advances to the next
+ * round. 5 rounds, then the highest scorer wins. Timeout → reveal without a
+ * winner.
  *
  * Phases: idle → questioning → revealed → … → game-end.
  */
@@ -15,16 +16,28 @@ import { randomInt } from 'node:crypto';
 export type GuessWhoPhase = 'idle' | 'questioning' | 'revealed' | 'game-end';
 
 export type GuessWhoError =
-  | 'NOT_STARTED'
-  | 'ALREADY_STARTED'
-  | 'NOT_PLAYER'
-  | 'WRONG_PHASE'
-  | 'NOT_ANSWERER'
-  | 'QUESTION_LIMIT'
-  | 'INVALID_INPUT';
+  'NOT_STARTED' | 'ALREADY_STARTED' | 'NOT_PLAYER' | 'WRONG_PHASE' | 'INVALID_INPUT';
 
 export type GuessWhoResult<T = unknown> =
   { ok: true; value: T } | { ok: false; error: GuessWhoError };
+
+/** D064 (GUESS-WHO-DESIGN §2): market of fame, NOT nationality. */
+export type CelebrityRegion = 'bollywood' | 'hollywood' | 'row';
+
+/** D064 (GUESS-WHO-DESIGN §2): primary fame domain, exactly one (closed 12). */
+export type CelebrityGenre =
+  | 'music'
+  | 'cinema'
+  | 'television'
+  | 'sports'
+  | 'politics'
+  | 'business'
+  | 'science'
+  | 'technology'
+  | 'literature'
+  | 'internet'
+  | 'art-fashion'
+  | 'royalty';
 
 export interface Celebrity {
   name: string;
@@ -37,69 +50,64 @@ export interface Celebrity {
   famousFor: string;
   /** M17, fun facts revealed after the round (more movies, awards, trivia). */
   facts: string[];
+  /** D064, server-internal balance metadata (never sent to players). Optional
+   * until the L12 backfill lands; the deck builder treats missing region as
+   * 'row' and missing difficulty as tier 1. */
+  region?: CelebrityRegion;
+  genre?: CelebrityGenre;
+  difficulty?: 1 | 2 | 3;
 }
 
-export interface QuestionEntry {
-  playerName: string;
-  question: string;
-  answer: boolean | null; // null until the answerer responds
-  at: number;
-}
-
-export const GUESS_WHO_MAX_QUESTIONS = 20;
 export const GUESS_WHO_TOTAL_ROUNDS = 5;
+/** Owner redesign: one timed round per celebrity, Skribbl-style. */
+export const GUESS_WHO_ROUND_MS = 60_000;
+/** Letter reveal schedule: first letters of each word now, then more of the
+ * name at these round offsets (monotonic — letters never un-reveal). */
+export const GUESS_WHO_HINT_1_MS = 20_000;
+export const GUESS_WHO_HINT_2_MS = 40_000;
+export const GUESS_WHO_REVEAL_LETTERS_1 = 0.4;
+export const GUESS_WHO_REVEAL_LETTERS_2 = 0.7;
 
 export class GuessWhoSession {
   private readonly celebrities: Celebrity[];
   private readonly randomIntFn: (max: number) => number;
+  private readonly pickMode: 'random' | 'sequential';
 
   private phase: GuessWhoPhase = 'idle';
   private players: { name: string }[] = [];
-  private answererName: string | null = null;
   private celebrity: Celebrity | null = null;
-  private questions: QuestionEntry[] = [];
   private winnerName: string | null = null;
-  private startedAt = 0;
+  private roundStartedAt = 0;
   private roundNumber = 0;
   private totalRounds = GUESS_WHO_TOTAL_ROUNDS;
   private scores = new Map<string, number>();
 
-  constructor(celebrities: Celebrity[], options: { randomInt?: (max: number) => number } = {}) {
+  constructor(
+    celebrities: Celebrity[],
+    options: {
+      randomInt?: (max: number) => number;
+      /** D064: 'sequential' consumes a pre-shuffled deck in order (repeat-free,
+       * deterministic); 'random' is the legacy per-round random pick. */
+      pickMode?: 'random' | 'sequential';
+    } = {}
+  ) {
     this.celebrities = celebrities;
     this.randomIntFn = options.randomInt ?? ((max) => randomInt(max));
+    this.pickMode = options.pickMode ?? 'random';
   }
 
   get phaseValue(): GuessWhoPhase {
     return this.phase;
   }
 
-  get answerer(): string | null {
-    return this.answererName;
-  }
-
-  /** The secret celebrity, ONLY ever sent to the answerer's device (D023). */
+  /** The current celebrity (name + traits). The name NEVER leaves the server
+   * during questioning — only the traits go out (see toWireClue). */
   get secretCelebrity(): Celebrity | null {
     return this.celebrity;
   }
 
-  get questionLog(): QuestionEntry[] {
-    return [...this.questions];
-  }
-
-  get questionCount(): number {
-    return this.questions.filter((entry) => entry.answer !== null).length;
-  }
-
   get winnerValue(): string | null {
     return this.winnerName;
-  }
-
-  get startedTimestamp(): number {
-    return this.startedAt;
-  }
-
-  get maxQuestions(): number {
-    return GUESS_WHO_MAX_QUESTIONS;
   }
 
   get currentRound(): number {
@@ -117,7 +125,7 @@ export class GuessWhoSession {
       .sort((a, b) => b.score - a.score || a.playerName.localeCompare(b.playerName));
   }
 
-  start(playerNames: string[], answererName: string): GuessWhoResult<{ celebrity: Celebrity }> {
+  start(playerNames: string[]): GuessWhoResult<{ celebrity: Celebrity }> {
     if (this.phase !== 'idle') {
       return { ok: false, error: 'ALREADY_STARTED' };
     }
@@ -127,72 +135,15 @@ export class GuessWhoSession {
     if (names.length === 0) {
       return { ok: false, error: 'NOT_PLAYER' };
     }
-    if (!names.includes(answererName)) {
-      return { ok: false, error: 'NOT_ANSWERER' };
-    }
     this.players = names.map((name) => ({ name }));
-    this.answererName = answererName;
-    this.startedAt = Date.now();
     this.roundNumber = 0;
     this.beginRound();
     return { ok: true, value: { celebrity: this.celebrity! } };
   }
 
-  /** Anyone except the answerer asks a yes/no question (solo rooms excepted
-   *, with one player the answerer is also the questioner, a testing
-   * affordance, D026). */
-  askQuestion(playerName: string, question: string): GuessWhoResult<{ number: number }> {
-    if (this.phase !== 'questioning') {
-      return { ok: false, error: 'WRONG_PHASE' };
-    }
-    if (playerName === this.answererName && this.players.length > 1) {
-      return { ok: false, error: 'NOT_ANSWERER' };
-    }
-    if (!this.players.some((player) => player.name === playerName)) {
-      return { ok: false, error: 'NOT_PLAYER' };
-    }
-    if (this.questionCount >= GUESS_WHO_MAX_QUESTIONS) {
-      return { ok: false, error: 'QUESTION_LIMIT' };
-    }
-    const cleaned = question.trim();
-    if (cleaned.length < 3 || cleaned.length > 140) {
-      return { ok: false, error: 'INVALID_INPUT' };
-    }
-    this.questions.push({ playerName, question: cleaned, answer: null, at: Date.now() });
-    return { ok: true, value: { number: this.questionCount } };
-  }
-
-  /** The answerer answers the LATEST open question (yes/no). */
-  answerQuestion(
-    answererName: string,
-    yes: boolean
-  ): GuessWhoResult<{ number: number; finished: boolean }> {
-    if (this.phase !== 'questioning') {
-      return { ok: false, error: 'WRONG_PHASE' };
-    }
-    if (answererName !== this.answererName) {
-      return { ok: false, error: 'NOT_ANSWERER' };
-    }
-    const open = [...this.questions].reverse().find((entry) => entry.answer === null);
-    if (!open) {
-      return { ok: false, error: 'INVALID_INPUT' };
-    }
-    open.answer = yes;
-    const answered = this.questionCount;
-    if (answered >= GUESS_WHO_MAX_QUESTIONS) {
-      // M17, nobody guessed in time: reveal without a winner.
-      this.phase = 'revealed';
-      return {
-        ok: true,
-        value: { number: answered, finished: this.roundNumber >= this.totalRounds },
-      };
-    }
-    return { ok: true, value: { number: answered, finished: false } };
-  }
-
   /**
-   * A guess from any non-answerer. Accepted when the normalized guess equals
-   * the celebrity's full name OR their last name (accents/“the” ignored).
+   * A guess from any player. Accepted when the normalized guess equals the
+   * celebrity's full name OR their last name (accents/“the” ignored).
    * Correct → +1 for the guesser and the round reveals (M17: multi-round).
    */
   submitGuess(
@@ -202,8 +153,8 @@ export class GuessWhoSession {
     if (this.phase !== 'questioning') {
       return { ok: false, error: 'WRONG_PHASE' };
     }
-    if (playerName === this.answererName && this.players.length > 1) {
-      return { ok: false, error: 'NOT_ANSWERER' };
+    if (!this.players.some((player) => player.name === playerName)) {
+      return { ok: false, error: 'NOT_PLAYER' };
     }
     if (!this.celebrity) {
       return { ok: false, error: 'NOT_STARTED' };
@@ -223,6 +174,16 @@ export class GuessWhoSession {
       };
     }
     return { ok: true, value: { correct: false, finished: false } };
+  }
+
+  /** Owner redesign: the round timer expired without a correct guess. */
+  revealOnTimeout(): GuessWhoResult<{ finished: boolean }> {
+    if (this.phase !== 'questioning') {
+      return { ok: false, error: 'WRONG_PHASE' };
+    }
+    this.winnerName = null;
+    this.phase = 'revealed';
+    return { ok: true, value: { finished: this.roundNumber >= this.totalRounds } };
   }
 
   /** M17, host advances after the reveal: next round or game end. */
@@ -245,23 +206,63 @@ export class GuessWhoSession {
       celebrity: this.celebrity
         ? { name: this.celebrity.name, famousFor: this.celebrity.famousFor }
         : null,
-      questionsAsked: this.questionCount,
       winner: top && top.score > 0 ? top.playerName : null,
       scores: this.scoreTable,
       rounds: this.roundNumber,
     };
   }
 
+  /**
+   * Skribbl-style name pattern: letters hidden as “_”, spaces/punctuation
+   * always visible. Monotonic reveal schedule:
+   *   0s       → the first letter of every word
+   *   ≥ 20s    → first 40% of the letters (plus the word-first letters)
+   *   ≥ 40s    → first 70% of the letters (plus the word-first letters)
+   * The full name only appears in the reveal payload, never in a pattern.
+   */
+  namePatternAt(now: number): string {
+    if (!this.celebrity || this.phase === 'idle') {
+      return '';
+    }
+    const elapsed = Math.max(0, now - this.roundStartedAt);
+    const chars = [...this.celebrity.name];
+    const letterIndexes = chars
+      .map((char, index) => ({ char, index }))
+      .filter(({ char }) => /[a-z0-9]/i.test(char));
+    // The first letter of every word (the always-visible base hint).
+    const firstOfWord = new Set<number>();
+    for (let index = 0; index < chars.length; index += 1) {
+      const prev = index > 0 ? (chars[index - 1] ?? '') : ' ';
+      if (/[a-z0-9]/i.test(chars[index]!) && !/[a-z0-9]/i.test(prev)) {
+        firstOfWord.add(index);
+      }
+    }
+    let revealCount = 0;
+    if (elapsed >= GUESS_WHO_HINT_2_MS) {
+      revealCount = Math.ceil(letterIndexes.length * GUESS_WHO_REVEAL_LETTERS_2);
+    } else if (elapsed >= GUESS_WHO_HINT_1_MS) {
+      revealCount = Math.ceil(letterIndexes.length * GUESS_WHO_REVEAL_LETTERS_1);
+    }
+    const revealed = new Set<number>(firstOfWord);
+    for (const { index } of letterIndexes.slice(0, revealCount)) {
+      revealed.add(index);
+    }
+    return chars
+      .map((char, index) => (revealed.has(index) ? char : /[a-z0-9]/i.test(char) ? '_' : char))
+      .join('');
+  }
+
   private beginRound(): void {
     this.roundNumber += 1;
-    // M17, the answerer rotates each round (pass-the-phone fairness).
-    if (this.players.length > 0) {
-      const index = (this.roundNumber - 1) % this.players.length;
-      this.answererName = this.players[index]!.name;
-    }
-    this.questions = [];
     this.winnerName = null;
-    const celebrity = this.celebrities[this.randomIntFn(this.celebrities.length)];
+    this.roundStartedAt = Date.now();
+    // D064: sequential consumes the pre-shuffled deck in order — random-looking
+    // but repeat-free and deterministic per deck. The legacy path picks per
+    // round via the injected randomIntFn (the 205-pool behavior, untouched).
+    const celebrity =
+      this.pickMode === 'sequential'
+        ? this.celebrities[(this.roundNumber - 1) % this.celebrities.length]
+        : this.celebrities[this.randomIntFn(this.celebrities.length)];
     if (!celebrity) {
       this.phase = 'game-end';
       return;

@@ -35,6 +35,8 @@ export const ClientEvents = {
   setShadowGenre: 'set-shadow-genre',
   // Additive (M17, Guess Who: host advances after a reveal)
   guessWhoNext: 'guess-who-next',
+  // Additive (D064, Guess Who: host picks the region/genre deck filter)
+  setGuessWhoFilter: 'set-guess-who-filter',
   // Additive (M8, Trivia room mode: host mode toggle + answers)
   setTriviaMode: 'set-trivia-mode',
   answerQuestion: 'answer-question',
@@ -71,6 +73,9 @@ export const ServerEvents = {
   roundReveal: 'round-reveal',
   // Additive (M17), Guess Who: celebrity + facts revealed after a round
   guessReveal: 'guess-reveal',
+  // Additive (D064), Guess Who lobby: pool counts so the FE can hide empty
+  // region/genre cells (emitted on join, idempotent)
+  guessWhoFilterOptions: 'guess-who-filter-options',
   gameEnd: 'game-end',
   gameRestart: 'game-restart',
   // Additive, drawing (broadcast: strokes/undo/clear echo to the room)

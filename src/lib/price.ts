@@ -16,9 +16,11 @@ import priceResolvedJson from '../data/price-resolved.json';
 export interface PriceResolvedRow {
   status: 'resolved';
   source: string; // amazon.com | amazon.in | pexels | pixabay | wikimedia
-  asin: string;
+  /** Amazon-sourced rows only; other sources (pixabay/pexels) carry null. */
+  asin: string | null;
   image: string; // self-hosted /images/price/{id}.jpg
-  detailPageUrl: string; // stored tag-free; tags appended at render
+  /** Stored tag-free; tags appended at render. Amazon-sourced rows only. */
+  detailPageUrl: string | null;
   prices: { usd: number; inr: number };
   priceUpdatedAt: string;
   approvedAt: string;
@@ -65,9 +67,9 @@ export function isResolvedRowShape(row: unknown): row is PriceResolvedRow {
   return (
     candidate.status === 'resolved' &&
     typeof candidate.source === 'string' &&
-    typeof candidate.asin === 'string' &&
+    (candidate.asin === null || typeof candidate.asin === 'string') &&
     typeof candidate.image === 'string' &&
-    typeof candidate.detailPageUrl === 'string' &&
+    (candidate.detailPageUrl === null || typeof candidate.detailPageUrl === 'string') &&
     typeof candidate.priceUpdatedAt === 'string' &&
     typeof prices === 'object' &&
     prices !== null &&

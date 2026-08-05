@@ -7,6 +7,9 @@ import { attachSocketIo } from '../socket/index.js';
 import { RoomEngine } from '../engine/room-engine.js';
 import { createDefaultLimiters } from '../lib/rate-limit.js';
 import { ClientEvents, ServerEvents } from '../lib/events.js';
+import { buildGuessWhoDeck, type GuessWhoFilter } from '../lib/guess-who-deck.js';
+import { hashString } from '../lib/random.js';
+import { GUESS_WHO_TOTAL_ROUNDS, type Celebrity } from '../engine/guess-who-engine.js';
 import { resetTestData, setupTestDb, teardownTestDb } from './helpers/db.js';
 
 type Ack = {
@@ -15,6 +18,8 @@ type Ack = {
   message?: string;
   roomCode?: string;
   score?: number;
+  /** D064: echo of the applied Guess Who filter on the start-game ack. */
+  filter?: { region: string; genre: string };
 };
 
 interface SpecialRoundStart {
@@ -23,10 +28,77 @@ interface SpecialRoundStart {
   [key: string]: unknown;
 }
 
+/** D064: fielded synthetic pool (the shipped celebrities.json is pre-L12).
+ * 8 bollywood/music (4 t1, 2 t2, 2 t3), 2 hollywood/music, 2 row/politics,
+ * 2 legacy rows without the new fields. */
+function celeb(
+  name: string,
+  region: NonNullable<Celebrity['region']>,
+  genre: NonNullable<Celebrity['genre']>,
+  difficulty: 1 | 2 | 3
+): Celebrity {
+  return {
+    name,
+    gender: 'm',
+    alive: true,
+    profession: 'Entertainer',
+    nationality: 'Test',
+    ageRange: '30s',
+    hairColor: 'brown',
+    famousFor: `Famous for ${name}`,
+    facts: [`Fact one about ${name}`, `Fact two about ${name}`, `Fact three about ${name}`],
+    region,
+    genre,
+    difficulty,
+  };
+}
+
+const TEST_POOL: Celebrity[] = [
+  // bollywood + music (8: t1×4, t2×2, t3×2)
+  celeb('Arijit Singh', 'bollywood', 'music', 1),
+  celeb('Neha Kakkar', 'bollywood', 'music', 1),
+  celeb('Udit Narayan', 'bollywood', 'music', 1),
+  celeb('Sonu Nigam', 'bollywood', 'music', 1),
+  celeb('Shreya Ghoshal', 'bollywood', 'music', 2),
+  celeb('A. R. Rahman', 'bollywood', 'music', 2),
+  celeb('Lata Mangeshkar', 'bollywood', 'music', 3),
+  celeb('Kishore Kumar', 'bollywood', 'music', 3),
+  // hollywood + music (2)
+  celeb('Taylor Swift', 'hollywood', 'music', 1),
+  celeb('Elvis Presley', 'hollywood', 'music', 3),
+  // row + politics (2)
+  celeb('Nelson Mandela', 'row', 'politics', 1),
+  celeb('Mahatma Gandhi', 'row', 'politics', 3),
+  // legacy rows (no region/genre/difficulty — default to region 'row')
+  {
+    name: 'Legacy One',
+    gender: 'f',
+    alive: false,
+    profession: 'Actor',
+    nationality: 'Unknown',
+    ageRange: '60s',
+    hairColor: 'grey',
+    famousFor: 'Old films',
+    facts: ['Fact a', 'Fact b', 'Fact c'],
+  },
+  {
+    name: 'Legacy Two',
+    gender: 'm',
+    alive: false,
+    profession: 'Writer',
+    nationality: 'Unknown',
+    ageRange: '70s',
+    hairColor: 'white',
+    famousFor: 'Old books',
+    facts: ['Fact x', 'Fact y', 'Fact z'],
+  },
+];
+
 /**
  * M9 journeys: Charades (category toggle → actor-only movie → Correct!
- * scores + rotates → game end) and Guess Who (answerer-only celebrity →
- * question/answer log → guess wins → reveal) over real sockets.
+ * scores + rotates → game end) and Guess Who (owner redesign: the name is
+ * hidden from everyone, traits + facts + letter hints go to all, guesses
+ * are server-verified → reveal) over real sockets.
  */
 describe('Charades + Guess Who (M9), DB-backed socket integration', () => {
   let httpServer: ReturnType<typeof createHttpServer>;
@@ -38,7 +110,13 @@ describe('Charades + Guess Who (M9), DB-backed socket integration', () => {
   async function startServer(): Promise<void> {
     engine = new RoomEngine();
     httpServer = createHttpServer();
-    io = attachSocketIo(httpServer, { engine, limiters: createDefaultLimiters() });
+    io = attachSocketIo(httpServer, {
+      engine,
+      limiters: createDefaultLimiters(),
+      // D064: the shipped pool has no region/genre fields yet (pre-L12), so
+      // the filter journey runs against the synthetic fielded pool.
+      celebrities: TEST_POOL,
+    });
     await new Promise<void>((resolve) => httpServer.listen(0, resolve));
     port = (httpServer.address() as AddressInfo).port;
   }
@@ -159,8 +237,19 @@ describe('Charades + Guess Who (M9), DB-backed socket integration', () => {
     expect(gameEnd.score).toBe(1);
   });
 
-  it('Guess Who: answerer-only secret, Q&A log, correct guess wins and reveals', async () => {
+  it('Guess Who (owner redesign): the name is hidden from EVERYONE, hints reveal letters, a correct guess reveals', async () => {
     const { host, guest, roomCode } = await joinRoom('guess-who');
+
+    // Deterministic round 1: filter the pool to 8 bollywood/music entries.
+    const FILTER: GuessWhoFilter = { region: 'bollywood', genre: 'music' };
+    const setFilter = await emitAck(host, ClientEvents.setGuessWhoFilter, { roomCode, ...FILTER });
+    expect(setFilter.ok).toBe(true);
+    const target = buildGuessWhoDeck(
+      TEST_POOL,
+      FILTER,
+      GUESS_WHO_TOTAL_ROUNDS,
+      hashString(`${roomCode}:1`)
+    )[0]!;
 
     const hostStartPromise = waitFor<SpecialRoundStart>(host, ServerEvents.roundStart);
     const guestStartPromise = waitFor<SpecialRoundStart>(guest, ServerEvents.roundStart);
@@ -168,66 +257,202 @@ describe('Charades + Guess Who (M9), DB-backed socket integration', () => {
     expect(started.ok).toBe(true);
     const [hostRound, guestRound] = [await hostStartPromise, await guestStartPromise];
     expect(hostRound.kind).toBe('guess-who');
-    expect(hostRound.answerer).toBe('Alice');
-    // Only the answerer's device sees the secret.
-    expect(typeof (hostRound.celebrity as { name?: string } | undefined)?.name).toBe('string');
+    // NOBODY sees the name — not even the host (owner redesign).
+    expect(hostRound.celebrity).toBeUndefined();
     expect(guestRound.celebrity).toBeUndefined();
+    expect(hostRound).not.toHaveProperty('answerer');
+    // Everyone gets the same clue: traits + facts, no name, no balance fields.
+    const clue = hostRound.clue as Record<string, unknown>;
+    expect(clue.famousFor).toBe(target.famousFor);
+    expect(clue).not.toHaveProperty('name');
+    expect(clue).not.toHaveProperty('region');
+    expect(clue).not.toHaveProperty('genre');
+    expect(clue).not.toHaveProperty('difficulty');
+    expect(guestRound.clue).toEqual(hostRound.clue);
+    // Skribbl-style pattern: same length as the name, revealed letters match.
+    const pattern = hostRound.namePattern as string;
+    expect(pattern.length).toBe(target.name.length);
+    expect(pattern).toMatch(/[A-Za-z0-9]/);
+    expect(hostRound.endsAt as number).toBeGreaterThan(Date.now());
 
-    // Bob asks; Alice answers; the log broadcasts.
-    const logPromise = waitFor<{ kind: string; questions: unknown[] }>(
-      guest,
-      ServerEvents.roundReveal
-    );
+    // The old yes/no question flow is gone (no answerer to judge).
     const asked = await emitAck(guest, ClientEvents.askQuestion, {
       roomCode,
       text: 'Are they alive?',
     });
-    expect(asked.ok).toBe(true);
-    await logPromise;
-    const answeredPromise = waitFor<{ kind: string; questionCount: number }>(
-      guest,
-      ServerEvents.roundReveal
-    );
-    const answered = await emitAck(host, ClientEvents.answerQuestion, { roomCode, yes: true });
-    expect(answered.ok).toBe(true);
-    const log = await answeredPromise;
-    expect(log.questionCount).toBe(1);
+    expect(asked.ok).toBe(false);
 
-    // The answerer cannot guess; a wrong guess continues; a correct one
-    // reveals (M17, round 1 of 5, so the game keeps going).
-    const deniedGuess = await emitAck(host, ClientEvents.sendGuess, { roomCode, text: 'Beyoncé' });
-    expect(deniedGuess.error).toBe('NOT_ANSWERER');
+    // A wrong guess continues; the correct one reveals (round 1 of 5).
     const wrong = await emitAck(guest, ClientEvents.sendGuess, { roomCode, text: 'Rihanna' });
     expect(wrong.ok).toBe(true);
-
     const revealPromise = waitFor<{
       kind: string;
       celebrity: { name: string; facts: string[] } | null;
       winner: string | null;
       finished: boolean;
     }>(guest, ServerEvents.guessReveal);
-    const right = await emitAck(guest, ClientEvents.sendGuess, { roomCode, text: 'Rihanna' });
+    const right = await emitAck(guest, ClientEvents.sendGuess, { roomCode, text: target.name });
     expect(right.ok).toBe(true);
-    // The guess may or may not match the random celebrity; if it didn't,
-    // ask 20 questions to force the reveal cap instead.
-    const reveal = await Promise.race([
-      revealPromise,
-      (async () => {
-        for (let i = 0; i < 20; i += 1) {
-          await emitAck(guest, ClientEvents.askQuestion, {
-            roomCode,
-            text: `Is it question number ${i + 1}?`,
-          });
-          await emitAck(host, ClientEvents.answerQuestion, { roomCode, yes: i % 2 === 0 });
-        }
-        return revealPromise;
-      })(),
-    ]);
+    const reveal = await revealPromise;
     expect(reveal.kind).toBe('guess-who');
-    expect(typeof reveal.celebrity?.name).toBe('string');
+    expect(reveal.celebrity?.name).toBe(target.name);
     expect(Array.isArray(reveal.celebrity?.facts)).toBe(true);
+    expect(reveal.winner).toBe('Bob');
     // Round 1 of 5: the game is NOT finished, the host advances it.
     expect(reveal.finished).toBe(false);
+  });
+
+  it('Guess Who (D064): filter journey — options on join, host-only set, deck applied, rematch re-deals', async () => {
+    const FILTER: GuessWhoFilter = { region: 'bollywood', genre: 'music' };
+
+    const host = await connect();
+    const created = await emitAck(host, ClientEvents.createRoom, { gameId: 'guess-who' });
+    if (!created.ok || !created.roomCode) {
+      throw new Error(`create-room failed: ${created.error}`);
+    }
+    const roomCode = created.roomCode;
+
+    // The host's own join is the room-created path: options arrive there.
+    const hostOptionsPromise = waitFor<{
+      regions: { value: string; count: number }[];
+      genres: { value: string; count: number }[];
+    }>(host, ServerEvents.guessWhoFilterOptions);
+    await emitAck(host, ClientEvents.joinRoom, { roomCode, playerName: 'Alice' });
+    const hostOptions = await hostOptionsPromise;
+    expect(hostOptions.regions[0]).toEqual({ value: 'all', count: TEST_POOL.length });
+    expect(hostOptions.regions.find((cell) => cell.value === 'bollywood')?.count).toBe(8);
+    expect(hostOptions.regions.find((cell) => cell.value === 'row')?.count).toBe(4); // 2 + 2 legacy
+    expect(hostOptions.genres.find((cell) => cell.value === 'music')?.count).toBe(10);
+    expect(hostOptions.genres.find((cell) => cell.value === 'technology')?.count).toBe(0);
+
+    // Joining players get the same options (idempotent).
+    const guest = await connect();
+    const guestOptionsPromise = waitFor<{
+      regions: { value: string; count: number }[];
+      genres: { value: string; count: number }[];
+    }>(guest, ServerEvents.guessWhoFilterOptions);
+    await emitAck(guest, ClientEvents.joinRoom, { roomCode, playerName: 'Bob' });
+    const guestOptions = await guestOptionsPromise;
+    expect(guestOptions.regions).toEqual(hostOptions.regions);
+
+    // Non-host set-filter rejected; enum-validated.
+    const denied = await emitAck(guest, ClientEvents.setGuessWhoFilter, {
+      roomCode,
+      region: 'bollywood',
+      genre: 'all',
+    });
+    expect(denied.error).toBe('NOT_HOST');
+    const badRegion = await emitAck(host, ClientEvents.setGuessWhoFilter, {
+      roomCode,
+      region: 'krypton',
+      genre: 'all',
+    });
+    expect(badRegion.error).toBe('INVALID_PAYLOAD');
+    const badGenre = await emitAck(host, ClientEvents.setGuessWhoFilter, {
+      roomCode,
+      region: 'all',
+      genre: 'podcasts',
+    });
+    expect(badGenre.error).toBe('INVALID_PAYLOAD');
+
+    const setFilter = await emitAck(host, ClientEvents.setGuessWhoFilter, { roomCode, ...FILTER });
+    expect(setFilter.ok).toBe(true);
+
+    // Expected deck for serial 1 — deterministic per (pool, filter, seed).
+    const expectedDeck = buildGuessWhoDeck(
+      TEST_POOL,
+      FILTER,
+      GUESS_WHO_TOTAL_ROUNDS,
+      hashString(`${roomCode}:1`)
+    );
+    expect(expectedDeck).toHaveLength(GUESS_WHO_TOTAL_ROUNDS);
+    expect(expectedDeck.filter((entry) => entry.difficulty === 1).length).toBeLessThanOrEqual(2);
+
+    // Play all 5 rounds: every clue matches the filter, in deck order, and
+    // the name only ever appears in the reveal payload (owner redesign).
+    const secrets: string[] = [];
+    for (let round = 1; round <= GUESS_WHO_TOTAL_ROUNDS; round += 1) {
+      const hostStart = waitFor<SpecialRoundStart>(host, ServerEvents.roundStart);
+      const guestStart = waitFor<SpecialRoundStart>(guest, ServerEvents.roundStart);
+      if (round === 1) {
+        const started = await emitAck(host, ClientEvents.startGame, { roomCode });
+        expect(started.ok).toBe(true);
+        expect(started.filter).toEqual(FILTER);
+      } else {
+        const advanced = await emitAck(host, ClientEvents.guessWhoNext, { roomCode });
+        expect(advanced.ok).toBe(true);
+      }
+      const [hostRound, guestRound] = [await hostStart, await guestStart];
+      // Both devices get the same clue; nobody gets the name.
+      const clue = (hostRound.clue ?? guestRound.clue) as Record<string, unknown> | undefined;
+      expect(clue?.famousFor).toBe(expectedDeck[round - 1]!.famousFor);
+      expect(hostRound.celebrity).toBeUndefined();
+      expect(guestRound.celebrity).toBeUndefined();
+      expect(clue).not.toHaveProperty('name');
+      expect(clue).not.toHaveProperty('region');
+      expect(clue).not.toHaveProperty('genre');
+      expect(clue).not.toHaveProperty('difficulty');
+      // Skribbl-style pattern: same length as the name; any revealed letter
+      // matches the name at the same index (never a wrong letter).
+      const pattern = hostRound.namePattern as string;
+      const name = expectedDeck[round - 1]!.name;
+      expect(pattern.length).toBe(name.length);
+      for (let index = 0; index < pattern.length; index += 1) {
+        if (/[A-Za-z0-9]/.test(pattern[index]!)) {
+          expect(pattern[index]).toBe(name[index]);
+        }
+      }
+
+      // Anyone can guess now — even the host (owner redesign).
+      const revealPromise = waitFor<{ celebrity: { name: string } | null }>(
+        host,
+        ServerEvents.guessReveal
+      );
+      const guessed = await emitAck(host, ClientEvents.sendGuess, {
+        roomCode,
+        text: name,
+      });
+      expect(guessed.ok).toBe(true);
+      const reveal = await revealPromise;
+      expect(reveal.celebrity?.name).toBe(name);
+      // The reveal payload is stripped of balance fields too.
+      expect(reveal.celebrity).not.toHaveProperty('region');
+      expect(reveal.celebrity).not.toHaveProperty('genre');
+      expect(reveal.celebrity).not.toHaveProperty('difficulty');
+      secrets.push(reveal.celebrity!.name);
+    }
+    expect(secrets).toEqual(expectedDeck.map((entry) => entry.name));
+    expect(new Set(secrets).size).toBe(GUESS_WHO_TOTAL_ROUNDS);
+
+    // End the game, restart in the SAME room: serial 1 → 2 re-deals.
+    const gameEndPromise = waitFor<{ kind: string }>(guest, ServerEvents.gameEnd);
+    const advancedLast = await emitAck(host, ClientEvents.guessWhoNext, { roomCode });
+    expect(advancedLast.ok).toBe(true);
+    await gameEndPromise;
+
+    const restarted = await emitAck(host, ClientEvents.restartGame, { roomCode });
+    expect(restarted.ok).toBe(true);
+    // The pending filter resets with the lobby (clearRoomGame, like charades)
+    // — the host re-applies it for the rematch.
+    const reSet = await emitAck(host, ClientEvents.setGuessWhoFilter, { roomCode, ...FILTER });
+    expect(reSet.ok).toBe(true);
+    const expectedDeck2 = buildGuessWhoDeck(
+      TEST_POOL,
+      FILTER,
+      GUESS_WHO_TOTAL_ROUNDS,
+      hashString(`${roomCode}:2`)
+    );
+    expect(expectedDeck2).not.toEqual(expectedDeck);
+
+    const rematchHostStart = waitFor<SpecialRoundStart>(host, ServerEvents.roundStart);
+    const rematchGuestStart = waitFor<SpecialRoundStart>(guest, ServerEvents.roundStart);
+    const restartedStart = await emitAck(host, ClientEvents.startGame, { roomCode });
+    expect(restartedStart.ok).toBe(true);
+    expect(restartedStart.filter).toEqual(FILTER);
+    const [rematchHostRound] = [await rematchHostStart, await rematchGuestStart];
+    const rematchClue = rematchHostRound.clue as { famousFor?: string } | undefined;
+    expect(rematchClue?.famousFor).toBe(`Famous for ${expectedDeck2[0]!.name}`);
+    expect(rematchHostRound).not.toHaveProperty('celebrity');
   });
 
   it('Copycat (M13): the reveal waits for both players to load the image, then counts 10s', async () => {

@@ -1467,3 +1467,194 @@ peeks.mjs`): OSM Overpass query → random road nodes → landmark
 - **Date:** 2026-08-05
 - **Future impact:** Google Street View swap replaces only the viewer
   source; the inset-map + content pipeline are source-agnostic.
+
+---
+
+## D056, Price Is Right image pipeline: PA-API primary, build-time resolution, human gate, self-hosted cache (2026-08-05)
+
+> **Architect re-append (2026-08-06):** D056-D059 were drafted in
+> `docs/ARCH-DESIGN-2.md` on 2026-08-05 and are logged here after the
+> World Peek series (D060-D063) that referenced them; append-only, no
+> renumbering.
+
+- **Decision:** the Price Is Right dataset becomes **word-first**
+  (`id`, `name`, `searchTerm`, `emoji`, `description`, `specs`, `price`
+  fallback, `category` bucket — no stored image/credit in the authoring
+  file). A build-time script (`scripts/resolve-price-images.mjs`, `scripts/`
+  style, **no new deps**) resolves images per product: **Amazon PA-API is
+  the PRIMARY source** (amazon.com + amazon.in Associates accounts, ~1 rps,
+  bulk keyword search into a 1,000-2,000 pool; ASIN/title/price/category/
+  image URL stored), Pexels/Pixabay + Wikimedia are the fallback, and a
+  **human verification gate** approves each image (no people, subject
+  matches product, offensive-term blocklist — the "jigger" incident is the
+  precedent; PA-API results still pass through it). Approved images are
+  downloaded and **self-hosted** (`public/images/price/*`, ≤1200px via the
+  Amazon URL size token, JPEG as-served — webp needs a new dependency,
+  deferred), recorded in an additive resolved layer
+  (`src/data/price-resolved.json`: status, source, asin, image,
+  detailPageUrl, prices {usd, inr}, priceUpdatedAt, approvedAt).
+  **Prices refresh daily at build (24h freshness rule)**. Associates
+  display rules are baked in: images hyperlink to the listing with the
+  affiliate tag, "See it on Amazon" on the reveal, `rel="sponsored"` +
+  a disclosure line, no misleading use. Unresolved products are
+  **flagged, not shipped** (emoji fallback). Runtime image search is
+  rejected (stability/licensing/moderation/cost — rationale documented in
+  ARCH-DESIGN-2 §1.2). Supersedes D034's Openverse source and PLAN-SCOPE
+  R12's "Amazon images infeasible" text (that held for scraping/hotlinking,
+  not PA-API).
+- **Reason:** CEO rejected stored image links and runtime search, then
+  approved PA-API as PRIMARY (FOLLOW-UP #2, 2026-08-05); PA-API returns
+  real product photos, unlike the random CC photos D034 shipped.
+- **Alternatives considered:** Openverse (current — random, rejected);
+  Wikimedia primary (product scarcity + 429s, D034); runtime search
+  (non-viable, documented); eBay (no legal API route); Amazon
+  scraping/hotlinking (ToS violation).
+- **Tradeoffs:** affiliate display obligations on the reveal surface;
+  per-region prices need the D059 model; the 24h price rule requires a
+  daily build; PA-API availability gates the authoring pipeline (mocks
+  cover development).
+- **Date:** 2026-08-05
+- **Future impact:** the pattern (word-first authoring + resolved layer +
+  human gate + self-hosted assets) is the template for any future
+  product-imagery need — World Peek already reuses it (D062/D063 pipeline
+  pattern); the first affiliate-integrated surface on the site.
+
+---
+
+## D057, Content scale program: graduated volume (2026-08-05)
+
+- **Decision:** volume targets per dataset — price 1,000-2,000; music,
+  movies, emoji-plots, genre-swap, genre-bender, charades, celebrities,
+  trivia 2,000-3,000 — shipped as **staged milestones** (v1 = 1,000/game →
+  owner go/no-go → v2 = 2,000+ → go/no-go → band max). Per-lot
+  schema/QA gates (volume, quotas, uniqueness, licensing, determinism
+  goldens) ship **with** the lot, never before (`pnpm verify` green at
+  every boundary). LLM-assisted drafting is allowed with a **mandatory
+  human rewrite pass** and memorization guardrails (never reproduce
+  copyrighted summaries/lyrics; two-source facts; radio-safe; trademark
+  blocklist). Algorithmic-exempt datasets (sudoku, crown-logic,
+  word-ladder, skribbl-words, world-peek imagery, CMU rhymes) carry
+  generator/curation gates instead of volume quotas.
+- **Reason:** CEO ask D12 (PLAN-SCOPE §4); catalog depth is the product
+  direction; quota-first briefs make the long pole measurable.
+- **Alternatives considered:** open-ended authoring (rejected, unmeasurable);
+  purchasing/licensing content (rejected, PRD §13); unbounded LLM output
+  (rejected, memorization + quality risk).
+- **Tradeoffs:** human review is the bottleneck (~110-140 author-days to
+  v1 across 9 games; 2-3 parallel tracks ≈ 6-8 weeks); daily games only
+  need ~365+/year, so volume is depth, not gameplay necessity — the
+  go/no-go gates are the brake.
+- **Date:** 2026-08-05
+- **Future impact:** lot structure (PLAN-SCOPE §4) + dual-market quotas
+  (D058) drive the authoring briefs; World Peek's L7 quotas follow this
+  program (D063 cites D057); the content engine (Phase D of the roadmap)
+  builds on the QA gates this program establishes.
+
+---
+
+## D058, Dual-market dimensions: India + US (2026-08-05)
+
+- **Decision:** additive market data + filters, English-only UI, i18n
+  explicitly out of scope. Charades (`charades-movies.json`): additive
+  `year`, `language` (hindi/english), `region` (bollywood/hollywood);
+  `category` stays as the legacy region alias; host lobby chips extend the
+  Hollywood/Bollywood/Mixed toggle to region+language+decade, sent with
+  the start, **server-side** filtered pool. Guess Who (`celebrities.json`):
+  additive `region` (bollywood/hollywood/row), host region filter,
+  server-side; **Bollywood quota first** (v1 ≥ 400 of 1,000).
+  Music/movies: additive `origin`/`region` (bollywood/hollywood/other),
+  decade quotas per region, client-side filter-before-seed chips on the
+  setup cards (daily stays deterministic per (day, slug, filter)).
+  Trivia: Indian topics in the L1/L2 topic registry (≥ 6 topics, ≥ 15%
+  of pool at 2,000+). Per-region dailies (different content per market)
+  are rejected — they break D050 same-for-everyone. The Guess Who
+  region/genre deck design (`docs/GUESS-WHO-DESIGN.md`) implements this
+  decision's Guess Who half.
+- **Reason:** CEO ask D13 (India + US); shared pools + user-facing filters
+  are the market switch without splitting the surface.
+- **Alternatives considered:** full i18n (rejected, out of scope);
+  region-scoped game builds (rejected, duplicate surface); per-region
+  daily content (rejected, D050 violation).
+- **Tradeoffs:** a mixed-region daily pool means any player may see any
+  region's content (filters are opt-in); Bollywood content volume is the
+  gating quota; decade quota tests gain region/origin cells (extend, not
+  replace).
+- **Date:** 2026-08-05
+- **Future impact:** no daily-registry/lockstep change (charades +
+  celebrities are server-only data files); the region filters reuse the
+  TL-DESIGN-1 B.3.2 mechanics; future regional content (Phase D content
+  engine) extends the same additive fields.
+
+---
+
+## D059, INR/USD price model: shared pool, per-region prices (2026-08-05)
+
+- **Decision:** shared product pool with a per-region price pair
+  (`prices: { usd, inr }`) in the price resolved layer (D056); the game's
+  correctness price is the selected market's price; the market comes from a
+  client-side toggle (`triviahub:market`, default US — no geo, zero PII);
+  the affiliate tag is per-market. Region-scoped pools (separate US/IN
+  catalogs) remain the documented alternative. **PM escalation:** the
+  choice must be confirmed before L9 authoring at scale (it shapes the
+  authoring briefs and the correctness semantics of "the right price").
+- **Reason:** FOLLOW-UP #2 (per-region prices, two Associates accounts);
+  a single global price is wrong for the INR market; two full catalogs
+  double authoring cost.
+- **Alternatives considered:** region-scoped pools (rejected as default —
+  doubles content cost, splits discovery; kept documented); single price
+  (rejected); geo-detection (rejected, needs an IP service and adds PII
+  surface).
+- **Tradeoffs:** the same product shows different prices per market (by
+  design — the answer differs per market); a stale or missing INR price
+  falls back to the authored price.
+- **Date:** 2026-08-05
+- **Future impact:** the resolved layer and toggle are additive; a future
+  region-scoped pool can layer on without a schema change; D055's PR-3
+  (price pipeline skeleton) depends on this model.
+
+---
+
+## D064, Guess Who region + genre deck filters (2026-08-06)
+
+- **Decision:** Guess Who (room game) gains additive `Celebrity` fields
+  (`region`: bollywood/hollywood/row; `genre`: closed 12-value taxonomy;
+  `difficulty`: 1-3) as **server-internal balance metadata**, stripped from
+  every wire payload via `toWireCelebrity` (round-start secret, reveal,
+  resync, game-end; `CelebrityView` stays byte-identical). Lobby: host
+  region+genre chip rows via `lobbyExtras`; `set-guess-who-filter`
+  (host-only, enum-validated) upserts `pendingGuessWhoFilters`;
+  `guess-who-filter-options` ships pool counts so chips hide below
+  `GUESS_WHO_TOTAL_ROUNDS`. Deck: `buildGuessWhoDeck`
+  (`server/src/lib/guess-who-deck.ts`) — filter (AND) → **best-effort tier
+  guard** (tier-1 ≤ 2 of 5; preference order tier-2 → tier-3 → tier-1 with
+  cap degrade; deck size invariant `min(roundCount, pool.length)` — the
+  guard never shrinks a deck) → seeded Fisher-Yates → take 5.
+  `GuessWhoSession` gains `pickMode: 'sequential'` (default `'random'`;
+  zero behavior change on existing paths). Determinism: seed =
+  `hashString(roomCode:gameSerial)`; the serial lives in a room-keyed
+  `guessWhoGameSerials` map, read+incremented at `startGuessWho`, deleted
+  at room teardown only (never in `clearRoomGame`) — rematches re-deal.
+  Filtered pool < 5 at start → fall back to all/all + log.
+- **Reason:** CEO dual-market ask (Bollywood-first content, D058); filters
+  make the growing pool (205 → 1,000+) navigable and the tier guard keeps
+  rooms solvable; per-room determinism enables golden tests and a fresh
+  rematch deal (owner-confirmed asks: guard kept, rematch re-deal kept,
+  `sources`/`aka` non-blocking, `difficulty` in schema).
+- **Alternatives considered:** internal per-round filter (charades pattern
+  — rejected, the deck is the unit of determinism and repeat-freedom);
+  `Math.random` deck (rejected, breaks golden tests); runtime difficulty
+  from sitelinks (rejected, breaks region context — CELEBRITY-SOURCING
+  §6.2).
+- **Tradeoffs:** sequential consumption changes pick distribution vs
+  `randomInt` (deck is pre-shuffled, so uniform over the deck; accepted);
+  the tier-1 cap degrades on thin pools (dataset gates ensure fat pools at
+  volume); a leftover serial entry for an abandoned room is a stale int
+  (room codes not reused) — the BE2 brief deletes the serial at both
+  room-teardown paths to keep the map bounded by the design's own
+  argument.
+- **Date:** 2026-08-06
+- **Future impact:** the deck pattern (pure builder + per-room seed +
+  sequential consumption) is the template for any future room-game
+  filtering — Charades' D058 region/language/decade filters can reuse it;
+  the wire-strip boundary extends the D008 server-keeps-what-it-needs
+  rule to balance metadata.

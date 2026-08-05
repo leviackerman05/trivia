@@ -215,7 +215,7 @@
     line-height: var(--text-body--line-height);
     /* Never let a wide island or long word break the layout on mobile. */
     overflow-x: clip;
-    /* [D063] game surfaces: no scroll chaining (the World Peek map/pano
+    /* [D063] game surfaces: no scroll chaining (the Placeguessr map/pano
        swallows gestures without yanking the page). */
     overscroll-behavior-y: contain;
   }

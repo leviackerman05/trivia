@@ -1,23 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 import SoloShell from './SoloShell';
 import Icon from '../../components/icons/Icon';
-import placesJson from '../../data/world-peek-places.json';
-import panosJson from '../../data/world-peek-panos.json';
+import placesJson from '../../data/placeguessr-places.json';
+import panosJson from '../../data/placeguessr-panos.json';
 import {
   greatCirclePoints,
   haversineKm,
-  pickWorldPeekRounds,
+  pickPlaceguessrRounds,
   scoreGuess,
-  WORLD_PEEK_ROUNDS,
-  type WorldPeekPlace,
-  type WorldPeekPanoMap,
-  type WorldPeekRound,
-} from '../../lib/world-peek';
+  PLACEGUESSR_ROUNDS,
+  type PlaceguessrPlace,
+  type PlaceguessrPanoMap,
+  type PlaceguessrRound,
+} from '../../lib/placeguessr';
 import leafletCssUrl from 'leaflet/dist/leaflet.css?url';
 import mapillaryCssUrl from 'mapillary-js/dist/mapillary.css?url';
 
 /**
- * World Peek (PLAN-SCOPE R5 + D061/D062/D063): solo geography game with a
+ * Placeguessr (PLAN-SCOPE R5 + D061/D062/D063): solo geography game with a
  * GeoGuessr composition. Each round: a full-bleed 360° Mapillary panorama
  * to study (LOOK), then a light-tile Leaflet map with the pano shrunk to a
  * corner inset (PIN), and the reveal draws the dotted great-circle line +
@@ -30,8 +30,8 @@ import mapillaryCssUrl from 'mapillary-js/dist/mapillary.css?url';
 type LeafletModule = typeof import('leaflet');
 type Viewer = import('mapillary-js').Viewer;
 
-const entries = placesJson as WorldPeekPlace[];
-const panos = panosJson as WorldPeekPanoMap;
+const entries = placesJson as PlaceguessrPlace[];
+const panos = panosJson as PlaceguessrPanoMap;
 // Astro exposes PUBLIC_* env vars to the client; the resolver script reads
 // the same token from MAPILLARY_TOKEN / PUBLIC_MAPILLARY_TOKEN in .env.
 const MAPILLARY_TOKEN = import.meta.env.PUBLIC_MAPILLARY_TOKEN as string | undefined;
@@ -52,9 +52,9 @@ interface RoundResult {
   points: number;
 }
 
-export default function WorldPeek() {
+export default function Placeguessr() {
   const [phase, setPhase] = useState<Phase>('setup');
-  const [rounds, setRounds] = useState<WorldPeekRound[]>([]);
+  const [rounds, setRounds] = useState<PlaceguessrRound[]>([]);
   const [index, setIndex] = useState(0);
   const [pin, setPin] = useState<GuessPin | null>(null);
   const [result, setResult] = useState<RoundResult | null>(null);
@@ -80,8 +80,8 @@ export default function WorldPeek() {
 
   /* ── Leaflet map: init once, kept alive across rounds (no flicker). ── */
   useEffect(() => {
-    if (phase !== 'pin' && phase !== 'reveal') {
-      return; // keep the instance alive while hidden behind LOOK
+    if (phase === 'setup' || phase === 'done') {
+      return; // the play area (and the map element) isn't mounted yet
     }
     const el = mapElRef.current;
     if (!el || mapRef.current) {
@@ -151,7 +151,12 @@ export default function WorldPeek() {
       });
 
       mapRef.current = map;
+      // The container may still be mid-layout or hidden behind LOOK when
+      // this lands; size it now and again after a frame so tiles render
+      // the moment PIN shows (the resize effect also invalidates on
+      // phase/showImage changes).
       map.invalidateSize();
+      requestAnimationFrame(() => map.invalidateSize());
     })();
     return () => {
       cancelled = true;
@@ -189,9 +194,9 @@ export default function WorldPeek() {
       }
     }, 20000);
     // mapillary-js won't start loading until the container has a real
-    // size; if the LOOK overlay reports 0×0 at mount (fixed-context
-    // timing), the image never fetches and the round times out. Wait a
-    // few frames for a measurable container before constructing.
+    // size; wait a few frames for a measurable container before
+    // constructing (the container can report 0×0 for a frame if the
+    // viewer CSS overrides kicked in before layout).
     const waitForSize = (maxFrames = 10): Promise<void> =>
       new Promise((resolve) => {
         const tick = (frame: number) => {
@@ -217,9 +222,13 @@ export default function WorldPeek() {
           return;
         }
         try {
+          // Construct WITHOUT imageId + moveTo: initializing with an ID
+          // puts the viewer in its cover state (a play button the user
+          // must click), which the loading overlay hides and blocks — the
+          // pano then never starts loading. The moveTo pattern skips the
+          // cover entirely (black background until the move succeeds).
           viewer = new MapillaryViewer({
             container: el,
-            imageId: panoId,
             accessToken: MAPILLARY_TOKEN,
             trackResize: true,
           });
@@ -232,6 +241,11 @@ export default function WorldPeek() {
           viewer.on('load', () => {
             panoLoadedRef.current = true;
             setPanoStatus('ready');
+          });
+          void viewer.moveTo(panoId).catch(() => {
+            if (!cancelled) {
+              setPanoStatus('error');
+            }
           });
           // GeoGuessr-style exploration (owner 2026-08-05): direction
           // arrows + sequence + spatial let the player walk connected
@@ -321,7 +335,7 @@ export default function WorldPeek() {
 
   const start = () => {
     const seed = Math.floor(Math.random() * 1e9);
-    setRounds(pickWorldPeekRounds(playableEntries, WORLD_PEEK_ROUNDS, seed));
+    setRounds(pickPlaceguessrRounds(playableEntries, PLACEGUESSR_ROUNDS, seed));
     setIndex(0);
     setScore(0);
     setResults([]);
@@ -414,7 +428,7 @@ export default function WorldPeek() {
   if (phase === 'setup') {
     return (
       <div className="flex flex-col gap-5 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
-        <h3 className="text-lg font-bold tracking-tight text-ink">World Peek</h3>
+        <h3 className="text-lg font-bold tracking-tight text-ink">Placeguessr</h3>
         <p className="max-w-xl text-body text-ink-muted">
           Five 360° panoramas from everyday places around the world. Look around, then pin the spot
           on the map. The closer you land, the more points you score.
@@ -440,32 +454,36 @@ export default function WorldPeek() {
           </button>
         ) : (
           <p className="text-small text-ink-muted">
-            Panoramas are being prepared. Add a Mapillary token and run pnpm resolve:world-peek.
+            Panoramas are being prepared. Add a Mapillary token and run pnpm resolve:placeguessr.
           </p>
         )}
       </div>
     );
   }
 
+  // mapillary-js appends `mapillary-viewer` to the container and its CSS
+  // (injected at runtime, after Tailwind) forces position: relative, which
+  // overrides `absolute` — inset-0 alone can't size the viewer, so the
+  // container carries EXPLICIT h-full/w-full inside a sized wrapper.
+  // [D063] inset: mobile bottom-sheet panel; desktop (sm+): corner inset.
   const panoWrapCls =
     phase === 'look'
-      ? 'absolute inset-0'
+      ? 'absolute inset-0 h-full w-full'
       : showImage
-        ? 'absolute inset-0 z-30 bg-surface'
-        : // [D063] mobile: bottom-sheet panel; desktop (sm+): corner inset.
-          'absolute inset-x-3 bottom-3 z-20 h-36 overflow-hidden rounded-lg border border-border shadow-lg sm:inset-x-auto sm:right-3 sm:h-48 sm:w-72';
+        ? 'absolute inset-0 z-30 h-full w-full bg-surface'
+        : 'absolute inset-x-3 bottom-3 z-20 h-36 overflow-hidden rounded-lg border border-border shadow-lg sm:inset-x-auto sm:right-3 sm:h-48 sm:w-72';
 
   return (
     <SoloShell
-      slug="world-peek"
-      name="World Peek"
+      slug="placeguessr"
+      name="Placeguessr"
       phase={phase === 'done' ? 'done' : 'playing'}
       round={Math.min(index + 1, rounds.length)}
-      totalRounds={rounds.length || WORLD_PEEK_ROUNDS}
+      totalRounds={rounds.length || PLACEGUESSR_ROUNDS}
       score={score}
       resultSummary={
         <p className="text-body text-ink-muted">
-          {results.length} of {results.length || WORLD_PEEK_ROUNDS} rounds,{' '}
+          {results.length} of {results.length || PLACEGUESSR_ROUNDS} rounds,{' '}
           {results.filter((item) => item.distance <= 100).length} within 100 km
         </p>
       }
@@ -480,49 +498,54 @@ export default function WorldPeek() {
                 : 'relative h-[58dvh] min-h-80 overflow-hidden rounded-lg border border-border sm:h-[calc(100dvh-13rem)]'
             }
           >
-            {/* Light-tile Leaflet map (hidden behind the full-bleed pano in LOOK). */}
-            <div
-              ref={mapElRef}
-              aria-label="World map, tap to place your guess"
-              className={phase === 'look' ? 'absolute inset-0 hidden' : 'absolute inset-0 z-0'}
-            />
-
-            {/* Mapillary 360° viewer container (kept mounted for the round). */}
-            <div
-              ref={panoElRef}
-              className={panoWrapCls}
-              role={phase === 'look' ? 'button' : undefined}
-              tabIndex={phase === 'look' ? 0 : undefined}
-              aria-label={
-                phase === 'look'
-                  ? '360° view of this round location. Look around, then show the map.'
-                  : undefined
-              }
-              onClick={phase === 'look' ? continueToPin : undefined}
-              onKeyDown={
-                phase === 'look'
-                  ? (event) => {
-                      if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        continueToPin();
-                      }
-                    }
-                  : undefined
-              }
-            />
-            {panoVisible && panoStatus !== 'ready' && (
+            {/* Light-tile Leaflet map (hidden behind the full-bleed pano in
+                LOOK). The phase-dependent class lives on the WRAPPER so
+                React never rewrites the map element's className (that would
+                wipe the leaflet-container class Leaflet adds at init). */}
+            <div className={phase === 'look' ? 'absolute inset-0 hidden' : 'absolute inset-0 z-0'}>
               <div
-                className={`${
-                  phase === 'look' ? 'absolute inset-0 z-10' : 'absolute inset-0 z-10'
-                } flex items-center justify-center bg-surface-muted px-6 text-center`}
-              >
-                <p className="text-small text-ink-muted">
-                  {panoStatus === 'loading'
-                    ? 'Loading the view…'
-                    : "The panorama couldn't load for this round."}
-                </p>
-              </div>
-            )}
+                ref={mapElRef}
+                aria-label="World map, tap to place your guess"
+                className="h-full w-full"
+              />
+            </div>
+
+            {/* Mapillary 360° viewer: sized wrapper + childless container
+                (mapillary requires an empty container) + fullscreen control
+                + loading overlay. Looking around never advances the round;
+                only the LOOK CTA does. */}
+            <div className={panoWrapCls}>
+              <div ref={panoElRef} className="absolute inset-0 h-full w-full" />
+              {panoVisible && panoStatus !== 'ready' && (
+                <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-surface-muted/70 px-6 text-center">
+                  <p className="text-small text-ink-muted">
+                    {panoStatus === 'loading'
+                      ? 'Loading the view…'
+                      : "The panorama couldn't load for this round."}
+                  </p>
+                </div>
+              )}
+              {(phase === 'pin' || phase === 'reveal') && !showImage && (
+                <button
+                  type="button"
+                  onClick={() => setShowImage(true)}
+                  aria-label="View the panorama full screen"
+                  className="absolute right-1.5 top-1.5 z-30 inline-flex h-12 w-12 items-center justify-center rounded-md bg-surface-raised/95 text-ink shadow-sm transition-colors hover:bg-surface-muted"
+                >
+                  <Icon name="expand" size={20} />
+                </button>
+              )}
+              {showImage && (
+                <button
+                  type="button"
+                  onClick={() => setShowImage(false)}
+                  aria-label="Close the full-screen panorama"
+                  className="absolute right-3 top-3 z-40 inline-flex h-12 w-12 items-center justify-center rounded-md bg-surface-raised/95 text-ink shadow-sm transition-colors hover:bg-surface-muted"
+                >
+                  <Icon name="x" size={20} />
+                </button>
+              )}
+            </div>
 
             {phase === 'look' && (
               <>
@@ -545,19 +568,6 @@ export default function WorldPeek() {
                   </button>
                 </div>
               </>
-            )}
-
-            {(phase === 'pin' || phase === 'reveal') && (
-              <button
-                type="button"
-                onClick={() => setShowImage((visible) => !visible)}
-                aria-expanded={showImage}
-                aria-label={showImage ? 'Hide the 360° view' : 'Show the 360° view over the map'}
-                className="absolute right-3 top-3 z-40 inline-flex min-h-12 items-center gap-2 rounded-md bg-surface-raised px-4 text-small font-semibold text-ink shadow-sm transition-colors hover:bg-surface-muted"
-              >
-                <Icon name={showImage ? 'x' : 'globe'} size={18} />
-                {showImage ? 'Hide image' : 'Show image'}
-              </button>
             )}
           </div>
 

@@ -23,7 +23,7 @@ const PRD_SLUGS = [
   'price-is-right',
   'genre-swap',
   'genre-bender',
-  'world-peek',
+  'placeguessr',
   'shadow-sketch',
   'charades',
   'would-you-rather',

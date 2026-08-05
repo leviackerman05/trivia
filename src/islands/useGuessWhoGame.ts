@@ -5,22 +5,26 @@ import { ClientEvents, ServerEvents } from '../lib/events';
 import {
   guessWhoReducer,
   initialGuessWhoState,
-  type CelebrityView,
+  GUESS_WHO_TOTAL_ROUNDS,
+  type GuessWhoClue,
+  type GuessWhoFilter,
+  type GuessWhoFilterOption,
   type GuessWhoGameState,
   type GuessWhoScoreRow,
-  type QuestionEntry,
 } from '../lib/guess-who';
 
-/** Guess Who session hook (M9/M17), room events + actions over guessWhoReducer. */
+/** Guess Who session hook (M9/M17 + owner redesign), room events + actions
+ * over guessWhoReducer. The name is hidden from every device; the server
+ * verifies guesses and broadcasts letter hints via round-hint. */
 
 export interface UseGuessWhoGame {
   game: GuessWhoGameState;
   actions: {
-    askQuestion: (text: string) => Promise<{ ok: boolean; error?: string }>;
-    answerYesNo: (yes: boolean) => Promise<{ ok: boolean; error?: string }>;
     submitGuess: (text: string) => Promise<{ ok: boolean; error?: string }>;
     nextCelebrity: () => Promise<{ ok: boolean; error?: string }>;
     restartGame: () => Promise<{ ok: boolean; error?: string }>;
+    /** D064, host-only lobby filter (the server rejects non-hosts). */
+    setFilter: (filter: GuessWhoFilter) => Promise<{ ok: boolean; error?: string }>;
   };
 }
 
@@ -30,15 +34,13 @@ interface AckResponse {
   message?: string;
   state?: {
     view: GuessWhoGameState['view'];
-    answerer: string | null;
-    questionCount: number;
-    maxQuestions: number;
-    questions: QuestionEntry[];
-    winner: string | null;
     round: number;
     totalRounds: number;
     scores: GuessWhoScoreRow[];
-    celebrity: CelebrityView | null;
+    winner: string | null;
+    clue?: GuessWhoClue;
+    namePattern?: string;
+    endsAt?: number;
   };
 }
 
@@ -89,13 +91,13 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
     const onRoundStart = (payload: {
       kind?: string;
       phase?: string;
-      answerer?: string;
-      questionCount?: number;
-      maxQuestions?: number;
       round?: number;
       totalRounds?: number;
       scores?: GuessWhoScoreRow[];
-      celebrity?: CelebrityView;
+      clue?: GuessWhoClue;
+      namePattern?: string;
+      endsAt?: number;
+      filter?: GuessWhoFilter;
     }) => {
       if (payload.kind !== 'guess-who' || payload.phase !== 'questioning') {
         return;
@@ -106,33 +108,19 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
         payload: {
           kind: payload.kind,
           phase: payload.phase,
-          answerer: payload.answerer ?? '',
-          questionCount: payload.questionCount ?? 0,
-          maxQuestions: payload.maxQuestions ?? 20,
           round: payload.round ?? 1,
-          totalRounds: payload.totalRounds ?? 5,
+          totalRounds: payload.totalRounds ?? GUESS_WHO_TOTAL_ROUNDS,
           scores: Array.isArray(payload.scores) ? payload.scores : [],
-          celebrity: payload.celebrity,
+          clue: payload.clue,
+          namePattern: payload.namePattern,
+          endsAt: payload.endsAt,
+          filter: payload.filter,
         },
       });
     };
-    const onQuestions = (payload: {
-      kind?: string;
-      questions?: QuestionEntry[];
-      questionCount?: number;
-      maxQuestions?: number;
-      finished?: boolean;
-    }) => {
-      if (payload.kind === 'guess-who' && Array.isArray(payload.questions)) {
-        dispatch({
-          type: 'questions-updated',
-          payload: {
-            questions: payload.questions,
-            questionCount: payload.questionCount ?? 0,
-            maxQuestions: payload.maxQuestions ?? 20,
-            finished: payload.finished === true,
-          },
-        });
+    const onRoundHint = (payload: { round?: number; pattern?: string }) => {
+      if (typeof payload.pattern === 'string' && payload.pattern.length > 0) {
+        dispatch({ type: 'hint', pattern: payload.pattern });
       }
     };
     const onGuessReveal = (payload: {
@@ -154,7 +142,7 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
           winner: payload.winner ?? null,
           scores: Array.isArray(payload.scores) ? payload.scores : [],
           round: payload.round ?? 1,
-          totalRounds: payload.totalRounds ?? 5,
+          totalRounds: payload.totalRounds ?? GUESS_WHO_TOTAL_ROUNDS,
           finished: payload.finished === true,
         },
       });
@@ -164,6 +152,26 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
         dispatch({ type: 'game-end', payload });
       }
     };
+    const onFilterOptions = (payload: {
+      regions?: GuessWhoFilterOption[];
+      genres?: GuessWhoFilterOption[];
+    }) => {
+      if (Array.isArray(payload.regions) && Array.isArray(payload.genres)) {
+        dispatch({
+          type: 'filter-options',
+          payload: { regions: payload.regions, genres: payload.genres },
+        });
+      }
+    };
+    const onGuessResult = (payload: { correct?: boolean; alreadyGuessed?: boolean }) => {
+      // Owner redesign: wrong guesses get quiet feedback so players keep
+      // trying; a correct one leads straight into the reveal broadcast.
+      if (payload.correct === false) {
+        dispatch({ type: 'feedback', text: 'Not quite, keep trying!' });
+      } else if (payload.correct === true) {
+        dispatch({ type: 'feedback', text: null });
+      }
+    };
     const onGameRestart = () => dispatch({ type: 'reset' });
     const onConnect = () => {
       void resync();
@@ -171,50 +179,27 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
 
     socket.on('connect', onConnect);
     socket.on(ServerEvents.roundStart, onRoundStart);
-    socket.on(ServerEvents.roundReveal, onQuestions);
+    socket.on(ServerEvents.roundHint, onRoundHint);
     socket.on(ServerEvents.guessReveal, onGuessReveal);
     socket.on(ServerEvents.gameEnd, onGameEnd);
     socket.on(ServerEvents.gameRestart, onGameRestart);
+    socket.on(ServerEvents.guessWhoFilterOptions, onFilterOptions);
+    socket.on(ServerEvents.guessResult, onGuessResult);
 
     void resync();
 
     return () => {
       socket.off('connect', onConnect);
       socket.off(ServerEvents.roundStart, onRoundStart);
-      socket.off(ServerEvents.roundReveal, onQuestions);
+      socket.off(ServerEvents.roundHint, onRoundHint);
       socket.off(ServerEvents.guessReveal, onGuessReveal);
       socket.off(ServerEvents.gameEnd, onGameEnd);
       socket.off(ServerEvents.gameRestart, onGameRestart);
+      socket.off(ServerEvents.guessWhoFilterOptions, onFilterOptions);
+      socket.off(ServerEvents.guessResult, onGuessResult);
       socketRef.current = null;
     };
   }, [roomCode, myName, resync]);
-
-  const askQuestion = useCallback(
-    async (text: string): Promise<{ ok: boolean; error?: string }> => {
-      const code = roomCodeRef.current;
-      if (!code) {
-        return { ok: false, error: 'NOT_IN_ROOM' };
-      }
-      const response = await emitAck(ClientEvents.askQuestion, { roomCode: code, text });
-      if (!response.ok) {
-        dispatch({ type: 'feedback', text: 'That question was rejected, 3-140 characters.' });
-      }
-      return { ok: response.ok, error: response.error };
-    },
-    [emitAck]
-  );
-
-  const answerYesNo = useCallback(
-    async (yes: boolean): Promise<{ ok: boolean; error?: string }> => {
-      const code = roomCodeRef.current;
-      if (!code) {
-        return { ok: false, error: 'NOT_IN_ROOM' };
-      }
-      const response = await emitAck(ClientEvents.answerQuestion, { roomCode: code, yes });
-      return { ok: response.ok, error: response.error };
-    },
-    [emitAck]
-  );
 
   const submitGuess = useCallback(
     async (text: string): Promise<{ ok: boolean; error?: string }> => {
@@ -249,8 +234,29 @@ export function useGuessWhoGame(roomCode: string | null, myName: string | null):
     return { ok: response.ok, error: response.error };
   }, [emitAck]);
 
+  const setFilter = useCallback(
+    async (filter: GuessWhoFilter) => {
+      const code = roomCodeRef.current;
+      if (!code) {
+        return { ok: false, error: 'NOT_IN_ROOM' };
+      }
+      const response = await emitAck(ClientEvents.setGuessWhoFilter, {
+        roomCode: code,
+        region: filter.region,
+        genre: filter.genre,
+      });
+      if (response.ok) {
+        // D064, optimistic update so the toggle reflects the choice immediately
+        // (the server only echoes the filter again at round start).
+        dispatch({ type: 'set-filter', filter });
+      }
+      return { ok: response.ok, error: response.error };
+    },
+    [emitAck]
+  );
+
   return {
     game,
-    actions: { askQuestion, answerYesNo, submitGuess, nextCelebrity, restartGame },
+    actions: { submitGuess, nextCelebrity, restartGame, setFilter },
   };
 }

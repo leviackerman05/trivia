@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * World Peek pano resolution (D062), build-time only — no runtime network.
+ * Placeguessr pano resolution (D062), build-time only — no runtime network.
  *
- * Reads the coordinate pool (src/data/world-peek-places.json) and resolves
+ * Reads the coordinate pool (src/data/placeguessr-places.json) and resolves
  * each everyday place to the nearest Mapillary panoramic image via the
- * graph API, writing src/data/world-peek-panos.json:
+ * graph API, writing src/data/placeguessr-panos.json:
  *   { [placeId]: { panoId, distanceM } }
  *
  * Requirements:
@@ -25,8 +25,8 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const PLACES_PATH = join(root, 'src/data/world-peek-places.json');
-const PANOS_PATH = join(root, 'src/data/world-peek-panos.json');
+const PLACES_PATH = join(root, 'src/data/placeguessr-places.json');
+const PANOS_PATH = join(root, 'src/data/placeguessr-panos.json');
 const ENV_PATH = join(root, '.env');
 
 // Max distance for a usable pano (~2 city blocks).
@@ -64,7 +64,10 @@ async function searchNear(accessToken, lon, lat) {
       'https://graph.mapillary.com/images' +
       `?fields=id,is_pano,is_primary,computed_geometry&bbox=${bbox}&limit=100&is_pano=true`;
     const response = await fetch(url, {
-      headers: { 'User-Agent': 'trivia-site/1.0 (world-peek resolve)', Authorization: `OAuth ${accessToken}` },
+      headers: {
+        'User-Agent': 'trivia-site/1.0 (placeguessr resolve)',
+        Authorization: `OAuth ${accessToken}`,
+      },
     });
     if (!response.ok) {
       continue; // rung rejected (bbox too wide) — try the next
@@ -75,9 +78,21 @@ async function searchNear(accessToken, lon, lat) {
       continue;
     }
     const nearest = panos
-      .map((pano) => ({ pano, distanceM: distanceM(lat, lon, pano.computed_geometry?.coordinates?.[1], pano.computed_geometry?.coordinates?.[0]) }))
+      .map((pano) => ({
+        pano,
+        distanceM: distanceM(
+          lat,
+          lon,
+          pano.computed_geometry?.coordinates?.[1],
+          pano.computed_geometry?.coordinates?.[0]
+        ),
+      }))
       .filter((item) => Number.isFinite(item.distanceM) && item.distanceM <= rung.maxDistanceM)
-      .sort((a, b) => a.distanceM - b.distanceM || Number(b.pano.is_primary === true) - Number(a.pano.is_primary === true))[0];
+      .sort(
+        (a, b) =>
+          a.distanceM - b.distanceM ||
+          Number(b.pano.is_primary === true) - Number(a.pano.is_primary === true)
+      )[0];
     if (nearest) {
       return nearest;
     }
@@ -103,7 +118,7 @@ const accessToken =
 
 if (!accessToken) {
   console.error(
-    'resolve-world-peek-panos: MAPILLARY_TOKEN is not set. Add it to .env ' +
+    'resolve-placeguessr-panos: MAPILLARY_TOKEN is not set. Add it to .env ' +
       '(free client token from mapillary.com/dashboard/developers), then re-run. ' +
       'Writing an empty pano map; the game will show "panoramas pending" until resolved.'
   );

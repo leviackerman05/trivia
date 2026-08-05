@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * World Peek content pool generator (D063, PLAN-SCOPE R5).
+ * Placeguessr content pool generator (D063, PLAN-SCOPE R5).
  *
  * Same pipeline discipline as the D056 price resolver: nothing unresolved
- * ships; every output is reviewable. The game dataset (world-peek-places.json)
+ * ships; every output is reviewable. The game dataset (placeguessr-places.json)
  * only ever contains entries with a resolved Mapillary pano.
  *
  * Stages (each separately runnable, deterministic re-runs):
@@ -12,7 +12,7 @@
  *              exclusion. Writes the candidate cache.
  *   --resolve  S3:    Mapillary pano-ID lookup per candidate (~1 rps,
  *              retry + backoff; MAPILLARY_TOKEN from build env).
- *   --apply    S4:    write world-peek-places.json (resolved entries ONLY)
+ *   --apply    S4:    write placeguessr-places.json (resolved entries ONLY)
  *              + scripts/.cache/ review list + per-region resolve rates.
  *
  * Default (no flag): sample → resolve → apply.
@@ -25,10 +25,10 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const DATASET_PATH = join(root, 'src/data/world-peek-places.json');
+const DATASET_PATH = join(root, 'src/data/placeguessr-places.json');
 const CACHE_DIR = join(root, 'scripts/.cache');
-const REVIEW_PATH = join(CACHE_DIR, 'world-peek-review.json');
-const CANDIDATES_PATH = join(CACHE_DIR, 'world-peek-candidates.json');
+const REVIEW_PATH = join(CACHE_DIR, 'placeguessr-review.json');
+const CANDIDATES_PATH = join(CACHE_DIR, 'placeguessr-candidates.json');
 
 const OVERPASS_ENDPOINTS = [
   'https://overpass-api.de/api/interpreter',
@@ -36,7 +36,7 @@ const OVERPASS_ENDPOINTS = [
 ];
 const OSM_API_MAP = 'https://api.openstreetmap.org/api/0.6/map';
 const MAPILLARY_GRAPH = 'https://graph.mapillary.com/images';
-const OSM_USER_AGENT = 'TriviaHub-dev/1.0 (world-peek content pipeline)';
+const OSM_USER_AGENT = 'TriviaHub-dev/1.0 (placeguessr content pipeline)';
 const RPS_DELAY_MS = 1000;
 const MAX_RETRIES = 4;
 const FULL_TARGET_PER_CITY = 40; // 50 cities × 40 = 2,000
@@ -45,6 +45,10 @@ const SAMPLE_PER_CITY = 1;
 // shrink on overflow so dense cities still sample.
 const OSM_START_RADIUS_KM = 2;
 const OSM_MIN_RADIUS_KM = 0.5;
+
+// Once both Overpass endpoints fail (rate limit / empty), stop trying them
+// for the rest of the run — the OSM API map endpoint is the reliable path.
+let overpassUnavailable = false;
 
 // ---------------------------------------------------------------------------
 // S0 — region slate (D058 region quota: every region covered; ≥15 per cell
@@ -421,6 +425,9 @@ function streetNodesFromWays(ways, nodeMap) {
 }
 
 async function overpassStreetNodes(city, radiusKm) {
+  if (overpassUnavailable) {
+    return [];
+  }
   const bbox = bboxFor(city, radiusKm);
   // Ways + their member nodes: `out tags` emits the ways, `>` adds members
   // to the result set, `out skel` emits them with coordinates.
@@ -475,6 +482,7 @@ async function overpassStreetNodes(city, radiusKm) {
         return points;
       } catch {
         if (attempt === MAX_RETRIES - 1) {
+          overpassUnavailable = true; // both endpoints exhausted for this city
           break; // try the next endpoint
         }
         await sleep(RPS_DELAY_MS * 2 ** attempt * 2);
@@ -501,7 +509,8 @@ async function osmApiStreetNodes(city, radiusKm) {
         if (attempt === MAX_RETRIES - 1) {
           throw new Error(`OSM API rate-limited for ${city.city}`);
         }
-        await sleep(RPS_DELAY_MS * 2 ** attempt * 2);
+        // The OSM API limiter needs a real cooldown — back off hard (30s +).
+        await sleep(30000 + RPS_DELAY_MS * 2 ** attempt);
         continue;
       }
       break;
@@ -537,7 +546,7 @@ function pickCandidates(nodes, city, count) {
   if (usable.length === 0) {
     return [];
   }
-  const rand = mulberry32(fnv1a(`world-peek:${city.city}:${city.region}`));
+  const rand = mulberry32(fnv1a(`placeguessr:${city.city}:${city.region}`));
   const picked = [];
   const seen = new Set();
   // Deterministic shuffle-pick without replacement (bounded tries).
@@ -626,15 +635,32 @@ async function sampleStage(full) {
   mkdirSync(CACHE_DIR, { recursive: true });
   const perCity = full ? FULL_TARGET_PER_CITY : SAMPLE_PER_CITY;
   const radiusKm = full ? undefined : OSM_START_RADIUS_KM;
-  const candidates = [];
+  // Resumable: keep existing candidates; only re-sample cities that haven't
+  // reached the per-city target yet (picks are deterministic per city).
+  const candidates = readJsonOr(CANDIDATES_PATH, []);
+  const counts = new Map();
+  for (const candidate of candidates) {
+    counts.set(candidate.city, (counts.get(candidate.city) ?? 0) + 1);
+  }
   for (const city of CITY_SLATE) {
-    const nodes = await fetchStreetNodes(city, radiusKm ?? city.radiusKm);
+    const have = counts.get(city.city) ?? 0;
+    if (have >= perCity) {
+      console.log(`skip ${city.city} (already ${have}/${perCity})`);
+      continue;
+    }
+    let nodes = [];
+    try {
+      nodes = await fetchStreetNodes(city, radiusKm ?? city.radiusKm);
+    } catch (error) {
+      console.warn(`  [warn] ${city.city}: ${error instanceof Error ? error.message : error}`);
+    }
     const picked = pickCandidates(nodes, city, perCity);
     candidates.push(...picked);
+    counts.set(city.city, have + picked.length);
     console.log(
       `sampled ${picked.length}/${perCity} from ${nodes.length} street nodes in ${city.city} (${city.region})`
     );
-    await sleep(1500); // be polite to the shared OSM quotas
+    await sleep(2500); // be polite to the shared OSM quotas
   }
   writeFileSync(CANDIDATES_PATH, JSON.stringify(candidates, null, 2) + '\n');
   console.log(`candidates: ${candidates.length} (${full ? 'full' : 'sample'} mode)`);
@@ -772,7 +798,7 @@ async function applyStage() {
     resolved: true,
   }));
   writeFileSync(DATASET_PATH, JSON.stringify(entries, null, 2) + '\n');
-  console.log(`world-peek-places.json: ${entries.length} resolved entries shipped`);
+  console.log(`placeguessr-places.json: ${entries.length} resolved entries shipped`);
 }
 
 // ---------------------------------------------------------------------------
@@ -791,7 +817,9 @@ async function main() {
     await applyStage();
   }
   if (!['--sample', '--resolve', '--apply', '--all'].includes(mode)) {
-    console.error('Usage: node scripts/sample-world-peeks.mjs [--sample|--resolve|--apply|--full]');
+    console.error(
+      'Usage: node scripts/sample-placeguessrs.mjs [--sample|--resolve|--apply|--full]'
+    );
     process.exit(1);
   }
 }
@@ -802,7 +830,7 @@ const isDirectRun = process.argv[1] && import.meta.url === pathToFileURL(process
 if (isDirectRun) {
   main().catch((error) => {
     console.error(
-      `world-peek pipeline failed: ${error instanceof Error ? error.message : String(error)}`
+      `placeguessr pipeline failed: ${error instanceof Error ? error.message : String(error)}`
     );
     process.exit(1);
   });

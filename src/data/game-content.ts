@@ -905,13 +905,13 @@ export const gameContent: Record<string, GameSeoContent> = {
       },
     ],
   },
-  'world-peek': {
+  placeguessr: {
     metaDescription:
-      'Play World Peek online free, a geography guessing game with five 360° views from everyday places. Pin each spot on the map and score by distance, no downloads.',
+      'Play Placeguessr online free, a geography guessing game with five 360° views from everyday places. Pin each spot on the map and score by distance, no downloads.',
     sections: [
       {
-        heading: 'How to play World Peek',
-        body: 'World Peek is a solo geography game with a simple loop: you get five 360° panoramas taken in five everyday places, and for each one you study the view, then tap the world map to pin where you think it was taken. The closer your pin lands to the real spot, the more points you score. There is no timer, no lives, and no penalty for being wrong, only a smaller score, so it is a relaxed way to test how well you know the planet. After five rounds the game adds up your total and shows how your geography instincts compare.',
+        heading: 'How to play Placeguessr',
+        body: 'Placeguessr is a solo geography game with a simple loop: you get five 360° panoramas taken in five everyday places, and for each one you study the view, then tap the world map to pin where you think it was taken. The closer your pin lands to the real spot, the more points you score. There is no timer, no lives, and no penalty for being wrong, only a smaller score, so it is a relaxed way to test how well you know the planet. After five rounds the game adds up your total and shows how your geography instincts compare.',
       },
       {
         heading: 'How scoring works',
@@ -919,20 +919,20 @@ export const gameContent: Record<string, GameSeoContent> = {
       },
       {
         heading: 'Read the view, not the map',
-        body: 'The trick to World Peek is in the details of the panorama. Street signs, vegetation, architecture, vehicles, and even the colour of the soil can place a scene on a continent. Once you have narrowed it down, think about the shape of the coastline or the position of a mountain range on the map and pin accordingly. Practice sharpens the eye, which is what makes the game quietly addictive.',
+        body: 'The trick to Placeguessr is in the details of the panorama. Street signs, vegetation, architecture, vehicles, and even the colour of the soil can place a scene on a continent. Once you have narrowed it down, think about the shape of the coastline or the position of a mountain range on the map and pin accordingly. Practice sharpens the eye, which is what makes the game quietly addictive.',
       },
       {
         heading: 'Why it works as a break or a classroom warm-up',
-        body: 'World Peek needs no setup and no account. It is a five-minute round, which makes it a natural coffee-break game, a geography-class warm-up, or a friendly bet between friends about who knows the world better. Because it is solo, you can play it anywhere and compare scores with others on the leaderboard. Teachers like it because the reveal explains the answer with the distance shown, so a wrong guess still teaches something about where a place actually sits. It is the kind of game that starts a conversation, someone swears a view was in Italy and it turns out to be a mountain town in Peru, and suddenly the whole room is debating geography.',
+        body: 'Placeguessr needs no setup and no account. It is a five-minute round, which makes it a natural coffee-break game, a geography-class warm-up, or a friendly bet between friends about who knows the world better. Because it is solo, you can play it anywhere and compare scores with others on the leaderboard. Teachers like it because the reveal explains the answer with the distance shown, so a wrong guess still teaches something about where a place actually sits. It is the kind of game that starts a conversation, someone swears a view was in Italy and it turns out to be a mountain town in Peru, and suddenly the whole room is debating geography.',
       },
       {
         heading: 'Devices & requirements',
-        body: 'World Peek runs in any modern browser on desktop, tablet, or phone. The map is built for both mouse and touch, and the 360° views stream on demand so even a slow connection stays playable. Nothing to install, nothing to download.',
+        body: 'Placeguessr runs in any modern browser on desktop, tablet, or phone. The map is built for both mouse and touch, and the 360° views stream on demand so even a slow connection stays playable. Nothing to install, nothing to download.',
       },
     ],
     faqs: [
       {
-        question: 'How many panoramas are in a game of World Peek?',
+        question: 'How many panoramas are in a game of Placeguessr?',
         answer:
           'Five 360° panoramas, one per round. Each one shows a real place with a real location, and your pin is scored by distance.',
       },
@@ -944,7 +944,7 @@ export const gameContent: Record<string, GameSeoContent> = {
       {
         question: 'Do I need an account to play?',
         answer:
-          'No. World Peek is a solo game that runs in your browser with no sign-up. Scores can be saved to the leaderboard with a nickname.',
+          'No. Placeguessr is a solo game that runs in your browser with no sign-up. Scores can be saved to the leaderboard with a nickname.',
       },
     ],
   },

@@ -118,6 +118,35 @@ adopted (D051); `pnpm verify` green: 144 client + 154 server tests.
 **Previous:** Phase 1.5 identity + server streaks; Phase 0/1 foundation.
 Next after launch: Phase B retention loop (XP, weekly challenge).
 
+> ⚠ **Guess Who region/genre design reviewed (2026-08-06, Architect):**
+> `docs/GUESS-WHO-DESIGN.md` — verdict **RETURN FOR CHANGES** (3 required
+> fixes, all small; design otherwise verified sound): (1) briefs cite
+> `server/src/lib/events.js` — the file is `events.ts`; (2) the tier-guard
+> fallback is under-specified when tiers 2-3 cannot fill the deck (pin:
+> best-effort guard — never shrink the deck below `roundCount` when the
+> filtered pool allows); (3) the per-room `gameSerial` must survive
+> `clearRoomGame` (it wipes pending maps on every start — the
+> owner-confirmed rematch re-deal would silently break); counter keyed by
+> room, removed on room teardown. Owner confirmed all four review asks
+> (tier guard kept, rematch re-deal kept, `sources`/`aka` non-blocking,
+> `difficulty` in schema). Evidence verified: 205-entry pool shape,
+> `GuessWhoSession` beginRound via `randomIntFn` (L255-271),
+> `pendingCharadesCategories` pattern, `lobbyExtras` prop, 859-candidate
+> pool. D056-D059 re-appended to DECISIONS (were unlogged after the World
+> Peek series; D055/D062/D063 reference them). Decision entry for the
+> Guess Who deck design (next free: D064) to be appended on resubmission.
+
+> ✅ **Resubmission re-reviewed (2026-08-06, Architect):**
+> `docs/GUESS-WHO-DESIGN.md` — all 3 required fixes verified applied and
+> correct (`events.ts` paths throughout; best-effort tier guard with the
+> deck-size invariant `min(roundCount, pool.length)`; room-keyed
+> `guessWhoGameSerials` deleted at teardown only). Verdict **APPROVE WITH
+> NOTES** — one non-blocking note for BE2: delete the serial at BOTH
+> room-emptied paths (leaveRoom `becameEmpty` L1526-1532 AND the
+> disconnect `players.size === 0` path L2636-2639) so the map stays
+> bounded by the design's own argument. **D064 logged** (deck design).
+> Handoff clear for BE1/FE1/L12.
+
 ---
 
 ## Completed Work

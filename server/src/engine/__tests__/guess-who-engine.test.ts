@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { GuessWhoSession, type Celebrity } from '../guess-who-engine.js';
+import {
+  GuessWhoSession,
+  GUESS_WHO_HINT_1_MS,
+  GUESS_WHO_HINT_2_MS,
+  type Celebrity,
+} from '../guess-who-engine.js';
 
 const CELEBRITIES: Celebrity[] = [
   {
@@ -44,38 +49,32 @@ function make(random: (max: number) => number = (_max) => 0) {
   return new GuessWhoSession(CELEBRITIES, { randomInt: random });
 }
 
-describe('GuessWhoSession (PRD §5.17, M17)', () => {
-  it('starts with the host as the answerer holding a secret celebrity', () => {
+describe('GuessWhoSession (PRD §5.17, owner redesign: hidden name)', () => {
+  it('starts a timed round; the secret celebrity exists but the name is never in a pattern', () => {
     const session = make();
-    const started = session.start(['Alice', 'Bob'], 'Alice');
+    const started = session.start(['Alice', 'Bob']);
     expect(started.ok).toBe(true);
-    expect(session.answerer).toBe('Alice');
     expect(session.secretCelebrity?.name).toBe('Beyoncé');
     expect(session.phaseValue).toBe('questioning');
     expect(session.totalRoundsValue).toBe(5);
     expect(session.currentRound).toBe(1);
+    // The initial pattern reveals only the first letter of each word.
+    expect(session.namePatternAt(Date.now())).toBe('B_____é');
   });
 
-  it('questioners ask, the answerer answers, and the log grows', () => {
-    const session = make();
-    session.start(['Alice', 'Bob'], 'Alice');
-    const asked = session.askQuestion('Bob', 'Are they alive?');
-    expect(asked.ok).toBe(true);
-    // The answerer cannot ask.
-    expect(session.askQuestion('Alice', 'Am I famous?').ok).toBe(false);
-    // The answerer answers the latest open question.
-    const answered = session.answerQuestion('Alice', true);
-    expect(answered.ok).toBe(true);
-    expect(session.questionLog[0]).toMatchObject({ question: 'Are they alive?', answer: true });
-    expect(session.questionCount).toBe(1);
-    // Non-answerers cannot answer.
-    expect(session.answerQuestion('Bob', false).ok).toBe(false);
+  it('namePatternAt reveals more letters monotonically (Skribbl-style)', () => {
+    const session = make(() => 1); // Will Smith
+    session.start(['Alice', 'Bob']);
+    const now = Date.now();
+    expect(session.namePatternAt(now)).toBe('W___ S____');
+    expect(session.namePatternAt(now + GUESS_WHO_HINT_1_MS)).toBe('Will S____');
+    expect(session.namePatternAt(now + GUESS_WHO_HINT_2_MS)).toBe('Will Smi__');
   });
 
-  it('M17: a correct guess scores +1, reveals, and advances to the NEXT round', () => {
+  it('anyone can guess; a correct guess scores +1, reveals, and advances to the NEXT round', () => {
     const session = make();
-    session.start(['Alice', 'Bob'], 'Alice');
-    const wrong = session.submitGuess('Bob', 'Rihanna');
+    session.start(['Alice', 'Bob']);
+    const wrong = session.submitGuess('Alice', 'Rihanna');
     expect(ok2(wrong)).toEqual({ correct: false, finished: false });
     const right = session.submitGuess('Bob', 'Beyoncé');
     // Round 1 of 5 → the game continues after the reveal.
@@ -83,24 +82,30 @@ describe('GuessWhoSession (PRD §5.17, M17)', () => {
     expect(session.phaseValue).toBe('revealed');
     expect(session.winnerValue).toBe('Bob');
     expect(session.scoreTable[0]).toEqual({ playerName: 'Bob', score: 1 });
-    // The host advances → round 2, answerer rotates to Bob.
+    // The host advances → round 2 with a fresh pattern.
     const advanced = session.next();
     expect(ok2(advanced).finished).toBe(false);
     expect(session.phaseValue).toBe('questioning');
     expect(session.currentRound).toBe(2);
-    expect(session.answerer).toBe('Bob');
-    expect(session.questionCount).toBe(0);
+    expect(session.namePatternAt(Date.now())).toBe('B_____é');
+  });
+
+  it('last-name guesses count (accents and punctuation ignored)', () => {
+    const session = make();
+    session.start(['Alice', 'Bob']);
+    expect(ok2(session.submitGuess('Alice', 'beyonce')).correct).toBe(true);
+
+    const smith = make(() => 1);
+    smith.start(['Alice', 'Bob']);
+    expect(ok2(smith.submitGuess('Bob', 'Smith')).correct).toBe(true);
   });
 
   it('M17: five correct guesses finish the game with a winner and scores', () => {
     const session = make();
-    session.start(['Alice', 'Bob'], 'Alice');
+    session.start(['Alice', 'Bob']);
     let finished = false;
-    // The answerer rotates each round (Alice, Bob, Alice, Bob, Alice), so
-    // the non-answerer guesses: Bob on odd rounds, Alice on even rounds.
     for (let round = 1; round <= 5; round += 1) {
-      const guesser = round % 2 === 1 ? 'Bob' : 'Alice';
-      const guessed = session.submitGuess(guesser, 'Beyoncé');
+      const guessed = session.submitGuess('Bob', 'Beyoncé');
       if (round < 5) {
         expect(ok2(guessed).finished).toBe(false);
         session.next();
@@ -119,23 +124,15 @@ describe('GuessWhoSession (PRD §5.17, M17)', () => {
     expect(payload.kind).toBe('guess-who');
     expect(payload.celebrity.name).toBe('Beyoncé');
     expect(payload.winner).toBe('Bob');
-    expect(payload.scores[0]).toEqual({ playerName: 'Bob', score: 3 });
+    expect(payload.scores[0]).toEqual({ playerName: 'Bob', score: 5 });
     expect(payload.rounds).toBe(5);
   });
 
-  it('reveals after 20 answered questions on any round (no winner)', () => {
+  it('revealOnTimeout reveals without a winner; the host advances', () => {
     const session = make();
-    session.start(['Alice', 'Bob'], 'Alice');
-    let finished = false;
-    for (let round = 1; round <= 20; round += 1) {
-      session.askQuestion('Bob', `Question ${round}?`);
-      const answered = session.answerQuestion('Alice', round % 2 === 0);
-      if (ok2(answered).finished) {
-        finished = true;
-      }
-    }
-    // The cap on round 1 reveals but does NOT finish the game.
-    expect(finished).toBe(false);
+    session.start(['Alice', 'Bob']);
+    const timedOut = session.revealOnTimeout();
+    expect(ok2(timedOut).finished).toBe(false);
     expect(session.phaseValue).toBe('revealed');
     expect(session.winnerValue).toBeNull();
     const advanced = session.next();
@@ -143,20 +140,32 @@ describe('GuessWhoSession (PRD §5.17, M17)', () => {
     expect(session.currentRound).toBe(2);
   });
 
-  it('rejects the 21st question and solo rooms let the answerer participate', () => {
+  it('rejects guesses outside questioning and from non-players', () => {
     const session = make();
-    session.start(['Alice', 'Bob'], 'Alice');
-    for (let round = 1; round <= 20; round += 1) {
-      session.askQuestion('Bob', `Question number ${round}?`);
-      session.answerQuestion('Alice', false);
-    }
-    expect(session.askQuestion('Bob', 'One more question?').ok).toBe(false); // QUESTION_LIMIT
+    session.start(['Alice', 'Bob']);
+    expect(session.submitGuess('Carol', 'Beyoncé').ok).toBe(false); // NOT_PLAYER
+    expect(ok2(session.submitGuess('Alice', 'Beyoncé')).correct).toBe(true);
+    expect(session.submitGuess('Bob', 'Beyoncé').ok).toBe(false); // WRONG_PHASE
+  });
 
-    const solo = make();
-    solo.start(['Solo'], 'Solo');
-    // Solo testing affordance (D026): the answerer may ask and guess.
-    expect(solo.askQuestion('Solo', 'Am I famous?').ok).toBe(true);
-    expect(solo.submitGuess('Solo', 'Beyoncé').ok).toBe(true);
+  it('D064: pickMode sequential consumes the deck in order, repeat-free', () => {
+    const session = new GuessWhoSession(CELEBRITIES, { pickMode: 'sequential' });
+    const started = session.start(['Alice', 'Bob']);
+    expect(started.ok).toBe(true);
+    const seen: string[] = [];
+    for (let round = 1; round <= CELEBRITIES.length; round += 1) {
+      const celebrity = session.secretCelebrity;
+      expect(celebrity).not.toBeNull();
+      seen.push(celebrity!.name);
+      // Reveal via a correct guess, then advance (host action).
+      const guessed = session.submitGuess('Bob', celebrity!.name);
+      expect(ok2(guessed).correct).toBe(true);
+      const next = session.next();
+      expect(ok2(next).finished).toBe(false);
+    }
+    // Deck order, no repeats, every celebrity used exactly once.
+    expect(seen).toEqual(['Beyoncé', 'Will Smith', 'Marie Curie']);
+    expect(new Set(seen).size).toBe(CELEBRITIES.length);
   });
 });
 

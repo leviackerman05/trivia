@@ -1,21 +1,21 @@
 import { describe, expect, it } from 'vitest';
-import placesJson from '../../data/world-peek-places.json';
+import placesJson from '../../data/placeguessr-places.json';
 import {
   greatCirclePoints,
   haversineKm,
   mapPoint,
-  pickWorldPeekRounds,
+  pickPlaceguessrRounds,
   pointToLonLat,
   scoreGuess,
-  WORLD_PEEK_EXACT_BONUS,
-  WORLD_PEEK_MAX_SCORE,
-  WORLD_PEEK_ROUNDS,
-  type WorldPeekPlace,
-} from '../world-peek';
+  PLACEGUESSR_EXACT_BONUS,
+  PLACEGUESSR_MAX_SCORE,
+  PLACEGUESSR_ROUNDS,
+  type PlaceguessrPlace,
+} from '../placeguessr';
 
-const entries = placesJson as WorldPeekPlace[];
+const entries = placesJson as PlaceguessrPlace[];
 
-describe('World Peek coordinate pool (D062/D063: 62 everyday places; full pool = content lot L7)', () => {
+describe('Placeguessr coordinate pool (D062/D063: 62 everyday places; full pool = content lot L7)', () => {
   it('has 50+ entries with valid coordinates, regions, and difficulty', () => {
     expect(entries.length).toBeGreaterThanOrEqual(50);
     for (const entry of entries) {
@@ -43,21 +43,21 @@ describe('World Peek coordinate pool (D062/D063: 62 everyday places; full pool =
   });
 });
 
-describe('pickWorldPeekRounds (seeded)', () => {
+describe('pickPlaceguessrRounds (seeded)', () => {
   it('is deterministic for the same seed and picks distinct entries', () => {
-    const first = pickWorldPeekRounds(entries, WORLD_PEEK_ROUNDS, 42);
-    const second = pickWorldPeekRounds(entries, WORLD_PEEK_ROUNDS, 42);
+    const first = pickPlaceguessrRounds(entries, PLACEGUESSR_ROUNDS, 42);
+    const second = pickPlaceguessrRounds(entries, PLACEGUESSR_ROUNDS, 42);
     expect(first).toEqual(second);
-    expect(first).toHaveLength(WORLD_PEEK_ROUNDS);
-    expect(new Set(first.map((round) => round.entry.place)).size).toBe(WORLD_PEEK_ROUNDS);
+    expect(first).toHaveLength(PLACEGUESSR_ROUNDS);
+    expect(new Set(first.map((round) => round.entry.place)).size).toBe(PLACEGUESSR_ROUNDS);
   });
 
   it('differs across seeds and returns fewer rounds on a small pool', () => {
-    expect(pickWorldPeekRounds(entries, 5, 1)[0]!.entry.place).not.toBe(
-      pickWorldPeekRounds(entries, 5, 2)[0]!.entry.place
+    expect(pickPlaceguessrRounds(entries, 5, 1)[0]!.entry.place).not.toBe(
+      pickPlaceguessrRounds(entries, 5, 2)[0]!.entry.place
     );
     const tiny = entries.slice(0, 3);
-    expect(pickWorldPeekRounds(tiny, 5, 0)).toHaveLength(3);
+    expect(pickPlaceguessrRounds(tiny, 5, 0)).toHaveLength(3);
   });
 });
 
@@ -80,13 +80,13 @@ describe('haversineKm', () => {
 
 describe('scoreGuess (1000 pts minus distance penalty, exact = bonus)', () => {
   it('pays the bonus for an exact pin', () => {
-    expect(scoreGuess(0)).toBe(WORLD_PEEK_MAX_SCORE + WORLD_PEEK_EXACT_BONUS);
-    expect(scoreGuess(0.5)).toBe(WORLD_PEEK_MAX_SCORE + WORLD_PEEK_EXACT_BONUS);
+    expect(scoreGuess(0)).toBe(PLACEGUESSR_MAX_SCORE + PLACEGUESSR_EXACT_BONUS);
+    expect(scoreGuess(0.5)).toBe(PLACEGUESSR_MAX_SCORE + PLACEGUESSR_EXACT_BONUS);
   });
 
   it('decays with distance and floors at zero', () => {
-    expect(scoreGuess(100)).toBe(WORLD_PEEK_MAX_SCORE - 10);
-    expect(scoreGuess(1000)).toBe(WORLD_PEEK_MAX_SCORE - 100);
+    expect(scoreGuess(100)).toBe(PLACEGUESSR_MAX_SCORE - 10);
+    expect(scoreGuess(1000)).toBe(PLACEGUESSR_MAX_SCORE - 100);
     expect(scoreGuess(10000)).toBe(0);
     expect(scoreGuess(50000)).toBe(0);
   });
@@ -153,7 +153,7 @@ describe('map projection helpers', () => {
   });
 
   it('round-trips the island pin flow exactly (regression: lat was negated)', () => {
-    // Mirrors WorldPeek.tsx submit: pin = mapPoint(lon, lat), then
+    // Mirrors Placeguessr.tsx submit: pin = mapPoint(lon, lat), then
     // guess = pointToLonLat(pin.x / 360, pin.y / 180). The bug used
     // "1 - pin.y / 180", which negated the latitude (Paris -> -48.8).
     const samples: [number, number][] = [

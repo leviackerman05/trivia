@@ -1,15 +1,25 @@
-import { useMemo, useState, type SyntheticEvent } from 'react';
+import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import { useRoom } from './room/useRoom';
 import RoomLobbyPanel from './room/RoomLobbyPanel';
 import { useGuessWhoGame } from './useGuessWhoGame';
 import { getGame } from '../lib/games';
-import type { CelebrityView, GuessWhoGameState } from '../lib/guess-who';
+import {
+  filterLabel,
+  GENRE_LABELS,
+  GUESS_WHO_TOTAL_ROUNDS,
+  REGION_LABELS,
+  type GuessWhoFilter,
+  type GuessWhoGameState,
+} from '../lib/guess-who';
 
 /**
- * Guess Who? Celebrity Edition arena (M9, PRD §5.17), the host (answerer)
- * holds a secret celebrity with trait objects; everyone else asks yes/no
- * questions (the answerer judges), sees the question log, and can guess at
- * any time. 20-question cap → reveal. The secret is answerer-only (D023).
+ * Guess Who? Celebrity Edition arena (M9, PRD §5.17 + owner redesign
+ * 2026-08-06): the celebrity's NAME is hidden from every device — not even
+ * the host sees it. Everyone gets the traits + facts (the clue) with a
+ * 60-second round timer and a Skribbl-style letter pattern that reveals more
+ * of the name over time; anyone can guess (the server verifies). A correct
+ * guess scores +1 and reveals the celebrity + facts (M17); the host advances
+ * to the next round.
  */
 
 interface Props {
@@ -21,16 +31,26 @@ export default function GuessWhoArena({ gameSlug }: Props) {
   const { status, error, room, messages, actions: roomActions, myName } = useRoom();
   const { game: gw, actions: gameActions } = useGuessWhoGame(room?.code ?? null, myName ?? null);
 
-  const [questionDraft, setQuestionDraft] = useState('');
   const [guessDraft, setGuessDraft] = useState('');
+  const [now, setNow] = useState(() => Date.now());
 
   const isHost = useMemo(
     () => room?.players.some((player) => player.isHost && player.connected) ?? false,
     [room]
   );
   const inGame = room !== null && room.phase !== 'lobby';
-  const isAnswerer = gw.answerer !== null && gw.answerer === myName;
-  const openQuestion = [...gw.questions].reverse().find((entry) => entry.answer === null) ?? null;
+
+  useEffect(() => {
+    if (gw.view !== 'questioning' || gw.endsAt === null) {
+      return;
+    }
+    const id = setInterval(() => setNow(Date.now()), 500);
+    return () => clearInterval(id);
+  }, [gw.view, gw.endsAt]);
+  const secondsLeft =
+    gw.view === 'questioning' && gw.endsAt !== null
+      ? Math.max(0, Math.ceil((gw.endsAt - now) / 1000))
+      : 0;
 
   if (!room) {
     return (
@@ -58,18 +78,25 @@ export default function GuessWhoArena({ gameSlug }: Props) {
         actions={roomActions}
         isHost={isHost}
         gamePlayable={game?.playable === true}
+        lobbyExtras={
+          isHost ? (
+            gw.filterOptions ? (
+              <FilterControl
+                filter={gw.filter}
+                options={gw.filterOptions}
+                onSelect={(filter) => void gameActions.setFilter(filter)}
+              />
+            ) : undefined
+          ) : (
+            <p className="text-small text-ink-muted">
+              Region: {filterLabel(gw.filter.region, REGION_LABELS)} · Genre:{' '}
+              {filterLabel(gw.filter.genre, GENRE_LABELS)}
+            </p>
+          )
+        }
       />
     );
   }
-
-  const ask = (event: SyntheticEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const text = questionDraft;
-    setQuestionDraft('');
-    if (text.trim()) {
-      void gameActions.askQuestion(text);
-    }
-  };
 
   const guess = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -87,11 +114,21 @@ export default function GuessWhoArena({ gameSlug }: Props) {
           {room.code}
         </span>
         <span className="rounded-pill bg-success-soft px-4 py-1.5 text-xs font-semibold text-success-strong">
-          Round {gw.round} of {gw.totalRounds} · {gw.questionCount}/{gw.maxQuestions} questions
+          Round {gw.round} of {gw.totalRounds}
         </span>
         <span className="rounded-pill bg-tertiary/40 px-4 py-1.5 text-xs font-semibold text-ink">
-          {isAnswerer ? 'You hold the secret' : `${gw.answerer} holds the secret`}
+          Region: {filterLabel(gw.filter.region, REGION_LABELS)} · Genre:{' '}
+          {filterLabel(gw.filter.genre, GENRE_LABELS)}
         </span>
+        {gw.view === 'questioning' && (
+          <span
+            className={`rounded-pill px-4 py-1.5 text-xs font-semibold ${
+              secondsLeft <= 10 ? 'bg-danger-soft text-danger-strong' : 'bg-tertiary/40 text-ink'
+            }`}
+          >
+            {secondsLeft}s left
+          </span>
+        )}
         <button
           type="button"
           onClick={() => roomActions.leaveRoom()}
@@ -101,58 +138,40 @@ export default function GuessWhoArena({ gameSlug }: Props) {
         </button>
       </div>
 
-      {gw.view === 'questioning' && isAnswerer && (
-        <AnswererView
-          celebrity={gw.celebrity}
-          openQuestion={openQuestion}
-          onAnswer={(yes) => void gameActions.answerYesNo(yes)}
-        />
-      )}
-
-      {gw.view === 'questioning' && !isAnswerer && (
+      {gw.view === 'questioning' && (
         <div className="flex flex-col gap-4">
           <div className="rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
             <h2 className="font-display text-h2 text-ink">Who is the secret celebrity?</h2>
             <p className="mt-1 text-body text-ink-muted">
-              Ask yes/no questions to narrow it down, you can guess the name at any time.
+              Nobody sees the name, not even the host. Use the clues, watch the letters reveal, and
+              guess before the timer runs out.
             </p>
-            <form onSubmit={ask} className="mt-4 flex flex-col gap-2 sm:flex-row">
-              <input
-                value={questionDraft}
-                onChange={(event) => setQuestionDraft(event.target.value)}
-                maxLength={140}
-                placeholder="Are they alive? Are they an actor?"
-                aria-label="Yes/no question"
-                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
-              />
-              <button
-                type="submit"
-                disabled={!questionDraft.trim()}
-                className="inline-flex min-h-12 items-center justify-center rounded-pill bg-secondary px-6 text-small font-semibold text-white  transition-colors hover:bg-secondary-dark disabled:pointer-events-none disabled:opacity-40"
-              >
-                Ask
-              </button>
-            </form>
-            <form onSubmit={guess} className="mt-3 flex flex-col gap-2 sm:flex-row">
+            <NamePattern namePattern={gw.namePattern} />
+            <ClueCard clue={gw.clue} />
+            <form onSubmit={guess} className="mt-4 flex flex-col gap-2 sm:flex-row">
               <input
                 value={guessDraft}
                 onChange={(event) => setGuessDraft(event.target.value)}
                 maxLength={60}
                 placeholder="Guess the name…"
                 aria-label="Celebrity guess"
-                className="min-w-0 flex-1 rounded-md border  border-primary/50 bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-primary focus:ring-2 focus:ring-ink"
+                className="min-w-0 flex-1 rounded-md border border-primary/50 bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-primary focus:ring-2 focus:ring-ink"
               />
               <button
                 type="submit"
                 disabled={!guessDraft.trim()}
-                className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-6 text-small font-semibold text-white  transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
+                className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-6 text-small font-semibold text-white transition-colors hover:bg-primary-hover disabled:pointer-events-none disabled:opacity-40"
               >
                 Guess!
               </button>
             </form>
           </div>
 
-          <QuestionLog questions={gw.questions} />
+          {gw.feedback && (
+            <p role="status" className="text-small font-semibold text-ink-muted">
+              {gw.feedback}
+            </p>
+          )}
         </div>
       )}
 
@@ -204,7 +223,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
             <button
               type="button"
               onClick={() => void gameActions.restartGame()}
-              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
+              className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white transition-colors hover:bg-primary-hover sm:self-start"
             >
               Play again
             </button>
@@ -212,12 +231,6 @@ export default function GuessWhoArena({ gameSlug }: Props) {
             <p className="text-small text-ink-muted">Waiting for the host to start another game.</p>
           )}
         </div>
-      )}
-
-      {gw.feedback && (
-        <p role="status" className="text-small font-semibold text-danger-strong">
-          {gw.feedback}
-        </p>
       )}
 
       {error && (
@@ -232,8 +245,100 @@ export default function GuessWhoArena({ gameSlug }: Props) {
   );
 }
 
-/** M17, between-round reveal: the celebrity, facts, scores, and the
- * host's advance control ("next celebrity" / "final results"). */
+/** Skribbl-style letter boxes: revealed letters, hidden letters as blanks,
+ * spaces/punctuation as spacing. */
+function NamePattern({ namePattern }: { namePattern: string | null }) {
+  if (!namePattern) {
+    return (
+      <p className="mt-4 rounded-md bg-surface-muted px-4 py-3 text-small text-ink-muted">
+        Loading the name puzzle…
+      </p>
+    );
+  }
+  const chars = [...namePattern];
+  return (
+    <div
+      className="mt-4 flex flex-wrap gap-1"
+      role="img"
+      aria-label={`Name puzzle: ${namePattern}`}
+    >
+      {chars.map((char, index) => {
+        if (char === '_') {
+          return (
+            <span
+              key={index}
+              className="inline-flex h-9 w-7 items-center justify-center rounded-md border border-border bg-surface-muted sm:h-11 sm:w-9"
+              aria-hidden="true"
+            />
+          );
+        }
+        if (/[a-z0-9]/i.test(char)) {
+          return (
+            <span
+              key={index}
+              className="inline-flex h-9 w-7 items-center justify-center rounded-md border border-primary bg-primary/15 font-mono text-lg font-bold text-primary-deep sm:h-11 sm:w-9"
+            >
+              {char}
+            </span>
+          );
+        }
+        // Space or punctuation: visual spacing, never a tile.
+        return (
+          <span key={index} className="w-2 sm:w-3" aria-hidden="true">
+            {char === ' ' ? '' : char}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
+/** The traits + facts everyone sees (the name is never here). */
+function ClueCard({ clue }: { clue: GuessWhoGameState['clue'] }) {
+  if (!clue) {
+    return <p className="mt-4 text-small text-ink-muted">Loading the clues…</p>;
+  }
+  return (
+    <div className="mt-4 rounded-lg border border-border bg-surface-raised p-5">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-body text-ink sm:grid-cols-3">
+        <p>
+          <span className="font-semibold">Gender:</span> {clue.gender === 'f' ? 'Female' : 'Male'}
+        </p>
+        <p>
+          <span className="font-semibold">Status:</span> {clue.alive ? 'Alive' : 'Deceased'}
+        </p>
+        <p>
+          <span className="font-semibold">Profession:</span> {clue.profession}
+        </p>
+        <p>
+          <span className="font-semibold">Nationality:</span> {clue.nationality}
+        </p>
+        <p>
+          <span className="font-semibold">Age:</span> {clue.ageRange}
+        </p>
+        <p>
+          <span className="font-semibold">Hair:</span> {clue.hairColor}
+        </p>
+      </div>
+      <p className="mt-2 text-body text-ink">
+        <span className="font-semibold">Famous for:</span> {clue.famousFor}
+      </p>
+      {clue.facts.length > 0 && (
+        <ul className="mt-3 flex flex-col gap-2">
+          {clue.facts.map((fact, index) => (
+            <li key={index} className="flex gap-2 text-body text-ink">
+              <span aria-hidden="true">✨</span>
+              <span>{fact}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+/** Between-round reveal: the celebrity, facts, scores, and the host's
+ * advance control ("next celebrity" / "final results"). */
 function RevealView({
   gw,
   isHost,
@@ -252,7 +357,7 @@ function RevealView({
         {gw.winner ? `🎉 ${gw.winner} guessed it!` : 'Nobody got it this round'}
       </h2>
       {revealed && (
-        <div className="rounded-lg border  border-primary/50 bg-primary/10 p-5">
+        <div className="rounded-lg border border-primary/50 bg-primary/10 p-5">
           <p className="text-center font-display text-h2 text-primary-deep">{revealed.name}</p>
           <p className="mt-1 text-center text-body text-ink-muted">{revealed.famousFor}</p>
           {revealed.facts.length > 0 && (
@@ -283,7 +388,7 @@ function RevealView({
         <button
           type="button"
           onClick={onNext}
-          className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"
+          className="inline-flex min-h-12 w-full items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white transition-colors hover:bg-primary-hover sm:w-auto sm:self-start"
         >
           {gw.revealFinished ? 'See final results' : 'Next celebrity'}
         </button>
@@ -296,108 +401,59 @@ function RevealView({
   );
 }
 
-/** The answerer's card: secret celebrity + traits + yes/no controls. */
-function AnswererView({
-  celebrity,
-  openQuestion,
-  onAnswer,
+/** D064, host lobby control: region + genre chip rows with pool counts. */
+function FilterControl({
+  filter,
+  options,
+  onSelect,
 }: {
-  celebrity: CelebrityView | null;
-  openQuestion: { playerName: string; question: string } | null;
-  onAnswer: (yes: boolean) => void;
+  filter: GuessWhoFilter;
+  options: NonNullable<GuessWhoGameState['filterOptions']>;
+  onSelect: (filter: GuessWhoFilter) => void;
 }) {
-  return (
-    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
-      <h2 className="text-lg font-bold tracking-tight text-ink">You hold the secret</h2>
-      {celebrity && (
-        <div className="rounded-lg border  border-primary/50 bg-primary/10 p-5">
-          <p className="text-center font-display text-h2 text-primary-deep">{celebrity.name}</p>
-          <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-1 text-body text-ink sm:grid-cols-3">
-            <li>
-              <span className="font-semibold">Gender:</span>{' '}
-              {celebrity.gender === 'f' ? 'Female' : 'Male'}
-            </li>
-            <li>
-              <span className="font-semibold">Status:</span>{' '}
-              {celebrity.alive ? 'Alive' : 'Deceased'}
-            </li>
-            <li>
-              <span className="font-semibold">Profession:</span> {celebrity.profession}
-            </li>
-            <li>
-              <span className="font-semibold">Nationality:</span> {celebrity.nationality}
-            </li>
-            <li>
-              <span className="font-semibold">Age:</span> {celebrity.ageRange}
-            </li>
-            <li>
-              <span className="font-semibold">Hair:</span> {celebrity.hairColor}
-            </li>
-          </ul>
-          <p className="mt-2 text-small text-ink-muted">Famous for: {celebrity.famousFor}</p>
-        </div>
-      )}
-      {openQuestion ? (
-        <div className="flex flex-col gap-3">
-          <p className="text-body text-ink">
-            <span className="font-semibold">{openQuestion.playerName} asks:</span> “
-            {openQuestion.question}”
-          </p>
-          <div className="flex gap-3">
-            <button
-              type="button"
-              onClick={() => onAnswer(true)}
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-pill bg-green-600 px-6 text-lg font-bold text-white  transition-colors hover:bg-green-700"
-            >
-              ✅ Yes
-            </button>
-            <button
-              type="button"
-              onClick={() => onAnswer(false)}
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-pill bg-red-600 px-6 text-lg font-bold text-white  transition-colors hover:bg-red-700"
-            >
-              ❌ No
-            </button>
-          </div>
-        </div>
-      ) : (
-        <p className="text-body text-ink-muted">Waiting for a question…</p>
-      )}
-    </div>
-  );
-}
-
-/** The question log everyone (except the answerer) sees. */
-function QuestionLog({
-  questions,
-}: {
-  questions: { playerName: string; question: string; answer: boolean | null }[];
-}) {
+  const regions = options.regions.filter((option) => option.count >= GUESS_WHO_TOTAL_ROUNDS);
+  const genres = options.genres.filter((option) => option.count >= GUESS_WHO_TOTAL_ROUNDS);
   return (
     <div className="rounded-lg border border-border bg-surface-raised p-5 shadow-sm">
-      <h3 className="mb-2 text-lg font-bold tracking-tight text-ink">Question log</h3>
-      {questions.length === 0 ? (
-        <p className="text-small text-ink-muted">No questions yet, ask away!</p>
-      ) : (
-        <ol className="flex max-h-56 flex-col gap-1 overflow-y-auto pr-1">
-          {questions.map((entry, index) => (
-            <li key={index} className="text-body text-ink">
-              <span className="font-semibold">{entry.playerName}:</span> “{entry.question}”
-              {entry.answer !== null && (
-                <span
-                  className={
-                    entry.answer
-                      ? 'ml-1 font-semibold text-success-strong'
-                      : 'ml-1 font-semibold text-danger-strong'
-                  }
-                >
-                  → {entry.answer ? 'Yes' : 'No'}
-                </span>
-              )}
-            </li>
-          ))}
-        </ol>
-      )}
+      <h3 className="text-lg font-bold tracking-tight text-ink">Filter (host)</h3>
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <span className="w-16 shrink-0 text-small font-semibold text-ink-muted">Region</span>
+        {regions.map((option) => (
+          <button
+            key={option.value}
+            type="button"
+            aria-pressed={filter.region === option.value}
+            onClick={() =>
+              onSelect({ ...filter, region: option.value as GuessWhoFilter['region'] })
+            }
+            className={`rounded-pill border px-4 py-2 text-small font-semibold transition-colors ${
+              filter.region === option.value
+                ? 'border-primary bg-primary/15 text-primary-deep'
+                : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
+            }`}
+          >
+            {filterLabel(option.value, REGION_LABELS)} ({option.count})
+          </button>
+        ))}
+      </div>
+      <div className="mt-2 flex flex-wrap items-center gap-2">
+        <span className="w-16 shrink-0 text-small font-semibold text-ink-muted">Genre</span>
+        {genres.map((option) => (
+          <button
+            key={option.value}
+            type="button"
+            aria-pressed={filter.genre === option.value}
+            onClick={() => onSelect({ ...filter, genre: option.value as GuessWhoFilter['genre'] })}
+            className={`rounded-pill border px-4 py-2 text-small font-semibold transition-colors ${
+              filter.genre === option.value
+                ? 'border-primary bg-primary/15 text-primary-deep'
+                : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
+            }`}
+          >
+            {filterLabel(option.value, GENRE_LABELS)} ({option.count})
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

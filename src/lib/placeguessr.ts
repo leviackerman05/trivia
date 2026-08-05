@@ -1,5 +1,5 @@
 /**
- * World Peek (PLAN-SCOPE R5, M23 + D062/D063): solo-only at launch, no
+ * Placeguessr (PLAN-SCOPE R5, M23 + D062/D063): solo-only at launch, no
  * daily registry entry ('geo' token deferred). Seeded rounds from a
  * coordinate pool of everyday places; each round plays a 360° panorama
  * (Mapillary pano ID resolved at build time, D062) that the player studies
@@ -8,12 +8,12 @@
  * full 2,000+ coordinate lot is content lot L7; this ships a 62-entry
  * everyday-place sample.
  *
- * Never "GeoGuessr" on-page (trademark-safe): the game is "World Peek".
+ * Never "GeoGuessr" on-page (trademark-safe): the game is "Placeguessr".
  */
 
 import { pickDistinct } from './pick';
 
-export interface WorldPeekPlace {
+export interface PlaceguessrPlace {
   /** Stable slug used to look up the build-time-resolved pano (D062). */
   id: string;
   /** Human-readable area label shown on the reveal (no monument names). */
@@ -26,27 +26,27 @@ export interface WorldPeekPlace {
 }
 
 /** Build-time-resolved Mapillary pano per place id (D062). */
-export type WorldPeekPanoMap = Record<string, { panoId: string; distanceM: number }>;
+export type PlaceguessrPanoMap = Record<string, { panoId: string; distanceM: number }>;
 
-export interface WorldPeekRound {
-  entry: WorldPeekPlace;
+export interface PlaceguessrRound {
+  entry: PlaceguessrPlace;
 }
 
-export const WORLD_PEEK_ROUNDS = 5;
+export const PLACEGUESSR_ROUNDS = 5;
 /** Exact-pin threshold (km): inside this, the guess counts as exact. */
-export const WORLD_PEEK_EXACT_KM = 1;
+export const PLACEGUESSR_EXACT_KM = 1;
 /** Exact-pin bonus added on top of the max distance score. */
-export const WORLD_PEEK_EXACT_BONUS = 250;
-export const WORLD_PEEK_MAX_SCORE = 1000;
+export const PLACEGUESSR_EXACT_BONUS = 250;
+export const PLACEGUESSR_MAX_SCORE = 1000;
 /** Penalty divisor: a 1,000 km miss loses 100 pts; 10,000 km floors at 0. */
-export const WORLD_PEEK_PENALTY_KM = 10;
+export const PLACEGUESSR_PENALTY_KM = 10;
 
 /** Seeded rounds: same seed ⇒ same photos, same order, for everyone. */
-export function pickWorldPeekRounds(
-  entries: WorldPeekPlace[],
-  count = WORLD_PEEK_ROUNDS,
+export function pickPlaceguessrRounds(
+  entries: PlaceguessrPlace[],
+  count = PLACEGUESSR_ROUNDS,
   seed = 0
-): WorldPeekRound[] {
+): PlaceguessrRound[] {
   return pickDistinct(entries, count, seed).map((entry) => ({ entry }));
 }
 
@@ -63,10 +63,10 @@ export function haversineKm(lat1: number, lon1: number, lat2: number, lon2: numb
 
 /** Distance-based score: max 1000 minus a per-10km penalty; exact = bonus. */
 export function scoreGuess(distanceKm: number): number {
-  if (distanceKm <= WORLD_PEEK_EXACT_KM) {
-    return WORLD_PEEK_MAX_SCORE + WORLD_PEEK_EXACT_BONUS;
+  if (distanceKm <= PLACEGUESSR_EXACT_KM) {
+    return PLACEGUESSR_MAX_SCORE + PLACEGUESSR_EXACT_BONUS;
   }
-  return Math.max(0, WORLD_PEEK_MAX_SCORE - Math.round(distanceKm / WORLD_PEEK_PENALTY_KM));
+  return Math.max(0, PLACEGUESSR_MAX_SCORE - Math.round(distanceKm / PLACEGUESSR_PENALTY_KM));
 }
 
 /* ── Simplified SVG world map (self-made, equirectangular) ──────────────

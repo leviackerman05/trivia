@@ -79,7 +79,7 @@ const GAME_SLUGS = [
   'price-is-right',
   'genre-swap',
   'genre-bender',
-  'world-peek',
+  'placeguessr',
   'charades',
   'guess-who',
   'trivia',
@@ -229,7 +229,7 @@ server.listen(PORT, async () => {
       }
       const size = statSync(join(DIST_DIR, '_astro', file)).size;
       // D062: the mapillary-js viewer is a lazy-loaded vendor chunk, only
-      // pulled by the World Peek island when a round starts (~1 MB raw /
+      // pulled by the Placeguessr island when a round starts (~1 MB raw /
       // ~265 KB gzip). It cannot fit the 300 KB authored-code gate, so it
       // gets its own explicit ceiling so it can't silently regress.
       const budget = file.startsWith('mapillary') ? LAZY_VENDOR_BUDGET_BYTES : BUNDLE_BUDGET_BYTES;
