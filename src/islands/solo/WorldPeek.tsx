@@ -180,6 +180,7 @@ export default function WorldPeek() {
     }
     let cancelled = false;
     let viewer: Viewer | null = null;
+    let resizeObserver: ResizeObserver | null = null;
     panoLoadedRef.current = false;
     setPanoStatus('loading');
     const timer = window.setTimeout(() => {
@@ -200,6 +201,11 @@ export default function WorldPeek() {
             trackResize: true,
           });
           viewerRef.current = viewer;
+          // The pano container changes size across LOOK/PIN swaps and
+          // device rotation; a ResizeObserver keeps the three.js canvas
+          // honest instead of relying on phase-based resize calls.
+          resizeObserver = new ResizeObserver(() => viewer?.resize());
+          resizeObserver.observe(el);
           viewer.on('load', () => {
             panoLoadedRef.current = true;
             setPanoStatus('ready');
@@ -220,6 +226,7 @@ export default function WorldPeek() {
     return () => {
       cancelled = true;
       window.clearTimeout(timer);
+      resizeObserver?.disconnect();
       if (viewer) {
         viewer.remove();
       }
@@ -445,7 +452,7 @@ export default function WorldPeek() {
           <div
             className={
               phase === 'look'
-                ? 'fixed inset-0 z-40 bg-surface'
+                ? 'fixed inset-0 z-40 h-dvh overflow-hidden bg-surface'
                 : 'relative h-[58dvh] min-h-80 overflow-hidden rounded-lg border border-border sm:h-[calc(100dvh-13rem)]'
             }
           >
