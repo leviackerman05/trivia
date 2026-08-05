@@ -284,7 +284,7 @@ export default function TriviaSolo() {
               onChange={(event) => setNickname(event.target.value)}
               maxLength={20}
               placeholder="e.g. QuizWhiz"
-              className="rounded-md border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+              className="rounded-md border bg-surface-raised px-4 py-3 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
             />
           </label>
           <button
@@ -416,8 +416,7 @@ export default function TriviaSolo() {
               classes += ' border-border text-ink-muted opacity-60';
             }
           } else {
-            classes +=
-              ' border-primary/50 text-primary-strong hover:bg-primary/15 focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30';
+            classes += ' border-primary/50 text-primary-strong hover:bg-primary/15';
           }
           return (
             <button

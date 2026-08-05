@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "schema": "v1",
+    "source": "Lichess puzzle database (CC0) — https://database.lichess.org/#puzzles",
+    "license": "CC0-1.0",
+    "note": "Skeleton sample (8 puzzles) for the R19 daily chess pipeline (D032 server-seeded pattern). Lot L11 fills the 1,000+ set with engine-validated solutions. Moves are UCI; skeleton move arrays are illustrative drafts pending L11 engine validation. Every FEN is validated by src/lib/chess.ts (dataset test). Credits line on reveal uses `attribution`."
+  },
+  "puzzles": [
+    {
+      "id": "chess-0001",
+      "fen": "6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1",
+      "moves": ["a1a8"],
+      "themes": ["mateIn1", "backRankMate"],
+      "source": { "site": "lichess", "id": "skeleton-0001", "license": "CC0-1.0" },
+      "attribution": "Lichess puzzle database (CC0) — skeleton entry 0001"
+    },
+    {
+      "id": "chess-0002",
+      "fen": "6nk/5p1p/8/6N1/8/8/8/6K1 w - - 0 1",
+      "moves": ["g5f7"],
+      "themes": ["mateIn1", "smotheredMate"],
+      "source": { "site": "lichess", "id": "skeleton-0002", "license": "CC0-1.0" },
+      "attribution": "Lichess puzzle database (CC0) — skeleton entry 0002"
+    },
+    {
+      "id": "chess-0003",
+      "fen": "6k1/5ppp/8/8/2B5/8/5PPP/3R2K1 w - - 0 1",
+      "moves": ["d1d8"],
+      "themes": ["mateIn1", "backRankMate"],
+      "source": { "site": "lichess", "id": "skeleton-0003", "license": "CC0-1.0" },
+      "attribution": "Lichess puzzle database (CC0) — skeleton entry 0003"
+    },
+    {
+      "id": "chess-0004",
+      "fen": "6k1/5p1p/6p1/5N2/8/8/5PPP/2R3K1 w - - 0 1",
+      "moves": ["c1c8"],
+      "themes": ["mateIn1", "backRankMate"],
+      "source": { "site": "lichess", "id": "skeleton-0004", "license": "CC0-1.0" },
+      "attribution": "Lichess puzzle database (CC0) — skeleton entry 0004"
+    },
+    {
+      "id": "chess-0005",
+      "fen": "r3k2r/ppp2ppp/8/8/8/8/PPP2PPP/R3K2R w KQkq - 0 1",
+      "moves": ["e1g1"],
+      "themes": ["openingTactic", "castling"],
+      "source": { "site": "lichess", "id": "skeleton-0005", "license": "CC0-1.0" },
+      "attribution": "Lichess puzzle database (CC0) — skeleton entry 0005"
+    },
+    {
+      "id": "chess-0006",
+      "fen": "rnbqkbnr/ppp1p1pp/8/3pPp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3",
+      "moves": ["e5f6"],
+      "themes": ["enPassant", "tactic"],
+      "source": { "site": "lichess", "id": "skeleton-0006", "license": "CC0-1.0" },
+      "attribution": "Lichess puzzle database (CC0) — skeleton entry 0006"
+    },
+    {
+      "id": "chess-0007",
+      "fen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
+      "moves": ["e1g1"],
+      "themes": ["openingTactic"],
+      "source": { "site": "lichess", "id": "skeleton-0007", "license": "CC0-1.0" },
+      "attribution": "Lichess puzzle database (CC0) — skeleton entry 0007"
+    },
+    {
+      "id": "chess-0008",
+      "fen": "6k1/8/8/8/8/8/4P3/4K3 w - - 0 1",
+      "moves": ["e2e4"],
+      "themes": ["pawnEndgame"],
+      "source": { "site": "lichess", "id": "skeleton-0008", "license": "CC0-1.0" },
+      "attribution": "Lichess puzzle database (CC0) — skeleton entry 0008"
+    }
+  ]
+}

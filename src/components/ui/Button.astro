@@ -1,8 +1,9 @@
 ---
 /**
- * BounceBox Button (PRD §11): pill-shaped, ≥44px touch targets.
- * Primary/secondary get glow shadows; disabled drops to 0.4 opacity.
- * Renders an <a> when href is provided, otherwise a <button>.
+ * TriviaHub Button (Airbnb direction, OWNER d1/d5): Rausch primary with
+ * white text and 8px radius; ink-outline secondary; ghost and destructive
+ * variants. ≥44px touch targets (min-h-11+). Renders an <a> when href is
+ * provided, otherwise a <button>.
  */
 interface Props {
   variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
@@ -23,8 +24,9 @@ const {
 } = Astro.props;
 
 const variants: Record<NonNullable<Props['variant']>, string> = {
-  primary: 'bg-primary text-white hover:bg-primary-hover',
-  secondary: 'bg-secondary text-white hover:bg-secondary-dark',
+  primary: 'bg-primary text-white hover:bg-primary-hover disabled:bg-primary-disabled',
+  // [AIRBNB] button-secondary: white fill, ink text, 1px ink outline.
+  secondary: 'border border-ink bg-surface-raised text-ink hover:bg-surface-muted',
   ghost: 'border border-primary-strong text-primary-strong hover:bg-primary/15',
   destructive: 'bg-danger-strong text-white hover:opacity-90',
 };
@@ -35,8 +37,9 @@ const sizes: Record<NonNullable<Props['size']>, string> = {
   large: 'min-h-14 px-8 py-4 text-lg',
 };
 
+// [AIRBNB] buttons are 8px radius (rounded-md), label weight 500.
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-md font-semibold no-underline transition-colors duration-150 select-none';
+  'inline-flex items-center justify-center gap-2 rounded-md font-medium no-underline transition-colors duration-150 select-none';
 const disabledClasses = disabled ? 'pointer-events-none opacity-40' : '';
 ---
 

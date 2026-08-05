@@ -1,8 +1,8 @@
 ---
 /**
- * BounceBox Card (PRD §11): white surface, 24px radius, 24px padding.
- * Default: 2px gray border + shadow-sm, hover lifts to shadow-md + teal border.
- * Elevated: no border, shadow-md at rest, shadow-lg on hover.
+ * Card ([AIRBNB] d5/d8): white surface, 14px radius (rounded-lg), hairline
+ * border + 1px inset hairline ring at rest (shadow-sm), and the single
+ * hover-float shadow on hover (shadow-md). No progressive elevation tiers.
  */
 interface Props {
   elevated?: boolean;
@@ -13,10 +13,11 @@ interface Props {
 const { elevated = false, hover = true, class: className } = Astro.props;
 
 const surface = 'rounded-lg bg-surface-raised p-4 sm:p-6';
+// Flat baseline: hairline border + inset hairline ring; hover = the float.
 const defaultCard = 'border border-border shadow-sm';
-const elevatedCard = 'border-0 shadow-md';
+const elevatedCard = 'border border-border shadow-sm';
 const hoverClasses = hover ? 'transition-all duration-150 hover:shadow-md' : '';
-const hoverBorder = elevated ? '' : 'hover:border-primary/50';
+const hoverBorder = elevated ? '' : '';
 ---
 
 <div

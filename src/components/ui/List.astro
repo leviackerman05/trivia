@@ -15,7 +15,7 @@ const { rows, class: className } = Astro.props;
 <ul class={`flex flex-col divide-y divide-border ${className ?? ''}`}>
   {
     rows?.map((row) => (
-      <li class="flex min-h-14 items-center px-5 text-base text-ink transition-colors hover:bg-[#fff5f5]">
+      <li class="flex min-h-14 items-center px-5 text-base text-ink transition-colors hover:bg-surface-muted">
         {row}
       </li>
     ))

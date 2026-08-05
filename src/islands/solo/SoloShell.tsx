@@ -182,8 +182,10 @@ export default function SoloShell({
         <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
           <h2 className="font-display text-h2 text-ink">Game over!</h2>
           <p className="text-body text-ink-muted">
-            You scored <span className="font-display text-h3 text-primary-deep">{score}</span>{' '}
-            points.
+            You scored{' '}
+            {/* [AIRBNB d4] rating-display 64/700 — the one loud typographic
+                moment, mapped to the results-screen score. */}
+            <span className="font-display text-score text-ink">{score}</span> points.
           </p>
           {resultSummary}
 
@@ -203,7 +205,7 @@ export default function SoloShell({
                   maxLength={20}
                   placeholder="Your name on the leaderboard"
                   aria-label="Nickname"
-                  className="min-w-0 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30 sm:w-72"
+                  className="min-w-0 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink sm:w-72"
                 />
               </label>
               <button
