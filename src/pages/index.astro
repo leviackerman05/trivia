@@ -36,7 +36,7 @@ const jsonLd = JSON.stringify({
 
 <BaseLayout
   title="Trivia in Games: Free Party Games, Daily Trivia and Multiplayer Fun"
-  description="Play 19 free online party games with friends, no downloads and no accounts. Daily trivia and sudoku, drawing games, voting games, and multiplayer rooms. Start playing in seconds!"
+  description="Play 20 free online party games with friends, no downloads and no accounts. Daily trivia and sudoku, drawing games, party classics, and multiplayer rooms. Start playing in seconds!"
   canonicalPath="/"
   ogImage="/og/home.png"
   jsonLd={jsonLd}
@@ -44,7 +44,7 @@ const jsonLd = JSON.stringify({
 >
   <section class="mb-14 text-center">
     <Chip variant="status" status="success" class="mb-6"
-      >19 free games · daily challenges · play in seconds</Chip
+      >20 free games · daily challenges · play in seconds</Chip
     >
     <h1 class="mx-auto max-w-4xl font-display text-h1 font-bold tracking-tight text-ink">
       Best daily trivia and party games
@@ -85,7 +85,7 @@ const jsonLd = JSON.stringify({
           <li>
             <a
               href={`/game/${game.slug}`}
-              class="flex items-center gap-4 rounded-lg border border-border bg-surface-raised px-4 py-3 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md"
+              class="flex items-center gap-4 rounded-lg border border-border bg-surface-raised px-4 py-3 shadow-sm transition-shadow duration-150 hover:shadow-md"
             >
               <span class="font-display text-h3 text-primary-deep">{index + 1}</span>
               <span class="min-w-0">
@@ -116,7 +116,7 @@ const jsonLd = JSON.stringify({
           <li>
             <a
               href={`/game/${game.slug}`}
-              class="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface-raised px-4 py-3 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md"
+              class="flex items-center justify-between gap-4 rounded-lg border border-border bg-surface-raised px-4 py-3 shadow-sm transition-shadow duration-150 hover:shadow-md"
             >
               <span class="min-w-0">
                 <span class="block truncate font-semibold text-ink">{game.name}</span>
@@ -138,7 +138,7 @@ const jsonLd = JSON.stringify({
             <li>
               <a
                 href={`/game/${game.slug}`}
-                class="inline-flex items-center gap-2 rounded-pill border border-border bg-surface-raised px-4 py-2 text-small font-semibold text-ink transition-colors hover:border-primary/50 hover:text-primary-strong"
+                class="inline-flex items-center gap-2 rounded-pill border border-border bg-surface-raised px-4 py-2 text-small font-semibold text-ink transition-shadow duration-150 hover:shadow-md"
               >
                 {game.name} →
               </a>
@@ -182,94 +182,82 @@ const jsonLd = JSON.stringify({
       The best free online party games, right in your browser
     </h2>
     <p class="max-w-3xl text-body text-ink-muted">
-      Trivia in Games is a collection of 19 free online party games designed for the way people
-      actually play today: across devices, across time zones, and without any setup. Every game runs
-      directly in the browser, with no downloads, no accounts, and no plugins. If you and your
-      friends can open a link, you can play. That makes Trivia in Games the easiest <strong
-        >browser party games</strong
-      > destination for virtual parties, classrooms, remote teams, and family game nights, with daily
-      trivia and sudoku challenges to return to every day.
+      Trivia in Games is a collection of 20 free online party games designed for the way people play
+      today: across devices, across time zones, and without any setup. Every game runs in the
+      browser, no downloads, no accounts. If you can open a link, you can play, which makes it the
+      easiest <strong>browser party games</strong> destination for virtual parties, classrooms, remote
+      teams, and family game nights.
     </p>
     <p class="max-w-3xl text-body text-ink-muted">
-      The heart of the site is the drawing room. If you are looking to{' '}
-      <strong>play pictionary online</strong> with friends, start with{' '}
+      The heart of the site is the drawing room. Looking to <strong>play pictionary online</strong>?
+      Start with{' '}
       <a href="/game/skribbl-arena" class="font-semibold text-primary-strong underline"
         >Skribbl Arena</a
-      >, our fast multiplayer drawing game where one player sketches a secret word and everyone
-      races to guess it. It is a genuine <strong>skribbl alternative</strong>: free, modern, and
-      full of extras like custom word lists, fill tools, and solo practice mode. The drawing family
-      continues with{' '}
+      >, a fast multiplayer drawing game where one player sketches and everyone races to guess. The
+      drawing family continues with{' '}
       <a href="/game/copycat-challenge" class="font-semibold text-primary-strong underline"
         >Copycat Challenge</a
-      >, where you memorize a famous painting for five seconds and redraw it from memory, and{' '}
+      >,{' '}
       <a href="/game/one-line-one-shape" class="font-semibold text-primary-strong underline"
         >One Line, One Shape</a
-      >, the continuous-line challenge that punishes every pen lift. For something gentler,{' '}
+      >,{' '}
       <a href="/game/shadow-sketch" class="font-semibold text-primary-strong underline"
         >Shadow Sketch</a
-      >{' '}
-      asks you to fill in a silhouette while guessers watch the details appear, and{' '}
+      >, and{' '}
       <a href="/game/draw-the-lyric" class="font-semibold text-primary-strong underline"
         >Draw the Lyric</a
-      >{' '}
-      turns song lyrics into a title-guessing race.
+      >.
     </p>
     <p class="max-w-3xl text-body text-ink-muted">
-      Not a drawer? The voting games are built for big rooms and loud arguments.{' '}
+      Not a drawer? Party games are built for big rooms and loud arguments.{' '}
       <a href="/game/would-you-rather" class="font-semibold text-primary-strong underline"
         >Would You Rather online</a
       >{' '}
-      turns outrageous dilemmas into live percentage battles, while{' '}
+      turns wild dilemmas into live percentage battles,{' '}
       <a href="/game/most-likely-to" class="font-semibold text-primary-strong underline"
-        >Most Likely To…</a
+        >Most Likely To</a
       >{' '}
-      puts your friends on trial and crowns the most likely culprit.{' '}
+      crowns the most likely culprit,{' '}
       <a href="/game/never-have-i-ever" class="font-semibold text-primary-strong underline"
         >Never Have I Ever</a
       >{' '}
-      scores the wildness of the room, and{' '}
+      scores the room's wildness, and{' '}
       <a href="/game/this-or-that" class="font-semibold text-primary-strong underline"
         >This or That</a
       >{' '}
-      delivers 20 rapid-fire taste battles in two minutes. Every voting game updates percentages live,
-      so the whole room watches the numbers swing.
+      delivers rapid-fire taste battles, with{' '}
+      <a href="/game/charades" class="font-semibold text-primary-strong underline">Charades</a>{' '}
+      and{' '}
+      <a href="/game/guess-who" class="font-semibold text-primary-strong underline"
+        >Guess Who? Celebrity Edition</a
+      >{' '}
+      rounding out the classics.
     </p>
     <p class="max-w-3xl text-body text-ink-muted">
       For trivia nights, our <strong>online trivia games</strong> cover General, Science, History, Pop
       Culture, and Sports. Play the daily challenge solo or race the room in{' '}
-      <a href="/game/trivia" class="font-semibold text-primary-strong underline">Trivia</a>, with a
-      Wrong Answers Only comedy mode for maximum chaos. Solo players can also test their word skills
-      in <a href="/game/rhyme-or-crime" class="font-semibold text-primary-strong underline"
+      <a href="/game/trivia" class="font-semibold text-primary-strong underline">Trivia</a>. Solo
+      players can test their word skills in{' '}
+      <a href="/game/rhyme-or-crime" class="font-semibold text-primary-strong underline"
         >Rhyme or Crime</a
       >, decode movie plots in{' '}
       <a href="/game/emoji-plot" class="font-semibold text-primary-strong underline">Emoji Plot</a>,
       order history in{' '}
       <a href="/game/timeline-tussle" class="font-semibold text-primary-strong underline"
         >Timeline Tussle</a
-      >, and guess real prices in{' '}
+      >, guess real prices in{' '}
       <a href="/game/price-is-right" class="font-semibold text-primary-strong underline"
         >Price Is Right</a
-      >. Film buffs get <a
-        href="/game/genre-swap"
-        class="font-semibold text-primary-strong underline">Genre Swap</a
-      >{' '}
-      and <a href="/game/genre-bender" class="font-semibold text-primary-strong underline"
-        >Genre-Bender</a
-      >, and the classics return in{' '}
-      <a href="/game/charades" class="font-semibold text-primary-strong underline">Charades</a>{' '}
-      and{' '}
-      <a href="/game/guess-who" class="font-semibold text-primary-strong underline"
-        >Guess Who? Celebrity Edition</a
-      >.
+      >, swap genres in{' '}
+      <a href="/game/genre-swap" class="font-semibold text-primary-strong underline">Genre Swap</a>,
+      and test their geography instincts in{' '}
+      <a href="/game/world-peek" class="font-semibold text-primary-strong underline">World Peek</a>.
     </p>
     <p class="max-w-3xl text-body text-ink-muted">
       Every multiplayer game uses a simple room system: create a room, share the code or link, and
-      play. Rooms support up to 24 players, and everything is optimized for phones, tablets, and
-      desktops, so <strong>virtual party games</strong> feel as natural as passing the phone around a
-      couch. Whether you are hosting a video-call game night or building team morale remotely, Trivia
-      in Games gets a game started in seconds, free, forever. And when the night is over, tomorrow's <a
-        href="/daily"
-        class="font-semibold text-primary-strong underline">daily games</a
+      play. Rooms hold up to 24 players on phones, tablets, and desktops. And when the night is
+      over, tomorrow's <a href="/daily" class="font-semibold text-primary-strong underline"
+        >daily games</a
       > are already waiting.
     </p>
   </section>

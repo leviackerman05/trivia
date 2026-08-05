@@ -23,6 +23,7 @@ const PRD_SLUGS = [
   'price-is-right',
   'genre-swap',
   'genre-bender',
+  'world-peek',
   'shadow-sketch',
   'charades',
   'would-you-rather',
@@ -69,7 +70,7 @@ describe('game catalog (src/data/games.json)', () => {
     expect(counts.drawing).toHaveLength(5);
     // [R3] voting (4) + special (2) merged into party (6).
     expect(counts.party).toHaveLength(6);
-    expect(counts.solo).toHaveLength(7);
+    expect(counts.solo).toHaveLength(8);
     expect(counts.quiz).toHaveLength(1);
   });
 

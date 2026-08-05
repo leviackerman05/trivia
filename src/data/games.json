@@ -279,5 +279,20 @@
     "featured": true,
     "isNew": true,
     "popularity": 9
+  },
+  {
+    "slug": "world-peek",
+    "name": "World Peek",
+    "type": "solo",
+    "family": "solo",
+    "tagline": "One photo, five rounds, pin the spot on the map.",
+    "description": "World Peek drops you into five photos from around the globe. Study each one, then tap the map to pin where you think it was taken. The closer you land, the more points you score, and an exact pin earns a bonus. No timers, no pressure, just geography instincts.",
+    "players": "1",
+    "durationMinutes": 5,
+    "energy": "low",
+    "featured": false,
+    "isNew": true,
+    "popularity": 7,
+    "image": "/images/games/world-peek.webp"
   }
 ]

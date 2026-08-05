@@ -47,7 +47,7 @@ describe('PRD §3 required routes', () => {
 
   it('covers every game slug from the catalog', () => {
     const slugs = games.map((game) => game.slug);
-    expect(slugs).toHaveLength(19);
+    expect(slugs).toHaveLength(20);
   });
 });
 

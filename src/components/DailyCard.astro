@@ -26,7 +26,7 @@ const { game } = Astro.props;
     </span>
     {game.live ? <Badge tone="success">Live</Badge> : <Badge tone="info">Coming soon</Badge>}
   </span>
-  <h3 class="text-base font-semibold tracking-tight text-ink group-hover:text-primary-strong">
+  <h3 class="text-base font-semibold text-ink group-hover:text-primary-strong">
     {game.name}
   </h3>
   <p class="text-body text-ink-muted">{game.description}</p>

@@ -23,7 +23,7 @@ export const globalFaqs: FaqEntry[] = [
   },
   {
     question: 'Are Trivia in Games games free?',
-    answer: 'Yes, all 19 games are free to play. Trivia in Games is supported by advertising.',
+    answer: 'Yes, all 20 games are free to play. Trivia in Games is supported by advertising.',
   },
   {
     question: 'How many players can join a game?',

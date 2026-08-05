@@ -1,0 +1,99 @@
+import { describe, expect, it } from 'vitest';
+import placesJson from '../../data/world-peek-places.json';
+import {
+  haversineKm,
+  mapPoint,
+  pickWorldPeekRounds,
+  pointToLonLat,
+  scoreGuess,
+  WORLD_PEEK_EXACT_BONUS,
+  WORLD_PEEK_MAX_SCORE,
+  WORLD_PEEK_ROUNDS,
+  type WorldPeekPlace,
+} from '../world-peek';
+
+const entries = placesJson as WorldPeekPlace[];
+
+describe('World Peek dataset (sample, 12 entries; full pool = content lot L7)', () => {
+  it('has 12+ entries with valid coordinates and regions', () => {
+    expect(entries.length).toBeGreaterThanOrEqual(12);
+    for (const entry of entries) {
+      expect(entry.lat).toBeGreaterThanOrEqual(-90);
+      expect(entry.lat).toBeLessThanOrEqual(90);
+      expect(entry.lon).toBeGreaterThanOrEqual(-180);
+      expect(entry.lon).toBeLessThanOrEqual(180);
+      expect(entry.region.trim().length).toBeGreaterThan(0);
+      expect(entry.image.startsWith('https://')).toBe(true);
+    }
+  });
+
+  it('places are unique', () => {
+    expect(new Set(entries.map((entry) => entry.place)).size).toBe(entries.length);
+  });
+});
+
+describe('pickWorldPeekRounds (seeded)', () => {
+  it('is deterministic for the same seed and picks distinct entries', () => {
+    const first = pickWorldPeekRounds(entries, WORLD_PEEK_ROUNDS, 42);
+    const second = pickWorldPeekRounds(entries, WORLD_PEEK_ROUNDS, 42);
+    expect(first).toEqual(second);
+    expect(first).toHaveLength(WORLD_PEEK_ROUNDS);
+    expect(new Set(first.map((round) => round.entry.place)).size).toBe(WORLD_PEEK_ROUNDS);
+  });
+
+  it('differs across seeds and returns fewer rounds on a small pool', () => {
+    expect(pickWorldPeekRounds(entries, 5, 1)[0]!.entry.place).not.toBe(
+      pickWorldPeekRounds(entries, 5, 2)[0]!.entry.place
+    );
+    const tiny = entries.slice(0, 3);
+    expect(pickWorldPeekRounds(tiny, 5, 0)).toHaveLength(3);
+  });
+});
+
+describe('haversineKm', () => {
+  it('returns ~0 for the same point', () => {
+    expect(haversineKm(48.8584, 2.2945, 48.8584, 2.2945)).toBeLessThan(1);
+  });
+
+  it('approximates known city distances', () => {
+    // Paris -> Rome is roughly 1,105 km.
+    const parisRome = haversineKm(48.8566, 2.3522, 41.9028, 12.4964);
+    expect(parisRome).toBeGreaterThan(1000);
+    expect(parisRome).toBeLessThan(1250);
+    // Paris -> New York is roughly 5,830 km.
+    const parisNy = haversineKm(48.8566, 2.3522, 40.7128, -74.006);
+    expect(parisNy).toBeGreaterThan(5400);
+    expect(parisNy).toBeLessThan(6400);
+  });
+});
+
+describe('scoreGuess (1000 pts minus distance penalty, exact = bonus)', () => {
+  it('pays the bonus for an exact pin', () => {
+    expect(scoreGuess(0)).toBe(WORLD_PEEK_MAX_SCORE + WORLD_PEEK_EXACT_BONUS);
+    expect(scoreGuess(0.5)).toBe(WORLD_PEEK_MAX_SCORE + WORLD_PEEK_EXACT_BONUS);
+  });
+
+  it('decays with distance and floors at zero', () => {
+    expect(scoreGuess(100)).toBe(WORLD_PEEK_MAX_SCORE - 10);
+    expect(scoreGuess(1000)).toBe(WORLD_PEEK_MAX_SCORE - 100);
+    expect(scoreGuess(10000)).toBe(0);
+    expect(scoreGuess(50000)).toBe(0);
+  });
+});
+
+describe('map projection helpers', () => {
+  it('maps lon/lat into the 360x180 box and back', () => {
+    const p = mapPoint(0, 0);
+    expect(p.x).toBe(180);
+    expect(p.y).toBe(90);
+    const roundTrip = pointToLonLat(0.5, 0.5);
+    expect(roundTrip.lon).toBe(0);
+    expect(roundTrip.lat).toBe(0);
+  });
+
+  it('round-trips a corner', () => {
+    const { lon, lat } = pointToLonLat(0, 0);
+    expect(lon).toBe(-180);
+    expect(lat).toBe(90);
+  });
+});

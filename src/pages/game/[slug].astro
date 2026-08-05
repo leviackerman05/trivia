@@ -18,6 +18,7 @@ import TimelineTussle from '../../islands/solo/TimelineTussle.tsx';
 import PriceIsRight from '../../islands/solo/PriceIsRight.tsx';
 import GenreSwap from '../../islands/solo/GenreSwap.tsx';
 import GenreBender from '../../islands/solo/GenreBender.tsx';
+import WorldPeek from '../../islands/solo/WorldPeek.tsx';
 import FAQSection from '../../components/FAQSection.astro';
 import { games, getGame, getRelatedGames } from '../../lib/games';
 import { gameContent } from '../../data/game-content';
@@ -84,6 +85,7 @@ const SHIPPED_SOLO = new Set([
   'price-is-right',
   'genre-swap',
   'genre-bender',
+  'world-peek',
 ]);
 const soloShipped = SHIPPED_SOLO.has(game.slug);
 /** Daily-page link for games with a live daily variant (Phase 0/1). */
@@ -182,6 +184,7 @@ const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku';
               {game.slug === 'price-is-right' && <PriceIsRight client:load />}
               {game.slug === 'genre-swap' && <GenreSwap client:load />}
               {game.slug === 'genre-bender' && <GenreBender client:load />}
+              {game.slug === 'world-peek' && <WorldPeek client:load />}
               {!soloShipped && (
                 <p class="max-w-2xl text-body text-ink-muted">
                   {game.name} is being built right now, this is where it will live.

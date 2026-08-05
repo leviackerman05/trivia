@@ -1,0 +1,98 @@
+[
+  {
+    "place": "Eiffel Tower, Paris",
+    "lat": 48.8584,
+    "lon": 2.2945,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Tour_Eiffel,_Paris,_France.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "Europe"
+  },
+  {
+    "place": "Statue of Liberty, New York",
+    "lat": 40.6892,
+    "lon": -74.0445,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Statue_of_Liberty,_NY.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "North America"
+  },
+  {
+    "place": "Taj Mahal, Agra",
+    "lat": 27.1751,
+    "lon": 78.0421,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Taj_Mahal_(Edited).jpeg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "Asia"
+  },
+  {
+    "place": "Great Wall of China, Mutianyu",
+    "lat": 40.4319,
+    "lon": 116.5704,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Great_Wall_of_China_at_Mutianyu.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "Asia"
+  },
+  {
+    "place": "Machu Picchu, Peru",
+    "lat": -13.1631,
+    "lon": -72.545,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Machu_Picchu,_Peru.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "South America"
+  },
+  {
+    "place": "Pyramids of Giza, Egypt",
+    "lat": 29.9792,
+    "lon": 31.1342,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/All_Gizah_Pyramids.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "Africa"
+  },
+  {
+    "place": "Sydney Opera House",
+    "lat": -33.8568,
+    "lon": 151.2153,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Sydney_Opera_House_-_Dec_2008.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "Oceania"
+  },
+  {
+    "place": "Mount Fuji, Japan",
+    "lat": 35.3606,
+    "lon": 138.7274,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Fuji_from_Hakone.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "Asia"
+  },
+  {
+    "place": "Colosseum, Rome",
+    "lat": 41.8902,
+    "lon": 12.4922,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Colosseum_in_Rome,_Italy_-_April_2007.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "Europe"
+  },
+  {
+    "place": "Christ the Redeemer, Rio de Janeiro",
+    "lat": -22.9519,
+    "lon": -43.2105,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Cristo_Redentor_-_Rio_de_Janeiro,_Brasil.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "South America"
+  },
+  {
+    "place": "Grand Canyon, Arizona",
+    "lat": 36.1069,
+    "lon": -112.1129,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Grand_Canyon_Arizona.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "North America"
+  },
+  {
+    "place": "Stonehenge, England",
+    "lat": 51.1789,
+    "lon": -1.8262,
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Stonehenge2007_07_30.jpg",
+    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "region": "Europe"
+  }
+]

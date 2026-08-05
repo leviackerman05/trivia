@@ -905,4 +905,47 @@ export const gameContent: Record<string, GameSeoContent> = {
       },
     ],
   },
+  'world-peek': {
+    metaDescription:
+      'Play World Peek online free, a geography guessing game with five photos from around the globe. Pin each spot on the map and score by distance, no downloads.',
+    sections: [
+      {
+        heading: 'How to play World Peek',
+        body: 'World Peek is a solo geography game with a simple loop: you get five photos taken in five different places, and for each one you tap the world map to pin where you think it was taken. The closer your pin lands to the real spot, the more points you score. There is no timer, no lives, and no penalty for being wrong, only a smaller score, so it is a relaxed way to test how well you know the planet. After five rounds the game adds up your total and shows how your geography instincts compare.',
+      },
+      {
+        heading: 'How scoring works',
+        body: 'Each round is worth up to 1,000 points. The game measures the straight-line distance between your pin and the true location in kilometres, and that distance decides your score: the further you are, the fewer points you earn, down to zero for a pin on the wrong side of the planet. Pin the exact spot, within a kilometre, and you earn a 250-point bonus on top of the maximum. It rewards precision without punishing a brave guess.',
+      },
+      {
+        heading: 'Read the photo, not the map',
+        body: 'The trick to World Peek is in the details of the photograph. Street signs, vegetation, architecture, vehicles, and even the colour of the soil can place a scene on a continent. Once you have narrowed it down, think about the shape of the coastline or the position of a mountain range on the map and pin accordingly. Practice sharpens the eye, which is what makes the game quietly addictive.',
+      },
+      {
+        heading: 'Why it works as a break or a classroom warm-up',
+        body: 'World Peek needs no setup and no account. It is a five-minute round, which makes it a natural coffee-break game, a geography-class warm-up, or a friendly bet between friends about who knows the world better. Because it is solo, you can play it anywhere and compare scores with others on the leaderboard. Teachers like it because the reveal explains the answer with the distance shown, so a wrong guess still teaches something about where a landmark actually sits. It is the kind of game that starts a conversation, someone swears a photo was taken in Italy and it turns out to be a mountain town in Peru, and suddenly the whole room is debating geography.',
+      },
+      {
+        heading: 'Devices & requirements',
+        body: 'World Peek runs in any modern browser on desktop, tablet, or phone. The map is built for both mouse and touch, and the photos load lazily so even a slow connection stays playable. Nothing to install, nothing to download.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'How many photos are in a game of World Peek?',
+        answer:
+          'Five photos, one per round. Each photo is a real place with a real location, and your pin is scored by distance.',
+      },
+      {
+        question: 'What happens if I guess completely wrong?',
+        answer:
+          'You score zero points for that round, but the game continues. A wrong pin on one round does not end the game, it just costs you those points.',
+      },
+      {
+        question: 'Do I need an account to play?',
+        answer:
+          'No. World Peek is a solo game that runs in your browser with no sign-up. Scores can be saved to the leaderboard with a nickname.',
+      },
+    ],
+  },
 };

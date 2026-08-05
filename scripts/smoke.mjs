@@ -79,6 +79,7 @@ const GAME_SLUGS = [
   'price-is-right',
   'genre-swap',
   'genre-bender',
+  'world-peek',
   'charades',
   'guess-who',
   'trivia',
