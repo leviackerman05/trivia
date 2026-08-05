@@ -10,7 +10,7 @@ import {
   type WorldPeekPlace,
   type WorldPeekRound,
 } from '../../lib/world-peek';
-import 'leaflet/dist/leaflet.css';
+import leafletCssUrl from 'leaflet/dist/leaflet.css?url';
 
 /**
  * World Peek (PLAN-SCOPE R5, M23 + D061): solo at launch. One photo per
@@ -77,8 +77,20 @@ export default function WorldPeek() {
     if (!el || mapRef.current) {
       return;
     }
+    // Scope Leaflet's CSS to this island: the [slug] template shares one
+    // stylesheet across every game page, so a static CSS import would push
+    // Leaflet's ~13 KB onto all of them. The ?url asset is injected as a
+    // <link> here, at runtime, only when this island actually mounts.
+    if (!document.getElementById('leaflet-css')) {
+      const link = document.createElement('link');
+      link.id = 'leaflet-css';
+      link.rel = 'stylesheet';
+      link.href = leafletCssUrl;
+      document.head.appendChild(link);
+    }
     let cancelled = false;
-    void import('leaflet').then((L) => {
+    void (async () => {
+      const L = await import('leaflet');
       if (cancelled || mapRef.current) {
         return;
       }
@@ -129,7 +141,7 @@ export default function WorldPeek() {
       });
 
       mapRef.current = map;
-    });
+    })();
     return () => {
       cancelled = true;
     };

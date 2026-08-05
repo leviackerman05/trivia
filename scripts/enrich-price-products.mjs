@@ -40,7 +40,7 @@ async function searchOpenverse(term, attempt = 0) {
     `https://api.openverse.org/v1/images/?q=${encodeURIComponent(`"${term}" product`)}` +
     '&license_type=commercial&page_size=20';
   const response = await fetch(url, {
-    headers: { 'User-Agent': 'Trivia in Games-dev/1.0 (price-game product images)' },
+    headers: { 'User-Agent': 'Trivia & Games-dev/1.0 (price-game product images)' },
   });
   if (response.status === 429 && attempt < 4) {
     await new Promise((resolve) => setTimeout(resolve, 2000 * (attempt + 1)));

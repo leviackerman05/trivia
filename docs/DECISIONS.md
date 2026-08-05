@@ -1357,3 +1357,62 @@ workspace package.
   the merged client loader without keys; World Peek re-uses the
   `'geo'` category slot and the removal's grep gate as its own QA
   template.
+
+## D060, World Peek map: Leaflet + OpenStreetMap replaces the self-made SVG (2026-08-05)
+
+- **Decision:** World Peek's map becomes an interactive Leaflet map with
+  OpenStreetMap raster tiles (drag/zoom, tap-to-pin), replacing the
+  hand-drawn 360×180 SVG polygons (owner feedback: "the map does not
+  look real; India and many places are missing"). Gameplay unchanged:
+  photo round → pin guess → haversine distance scoring (the lat-negation
+  bug fixed in 5e7e1e2 stays covered by the round-trip test).
+- **PRD §2 amendment (stack):** `leaflet` (MIT, ~42 KB gz, no runtime
+  keys) is added as the first client map dependency. Google Maps
+  Platform was considered and rejected for now: API key + billing +
+  branding/ToS obligations + runtime key management (the CEO has not
+  yet provisioned the Amazon PA-API keys; a third keyed service is
+  premature). GeoGuessr's Street View experience is Google-licensed and
+  out of scope; photos remain the round content (L7 pool).
+- **Attribution/licensing:** OSM requires "© OpenStreetMap contributors"
+  — visible attribution on the map surface; tile usage policy respected
+  (browser-cached, modest traffic; a tile CDN like CartoDB can be
+  swapped in without code change if volume demands).
+- **Implementation contract:** `pnpm add leaflet` (types included); map
+  component in the WorldPeek island (init once, no per-render reinit),
+  marker on tap (fractional → lon/lat via `map.unproject` or
+  containerPoint math), dark-theme tile option via a tile-layer swap
+  (CartoDB dark free tier, no key) while light keeps OSM standard;
+  Leaflet CSS imported; island bundle stays under the 300 KB gate;
+  attribution control on; touch (tap) and drag on mobile verified.
+- **Date:** 2026-08-05
+- **Future impact:** the SVG map module (`mapPoint`/`pointToLonLat`)
+  stays as the pure math contract for tests; the Leaflet layer is a
+  rendering detail behind it. Google Maps remains a documented upgrade
+  path if the CEO later accepts billing + keys.
+
+## D061, World Peek reveal: satellite tiles + great-circle line + distance (2026-08-05)
+
+- **Decision:** the reveal adds GeoGuessr-style feedback on the Leaflet
+  map: the player's pin and the actual location marked, a **dotted
+  great-circle line** between them, and the **distance in km** labeled
+  on the map. Default layer = **satellite imagery** (Esri World Imagery
+  tile service, no key, attribution required: "Tiles © Esri — Source:
+  Esri, Maxar, Earthstar Geographics, GIS User Community") with an OSM
+  streets layer toggle. Owner ask: "very close to GeoGuessr — zoom,
+  move, dotted line, kilometers, satellite".
+- **Implementation contract:** pure `greatCirclePoints(lat1, lon1,
+lat2, lon2, n)` helper in `src/lib/world-peek.ts` (equirectangular-
+  spaced great-circle interpolation, ~100 points) + unit tests
+  (endpoints exact, midpoint ≈ halfway, antimeridian case);
+  `L.polyline` with `dashArray` + the distance label via `divIcon` at
+  the midpoint; `fitBounds([guess, actual])` on reveal; Esri tile
+  attribution control on; satellite default, streets toggle;
+  `maxBounds`/minZoom so the world can't be panned into the void;
+  mobile pinch-zoom + drag verified.
+- **Licensing note:** Esri World Imagery is free to use with
+  attribution; re-review the terms when AdSense/commercial traffic
+  begins (documented, not blocking).
+- **Date:** 2026-08-05
+- **Future impact:** supersedes the plain-tile part of D060's contract
+  (D060's Leaflet + attribution + bundle gates stand); Google satellite
+  remains the paid alternative if Esri terms ever bind.
