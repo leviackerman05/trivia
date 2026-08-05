@@ -35,7 +35,8 @@ const PRD_SLUGS = [
 ];
 
 const VALID_TYPES: GameType[] = ['solo', 'multiplayer-realtime', 'multiplayer-voting'];
-const VALID_FAMILIES: GameFamily[] = ['drawing', 'voting', 'solo', 'special', 'quiz'];
+// [R3] voting + special merged into party.
+const VALID_FAMILIES: GameFamily[] = ['drawing', 'solo', 'party', 'quiz'];
 
 describe('game catalog (src/data/games.json)', () => {
   it('contains the 18 PRD games plus the M18 daily game (sudoku)', () => {
@@ -66,9 +67,9 @@ describe('game catalog (src/data/games.json)', () => {
   it('covers every family grouping with the expected game counts', () => {
     const counts = Object.groupBy(games, (game) => game.family) as Record<string, GameFamily[]>;
     expect(counts.drawing).toHaveLength(5);
-    expect(counts.voting).toHaveLength(4);
+    // [R3] voting (4) + special (2) merged into party (6).
+    expect(counts.party).toHaveLength(6);
     expect(counts.solo).toHaveLength(7);
-    expect(counts.special).toHaveLength(2);
     expect(counts.quiz).toHaveLength(1);
   });
 

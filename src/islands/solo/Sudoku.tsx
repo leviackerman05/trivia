@@ -14,7 +14,7 @@ import { nextCellIndex, sanitizeDigitInput, type ArrowKey } from '../../lib/sudo
  * Daily Sudoku (M18, owner request), the same seeded puzzle for everyone
  * on the same UTC day, played in the shared SoloShell (streak, leaderboard,
  * share image). [R9] All 81 cells are real inputs: tap to select, then use
- * the native numeric keypad (mobile) or the keyboard (desktop) — arrows
+ * the native numeric keypad (mobile) or the keyboard (desktop), arrows
  * navigate with wrap, Backspace/Delete erase. Given cells are disabled
  * inputs (uniform grid semantics; tab order skips them). Completing the
  * puzzle scores a flat 200, the leaderboard is the race.
@@ -87,7 +87,7 @@ export default function Sudoku() {
 
   // [R9] keyboard navigation: arrows move selection with 9×9 wrap (Tab
   // passes through untouched); Backspace/Delete erase the cell; digits
-  // 1–9 type normally and reach handleChange.
+  // 1-9 type normally and reach handleChange.
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>, cellIndex: number) => {
     if (ARROW_KEYS.includes(event.key as ArrowKey)) {
       event.preventDefault();

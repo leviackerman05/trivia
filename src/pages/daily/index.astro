@@ -24,14 +24,14 @@ const jsonLd = JSON.stringify({
 ---
 
 <BaseLayout
-  title="Daily Games: Free Daily Trivia, Sudoku and More | TriviaHub"
+  title="Daily Games: Free Daily Trivia, Sudoku and More | Trivia in Games"
   description="Play today's daily trivia, sudoku, emoji plots, timelines, price guesses, word, movie, music, and drawing games, free. The same challenge for everyone, every day: streaks, daily leaderboards, and share cards. A new set resets at midnight UTC."
   canonicalPath="/daily"
   jsonLd={jsonLd}
   activeNav="daily"
 >
   <section class="mb-10 text-center">
-    <h1 class="font-display text-h1 text-ink">Today at TriviaHub</h1>
+    <h1 class="font-display text-h1 text-ink">Today at Trivia in Games</h1>
     <p class="mx-auto mt-4 max-w-2xl text-body text-ink-muted">
       The live registry resets at midnight UTC. Play the same daily games as your friends, keep your
       streak alive, and race the leaderboard.
@@ -47,7 +47,7 @@ const jsonLd = JSON.stringify({
   </section>
 
   <section aria-label="Live daily games" class="mb-12">
-    <h2 class="mb-5 font-display text-h2 text-ink">Playable today</h2>
+    <h2 class="mb-5 font-display text-h2 text-ink">Exciting Games</h2>
     <ul class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
         liveGames.map((game) => (

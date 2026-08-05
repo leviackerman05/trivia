@@ -1,18 +1,20 @@
 ---
+import Icon from '../icons/Icon.astro';
+
 /**
- * CategoryCard: discovery tile for a game family. One link, emoji glyph,
- * name, count, and a short pitch.
+ * CategoryCard: discovery tile for a game family. One link, in-repo icon
+ * glyph, name, count, and a short pitch.
  */
 interface Props {
   href: string;
   name: string;
-  emoji: string;
+  icon: string;
   count: number;
   description: string;
   class?: string;
 }
 
-const { href, name, emoji, count, description, class: className } = Astro.props;
+const { href, name, icon, count, description, class: className } = Astro.props;
 ---
 
 <a
@@ -20,7 +22,9 @@ const { href, name, emoji, count, description, class: className } = Astro.props;
   class={`group flex h-full flex-col gap-3 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm transition-all duration-150 hover:shadow-md ${className ?? ''}`}
 >
   <span class="flex items-center justify-between gap-3">
-    <span aria-hidden="true" class="text-4xl">{emoji}</span>
+    <span aria-hidden="true" class="text-ink-muted">
+      <Icon name={icon} size={32} strokeWidth={1.5} />
+    </span>
     <span class="rounded-pill bg-surface-muted px-3 py-1 text-badge text-ink-muted">
       {count}
       {count === 1 ? 'game' : 'games'}

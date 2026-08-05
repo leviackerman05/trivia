@@ -30,7 +30,7 @@ import { ensureMemberKey, readMemberKey } from '../../lib/member';
 import { readNickname } from '../../lib/solo';
 
 /**
- * Daily Drawing — "Prompt of the Day" (DAILY-DESIGN §3.4 + §4.3).
+ * Daily Drawing, "Prompt of the Day" (DAILY-DESIGN §3.4 + §4.3).
  * prompt → drawing → done. The done view is the SoloShell result frame
  * (flat 100) with the gallery as resultSummary: upload (idempotent, retry
  * on failure), votes-desc gallery (top 20 + "Show more" to 50), vote,
@@ -74,7 +74,7 @@ export default function DrawingDaily({ dailyDateKey: dateKeyProp }: Props) {
   const dataUrlRef = useRef<string | null>(null);
 
   // Critical ordering (DAILY-DESIGN §4.3): the memberKey must exist before
-  // SoloShell's done-effect reads readMemberKey() — React runs child
+  // SoloShell's done-effect reads readMemberKey(), React runs child
   // effects before parent effects, so creating it at mount guarantees the
   // server run + streak/PB pipeline fires for everyone.
   useEffect(() => {
@@ -362,8 +362,8 @@ export default function DrawingDaily({ dailyDateKey: dateKeyProp }: Props) {
             className="rounded-md border border-danger/50 bg-danger-soft px-4 py-2 text-body font-semibold text-danger-strong"
           >
             {tooDetailed
-              ? 'Drawing too detailed — simplify it and submit again.'
-              : "Couldn't export your drawing — try again."}
+              ? 'Drawing too detailed, simplify it and submit again.'
+              : "Couldn't export your drawing, try again."}
           </p>
         )}
 
@@ -412,7 +412,7 @@ export default function DrawingDaily({ dailyDateKey: dateKeyProp }: Props) {
               className="flex flex-wrap items-center gap-3 rounded-md border border-danger/50 bg-danger-soft px-4 py-2"
             >
               <p className="text-small font-semibold text-danger-strong">
-                Upload didn't go through — retry.
+                Upload didn't go through, retry.
               </p>
               <button
                 type="button"
@@ -427,7 +427,7 @@ export default function DrawingDaily({ dailyDateKey: dateKeyProp }: Props) {
           <div>
             <h3 className="mb-2 text-lg font-bold tracking-tight text-ink">Today's gallery</h3>
             {submissions.length === 0 ? (
-              <p className="text-body text-ink-muted">No drawings yet — be the first!</p>
+              <p className="text-body text-ink-muted">No drawings yet, be the first!</p>
             ) : (
               <ul className="flex flex-col divide-y divide-border rounded-lg border border-border">
                 {submissions.slice(0, visibleCount).map((submission) => (
@@ -494,7 +494,7 @@ export default function DrawingDaily({ dailyDateKey: dateKeyProp }: Props) {
           </div>
 
           <p className="text-small text-ink-muted">
-            Report inappropriate drawings — anything offensive is hidden after 3 reports.
+            Report inappropriate drawings, anything offensive is hidden after 3 reports.
           </p>
         </div>
       }
@@ -508,7 +508,7 @@ export default function DrawingDaily({ dailyDateKey: dateKeyProp }: Props) {
       }}
     >
       <p className="text-body text-ink-muted">
-        You drew today's prompt — 100 points for completing the challenge.
+        You drew today's prompt, 100 points for completing the challenge.
       </p>
     </SoloShell>
   );

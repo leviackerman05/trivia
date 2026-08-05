@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SEOHead from '../components/SEOHead.astro';
+import Icon from '../components/icons/Icon.astro';
 
 interface Props {
   title: string;
@@ -94,7 +95,7 @@ const footerLinks = [
       >
         <a href="/" class="flex items-center gap-2 text-lg font-extrabold tracking-tight text-ink">
           <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
-          Trivia<span class="text-primary-deep">Hub</span>
+          Trivia in <span class="text-primary-deep">Games</span>
         </a>
         <ul class="hidden items-center gap-1 lg:flex">
           {
@@ -117,8 +118,12 @@ const footerLinks = [
           aria-label="Toggle theme"
           class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border bg-surface-muted text-base transition-colors hover:border-primary/50"
         >
-          <span class="dark:hidden" aria-hidden="true">🌙</span>
-          <span class="hidden dark:inline" aria-hidden="true">☀️</span>
+          <span class="dark:hidden" aria-hidden="true">
+            <Icon name="moon" size={18} />
+          </span>
+          <span class="hidden dark:inline" aria-hidden="true">
+            <Icon name="sun" size={18} />
+          </span>
         </button>
       </nav>
     </header>
@@ -139,7 +144,7 @@ const footerLinks = [
         class="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-8 sm:flex-row sm:justify-between"
       >
         <p class="text-small text-ink-muted">
-          © 2026 TriviaHub. Free party games, daily trivia, multiplayer fun.
+          © 2026 Trivia in Games. Free party games, daily trivia, multiplayer fun.
         </p>
         <ul class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           {

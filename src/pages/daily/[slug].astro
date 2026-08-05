@@ -36,7 +36,7 @@ const jsonLd = JSON.stringify([
   {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: `${game.name} - TriviaHub`,
+    name: `${game.name} - Trivia in Games`,
     url: dailyUrl,
     description: game.description,
     applicationCategory: 'GameApplication',
@@ -57,7 +57,7 @@ const jsonLd = JSON.stringify([
 ---
 
 <BaseLayout
-  title={`${game.name}: Play Today's Challenge | TriviaHub`}
+  title={`${game.name}: Play Today's Challenge | Trivia in Games`}
   description={game.description}
   canonicalPath={`/daily/${game.slug}`}
   jsonLd={jsonLd}

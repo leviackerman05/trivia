@@ -37,7 +37,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'trivia',
     name: 'Daily Trivia',
-    emoji: '🧠',
+    emoji: 'brain',
     category: 'trivia',
     description: 'Ten seeded questions, same for everyone today. Speed scoring, daily leaderboard.',
     estimatedMinutes: 5,
@@ -47,7 +47,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'sudoku',
     name: 'Daily Sudoku',
-    emoji: '🔢',
+    emoji: 'grid',
     category: 'puzzle',
     description: 'One seeded grid for the whole world. Finish it, score 200, race the board.',
     estimatedMinutes: 15,
@@ -57,7 +57,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'emoji-plot',
     name: 'Daily Emoji Plot',
-    emoji: '🎬',
+    emoji: 'film',
     category: 'movies',
     description: 'Decode the movie and book of the day from emoji sequences.',
     estimatedMinutes: 5,
@@ -67,7 +67,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'timeline-tussle',
     name: 'Daily Timeline',
-    emoji: '📜',
+    emoji: 'clock',
     category: 'trivia',
     description: 'Order today history in the right sequence. Three events, one correct line.',
     estimatedMinutes: 5,
@@ -77,7 +77,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'price-is-right',
     name: 'Daily Price Guess',
-    emoji: '🏷️',
+    emoji: 'tag',
     category: 'trivia',
     description: 'Five products, one price each. Guess close, never over.',
     estimatedMinutes: 5,
@@ -87,7 +87,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'rhyme-or-crime',
     name: 'Daily Rhyme',
-    emoji: '🎵',
+    emoji: 'music-note',
     category: 'word',
     description: 'A rhyme that fits the category. Today prompt is served fresh.',
     estimatedMinutes: 5,
@@ -97,7 +97,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'genre-swap',
     name: 'Daily Genre Swap',
-    emoji: '🎭',
+    emoji: 'masks',
     category: 'movies',
     description: 'Spot the original film behind a wildly wrong genre, ten rounds.',
     estimatedMinutes: 5,
@@ -107,7 +107,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'genre-bender',
     name: 'Daily Genre-Bender',
-    emoji: '📖',
+    emoji: 'book',
     category: 'music',
     description: 'Name the song behind a sonnet-ified lyric, ten bended classics.',
     estimatedMinutes: 5,
@@ -117,7 +117,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'movies',
     name: 'Daily Movie',
-    emoji: '🍿',
+    emoji: 'popcorn',
     category: 'movies',
     description: 'Ten synopses — some real, some invented. Spot the made-up plots.',
     estimatedMinutes: 5,
@@ -127,7 +127,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'music',
     name: 'Daily Music',
-    emoji: '🎶',
+    emoji: 'music-note',
     category: 'music',
     description: 'Name that song from emoji, year, and BPM clues — ten rounds, no audio needed.',
     estimatedMinutes: 5,
@@ -137,7 +137,7 @@ export const dailyGames: DailyGame[] = [
   {
     slug: 'drawing',
     name: 'Daily Drawing',
-    emoji: '✏️',
+    emoji: 'pencil',
     category: 'drawing',
     description: 'Draw the prompt, submit your masterpiece, then vote on the world best.',
     estimatedMinutes: 10,

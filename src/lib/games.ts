@@ -1,13 +1,14 @@
 import gamesJson from '../data/games.json';
 
 /**
- * Game catalog, single source of truth for the TriviaHub games.
+ * Game catalog, single source of truth for the Trivia in Games games.
  * Mirrors PRD §5 slugs verbatim; consumed by the homepage grid, per-game
  * pages, and the server seed (server/prisma/seed.ts reads the same JSON).
  */
 
 export type GameType = 'solo' | 'multiplayer-realtime' | 'multiplayer-voting';
-export type GameFamily = 'drawing' | 'voting' | 'solo' | 'special' | 'quiz';
+// [R3] voting + special merged into party.
+export type GameFamily = 'drawing' | 'solo' | 'party' | 'quiz';
 export type GameEnergy = 'high' | 'low';
 
 /**

@@ -46,7 +46,7 @@ const jsonLd = JSON.stringify([
   {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: `${game.name} - TriviaHub`,
+    name: `${game.name} - Trivia in Games`,
     url: gameUrl,
     description: seo.metaDescription,
     applicationCategory: 'GameApplication',
@@ -91,7 +91,7 @@ const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku';
 ---
 
 <BaseLayout
-  title={`${game.name} - Play Free Online | TriviaHub`}
+  title={`${game.name} - Play Free Online | Trivia in Games`}
   description={seo.metaDescription}
   canonicalPath={`/game/${game.slug}`}
   ogImage={`/og/${game.slug}.png`}
@@ -151,7 +151,7 @@ const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku';
                 <CopycatArena client:load gameSlug={game.slug} />
               ) : game.family === 'drawing' ? (
                 <DrawingGameArena client:load gameSlug={game.slug} />
-              ) : game.family === 'voting' ? (
+              ) : game.family === 'party' ? (
                 <VotingArena client:load gameSlug={game.slug} />
               ) : game.slug === 'trivia' ? (
                 <TriviaArena client:load gameSlug={game.slug} />

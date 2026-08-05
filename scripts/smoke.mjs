@@ -32,9 +32,9 @@ if (!existsSync(DIST_DIR)) {
 }
 
 const checks = [
-  { path: '/', contains: 'Today at TriviaHub' },
+  { path: '/', contains: 'Today at Trivia in Games' },
   { path: '/', contains: 'application/ld+json' },
-  { path: '/daily', contains: 'Today at TriviaHub' },
+  { path: '/daily', contains: 'Today at Trivia in Games' },
   { path: '/daily/trivia', contains: 'Daily Trivia' },
   { path: '/daily/sudoku', contains: 'Daily Sudoku' },
   { path: '/daily/emoji-plot', contains: 'Daily Emoji Plot' },
@@ -55,7 +55,7 @@ const checks = [
   { path: '/faq', contains: 'application/ld+json' },
   { path: '/privacy-policy', contains: 'Privacy Policy' },
   { path: '/terms-and-conditions', contains: 'Terms &amp; Conditions' },
-  { path: '/about-us', contains: 'About TriviaHub' },
+  { path: '/about-us', contains: 'About Trivia in Games' },
   { path: '/contact-us', contains: 'Contact Us' },
   { path: '/game/skribbl-arena', contains: 'Skribbl Arena' },
   { path: '/game/trivia', contains: 'More games like this' },

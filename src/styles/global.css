@@ -242,6 +242,19 @@
 }
 
 @layer components {
+  /* In-repo icon defaults (src/lib/icons.ts + Icon.astro/Icon.tsx): stroke
+     attrs live in CSS so repeated icons stay cheap. Icons inherit
+     currentColor. */
+  .pb-icon {
+    display: inline-block;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vertical-align: -0.125em;
+  }
   /* Custom checkbox [OWNER d5]: 24px, 8px radius, 1px border, Rausch fill
      + white checkmark, ink focus ring. */
   .pb-checkbox {

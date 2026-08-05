@@ -183,7 +183,7 @@ export default function SoloShell({
           <h2 className="font-display text-h2 text-ink">Game over!</h2>
           <p className="text-body text-ink-muted">
             You scored{' '}
-            {/* [AIRBNB d4] rating-display 64/700 — the one loud typographic
+            {/* [AIRBNB d4] rating-display 64/700, the one loud typographic
                 moment, mapped to the results-screen score. */}
             <span className="font-display text-score text-ink">{score}</span> points.
           </p>

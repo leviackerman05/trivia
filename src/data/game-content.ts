@@ -47,7 +47,7 @@ export const gameContent: Record<string, GameSeoContent> = {
       {
         question: 'Is Skribbl Arena free to play?',
         answer:
-          'Yes, every TriviaHub game is free. No downloads, no accounts, no paywalls. Create a room and share the link.',
+          'Yes, every Trivia in Games game is free. No downloads, no accounts, no paywalls. Create a room and share the link.',
       },
       {
         question: 'How many players can join a Skribbl Arena room?',
@@ -416,7 +416,7 @@ export const gameContent: Record<string, GameSeoContent> = {
       },
       {
         heading: 'Playing with friends',
-        body: 'This or That is the ultimate warm-up game for a room: create a room, share the code, and everyone votes from their own phone in real time. Up to 24 players can join, and because rounds last six seconds, nobody waits and nobody gets bored, the game is over before the group chat finishes debating the first pair. The live bars make every vote visible, and the final herd-alignment scores create instant rivalries that carry into the next game of the night. It is also the easiest TriviaHub game to explain, which makes it perfect for mixed groups, classrooms, and game nights. The two-minute runtime means you can run it twice in a row and compare scores.',
+        body: 'This or That is the ultimate warm-up game for a room: create a room, share the code, and everyone votes from their own phone in real time. Up to 24 players can join, and because rounds last six seconds, nobody waits and nobody gets bored, the game is over before the group chat finishes debating the first pair. The live bars make every vote visible, and the final herd-alignment scores create instant rivalries that carry into the next game of the night. It is also the easiest Trivia in Games game to explain, which makes it perfect for mixed groups, classrooms, and game nights. The two-minute runtime means you can run it twice in a row and compare scores.',
       },
     ],
     faqs: [
@@ -723,7 +723,7 @@ export const gameContent: Record<string, GameSeoContent> = {
     sections: [
       {
         heading: 'How to play Charades',
-        body: "TriviaHub Charades keeps the classic game exactly as it should be: one actor, one secret movie title, one very enthusiastic team. The actor's device shows the title in large letters, the team cannot see it. The actor mimes, the team shouts, and anyone taps 'Got it!' the moment the title is guessed. Each correct guess in the 60-second window earns the team a point, then the phone passes to the next actor. Hollywood, Bollywood, or Mixed, you pick the category before you start.",
+        body: "Trivia in Games Charades keeps the classic game exactly as it should be: one actor, one secret movie title, one very enthusiastic team. The actor's device shows the title in large letters, the team cannot see it. The actor mimes, the team shouts, and anyone taps 'Got it!' the moment the title is guessed. Each correct guess in the 60-second window earns the team a point, then the phone passes to the next actor. Hollywood, Bollywood, or Mixed, you pick the category before you start.",
       },
       {
         heading: 'Rules & scoring',
@@ -735,7 +735,7 @@ export const gameContent: Record<string, GameSeoContent> = {
       },
       {
         heading: 'Why it works for co-located parties',
-        body: 'Charades is the original party game, and the TriviaHub version is built for a single shared screen or pass-the-phone play, perfect for family gatherings, game nights, and classroom drama warm-ups. The Hollywood/Bollywood toggle makes it a hit across cultures.',
+        body: 'Charades is the original party game, and the Trivia in Games version is built for a single shared screen or pass-the-phone play, perfect for family gatherings, game nights, and classroom drama warm-ups. The Hollywood/Bollywood toggle makes it a hit across cultures.',
       },
       {
         heading: 'Devices & requirements',
@@ -817,7 +817,7 @@ export const gameContent: Record<string, GameSeoContent> = {
     sections: [
       {
         heading: 'How to play Trivia',
-        body: 'TriviaHub Trivia covers two ways to play. Solo: take on the daily trivia, the same 10 questions everyone else gets that day, 15 seconds each, 10 points per correct answer, and a global daily leaderboard to climb. With friends: join a room for a 10-question race where everyone answers the same questions on the same clock, ending in a podium ceremony. Questions span General, Science, History, Pop Culture, Sports, Geography, Movies, Music, Food, and Technology.',
+        body: 'Trivia in Games Trivia covers two ways to play. Solo: take on the daily trivia, the same 10 questions everyone else gets that day, 15 seconds each, 10 points per correct answer, and a global daily leaderboard to climb. With friends: join a room for a 10-question race where everyone answers the same questions on the same clock, ending in a podium ceremony. Questions span General, Science, History, Pop Culture, Sports, Geography, Movies, Music, Food, and Technology.',
       },
       {
         heading: 'Rules & scoring',
@@ -829,7 +829,7 @@ export const gameContent: Record<string, GameSeoContent> = {
       },
       {
         heading: 'Why it works for everyone',
-        body: 'Trivia is the most flexible game on TriviaHub: a solo daily ritual, a classroom review tool, a competitive room race, or a comedy mode for game nights. With 525 questions across ten categories, including Geography, Movies, Music, Food, and Technology, it is the definitive free online trivia game for groups and solo players alike, and it stays fresh all year round.',
+        body: 'Trivia is the most flexible game on Trivia in Games: a solo daily ritual, a classroom review tool, a competitive room race, or a comedy mode for game nights. With 525 questions across ten categories, including Geography, Movies, Music, Food, and Technology, it is the definitive free online trivia game for groups and solo players alike, and it stays fresh all year round.',
       },
       {
         heading: 'Devices & requirements',
@@ -864,7 +864,7 @@ export const gameContent: Record<string, GameSeoContent> = {
     sections: [
       {
         heading: 'How to play Daily Sudoku',
-        body: 'A classic 9×9 sudoku grid, seeded by date so everyone on TriviaHub plays the same puzzle every day. Tap a cell to select it, then tap a number to place it. Given numbers are fixed; everything else is yours to solve. Fill all 81 cells with no repeated digits in any row, column, or 3×3 box to complete the puzzle. The controls are built for touch: a number pad sits right below the grid, and an erase button clears any cell you placed, so experimenting is free.',
+        body: 'A classic 9×9 sudoku grid, seeded by date so everyone on Trivia in Games plays the same puzzle every day. Tap a cell to select it, then tap a number to place it. Given numbers are fixed; everything else is yours to solve. Fill all 81 cells with no repeated digits in any row, column, or 3×3 box to complete the puzzle. The controls are built for touch: a number pad sits right below the grid, and an erase button clears any cell you placed, so experimenting is free.',
       },
       {
         heading: 'Rules & scoring',
@@ -884,7 +884,7 @@ export const gameContent: Record<string, GameSeoContent> = {
       },
       {
         heading: 'A daily habit',
-        body: 'The daily sudoku joins the daily trivia as one of TriviaHub’s rotating daily games. Play both each day to keep your streak alive, compare your finish times on the leaderboard, and share your completed-grid score card with friends. Same puzzle, same day, same rules for everyone, that is what makes the daily games addictive.',
+        body: 'The daily sudoku joins the daily trivia as one of Trivia in Games’s rotating daily games. Play both each day to keep your streak alive, compare your finish times on the leaderboard, and share your completed-grid score card with friends. Same puzzle, same day, same rules for everyone, that is what makes the daily games addictive.',
       },
     ],
     faqs: [

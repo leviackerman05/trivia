@@ -8,7 +8,7 @@ import { DECADE_PRESETS, filterByDecade } from '../../lib/decade';
 import DecadeChips from '../../components/DecadeChips';
 
 /**
- * Daily Movies — "Real or Fake?" (DAILY-DESIGN §3.2).
+ * Daily Movies, "Real or Fake?" (DAILY-DESIGN §3.2).
  * 10 synopsis rounds; the player judges Real vs Fake. Feedback names the
  * film + year on both outcomes; 100 per correct, 0 per wrong.
  */
@@ -68,8 +68,8 @@ export default function MoviesDaily({ dailyDateKey: dateKeyProp }: Props) {
     setFeedback({
       correct: wasCorrect,
       text: wasCorrect
-        ? `Yes — ${round.entry.title}, ${round.entry.year}`
-        : `No — it was ${round.entry.title}, ${round.entry.year}`,
+        ? `Yes, ${round.entry.title}, ${round.entry.year}`
+        : `No, it was ${round.entry.title}, ${round.entry.year}`,
     });
     setRoundState('revealed');
   };
@@ -93,7 +93,7 @@ export default function MoviesDaily({ dailyDateKey: dateKeyProp }: Props) {
       <div className="flex flex-col gap-5 rounded-lg border border-border bg-surface-raised p-4 sm:p-6 shadow-sm">
         <h3 className="text-lg font-bold tracking-tight text-ink">Daily Movie</h3>
         <p className="max-w-xl text-body text-ink-muted">
-          Ten synopses — some real, some invented. Spot the made-up plots, 100 points per correct
+          Ten synopses, some real, some invented. Spot the made-up plots, 100 points per correct
           call.
         </p>
         {/* [R8] decade filter on the setup card, before Start. */}

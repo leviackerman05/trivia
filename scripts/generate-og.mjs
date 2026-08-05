@@ -1,6 +1,6 @@
 /**
  * OG image generator (PRD §6.2, auto-generated template with game name +
- * TriviaHub wordmark). Build-time only: renders public/og/{slug}.png at
+ * Trivia in Games wordmark). Build-time only: renders public/og/{slug}.png at
  * 1200x630 from the BounceBox template.
  *
  * Runs automatically before `astro build` (package.json "prebuild") and
@@ -252,13 +252,13 @@ const entries = [
     fileName: `${game.slug}.png`,
   })),
   {
-    name: 'TriviaHub',
+    name: 'Trivia in Games',
     tagline: '19 free party games, daily trivia, and multiplayer fun',
     family: 'special',
     fileName: 'home.png',
   },
   {
-    name: 'TriviaHub',
+    name: 'Trivia in Games',
     tagline: '19 free party games, daily trivia, and multiplayer fun',
     family: 'special',
     fileName: 'default.png',

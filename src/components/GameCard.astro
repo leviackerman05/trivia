@@ -5,6 +5,9 @@ import Badge from './ui/Badge.astro';
 /**
  * GameCard: catalog tile with discovery metadata (players, duration,
  * energy), family chip, and New/Featured badges. One accessible link.
+ * [§5.3] Airbnb hover: 1px hairline border + the single hover-float shadow
+ * (no translate, no border-color shift); title 16/600 ink. Chrome icons
+ * are in-repo SVGs, never emojis.
  */
 interface Props {
   game: Game;
@@ -16,10 +19,10 @@ const energyLabel = game.energy === 'high' ? 'High energy' : 'Low energy';
 
 <a
   href={`/game/${game.slug}`}
-  class="group flex h-full flex-col gap-3 rounded-lg border border-border bg-surface-raised p-4 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md sm:p-6"
+  class="group flex h-full flex-col gap-3 rounded-lg border border-border bg-surface-raised p-4 shadow-sm transition-shadow duration-150 hover:shadow-md sm:p-6"
 >
   <span class="flex items-start justify-between gap-3">
-    <h3 class="text-lg font-bold tracking-tight text-ink group-hover:text-primary-strong">
+    <h3 class="text-base font-semibold tracking-tight text-ink group-hover:text-primary-strong">
       {game.name}
     </h3>
     <span class="flex shrink-0 flex-wrap justify-end gap-1.5">
@@ -31,13 +34,19 @@ const energyLabel = game.energy === 'high' ? 'High energy' : 'Low energy';
   <span
     class="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-medium text-ink-muted"
   >
-    <span>👥 {game.players ?? 'Any'}</span>
-    {game.durationMinutes && <span>⏱ {game.durationMinutes} min</span>}
-    <span>⚡ {energyLabel}</span>
+    <span class="inline-flex items-center gap-1">
+      {game.players ?? 'Any'}
+    </span>
+    {
+      game.durationMinutes && (
+        <span class="inline-flex items-center gap-1">{game.durationMinutes} min</span>
+      )
+    }
+    <span class="inline-flex items-center gap-1">{energyLabel}</span>
   </span>
   <span
     class="w-fit rounded-md border border-primary/40 bg-primary/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary-strong"
   >
-    {game.family}
+    {game.family} game
   </span>
 </a>

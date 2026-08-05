@@ -8,9 +8,9 @@ import { DECADE_PRESETS, filterByDecade } from '../../lib/decade';
 import DecadeChips from '../../components/DecadeChips';
 
 /**
- * Daily Music — "Name That Song" (DAILY-DESIGN §3.3).
+ * Daily Music, "Name That Song" (DAILY-DESIGN §3.3).
  * 10 rounds; the clue strip is emoji + year + BPM (no audio, no lyrics, no
- * album art — licensing walls). 4 title options; feedback names song +
+ * album art, licensing walls). 4 title options; feedback names song +
  * artist; 100 per correct.
  */
 
@@ -66,7 +66,7 @@ export default function MusicDaily({ dailyDateKey: dateKeyProp }: Props) {
       setScore((previous) => previous + 100);
       setCorrect((previous) => previous + 1);
     }
-    setFeedback({ correct: wasCorrect, text: `${round.title} — ${round.artist}` });
+    setFeedback({ correct: wasCorrect, text: `${round.title}, ${round.artist}` });
     setRoundState('revealed');
   };
 
@@ -90,7 +90,7 @@ export default function MusicDaily({ dailyDateKey: dateKeyProp }: Props) {
         <h3 className="text-lg font-bold tracking-tight text-ink">Daily Music</h3>
         <p className="max-w-xl text-body text-ink-muted">
           Name that song from emoji, year, and BPM clues. Ten rounds, four options each, no audio
-          needed — just music knowledge.
+          needed, just music knowledge.
         </p>
         {/* [R8] decade filter on the setup card, before Start. */}
         <DecadeChips presets={availablePresets} value={decade} onChange={setDecade} />

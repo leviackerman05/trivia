@@ -1,7 +1,7 @@
 import type { DrawingGalleryResponse } from './daily-drawing';
 
 /**
- * Typed API client for the TriviaHub backend (PRD §8.1 endpoints).
+ * Typed API client for the Trivia in Games backend (PRD §8.1 endpoints).
  * Islands use these helpers; errors surface as ApiError with a stable code.
  */
 

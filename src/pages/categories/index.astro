@@ -3,35 +3,29 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CategoryCard from '../../components/ui/CategoryCard.astro';
 import { games, type GameFamily } from '../../lib/games';
 
-const families: { family: GameFamily; name: string; emoji: string; description: string }[] = [
+const families: { family: GameFamily; name: string; icon: string; description: string }[] = [
   {
     family: 'drawing',
     name: 'Drawing Games',
-    emoji: '🎨',
+    icon: 'pencil',
     description: 'Sketch, guess, and laugh. Pictionary-style rooms with custom word lists.',
   },
   {
-    family: 'voting',
-    name: 'Voting Games',
-    emoji: '🗳️',
-    description: 'Live percentage battles: Would You Rather, Most Likely To, and more.',
+    family: 'party',
+    name: 'Party Classics',
+    icon: 'confetti',
+    description: 'Charades, Guess Who, and live percentage battles for big groups.',
   },
   {
     family: 'solo',
     name: 'Solo Games',
-    emoji: '🧩',
+    icon: 'user',
     description: 'Word puzzles, trivia, and brain teasers with daily streaks and leaderboards.',
-  },
-  {
-    family: 'special',
-    name: 'Party Classics',
-    emoji: '🎭',
-    description: 'Charades and Guess Who, digitized for co-located and remote groups.',
   },
   {
     family: 'quiz',
     name: 'Quiz Games',
-    emoji: '📚',
+    icon: 'question',
     description: 'Ten categories, 525 questions, solo dailies or a room-wide race.',
   },
 ];
@@ -52,8 +46,8 @@ const jsonLd = JSON.stringify({
 ---
 
 <BaseLayout
-  title="Game Categories: Drawing, Trivia, Voting and More | TriviaHub"
-  description="Browse TriviaHub by category: drawing games, trivia and quiz games, voting games, word games, and party classics. Free to play, no downloads, no accounts."
+  title="Game Categories: Drawing, Party, Solo and Quiz | Trivia in Games"
+  description="Browse Trivia in Games by category: drawing games, party classics, trivia and quiz games, solo puzzles, and word games. Free to play, no downloads, no accounts."
   canonicalPath="/categories"
   jsonLd={jsonLd}
   activeNav="categories"
@@ -61,8 +55,8 @@ const jsonLd = JSON.stringify({
   <section class="mb-10">
     <h1 class="font-display text-h1 text-ink">Browse by category</h1>
     <p class="mt-4 max-w-2xl text-body text-ink-muted">
-      Every TriviaHub game fits one of five families. Pick a mood, find your game, and start playing
-      in seconds.
+      Every Trivia in Games game fits one of four families. Pick a mood, find your game, and start
+      playing in seconds.
     </p>
   </section>
 
@@ -76,7 +70,7 @@ const jsonLd = JSON.stringify({
               <CategoryCard
                 href={`/#games-${family.family}`}
                 name={family.name}
-                emoji={family.emoji}
+                icon={family.icon}
                 count={count}
                 description={family.description}
               />

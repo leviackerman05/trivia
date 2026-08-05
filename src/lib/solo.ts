@@ -255,7 +255,7 @@ export function drawScoreImage(
   ctx.fillText(String(options.score), width / 2, 300);
   ctx.font = '500 36px system-ui, sans-serif';
   ctx.fillText(`${options.playerName} · ${options.dateKey}`, width / 2, 400);
-  ctx.fillText('Play TriviaHub: free party games and daily trivia online', width / 2, 480);
+  ctx.fillText('Play Trivia in Games: free party games and daily trivia online', width / 2, 480);
 }
 
 export function downloadCanvas(canvas: HTMLCanvasElement, slug: string): void {
