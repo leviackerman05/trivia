@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react';
 import SoloShell from './SoloShell';
 import {
   conflictCount,
@@ -8,17 +8,21 @@ import {
   validPlacement,
 } from '../../lib/sudoku';
 import { dailyDateKey } from '../../lib/trivia';
+import { nextCellIndex, sanitizeDigitInput, type ArrowKey } from '../../lib/sudoku-input';
 
 /**
  * Daily Sudoku (M18, owner request), the same seeded puzzle for everyone
  * on the same UTC day, played in the shared SoloShell (streak, leaderboard,
- * share image). Tap a cell, tap a number; wrong entries can be erased.
- * Completing the puzzle scores a flat 200, the leaderboard is the race.
+ * share image). [R9] All 81 cells are real inputs: tap to select, then use
+ * the native numeric keypad (mobile) or the keyboard (desktop) — arrows
+ * navigate with wrap, Backspace/Delete erase. Given cells are disabled
+ * inputs (uniform grid semantics; tab order skips them). Completing the
+ * puzzle scores a flat 200, the leaderboard is the race.
  */
 
-const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 type Phase = 'setup' | 'playing' | 'done';
+
+const ARROW_KEYS: ArrowKey[] = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
 
 export default function Sudoku() {
   const [phase, setPhase] = useState<Phase>('setup');
@@ -28,6 +32,7 @@ export default function Sudoku() {
   const [mistakes, setMistakes] = useState(0);
   const [score, setScore] = useState(0);
   const startedAtRef = useRef(0);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [, setTick] = useState(0);
 
   const dateKey = dailyDateKey(new Date());
@@ -52,14 +57,14 @@ export default function Sudoku() {
     setPhase('playing');
   };
 
-  const place = (value: number) => {
-    if (phase !== 'playing' || selected === null || given[selected]) {
+  const place = (value: number, cellIndex: number) => {
+    if (phase !== 'playing' || given[cellIndex]) {
       return;
     }
-    const row = Math.floor(selected / 9);
-    const col = selected % 9;
+    const row = Math.floor(cellIndex / 9);
+    const col = cellIndex % 9;
     const next = [...grid];
-    next[selected] = value;
+    next[cellIndex] = value;
     setGrid(next);
     if (value !== 0 && !validPlacement(next, row, col, value)) {
       // Flavor only, the player can fix or erase; no game-over.
@@ -69,6 +74,31 @@ export default function Sudoku() {
     if (value !== 0 && isComplete(next)) {
       setScore(SUDOKU_COMPLETION_POINTS);
       setPhase('done');
+    }
+  };
+
+  // [R9] digit input: sanitize (multi-char paste keeps the last digit) and
+  // write through the existing place() path; place(0) erases.
+  const handleChange = (event: ChangeEvent<HTMLInputElement>, cellIndex: number) => {
+    const value = sanitizeDigitInput(event.target.value);
+    setSelected(cellIndex);
+    place(value, cellIndex);
+  };
+
+  // [R9] keyboard navigation: arrows move selection with 9×9 wrap (Tab
+  // passes through untouched); Backspace/Delete erase the cell; digits
+  // 1–9 type normally and reach handleChange.
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>, cellIndex: number) => {
+    if (ARROW_KEYS.includes(event.key as ArrowKey)) {
+      event.preventDefault();
+      const next = nextCellIndex(cellIndex, event.key as ArrowKey);
+      setSelected(next);
+      inputRefs.current[next]?.focus();
+      return;
+    }
+    if (event.key === 'Backspace' || event.key === 'Delete') {
+      event.preventDefault();
+      place(0, cellIndex);
     }
   };
 
@@ -87,7 +117,8 @@ export default function Sudoku() {
         <h3 className="text-lg font-bold tracking-tight text-ink">Daily Sudoku</h3>
         <p className="max-w-xl text-body text-ink-muted">
           The same puzzle for everyone today ({dateKey}), finish it to score{' '}
-          {SUDOKU_COMPLETION_POINTS} points on the daily leaderboard. Tap a cell, then tap a number.
+          {SUDOKU_COMPLETION_POINTS} points on the daily leaderboard. Tap a cell, then type a
+          number.
         </p>
         <button
           type="button"
@@ -146,14 +177,23 @@ export default function Sudoku() {
                 digit
               );
             return (
-              <button
+              <input
                 key={index}
-                type="button"
+                type="text"
+                inputMode="numeric"
+                pattern="[1-9]"
+                maxLength={1}
+                autoComplete="off"
                 disabled={phase !== 'playing' || isGiven}
                 aria-label={`Row ${row + 1}, column ${col + 1}${digit ? `, ${digit}` : ', empty'}`}
-                aria-pressed={isSelected}
-                onClick={() => setSelected(index)}
-                className={`flex aspect-square items-center justify-center border border-border text-lg font-semibold transition-colors sm:text-xl ${
+                value={digit === 0 ? '' : String(digit)}
+                ref={(element) => {
+                  inputRefs.current[index] = element;
+                }}
+                onChange={(event) => handleChange(event, index)}
+                onKeyDown={(event) => handleKeyDown(event, index)}
+                onFocus={() => setSelected(index)}
+                className={`aspect-square border border-border text-center text-lg font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40 sm:text-xl ${
                   isGiven
                     ? 'bg-surface-muted font-bold text-ink'
                     : isConflict
@@ -162,35 +202,13 @@ export default function Sudoku() {
                         ? 'bg-primary/20 text-ink'
                         : 'bg-surface-raised text-ink-muted hover:bg-primary/10'
                 }`}
-              >
-                {digit === 0 ? '' : digit}
-              </button>
+              />
             );
           })}
         </div>
 
         {phase === 'playing' && (
           <>
-            <div className="flex flex-wrap justify-center gap-2">
-              {DIGITS.map((digit) => (
-                <button
-                  key={digit}
-                  type="button"
-                  onClick={() => place(digit)}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-pill border border-border bg-surface-muted text-lg font-bold text-ink transition-colors hover:border-primary/50 hover:bg-primary/10"
-                >
-                  {digit}
-                </button>
-              ))}
-              <button
-                type="button"
-                onClick={() => place(0)}
-                aria-label="Erase the selected cell"
-                className="inline-flex h-11 items-center justify-center rounded-pill border border-danger/50 bg-danger-soft px-4 text-sm font-semibold text-danger-strong transition-colors hover:bg-danger-soft/70"
-              >
-                ✕ Erase
-              </button>
-            </div>
             {conflicts > 0 && (
               <p role="status" className="text-small font-semibold text-warning-strong">
                 {conflicts} {conflicts === 1 ? 'cell has' : 'cells have'} conflicting numbers, fix
@@ -198,7 +216,8 @@ export default function Sudoku() {
               </p>
             )}
             <p className="text-small text-ink-muted">
-              Hint: given numbers are fixed; conflicting entries are highlighted in red.
+              Hint: given numbers are fixed; conflicting entries are highlighted in red. Use the
+              arrow keys to move between cells.
             </p>
           </>
         )}

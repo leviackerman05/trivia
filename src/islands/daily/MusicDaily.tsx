@@ -4,6 +4,8 @@ import musicJson from '../../data/daily-music.json';
 import { dailyGameSeed } from '../../lib/daily';
 import { dailyDateKey } from '../../lib/trivia';
 import { MUSIC_ROUNDS_PER_DAY, pickMusicRounds, type MusicRound } from '../../lib/music';
+import { DECADE_PRESETS, filterByDecade } from '../../lib/decade';
+import DecadeChips from '../../components/DecadeChips';
 
 /**
  * Daily Music — "Name That Song" (DAILY-DESIGN §3.3).
@@ -25,6 +27,7 @@ interface Props {
 export default function MusicDaily({ dailyDateKey: dateKeyProp }: Props) {
   const dateKey = dateKeyProp ?? dailyDateKey(new Date());
   const [phase, setPhase] = useState<Phase>('setup');
+  const [decade, setDecade] = useState<number | null>(null);
   const [rounds, setRounds] = useState<MusicRound[]>([]);
   const [index, setIndex] = useState(0);
   const [roundState, setRoundState] = useState<RoundState>('answering');
@@ -34,8 +37,18 @@ export default function MusicDaily({ dailyDateKey: dateKeyProp }: Props) {
 
   const round = rounds[index];
 
+  // [R8] empty-decade guard: a preset renders only when its filtered pool
+  // can fill a full round; "All" always renders.
+  const availablePresets = DECADE_PRESETS.filter(
+    (preset) =>
+      preset === null ||
+      filterByDecade(entries, preset, (entry) => entry.year).length >= MUSIC_ROUNDS_PER_DAY
+  );
+
   const start = () => {
-    setRounds(pickMusicRounds(entries, MUSIC_ROUNDS_PER_DAY, dailyGameSeed(dateKey, 'music')));
+    // [R8] filter BEFORE seeding: same (day, filter) ⇒ same rounds.
+    const pool = filterByDecade(entries, decade, (entry) => entry.year);
+    setRounds(pickMusicRounds(pool, MUSIC_ROUNDS_PER_DAY, dailyGameSeed(dateKey, 'music')));
     setIndex(0);
     setScore(0);
     setCorrect(0);
@@ -79,6 +92,8 @@ export default function MusicDaily({ dailyDateKey: dateKeyProp }: Props) {
           Name that song from emoji, year, and BPM clues. Ten rounds, four options each, no audio
           needed — just music knowledge.
         </p>
+        {/* [R8] decade filter on the setup card, before Start. */}
+        <DecadeChips presets={availablePresets} value={decade} onChange={setDecade} />
         <button
           type="button"
           onClick={start}

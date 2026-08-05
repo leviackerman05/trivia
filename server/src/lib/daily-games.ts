@@ -17,8 +17,7 @@ export const LIVE_DAILY_GAMES = [
   'rhyme-or-crime',
   'genre-swap',
   'genre-bender',
-  // M19 (DAILY-DESIGN §7): the four coming-soon dailies flip live together.
-  'geography',
+  // M19: the remaining three client-engine dailies (the fourth was removed in M20 Phase 0.5).
   'movies',
   'music',
   'drawing',

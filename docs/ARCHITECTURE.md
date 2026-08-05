@@ -702,3 +702,10 @@ reduced-motion safe:
 - Play-again in daily mode keeps the day's content (it is the daily); solo
   mode re-rolls. All live dailies feed the Phase 1.5 member pipeline
   (streaks, history, personal bests) with no per-game server work.
+
+### 21.8 M19 daily expansion + Phase 0.5 geography removal
+
+- M19 (2026-08-05) took the hub to **twelve live dailies** (D053); M20
+  Phase 0.5 (D055) removed Daily Geography — **eleven live dailies
+  (geography removed, M20 Phase 0.5)** — see `docs/DAILY-DESIGN.md` §3.1
+  (superseded) and D055.

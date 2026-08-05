@@ -14,6 +14,9 @@ import {
   type GenreBenderEntry,
 } from '../genre-bender';
 import { buildOptions } from '../solo';
+import { optionSeed } from '../pick';
+import { seededRandom } from '../trivia';
+import { dailyGameSeed } from '../daily';
 
 const SWAPS: GenreSwapEntry[] = [
   { original: 'Harry Potter', genre: 'noir', description: 'A boy detective in a rainy city.' },
@@ -62,6 +65,28 @@ describe('Genre Swap logic (PRD §5.9)', () => {
     expect(new Set(options).size).toBe(4);
     expect(options).toContain('a');
   });
+
+  it('[R7] daily mode is deterministic per (date, slug)', () => {
+    const seed = dailyGameSeed('2026-08-05', 'genre-swap');
+    const picked = pickGenreSwapQuestions(SWAPS, 4, seed);
+    const options = (entry: GenreSwapEntry, index: number) =>
+      genreSwapOptions(
+        entry,
+        SWAPS.map((swap) => swap.original),
+        seededRandom(optionSeed(seed, index))
+      );
+    expect(picked.map(options)).toEqual(picked.map(options));
+  });
+
+  it('[R7] solo mode varies across random streams', () => {
+    const entry = SWAPS[0]!;
+    const pool = SWAPS.map((swap) => swap.original);
+    const orders = new Set<string>();
+    for (let seed = 0; seed < 40; seed += 1) {
+      orders.add(genreSwapOptions(entry, pool, seededRandom(seed)).join('|'));
+    }
+    expect(orders.size).toBeGreaterThan(1);
+  });
 });
 
 describe('Genre-Bender logic (PRD §5.10)', () => {
@@ -80,5 +105,16 @@ describe('Genre-Bender logic (PRD §5.10)', () => {
     expect(judgeGenreBender('Old Town Road, Lil Nas X', 'Baby Shark, Pinkfong', 1_000).points).toBe(
       0
     );
+  });
+
+  it('[R7] daily mode is deterministic and keeps the correct label', () => {
+    const seed = dailyGameSeed('2026-08-05', 'genre-bender');
+    const picked = pickGenreBenderQuestions(BENDERS, 4, seed);
+    const options = (entry: GenreBenderEntry, index: number) =>
+      genreBenderOptions(entry, picked, seededRandom(optionSeed(seed, index)));
+    expect(picked.map(options)).toEqual(picked.map(options));
+    for (let index = 0; index < picked.length; index += 1) {
+      expect(options(picked[index]!, index)).toContain(benderLabel(picked[index]!));
+    }
   });
 });

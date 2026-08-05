@@ -17,7 +17,7 @@
 
 ## Current Milestone
 
-**M19, Four daily games: geography, movies, music, drawing (2026-08-05)** —
+**M19, Four daily games: geography, movies, music, drawing (2026-08-05) — (geography removed 2026-08-05, Phase 0.5)** —
 Tech Lead design delivered in `docs/DAILY-DESIGN.md` (design only, no
 production code): three pure client engines on the Phase A seeded-pick
 pattern (D050) + the drawing gallery subsystem — the first server-persisted

@@ -10,6 +10,8 @@ import {
   triviaQuestions,
   TRIVIA_QUESTION_SECONDS,
 } from '../trivia';
+import { dailyGameSeed } from '../daily';
+import { optionSeed, shuffleQuestion } from '../pick';
 
 describe('trivia dataset (src/data/trivia-questions.json)', () => {
   it('has at least 50 questions with a valid shape', () => {
@@ -39,6 +41,29 @@ describe('daily challenge selection', () => {
     const first = selectDailyQuestions(date);
     const second = selectDailyQuestions(date);
     expect(first).toEqual(second);
+  });
+
+  it('[R7] client shuffle golden: same date ⇒ same set and option order', () => {
+    const dateKey = '2026-08-04';
+    const shuffled = (key: string) =>
+      selectDailyQuestions(new Date(`${key}T12:00:00Z`)).map((question, index) =>
+        shuffleQuestion(question, optionSeed(dailyGameSeed(key, 'trivia'), index))
+      );
+    expect(shuffled(dateKey)).toEqual(shuffled(dateKey));
+    for (const question of shuffled(dateKey)) {
+      const original = triviaQuestions.find((entry) => entry.question === question.question)!;
+      expect(question.options[question.answer]).toBe(original.options[original.answer]);
+    }
+  });
+
+  it('[R7] client shuffle golden: different days differ in order', () => {
+    const shuffled = (key: string) =>
+      selectDailyQuestions(new Date(`${key}T12:00:00Z`)).map((question, index) =>
+        shuffleQuestion(question, optionSeed(dailyGameSeed(key, 'trivia'), index))
+      );
+    const dayOne = shuffled('2026-08-04');
+    const dayTwo = shuffled('2026-08-05');
+    expect(dayOne.some((question, i) => question !== dayTwo[i])).toBe(true);
   });
 
   it('varies across dates', () => {

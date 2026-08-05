@@ -43,7 +43,9 @@ const checks = [
   { path: '/daily/rhyme-or-crime', contains: 'Daily Rhyme' },
   { path: '/daily/genre-swap', contains: 'Daily Genre Swap' },
   { path: '/daily/genre-bender', contains: 'Daily Genre-Bender' },
-  { path: '/daily/geography', contains: 'Daily Geography' },
+  // M20 Phase 0.5: the removed daily 404s (the smoke server returns 404 for
+  // missing files; checks may override the expected status).
+  { path: '/daily/geography', status: 404 },
   { path: '/daily/movies', contains: 'Daily Movie' },
   { path: '/daily/music', contains: 'Daily Music' },
   { path: '/daily/drawing', contains: 'Daily Drawing' },
@@ -156,13 +158,14 @@ server.listen(PORT, async () => {
     for (const check of checks) {
       const response = await fetch(`http://localhost:${PORT}${check.path}`);
       const body = await response.text();
-      if (response.status !== 200) {
-        throw new Error(`${check.path} → HTTP ${response.status}`);
+      const expectedStatus = check.status ?? 200;
+      if (response.status !== expectedStatus) {
+        throw new Error(`${check.path} → HTTP ${response.status}, expected ${expectedStatus}`);
       }
-      if (!body.includes(check.contains)) {
+      if (check.contains !== undefined && !body.includes(check.contains)) {
         throw new Error(`${check.path} → missing expected content: "${check.contains}"`);
       }
-      console.log(`✓ ${check.path}`);
+      console.log(`✓ ${check.path}${expectedStatus === 200 ? '' : ` (${expectedStatus})`}`);
     }
 
     for (const path of weightChecks) {

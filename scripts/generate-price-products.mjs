@@ -9,7 +9,7 @@
  * Then: node scripts/enrich-price-products.mjs  (network)
  */
 
-import { writeFileSync, readFileSync } from 'node:fs';
+import { writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -618,6 +618,13 @@ const CATEGORY_BLURBS = {
   outdoors: 'Outdoor gear with a story, great for camping, tailgates, and showing off.',
 };
 
+/**
+ * S0 (D055/D056): the bucket registry is `kitchen, bar, home, office,
+ * electronics, outdoors, toys, sports, beauty, grocery` (mapped to the
+ * PA-API SearchIndex in resolve-price-images.mjs, `All` when invalid).
+ * This generator emits from its four historic buckets; later lots add the
+ * rest.
+ */
 function categoryFor(index) {
   if (index < 150) return 'kitchen';
   if (index < 300) return 'electronics';
@@ -625,28 +632,38 @@ function categoryFor(index) {
   return 'outdoors';
 }
 
+/** S0: stable, deduped product id (slugified name). */
+function slugify(name) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+const seenIds = new Map();
+function uniqueId(name) {
+  const base = slugify(name) || 'product';
+  const count = seenIds.get(base) ?? 0;
+  seenIds.set(base, count + 1);
+  return count === 0 ? base : `${base}-${count + 1}`;
+}
+
 const products = ROWS.map(([name, searchTerm, emoji, price, blurb], index) => ({
+  id: uniqueId(name),
   name,
   searchTerm: searchTerm ?? name,
   emoji,
   description: blurb ?? `${name}, ${CATEGORY_BLURBS[categoryFor(index)]}`,
   price,
+  category: categoryFor(index),
+  // Additive: reveal-line spec bullets; content lands with lot L9.
+  specs: [],
 }));
 
-// Keep any existing images + credits (M10 enrichment) matched by name.
-const previous = JSON.parse(readFileSync(out, 'utf8'));
-const previousByName = new Map(previous.map((p) => [p.name, p]));
-for (const product of products) {
-  const old = previousByName.get(product.name);
-  if (old) {
-    if (old.image) {
-      product.image = old.image;
-    }
-    if (old.credit) {
-      product.credit = old.credit;
-    }
-  }
-}
+// S0 (D055): image/credit are enrichment artifacts and no longer ship in the
+// authoring file — the price pipeline (resolve-price-images.mjs, D056)
+// resolves images via PA-API and the merged loader (src/lib/price.ts) owns
+// the render view. The emoji fallback is preserved.
 
 writeFileSync(out, JSON.stringify(products, null, 2) + '\n');
 console.log(`price-products.json: ${products.length} products`);

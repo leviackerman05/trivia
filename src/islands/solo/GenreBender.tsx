@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import SoloShell from './SoloShell';
 import TimerPicker from './TimerPicker';
 import genreBendersJson from '../../data/genre-benders.json';
@@ -13,6 +13,10 @@ import {
   type GenreBenderEntry,
 } from '../../lib/genre-bender';
 import { dailyGameSeed } from '../../lib/daily';
+import { optionSeed } from '../../lib/pick';
+import { seededRandom } from '../../lib/trivia';
+import { DECADE_PRESETS, filterByDecade } from '../../lib/decade';
+import DecadeChips from '../../components/DecadeChips';
 
 /**
  * Genre-Bender (M8, PRD §5.10; M14 owner fixes), rap lyrics rewritten as
@@ -34,6 +38,7 @@ interface Props {
 export default function GenreBender({ dailyDateKey }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('genre-bender', 30));
+  const [decade, setDecade] = useState<number | null>(null);
   const [questions, setQuestions] = useState<GenreBenderEntry[]>([]);
   const [index, setIndex] = useState(0);
   const [options, setOptions] = useState<string[]>([]);
@@ -42,6 +47,8 @@ export default function GenreBender({ dailyDateKey }: Props) {
   const [locked, setLocked] = useState(false);
   const [score, setScore] = useState(0);
   const [results, setResults] = useState<{ correct: boolean; points: number }[]>([]);
+  // [R7] the round's option shuffle must stay seeded per round in daily mode.
+  const seedRef = useRef(0);
 
   const question = questions[index];
   const remaining = useCountdown(
@@ -50,14 +57,33 @@ export default function GenreBender({ dailyDateKey }: Props) {
     index
   );
 
+  // [R8] hide decade presets whose filtered pool can't fill a round; "All"
+  // always renders. Deterministic and self-healing as content lands.
+  const availablePresets = DECADE_PRESETS.filter(
+    (preset) =>
+      preset === null ||
+      filterByDecade(entries, preset, (entry) => entry.year).length >= GENRE_BENDER_TOTAL_QUESTIONS
+  );
+
   const start = () => {
     saveTimerSetting('genre-bender', timerSeconds);
     const seed = dailyDateKey
       ? dailyGameSeed(dailyDateKey, 'genre-bender')
       : Math.floor(Math.random() * 1000);
-    const picked = pickGenreBenderQuestions(entries, GENRE_BENDER_TOTAL_QUESTIONS, seed);
+    seedRef.current = seed;
+    // [R8] filter BEFORE seeding: same (day, filter) ⇒ same rounds.
+    const pool = filterByDecade(entries, decade, (entry) => entry.year);
+    const picked = pickGenreBenderQuestions(pool, GENRE_BENDER_TOTAL_QUESTIONS, seed);
     setQuestions(picked);
-    setOptions(picked[0] ? genreBenderOptions(picked[0], picked) : []);
+    setOptions(
+      picked[0]
+        ? genreBenderOptions(
+            picked[0],
+            picked,
+            dailyDateKey ? seededRandom(optionSeed(seed, 0)) : undefined
+          )
+        : []
+    );
     setIndex(0);
     setScore(0);
     setResults([]);
@@ -98,7 +124,15 @@ export default function GenreBender({ dailyDateKey }: Props) {
     }
     setIndex((previous) => previous + 1);
     const nextQuestion = questions[index + 1];
-    setOptions(nextQuestion ? genreBenderOptions(nextQuestion, questions) : []);
+    setOptions(
+      nextQuestion
+        ? genreBenderOptions(
+            nextQuestion,
+            questions,
+            dailyDateKey ? seededRandom(optionSeed(seedRef.current, index + 1)) : undefined
+          )
+        : []
+    );
     setShowYear(false);
     setFeedback(null);
     setLocked(false);
@@ -123,6 +157,8 @@ export default function GenreBender({ dailyDateKey }: Props) {
           round timer; the clock starts when you do.
         </p>
         <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />
+        {/* [R8] decade filter (both modes); presets hidden when the pool is thin. */}
+        <DecadeChips presets={availablePresets} value={decade} onChange={setDecade} />
         <button
           type="button"
           onClick={start}

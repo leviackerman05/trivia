@@ -11,9 +11,9 @@ import {
 import { EMOJI_TOTAL_QUESTIONS, pickEmojiQuestions } from '../emoji-plot';
 
 describe('daily registry (Phase A + M19)', () => {
-  it('exposes 12 live daily games with unique slugs', () => {
+  it('exposes 11 live daily games with unique slugs', () => {
     const live = getLiveDailyGames();
-    expect(live).toHaveLength(12);
+    expect(live).toHaveLength(11);
     expect(new Set(live.map((game) => game.slug)).size).toBe(live.length);
   });
 

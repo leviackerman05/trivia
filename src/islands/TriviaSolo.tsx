@@ -7,6 +7,8 @@ import {
   TRIVIA_QUESTION_SECONDS,
   type TriviaQuestion,
 } from '../lib/trivia';
+import { optionSeed, shuffleQuestion } from '../lib/pick';
+import { dailyGameSeed } from '../lib/daily';
 import { SERVER_URL, submitScore } from '../lib/api';
 import { claimMember, ensureMemberKey, readMemberKey, submitDailyRun } from '../lib/member';
 import { readNickname, registerStreak, writeNickname } from '../lib/solo';
@@ -93,7 +95,17 @@ export default function TriviaSolo() {
     if (typeof window !== 'undefined') {
       writeNickname(name);
     }
-    setQuestions(dailyQuestions ?? selectDailyQuestions(new Date()));
+    // [R7] shuffle the question set: same day + same seed ⇒ same option
+    // order for everyone. Daily trivia is always date-seeded (never
+    // Math.random); the shuffled client copy judges by the remapped index
+    // while the server's D032 payload stays untouched.
+    const source = dailyQuestions ?? selectDailyQuestions(new Date());
+    const gameSeed = dailyGameSeed(dailyDateKey(new Date()), 'trivia');
+    setQuestions(
+      source.map((question, roundIndex) =>
+        shuffleQuestion(question, optionSeed(gameSeed, roundIndex))
+      )
+    );
     setIndex(0);
     setResults([]);
     setTotalScore(0);

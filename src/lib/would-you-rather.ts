@@ -28,6 +28,14 @@ export function pickDilemmas(count = WYR_DILEMMAS_PER_SESSION): Dilemma[] {
   return pool.slice(0, Math.min(count, pool.length));
 }
 
+/**
+ * [R7] Randomly present a dilemma as A-first or B-first (swaps a/b roughly
+ * half the time). Solo-only one-screen mode, no seed discipline required.
+ */
+export function shuffleDilemma(dilemma: Dilemma, random: () => number = Math.random): Dilemma {
+  return random() < 0.5 ? { a: dilemma.b, b: dilemma.a } : { a: dilemma.a, b: dilemma.b };
+}
+
 export interface WyRSessionSummary {
   dilemmas: number;
   votes: number;

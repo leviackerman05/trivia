@@ -16,6 +16,7 @@
     "og:generate": "node scripts/generate-og.mjs",
     "preview": "astro preview",
     "deploy": "astro build && wrangler pages deploy --project-name triviahub",
+    "resolve:price": "node scripts/resolve-price-images.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",

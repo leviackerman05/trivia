@@ -65,6 +65,9 @@ stay deterministic.
 
 ### 2.1 Geography — "Where in the World?"
 
+> **SUPERSEDED — removed in M20 Phase 0.5 (PLAN-SCOPE R5/D6); World Peek
+> replaces it with fresh data in Phase C.**
+
 **Concept:** a photo; pick the place out of 4 options. Hint after a wrong
 guess; credit line on reveal for CC-BY/CC-BY-SA photos.
 

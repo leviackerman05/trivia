@@ -14,7 +14,7 @@
 import { hashString } from './trivia';
 
 export type DailyCategory =
-  'trivia' | 'puzzle' | 'word' | 'drawing' | 'geography' | 'movies' | 'music' | 'social';
+  'trivia' | 'puzzle' | 'word' | 'drawing' | 'movies' | 'music' | 'social';
 
 export interface DailyGame {
   slug: string;
@@ -110,17 +110,6 @@ export const dailyGames: DailyGame[] = [
     emoji: '📖',
     category: 'music',
     description: 'Name the song behind a sonnet-ified lyric, ten bended classics.',
-    estimatedMinutes: 5,
-    tiers: [],
-    live: true,
-  },
-  {
-    slug: 'geography',
-    name: 'Daily Geography',
-    emoji: '🌍',
-    category: 'geography',
-    description:
-      'Identify the place in each photo — ten rounds around the world, with a hint and a retry.',
     estimatedMinutes: 5,
     tiers: [],
     live: true,

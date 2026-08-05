@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import moviesJson from '../../data/daily-movies.json';
 import { dailyGameSeed } from '../daily';
 import { MOVIE_REAL_COUNT_MIN, pickMovieRounds, type MoviePair } from '../movies';
+import { decadeOf, filterByDecade } from '../decade';
 
 const entries = moviesJson as MoviePair[];
 
@@ -55,6 +56,19 @@ describe('pickMovieRounds (DAILY-DESIGN §3.2)', () => {
     // A fixed 5/5 pattern is a solver exploit — the seeded mix must vary.
     expect(counts.size).toBeGreaterThan(1);
     expect(counts.has(MOVIE_REAL_COUNT_MIN)).toBe(true);
+  });
+
+  it('[R8] decade-filtered days are deterministic per (day, filter)', () => {
+    for (const key of dateKeys(90)) {
+      const pool = filterByDecade(entries, 2000, (entry) => entry.year);
+      const seed = dailyGameSeed(key, 'movies');
+      const first = pickMovieRounds(pool, 10, seed);
+      const second = pickMovieRounds(pool, 10, seed);
+      expect(first, key).toEqual(second);
+      for (const round of first) {
+        expect(decadeOf(round.entry.year), key).toBe(2000);
+      }
+    }
   });
 });
 

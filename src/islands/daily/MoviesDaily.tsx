@@ -4,6 +4,8 @@ import moviesJson from '../../data/daily-movies.json';
 import { dailyGameSeed } from '../../lib/daily';
 import { dailyDateKey } from '../../lib/trivia';
 import { MOVIE_ROUNDS_PER_DAY, pickMovieRounds, type MovieRound } from '../../lib/movies';
+import { DECADE_PRESETS, filterByDecade } from '../../lib/decade';
+import DecadeChips from '../../components/DecadeChips';
 
 /**
  * Daily Movies — "Real or Fake?" (DAILY-DESIGN §3.2).
@@ -24,6 +26,7 @@ interface Props {
 export default function MoviesDaily({ dailyDateKey: dateKeyProp }: Props) {
   const dateKey = dateKeyProp ?? dailyDateKey(new Date());
   const [phase, setPhase] = useState<Phase>('setup');
+  const [decade, setDecade] = useState<number | null>(null);
   const [rounds, setRounds] = useState<MovieRound[]>([]);
   const [index, setIndex] = useState(0);
   const [roundState, setRoundState] = useState<RoundState>('answering');
@@ -33,8 +36,18 @@ export default function MoviesDaily({ dailyDateKey: dateKeyProp }: Props) {
 
   const round = rounds[index];
 
+  // [R8] empty-decade guard: a preset renders only when its filtered pool
+  // can fill a full round; "All" always renders.
+  const availablePresets = DECADE_PRESETS.filter(
+    (preset) =>
+      preset === null ||
+      filterByDecade(entries, preset, (entry) => entry.year).length >= MOVIE_ROUNDS_PER_DAY
+  );
+
   const start = () => {
-    setRounds(pickMovieRounds(entries, MOVIE_ROUNDS_PER_DAY, dailyGameSeed(dateKey, 'movies')));
+    // [R8] filter BEFORE seeding: same (day, filter) ⇒ same rounds.
+    const pool = filterByDecade(entries, decade, (entry) => entry.year);
+    setRounds(pickMovieRounds(pool, MOVIE_ROUNDS_PER_DAY, dailyGameSeed(dateKey, 'movies')));
     setIndex(0);
     setScore(0);
     setCorrect(0);
@@ -83,6 +96,8 @@ export default function MoviesDaily({ dailyDateKey: dateKeyProp }: Props) {
           Ten synopses — some real, some invented. Spot the made-up plots, 100 points per correct
           call.
         </p>
+        {/* [R8] decade filter on the setup card, before Start. */}
+        <DecadeChips presets={availablePresets} value={decade} onChange={setDecade} />
         <button
           type="button"
           onClick={start}

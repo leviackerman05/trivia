@@ -9,7 +9,7 @@
  */
 
 import { hashString } from './trivia';
-import { pickDistinct } from './pick';
+import { optionSeed, pickDistinct, shuffleOptions } from './pick';
 
 export interface MusicEntry {
   title: string;
@@ -66,5 +66,11 @@ export function pickMusicRounds(
     picked.push(...pickDistinct(leftovers, count - picked.length, hashString(`${seed}:fill`)));
   }
   const ordered = shuffleEntries(picked, hashString(`${seed}:order`));
-  return ordered.map(({ bpmSource: _bpmSource, ...round }) => round);
+  // [R7] shuffle each round's embedded options; the round type carries
+  // options/answer so the island renders without any change. The answer is
+  // remapped to the shuffled position of the original correct option.
+  return ordered.map(({ bpmSource: _bpmSource, ...round }, index) => {
+    const options = shuffleOptions(round.options, optionSeed(seed, index));
+    return { ...round, options, answer: options.indexOf(round.options[round.answer]!) };
+  });
 }

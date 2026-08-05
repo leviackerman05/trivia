@@ -203,56 +203,8 @@ milestone (no solo-mode change, per scope §1.1).
 
 ### 3.1 Geography — "Where in the World?"
 
-**Concept:** photo + 4-option MC; hint after a wrong guess; one retry;
-credit line on reveal. 10 rounds/day.
-
-**Data** (`src/data/daily-geography.json`, 120 entries, verbatim from
-CONTENT-SOURCING §1): `{ place, url, credit?, options[4], answer, hint,
-region }`. `answer` = index into `options`. Region buckets: `africa`,
-`americas`, `asia`, `europe`, `oceania`, quota ≥10 each.
-
-**Pick function** — `pickGeographyRounds(entries, count = 10, seed)`:
-
-1. Base pick: `candidate = pickDistinct(entries, 10, seed)`.
-2. **Region cap (≤4 per region per day, P1):** count regions in the
-   candidate; if any > 4, re-roll deterministically:
-   `candidate = pickDistinct(entries, 10, seed + k * 31)` for `k = 1..63`,
-   returning the first valid candidate; after 64 tries return the last
-   candidate (deterministic; with ≥10 per bucket and 5 buckets a valid
-   subset always exists, so the fallback is a theoretical backstop, not a
-   path).
-3. Returns the entries in seeded order (round order = array order).
-
-Determinism is preserved: the k-sequence is fixed, no randomness. The
-per-day test asserts the cap over 90 consecutive dates.
-
-**Round flow** (island state machine):
-
-```
-idle → (pick option) → wrong? → hint shown, one retry allowed → 50 pts if correct now
-                     → correct → 100 pts
-                     → second wrong → 0 pts
-any terminal state → reveal (answer, credit line) → next round
-```
-
-- Credit line renders only on reveal, only when `credit.license` is `by`
-  or `by-sa`: `Photo: {creator} (CC-{license})`. Absent for PD/CC0
-  (`credit` omitted).
-- Photo: `<img src={entry.url} loading="lazy" referrerPolicy="no-referrer"
-alt="" />` — **`alt` intentionally empty** (a descriptive alt leaks the
-  answer to screen-reader users; the question is the 4 options, which are
-  real buttons). The round container carries an aria-label.
-
-**Scoring:** 100 first-try correct, 50 after hint, 0 wrong. Max 1000.
-Submit the run with `correctCount` / `totalCount: 10` (see §3.5).
-
-**Share card:** name "Daily Geography" flows through `SoloShell` →
-`drawScoreImage` (game name + score + date). Credit renders on the round
-reveal only, never on the card.
-
-**Files:** `src/data/daily-geography.json`, `src/lib/geography.ts`
-(`GeographyEntry`, `pickGeographyRounds`), `src/lib/__tests__/geography.test.ts`,
-`src/islands/daily/GeographyDaily.tsx`, `[slug].astro` branch.
+> **SUPERSEDED — removed in M20 Phase 0.5 (PLAN-SCOPE R5/D6). World Peek
+> replaces it with fresh data in Phase C.**
 
 ### 3.2 Movies — "Real or Fake?"
 
@@ -649,17 +601,17 @@ Rationale notes:
 
 ## 7. Registry + surface updates
 
-| Surface                                               | Change                                                                                                                                                                                                                                                                                                        |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/lib/daily.ts`                                    | 4 entries → `live: true`; drop `gameSlug`; final descriptions (remove "Coming in the next milestone"); `estimatedMinutes`: geography/movies/music 5, **drawing 10** (currently 5)                                                                                                                             |
-| `src/pages/daily/index.astro`                         | "Eight challenges" → **"Twelve challenges"**; meta description enumerates the new games; wrap the "Coming to the daily hub" section in `{plannedGames.length > 0 && …}` (it will render nothing)                                                                                                              |
-| `src/pages/index.astro`                               | Daily strip auto-updates (`liveDaily.slice(0,3)`) — verify only; hero/meta copy already generic (verified: no per-game enumeration in hero/meta)                                                                                                                                                              |
-| `public/sitemap.xml`                                  | +4 URLs: `/daily/geography`, `/daily/movies`, `/daily/music`, `/daily/drawing` — `changefreq daily`, `priority 0.9`, `lastmod` today                                                                                                                                                                          |
-| `scripts/smoke.mjs`                                   | +4 checks: `/daily/geography` → "Daily Geography", `/daily/movies` → "Daily Movie", `/daily/music` → "Daily Music", `/daily/drawing` → "Daily Drawing"; add `/daily/drawing` to `weightChecks` (heaviest new page); island-bundle budget re-verified by the existing loop (remote photo URLs are not bundled) |
-| `src/lib/__tests__/daily.test.ts`                     | 8 → **12 live**; assert zero planned (the current test maps "every planned game" — flip to assert `getPlannedDailyGames()` is empty)                                                                                                                                                                          |
-| `src/lib/__tests__/games.test.ts`                     | Lockstep passes automatically once both registries are updated — no edit                                                                                                                                                                                                                                      |
-| Share card                                            | Names flow via `SoloShell` → `drawScoreImage`; verify the four names read well on the 1080×540 card (all short — expected fine, no engine change)                                                                                                                                                             |
-| `/daily/archive.astro`, `DailyHubStatus`, `DailyCard` | Registry-driven — verify, expect no change                                                                                                                                                                                                                                                                    |
+| Surface                                               | Change                                                                                                                                                                                                                                                                                                                                                                                               |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/lib/daily.ts`                                    | 4 entries → `live: true`; drop `gameSlug`; final descriptions (remove "Coming in the next milestone"); `estimatedMinutes`: geography/movies/music 5, **drawing 10** (currently 5)                                                                                                                                                                                                                    |
+| `src/pages/daily/index.astro`                         | "Eight challenges" → **"Twelve challenges"**; meta description enumerates the new games; wrap the "Coming to the daily hub" section in `{plannedGames.length > 0 && …}` (it will render nothing)                                                                                                                                                                                                     |
+| `src/pages/index.astro`                               | Daily strip auto-updates (`liveDaily.slice(0,3)`) — verify only; hero/meta copy already generic (verified: no per-game enumeration in hero/meta)                                                                                                                                                                                                                                                     |
+| `public/sitemap.xml`                                  | +4 URLs: `/daily/geography`, `/daily/movies`, `/daily/music`, `/daily/drawing` — `changefreq daily`, `priority 0.9`, `lastmod` today; **M20 Phase 0.5: `/daily/geography` URL removed**                                                                                                                                                                                                              |
+| `scripts/smoke.mjs`                                   | +4 checks: `/daily/geography` → "Daily Geography" (removed M20 Phase 0.5 — the check is now `{ path: '/daily/geography', status: 404 }`), `/daily/movies` → "Daily Movie", `/daily/music` → "Daily Music", `/daily/drawing` → "Daily Drawing"; add `/daily/drawing` to `weightChecks` (heaviest new page); island-bundle budget re-verified by the existing loop (remote photo URLs are not bundled) |
+| `src/lib/__tests__/daily.test.ts`                     | 8 → **12 live**; assert zero planned (the current test maps "every planned game" — flip to assert `getPlannedDailyGames()` is empty)                                                                                                                                                                                                                                                                 |
+| `src/lib/__tests__/games.test.ts`                     | Lockstep passes automatically once both registries are updated — no edit                                                                                                                                                                                                                                                                                                                             |
+| Share card                                            | Names flow via `SoloShell` → `drawScoreImage`; verify the four names read well on the 1080×540 card (all short — expected fine, no engine change)                                                                                                                                                                                                                                                    |
+| `/daily/archive.astro`, `DailyHubStatus`, `DailyCard` | Registry-driven — verify, expect no change                                                                                                                                                                                                                                                                                                                                                           |
 
 ---
 
@@ -688,11 +640,7 @@ Rationale notes:
 
 ### Client unit (vitest, `src/lib/__tests__/`)
 
-- **`geography.test.ts`** — entry shape; seed determinism (same date/slug
-  ⇒ identical rounds; consecutive days differ); **region cap ≤4 per day
-  over 90 consecutive dates**; pool-edge (pool < 10 ⇒ fewer rounds, no
-  crash); dataset QA: ≥120 entries, ≥10 per region bucket, `answer` ∈
-  `[0,3]`, unique `place`, `options` contains `place` at `answer`.
+- **`geography.test.ts`** — SUPERSEDED: removed with the game in M20 Phase 0.5 (PLAN-SCOPE R5/D6); World Peek ships fresh data + tests in Phase C.
 - **`movies.test.ts`** — determinism; **real count ∈ 4..6 over 90 dates,
   and not 5 every day**; 10 distinct entries per day; dataset QA: ≥300
   entries, tiers populated, unique titles, both synopses non-empty and
@@ -734,9 +682,9 @@ Rationale notes:
     **401 missing/wrong token**; 404 unknown.
   - Rate limits: upload/vote/flag/read limiter tests (small-limiter app).
 - **`routes.integration.test.ts`** (extend): one representative new game
-  (e.g. `geography`) — submit accepted → run recorded, streak + PB visible
-  via `/api/me` (the submit path is shared; per-game server logic is zero,
-  scope §3.1).
+  (e.g. `movies`, after the geography case was removed in M20 Phase 0.5) —
+  submit accepted → run recorded, streak + PB visible via `/api/me` (the
+  submit path is shared; per-game server logic is zero, scope §3.1).
 - **`identity.integration.test.ts`**: unchanged (submit path untouched).
 
 ### Lockstep / registry
@@ -803,14 +751,6 @@ verify` green at every PR (datasets land with their QA tests in the same
 - Files: `src/lib/pick.ts` (new, `pickDistinct`), `src/lib/__tests__/pick.test.ts`.
 - Acceptance: matches `pickEmojiQuestions` behavior on the same seed
   (golden test); pool-edge returns all entries; `emoji-plot.ts` untouched.
-
-**F2 — Geography engine**
-
-- Files: `src/data/daily-geography.json` (sample 12+ to start; full 120
-  with the authoring PR), `src/lib/geography.ts`,
-  `src/lib/__tests__/geography.test.ts`.
-- Acceptance: §9 geography tests green (determinism, region cap over 90
-  days, pool-edge, dataset QA when full).
 
 **F3 — Movies engine**
 

@@ -34,3 +34,6 @@ pnpm-debug.log*
 
 # Generated OG images (build-time, via scripts/generate-og.mjs)
 public/og/
+
+# Price pipeline (M20 S1-S5): review artifacts + candidate cache never ship.
+scripts/.cache/

@@ -49,6 +49,10 @@ export function judgeGenreSwap(
   return { correct, points, correctLabel };
 }
 
-export function genreSwapOptions(entry: GenreSwapEntry, allOriginals: string[]): string[] {
-  return buildOptions(entry.original, allOriginals);
+export function genreSwapOptions(
+  entry: GenreSwapEntry,
+  allOriginals: string[],
+  random: () => number = Math.random
+): string[] {
+  return buildOptions(entry.original, allOriginals, 4, random);
 }

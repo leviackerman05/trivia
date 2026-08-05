@@ -14,6 +14,8 @@ import {
   type EmojiPlotEntry,
 } from '../../lib/emoji-plot';
 import { dailyGameSeed } from '../../lib/daily';
+import { DECADE_PRESETS, filterByDecade } from '../../lib/decade';
+import DecadeChips from '../../components/DecadeChips';
 
 /**
  * Emoji Plot (M7, PRD §5.3; M14 owner fixes), decode movies and books from
@@ -34,6 +36,7 @@ interface Props {
 export default function EmojiPlot({ dailyDateKey }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('emoji-plot', 30));
+  const [decade, setDecade] = useState<number | null>(null);
   const [questions, setQuestions] = useState<EmojiPlotEntry[]>([]);
   const [index, setIndex] = useState(0);
   const [draft, setDraft] = useState('');
@@ -53,12 +56,22 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
     index
   );
 
+  // [R8] empty-decade guard: a preset renders only when its filtered pool
+  // can fill a full round; "All" always renders.
+  const availablePresets = DECADE_PRESETS.filter(
+    (preset) =>
+      preset === null ||
+      filterByDecade(entries, preset, (entry) => entry.year).length >= EMOJI_TOTAL_QUESTIONS
+  );
+
   const start = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     saveTimerSetting('emoji-plot', timerSeconds);
+    // [R8] filter BEFORE seeding: same (day, filter) ⇒ same rounds.
+    const pool = filterByDecade(entries, decade, (entry) => entry.year);
     setQuestions(
       pickEmojiQuestions(
-        entries,
+        pool,
         EMOJI_TOTAL_QUESTIONS,
         dailyDateKey ? dailyGameSeed(dailyDateKey, 'emoji-plot') : Math.floor(Math.random() * 1000)
       )
@@ -152,6 +165,8 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
           or letters of the title, each hint costs points. The clock starts when you do.
         </p>
         <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />
+        {/* [R8] decade filter (both modes); presets hidden when the pool is thin. */}
+        <DecadeChips presets={availablePresets} value={decade} onChange={setDecade} />
         <button
           type="submit"
           className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white  transition-colors hover:bg-primary-hover sm:self-start"

@@ -149,6 +149,8 @@ export class VotingSession {
   private nhieTier: NhieTier = 'moderate';
   private nhieSource: NhieSource = 'both';
   private totGenre: string | null = null;
+  /** [R8] WYR presentation RNG seam: true → present the dilemma A-first. */
+  private presentFirstFn: () => boolean;
 
   constructor(
     config: VotingConfig,
@@ -158,7 +160,11 @@ export class VotingSession {
       nhie?: NhieSuggestion[];
       tot?: TotPair[];
     },
-    options: { randomInt?: (max: number) => number; now?: () => number } = {}
+    options: {
+      randomInt?: (max: number) => number;
+      now?: () => number;
+      presentFirst?: () => boolean;
+    } = {}
   ) {
     this.config = config;
     this.wyrEntries = datasets.wyr ?? [];
@@ -167,6 +173,8 @@ export class VotingSession {
     this.totPairs = datasets.tot ?? [];
     this.randomIntFn = options.randomInt ?? ((max) => randomInt(max));
     this.nowFn = options.now ?? (() => Date.now());
+    // Room games are not dailies — Math.random is correct here (D055).
+    this.presentFirstFn = options.presentFirst ?? (() => Math.random() < 0.5);
   }
 
   get phaseValue(): VotingPhase {
@@ -505,10 +513,19 @@ export class VotingSession {
           this.customPrompt = isCustom;
           this.promptTitle = 'Would you rather…';
           this.promptSubtitle = null;
-          this.options = [
-            { id: 'a', label: entry.a },
-            { id: 'b', label: entry.b },
-          ];
+          // [R8] Presentation shuffle: ~50% of rounds present B first. The
+          // id↔label binding swaps together, so vote payloads (which
+          // reference ids) and winnerId reveal semantics stay correct.
+          const aFirst = this.presentFirstFn();
+          this.options = aFirst
+            ? [
+                { id: 'a', label: entry.a },
+                { id: 'b', label: entry.b },
+              ]
+            : [
+                { id: 'b', label: entry.b },
+                { id: 'a', label: entry.a },
+              ];
         }
         this.phase = 'voting';
         break;

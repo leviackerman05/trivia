@@ -40,9 +40,10 @@ export function benderLabel(entry: GenreBenderEntry): string {
 
 export function genreBenderOptions(
   entry: GenreBenderEntry,
-  allEntries: GenreBenderEntry[]
+  allEntries: GenreBenderEntry[],
+  random: () => number = Math.random
 ): string[] {
-  return buildOptions(benderLabel(entry), allEntries.map(benderLabel));
+  return buildOptions(benderLabel(entry), allEntries.map(benderLabel), 4, random);
 }
 
 export interface GenreBenderVerdict {

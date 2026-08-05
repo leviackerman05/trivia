@@ -11,7 +11,6 @@ import TimelineTussle from '../../islands/solo/TimelineTussle.tsx';
 import PriceIsRight from '../../islands/solo/PriceIsRight.tsx';
 import GenreSwap from '../../islands/solo/GenreSwap.tsx';
 import GenreBender from '../../islands/solo/GenreBender.tsx';
-import GeographyDaily from '../../islands/daily/GeographyDaily.tsx';
 import MoviesDaily from '../../islands/daily/MoviesDaily.tsx';
 import MusicDaily from '../../islands/daily/MusicDaily.tsx';
 import DrawingDaily from '../../islands/daily/DrawingDaily.tsx';
@@ -106,11 +105,6 @@ const jsonLd = JSON.stringify([
         {
           game.live && game.slug === 'genre-bender' && (
             <GenreBender client:load dailyDateKey={dateKey} />
-          )
-        }
-        {
-          game.live && game.slug === 'geography' && (
-            <GeographyDaily client:load dailyDateKey={dateKey} />
           )
         }
         {game.live && game.slug === 'movies' && <MoviesDaily client:load dailyDateKey={dateKey} />}

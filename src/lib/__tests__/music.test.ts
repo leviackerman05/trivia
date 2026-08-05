@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import musicJson from '../../data/daily-music.json';
 import { dailyGameSeed } from '../daily';
 import { MUSIC_TIER_QUOTAS, pickMusicRounds, type MusicEntry } from '../music';
+import { decadeOf, filterByDecade } from '../decade';
 
 const entries = musicJson as MusicEntry[];
 
@@ -82,6 +83,36 @@ describe('pickMusicRounds (DAILY-DESIGN §3.3)', () => {
     const rounds = pickMusicRounds(tiny, 10, dailyGameSeed('2026-08-05', 'music'));
     expect(rounds).toHaveLength(6);
     expect(new Set(rounds.map((round) => round.title)).size).toBe(6);
+  });
+
+  it('[R7] answer positions cover 0–3 across 90 days and stay day-deterministic', () => {
+    const positions = new Set<number>();
+    for (const key of dateKeys(90)) {
+      const seed = dailyGameSeed(key, 'music');
+      const first = pickMusicRounds(entries, 10, seed);
+      const second = pickMusicRounds(entries, 10, seed);
+      // Day-deterministic: the option order too, not just the selection.
+      expect(first, key).toEqual(second);
+      for (const round of first) {
+        positions.add(round.answer);
+        // Remap keeps the correct label at the answer index.
+        expect(round.options[round.answer]).toBe(round.title);
+      }
+    }
+    expect(positions).toEqual(new Set([0, 1, 2, 3]));
+  });
+
+  it('[R8] decade-filtered days are deterministic per (day, filter)', () => {
+    for (const key of dateKeys(90)) {
+      const pool = filterByDecade(entries, 1970, (entry) => entry.year);
+      const seed = dailyGameSeed(key, 'music');
+      const first = pickMusicRounds(pool, 10, seed);
+      const second = pickMusicRounds(pool, 10, seed);
+      expect(first, key).toEqual(second);
+      for (const round of first) {
+        expect(decadeOf(round.year), key).toBe(1970);
+      }
+    }
   });
 });
 

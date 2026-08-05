@@ -66,6 +66,7 @@ import {
   type GuessWhoSession as GuessWhoGameSession,
 } from '../engine/guess-who-engine.js';
 import { PLAYABLE_ROOM_GAMES } from '../lib/game-registry.js';
+import { shuffleTriviaDeck } from '../lib/trivia-options.js';
 
 import wordsJson from '../data/skribbl-words.json' with { type: 'json' };
 import objectsJson from '../data/one-line-objects.json' with { type: 'json' };
@@ -1068,10 +1069,15 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
     // Capture the host-chosen mode BEFORE clearing the room game state.
     const mode = pendingTriviaModes.get(room.code) ?? 'race';
     clearRoomGame(room.code);
-    const session = new TriviaSession(triviaQuestionsJson as TriviaQuestion[], {
-      ...TRIVIA_CONFIG,
-      mode,
-    });
+    // [R7] Room-side answer randomization: the deck is shuffled per room code
+    // and the answer index is remapped server-side (never emitted).
+    const session = new TriviaSession(
+      shuffleTriviaDeck(triviaQuestionsJson as TriviaQuestion[], room.code),
+      {
+        ...TRIVIA_CONFIG,
+        mode,
+      }
+    );
     const players = [...room.players.values()]
       .filter((player) => player.connected)
       .map((player) => player.name);

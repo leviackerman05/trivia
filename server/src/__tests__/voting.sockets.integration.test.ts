@@ -182,7 +182,11 @@ describe('Voting games (M6), DB-backed socket integration', () => {
     expect(reveal.kind).toBe('would-you-rather');
     expect(reveal.totalVotes).toBe(2);
     expect(reveal.winnerId).toBe('a');
-    expect(reveal.winnerLabel).toBe(firstRound.options[0]?.label);
+    // [R8] the winner label follows the id↔label binding presented in the
+    // round start, whichever order the ~50% presentation shuffle picked.
+    expect(reveal.winnerLabel).toBe(
+      firstRound.options.find((o) => o.id === reveal.winnerId)?.label
+    );
 
     // Queue a player-submitted dilemma → next round is the custom prompt.
     const queued = await emitAck(host, ClientEvents.submitPrompt, {
@@ -197,10 +201,10 @@ describe('Voting games (M6), DB-backed socket integration', () => {
     const customRound = await customRoundPromise;
     expect(customRound.round).toBe(2);
     expect(customRound.custom).toBe(true);
-    expect(customRound.options.map((option) => option.label)).toEqual([
-      'own option A',
-      'own option B',
-    ]);
+    // [R8] presentation order may swap; the binding itself must be exact.
+    expect(customRound.options.map((option) => option.label).sort()).toEqual(
+      ['own option A', 'own option B'].sort()
+    );
 
     // Skip to the end → game-end with the rounds summary. Both players vote
     // each round so the all-in reveal lands (phase → revealed → next works).

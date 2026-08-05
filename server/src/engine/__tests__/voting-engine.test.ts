@@ -56,7 +56,11 @@ const DATASETS = {
 };
 
 function make(config: VotingConfig) {
-  return new VotingSession(config, DATASETS, { randomInt: (_max) => 0 });
+  // [R8] pin the presentation order so existing assertions stay deterministic.
+  return new VotingSession(config, DATASETS, {
+    randomInt: (_max) => 0,
+    presentFirst: () => true,
+  });
 }
 
 describe('VotingSession, Would You Rather (PRD §5.13)', () => {
@@ -113,6 +117,44 @@ describe('VotingSession, Would You Rather (PRD §5.13)', () => {
     // Next round falls back to the dataset.
     session.next();
     expect(session.roundPrompt.custom).toBe(false);
+  });
+
+  it('[R8] presents both A-first and B-first orderings across rounds', () => {
+    // 200 simulated round-starts, alternating the injectable presentation
+    // RNG — the same seam a per-room RNG plugs into.
+    let flip = false;
+    const presentFirst = () => {
+      flip = !flip;
+      return flip;
+    };
+    let aFirst = 0;
+    let bFirst = 0;
+    for (let round = 0; round < 200; round += 1) {
+      const session = new VotingSession(WYR, DATASETS, {
+        randomInt: (_max) => 0,
+        presentFirst,
+      });
+      session.start(['Alice']);
+      const options = session.roundOptions;
+      expect(options).toHaveLength(2);
+      if (options[0]?.id === 'a') {
+        aFirst += 1;
+      } else {
+        bFirst += 1;
+      }
+      // The presented labels match their ids (id↔label binding swaps
+      // together), and a vote for the presented first option is a valid
+      // winner — reveal semantics stay correct with the swap.
+      const [first] = options;
+      const voted = session.submitVote('Alice', first!.id);
+      expect(voted.ok).toBe(true);
+      const revealed = session.reveal();
+      expect(revealed.ok).toBe(true);
+      expect(ok2(revealed).reveal.winnerId).toBe(first!.id);
+      expect(ok2(revealed).reveal.winnerLabel).toBe(first!.label);
+    }
+    expect(aFirst).toBe(100);
+    expect(bFirst).toBe(100);
   });
 });
 

@@ -2,9 +2,11 @@ import { describe, expect, it } from 'vitest';
 import {
   dilemmas,
   pickDilemmas,
+  shuffleDilemma,
   summarizeSession,
   WYR_DILEMMAS_PER_SESSION,
 } from '../would-you-rather';
+import { seededRandom } from '../trivia';
 
 describe('would-you-rather dataset (src/data/would-you-rather.json)', () => {
   it('has at least 30 valid dilemmas', () => {
@@ -27,6 +29,36 @@ describe('pickDilemmas', () => {
   it('never exceeds the dataset size', () => {
     const picked = pickDilemmas(1000);
     expect(picked.length).toBe(dilemmas.length);
+  });
+});
+
+describe('shuffleDilemma (R7)', () => {
+  const dilemma = { a: 'pizza', b: 'tacos' };
+
+  it('keeps both options, just reordered', () => {
+    const shuffled = shuffleDilemma(dilemma);
+    expect(new Set([shuffled.a, shuffled.b])).toEqual(new Set(['pizza', 'tacos']));
+  });
+
+  it('presents both A-first and B-first over repeated rounds', () => {
+    let aFirst = 0;
+    let bFirst = 0;
+    for (let i = 0; i < 60; i += 1) {
+      const shuffled = shuffleDilemma(dilemma);
+      if (shuffled.a === 'pizza') {
+        aFirst += 1;
+      } else {
+        bFirst += 1;
+      }
+    }
+    expect(aFirst).toBeGreaterThan(0);
+    expect(bFirst).toBeGreaterThan(0);
+  });
+
+  it('is deterministic under a seeded random', () => {
+    expect(shuffleDilemma(dilemma, seededRandom(1))).toEqual(
+      shuffleDilemma(dilemma, seededRandom(1))
+    );
   });
 });
 

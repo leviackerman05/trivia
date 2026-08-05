@@ -1312,3 +1312,48 @@ workspace package.
   primitive for every future daily (Phase E `GameDefinition`); the
   body-parser ordering pattern in `app.ts` is the precedent for any future
   large-payload route.
+
+## D055, M20 Phase 0.5 + Phase B: geography removal + answer randomization (2026-08-05)
+
+- **Decision:** Phase 0.5 removes Daily Geography completely (superseding
+  DAILY-DESIGN §3.1, its F2 brief, and the geography test delta): the
+  island, engine, dataset (15-entry sample), `[slug].astro` branch, client
+  - server registry entries (12 → 11 live), sitemap URL, and smoke check
+    (now a 404 assertion) all go in PR-1; `/daily/geography` 404s and the
+    lockstep test stays green at 11 = 11. `DailyCategory` drops `'geography'`
+    **now**; World Peek re-adds it as `'geo'` in Phase C (do not add `'geo'`
+    early). Docs get superseded markers only (no prose deletions). Phase B
+    (PR-2) ships the room-side answer-randomization scope (R7/R8/R9/R11/R12;
+    escalations 2/5): seeded per-question trivia deck shuffle
+    (`shuffleTriviaDeck`, roomCode-seeded, answer index remapped server-side
+    and never emitted) and the WYR presentation shuffle (~50% id↔label swap
+    at the round-start emit point; vote ids keep `winnerId` semantics
+    unchanged). Phase B is server-only; datasets' `answer` fields are never
+    modified, dailies never use `Math.random`.
+- **Reason:** geography's Wikimedia hotlink surface is the flakiest of the
+  four M19 dailies and its region-balance engine is superseded by World
+  Peek's fresh data model in Phase C; the removal is the cheapest path to
+  a stable 11-game hub. Room answer randomization addresses the
+  repetition exploit (same room code ⇒ same correct-option position across
+  sessions) and the WYR left/right bias; both are render/build-time
+  concerns with zero engine changes and zero dataset edits.
+- **Alternatives considered:** keeping geography with the region-cap
+  engine (rejected — redundant with World Peek); shuffling answers
+  client-side in room payloads (rejected — the correct index would
+  momentarily exist in client memory; server-side remap keeps it out of
+  every payload); deterministic (non-random) WYR orderings (rejected — the
+  bias is exactly the bug being fixed); per-round random reseeding of the
+  trivia deck (rejected — session-stable per-code seeding is the agreed
+  contract).
+- **Tradeoffs:** rooms with the same code shuffle identically across
+  sessions (accepted — the seed is the room code by design); WYR ordering
+  is not deterministic for room games (correct — rooms are not dailies);
+  the PR-1 grep gate scopes out trivia-content `"Geography"` categories
+  and the skribbl word-bank entry, which legitimately keep the word.
+- **Date:** 2026-08-05
+- **Future impact:** PR ordering is fixed — PR-1 (geography removal)
+  lands first, then PR-2 (server Phase B), then PR-3 (price pipeline
+  skeleton, D056/D059); the price pipeline's mock-first design unblocks
+  the merged client loader without keys; World Peek re-uses the
+  `'geo'` category slot and the removal's grep gate as its own QA
+  template.

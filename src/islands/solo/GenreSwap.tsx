@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import SoloShell from './SoloShell';
 import TimerPicker from './TimerPicker';
 import genreSwapsJson from '../../data/genre-swaps.json';
@@ -12,6 +12,10 @@ import {
   type GenreSwapEntry,
 } from '../../lib/genre-swap';
 import { dailyGameSeed } from '../../lib/daily';
+import { optionSeed } from '../../lib/pick';
+import { seededRandom } from '../../lib/trivia';
+import { DECADE_PRESETS, filterByDecade } from '../../lib/decade';
+import DecadeChips from '../../components/DecadeChips';
 
 /**
  * Genre Swap (M8, PRD §5.9; M14 owner fixes), a famous movie plot rewritten
@@ -23,6 +27,12 @@ const entries = genreSwapsJson as GenreSwapEntry[];
 const allOriginals = entries.map((entry) => entry.original);
 const TIMER_OPTIONS = [30, 40, 50, 60, 70];
 
+// [R8] genre-swaps.json has no `year` until the L10 backfill lands, so every
+// decade preset filters to an empty pool and the empty-decade guard hides
+// all presets; "All" always works. Self-healing once content lands.
+const yearOf = (entry: GenreSwapEntry): number | undefined =>
+  (entry as GenreSwapEntry & { year?: number }).year;
+
 type Phase = 'setup' | 'playing' | 'done';
 
 interface Props {
@@ -33,6 +43,7 @@ interface Props {
 export default function GenreSwap({ dailyDateKey }: Props) {
   const [phase, setPhase] = useState<Phase>('setup');
   const [timerSeconds, setTimerSeconds] = useState(() => readTimerSetting('genre-swap', 30));
+  const [decade, setDecade] = useState<number | null>(null);
   const [questions, setQuestions] = useState<GenreSwapEntry[]>([]);
   const [index, setIndex] = useState(0);
   const [options, setOptions] = useState<string[]>([]);
@@ -40,6 +51,8 @@ export default function GenreSwap({ dailyDateKey }: Props) {
   const [locked, setLocked] = useState(false);
   const [score, setScore] = useState(0);
   const [results, setResults] = useState<{ correct: boolean; points: number }[]>([]);
+  // [R7] the round's option shuffle must stay seeded per round in daily mode.
+  const seedRef = useRef(0);
 
   const question = questions[index];
   const remaining = useCountdown(
@@ -48,14 +61,33 @@ export default function GenreSwap({ dailyDateKey }: Props) {
     index
   );
 
+  // [R8] hide decade presets whose filtered pool can't fill a round; "All"
+  // always renders. Deterministic and self-healing as content lands.
+  const availablePresets = DECADE_PRESETS.filter(
+    (preset) =>
+      preset === null ||
+      filterByDecade(entries, preset, yearOf).length >= GENRE_SWAP_TOTAL_QUESTIONS
+  );
+
   const start = () => {
     saveTimerSetting('genre-swap', timerSeconds);
     const seed = dailyDateKey
       ? dailyGameSeed(dailyDateKey, 'genre-swap')
       : Math.floor(Math.random() * 1000);
-    const picked = pickGenreSwapQuestions(entries, GENRE_SWAP_TOTAL_QUESTIONS, seed);
+    seedRef.current = seed;
+    // [R8] filter BEFORE seeding: same (day, filter) ⇒ same rounds.
+    const pool = filterByDecade(entries, decade, yearOf);
+    const picked = pickGenreSwapQuestions(pool, GENRE_SWAP_TOTAL_QUESTIONS, seed);
     setQuestions(picked);
-    setOptions(picked[0] ? genreSwapOptions(picked[0], allOriginals) : []);
+    setOptions(
+      picked[0]
+        ? genreSwapOptions(
+            picked[0],
+            allOriginals,
+            dailyDateKey ? seededRandom(optionSeed(seed, 0)) : undefined
+          )
+        : []
+    );
     setIndex(0);
     setScore(0);
     setResults([]);
@@ -98,7 +130,15 @@ export default function GenreSwap({ dailyDateKey }: Props) {
     }
     setIndex((previous) => previous + 1);
     const nextQuestion = questions[index + 1];
-    setOptions(nextQuestion ? genreSwapOptions(nextQuestion, allOriginals) : []);
+    setOptions(
+      nextQuestion
+        ? genreSwapOptions(
+            nextQuestion,
+            allOriginals,
+            dailyDateKey ? seededRandom(optionSeed(seedRef.current, index + 1)) : undefined
+          )
+        : []
+    );
     setFeedback(null);
     setLocked(false);
   }, [index, questions]);
@@ -121,6 +161,8 @@ export default function GenreSwap({ dailyDateKey }: Props) {
           timer; the clock starts when you do.
         </p>
         <TimerPicker value={timerSeconds} onChange={setTimerSeconds} options={TIMER_OPTIONS} />
+        {/* [R8] decade filter (both modes); presets hidden when the pool is thin. */}
+        <DecadeChips presets={availablePresets} value={decade} onChange={setDecade} />
         <button
           type="button"
           onClick={start}

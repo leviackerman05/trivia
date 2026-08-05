@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   pickDilemmas,
+  shuffleDilemma,
   summarizeSession,
   WYR_DILEMMAS_PER_SESSION,
   type Dilemma,
@@ -28,7 +29,8 @@ export default function WouldYouRatherOneScreen() {
   const [votes, setVotes] = useState<DilemmaVotes[]>([]);
 
   const start = () => {
-    setDilemmas(pickDilemmas());
+    // [R7] present each dilemma A-first or B-first at random (once per round).
+    setDilemmas(pickDilemmas().map((dilemma) => shuffleDilemma(dilemma)));
     setIndex(0);
     setVotes([]);
     setPhase('voting');

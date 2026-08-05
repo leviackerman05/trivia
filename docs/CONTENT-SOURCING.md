@@ -41,6 +41,10 @@ and the M5 datasets (`genre-benders.json`) ship original paraphrase text.
 
 ## 1. Daily Geography — "Where in the World?"
 
+> **SUPERSEDED — removed in M20 Phase 0.5 (PLAN-SCOPE R5/D6); World Peek
+> replaces it with fresh data in Phase C. No dataset work to discard
+> (the 15-entry sample dies with the code).**
+
 **Default concept (owner-set):** a photo; pick the place out of 4 options.
 
 ### Data model — `src/data/daily-geography.json`
