@@ -210,10 +210,11 @@ export default function WorldPeek() {
             panoLoadedRef.current = true;
             setPanoStatus('ready');
           });
-          // The round is one pano: no moving to connected panoramas.
-          viewer.deactivateComponent('direction');
-          viewer.deactivateComponent('spatial');
-          viewer.deactivateComponent('sequence');
+          // GeoGuessr-style exploration (owner 2026-08-05): direction
+          // arrows + sequence + spatial let the player walk connected
+          // panoramas to gather clues before pinning. Object tags are
+          // hidden; the answer remains the START pano (entry coords).
+          viewer.deactivateComponent('tag');
         } catch {
           setPanoStatus('error');
         }
