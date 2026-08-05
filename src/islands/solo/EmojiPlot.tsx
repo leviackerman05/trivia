@@ -203,7 +203,7 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
                 maxLength={40}
                 placeholder="👦⚡🧙🏰"
                 aria-label="Your emoji sequence"
-                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
               />
               <input
                 value={challenge?.title ?? ''}
@@ -213,7 +213,7 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
                 maxLength={80}
                 placeholder="Harry Potter"
                 aria-label="The answer title"
-                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+                className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
               />
               <button
                 type="submit"
@@ -289,7 +289,7 @@ export default function EmojiPlot({ dailyDateKey }: Props) {
               disabled={locked}
               placeholder="What's the title?"
               aria-label="Your guess"
-              className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+              className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
             />
             <button
               type="submit"

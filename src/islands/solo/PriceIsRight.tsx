@@ -152,7 +152,7 @@ export default function PriceIsRight({ dailyDateKey }: Props) {
                 setGuess(event.target.value === '' ? NaN : Number(event.target.value))
               }
               aria-label="Price guess in dollars"
-              className="mt-3 w-full rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30 sm:w-56"
+              className="mt-3 w-full rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink sm:w-56"
             />
             <div className="mt-4 flex flex-wrap items-center gap-3">
               <button

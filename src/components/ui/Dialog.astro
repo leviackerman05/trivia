@@ -3,6 +3,7 @@
  * Dialog: accessible modal built on the native <dialog> element (focus trap,
  * Escape to close, inert backdrop all handled by the browser). The trigger
  * opens it via a tiny inline script. Title is announced on open.
+ * [AIRBNB d8] backdrop is the 50% black scrim (was 80% + blur).
  */
 interface Props {
   id: string;
@@ -17,7 +18,7 @@ const { id, title, mode = 'modal', class: className } = Astro.props;
 
 <dialog
   id={id}
-  class="m-auto w-full max-w-lg rounded-lg border border-border bg-surface-raised p-4 shadow-lg backdrop:bg-black/80 backdrop:backdrop-blur-sm open:flex open:flex-col open:gap-4 sm:p-6"
+  class="m-auto w-full max-w-lg rounded-lg border border-border bg-surface-raised p-4 shadow-lg backdrop:bg-scrim/50 open:flex open:flex-col open:gap-4 sm:p-6"
   aria-labelledby={`${id}-title`}
   aria-modal={mode === 'modal' ? 'true' : undefined}
 >

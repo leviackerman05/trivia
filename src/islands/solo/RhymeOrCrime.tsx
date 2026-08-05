@@ -233,7 +233,7 @@ export default function RhymeOrCrime({ dailyDateKey }: Props) {
               disabled={locked}
               placeholder="Your rhyme…"
               aria-label="Your rhyme"
-              className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:border-primary-strong focus:outline-none focus:ring-2 focus:ring-success/30"
+              className="min-w-0 flex-1 rounded-md border border-border bg-surface-raised px-4 py-2.5 text-base text-ink transition-colors hover:border-border-strong focus:ring-2 focus:ring-ink"
             />
             <button
               type="submit"

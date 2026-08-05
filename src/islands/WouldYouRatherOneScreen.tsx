@@ -155,14 +155,14 @@ export default function WouldYouRatherOneScreen() {
         <button
           type="button"
           onClick={() => castVote('a')}
-          className="inline-flex min-h-20 items-center justify-center rounded-lg border border-secondary bg-secondary px-6 py-4 text-lg font-semibold text-white transition-colors hover:bg-secondary-dark focus:outline-none focus:ring-2 focus:ring-success/30"
+          className="inline-flex min-h-20 items-center justify-center rounded-lg border border-secondary bg-secondary px-6 py-4 text-lg font-semibold text-white transition-colors hover:bg-secondary-dark"
         >
           A
         </button>
         <button
           type="button"
           onClick={() => castVote('b')}
-          className="inline-flex min-h-20 items-center justify-center rounded-lg border border-danger-strong bg-danger-strong px-6 py-4 text-lg font-semibold text-white transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-success/30"
+          className="inline-flex min-h-20 items-center justify-center rounded-lg border border-danger-strong bg-danger-strong px-6 py-4 text-lg font-semibold text-white transition-colors hover:opacity-90"
         >
           B
         </button>

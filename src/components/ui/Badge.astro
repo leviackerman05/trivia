@@ -1,7 +1,8 @@
 ---
 /**
  * Badge: compact status label for cards (new, popular, featured, beta).
- * Tone maps to a soft/strong token pair (AA on both themes).
+ * Tone maps to a soft/strong token pair (AA on both themes). Pill-shaped
+ * with 11px/600 badge type ([AIRBNB] guest-favorite badge style).
  */
 interface Props {
   tone?: 'success' | 'warning' | 'error' | 'info';
@@ -19,7 +20,7 @@ const tones: Record<NonNullable<Props['tone']>, string> = {
 ---
 
 <span
-  class={`inline-flex items-center gap-1 rounded-pill px-2.5 py-0.5 text-xs font-semibold ${tones[tone]} ${className ?? ''}`}
+  class={`inline-flex items-center gap-1 rounded-pill px-2.5 py-0.5 text-badge ${tones[tone]} ${className ?? ''}`}
 >
   <slot />
 </span>
