@@ -3,7 +3,7 @@
     "place": "Eiffel Tower, Paris",
     "lat": 48.8584,
     "lon": 2.2945,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Tour_Eiffel,_Paris,_France.jpg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg",
     "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
     "region": "Europe"
   },
@@ -27,7 +27,7 @@
     "place": "Great Wall of China, Mutianyu",
     "lat": 40.4319,
     "lon": 116.5704,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Great_Wall_of_China_at_Mutianyu.jpg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/78/The_Great_Wall_at_Mutianyu.jpg",
     "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
     "region": "Asia"
   },
@@ -59,8 +59,8 @@
     "place": "Mount Fuji, Japan",
     "lat": 35.3606,
     "lon": 138.7274,
-    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Fuji_from_Hakone.jpg",
-    "credit": { "creator": "Wikimedia Commons", "license": "cc-by-sa" },
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/57/Red_Fuji_southern_wind_clear_morning.jpg",
+    "credit": { "creator": "Katsushika Hokusai", "license": "public domain" },
     "region": "Asia"
   },
   {

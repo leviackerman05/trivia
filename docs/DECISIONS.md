@@ -1416,3 +1416,54 @@ lat2, lon2, n)` helper in `src/lib/world-peek.ts` (equirectangular-
 - **Future impact:** supersedes the plain-tile part of D060's contract
   (D060's Leaflet + attribution + bundle gates stand); Google satellite
   remains the paid alternative if Esri terms ever bind.
+
+## D062, World Peek imagery: 360° panoramas (Mapillary default, Google Street View upgrade path) (2026-08-05)
+
+- **Decision:** World Peek rounds become **360° panoramas the player can
+  drag/pan/zoom**, replacing static photos (owner: "like GeoGuessr,
+  people move around in the image; random places on Earth; no
+  monuments"). Primary source: **Mapillary** (free API token, no
+  billing; open-source mapillary-js viewer, MIT; CC-BY-SA attribution
+  "© Mapillary contributors"). Google Street View (API key + billing +
+  ToS) is the documented paid upgrade — same architecture, swappable
+  source.
+- **PRD §2 amendment (stack):** mapillary-js (or the official embed
+  URL) added as the panorama viewer dependency behind the existing
+  Leaflet map layer (D060).
+- **Content model change:** the L7 lot becomes a **curated coordinate
+  pool** (2,000+ entries: lat/lon + region + difficulty, NO imagery
+  URLs) resolved at BUILD time via the Mapillary API to pano IDs
+  (deterministic, quality-gated, rate-limit-friendly); unresolved
+  coordinates are flagged at authoring (the price-pipeline pattern,
+  D056). No runtime random API calls.
+- **Attribution:** "© Mapillary contributors" visible in the viewer;
+  Google swap later keeps the same attribution slot.
+- **Date:** 2026-08-05
+- **Future impact:** scoring/pin UX unchanged (D061 line + km stay);
+  the pano viewer sits where the photo sat; Street View becomes a
+  one-source swap once billing + keys exist.
+
+## D063, World Peek GeoGuessr composition: full-bleed pano + inset map; random everyday-place content pool (2026-08-05)
+
+- **Decision:** (1) Layout mirrors GeoGuessr: **full-bleed 360° viewer**
+  with a **small inset map** (bottom corner, drag/zoom Leaflet) for the
+  pin; reveal zooms the inset to fit guess + actual with the D061
+  dotted line + km. (2) Content: the pool becomes **random everyday
+  places** — sample the OSM road network within city boundaries
+  worldwide, **exclude landmarks** (tourism/attraction tags + a
+  maintained landmark blocklist), resolve to Mapillary panos at build
+  time (2,000+ entries). Owner: "I basically want GeoGuessr on my
+  website" — no monuments, real random places.
+- **Implementation contract:** L7 lot script (`scripts/sample-world-
+peeks.mjs`): OSM Overpass query → random road nodes → landmark
+  exclusion → Mapillary resolve (the D056 pipeline pattern: flags +
+  review list, no unresolved entries ship). Sample dataset: replace the
+  landmark entries (Eiffel Tower, Pisa, etc.) with 50+ random everyday
+  coordinates immediately; full 2,000+ per D057 quotas.
+- **Layout contract:** viewer full-bleed (aspect ~16:9, touch drag to
+  pan, pinch zoom); inset map ~200px corner card (mobile: bottom
+  sheet-style panel); pin before submit; reveal = fitBounds + line +
+  km label (D061).
+- **Date:** 2026-08-05
+- **Future impact:** Google Street View swap replaces only the viewer
+  source; the inset-map + content pipeline are source-agnostic.
