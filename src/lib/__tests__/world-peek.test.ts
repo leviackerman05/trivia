@@ -96,4 +96,22 @@ describe('map projection helpers', () => {
     expect(lon).toBe(-180);
     expect(lat).toBe(90);
   });
+
+  it('round-trips the island pin flow exactly (regression: lat was negated)', () => {
+    // Mirrors WorldPeek.tsx submit: pin = mapPoint(lon, lat), then
+    // guess = pointToLonLat(pin.x / 360, pin.y / 180). The bug used
+    // "1 - pin.y / 180", which negated the latitude (Paris -> -48.8).
+    const samples: [number, number][] = [
+      [2.3522, 48.8566], // Paris
+      [151.2093, -33.8688], // Sydney
+      [-74.006, 40.7128], // New York
+      [0, 0], // equator/prime meridian
+    ];
+    for (const [lon, lat] of samples) {
+      const pin = mapPoint(lon, lat);
+      const guess = pointToLonLat(pin.x / 360, pin.y / 180);
+      expect(guess.lon).toBeCloseTo(lon, 5);
+      expect(guess.lat).toBeCloseTo(lat, 5);
+    }
+  });
 });

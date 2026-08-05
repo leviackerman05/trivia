@@ -74,7 +74,7 @@ export default function WorldPeek() {
     if (!entry || !pin || result) {
       return;
     }
-    const guess = pointToLonLat(pin.x / 360, 1 - pin.y / 180);
+    const guess = pointToLonLat(pin.x / 360, pin.y / 180);
     const distance = haversineKm(entry.lat, entry.lon, guess.lat, guess.lon);
     const points = scoreGuess(distance);
     setResult({ distance, points });
