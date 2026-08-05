@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GameCard from '../components/GameCard.astro';
+import Icon from '../components/icons/Icon.astro';
+import { games, type GameFamily } from '../lib/games';
+import { FAMILY_ICONS } from '../lib/icons';
+
+/**
+ * [AIRBNB v3] /games, the 19-game catalog. SSG: every game renders with
+ * real links; the family filter and ?mode=room are URL-driven (static
+ * hosting ignores query params, so a tiny inline script applies them.
+ * no client state, no React, no dependencies). Cards link normally, and
+ * to /game/[slug]?room=1 in room mode. Solo games never appear in room
+ * mode (they have no rooms).
+ */
+
+const familyMeta: Record<GameFamily, string> = {
+  drawing: 'Drawing',
+  party: 'Party',
+  solo: 'Solo',
+  quiz: 'Quiz',
+};
+
+const families = Object.keys(familyMeta) as GameFamily[];
+const roomMode = Astro.url.searchParams.get('mode') === 'room';
+const familyFilter = Astro.url.searchParams.get('family') as GameFamily | null;
+---
+
+<BaseLayout
+  title="All Games: 19 Free Online Party Games | Trivia"
+  description="Browse all 19 free party games: drawing rooms, voting games, solo puzzles, trivia, charades, and more. Play in your browser, no downloads, no accounts."
+  canonicalPath="/games"
+  activeNav="games"
+>
+  <section class="mb-10 text-center">
+    <h1 class="font-display text-h1 text-ink">All games</h1>
+    <p id="games-lede" class="mx-auto mt-4 max-w-2xl text-body text-ink-muted">
+      All 19 games, solo or with friends, free and in your browser.
+    </p>
+
+    <!-- Family filter + room mode ([AIRBNB v3] static anchors). -->
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-2">
+      <a
+        href="/games"
+        aria-current={!familyFilter && !roomMode ? 'page' : undefined}
+        class="rounded-pill border border-border bg-surface-raised px-4 py-2 text-small font-medium text-ink transition-colors hover:border-primary/50 hover:text-primary-strong aria-current:border-primary aria-current:bg-primary/15 aria-current:text-primary-strong"
+      >
+        All
+      </a>
+      {
+        families.map((family) => (
+          <a
+            href={`/games?family=${family}`}
+            aria-current={familyFilter === family && !roomMode ? 'page' : undefined}
+            class="rounded-pill border border-border bg-surface-raised px-4 py-2 text-small font-medium text-ink transition-colors hover:border-primary/50 hover:text-primary-strong aria-current:border-primary aria-current:bg-primary/15 aria-current:text-primary-strong"
+          >
+            {familyMeta[family]}
+          </a>
+        ))
+      }
+      <a
+        href="/games?mode=room"
+        aria-current={roomMode ? 'page' : undefined}
+        class="rounded-pill border border-primary/40 bg-primary/15 px-4 py-2 text-small font-medium text-primary-strong transition-colors hover:bg-primary/25"
+      >
+        Create room
+      </a>
+    </div>
+  </section>
+
+  <section aria-label="Game catalog" class="mb-16">
+    {
+      families.map((family) => {
+        const familyGames = games.filter((game) => game.family === family);
+        return (
+          <div
+            id={`games-${family}`}
+            data-family-group={family}
+            class="mb-12 scroll-mt-24"
+            hidden={Boolean(familyFilter && familyFilter !== family)}
+          >
+            <h2 class="mb-5 flex items-center gap-2 font-display text-h2 text-ink">
+              <Icon name={FAMILY_ICONS[family]} size={22} />
+              {familyMeta[family]} Games
+              {roomMode && family === 'solo' && (
+                <span class="text-xs text-ink-muted">(no rooms)</span>
+              )}
+            </h2>
+            <ul class="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {familyGames.map((game) => (
+                <li>
+                  <GameCard game={game} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })
+    }
+  </section>
+
+  <script is:inline>
+    // [AIRBNB v3] static-host URL filter: query params can't be served
+    // server-side, so apply them here, state lives in the URL only.
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const mode = params.get('mode');
+      const family = params.get('family');
+      const room = mode === 'room';
+      const sections = document.querySelectorAll('[data-family-group]');
+      sections.forEach(function (section) {
+        section.hidden = Boolean(family && section.dataset.familyGroup !== family);
+        if (room && section.dataset.familyGroup === 'solo') section.hidden = true;
+      });
+      if (room) {
+        document.querySelectorAll('.pb-card').forEach(function (card) {
+          const href = card.getAttribute('href') || '';
+          if (href.indexOf('/game/') === 0 && href.indexOf('?room=') === -1) {
+            card.setAttribute('href', href + '?room=1');
+          }
+        });
+      }
+      const lede = document.getElementById('games-lede');
+      if (lede) {
+        lede.textContent = room
+          ? 'Room mode: pick a multiplayer game and jump straight into a new room.'
+          : 'All 19 games, solo or with friends, free and in your browser.';
+      }
+    })();
+  </script>
+</BaseLayout>

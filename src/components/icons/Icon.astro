@@ -1,0 +1,31 @@
+---
+import { ICON_PATHS, type IconName } from '../../lib/icons';
+
+/**
+ * [AIRBNB v3] In-repo SVG line icon for Astro markup. Wraps the shared
+ * path table (src/lib/icons.ts); unknown names fall back to `question`.
+ * Stroke defaults live in the `.pb-icon` CSS class to keep repeated
+ * instances cheap (homepage budget gate).
+ */
+interface Props {
+  name: IconName | string;
+  /** Rendered px; 20 for inline chrome, 28 for illustrated moments. */
+  size?: number;
+  class?: string;
+  strokeWidth?: number;
+}
+
+const { name, size = 20, class: className, strokeWidth = 1.75 } = Astro.props;
+const inner = ICON_PATHS[name as IconName] ?? ICON_PATHS.question;
+---
+
+<svg
+  viewBox="0 0 32 32"
+  width={size}
+  height={size}
+  stroke-width={strokeWidth !== 1.75 ? strokeWidth : undefined}
+  aria-hidden="true"
+  class={`pb-icon ${className ?? ''}`}
+>
+  <g set:html={inner} />
+</svg>

@@ -1,0 +1,37 @@
+---
+import { type GameFamily } from '../lib/games';
+import { FAMILY_ICONS } from '../lib/icons';
+import Icon from './icons/Icon.astro';
+
+/**
+ * CategoryStrip ([AIRBNB m3]): circular category buttons with caption
+ * labels beneath, real links to each family section. Icons are in-repo
+ * SVGs ([AIRBNB v3]). Used on the homepage hero and the /categories page.
+ */
+
+const familyMeta: Record<GameFamily, { label: string }> = {
+  drawing: { label: 'Drawing' },
+  party: { label: 'Party' },
+  solo: { label: 'Solo' },
+  quiz: { label: 'Quiz' },
+};
+
+const families = Object.entries(familyMeta) as [GameFamily, { label: string }][];
+---
+
+<ul class="flex flex-wrap items-start justify-center gap-x-7 gap-y-5">
+  {
+    families.map(([family, meta]) => (
+      <li>
+        <a href={`/#games-${family}`} class="group flex w-16 flex-col items-center gap-2">
+          <span aria-hidden="true" class="pb-strip-circle">
+            <Icon name={FAMILY_ICONS[family]} size={26} strokeWidth={1.5} />
+          </span>
+          <span class="text-small font-medium text-ink-muted transition-colors group-hover:text-ink">
+            {meta.label}
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>
