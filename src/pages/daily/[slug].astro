@@ -3,17 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '../../components/ui/Card.astro';
 import Chip from '../../components/ui/Chip.astro';
 import Button from '../../components/ui/Button.astro';
+import Icon from '../../components/icons/Icon.astro';
 import TriviaSolo from '../../islands/TriviaSolo.tsx';
 import Sudoku from '../../islands/solo/Sudoku.tsx';
-import RhymeOrCrime from '../../islands/solo/RhymeOrCrime.tsx';
-import EmojiPlot from '../../islands/solo/EmojiPlot.tsx';
-import TimelineTussle from '../../islands/solo/TimelineTussle.tsx';
-import PriceIsRight from '../../islands/solo/PriceIsRight.tsx';
-import GenreSwap from '../../islands/solo/GenreSwap.tsx';
-import GenreBender from '../../islands/solo/GenreBender.tsx';
 import MoviesDaily from '../../islands/daily/MoviesDaily.tsx';
 import MusicDaily from '../../islands/daily/MusicDaily.tsx';
-import DrawingDaily from '../../islands/daily/DrawingDaily.tsx';
+import WordleDaily from '../../islands/daily/WordleDaily.tsx';
 import { dailyGames, getDailyGame } from '../../lib/daily';
 import { dailyDateKey } from '../../lib/trivia';
 
@@ -66,8 +61,8 @@ const jsonLd = JSON.stringify([
   <article class="flex flex-col gap-8">
     <header class="text-center">
       <Chip class="mb-4">{game.category} · daily game</Chip>
-      <h1 class="font-display text-h1 text-ink">
-        {game.emoji}
+      <h1 class="flex items-center justify-center gap-3 font-display text-h1 text-ink">
+        <Icon name={game.emoji} size={28} class="text-ink-muted" />
         {game.name}
       </h1>
       <p class="mx-auto mt-3 max-w-2xl text-body text-ink-muted">{game.description}</p>
@@ -77,43 +72,9 @@ const jsonLd = JSON.stringify([
       <Card>
         {game.live && game.slug === 'trivia' && <TriviaSolo client:load />}
         {game.live && game.slug === 'sudoku' && <Sudoku client:load />}
-        {
-          game.live && game.slug === 'emoji-plot' && (
-            <EmojiPlot client:load dailyDateKey={dateKey} />
-          )
-        }
-        {
-          game.live && game.slug === 'timeline-tussle' && (
-            <TimelineTussle client:load dailyDateKey={dateKey} />
-          )
-        }
-        {
-          game.live && game.slug === 'price-is-right' && (
-            <PriceIsRight client:load dailyDateKey={dateKey} />
-          )
-        }
-        {
-          game.live && game.slug === 'rhyme-or-crime' && (
-            <RhymeOrCrime client:load dailyDateKey={dateKey} />
-          )
-        }
-        {
-          game.live && game.slug === 'genre-swap' && (
-            <GenreSwap client:load dailyDateKey={dateKey} />
-          )
-        }
-        {
-          game.live && game.slug === 'genre-bender' && (
-            <GenreBender client:load dailyDateKey={dateKey} />
-          )
-        }
         {game.live && game.slug === 'movies' && <MoviesDaily client:load dailyDateKey={dateKey} />}
         {game.live && game.slug === 'music' && <MusicDaily client:load dailyDateKey={dateKey} />}
-        {
-          game.live && game.slug === 'drawing' && (
-            <DrawingDaily client:load dailyDateKey={dateKey} />
-          )
-        }
+        {game.live && game.slug === 'wordle' && <WordleDaily client:load dailyDateKey={dateKey} />}
         {
           !game.live && (
             <div class="flex flex-col items-center gap-4 py-6 text-center">

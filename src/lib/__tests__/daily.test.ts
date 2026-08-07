@@ -9,15 +9,27 @@ import {
   type DailyHistory,
 } from '../daily';
 import { EMOJI_TOTAL_QUESTIONS, pickEmojiQuestions } from '../emoji-plot';
+import { ICON_PATHS } from '../icons';
 
-describe('daily registry (Phase A + M19)', () => {
-  it('exposes 11 live daily games with unique slugs', () => {
+describe('daily registry (Phase A + M19 + R18/R20)', () => {
+  it('exposes 6 live daily games with unique slugs', () => {
     const live = getLiveDailyGames();
-    expect(live).toHaveLength(11);
+    expect(live).toHaveLength(6);
     expect(new Set(live.map((game) => game.slug)).size).toBe(live.length);
   });
 
-  it('has zero planned games (the four M19 dailies are live)', () => {
+  it('ships wordle live with its category (R20; chess reverted by D067)', () => {
+    expect(getDailyGame('wordle')).toMatchObject({ category: 'word', live: true });
+    expect(getDailyGame('chess')).toBeUndefined();
+  });
+
+  it('every live game icon key exists in the in-repo icon set', () => {
+    for (const game of getLiveDailyGames()) {
+      expect(ICON_PATHS[game.emoji as keyof typeof ICON_PATHS], game.slug).toBeDefined();
+    }
+  });
+
+  it('has zero planned games (all six are live)', () => {
     expect(getPlannedDailyGames()).toHaveLength(0);
   });
 

@@ -1,6 +1,7 @@
 import { Router, type NextFunction, type Request, type Response } from 'express';
 import { getPrisma } from '../lib/prisma.js';
 import { ensureDailyChallenges } from '../lib/daily-seed.js';
+import { LIVE_DAILY_GAMES } from '../lib/daily-games.js';
 
 /** PRD §8.1: GET /api/daily-challenge, today's daily challenge per solo game. */
 
@@ -24,12 +25,22 @@ export function createDailyChallengeRouter(): Router {
       await ensureDailyChallenges(date);
 
       const rows = await getPrisma().dailyChallenge.findMany({
-        where: { date: { gte: start, lt: end } },
+        where: {
+          date: { gte: start, lt: end },
+          // R18 (2026-08-07): demoted games' rows stay in the DB (data-inert)
+          // but are never served — only the live registry surfaces here.
+          gameId: { in: [...LIVE_DAILY_GAMES] },
+        },
       });
+
+      const challenges: { gameId: string; data: unknown }[] = rows.map((row) => ({
+        gameId: row.gameId,
+        data: row.data,
+      }));
 
       res.json({
         date,
-        challenges: rows.map((row) => ({ gameId: row.gameId, data: row.data })),
+        challenges,
       });
     } catch (error) {
       next(error);

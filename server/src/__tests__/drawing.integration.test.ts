@@ -207,7 +207,7 @@ describe('M19 drawing gallery (DAILY-DESIGN §5), DB-backed integration', () => 
       ];
 
       const response = await request(app).get(
-        '/api/drawing/submissions?dateKey=2026-08-05&promptIndex=1'
+        `/api/drawing/submissions?dateKey=${today}&promptIndex=1`
       );
       expect(response.status).toBe(200);
       expect(response.body.total).toBe(3);

@@ -39,6 +39,20 @@ const MAPILLARY_TOKEN = import.meta.env.PUBLIC_MAPILLARY_TOKEN as string | undef
 /** Rounds only ever pick from places with a resolved pano (D062). */
 const playableEntries = entries.filter((entry) => panos[entry.id]?.panoId);
 
+/** WebGL2 gate: mapillary-js renders via WebGL2 (old iOS/Android lacks it).
+ * Computed once, SSR-safe. */
+const webgl2Supported = (() => {
+  if (typeof document === 'undefined') {
+    return true;
+  }
+  try {
+    const canvas = document.createElement('canvas');
+    return Boolean(canvas.getContext('webgl2'));
+  } catch {
+    return false;
+  }
+})();
+
 type Phase = 'setup' | 'look' | 'pin' | 'reveal' | 'done';
 type PanoStatus = 'idle' | 'loading' | 'ready' | 'error';
 
@@ -62,6 +76,16 @@ export default function Placeguessr() {
   const [results, setResults] = useState<RoundResult[]>([]);
   const [showImage, setShowImage] = useState(false);
   const [panoStatus, setPanoStatus] = useState<PanoStatus>('idle');
+  /** Friendly error message for the pano overlay (Retry button included). */
+  const [panoError, setPanoError] = useState<string | null>(null);
+  /** Technical reason under the message — lets the owner report the exact
+   * failure from a phone (diagnostic, kept during the mobile fix). */
+  const [panoErrorDetail, setPanoErrorDetail] = useState<string | null>(null);
+  /** How many auto-retries have been scheduled (shows a slow-network hint). */
+  const [retryCount, setRetryCount] = useState(0);
+  /** The viewer effect exposes its recreate path so the Retry button can
+   * run the same logic (advanced-event-handler-refs pattern). */
+  const retryActionRef = useRef<(() => void) | null>(null);
 
   const panoElRef = useRef<HTMLDivElement | null>(null);
   const mapElRef = useRef<HTMLDivElement | null>(null);
@@ -163,13 +187,26 @@ export default function Placeguessr() {
     };
   }, [phase]);
 
-  /* ── 360° viewer: one instance per round (D062), destroyed on change. ── */
+  /* ── 360° viewer: one instance per round (D062), destroyed on change. The
+     load lifecycle is defensive (mobile networks): an adaptive timeout that
+     scales with navigator.connection.effectiveType, an auto-retry loop (up
+     to 3 attempts with backoff) that destroys + recreates the viewer, and a
+     Retry button that runs the same recreate path on demand. ── */
   useEffect(() => {
     if (phase === 'setup' || phase === 'done') {
       return;
     }
     if (!entry || !panoId || !MAPILLARY_TOKEN) {
       setPanoStatus('error');
+      setPanoError("The panorama couldn't load for this round.");
+      setPanoErrorDetail('No panorama id resolved for this place');
+      return;
+    }
+    if (!webgl2Supported) {
+      console.warn('[placeguessr] WebGL2 unavailable — 360° viewer disabled');
+      setPanoStatus('error');
+      setPanoError("This device doesn't support the 360° viewer.");
+      setPanoErrorDetail('WebGL2 is not available on this device');
       return;
     }
     const el = panoElRef.current;
@@ -186,91 +223,236 @@ export default function Placeguessr() {
     let cancelled = false;
     let viewer: Viewer | null = null;
     let resizeObserver: ResizeObserver | null = null;
+    let moveToAttempted = false;
+    let constructedWithSize = false;
+    let reissuedAfterResize = false;
+    let panoLoaded = false;
+    let attempts = 0;
+    let timeoutTimer: number | undefined;
+    let retryTimer: number | undefined;
+    const MAX_ATTEMPTS = 3;
+    // Adaptive timeout: pano tiles are several MB, so slow connections get
+    // much longer before the round is declared dead (4g → 35s, 3g → 60s,
+    // slow-2g → 90s; unknown defaults to the 4g value).
+    const effectiveType =
+      typeof navigator !== 'undefined'
+        ? (navigator as Navigator & { connection?: { effectiveType?: string } }).connection
+            ?.effectiveType
+        : undefined;
+    const timeoutMs =
+      effectiveType === 'slow-2g' ? 90_000 : effectiveType === '3g' ? 60_000 : 35_000;
+    console.log('[placeguessr] pano load', {
+      place: entry.id,
+      effectiveType,
+      timeoutMs,
+      webgl2: webgl2Supported,
+    });
+
     panoLoadedRef.current = false;
-    setPanoStatus('loading');
-    const timer = window.setTimeout(() => {
-      if (!cancelled && !panoLoadedRef.current) {
-        setPanoStatus('error');
+
+    const clearTimers = () => {
+      if (timeoutTimer !== undefined) {
+        window.clearTimeout(timeoutTimer);
+        timeoutTimer = undefined;
       }
-    }, 20000);
-    // mapillary-js won't start loading until the container has a real
-    // size; wait a few frames for a measurable container before
-    // constructing (the container can report 0×0 for a frame if the
-    // viewer CSS overrides kicked in before layout).
-    const waitForSize = (maxFrames = 10): Promise<void> =>
-      new Promise((resolve) => {
-        const tick = (frame: number) => {
+      if (retryTimer !== undefined) {
+        window.clearTimeout(retryTimer);
+        retryTimer = undefined;
+      }
+    };
+
+    const destroyViewer = () => {
+      resizeObserver?.disconnect();
+      resizeObserver = null;
+      if (viewer) {
+        try {
+          viewer.remove();
+        } catch {
+          // mapillary internals may already have torn it down
+        }
+        viewer = null;
+      }
+      if (viewerRef.current) {
+        viewerRef.current = null;
+      }
+    };
+
+    const fail = (detail: string) => {
+      if (cancelled) {
+        return;
+      }
+      clearTimers();
+      destroyViewer();
+      setPanoStatus('error');
+      setPanoError("The panorama couldn't load for this round.");
+      setPanoErrorDetail(detail);
+    };
+
+    const scheduleRetry = (detail: string, tag: string) => {
+      if (attempts < MAX_ATTEMPTS) {
+        attempts += 1;
+        setRetryCount((count) => count + 1);
+        console.warn(`[placeguessr] ${tag}`, detail);
+        // Backoff: 1s after the first failure, 2s after the second.
+        retryTimer = window.setTimeout(attempt, attempts === 1 ? 1000 : 2000);
+      } else {
+        fail(detail);
+      }
+    };
+
+    const issueMoveTo = () => {
+      if (cancelled || !viewer || moveToAttempted) {
+        return;
+      }
+      moveToAttempted = true;
+      viewer.moveTo(panoId).catch((reason: unknown) => {
+        if (cancelled) {
+          return;
+        }
+        const detail =
+          reason instanceof Error ? reason.message : String(reason ?? 'moveTo rejected');
+        scheduleRetry(detail, 'moveTo rejected');
+      });
+    };
+
+    const attempt = () => {
+      if (cancelled) {
+        return;
+      }
+      clearTimers();
+      destroyViewer();
+      panoLoaded = false;
+      moveToAttempted = false;
+      constructedWithSize = false;
+      reissuedAfterResize = false;
+      if (attempts === 0) {
+        setRetryCount(0);
+      }
+      setPanoStatus('loading');
+      setPanoError(null);
+      setPanoErrorDetail(null);
+      timeoutTimer = window.setTimeout(() => {
+        if (cancelled || panoLoaded) {
+          return;
+        }
+        scheduleRetry(
+          `Timed out after ${Math.round(timeoutMs / 1000)}s on this connection`,
+          'load timeout'
+        );
+      }, timeoutMs);
+      void import('mapillary-js')
+        .then(async ({ Viewer: MapillaryViewer }) => {
           if (cancelled) {
             return;
           }
-          if ((el.clientWidth > 0 && el.clientHeight > 0) || frame >= maxFrames) {
-            resolve();
+          // mapillary-js won't start loading until the container has a real
+          // size; wait up to ~2s for one (mobile URL-bar animation, layout
+          // settle). If it stays 0×0, construct anyway — the ResizeObserver
+          // re-issues the move the moment a real size arrives.
+          constructedWithSize = await waitForSize();
+          if (cancelled) {
             return;
           }
-          requestAnimationFrame(() => tick(frame + 1));
+          try {
+            // Construct WITHOUT imageId + moveTo: initializing with an ID
+            // puts the viewer in its cover state (a play button the user
+            // must click), which the loading overlay hides and blocks — the
+            // pano then never starts loading. The moveTo pattern skips the
+            // cover entirely (black background until the move succeeds).
+            viewer = new MapillaryViewer({
+              container: el,
+              accessToken: MAPILLARY_TOKEN,
+              trackResize: true,
+            });
+            viewerRef.current = viewer;
+            console.log('[placeguessr] viewer constructed', {
+              width: el.clientWidth,
+              height: el.clientHeight,
+              attempt: attempts + 1,
+              effectiveType,
+            });
+            // The pano container changes size across LOOK/PIN swaps and
+            // device rotation; a ResizeObserver keeps the three.js canvas
+            // honest instead of relying on phase-based resize calls. It also
+            // rescues the 0×0-constructed case: the first tick with a real
+            // size re-issues the move if the pano never started loading.
+            resizeObserver = new ResizeObserver(() => {
+              viewer?.resize();
+              if (
+                !panoLoaded &&
+                !constructedWithSize &&
+                !reissuedAfterResize &&
+                el.clientWidth > 0 &&
+                el.clientHeight > 0
+              ) {
+                reissuedAfterResize = true;
+                moveToAttempted = false;
+                console.warn('[placeguessr] container sized late — re-issuing moveTo');
+                issueMoveTo();
+              }
+            });
+            resizeObserver.observe(el);
+            viewer.on('load', () => {
+              panoLoaded = true;
+              panoLoadedRef.current = true;
+              clearTimers();
+              setPanoStatus('ready');
+            });
+            issueMoveTo();
+            // GeoGuessr-style exploration (owner 2026-08-05): direction
+            // arrows + sequence + spatial let the player walk connected
+            // panoramas to gather clues before pinning. Object tags are
+            // hidden; the answer remains the START pano (entry coords).
+            viewer.deactivateComponent('tag');
+          } catch (err) {
+            const detail =
+              err instanceof Error ? err.message : String(err ?? 'viewer construction failed');
+            scheduleRetry(detail, 'construction failed');
+          }
+        })
+        .catch((err: unknown) => {
+          const detail =
+            err instanceof Error ? err.message : String(err ?? 'mapillary-js import failed');
+          scheduleRetry(detail, 'import failed');
+        });
+    };
+
+    // waitForSize: up to ~2s for a real size (mobile URL-bar animation,
+    // layout settle); if still 0×0, construct anyway — the ResizeObserver
+    // re-issues the move when a size arrives.
+    const waitForSize = (maxMs = 2000): Promise<boolean> =>
+      new Promise((resolve) => {
+        const start = performance.now();
+        const tick = () => {
+          if (cancelled) {
+            return;
+          }
+          if (el.clientWidth > 0 && el.clientHeight > 0) {
+            resolve(true);
+            return;
+          }
+          if (performance.now() - start >= maxMs) {
+            resolve(false);
+            return;
+          }
+          requestAnimationFrame(tick);
         };
-        tick(0);
+        tick();
       });
 
-    void import('mapillary-js')
-      .then(async ({ Viewer: MapillaryViewer }) => {
-        if (cancelled) {
-          return;
-        }
-        await waitForSize();
-        if (cancelled) {
-          return;
-        }
-        try {
-          // Construct WITHOUT imageId + moveTo: initializing with an ID
-          // puts the viewer in its cover state (a play button the user
-          // must click), which the loading overlay hides and blocks — the
-          // pano then never starts loading. The moveTo pattern skips the
-          // cover entirely (black background until the move succeeds).
-          viewer = new MapillaryViewer({
-            container: el,
-            accessToken: MAPILLARY_TOKEN,
-            trackResize: true,
-          });
-          viewerRef.current = viewer;
-          // The pano container changes size across LOOK/PIN swaps and
-          // device rotation; a ResizeObserver keeps the three.js canvas
-          // honest instead of relying on phase-based resize calls.
-          resizeObserver = new ResizeObserver(() => viewer?.resize());
-          resizeObserver.observe(el);
-          viewer.on('load', () => {
-            panoLoadedRef.current = true;
-            setPanoStatus('ready');
-          });
-          void viewer.moveTo(panoId).catch(() => {
-            if (!cancelled) {
-              setPanoStatus('error');
-            }
-          });
-          // GeoGuessr-style exploration (owner 2026-08-05): direction
-          // arrows + sequence + spatial let the player walk connected
-          // panoramas to gather clues before pinning. Object tags are
-          // hidden; the answer remains the START pano (entry coords).
-          viewer.deactivateComponent('tag');
-        } catch {
-          setPanoStatus('error');
-        }
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setPanoStatus('error');
-        }
-      });
+    // Expose the recreate path to the Retry button (user-initiated retries
+    // start fresh from attempt 0).
+    retryActionRef.current = () => {
+      attempts = 0;
+      attempt();
+    };
+    attempt();
+
     return () => {
       cancelled = true;
-      window.clearTimeout(timer);
-      resizeObserver?.disconnect();
-      if (viewer) {
-        viewer.remove();
-      }
-      if (viewerRef.current === viewer) {
-        viewerRef.current = null;
-      }
+      clearTimers();
+      destroyViewer();
+      retryActionRef.current = null;
     };
   }, [entry?.id]);
 
@@ -343,6 +525,9 @@ export default function Placeguessr() {
     setResult(null);
     setShowImage(false);
     setPanoStatus('idle');
+    setPanoError(null);
+    setPanoErrorDetail(null);
+    setRetryCount(0);
     revealedRef.current = false;
     setPhase('look');
   };
@@ -414,6 +599,9 @@ export default function Placeguessr() {
     setResult(null);
     setShowImage(false);
     setPanoStatus('idle');
+    setPanoError(null);
+    setPanoErrorDetail(null);
+    setRetryCount(0);
     revealedRef.current = false;
     clearRoundLayers();
     setPhase('look');
@@ -423,6 +611,12 @@ export default function Placeguessr() {
     setPhase('setup');
     setRounds([]);
     setResults([]);
+  };
+
+  /** Manual retry: runs the same destroy + recreate path as the auto-retry
+   * loop, starting fresh from attempt 0. */
+  const handleRetry = () => {
+    retryActionRef.current?.();
   };
 
   if (phase === 'setup') {
@@ -517,12 +711,34 @@ export default function Placeguessr() {
             <div className={panoWrapCls}>
               <div ref={panoElRef} className="absolute inset-0 h-full w-full" />
               {panoVisible && panoStatus !== 'ready' && (
-                <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-surface-muted/70 px-6 text-center">
-                  <p className="text-small text-ink-muted">
+                <div
+                  className={`absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 px-6 text-center ${
+                    panoStatus === 'error'
+                      ? 'bg-surface-muted/70'
+                      : 'pointer-events-none bg-surface-muted/70'
+                  }`}
+                >
+                  <p className="text-small text-ink">
                     {panoStatus === 'loading'
-                      ? 'Loading the view…'
-                      : "The panorama couldn't load for this round."}
+                      ? retryCount > 0
+                        ? 'Connection is slow, still trying…'
+                        : 'Loading the view…'
+                      : (panoError ?? "The panorama couldn't load for this round.")}
                   </p>
+                  {panoStatus === 'error' && (
+                    <>
+                      {panoErrorDetail && (
+                        <p className="text-xs text-ink-muted">Reason: {panoErrorDetail}</p>
+                      )}
+                      <button
+                        type="button"
+                        onClick={handleRetry}
+                        className="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-6 text-small font-semibold text-white transition-colors hover:bg-primary-hover"
+                      >
+                        Retry
+                      </button>
+                    </>
+                  )}
                 </div>
               )}
               {(phase === 'pin' || phase === 'reveal') && !showImage && (

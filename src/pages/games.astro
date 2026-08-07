@@ -27,15 +27,15 @@ const familyFilter = Astro.url.searchParams.get('family') as GameFamily | null;
 ---
 
 <BaseLayout
-  title="All Games: 19 Free Online Party Games | Trivia"
-  description="Browse all 19 free party games: drawing rooms, voting games, solo puzzles, trivia, charades, and more. Play in your browser, no downloads, no accounts."
+  title="All Games: 21 Free Online Party Games | Trivia"
+  description="Browse all 21 free party games: drawing rooms, voting games, solo puzzles, daily wordle, trivia, charades, and more. Play in your browser, no downloads, no accounts."
   canonicalPath="/games"
   activeNav="games"
 >
   <section class="mb-10 text-center">
     <h1 class="font-display text-h1 text-ink">All games</h1>
     <p id="games-lede" class="mx-auto mt-4 max-w-2xl text-body text-ink-muted">
-      All 19 games, solo or with friends, free and in your browser.
+      All 21 games, solo or with friends, free and in your browser.
     </p>
 
     <!-- Family filter + room mode ([AIRBNB v3] static anchors). -->
@@ -124,7 +124,7 @@ const familyFilter = Astro.url.searchParams.get('family') as GameFamily | null;
       if (lede) {
         lede.textContent = room
           ? 'Room mode: pick a multiplayer game and jump straight into a new room.'
-          : 'All 19 games, solo or with friends, free and in your browser.';
+          : 'All 21 games, solo or with friends, free and in your browser.';
       }
     })();
   </script>

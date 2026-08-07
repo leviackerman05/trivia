@@ -1658,3 +1658,74 @@ peeks.mjs`): OSM Overpass query → random road nodes → landmark
   filtering — Charades' D058 region/language/decade filters can reuse it;
   the wire-strip boundary extends the D008 server-keeps-what-it-needs
   rule to balance metadata.
+
+## D065, Daily Chess engine policy: pure FEN validator + static Lichess CC0 puzzle data, no chess.js (2026-08-07)
+
+> **SUPERSEDED SAME DAY by D067** (owner): Daily Chess became a full client-side
+> CPU game (chess.js + Stockfish WASM); the D032 server-seeded daily puzzle and
+> the server registry entry were reverted. The Lichess CC0 puzzle file remains
+> in the repo, dormant.
+
+- **Decision:** Daily Chess (R19) ships with **no chess engine dependency**.
+  The client uses a **pure FEN validator** (`src/lib/chess.ts`) and the daily
+  puzzle comes from the **static Lichess puzzle database (CC0)** served
+  server-side (D032 pattern: `server/src/data/chess-puzzles.json`, 1,000+
+  engine-validated puzzles, per-puzzle `credit` attribution on the reveal).
+  Solution checking is move-string comparison against the stored UCI line —
+  no move generation. Owner accepted the PM recommendation over chess.js
+  (PRD §2 stack question): no new dependencies, no 1 MB engine bundle, and
+  the binding no-new-deps gate stays intact.
+- **Date:** 2026-08-07
+- **Future impact:** an engine can be added later as a progressive
+  enhancement (e.g., post-move legality hints) without touching the daily
+  pipeline; the Lichess `moves` field already carries the full solution
+  line, so the validator only ever needs FEN shape + move syntax.
+
+## D066, Wordle scoring by attempt: 100/85/70/55/40/25 (2026-08-07)
+
+- **Decision:** Daily Wordle (R20) scores a solve by attempt count: 1st
+  guess = 100, 2nd = 85, 3rd = 70, 4th = 55, 5th = 40, 6th = 25; a failed
+  solve = 0. Owner accepted over the flat-100 default; scores stay out of
+  the daily leaderboard (per-attempt scores are not a comparable race), but
+  the run still records for streaks and personal bests via the standard
+  daily pipeline.
+- **Date:** 2026-08-07
+- **Future impact:** the score table lives in `src/lib/wordle.ts`
+  (`wordleScore`), single source of truth; share cards show the score the
+  same way as every other daily game.
+
+## D067, Chess as a client-side CPU game: chess.js + Stockfish WASM, daily puzzle reverted (2026-08-07)
+
+- **Decision:** owner replaced the Daily Chess puzzle (R19, D032 server-seeded)
+  with a **full CPU chess game** on the client: chess.js for move legality and
+  Stockfish WASM for the opponent. Supersedes D065 (pure FEN validator + static
+  puzzle data) the same day it was logged.
+- **Server impact (executed):** `chess` removed from `LIVE_DAILY_GAMES` (final
+  live set: trivia, sudoku, timeline-tussle, movies, music, wordle); the
+  `/api/daily-challenge` chess branch and `selectDailyChessPuzzle` were
+  reverted; `server/src/data/chess-puzzles.json` (Lichess CC0, 1,200 puzzles)
+  stays in the repo, dormant — not deleted, not served, never bundled.
+- **Date:** 2026-08-07
+- **Future impact:** the chess engine and its bundle budget live entirely in
+  the client; the daily registry stays 6 until a future daily-only game
+  (e.g., Wordle) or a revived puzzle mode re-adds entries.
+
+### D067 addendum (executed 2026-08-07): difficulty bands, engine build, compliance
+
+- **Implementation (frontend, landed):** `/game/chess` ships as a normal solo
+  game (catalog row, no daily entry). `src/lib/chess.ts` is the rules layer on
+  **chess.js 1.4 (MIT)** — legal moves per square, UCI move application,
+  check/checkmate/stalemate/draw detection, FEN handling — with the pure FEN
+  grammar validator retained only for the dormant Lichess dataset QA.
+- **Difficulty bands (owner-approved):** Easy 200-600 (Stockfish Skill Level 1,
+  movetime 150ms, ~30% deliberate blunder via a random legal move from
+  chess.js), Medium 800-1200 (Skill 9, 250ms), Hard 1200+ (Skill 17, 500ms).
+  Tunable via the `DIFFICULTY` constant at the top of `src/islands/solo/Chess.tsx`.
+- **Engine build:** Stockfish 18 (nmrugg/stockfish.js lite single-thread
+  build) self-hosted in `public/stockfish/` (worker + wasm, loaded only when
+  a game starts; never part of the island bundle). GPLv3 compliance: the
+  game page credits "Engine: Stockfish (GPLv3, github.com/official-stockfish)"
+  under the board, and the repo README carries the license note.
+- **Fallback:** if the worker cannot load, the CPU falls back to random legal
+  moves (chess.js) with a visible notice, so the game stays playable.
+- **Date:** 2026-08-07

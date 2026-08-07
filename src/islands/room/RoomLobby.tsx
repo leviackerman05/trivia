@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useRoom } from './useRoom';
 import RoomLobbyPanel from './RoomLobbyPanel';
+import RoomRejoining from './RoomRejoining';
 import { getGame } from '../../lib/games';
 
 interface Props {
@@ -14,12 +15,16 @@ interface Props {
  */
 export default function RoomLobby({ gameSlug }: Props) {
   const game = getGame(gameSlug);
-  const { status, error, room, messages, actions } = useRoom();
+  const { status, error, room, messages, actions, rejoining } = useRoom(gameSlug);
 
   const isHost = useMemo(
     () => room?.players.some((player) => player.isHost && player.connected) ?? false,
     [room]
   );
+
+  if (rejoining) {
+    return <RoomRejoining />;
+  }
 
   return (
     <RoomLobbyPanel

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isWordleWord, letterStates, pickDailyWord, wordleWords } from '../wordle';
+import { isWordleWord, letterStates, pickDailyWord, wordleScore, wordleWords } from '../wordle';
 import skribblWordsJson from '../../../server/src/data/skribbl-words.json';
 
 const bank = skribblWordsJson as { word: string; difficulty: string }[];
@@ -95,6 +95,23 @@ describe('letterStates (classic duplicate-correct feedback)', () => {
   it('normalizes case', () => {
     expect(letterStates('CANDY', 'candy').solved).toBe(true);
     expect(letterStates('candy', 'CANDY').solved).toBe(true);
+  });
+});
+
+describe('wordleScore ([D066] scoring by attempt, owner 2026-08-07)', () => {
+  it('scores 100/85/70/55/40/25 by attempt, 0 on a failed solve', () => {
+    expect(wordleScore(1)).toBe(100);
+    expect(wordleScore(2)).toBe(85);
+    expect(wordleScore(3)).toBe(70);
+    expect(wordleScore(4)).toBe(55);
+    expect(wordleScore(5)).toBe(40);
+    expect(wordleScore(6)).toBe(25);
+  });
+
+  it('scores a failed solve and out-of-range attempts as 0', () => {
+    expect(wordleScore(0)).toBe(0);
+    expect(wordleScore(7)).toBe(0);
+    expect(wordleScore(-1)).toBe(0);
   });
 });
 

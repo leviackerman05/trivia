@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import { useRoom } from './room/useRoom';
 import RoomLobbyPanel from './room/RoomLobbyPanel';
+import RoomRejoining from './room/RoomRejoining';
 import { useGuessWhoGame } from './useGuessWhoGame';
 import { getGame } from '../lib/games';
 import {
   filterLabel,
   GENRE_LABELS,
   GUESS_WHO_TOTAL_ROUNDS,
-  REGION_LABELS,
   type GuessWhoFilter,
   type GuessWhoGameState,
 } from '../lib/guess-who';
@@ -28,7 +28,15 @@ interface Props {
 
 export default function GuessWhoArena({ gameSlug }: Props) {
   const game = getGame(gameSlug);
-  const { status, error, room, messages, actions: roomActions, myName } = useRoom();
+  const {
+    status,
+    error,
+    room,
+    messages,
+    actions: roomActions,
+    myName,
+    rejoining,
+  } = useRoom(gameSlug);
   const { game: gw, actions: gameActions } = useGuessWhoGame(room?.code ?? null, myName ?? null);
 
   const [guessDraft, setGuessDraft] = useState('');
@@ -53,6 +61,9 @@ export default function GuessWhoArena({ gameSlug }: Props) {
       : 0;
 
   if (!room) {
+    if (rejoining) {
+      return <RoomRejoining />;
+    }
     return (
       <RoomLobbyPanel
         game={game}
@@ -84,13 +95,12 @@ export default function GuessWhoArena({ gameSlug }: Props) {
               <FilterControl
                 filter={gw.filter}
                 options={gw.filterOptions}
-                onSelect={(filter) => void gameActions.setFilter(filter)}
+                onSelect={(genre) => void gameActions.setFilter({ region: 'all', genre })}
               />
             ) : undefined
           ) : (
             <p className="text-small text-ink-muted">
-              Region: {filterLabel(gw.filter.region, REGION_LABELS)} · Genre:{' '}
-              {filterLabel(gw.filter.genre, GENRE_LABELS)}
+              Genre: {filterLabel(gw.filter.genre, GENRE_LABELS)}
             </p>
           )
         }
@@ -117,8 +127,7 @@ export default function GuessWhoArena({ gameSlug }: Props) {
           Round {gw.round} of {gw.totalRounds}
         </span>
         <span className="rounded-pill bg-tertiary/40 px-4 py-1.5 text-xs font-semibold text-ink">
-          Region: {filterLabel(gw.filter.region, REGION_LABELS)} · Genre:{' '}
-          {filterLabel(gw.filter.genre, GENRE_LABELS)}
+          Genre: {filterLabel(gw.filter.genre, GENRE_LABELS)}
         </span>
         {gw.view === 'questioning' && (
           <span
@@ -401,7 +410,10 @@ function RevealView({
   );
 }
 
-/** D064, host lobby control: region + genre chip rows with pool counts. */
+/** D064, host lobby control: ONE genre chip row (owner 2026-08-06 — the
+ * region picker was dropped; the filter always plays every region, chips
+ * show the name only, cells below the deck size are hidden, never
+ * disabled). */
 function FilterControl({
   filter,
   options,
@@ -409,48 +421,27 @@ function FilterControl({
 }: {
   filter: GuessWhoFilter;
   options: NonNullable<GuessWhoGameState['filterOptions']>;
-  onSelect: (filter: GuessWhoFilter) => void;
+  onSelect: (genre: GuessWhoFilter['genre']) => void;
 }) {
-  const regions = options.regions.filter((option) => option.count >= GUESS_WHO_TOTAL_ROUNDS);
   const genres = options.genres.filter((option) => option.count >= GUESS_WHO_TOTAL_ROUNDS);
   return (
     <div className="rounded-lg border border-border bg-surface-raised p-5 shadow-sm">
       <h3 className="text-lg font-bold tracking-tight text-ink">Filter (host)</h3>
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        <span className="w-16 shrink-0 text-small font-semibold text-ink-muted">Region</span>
-        {regions.map((option) => (
-          <button
-            key={option.value}
-            type="button"
-            aria-pressed={filter.region === option.value}
-            onClick={() =>
-              onSelect({ ...filter, region: option.value as GuessWhoFilter['region'] })
-            }
-            className={`rounded-pill border px-4 py-2 text-small font-semibold transition-colors ${
-              filter.region === option.value
-                ? 'border-primary bg-primary/15 text-primary-deep'
-                : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
-            }`}
-          >
-            {filterLabel(option.value, REGION_LABELS)} ({option.count})
-          </button>
-        ))}
-      </div>
-      <div className="mt-2 flex flex-wrap items-center gap-2">
         <span className="w-16 shrink-0 text-small font-semibold text-ink-muted">Genre</span>
         {genres.map((option) => (
           <button
             key={option.value}
             type="button"
             aria-pressed={filter.genre === option.value}
-            onClick={() => onSelect({ ...filter, genre: option.value as GuessWhoFilter['genre'] })}
+            onClick={() => onSelect(option.value as GuessWhoFilter['genre'])}
             className={`rounded-pill border px-4 py-2 text-small font-semibold transition-colors ${
               filter.genre === option.value
                 ? 'border-primary bg-primary/15 text-primary-deep'
                 : 'border-border bg-surface-raised text-ink hover:bg-surface-muted'
             }`}
           >
-            {filterLabel(option.value, GENRE_LABELS)} ({option.count})
+            {filterLabel(option.value, GENRE_LABELS)}
           </button>
         ))}
       </div>

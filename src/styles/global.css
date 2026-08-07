@@ -159,6 +159,18 @@
     0 0 0 1px rgb(0 0 0 / 0.02), 0 2px 6px 0 rgb(0 0 0 / 0.04), 0 4px 8px 0 rgb(0 0 0 / 0.1);
   --shadow-lg:
     0 0 0 1px rgb(0 0 0 / 0.02), 0 2px 6px 0 rgb(0 0 0 / 0.04), 0 4px 8px 0 rgb(0 0 0 / 0.1);
+
+  /* ── Chess board palette [D067 addendum §2/6] — light-on-light squares,
+     never follows :root.dark (the board is a flush edge-to-edge grid). */
+  --chess-board-border: rgba(0, 0, 0, 0.12);
+  --chess-light: #eeeed2;
+  --chess-dark: #769656;
+  --chess-selected: #f6e58d;
+  --chess-last: #cdd26b; /* last-move destination square */
+  --chess-dot: rgba(0, 0, 0, 0.22);
+  --chess-ring: rgba(0, 0, 0, 0.45);
+  --chess-check: rgba(255, 107, 107, 0.35);
+  --chess-coord: rgba(0, 0, 0, 0.5);
 }
 
 /* Dark theme [OWNER d2]: optional toggle, restyled on the Airbnb tokens —

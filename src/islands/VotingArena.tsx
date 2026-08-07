@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import { useRoom } from './room/useRoom';
 import RoomLobbyPanel from './room/RoomLobbyPanel';
+import RoomRejoining from './room/RoomRejoining';
 import { useVotingGame } from './useVotingGame';
 import { getGame } from '../lib/games';
 import type { VotingGameState, VotingOption } from '../lib/voting';
@@ -59,7 +60,15 @@ const NHIE_SOURCES: { id: 'provided' | 'own' | 'both'; label: string }[] = [
 
 export default function VotingArena({ gameSlug }: Props) {
   const game = getGame(gameSlug);
-  const { status, error, room, messages, actions: roomActions, myName } = useRoom();
+  const {
+    status,
+    error,
+    room,
+    messages,
+    actions: roomActions,
+    myName,
+    rejoining,
+  } = useRoom(gameSlug);
   const { game: voting, actions: gameActions } = useVotingGame(room?.code ?? null, myName ?? null);
 
   const [now, setNow] = useState(() => Date.now());
@@ -88,6 +97,9 @@ export default function VotingArena({ gameSlug }: Props) {
       : 0;
 
   if (!room) {
+    if (rejoining) {
+      return <RoomRejoining />;
+    }
     return (
       <RoomLobbyPanel
         game={game}

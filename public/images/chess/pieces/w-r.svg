@@ -1,0 +1,17 @@
+<!--
+  Chess piece set by Colin M.L. Burnett (GFDL / CC BY-SA 3.0 / GPL)
+  Source: Wikimedia Commons "Chess cdt45" series (Cburnett), recolored to the
+  Trivia & Games site palette (#f7f5ef white fill / #1f1f1f ink). Redistributed
+  under the same tri-license; visible credit on the chess game page. Colors: #f7f5ef (white) / #1f1f1f (ink).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" role="img" aria-labelledby="title">
+  <title id="title">White rook</title>
+  <desc>Chess piece set by Colin M.L. Burnett (GFDL / CC BY-SA 3.0 / GPL)</desc>
+  <g fill="#f7f5ef" fill-rule="evenodd" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 39h27v-3H9v3zm3-3v-4h21v4H12zm-1-22V9h4v2h5V9h5v2h5V9h4v5" stroke-linecap="butt"/>
+    <path d="M34 14l-3 3H14l-3-3"/>
+    <path d="M31 17v12.5H14V17" stroke-linecap="butt" stroke-linejoin="miter"/>
+    <path d="M31 29.5l1.5 2.5h-20l1.5-2.5"/>
+    <path d="M11 14h23" fill="none" stroke-linejoin="miter"/>
+  </g>
+</svg>

@@ -948,4 +948,104 @@ export const gameContent: Record<string, GameSeoContent> = {
       },
     ],
   },
+  chess: {
+    metaDescription:
+      'Play chess against the CPU online free: pick Easy, Medium, or Hard, choose your color, and face Stockfish. Full rules, legal-move hints, and a move list.',
+    sections: [
+      {
+        heading: 'How to play chess vs CPU',
+        body: 'Chess vs CPU is a complete game of chess against Stockfish, the open-source engine that has beaten world champions. Pick a difficulty level and a color, then play a normal game: white moves first, you take turns, and the first checkmate wins. Tap a piece to see every legal destination highlighted, then tap the square you want. You can also drag a piece to its destination, and promotions let you choose queen, rook, bishop, or knight.',
+      },
+      {
+        heading: 'The difficulty levels',
+        body: 'Easy plays at roughly a 200 to 600 rating. It thinks fast and deliberately blunders about a third of its moves, which gives beginners real winning chances while still playing a sensible opening. Medium plays at roughly 800 to 1200, with solid tactics and few mistakes. Hard plays at 1200 and beyond, thinking longer and punishing inaccuracies. The engine settings are exposed in the page source, so the levels are honest and tunable.',
+      },
+      {
+        heading: 'The engine',
+        body: 'The opponent is Stockfish, the strongest chess engine in the world, compiled to WebAssembly and running entirely in your browser. Nothing is sent to a server, and the engine only starts when you begin a game, so the page stays light. Stockfish is free software under the GPLv3 license, and the game credits it on the board. Rules are enforced by chess.js, a separate MIT-licensed library that also powers the legal-move hints and the move list.',
+      },
+      {
+        heading: 'Rules and end states',
+        body: 'Every move is checked against the real rules: castling, en passant, promotion, and check. The board shows a check pill when your king is attacked, and the game ends properly on checkmate, stalemate, or a draw by agreement of the rules, including insufficient material. You can resign at any time and rematch instantly with the same settings.',
+      },
+      {
+        heading: 'Why play chess here',
+        body: 'It runs on any phone or laptop with no account and no download, and the interface is built for touch: tap a piece, tap a square. The move list keeps the whole game readable, the board flips when you play black, and the difficulty ladder gives you a path from first game to serious practice. It is one of the few places you can play a full engine-strength game with zero setup. Because the engine lives in your browser, there is no queue, no server lag, and no waiting between moves, and a rematch starts instantly with the same settings.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is playing against the CPU free?',
+        answer:
+          'Yes. Chess vs CPU is free, with no account and no downloads. The engine runs in your browser, and everything is on the page.',
+      },
+      {
+        question: 'What do the difficulty levels mean?',
+        answer:
+          'Easy plays at roughly 200 to 600 rating and blunders on purpose sometimes. Medium is roughly 800 to 1200. Hard is 1200 and beyond, and plays strong chess with more think time.',
+      },
+      {
+        question: 'Can I choose to play black?',
+        answer:
+          'Yes. Pick White, Black, or Random before the game. When you play black, the board flips so your pieces start at the bottom.',
+      },
+      {
+        question: 'Does the game handle all chess rules?',
+        answer:
+          'Yes. Castling, en passant, promotion, check, checkmate, stalemate, and draw rules are enforced by chess.js, a battle-tested rules library.',
+      },
+    ],
+  },
+  wordle: {
+    metaDescription:
+      'Play Daily Wordle free: the same five-letter word for everyone every day. Six guesses, letter feedback, streaks, and a share card. No app, no sign-up.',
+    sections: [
+      {
+        heading: 'How to play Daily Wordle',
+        body: 'Daily Wordle hides one five-letter word, and you have six guesses to find it. Type a word and the tiles tell you how close you are: a green tile means the letter is right and in the right place, a yellow tile means the letter is in the word but in the wrong place, and a gray tile means the letter is not in the word at all. The word is the same for every player, every UTC day.',
+      },
+      {
+        heading: 'The daily word',
+        body: 'The word is picked deterministically from the UTC date, so the whole world plays the same puzzle. There is no timer, so you can think as long as you like, and the streak system rewards showing up every day rather than rushing. Our word list is our own, filtered from a large common-word bank, so nothing is copied from any other word game.',
+      },
+      {
+        heading: 'Scoring',
+        body: 'Solve the word on your first guess for 100 points, and the score steps down with each extra guess: 85, 70, 55, 40, and 25 on the sixth. Fail to find the word and the score is 0. Your best score feeds your personal best, and the result records into your daily streak like every other daily game.',
+      },
+      {
+        heading: 'Share your result',
+        body: 'When you finish, grab a share card with your score and streak and send it to friends. The card is generated right in your browser, no images are uploaded, and the same daily word means you and your friends can compare directly.',
+      },
+      {
+        heading: 'Why it works as a daily ritual',
+        body: 'One word, six guesses, about two minutes. Daily Wordle is built for the daily loop: open the page, play the word, keep the streak. The keyboard works on screen or on your physical keyboard, and the whole game fits on a phone screen with no scrolling.',
+      },
+      {
+        heading: 'Strategy that sticks',
+        body: 'A few habits lift your score fast. Start with a word that covers the most common letters, like a mix of vowels and frequent consonants. Let the tile colors drive your next guess, and never repeat a letter you know is gray. When a letter lands yellow, try it in every remaining position before you give up on it. The goal is fewer guesses, and the scoring ladder rewards exactly that: solve in two guesses and you take 85 points, in six you still take 25. Compare your personal best against yesterday, and against the friends you share the card with.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is Daily Wordle free?',
+        answer:
+          'Yes. Daily Wordle is free with no account, no app, and no downloads. The word list is our own, no copied art or lists from other word games.',
+      },
+      {
+        question: 'What do the tile colors mean?',
+        answer:
+          'Green means the letter is correct and in the right spot. Yellow means the letter is in the word but in the wrong spot. Gray means the letter is not in the word at all.',
+      },
+      {
+        question: 'Is the word the same for everyone?',
+        answer:
+          'Yes. The word is seeded from the UTC date, so every player on the same day sees the same five-letter word.',
+      },
+      {
+        question: 'Can I play more than once a day?',
+        answer:
+          'You can replay as often as you like, but the day word stays the same until midnight UTC, and the leaderboard and streak count the first completion.',
+      },
+    ],
+  },
 };

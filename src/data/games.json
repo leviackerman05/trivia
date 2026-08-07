@@ -281,6 +281,34 @@
     "popularity": 9
   },
   {
+    "slug": "chess",
+    "name": "Chess",
+    "type": "solo",
+    "family": "solo",
+    "tagline": "Full chess against the CPU, three difficulty levels.",
+    "description": "Play a complete game of chess against Stockfish, the strongest open-source engine. Pick Easy, Medium, or Hard, choose your color, and get legal-move hints, a live move list, and proper checkmate, stalemate, and draw rules.",
+    "players": "1",
+    "durationMinutes": 20,
+    "energy": "low",
+    "featured": false,
+    "isNew": true,
+    "popularity": 8
+  },
+  {
+    "slug": "wordle",
+    "name": "Daily Wordle",
+    "type": "solo",
+    "family": "solo",
+    "tagline": "Guess the five-letter word in six tries.",
+    "description": "A new five-letter word every day, the same for everyone. Six guesses, letter-by-letter feedback, and a streak worth protecting. Our own word list, no copied art.",
+    "players": "1",
+    "durationMinutes": 5,
+    "energy": "low",
+    "featured": false,
+    "isNew": true,
+    "popularity": 8
+  },
+  {
     "slug": "placeguessr",
     "name": "Placeguessr",
     "type": "solo",

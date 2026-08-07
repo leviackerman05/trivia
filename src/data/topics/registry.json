@@ -1,0 +1,322 @@
+[
+  {
+    "slug": "tv-general",
+    "label": "TV Series",
+    "region": "global",
+    "difficulty": 1,
+    "icon": "film",
+    "launch": true
+  },
+  {
+    "slug": "tv-friends",
+    "label": "Friends",
+    "region": "US",
+    "difficulty": 1,
+    "icon": "users",
+    "launch": true
+  },
+  {
+    "slug": "movies-hollywood",
+    "label": "Hollywood Movies",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "film",
+    "launch": true
+  },
+  {
+    "slug": "movies-bollywood",
+    "label": "Bollywood Movies",
+    "region": "IN",
+    "difficulty": 2,
+    "icon": "popcorn",
+    "launch": true
+  },
+  {
+    "slug": "movies-harry-potter",
+    "label": "Harry Potter",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "sparkles",
+    "launch": true
+  },
+  {
+    "slug": "bollywood-scandals",
+    "label": "Bollywood Buzz",
+    "region": "IN",
+    "difficulty": 3,
+    "icon": "chat",
+    "launch": true
+  },
+  {
+    "slug": "sports-cricket",
+    "label": "Cricket",
+    "region": "IN",
+    "difficulty": 2,
+    "icon": "ball",
+    "launch": true
+  },
+  {
+    "slug": "sports-football",
+    "label": "Football (Soccer)",
+    "region": "global",
+    "difficulty": 1,
+    "icon": "ball",
+    "launch": true
+  },
+  {
+    "slug": "sports-f1",
+    "label": "Formula 1",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "car",
+    "launch": true
+  },
+  {
+    "slug": "sports-tennis",
+    "label": "Tennis",
+    "region": "global",
+    "difficulty": 1,
+    "icon": "ball",
+    "launch": true
+  },
+  {
+    "slug": "games-general",
+    "label": "Video Games",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "gamepad",
+    "launch": true
+  },
+  {
+    "slug": "music-bollywood",
+    "label": "Bollywood Music",
+    "region": "IN",
+    "difficulty": 2,
+    "icon": "music-note",
+    "launch": true
+  },
+  {
+    "slug": "history-india",
+    "label": "Indian History",
+    "region": "IN",
+    "difficulty": 2,
+    "icon": "book",
+    "launch": true
+  },
+  {
+    "slug": "science-space",
+    "label": "Space & Astronomy",
+    "region": "global",
+    "difficulty": 1,
+    "icon": "globe",
+    "launch": true
+  },
+  {
+    "slug": "food-india",
+    "label": "Indian Food",
+    "region": "IN",
+    "difficulty": 1,
+    "icon": "fork-spoon",
+    "launch": true
+  },
+  {
+    "slug": "tv-thrones",
+    "label": "Game of Thrones",
+    "region": "US",
+    "difficulty": 2,
+    "icon": "crown",
+    "launch": false
+  },
+  {
+    "slug": "tv-breaking-bad",
+    "label": "Breaking Bad",
+    "region": "US",
+    "difficulty": 2,
+    "icon": "bolt",
+    "launch": false
+  },
+  {
+    "slug": "tv-office",
+    "label": "The Office",
+    "region": "US",
+    "difficulty": 1,
+    "icon": "desk",
+    "launch": false
+  },
+  {
+    "slug": "tv-stranger-things",
+    "label": "Stranger Things",
+    "region": "US",
+    "difficulty": 2,
+    "icon": "bolt",
+    "launch": false
+  },
+  {
+    "slug": "movies-marvel",
+    "label": "Marvel Movies",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "bolt",
+    "launch": false
+  },
+  {
+    "slug": "movies-star-wars",
+    "label": "Star Wars",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "star",
+    "launch": false
+  },
+  {
+    "slug": "movies-disney",
+    "label": "Disney & Animation",
+    "region": "global",
+    "difficulty": 1,
+    "icon": "sparkles",
+    "launch": false
+  },
+  {
+    "slug": "sports-olympics",
+    "label": "Olympics",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "trophy",
+    "launch": false
+  },
+  {
+    "slug": "sports-basketball",
+    "label": "Basketball",
+    "region": "US",
+    "difficulty": 2,
+    "icon": "ball",
+    "launch": false
+  },
+  {
+    "slug": "sports-nfl",
+    "label": "American Football",
+    "region": "US",
+    "difficulty": 2,
+    "icon": "flag",
+    "launch": false
+  },
+  {
+    "slug": "sports-combat",
+    "label": "Boxing & MMA",
+    "region": "global",
+    "difficulty": 3,
+    "icon": "flame",
+    "launch": false
+  },
+  {
+    "slug": "music-pop",
+    "label": "Pop Music",
+    "region": "global",
+    "difficulty": 1,
+    "icon": "music-note",
+    "launch": false
+  },
+  {
+    "slug": "music-rock",
+    "label": "Rock & Metal",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "music-note",
+    "launch": false
+  },
+  {
+    "slug": "music-hiphop",
+    "label": "Hip-Hop & Rap",
+    "region": "US",
+    "difficulty": 2,
+    "icon": "music-note",
+    "launch": false
+  },
+  {
+    "slug": "games-nintendo",
+    "label": "Nintendo",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "gamepad",
+    "launch": false
+  },
+  {
+    "slug": "games-pokemon",
+    "label": "Pokémon",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "gamepad",
+    "launch": false
+  },
+  {
+    "slug": "games-esports",
+    "label": "Esports",
+    "region": "global",
+    "difficulty": 3,
+    "icon": "trophy",
+    "launch": false
+  },
+  {
+    "slug": "history-world",
+    "label": "World History",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "book",
+    "launch": false
+  },
+  {
+    "slug": "history-us",
+    "label": "US History",
+    "region": "US",
+    "difficulty": 2,
+    "icon": "flag",
+    "launch": false
+  },
+  {
+    "slug": "history-ancient",
+    "label": "Ancient Civilizations",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "globe",
+    "launch": false
+  },
+  {
+    "slug": "science-nature",
+    "label": "Nature & Animals",
+    "region": "global",
+    "difficulty": 1,
+    "icon": "leaf",
+    "launch": false
+  },
+  {
+    "slug": "tech-general",
+    "label": "Technology",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "tools",
+    "launch": false
+  },
+  {
+    "slug": "food-world",
+    "label": "World Food",
+    "region": "global",
+    "difficulty": 1,
+    "icon": "fork-spoon",
+    "launch": false
+  },
+  {
+    "slug": "geography-wonders",
+    "label": "World Landmarks",
+    "region": "global",
+    "difficulty": 2,
+    "icon": "landmark",
+    "launch": false
+  },
+  {
+    "slug": "general-curiosities",
+    "label": "Curious Facts",
+    "region": "global",
+    "difficulty": 1,
+    "icon": "lightbulb",
+    "launch": false
+  }
+]

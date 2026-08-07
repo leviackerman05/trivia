@@ -1,0 +1,1122 @@
+[
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which actress won the Best Actress Oscar for La La Land in 2017?",
+    "options": ["Natalie Portman", "Emma Stone", "Jennifer Lawrence", "Meryl Streep"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1977 space opera follows farm boy Luke Skywalker as he joins the Rebel Alliance?",
+    "options": ["Star Wars", "Star Trek", "Flash Gordon", "Battlestar Galactica"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1997 film depicts the sinking of the ocean liner RMS Titanic?",
+    "options": ["Poseidon", "The Perfect Storm", "Das Boot", "Titanic"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which fantasy trilogy centers on a powerful ring that must be destroyed?",
+    "options": [
+      "The Lord of the Rings",
+      "The Chronicles of Narnia",
+      "Conan the Barbarian",
+      "Willow"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which animated film features the toys Woody and Buzz Lightyear?",
+    "options": ["A Bug's Life", "Cars", "Toy Story", "Monsters, Inc."],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2012 superhero film teams up Iron Man, Captain America, Thor, and the Hulk?",
+    "options": ["Fantastic Four", "Justice League", "X-Men: Days of Future Past", "The Avengers"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2018 superhero film is set in the futuristic nation of Wakanda?",
+    "options": ["Shazam!", "Ant-Man", "Black Panther", "Aquaman"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which film series follows retired hitman John Wick?",
+    "options": ["Nobody", "John Wick", "The Equalizer", "Taken"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which film series follows archaeologist and adventurer Indiana Jones?",
+    "options": ["National Treasure", "The Mummy", "Indiana Jones", "Uncharted"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1993 film features a theme park where cloned dinosaurs run loose?",
+    "options": ["Jurassic Park", "The Lost World: Jurassic Park", "Godzilla", "King Kong"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which animated film follows the young lion prince Simba?",
+    "options": ["Tarzan", "The Lion King", "The Jungle Book", "Kung Fu Panda"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2009 science fiction film is set on the alien moon Pandora?",
+    "options": ["Alien", "Prometheus", "Interstellar", "Avatar"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2016 animated film is set in the animal metropolis of Zootopia?",
+    "options": ["Zootopia", "Rio", "The Secret Life of Pets", "Sing"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which animated film features the one-eyed monster Mike Wazowski?",
+    "options": ["Toy Story 2", "Monsters, Inc.", "Wreck-It Ralph", "Brave"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1994 film follows a gentle man named Forrest through decades of American history?",
+    "options": ["Cast Away", "Big", "Philadelphia", "Forrest Gump"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1972 mafia saga stars Marlon Brando as Vito Corleone?",
+    "options": ["The Godfather Part II", "Goodfellas", "Scarface", "The Godfather"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1999 film follows computer hacker Neo into a simulated reality?",
+    "options": ["Dark City", "Johnny Mnemonic", "The Matrix", "Tron"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1975 thriller features a great white shark terrorizing a beach town?",
+    "options": ["The Shallows", "Jaws", "Piranha", "Deep Blue Sea"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which film series features a cyborg assassin sent back in time?",
+    "options": ["The Terminator", "RoboCop", "The Matrix", "Blade Runner"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2018 animated film follows teenager Miles Morales becoming a superhero?",
+    "options": [
+      "Spider-Man: Into the Spider-Verse",
+      "Incredibles 2",
+      "Ralph Breaks the Internet",
+      "Teen Titans Go! To the Movies"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2008 superhero film pits Batman against the Joker?",
+    "options": ["Batman Returns", "The Dark Knight", "Batman Begins", "Batman v Superman"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which film series follows British secret agent 007?",
+    "options": ["Jason Bourne", "Mission: Impossible", "The Bourne Identity", "James Bond"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1998 animated film follows a young woman who joins the army in her father's place?",
+    "options": ["Mulan", "Pocahontas", "Hunchback of Notre Dame", "Brave"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which animated film series features super-villain Gru?",
+    "options": ["Hotel Transylvania", "Megamind", "Despicable Me", "The Boss Baby"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2017 live-action fantasy stars Emma Watson as Belle?",
+    "options": ["Beauty and the Beast", "Aladdin", "Maleficent", "Cinderella"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2019 superhero film features the title character played by Brie Larson?",
+    "options": ["Wonder Woman", "Captain Marvel", "Supergirl", "Black Widow"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2022 sequel follows fighter pilot Maverick returning to teach a new generation?",
+    "options": ["Flight", "Sully", "Air", "Top Gun: Maverick"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2004 animated film follows a family of superheroes?",
+    "options": ["The Incredibles", "The Incredible Hulk", "Sky High", "Megamind"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1989 animated film features the mermaid princess Ariel?",
+    "options": ["Tangled", "The Princess and the Frog", "Moana", "The Little Mermaid"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1992 animated film features the street urchin Aladdin?",
+    "options": ["Sinbad", "The Thief and the Cobbler", "Aladdin", "Prince of Persia"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2017 superhero film unites Batman, Wonder Woman, and The Flash?",
+    "options": ["Justice League", "The Eternals", "Suicide Squad", "The Avengers"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2016 film brings Batman and Superman into conflict?",
+    "options": [
+      "The Dark Knight Rises",
+      "Superman Returns",
+      "Captain America: Civil War",
+      "Batman v Superman: Dawn of Justice"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2013 superhero film chronicles the early years of Superman?",
+    "options": ["Superman", "Man of Steel", "Superman Returns", "Shazam!"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2017 superhero film follows Diana Prince leaving her island home?",
+    "options": ["Xena", "Mulan", "Wonder Woman", "Thor: Ragnarok"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2018 superhero film follows the king of the undersea kingdom of Atlantis?",
+    "options": ["The Little Mermaid", "Moana", "Aquaman", "Poseidon"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1996 alien-invasion blockbuster stars Will Smith and Jeff Goldblum?",
+    "options": ["The Day After Tomorrow", "Mars Attacks!", "War of the Worlds", "Independence Day"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1986 film follows naval aviator Pete 'Maverick' Mitchell?",
+    "options": ["The Right Stuff", "Top Gun", "Iron Eagle", "Hot Shots!"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1997 animated film follows the son of Zeus in ancient Greece?",
+    "options": ["Atlantis: The Lost Empire", "The Road to El Dorado", "Sinbad", "Hercules"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1999 animated film follows a boy raised by gorillas in the jungle?",
+    "options": ["Mowgli", "Tarzan", "The Jungle Book", "George of the Jungle"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 1995 animated film tells the story of a Native American woman in colonial Virginia?",
+    "options": ["Brother Bear", "Pocahontas", "Pocahontas II", "The New World"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actor plays retired hitman John Wick?",
+    "options": ["Denzel Washington", "Liam Neeson", "Keanu Reeves", "Jason Statham"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actor plays Thor in the Marvel films?",
+    "options": ["Chris Hemsworth", "Chris Evans", "Chris Pratt", "Tom Hiddleston"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actress plays Black Widow in the Marvel films?",
+    "options": ["Brie Larson", "Scarlett Johansson", "Zoe Saldana", "Elizabeth Olsen"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actor plays Captain America in the Marvel films?",
+    "options": ["Chris Hemsworth", "Chris Evans", "Sebastian Stan", "Jeremy Renner"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actor plays Doctor Strange in the Marvel films?",
+    "options": ["Paul Bettany", "Tom Holland", "Benedict Cumberbatch", "Idris Elba"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Who played the villain Killmonger in Black Panther?",
+    "options": ["Winston Duke", "Chadwick Boseman", "Michael B. Jordan", "Lupita Nyong'o"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actor plays Wolverine in the X-Men films?",
+    "options": ["Hugh Jackman", "Patrick Stewart", "James McAvoy", "Ryan Reynolds"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actress plays Wonder Woman in the DCEU films?",
+    "options": ["Gal Gadot", "Margot Robbie", "Kristen Wiig", "Amy Adams"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actor plays Superman in Man of Steel?",
+    "options": ["Brandon Routh", "Henry Cavill", "Tyler Hoechlin", "Dwayne Johnson"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Who played the Joker in the 1989 film Batman?",
+    "options": ["Jack Nicholson", "Heath Ledger", "Jared Leto", "Joaquin Phoenix"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actor plays the archaeologist Indiana Jones in the classic films?",
+    "options": ["Harrison Ford", "Shia LaBeouf", "River Phoenix", "Sean Connery"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actor voices the cowboy doll Woody in Toy Story?",
+    "options": ["John Goodman", "Billy Crystal", "Tom Hanks", "Tim Allen"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actor voices the space ranger Buzz Lightyear in Toy Story?",
+    "options": ["Chris Pratt", "Tim Allen", "Tom Hanks", "Owen Wilson"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which actress plays Katniss Everdeen in The Hunger Games films?",
+    "options": ["Jennifer Lawrence", "Shailene Woodley", "Lily Collins", "Emma Stone"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which film series centers on street racing, heists, and family loyalty?",
+    "options": ["The Fast and the Furious", "Need for Speed", "Gone in 60 Seconds", "Drive"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which film series follows amnesiac CIA agent Jason Bourne?",
+    "options": ["Mission: Impossible", "The Bourne films", "The Transporter", "Salt"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2016 animated film follows the forgetful blue tang fish Dory?",
+    "options": ["Shark Tale", "Finding Nemo", "Finding Dory", "The Reef"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2016 animated film follows a Polynesian voyager across the ocean?",
+    "options": ["Raya and the Last Dragon", "Lilo & Stitch", "Moana", "Voyage of the Dawn Treader"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which animated film features the race car Lightning McQueen?",
+    "options": ["Cars", "Speed Racer", "Planes", "Turbo"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2020 animated film follows a music teacher whose soul is separated from his body?",
+    "options": ["Onward", "Inside Out", "Soul", "Luca"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 1,
+    "question": "Which 2008 film introduced Tony Stark as the armored hero Iron Man?",
+    "options": ["Iron Man 2", "The Incredible Hulk", "Iron Man", "X-Men Origins: Wolverine"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed Jurassic Park?",
+    "options": ["Robert Zemeckis", "Steven Spielberg", "George Lucas", "James Cameron"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which director made the Dark Knight trilogy and Oppenheimer?",
+    "options": ["Ridley Scott", "Denis Villeneuve", "Zack Snyder", "Christopher Nolan"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the Kill Bill films?",
+    "options": ["Luc Besson", "Quentin Tarantino", "Guy Ritchie", "Robert Rodriguez"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed Apocalypse Now?",
+    "options": ["Stanley Kubrick", "Francis Ford Coppola", "Oliver Stone", "Martin Scorsese"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the Lord of the Rings trilogy?",
+    "options": ["Ridley Scott", "Peter Jackson", "Guillermo del Toro", "George Lucas"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which director made Fight Club and The Social Network?",
+    "options": ["David Fincher", "Darren Aronofsky", "Paul Thomas Anderson", "Christopher Nolan"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the jazz drama Whiplash?",
+    "options": ["Terrence Malick", "Damien Chazelle", "John Carney", "Jason Reitman"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the 2023 fantasy-comedy Barbie?",
+    "options": ["Sofia Coppola", "Noah Baumbach", "Greta Gerwig", "Olivia Wilde"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the 2021 adaptation of Dune?",
+    "options": ["Ridley Scott", "Alejandro Jodorowsky", "Denis Villeneuve", "David Lynch"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the horror film Get Out?",
+    "options": ["M. Night Shyamalan", "Jordan Peele", "John Krasinski", "Ari Aster"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed The Grand Budapest Hotel?",
+    "options": ["Coen Brothers", "Paul Thomas Anderson", "Wes Anderson", "Taika Waititi"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the dark fantasy film Pan's Labyrinth?",
+    "options": [
+      "Pedro Almodovar",
+      "Alfonso Cuaron",
+      "Guillermo del Toro",
+      "Alejandro Gonzalez Inarritu"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the black-and-white drama Roma?",
+    "options": ["Emmanuel Lubezki", "Carlos Reygadas", "Alfonso Cuaron", "Guillermo del Toro"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed 2001: A Space Odyssey?",
+    "options": ["Steven Spielberg", "Stanley Kubrick", "Fritz Lang", "Andrei Tarkovsky"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed Close Encounters of the Third Kind?",
+    "options": ["George Lucas", "Steven Soderbergh", "John Carpenter", "Steven Spielberg"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which director made The Irishman and Killers of the Flower Moon?",
+    "options": ["Martin Scorsese", "Brian De Palma", "Francis Ford Coppola", "Quentin Tarantino"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed The Silence of the Lambs?",
+    "options": ["Jonathan Demme", "David Lynch", "Ridley Scott", "Michael Mann"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed Mad Max: Fury Road?",
+    "options": ["George Miller", "Doug Liman", "Alex Garland", "James Cameron"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the Korean thriller Parasite?",
+    "options": ["Kim Jee-woon", "Park Chan-wook", "Bong Joon-ho", "Na Hong-jin"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the first Toy Story film?",
+    "options": ["John Lasseter", "Lee Unkrich", "Andrew Stanton", "Pete Docter"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the first Iron Man film?",
+    "options": ["Joss Whedon", "Kenneth Branagh", "Jon Favreau", "Shane Black"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed Avengers: Endgame?",
+    "options": ["James Gunn", "Taika Waititi", "Anthony and Joe Russo", "Joss Whedon"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed Black Panther?",
+    "options": ["Ryan Coogler", "Antoine Fuqua", "Barry Jenkins", "Spike Lee"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the superhero film Wonder Woman?",
+    "options": ["Patty Jenkins", "Michelle MacLaren", "Zack Snyder", "Joss Whedon"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the 2019 film Joker?",
+    "options": ["David Fincher", "Todd Phillips", "Martin Scorsese", "James Mangold"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the Japanese animated classic Spirited Away?",
+    "options": ["Satoshi Kon", "Isao Takahata", "Makoto Shinkai", "Hayao Miyazaki"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the biopic Bohemian Rhapsody?",
+    "options": ["Rob Reiner", "James Mangold", "Dexter Fletcher", "Bryan Singer"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed The Shawshank Redemption?",
+    "options": ["Frank Darabont", "Clint Eastwood", "Steven Spielberg", "David Fincher"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed Forrest Gump?",
+    "options": ["Robert Zemeckis", "Ron Howard", "Steven Spielberg", "Barry Levinson"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the time-travel adventure Back to the Future?",
+    "options": ["Ivan Reitman", "Steven Spielberg", "John Hughes", "Robert Zemeckis"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the classic romance Casablanca?",
+    "options": ["Billy Wilder", "Michael Curtiz", "Howard Hawks", "Alfred Hitchcock"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed Citizen Kane?",
+    "options": ["Frank Capra", "Alfred Hitchcock", "Orson Welles", "John Ford"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the thriller Psycho?",
+    "options": ["Michael Powell", "Alfred Hitchcock", "Roman Polanski", "Brian De Palma"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who co-directed the musical Singin' in the Rain?",
+    "options": [
+      "Bob Fosse and Jerome Robbins",
+      "Gene Kelly and Stanley Donen",
+      "Vincente Minnelli and Busby Berkeley",
+      "Fred Astaire and Ginger Rogers"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the original 1977 Star Wars film?",
+    "options": ["Richard Marquand", "George Lucas", "Steven Spielberg", "Irvin Kershner"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the original Raiders of the Lost Ark?",
+    "options": ["Irvin Kershner", "George Lucas", "Steven Spielberg", "Robert Zemeckis"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played the title role in Gladiator?",
+    "options": ["Russell Crowe", "Brad Pitt", "Gerard Butler", "Mel Gibson"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played Mark Zuckerberg in The Social Network?",
+    "options": ["Jesse Eisenberg", "Joseph Gordon-Levitt", "Justin Timberlake", "Andrew Garfield"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played James Bond in Goldfinger?",
+    "options": ["Roger Moore", "George Lazenby", "Pierce Brosnan", "Sean Connery"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played the villain Hans Gruber in Die Hard?",
+    "options": ["Michael Caine", "Alan Rickman", "Jeremy Irons", "Gary Oldman"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actress played the Bride in Kill Bill?",
+    "options": ["Vivica A. Fox", "Lucy Liu", "Daryl Hannah", "Uma Thurman"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actress played the title role in Erin Brockovich?",
+    "options": ["Julia Roberts", "Sandra Bullock", "Renee Zellweger", "Hillary Swank"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played the Joker in Suicide Squad?",
+    "options": ["Joaquin Phoenix", "Heath Ledger", "Willem Dafoe", "Jared Leto"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played the title role in Oppenheimer?",
+    "options": ["Rami Malek", "Robert Downey Jr.", "Matt Damon", "Cillian Murphy"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played the title role in the 2019 film Joker?",
+    "options": ["Jared Leto", "Joaquin Phoenix", "Heath Ledger", "Jake Gyllenhaal"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played the title role in the 2022 film The Batman?",
+    "options": ["Ben Affleck", "Robert Pattinson", "George Clooney", "Christian Bale"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played the title role in Beetlejuice?",
+    "options": ["Danny DeVito", "Jack Nicholson", "Robin Williams", "Michael Keaton"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played the title role in the Deadpool films?",
+    "options": ["Zachary Levi", "Channing Tatum", "Ryan Reynolds", "Chris Pratt"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played the title role in Venom?",
+    "options": ["Ben Affleck", "Keanu Reeves", "Tom Hardy", "Jared Leto"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actress played the lead in The Devil Wears Prada?",
+    "options": ["Natalie Portman", "Anne Hathaway", "Keira Knightley", "Rachel McAdams"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actress played fashion editor Miranda Priestly in The Devil Wears Prada?",
+    "options": ["Judi Dench", "Helen Mirren", "Glenn Close", "Meryl Streep"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actress played Rose in Titanic?",
+    "options": ["Kate Winslet", "Gwyneth Paltrow", "Claire Danes", "Cate Blanchett"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which actor played the lead in The Revenant?",
+    "options": ["Leonardo DiCaprio", "Brad Pitt", "Tom Hardy", "Christian Bale"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which film won Best Picture at the 2023 Oscars?",
+    "options": [
+      "The Banshees of Inisherin",
+      "Everything Everywhere All at Once",
+      "Top Gun: Maverick",
+      "Elvis"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which film won Best Picture at the 2022 Oscars?",
+    "options": ["CODA", "The Power of the Dog", "Belfast", "Dune"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which film won Best Picture at the 2017 Oscars?",
+    "options": ["Manchester by the Sea", "La La Land", "Moonlight", "Arrival"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which film won Best Picture at the 2018 Oscars?",
+    "options": [
+      "Get Out",
+      "Dunkirk",
+      "The Shape of Water",
+      "Three Billboards Outside Ebbing, Missouri"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Which film won Best Picture at the 2016 Oscars?",
+    "options": ["Spotlight", "The Revenant", "Mad Max: Fury Road", "The Big Short"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 1959 epic was the first film to win 11 Academy Awards?",
+    "options": ["West Side Story", "Gone with the Wind", "Ben-Hur", "The Ten Commandments"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 1997 film won 11 Academy Awards, tying the record set by Ben-Hur?",
+    "options": ["The English Patient", "Saving Private Ryan", "Braveheart", "Titanic"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 2003 film swept 11 Academy Awards, including Best Picture?",
+    "options": [
+      "Lost in Translation",
+      "Finding Nemo",
+      "The Lord of the Rings: The Return of the King",
+      "Master and Commander"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film was the first to pass $2 billion at the worldwide box office?",
+    "options": ["Avengers: Endgame", "Titanic", "Star Wars: The Force Awakens", "Avatar"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film is the highest-grossing Marvel Studios release?",
+    "options": [
+      "Spider-Man: No Way Home",
+      "Avengers: Infinity War",
+      "Avengers: Endgame",
+      "The Avengers"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 2012 film was the first Marvel Studios release to pass $1 billion worldwide?",
+    "options": [
+      "Guardians of the Galaxy",
+      "Captain America: Civil War",
+      "Iron Man 3",
+      "The Avengers"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the first Academy Award for Best Animated Feature?",
+    "options": ["Spirited Away", "Monsters, Inc.", "Ice Age", "Shrek"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 2017 film won the Oscar for Best Animated Feature?",
+    "options": ["The Boss Baby", "Coco", "Ferdinand", "Loving Vincent"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 2016 film won the Oscar for Best Animated Feature?",
+    "options": ["Kubo and the Two Strings", "Moana", "Sing", "Zootopia"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 2015 film won the Oscar for Best Animated Feature?",
+    "options": ["Inside Out", "Anomalisa", "Shaun the Sheep Movie", "Boy and the World"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 2014 film won the Oscar for Best Animated Feature?",
+    "options": ["How to Train Your Dragon 2", "Big Hero 6", "The Boxtrolls", "Song of the Sea"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 2019 film won the Oscar for Best Animated Feature?",
+    "options": [
+      "How to Train Your Dragon: The Hidden World",
+      "Toy Story 4",
+      "Klaus",
+      "I Lost My Body"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 2021 film won the Oscar for Best Animated Feature?",
+    "options": ["Encanto", "Flee", "Luca", "The Mitchells vs. the Machines"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 2018 film won the Oscar for Best Animated Feature?",
+    "options": [
+      "Spider-Man: Into the Spider-Verse",
+      "Ralph Breaks the Internet",
+      "Isle of Dogs",
+      "Incredibles 2"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which 2022 film won the Oscar for Best Animated Feature?",
+    "options": [
+      "Puss in Boots: The Last Wish",
+      "Turning Red",
+      "Guillermo del Toro's Pinocchio",
+      "The Sea Beast"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Oscar for Best International Feature Film at the 2020 ceremony?",
+    "options": ["Pain and Glory", "Parasite", "Les Miserables", "Corpus Christi"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which actor won the Best Actor Oscar for Oppenheimer?",
+    "options": ["Jeffrey Wright", "Paul Giamatti", "Cillian Murphy", "Bradley Cooper"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which actress won the Best Actress Oscar for Nomadland?",
+    "options": ["Viola Davis", "Frances McDormand", "Carey Mulligan", "Andra Day"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 1993?",
+    "options": ["The Fugitive", "Schindler's List", "In the Name of the Father", "The Piano"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 1972?",
+    "options": ["Deliverance", "The Emigrants", "The Godfather", "Cabaret"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 1990?",
+    "options": ["Dances with Wolves", "Awakenings", "The Godfather Part III", "Goodfellas"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 2000?",
+    "options": ["Crouching Tiger, Hidden Dragon", "Traffic", "Erin Brockovich", "Gladiator"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 2007?",
+    "options": ["There Will Be Blood", "No Country for Old Men", "Atonement", "Michael Clayton"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 2008?",
+    "options": [
+      "Frost/Nixon",
+      "The Curious Case of Benjamin Button",
+      "Slumdog Millionaire",
+      "Milk"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 2011?",
+    "options": ["Midnight in Paris", "Hugo", "The Artist", "The Descendants"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 2014?",
+    "options": ["Birdman", "Boyhood", "The Imitation Game", "Whiplash"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 2013?",
+    "options": ["American Hustle", "12 Years a Slave", "Gravity", "The Wolf of Wall Street"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 2010?",
+    "options": ["The Fighter", "Black Swan", "The King's Speech", "Inception"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 3,
+    "question": "Which film won the Academy Award for Best Picture for the year 2004?",
+    "options": ["Ray", "Finding Neverland", "Million Dollar Baby", "The Aviator"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who directed the thriller Memento?",
+    "options": ["Guy Ritchie", "Darren Aronofsky", "David Fincher", "Christopher Nolan"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-hollywood",
+    "difficulty": 2,
+    "question": "Who played the title role in The Wolf of Wall Street?",
+    "options": ["Bradley Cooper", "Christian Bale", "Jake Gyllenhaal", "Leonardo DiCaprio"],
+    "answer": 3
+  }
+]

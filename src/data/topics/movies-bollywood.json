@@ -1,0 +1,1082 @@
+[
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1995 romance stars Shah Rukh Khan and Kajol as Raj and Simran?",
+    "options": [
+      "Dilwale Dulhania Le Jayenge",
+      "Hum Aapke Hain Koun..!",
+      "Kuch Kuch Hota Hai",
+      "Kabhi Khushi Kabhie Gham"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2009 comedy stars Aamir Khan as a carefree engineering student nicknamed Rancho?",
+    "options": ["Chhichhore", "Koi... Mil Gaya", "3 Idiots", "Student of the Year"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2016 sports drama stars Aamir Khan as a wrestling coach training his daughters?",
+    "options": ["Mukkabaaz", "Dangal", "Chak De! India", "Sultan"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1975 action classic features the characters Jai and Veeru?",
+    "options": ["Zanjeer", "Deewaar", "Don", "Sholay"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1960 epic stars Dilip Kumar as Prince Salim, in love with Anarkali?",
+    "options": ["Barsaat", "Pakeezah", "Mother India", "Mughal-e-Azam"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2001 period drama is set in a village where the locals challenge the British to a cricket match?",
+    "options": ["Gadar", "The Rising", "Lagaan", "Mangal Pandey"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2007 sports drama stars Shah Rukh Khan as the coach of an Indian women's hockey team?",
+    "options": ["Bend It Like Beckham", "Dangal", "Patiala House", "Chak De! India"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2008 thriller stars Aamir Khan as a businessman with short-term memory loss?",
+    "options": ["Baby", "Ghajini", "Raees", "Rustom"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2014 comedy stars Aamir Khan as an alien who questions human beliefs?",
+    "options": ["Koi... Mil Gaya", "My Name Is Khan", "Dhoom 3", "PK"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2018 period drama stars Ranveer Singh as Sultan Alauddin Khilji?",
+    "options": ["Bajirao Mastani", "Jodhaa Akbar", "Mohenjo Daro", "Padmaavat"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2015 period romance stars Ranveer Singh and Deepika Padukone as Bajirao and Mastani?",
+    "options": ["Padmaavat", "Bajrangi Bhaijaan", "Bajirao Mastani", "Ram-Leela"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2019 drama stars Ranveer Singh as a young man from the Mumbai slums chasing a rap career?",
+    "options": ["Street Dancer 3D", "Rock On 2", "Gully Boy", "ABCD 2"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2023 action film stars Shah Rukh Khan as a former spy named Pathaan?",
+    "options": ["Tiger 3", "Pathaan", "Dunki", "Jawan"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2023 action drama stars Shah Rukh Khan and was directed by Atlee?",
+    "options": ["Leo", "Vikram", "Pathaan", "Jawan"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2002 romantic drama stars Shah Rukh Khan in the title role of a doomed lover?",
+    "options": ["Mohabbatein", "Saathiya", "Dil Se", "Devdas"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1998 romantic comedy stars Shah Rukh Khan and Kajol as Rahul and Anjali?",
+    "options": [
+      "Karan Arjun",
+      "Dil To Pagal Hai",
+      "Dilwale Dulhania Le Jayenge",
+      "Kuch Kuch Hota Hai"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2001 family drama stars Amitabh Bachchan and Jaya Bachchan as the parents of a wealthy family?",
+    "options": ["Parineeta", "Hum Saath-Saath Hain", "Kabhi Khushi Kabhie Gham", "Mohabbatein"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1975 drama stars Amitabh Bachchan as a Bombay dockworker named Vijay?",
+    "options": ["Muqaddar Ka Sikandar", "Sholay", "Deewaar", "Amar Akbar Anthony"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1971 classic stars Rajesh Khanna as a cheerful man facing a terminal illness?",
+    "options": ["Anand", "Aradhana", "Kati Patang", "Safar"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1957 film stars Guru Dutt as a struggling poet in Bombay?",
+    "options": ["Do Bigha Zamin", "Kaagaz Ke Phool", "Pyaasa", "Guide"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1957 epic starring Nargis is regarded as a landmark of Indian cinema?",
+    "options": ["Mother India", "Devdas", "Do Aankhen Barah Haath", "Mughal-e-Azam"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1955 film stars Raj Kapoor as a small-town man arriving in Bombay?",
+    "options": ["Aag", "Shree 420", "Barsaat", "Awara"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1951 Raj Kapoor film features him as the character Raj?",
+    "options": ["Aah", "Awara", "Mera Naam Joker", "Shree 420"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2006 drama blends college revolutionaries with a film shoot about them?",
+    "options": ["Guru", "Lakshya", "Rang De Basanti", "Yuvvraaj"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2004 drama stars Shah Rukh Khan as an NRI scientist who returns to rural India?",
+    "options": ["Swades", "Yes Boss", "Pardes", "Chak De! India"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2007 film, Aamir Khan's directorial debut, is about a boy struggling at school?",
+    "options": ["Hichki", "Taare Zameen Par", "Chillar Party", "Stanley Ka Dabba"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2000 romantic drama stars Hrithik Roshan in his debut role?",
+    "options": ["Kaho Naa... Pyaar Hai", "Mission Kashmir", "Dhadkan", "Fiza"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2006 superhero film features the masked hero Krrish?",
+    "options": ["Krrish", "Koi... Mil Gaya", "Krrish 3", "Ra.One"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2004 heist film launched a popular action franchise?",
+    "options": ["Dus", "Ek Ajnabee", "Musafir", "Dhoom"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2013 comedy stars Shah Rukh Khan and Deepika Padukone and involves a train journey?",
+    "options": ["Happy New Year", "Chennai Express", "Rab Ne Bana Di Jodi", "Jab Tak Hai Jaan"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2018 spy thriller stars Alia Bhatt as a young bride secretly working as an agent?",
+    "options": ["Kahaani 2", "Talvar", "Raazi", "Naam Shabana"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2022 drama stars Alia Bhatt as a woman who rises to power in Mumbai's red-light district?",
+    "options": ["RRR", "Brahmastra", "Darlings", "Gangubai Kathiawadi"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2016 romance starring Ranbir Kapoor and Anushka Sharma was directed by Karan Johar?",
+    "options": ["Rockstar", "Ae Dil Hai Mushkil", "Dear Zindagi", "Tamasha"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2011 road-trip film stars Hrithik Roshan, Farhan Akhtar, and Abhay Deol?",
+    "options": ["3 Idiots", "Dil Chahta Hai", "Zindagi Na Milegi Dobara", "Rock On!!"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2013 film stars Ranbir Kapoor and Deepika Padukone as old friends who meet at a wedding?",
+    "options": ["Bachna Ae Haseeno", "Ae Dil Hai Mushkil", "Tamasha", "Yeh Jawaani Hai Deewani"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2011 musical drama stars Ranbir Kapoor as a passionate singer?",
+    "options": ["Rockstar", "Jab We Met", "Aashiqui 2", "Barfi!"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2012 romantic comedy stars Ranbir Kapoor as a young man in love with a deaf and mute girl?",
+    "options": ["Raanjhanaa", "Jab Tak Hai Jaan", "Barfi!", "Vicky Donor"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2014 comedy-drama stars Kangana Ranaut as a bride whose fiancé leaves her before the honeymoon?",
+    "options": ["Panga", "Queen", "Kangana", "Tanu Weds Manu"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2016 biopic stars Sushant Singh Rajput as cricketer M. S. Dhoni?",
+    "options": ["Sachin: A Billion Dreams", "Azhar", "83", "M.S. Dhoni: The Untold Story"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2014 biopic stars Priyanka Chopra as boxer Mary Kom?",
+    "options": ["Dangal", "Sarbjit", "Chak De! India", "Mary Kom"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2018 biopic stars Ranbir Kapoor as actor Sanjay Dutt?",
+    "options": ["Sanju", "Dutt", "Rocketry", "Bombay Velvet"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2021 war film stars Sidharth Malhotra as Kargil hero Captain Vikram Batra?",
+    "options": ["Sam Bahadur", "Uri: The Surgical Strike", "Shershaah", "Gunjan Saxena"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2019 war film stars Vicky Kaushal as an Indian Army officer leading a surgical strike?",
+    "options": ["Raazi", "Paltan", "The Ghazi Attack", "Uri: The Surgical Strike"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2021 biographical film stars Vicky Kaushal as freedom fighter Udham Singh?",
+    "options": ["Rang De Basanti", "Mangal Pandey", "Sam Bahadur", "Sardar Udham"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2017 comedy stars Irrfan Khan as a father desperate to get his child into a good school?",
+    "options": ["Badhaai Ho", "Kapoor & Sons", "Dangal", "Hindi Medium"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2013 film stars Irrfan Khan as a man whose lunchbox is delivered to the wrong office worker?",
+    "options": ["Qissa", "Piku", "The Lunchbox", "Life of Pi"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2018 comedy-horror features a town haunted by a spirit known as Stree?",
+    "options": ["Tumbbad", "Stree", "Pari", "Bhoot"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2018 thriller stars Ayushmann Khurrana as a pianist pretending to be blind?",
+    "options": ["Shubh Mangal Saavdhan", "Badhaai Ho", "Andhadhun", "Article 15"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2019 film stars Ayushmann Khurrana as a police officer investigating a caste crime?",
+    "options": ["Dream Girl", "Article 15", "Bala", "Andhadhun"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2017 comedy-drama follows a government clerk on election duty in a conflict-affected area?",
+    "options": ["Ankhon Dekhi", "Mulk", "Swades", "Newton"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2023 drama follows a young man from a small town preparing for the UPSC civil services exam?",
+    "options": ["Joram", "12th Fail", "Laapataa Ladies", "Sapne vs Everyone"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2008 film about a boy from the Mumbai slums was directed by Danny Boyle?",
+    "options": ["Life of Pi", "The Lunchbox", "Slumdog Millionaire", "Dhobi Ghat"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2022 Telugu-language epic won the Oscar for Best Original Song?",
+    "options": ["Pushpa: The Rise", "Baahubali 2", "RRR", "KGF: Chapter 2"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which Indian epic film series features the warrior Baahubali?",
+    "options": ["RRR", "Eega", "Baahubali", "Magadheera"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2021 film stars Allu Arjun as a sandalwood smuggler from the forests of Andhra Pradesh?",
+    "options": ["Ala Vaikunthapurramuloo", "Saaho", "Jersey", "Pushpa: The Rise"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which Kannada-language film series stars Yash as the underworld figure Rocky?",
+    "options": ["KGF", "Googly", "Ugramm", "Kirik Party"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2023 drama stars Ranbir Kapoor in a violent family saga directed by Sandeep Reddy Vanga?",
+    "options": ["Animal", "Rocky Aur Rani Kii Prem Kahaani", "Jawan", "Kabir Singh"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2004 romance stars Shah Rukh Khan and Preity Zinta in a cross-border love story?",
+    "options": ["Veer-Zaara", "Kuch Kuch Hota Hai", "Rab Ne Bana Di Jodi", "Dil Se"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 1965 film stars Dev Anand and Waheeda Rehman and is based on a novel by R. K. Narayan?",
+    "options": ["Guide", "Jewel Thief", "Pyaasa", "C.I.D."],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 1,
+    "question": "Which 2001 drama stars Sunny Deol as a Sikh man in love with a woman across the border?",
+    "options": ["The Legend of Bhagat Singh", "LOC Kargil", "Border", "Gadar: Ek Prem Katha"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Sholay?",
+    "options": ["Yash Chopra", "Hrishikesh Mukherjee", "Manmohan Desai", "Ramesh Sippy"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Mughal-e-Azam?",
+    "options": ["Vijay Anand", "Raj Kapoor", "Mehboob Khan", "K. Asif"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Mother India?",
+    "options": ["V. Shantaram", "Mehboob Khan", "Bimal Roy", "K. Asif"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Dilwale Dulhania Le Jayenge?",
+    "options": ["Kundan Shah", "Aditya Chopra", "Yash Chopra", "Karan Johar"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Lagaan?",
+    "options": ["Vidhu Vinod Chopra", "Rajkumar Hirani", "Ketan Mehta", "Ashutosh Gowariker"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed 3 Idiots and PK?",
+    "options": ["Aamir Khan", "Shibsankar Mitra", "Rajkumar Hirani", "Ashutosh Gowariker"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Kuch Kuch Hota Hai?",
+    "options": ["Kundan Shah", "Sooraj Barjatya", "Aditya Chopra", "Karan Johar"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed the 2002 film Devdas?",
+    "options": ["Vidhu Vinod Chopra", "Ram Gopal Varma", "Sanjay Leela Bhansali", "Sudhir Mishra"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Padmaavat?",
+    "options": ["Karan Johar", "Sanjay Leela Bhansali", "Abhishek Kapoor", "Ashutosh Gowariker"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Gully Boy?",
+    "options": ["Zoya Akhtar", "Anurag Kashyap", "Shoojit Sircar", "Kiran Rao"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Rang De Basanti?",
+    "options": ["Imtiaz Ali", "Ashutosh Gowariker", "Rakeysh Omprakash Mehra", "Mani Ratnam"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Chak De! India?",
+    "options": ["Rajkumar Hirani", "Rakeysh Omprakash Mehra", "Shimit Amin", "Kabir Khan"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Swades?",
+    "options": ["Farhan Akhtar", "Ashutosh Gowariker", "Ram Madhvani", "Rakeysh Omprakash Mehra"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Taare Zameen Par?",
+    "options": ["Amole Gupte", "Rajkumar Hirani", "Ashutosh Gowariker", "Aamir Khan"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Dangal?",
+    "options": ["Sharat Katariya", "Nitesh Tiwari", "Abhishek Sharma", "Ali Abbas Zafar"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Andhadhun?",
+    "options": ["Anurag Kashyap", "Sujoy Ghosh", "Sriram Raghavan", "Vishal Bhardwaj"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Animal?",
+    "options": ["Sukumar", "Lokesh Kanagaraj", "Sandeep Reddy Vanga", "Atlee"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which director made Veer-Zaara and Dil To Pagal Hai?",
+    "options": ["Milan Luthria", "Aditya Chopra", "Karan Johar", "Yash Chopra"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed the Baahubali films?",
+    "options": ["S. S. Rajamouli", "Sukumar", "Trivikram Srinivas", "Koratala Siva"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed RRR?",
+    "options": ["S. S. Rajamouli", "Prashanth Neel", "Sukumar", "S. Shankar"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who directed Pushpa: The Rise?",
+    "options": ["S. S. Rajamouli", "Trivikram Srinivas", "Vijay", "Sukumar"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which actor starred in both Sholay and Deewaar in the same year, 1975?",
+    "options": ["Amitabh Bachchan", "Dharmendra", "Shashi Kapoor", "Sanjeev Kumar"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which actor played the villain Gabbar Singh in Sholay?",
+    "options": ["Jeevan", "Amjad Khan", "Prem Nath", "Pran"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which actress played the widow Radha in Sholay?",
+    "options": ["Saira Banu", "Hema Malini", "Jaya Bhaduri", "Rakhee"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which actress played Paro in the 2002 film Devdas?",
+    "options": ["Rani Mukerji", "Aishwarya Rai", "Kajol", "Madhuri Dixit"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which actress played the courtesan Chandramukhi in the 2002 film Devdas?",
+    "options": ["Aishwarya Rai", "Preity Zinta", "Madhuri Dixit", "Sushmita Sen"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 1993 thriller was the first film to star Shah Rukh Khan and Kajol together?",
+    "options": ["Anjaam", "Dilwale Dulhania Le Jayenge", "Baazigar", "Karan Arjun"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 1992 film marked the acting debut of Shah Rukh Khan?",
+    "options": ["Chamatkar", "Deewana", "Raju Ban Gaya Gentleman", "Baazigar"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 1988 film was Aamir Khan's debut as a leading actor?",
+    "options": ["Love Love Love", "Qayamat Se Qayamat Tak", "Dil", "Raakh"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 1989 film was Salman Khan's debut as a leading man?",
+    "options": ["Maine Pyar Kiya", "Hum Aapke Hain Koun..!", "Biwi Ho To Aisi", "Saajan"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2007 film marked the acting debut of Deepika Padukone?",
+    "options": ["Salaam-e-Ishq", "Ram Gopal Varma Ki Aag", "Aaja Nachle", "Om Shanti Om"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2007 film marked the acting debut of Ranbir Kapoor?",
+    "options": ["Saawariya", "Ta Ra Rum Pum", "Jab We Met", "Laaga Chunari Mein Daag"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2012 film marked the acting debut of Alia Bhatt?",
+    "options": ["Student of the Year", "2 States", "Humpty Sharma Ki Dulhania", "Highway"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2003 film marked the acting debut of Priyanka Chopra?",
+    "options": ["Mujhse Shaadi Karogi", "Aitraaz", "The Hero: Love Story of a Spy", "Andaaz"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2010 film marked the acting debut of Ranveer Singh?",
+    "options": [
+      "Band Baaja Baaraat",
+      "Lootera",
+      "Goliyon Ki Raasleela Ram-Leela",
+      "Ladies vs Ricky Bahl"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2000 film marked the acting debut of Kareena Kapoor?",
+    "options": ["Kabhi Khushi Kabhie Gham", "Mohabbatein", "Refugee", "Fiza"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2003 film marked the acting debut of Katrina Kaif?",
+    "options": ["Namastey London", "Race", "Partner", "Boom"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 1992 film marked the acting debut of Kajol?",
+    "options": ["Baazigar", "Yeh Dillagi", "Bekhudi", "Dilwale"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which film marked Aishwarya Rai's debut in Hindi cinema?",
+    "options": ["Devdas", "Hum Dil De Chuke Sanam", "Aur Pyaar Ho Gaya", "Taal"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which actor is the father of actress Sonam Kapoor?",
+    "options": ["Anil Kapoor", "Raj Kapoor", "Boney Kapoor", "Shashi Kapoor"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which actor is the father of Ranbir Kapoor?",
+    "options": ["Raj Kapoor", "Shammi Kapoor", "Rishi Kapoor", "Randhir Kapoor"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which legendary actor-director is the grandfather of Ranbir Kapoor?",
+    "options": ["Dev Anand", "Dilip Kumar", "Prithviraj Kapoor", "Raj Kapoor"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which director is the father of actor Hrithik Roshan?",
+    "options": ["Sanjay Leela Bhansali", "Rajesh Roshan", "Rakesh Roshan", "J. P. Dutta"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Who is the father of actor Abhishek Bachchan?",
+    "options": ["Amitabh Bachchan", "Dilip Kumar", "Shammi Kapoor", "Hrishikesh Mukherjee"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which production company was founded by director Yash Chopra?",
+    "options": [
+      "Yash Raj Films",
+      "Red Chillies Entertainment",
+      "UTV Motion Pictures",
+      "Dharma Productions"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which production house was founded by Yash Johar, father of Karan Johar?",
+    "options": [
+      "Excel Entertainment",
+      "Yash Raj Films",
+      "Nadiadwala Grandson",
+      "Dharma Productions"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which film's song 'Jai Ho' won the Academy Award for Best Original Song?",
+    "options": ["Dil Se", "Devdas", "Slumdog Millionaire", "Lagaan"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "How many Academy Awards did Slumdog Millionaire win?",
+    "options": ["Eight", "Ten", "Six", "Five"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which Indian composer won two Oscars for the music of Slumdog Millionaire?",
+    "options": ["A. R. Rahman", "Ilaiyaraaja", "R. D. Burman", "Shankar-Ehsaan-Loy"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2001 Indian film was nominated for the Academy Award for Best Foreign Language Film?",
+    "options": ["Lagaan", "Mother India", "Salaam Bombay!", "Devdas"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 1957 film was India's first nominee for the Best Foreign Language Film Oscar?",
+    "options": ["Do Bigha Zamin", "Pyaasa", "Mother India", "Shree 420"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2019 film was India's official entry for the 2020 Best International Feature Oscar?",
+    "options": ["Article 15", "The Sky Is Pink", "Gully Boy", "Super 30"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which song from the film RRR won the Academy Award for Best Original Song?",
+    "options": ["Dandalayya", "Jai Ho", "Naatu Naatu", "Mera Naam"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which actor played the title role in Lagaan?",
+    "options": ["Akshaye Khanna", "R. Madhavan", "Saif Ali Khan", "Aamir Khan"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 1994 family film starring Salman Khan and Madhuri Dixit became one of the biggest Bollywood hits of its decade?",
+    "options": ["Karan Arjun", "Hum Aapke Hain Koun..!", "Aankhen", "Dilwale Dulhania Le Jayenge"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2008 Aamir Khan film was the first Hindi film to cross 100 crore rupees at the domestic box office?",
+    "options": ["Ghajini", "Rab Ne Bana Di Jodi", "Race", "Singh Is Kinng"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2009 film was the first Hindi film to cross 200 crore rupees in India?",
+    "options": ["Kambakkht Ishq", "3 Idiots", "Love Aaj Kal", "Wanted"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2017 sequel became the first Indian film to earn more than 500 crore rupees in India?",
+    "options": ["Raees", "Baahubali 2: The Conclusion", "Tubelight", "Dangal"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2006 crime drama by Vishal Bhardwaj adapts Shakespeare's Othello?",
+    "options": ["Maqbool", "Haider", "Kaminey", "Omkara"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 2,
+    "question": "Which 2003 film by Vishal Bhardwaj adapts Shakespeare's Macbeth?",
+    "options": ["Maqbool", "Omkara", "Haider", "Saath Kya"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2014 film by Vishal Bhardwaj adapts Shakespeare's Hamlet?",
+    "options": ["Omkara", "Maqbool", "Rangoon", "Haider"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 1951 Raj Kapoor film became hugely popular in the Soviet Union?",
+    "options": ["Chori Chori", "Awara", "Aag", "Barsaat"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 1975 film cemented Amitabh Bachchan's image as the 'angry young man'?",
+    "options": ["Amar Akbar Anthony", "Zanjeer", "Sholay", "Deewaar"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 1973 crime drama stars Amitabh Bachchan as an orphaned man seeking revenge?",
+    "options": ["Zanjeer", "Don", "Trishul", "Deewaar"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 1960 epic was re-released in a colorized version in 2004?",
+    "options": ["Naya Daur", "Mughal-e-Azam", "Pyaasa", "Mother India"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 1960 epic was the most expensive Indian film of its era?",
+    "options": ["Kaagaz Ke Phool", "Mughal-e-Azam", "Gunga Jumna", "Shree 420"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which actress starred in both Pyaasa and Guide?",
+    "options": ["Waheeda Rehman", "Vyjayanthimala", "Meena Kumari", "Nargis"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 1971 film starring Rajesh Khanna won the National Film Award for Best Feature Film in Hindi?",
+    "options": ["Dushman", "Aradhana", "Safar", "Anand"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "The climax of which 1995 romance famously takes place at a railway station?",
+    "options": [
+      "Kuch Kuch Hota Hai",
+      "Hum Aapke Hain Koun..!",
+      "Dilwale Dulhania Le Jayenge",
+      "Maine Pyar Kiya"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 1995 film ran continuously at a Mumbai cinema for more than 25 years?",
+    "options": ["Sholay", "Gadar", "Dilwale Dulhania Le Jayenge", "Mughal-e-Azam"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2001 film earned India its most recent nomination in the Best Foreign Language Film Oscar category?",
+    "options": ["Water", "Lagaan", "The Lunchbox", "Devdas"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 1958 film was India's first official submission for the Best Foreign Language Film Oscar?",
+    "options": ["Madhumati", "Pyaasa", "Mother India", "Do Bigha Zamin"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2002 film was India's official Oscar submission for Best Foreign Language Film?",
+    "options": ["Devdas", "The Legend of Bhagat Singh", "Lagaan", "Kabhi Khushi Kabhie Gham"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 1988 film directed by Mira Nair was nominated for the Best Foreign Language Film Oscar?",
+    "options": ["Qayamat Se Qayamat Tak", "Salaam Bombay!", "Mr. India", "Pather Panchali"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2013 film was India's Oscar entry and made the shortlist for Best Foreign Language Film?",
+    "options": ["The Lunchbox", "Ship of Theseus", "Bhaag Milkha Bhaag", "The Good Road"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2016 film is widely cited as the highest-grossing Indian film worldwide?",
+    "options": ["Secret Superstar", "PK", "Baahubali 2", "Dangal"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2017 sequel was the first Indian film to cross 1000 crore rupees worldwide?",
+    "options": ["Baahubali 2: The Conclusion", "Padmaavat", "Tiger Zinda Hai", "Dangal"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2008 Aamir Khan thriller was inspired by the Hollywood film Memento?",
+    "options": ["Kaminey", "Ghajini", "Kurbaan", "A Wednesday"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2013 biopic stars Farhan Akhtar as athlete Milkha Singh?",
+    "options": ["Dil Chahta Hai", "Rang De Basanti", "Gold", "Bhaag Milkha Bhaag"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which actor won the first Filmfare Award for Best Actor?",
+    "options": ["Raj Kapoor", "Ashok Kumar", "Dev Anand", "Dilip Kumar"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which actress won the first Filmfare Award for Best Actress?",
+    "options": ["Waheeda Rehman", "Nargis", "Madhubala", "Meena Kumari"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 1975 film won the Filmfare Award for Best Film?",
+    "options": ["Deewaar", "Nishant", "Sholay", "Amanush"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2001 film won the Filmfare Award for Best Film?",
+    "options": ["Kabhi Khushi Kabhie Gham", "Gadar", "Aks", "Lagaan"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2006 film won the Filmfare Award for Best Film?",
+    "options": ["Dhoom 2", "Rang De Basanti", "Lage Raho Munna Bhai", "Krrish"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2009 film won the Filmfare Award for Best Film?",
+    "options": ["Love Aaj Kal", "3 Idiots", "Wake Up Sid", "Kaminey"],
+    "answer": 1
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2016 film won the Filmfare Award for Best Film?",
+    "options": ["Neerja", "Ae Dil Hai Mushkil", "Dangal", "M.S. Dhoni: The Untold Story"],
+    "answer": 2
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2019 film won the Filmfare Award for Best Film?",
+    "options": ["Article 15", "Kabir Singh", "Uri: The Surgical Strike", "Gully Boy"],
+    "answer": 3
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2022 film was the highest-grossing Indian film of that year?",
+    "options": ["RRR", "Brahmastra", "Drishyam 2", "Vikrant Rona"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2023 film was the highest-grossing Hindi film of that year?",
+    "options": ["Jawan", "Gadar 2", "Pathaan", "Animal"],
+    "answer": 0
+  },
+  {
+    "topic": "movies-bollywood",
+    "difficulty": 3,
+    "question": "Which 2000 film won the Filmfare Award for Best Film?",
+    "options": ["Dhadkan", "Mohabbatein", "Kaho Naa... Pyaar Hai", "Mission Kashmir"],
+    "answer": 2
+  }
+]

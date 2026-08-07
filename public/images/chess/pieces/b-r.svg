@@ -1,0 +1,16 @@
+<!--
+  Chess piece set by Colin M.L. Burnett (GFDL / CC BY-SA 3.0 / GPL)
+  Source: Wikimedia Commons "Chess cdt45" series (Cburnett), recolored to the
+  Trivia & Games site palette (#f7f5ef white fill / #1f1f1f ink). Redistributed
+  under the same tri-license; visible credit on the chess game page. Colors: #f7f5ef (white) / #1f1f1f (ink).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" role="img" aria-labelledby="title">
+  <title id="title">Black rook</title>
+  <desc>Chess piece set by Colin M.L. Burnett (GFDL / CC BY-SA 3.0 / GPL)</desc>
+  <g fill="#1f1f1f" fill-rule="evenodd" stroke="#f7f5ef" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 39h27v-3H9v3zm3.5-7l1.5-2.5h17l1.5 2.5h-20zm-.5 4v-4h21v4H12z" stroke-linecap="butt"/>
+    <path d="M14 29.5v-13h17v13H14z" stroke-linecap="butt" stroke-linejoin="miter"/>
+    <path d="M14 16.5L11 14h23l-3 2.5H14zM11 14V9h4v2h5V9h5v2h5V9h4v5H11z" stroke-linecap="butt"/>
+    <path d="M12 35.5h21" fill="none" stroke-linecap="butt"/>
+  </g>
+</svg>

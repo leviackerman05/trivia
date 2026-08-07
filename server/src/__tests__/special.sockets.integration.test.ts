@@ -7,7 +7,12 @@ import { attachSocketIo } from '../socket/index.js';
 import { RoomEngine } from '../engine/room-engine.js';
 import { createDefaultLimiters } from '../lib/rate-limit.js';
 import { ClientEvents, ServerEvents } from '../lib/events.js';
-import { buildGuessWhoDeck, type GuessWhoFilter } from '../lib/guess-who-deck.js';
+import {
+  buildGuessWhoDeck,
+  GUESS_WHO_GENRES,
+  GUESS_WHO_REGIONS,
+  type GuessWhoFilter,
+} from '../lib/guess-who-deck.js';
 import { hashString } from '../lib/random.js';
 import { GUESS_WHO_TOTAL_ROUNDS, type Celebrity } from '../engine/guess-who-engine.js';
 import { resetTestData, setupTestDb, teardownTestDb } from './helpers/db.js';
@@ -453,6 +458,40 @@ describe('Charades + Guess Who (M9), DB-backed socket integration', () => {
     const rematchClue = rematchHostRound.clue as { famousFor?: string } | undefined;
     expect(rematchClue?.famousFor).toBe(`Famous for ${expectedDeck2[0]!.name}`);
     expect(rematchHostRound).not.toHaveProperty('celebrity');
+  });
+
+  it('Guess Who (D064): filter options reach a listener mounted AFTER the join ack (resync path)', async () => {
+    const host = await connect();
+    const created = await emitAck(host, ClientEvents.createRoom, { gameId: 'guess-who' });
+    if (!created.ok || !created.roomCode) {
+      throw new Error(`create-room failed: ${created.error}`);
+    }
+    const roomCode = created.roomCode;
+
+    // Real FE timing: the socket listener mounts only after the join ack
+    // resolves, so the join-time emission is always dropped. The only
+    // post-mount round-trip is gameResync — which must re-emit the options.
+    const joined = await emitAck(host, ClientEvents.joinRoom, { roomCode, playerName: 'Alice' });
+    expect(joined.ok).toBe(true);
+
+    const optionsPromise = waitFor<{
+      regions: { value: string; count: number }[];
+      genres: { value: string; count: number }[];
+    }>(host, ServerEvents.guessWhoFilterOptions);
+    const resync = await emitAck(host, ClientEvents.gameResync, { roomCode });
+    // Lobby resync acks NOT_STARTED (no session yet) — the options still
+    // arrive because the emit precedes the snapshot path.
+    expect(resync.error).toBe('NOT_STARTED');
+    const options = await optionsPromise;
+
+    // Counts contract: all + the closed region union / the 12-genre union,
+    // legacy rows counted as 'row' (2 explicit + 2 legacy in TEST_POOL).
+    expect(options.regions[0]).toEqual({ value: 'all', count: TEST_POOL.length });
+    expect(options.regions.map((cell) => cell.value)).toEqual(['all', ...GUESS_WHO_REGIONS]);
+    expect(options.regions.find((cell) => cell.value === 'row')?.count).toBe(4);
+    expect(options.genres[0]).toEqual({ value: 'all', count: TEST_POOL.length });
+    expect(options.genres.map((cell) => cell.value)).toEqual(['all', ...GUESS_WHO_GENRES]);
+    expect(options.genres.find((cell) => cell.value === 'music')?.count).toBe(10);
   });
 
   it('Copycat (M13): the reveal waits for both players to load the image, then counts 10s', async () => {

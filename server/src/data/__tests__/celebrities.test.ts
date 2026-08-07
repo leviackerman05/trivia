@@ -40,6 +40,8 @@ const REGIONS = ['bollywood', 'hollywood', 'row'] as const;
 const GENRES = [
   'music',
   'cinema',
+  'cinema-bollywood',
+  'cinema-hollywood',
   'television',
   'sports',
   'politics',

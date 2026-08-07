@@ -1,4 +1,5 @@
 import { randomInt } from 'node:crypto';
+import { hashString, seededRandom } from '../lib/random.js';
 
 /**
  * Guess Who? Celebrity Edition session engine (M9/M17, PRD §5.17, owner
@@ -24,10 +25,13 @@ export type GuessWhoResult<T = unknown> =
 /** D064 (GUESS-WHO-DESIGN §2): market of fame, NOT nationality. */
 export type CelebrityRegion = 'bollywood' | 'hollywood' | 'row';
 
-/** D064 (GUESS-WHO-DESIGN §2): primary fame domain, exactly one (closed 12). */
+/** D064 (GUESS-WHO-DESIGN §2): primary fame domain, exactly one (closed 12
+ * + owner 2026-08-06 cinema split: cinema-bollywood / cinema-hollywood). */
 export type CelebrityGenre =
   | 'music'
   | 'cinema'
+  | 'cinema-bollywood'
+  | 'cinema-hollywood'
   | 'television'
   | 'sports'
   | 'politics'
@@ -72,6 +76,7 @@ export class GuessWhoSession {
   private readonly celebrities: Celebrity[];
   private readonly randomIntFn: (max: number) => number;
   private readonly pickMode: 'random' | 'sequential';
+  private readonly gameSeed: number;
 
   private phase: GuessWhoPhase = 'idle';
   private players: { name: string }[] = [];
@@ -81,6 +86,9 @@ export class GuessWhoSession {
   private roundNumber = 0;
   private totalRounds = GUESS_WHO_TOTAL_ROUNDS;
   private scores = new Map<string, number>();
+  /** D064 letter reveals: per-round seeded permutation of the letter
+   * positions, in reveal order (Skribbl-style, not left-to-right). */
+  private letterOrder: number[] = [];
 
   constructor(
     celebrities: Celebrity[],
@@ -89,11 +97,16 @@ export class GuessWhoSession {
       /** D064: 'sequential' consumes a pre-shuffled deck in order (repeat-free,
        * deterministic); 'random' is the legacy per-round random pick. */
       pickMode?: 'random' | 'sequential';
+      /** D064 letter reveals: per-game seed (socket layer: hashString of
+       * roomCode:serial) so every player sees the same randomized reveal
+       * pattern. Combined with the round number per round. */
+      gameSeed?: number;
     } = {}
   ) {
     this.celebrities = celebrities;
     this.randomIntFn = options.randomInt ?? ((max) => randomInt(max));
     this.pickMode = options.pickMode ?? 'random';
+    this.gameSeed = options.gameSeed ?? 0;
   }
 
   get phaseValue(): GuessWhoPhase {
@@ -244,7 +257,10 @@ export class GuessWhoSession {
       revealCount = Math.ceil(letterIndexes.length * GUESS_WHO_REVEAL_LETTERS_1);
     }
     const revealed = new Set<number>(firstOfWord);
-    for (const { index } of letterIndexes.slice(0, revealCount)) {
+    // D064: reveal in seeded permutation order (not left-to-right). The
+    // permutation covers every letter position and is fixed for the round;
+    // later hints take longer prefixes of it, so letters never un-reveal.
+    for (const index of this.letterOrder.slice(0, revealCount)) {
       revealed.add(index);
     }
     return chars
@@ -268,6 +284,23 @@ export class GuessWhoSession {
       return;
     }
     this.celebrity = celebrity;
+    // D064: seeded Fisher-Yates permutation of this round's letter positions
+    // — deterministic per (gameSeed, round) so every player sees the same
+    // reveal pattern (never Math.random: cross-player determinism is a hard
+    // requirement).
+    const chars = [...celebrity.name];
+    const letterIndexes = chars
+      .map((char, index) => ({ char, index }))
+      .filter(({ char }) => /[a-z0-9]/i.test(char))
+      .map(({ index }) => index);
+    const rand = seededRandom(hashString(`${this.gameSeed}:round${this.roundNumber}`));
+    for (let i = letterIndexes.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(rand() * (i + 1));
+      const swap = letterIndexes[i]!;
+      letterIndexes[i] = letterIndexes[j]!;
+      letterIndexes[j] = swap;
+    }
+    this.letterOrder = letterIndexes;
     this.phase = 'questioning';
   }
 }

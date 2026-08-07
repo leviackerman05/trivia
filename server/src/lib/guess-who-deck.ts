@@ -19,6 +19,8 @@ export const GUESS_WHO_REGIONS: readonly CelebrityRegion[] = ['bollywood', 'holl
 export const GUESS_WHO_GENRES: readonly CelebrityGenre[] = [
   'music',
   'cinema',
+  'cinema-bollywood',
+  'cinema-hollywood',
   'television',
   'sports',
   'politics',

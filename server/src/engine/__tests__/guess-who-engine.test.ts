@@ -67,8 +67,60 @@ describe('GuessWhoSession (PRD §5.17, owner redesign: hidden name)', () => {
     session.start(['Alice', 'Bob']);
     const now = Date.now();
     expect(session.namePatternAt(now)).toBe('W___ S____');
-    expect(session.namePatternAt(now + GUESS_WHO_HINT_1_MS)).toBe('Will S____');
-    expect(session.namePatternAt(now + GUESS_WHO_HINT_2_MS)).toBe('Will Smi__');
+    expect(session.namePatternAt(now + GUESS_WHO_HINT_1_MS)).toBe('W___ S__th');
+    expect(session.namePatternAt(now + GUESS_WHO_HINT_2_MS)).toBe('Will S__th');
+  });
+
+  it('letter reveals are deterministic per (gameSeed, round) across sessions', () => {
+    const first = new GuessWhoSession(CELEBRITIES, { randomInt: () => 1, gameSeed: 42 });
+    const second = new GuessWhoSession(CELEBRITIES, { randomInt: () => 1, gameSeed: 42 });
+    first.start(['Alice', 'Bob']);
+    second.start(['Alice', 'Bob']);
+    const now = Date.now();
+    // Same seed + same round ⇒ identical pattern at the same elapsed time.
+    expect(first.namePatternAt(now + GUESS_WHO_HINT_1_MS)).toBe(
+      second.namePatternAt(now + GUESS_WHO_HINT_1_MS)
+    );
+    expect(first.namePatternAt(now + GUESS_WHO_HINT_2_MS)).toBe(
+      second.namePatternAt(now + GUESS_WHO_HINT_2_MS)
+    );
+  });
+
+  it('different gameSeeds reveal different letter positions at the same elapsed time', () => {
+    const first = new GuessWhoSession(CELEBRITIES, { randomInt: () => 1, gameSeed: 1 });
+    const second = new GuessWhoSession(CELEBRITIES, { randomInt: () => 1, gameSeed: 2 });
+    first.start(['Alice', 'Bob']);
+    second.start(['Alice', 'Bob']);
+    const now = Date.now();
+    const patternA = first.namePatternAt(now + GUESS_WHO_HINT_1_MS);
+    const patternB = second.namePatternAt(now + GUESS_WHO_HINT_1_MS);
+    expect(patternA).not.toBe(patternB);
+    // Both reveal the same number of letters (4 of 9 at 40%), but not the
+    // same ones — the word-first W + S are the only guaranteed overlap.
+    expect(visibleLetterCount(patternA)).toBe(visibleLetterCount(patternB));
+  });
+
+  it('reveals are monotonic: later patterns are supersets, letters never un-reveal', () => {
+    const session = make(() => 1); // Will Smith
+    session.start(['Alice', 'Bob']);
+    const now = Date.now();
+    const at0 = visiblePositions(session.namePatternAt(now));
+    const at1 = visiblePositions(session.namePatternAt(now + GUESS_WHO_HINT_1_MS));
+    const at2 = visiblePositions(session.namePatternAt(now + GUESS_WHO_HINT_2_MS));
+    // The always-visible word-first letters still show at 0s.
+    expect(session.namePatternAt(now)).toBe('W___ S____');
+    for (const position of at0) {
+      expect(at1.has(position), `position ${position} un-revealed at 20s`).toBe(true);
+    }
+    for (const position of at1) {
+      expect(at2.has(position), `position ${position} un-revealed at 40s`).toBe(true);
+    }
+    // The permutation reveals a proper subset at 40%: strictly more letters
+    // are visible at 70%, and at least ceil(0.7 × 9) = 7 letters show there
+    // (word-first letters may overlap the permutation, so the union can be
+    // smaller than 9).
+    expect(at1.size).toBeLessThan(at2.size);
+    expect(at2.size).toBeGreaterThanOrEqual(7);
   });
 
   it('anyone can guess; a correct guess scores +1, reveals, and advances to the NEXT round', () => {
@@ -174,4 +226,19 @@ function ok2<T>(result: { ok: true; value: T } | { ok: false; error: string }): 
     throw new Error(`expected ok, got ${result.error}`);
   }
   return result.value;
+}
+
+/** Positions where the pattern shows a real character (letters or spaces). */
+function visiblePositions(pattern: string): Set<number> {
+  const set = new Set<number>();
+  for (let i = 0; i < pattern.length; i += 1) {
+    if (pattern[i] !== '_') {
+      set.add(i);
+    }
+  }
+  return set;
+}
+
+function visibleLetterCount(pattern: string): number {
+  return [...pattern].filter((char) => /[a-z]/i.test(char)).length;
 }

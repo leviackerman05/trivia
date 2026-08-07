@@ -33,6 +33,10 @@ const PRD_SLUGS = [
   'guess-who',
   'this-or-that',
   'sudoku',
+  // [R20] daily-only catalog row.
+  'wordle',
+  // [D067] chess vs CPU (normal game, not a daily).
+  'chess',
 ];
 
 const VALID_TYPES: GameType[] = ['solo', 'multiplayer-realtime', 'multiplayer-voting'];
@@ -40,7 +44,7 @@ const VALID_TYPES: GameType[] = ['solo', 'multiplayer-realtime', 'multiplayer-vo
 const VALID_FAMILIES: GameFamily[] = ['drawing', 'solo', 'party', 'quiz'];
 
 describe('game catalog (src/data/games.json)', () => {
-  it('contains the 18 PRD games plus the M18 daily game (sudoku)', () => {
+  it('contains the 18 PRD games plus sudoku, placeguessr, wordle, and chess', () => {
     const slugs = games.map((game) => game.slug);
     expect(slugs.sort()).toEqual([...PRD_SLUGS].sort());
   });
@@ -70,7 +74,7 @@ describe('game catalog (src/data/games.json)', () => {
     expect(counts.drawing).toHaveLength(5);
     // [R3] voting (4) + special (2) merged into party (6).
     expect(counts.party).toHaveLength(6);
-    expect(counts.solo).toHaveLength(8);
+    expect(counts.solo).toHaveLength(10); // 8 solo + wordle (R20) + chess (D067)
     expect(counts.quiz).toHaveLength(1);
   });
 

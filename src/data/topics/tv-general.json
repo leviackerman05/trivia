@@ -1,0 +1,1142 @@
+[
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which long-running animated series features Homer and Marge Simpson?",
+    "options": ["South Park", "Family Guy", "The Simpsons", "Futurama"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which series follows a group of kids in the 1980s town of Hawkins, Indiana?",
+    "options": ["The OA", "Dark", "Stranger Things", "Riverdale"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which classic sitcom is set in a Boston bar?",
+    "options": ["Taxi", "Seinfeld", "Night Court", "Cheers"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which drama series follows Walter White, a chemistry teacher turned drug producer?",
+    "options": ["Narcos", "Ozark", "Dexter", "Breaking Bad"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which fantasy series is adapted from the novels of George R. R. Martin?",
+    "options": ["The Wheel of Time", "Vikings", "The Witcher", "Game of Thrones"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which long-running British series follows a time-traveling alien called the Doctor?",
+    "options": ["Primeval", "Torchwood", "Doctor Who", "Red Dwarf"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which sitcom features the characters Jerry, George, Elaine, and Kramer?",
+    "options": ["Friends", "NewsRadio", "Seinfeld", "Mad About You"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which crime drama follows New Jersey mob boss Tony Soprano?",
+    "options": ["The Wire", "Boardwalk Empire", "Sons of Anarchy", "The Sopranos"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which mystery series follows FBI agents Fox Mulder and Dana Scully?",
+    "options": ["The X-Files", "Fringe", "Millennium", "Twin Peaks"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which workplace comedy stars Steve Carell as branch manager Michael Scott?",
+    "options": ["Community", "30 Rock", "The Office", "Parks and Recreation"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which sitcom features scientist roommates Sheldon Cooper and Leonard Hofstadter?",
+    "options": [
+      "How I Met Your Mother",
+      "The Big Bang Theory",
+      "Silicon Valley",
+      "Two and a Half Men"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which medical drama follows the surgical staff at the fictional Seattle Grace Hospital?",
+    "options": ["Private Practice", "ER", "House M.D.", "Grey's Anatomy"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which animated series features the Griffin family in Quahog, Rhode Island?",
+    "options": ["King of the Hill", "The Simpsons", "Bob's Burgers", "Family Guy"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which animated comedy follows a family that runs a burger restaurant?",
+    "options": ["Bob's Burgers", "Archer", "Futurama", "American Dad"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which comedy follows the Rose family after they lose their fortune and move to a small town?",
+    "options": ["The Good Place", "Schitt's Creek", "Parks and Recreation", "Arrested Development"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which comedy follows the staff of Sacred Heart Hospital?",
+    "options": ["Nurse Jackie", "ER", "House M.D.", "Scrubs"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which animated series features four boys in the Colorado mountain town of South Park?",
+    "options": ["Beavis and Butt-Head", "South Park", "Daria", "Celebrity Deathmatch"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which reality competition strands contestants on an island and votes them off one by one?",
+    "options": ["Big Brother", "Naked and Afraid", "The Amazing Race", "Survivor"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which singing competition uses celebrity coaches and blind auditions?",
+    "options": ["The X Factor", "The Voice", "American Idol", "America's Got Talent"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which singing competition helped launch the career of its first winner, Kelly Clarkson?",
+    "options": ["Pop Idol", "The Voice", "American Idol", "Star Search"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which cooking competition gives amateur home cooks the chance to become a professional chef?",
+    "options": ["Chopped", "Top Chef", "MasterChef", "Iron Chef"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which quiz show famously offers contestants a phone-a-friend lifeline?",
+    "options": [
+      "Who Wants to Be a Millionaire",
+      "The Weakest Link",
+      "Jeopardy!",
+      "Wheel of Fortune"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which BBC series updates Sherlock Holmes to present-day London?",
+    "options": ["Elementary", "Luther", "Sherlock", "Hustle"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which 1970s sitcom features the character Arthur Fonzarelli, better known as the Fonz?",
+    "options": ["Laverne & Shirley", "Welcome Back, Kotter", "Happy Days", "Mork & Mindy"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which courtroom series is presided over by a no-nonsense former family-court judge?",
+    "options": ["Judge Judy", "Judge Mathis", "The People's Court", "Divorce Court"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which sketch comedy show has aired on Saturday nights since 1975?",
+    "options": ["Saturday Night Live", "In Living Color", "Mad TV", "The Kids in the Hall"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which 1990s drama is set in the emergency room of a Chicago hospital?",
+    "options": ["ER", "Chicago Hope", "Third Watch", "Grey's Anatomy"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which comedy follows Liz Lemon, head writer of a sketch show?",
+    "options": [
+      "30 Rock",
+      "Unbreakable Kimmy Schmidt",
+      "The Larry Sanders Show",
+      "Studio 60 on the Sunset Strip"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which British period drama follows the aristocratic Crawley family?",
+    "options": ["Brideshead Revisited", "Upstairs, Downstairs", "The Crown", "Downton Abbey"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which Netflix drama follows the British royal family across the decades?",
+    "options": ["The Great", "The Windsors", "Victoria", "The Crown"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which crime drama follows Tommy Shelby and his family in 1920s Birmingham?",
+    "options": ["Boardwalk Empire", "Ripper Street", "Gangs of London", "Peaky Blinders"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which South Korean drama features a deadly competition built on childhood games?",
+    "options": ["Squid Game", "Kingdom", "Sweet Home", "Money Heist"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which Spanish-language heist series follows a crew robbing the Royal Mint of Spain?",
+    "options": ["Money Heist", "Elite", "Sky Rojo", "Narcos"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which French series stars Omar Sy as a clever thief inspired by a literary gentleman thief?",
+    "options": ["Call My Agent!", "Lupin", "The Bureau", "Missions"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which 1960s-set drama features advertising executive Don Draper?",
+    "options": ["The Americans", "Mad Men", "Mad Dogs", "Pan Am"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which comedy follows a group of teenagers in 1990s Derry, Northern Ireland?",
+    "options": ["The Inbetweeners", "Bad Education", "Derry Girls", "Fresh Meat"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which adult animated series follows an eccentric scientist and his grandson across dimensions?",
+    "options": ["Solar Opposites", "Final Space", "Futurama", "Rick and Morty"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which comedy follows the staff of the parks department in the fictional town of Pawnee?",
+    "options": ["Superstore", "The Office", "Brooklyn Nine-Nine", "Parks and Recreation"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which sitcom is framed as a man telling his children the long story of how he met their mother?",
+    "options": ["The Big Bang Theory", "Happy Endings", "How I Met Your Mother", "New Girl"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which series follows a teenage vampire slayer chosen to fight supernatural evil?",
+    "options": ["Angel", "Buffy the Vampire Slayer", "Charmed", "Supernatural"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which medical drama centers on a brilliant but misanthropic doctor named Gregory House?",
+    "options": ["Nurse Jackie", "House M.D.", "The Good Doctor", "Scrubs"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which 1970s sitcom features the outspoken working-class character Archie Bunker?",
+    "options": ["Sanford and Son", "Maude", "All in the Family", "Good Times"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which animated series features delivery boy Fry and one-eyed captain Leela?",
+    "options": ["Futurama", "The Jetsons", "Rick and Morty", "Space Ghost"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which detective series features the rumpled but brilliant Lieutenant Columbo?",
+    "options": ["Columbo", "Matlock", "Kojak", "Murder, She Wrote"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which sitcom features psychiatrist Frasier Crane hosting a radio advice show in Seattle?",
+    "options": ["Cheers", "Becker", "Frasier", "Wings"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which teen drama is narrated by an anonymous blogger covering wealthy Manhattan teenagers?",
+    "options": ["One Tree Hill", "Gossip Girl", "Pretty Little Liars", "The OC"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which HBO series follows New York columnist Carrie Bradshaw and her friends?",
+    "options": ["Girls", "The Carrie Diaries", "Lipstick Jungle", "Sex and the City"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which stone-age animated family lives in the town of Bedrock?",
+    "options": ["The Smurfs", "The Flintstones", "The Simpsons", "The Jetsons"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which sitcom is set in the 1970s and follows teenager Eric Forman and his friends?",
+    "options": ["The Wonder Years", "That '70s Show", "Freaks and Geeks", "Happy Days"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which mystery series features mystery writer Jessica Fletcher solving crimes?",
+    "options": ["Columbo", "Matlock", "Murder, She Wrote", "Diagnosis Murder"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which reality series follows the lives of the Kardashian family?",
+    "options": [
+      "The Simple Life",
+      "The Real Housewives",
+      "Keeping Up with the Kardashians",
+      "Jersey Shore"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which competition series features drag queens competing for a crown?",
+    "options": [
+      "Dancing with the Stars",
+      "RuPaul's Drag Race",
+      "Project Runway",
+      "America's Next Top Model"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which 1960s sci-fi series follows the crew of the starship Enterprise?",
+    "options": ["Space: 1999", "Lost in Space", "The Twilight Zone", "Star Trek"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which British sitcom is set at the fictional Wernham Hogg paper company?",
+    "options": ["The Vicar of Dibley", "The IT Crowd", "The Office", "Extras"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which action series follows counterterrorism agent Jack Bauer in real time?",
+    "options": ["Alias", "Prison Break", "Homeland", "24"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which actor plays Walter White in Breaking Bad?",
+    "options": ["Bryan Cranston", "Bob Odenkirk", "Kiefer Sutherland", "Jon Hamm"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which actor plays Michael Scott in the US version of The Office?",
+    "options": ["Will Ferrell", "Rainn Wilson", "John Krasinski", "Steve Carell"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which actor plays physicist Sheldon Cooper in The Big Bang Theory?",
+    "options": ["Johnny Galecki", "Jim Parsons", "Simon Helberg", "Kal Penn"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which actor plays the title detective in the BBC series Sherlock?",
+    "options": ["Benedict Cumberbatch", "Martin Freeman", "Tom Hiddleston", "Andrew Scott"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 1,
+    "question": "Which actress plays Daenerys Targaryen in Game of Thrones?",
+    "options": ["Maisie Williams", "Natalie Dormer", "Emilia Clarke", "Lena Headey"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who created The Simpsons?",
+    "options": ["Matt Groening", "Mike Judge", "Seth MacFarlane", "Trey Parker"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who created Breaking Bad?",
+    "options": ["David Simon", "Vince Gilligan", "Terence Winter", "David Chase"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who developed the US version of The Office?",
+    "options": ["Greg Daniels", "Ken Kwapis", "Ricky Gervais", "Stephen Merchant"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who created the original British version of The Office?",
+    "options": [
+      "Chris Morris and Armando Iannucci",
+      "Ricky Gervais and Stephen Merchant",
+      "David Mitchell and Robert Webb",
+      "Paul Whitehouse and Harry Enfield"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who created the original Star Trek series?",
+    "options": ["Gene Roddenberry", "Gene Coon", "George Lucas", "Rod Serling"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who created The X-Files?",
+    "options": ["David E. Kelley", "Shawn Ryan", "J. J. Abrams", "Chris Carter"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who created The Sopranos?",
+    "options": ["James Gandolfini", "David Milch", "David Chase", "Alan Ball"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who created The Wire?",
+    "options": ["Tom Fontana", "Ed Burns", "David Chase", "David Simon"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who created Stranger Things?",
+    "options": ["The Duffer Brothers", "Bryan Fuller", "Sam Esmail", "Mike Flanagan"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who developed Game of Thrones for television?",
+    "options": [
+      "David Benioff and D. B. Weiss",
+      "George R. R. Martin and Bryan Cogman",
+      "Jane Espenson and Dan Weiss",
+      "Terry Pratchett and Neil Gaiman"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who created Seinfeld?",
+    "options": [
+      "Peter Mehlman and Larry David",
+      "Larry David and Jerry Seinfeld",
+      "Andy Kaufman and Jerry Seinfeld",
+      "George Shapiro and Jerry Seinfeld"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which of these people is credited with creating Doctor Who?",
+    "options": ["Terry Nation", "Sidney Sheldon", "Sydney Newman", "John Sullivan"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which network aired The Sopranos?",
+    "options": ["AMC", "HBO", "FX", "Showtime"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which network aired Breaking Bad?",
+    "options": ["TNT", "Showtime", "AMC", "HBO"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which network aired Seinfeld?",
+    "options": ["Fox", "CBS", "ABC", "NBC"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which network aired The X-Files?",
+    "options": ["NBC", "Fox", "CBS", "ABC"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which network has aired The Simpsons since its debut?",
+    "options": ["CBS", "Fox", "NBC", "ABC"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which network originally aired Twin Peaks?",
+    "options": ["NBC", "Fox", "CBS", "ABC"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which network aired the US version of The Office?",
+    "options": ["TBS", "Fox", "CBS", "NBC"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which streaming service produces the drama The Crown?",
+    "options": ["Apple TV+", "Amazon Prime Video", "Netflix", "HBO Max"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which streaming service produced the superhero satire The Boys?",
+    "options": ["Peacock", "Amazon Prime Video", "Hulu", "Netflix"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which streaming service premiered the Star Wars series The Mandalorian?",
+    "options": ["Apple TV+", "Netflix", "Disney+", "HBO Max"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which UK broadcaster has aired Doctor Who since the 1960s?",
+    "options": ["Sky", "BBC", "ITV", "Channel 4"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which animated series holds the record for the most Emmy wins in the Outstanding Animated Program category?",
+    "options": ["South Park", "Family Guy", "SpongeBob SquarePants", "The Simpsons"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which fantasy drama won a record 59 Primetime Emmy Awards?",
+    "options": ["The Sopranos", "The West Wing", "Game of Thrones", "Breaking Bad"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which political drama won the Emmy for Outstanding Drama Series four years in a row in the early 2000s?",
+    "options": ["The Sopranos", "The West Wing", "ER", "24"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which comedy series holds the record for the most Emmy nominations of any show?",
+    "options": ["Cheers", "Frasier", "Saturday Night Live", "The Simpsons"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which 1977 miniseries about an enslaved American family became a landmark television event?",
+    "options": ["Holocaust", "The Thorn Birds", "North and South", "Roots"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which sitcom's 1998 finale drew more than 75 million US viewers?",
+    "options": ["M*A*S*H", "Friends", "Cheers", "Seinfeld"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which show's 1983 finale remains one of the most-watched US television broadcasts ever?",
+    "options": ["Dallas", "Dynasty", "M*A*S*H", "Cheers"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "How many seasons did Breaking Bad run?",
+    "options": ["Five", "Seven", "Six", "Four"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "How many seasons did Game of Thrones run?",
+    "options": ["Six", "Eight", "Seven", "Nine"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "How many seasons did the US version of The Office run?",
+    "options": ["Eight", "Nine", "Seven", "Ten"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "How many seasons did The Sopranos run?",
+    "options": ["Four", "Seven", "Six", "Five"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "How many seasons did Cheers run?",
+    "options": ["Nine", "Ten", "Eleven", "Twelve"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which sitcom was Frasier spun off from?",
+    "options": ["Wings", "Mad About You", "Taxi", "Cheers"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which drama is a prequel to Breaking Bad?",
+    "options": ["Better Call Saul", "The Americans", "Ozark", "El Camino"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which late-night comedy show was a spin-off of The Daily Show?",
+    "options": [
+      "Last Week Tonight",
+      "Saturday Night Live",
+      "The Late Late Show",
+      "The Colbert Report"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actor plays mob boss Tony Soprano?",
+    "options": ["Michael Imperioli", "James Gandolfini", "Edie Falco", "Steve Buscemi"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actor plays advertising executive Don Draper in Mad Men?",
+    "options": ["Jon Hamm", "Christina Hendricks", "Vincent Kartheiser", "Elisabeth Moss"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actor plays Jon Snow in Game of Thrones?",
+    "options": ["Iain Glen", "Rory McCann", "Kit Harington", "Richard Madden"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actor plays Tyrion Lannister in Game of Thrones?",
+    "options": ["Nikolaj Coster-Waldau", "Jerome Flynn", "Peter Dinklage", "Charles Dance"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actor plays the title role in House M.D.?",
+    "options": ["David Tennant", "Hugh Laurie", "Stephen Fry", "Rowan Atkinson"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actor plays counterterrorism agent Jack Bauer in 24?",
+    "options": ["Mark Harmon", "William Petersen", "Kiefer Sutherland", "David Boreanaz"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actor plays lawyer Saul Goodman in Breaking Bad and Better Call Saul?",
+    "options": ["Bob Odenkirk", "Jonathan Banks", "Giancarlo Esposito", "Dean Norris"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actor plays Jesse Pinkman in Breaking Bad?",
+    "options": ["Aaron Paul", "Matt Jones", "RJ Mitte", "Jesse Plemons"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actress plays Skyler White in Breaking Bad?",
+    "options": ["Giancarlo Esposito", "Betsy Brandt", "Laura Fraser", "Anna Gunn"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actress plays Cersei Lannister in Game of Thrones?",
+    "options": ["Gwendoline Christie", "Carice van Houten", "Emilia Clarke", "Lena Headey"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actor plays FBI agent Fox Mulder in The X-Files?",
+    "options": ["Mitch Pileggi", "David Duchovny", "Gillian Anderson", "Robert Patrick"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actress plays FBI agent Dana Scully in The X-Files?",
+    "options": ["Mimi Rogers", "David Duchovny", "Annabella Sciorra", "Gillian Anderson"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "What does the channel name HBO stand for?",
+    "options": [
+      "Hollywood Broadcasting Organization",
+      "High-Budget Originals",
+      "Home Broadcasting Online",
+      "Home Box Office"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "What does the broadcaster name BBC stand for?",
+    "options": [
+      "Britain's Best Channels",
+      "British Broadcast Channel",
+      "British Broadcasting Company of England",
+      "British Broadcasting Corporation"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "What does the network name PBS stand for?",
+    "options": [
+      "Public Broadcasting Service",
+      "Premium Broadcasting Station",
+      "Public Bilingual Service",
+      "Private Broadcast System"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "In HDTV, what does the abbreviation HD stand for?",
+    "options": ["High Definition", "Home Digital", "High Density", "High Display"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which 1950s sitcom starred the real-life couple Lucille Ball and Desi Arnaz?",
+    "options": [
+      "The Honeymooners",
+      "The Adventures of Ozzie and Harriet",
+      "Father Knows Best",
+      "I Love Lucy"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Who created and hosted the original The Twilight Zone?",
+    "options": ["Gene Roddenberry", "Rod Serling", "Alfred Hitchcock", "Irwin Allen"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which 2000s mystery drama follows survivors of a plane crash on a mysterious island?",
+    "options": ["Lost", "The 100", "Survivor", "Manifest"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "What is the name of the fictional town where Gilmore Girls is set?",
+    "options": ["Tree Hill", "Bluebell", "Stars Hollow", "Pawnee"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which actress plays political fixer Olivia Pope in Scandal?",
+    "options": ["Angela Bassett", "Viola Davis", "Kerry Washington", "Taraji P. Henson"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 2,
+    "question": "Which drama features CIA officer Carrie Mathison investigating threats to national security?",
+    "options": ["Homeland", "24", "The Americans", "Alias"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which Scottish inventor is credited with demonstrating an early working television system in the 1920s?",
+    "options": ["John Logie Baird", "Guglielmo Marconi", "Nikola Tesla", "Thomas Edison"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "What figure does the Emmy statuette depict?",
+    "options": [
+      "A knight holding a shield",
+      "A golden eagle with a laurel",
+      "A winged woman holding an atom",
+      "A torch-bearing runner"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "In which year was the first Emmy Awards ceremony held?",
+    "options": ["1939", "1949", "1961", "1955"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which western series ran for 20 seasons and more than 600 episodes, a record for a live-action US primetime series?",
+    "options": ["Bonanza", "Wagon Train", "Gunsmoke", "The Rifleman"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "The Simpsons was the first prime-time animated series since which 1960s cartoon?",
+    "options": ["The Flintstones", "Jonny Quest", "Top Cat", "The Jetsons"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Who composed the theme music for Game of Thrones?",
+    "options": ["Bear McCreary", "Hans Zimmer", "Howard Shore", "Ramin Djawadi"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Who composed the original Star Trek theme music?",
+    "options": ["Jerry Goldsmith", "John Williams", "Danny Elfman", "Alexander Courage"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which actor played the Doctor for the longest continuous run, seven years?",
+    "options": ["Colin Baker", "Tom Baker", "Jon Pertwee", "Peter Davison"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which series holds a Guinness World Record as the longest-running science fiction television series?",
+    "options": ["Stargate SG-1", "Doctor Who", "The X-Files", "Star Trek"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which network's 'Must See TV' branding defined the 1990s Thursday-night comedy block?",
+    "options": ["Fox", "CBS", "ABC", "NBC"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "The Simpsons first appeared as animated shorts on which 1980s show?",
+    "options": [
+      "Late Night with David Letterman",
+      "The Tracey Ullman Show",
+      "Saturday Night Live",
+      "The Carol Burnett Show"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which series is set in the fictional city of Gotham and follows its police before Batman?",
+    "options": ["Titans", "Smallville", "Batwoman", "Gotham"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "House of Cards was the first major original drama produced by which streaming service?",
+    "options": ["Apple TV+", "Netflix", "Hulu", "Amazon Prime Video"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which 1970s comedy was a spin-off of All in the Family and starred Bea Arthur?",
+    "options": ["The Jeffersons", "Maude", "Good Times", "Mork & Mindy"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which animated series was created by Mike Judge and premiered in 1993?",
+    "options": ["Daria", "Beavis and Butt-Head", "Home Movies", "King of the Hill"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which animated series about a Texas propane salesman was created by Mike Judge in 1997?",
+    "options": ["Beavis and Butt-Head", "King of the Hill", "Bob's Burgers", "The Cleveland Show"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which sci-fi series featured what is often called the first interracial kiss on US network television?",
+    "options": ["Star Trek", "The Outer Limits", "Mission: Impossible", "I Dream of Jeannie"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "The Peabody Awards honor excellence in which field?",
+    "options": [
+      "Stage acting",
+      "Music composition",
+      "Film directing",
+      "Broadcasting and journalism"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "In which year did the animated series Family Guy premiere on Fox?",
+    "options": ["2002", "1999", "1995", "2005"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "What scandal rocked American television in the 1950s when popular quiz shows were found to be rigged?",
+    "options": [
+      "The loyalty oath controversy",
+      "The payola hearings",
+      "The game show boycott",
+      "The quiz show scandals"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which American soap opera has been on the air continuously since 1963?",
+    "options": [
+      "Days of Our Lives",
+      "The Bold and the Beautiful",
+      "General Hospital",
+      "All My Children"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which actor provides the voice of Homer Simpson?",
+    "options": ["Dan Castellaneta", "Kevin Michael Richardson", "Harry Shearer", "Hank Azaria"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which actress provides the voice of Bart Simpson?",
+    "options": ["Julie Kavner", "Yeardley Smith", "Tress MacNeille", "Nancy Cartwright"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which actor plays the Vulcan science officer Spock in the original Star Trek?",
+    "options": ["Leonard Nimoy", "DeForest Kelley", "James Doohan", "Nichelle Nichols"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which 1983 made-for-television movie about a nuclear attack on the US drew enormous audiences?",
+    "options": ["The War Game", "Threads", "The Day After", "Special Bulletin"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which 2001 HBO miniseries followed a World War II airborne company from training to war's end?",
+    "options": ["The Pacific", "Band of Brothers", "Saving Private Ryan", "Generation Kill"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "Which HBO sci-fi drama about an artificial-intelligence theme park premiered in 2016?",
+    "options": ["Westworld", "Altered Carbon", "Humans", "Devs"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "In which year did Mad Men premiere?",
+    "options": ["2004", "2011", "2007", "2009"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "In which year did The West Wing premiere?",
+    "options": ["2003", "2001", "1999", "1997"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-general",
+    "difficulty": 3,
+    "question": "In which year did The Mandalorian premiere on Disney+?",
+    "options": ["2019", "2017", "2020", "2018"],
+    "answer": 0
+  }
+]

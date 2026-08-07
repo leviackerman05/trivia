@@ -7,7 +7,7 @@
  */
 import { createServer } from 'node:http';
 import { readFile, readdir } from 'node:fs/promises';
-import { existsSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join, extname, normalize } from 'node:path';
 
 const DIST_DIR = join(process.cwd(), 'dist');
@@ -37,18 +37,21 @@ const checks = [
   { path: '/daily', contains: 'Today at Trivia & Games' },
   { path: '/daily/trivia', contains: 'Daily Trivia' },
   { path: '/daily/sudoku', contains: 'Daily Sudoku' },
-  { path: '/daily/emoji-plot', contains: 'Daily Emoji Plot' },
   { path: '/daily/timeline-tussle', contains: 'Daily Timeline' },
-  { path: '/daily/price-is-right', contains: 'Daily Price Guess' },
-  { path: '/daily/rhyme-or-crime', contains: 'Daily Rhyme' },
-  { path: '/daily/genre-swap', contains: 'Daily Genre Swap' },
-  { path: '/daily/genre-bender', contains: 'Daily Genre-Bender' },
-  // M20 Phase 0.5: the removed daily 404s (the smoke server returns 404 for
-  // missing files; checks may override the expected status).
+  // R18 demotions (2026-08-07): removed daily pages 404 (the smoke server
+  // returns 404 for missing files; checks may override the expected status).
   { path: '/daily/geography', status: 404 },
+  { path: '/daily/emoji-plot', status: 404 },
+  { path: '/daily/price-is-right', status: 404 },
+  { path: '/daily/rhyme-or-crime', status: 404 },
+  { path: '/daily/genre-swap', status: 404 },
+  { path: '/daily/genre-bender', status: 404 },
+  { path: '/daily/drawing', status: 404 },
+  // D067 (2026-08-07): Daily Chess reverted to a client-side CPU game.
+  { path: '/daily/chess', status: 404 },
   { path: '/daily/movies', contains: 'Daily Movie' },
   { path: '/daily/music', contains: 'Daily Music' },
-  { path: '/daily/drawing', contains: 'Daily Drawing' },
+  { path: '/daily/wordle', contains: 'Daily Wordle' },
   { path: '/daily/archive', contains: 'Your daily archive' },
   { path: '/categories', contains: 'Browse by category' },
   { path: '/faq', contains: 'Frequently Asked Questions' },
@@ -84,16 +87,32 @@ const GAME_SLUGS = [
   'guess-who',
   'trivia',
   'sudoku',
+  'wordle',
+  'chess',
 ];
 
 // PRD §10: static pages < 100 KB total page weight (HTML + CSS + JS, no images).
-const weightChecks = ['/', '/faq', '/game/skribbl-arena', '/daily/drawing'];
+const weightChecks = [
+  '/',
+  '/faq',
+  '/game/skribbl-arena',
+  '/daily/wordle',
+  '/game/chess',
+  '/game/trivia',
+];
 
 // PRD §10: bundle-size budget per game island (shared runtime excluded, it
 // is cached once per visitor; the gate is on the per-island chunks).
 const BUNDLE_BUDGET_BYTES = 300 * 1024;
 // D062: mapillary-js lazy vendor chunk ceiling (raw; ~265 KB gzipped).
 const LAZY_VENDOR_BUDGET_BYTES = 1.2 * 1024 * 1024;
+// [M-T1] Topic JSON chunks (one per src/data/topics/{slug}.json, emitted by
+// the dynamic-import glob) stay under the same island gate — the generic
+// per-chunk loop above already enforces it; this report makes it visible.
+const registryPath = join(process.cwd(), 'src', 'data', 'topics', 'registry.json');
+const topicSlugs = existsSync(registryPath)
+  ? JSON.parse(readFileSync(registryPath, 'utf8')).map((row) => row.slug)
+  : [];
 const SHARED_RUNTIME_PREFIX = 'client.';
 
 /**
@@ -237,6 +256,17 @@ server.listen(PORT, async () => {
         throw new Error(
           `bundle ${file} is ${(size / 1024).toFixed(1)} KB, over the ${budget / 1024} KB budget (PRD §10)`
         );
+      }
+    }
+    // [M-T1] Topic chunks (dynamic-import JSON code-splits) get an explicit
+    // report line so the budget check is visible in the smoke output.
+    for (const slug of topicSlugs) {
+      const chunk = (await readdir(DIST_DIR + '/_astro')).find(
+        (name) => name.startsWith(`${slug}.`) && name.endsWith('.js')
+      );
+      if (chunk) {
+        const size = statSync(join(DIST_DIR, '_astro', chunk)).size;
+        console.log(`✓ topic chunk ${slug} ${(size / 1024).toFixed(1)} KB`);
       }
     }
     console.log('✓ island bundles within budget');

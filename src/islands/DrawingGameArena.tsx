@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import { useRoom } from './room/useRoom';
 import RoomLobbyPanel from './room/RoomLobbyPanel';
+import RoomRejoining from './room/RoomRejoining';
 import { useDrawingGame } from './useDrawingGame';
 import DrawingCanvas from '../components/DrawingCanvas';
 import { getGame } from '../lib/games';
@@ -41,7 +42,15 @@ const BRUSH_SIZES = [2, 6, 12, 24] as const;
 export default function DrawingGameArena({ gameSlug }: Props) {
   const game = getGame(gameSlug);
   const config = ARENA_CONFIGS[gameSlug] ?? ARENA_CONFIGS['skribbl-arena']!;
-  const { status, error, room, messages, actions: roomActions, myName } = useRoom();
+  const {
+    status,
+    error,
+    room,
+    messages,
+    actions: roomActions,
+    myName,
+    rejoining,
+  } = useRoom(gameSlug);
   const { game: drawing, actions: gameActions } = useDrawingGame(
     room?.code ?? null,
     myName ?? null
@@ -89,6 +98,9 @@ export default function DrawingGameArena({ gameSlug }: Props) {
   };
 
   if (!room) {
+    if (rejoining) {
+      return <RoomRejoining />;
+    }
     return (
       <RoomLobbyPanel
         game={game}

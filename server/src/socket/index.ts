@@ -1371,7 +1371,9 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       );
     }
     clearRoomGame(room.code);
-    const session = new GuessWhoSession(deck, { pickMode: 'sequential' });
+    // D064: gameSeed drives BOTH the deck seed and the per-round letter-reveal
+    // permutation (hashString(`${gameSeed}:round${round}`) inside the engine).
+    const session = new GuessWhoSession(deck, { pickMode: 'sequential', gameSeed: seed });
     const players = [...room.players.values()]
       .filter((player) => player.connected)
       .map((player) => player.name);
@@ -2661,6 +2663,14 @@ export function attachSocketIo(httpServer: HttpServer, deps: SocketGatewayDeps):
       if (!player) {
         ack?.({ ok: false, error: 'NOT_IN_ROOM' });
         return;
+      }
+      // D064: the FE mounts its socket listeners only after the join ack, so
+      // the join-time options emit is always dropped. gameResync is the only
+      // post-mount round-trip (mount-time + every reconnect), so the lobby
+      // filter options are re-emitted here, before the snapshot path. The
+      // join-handler emit stays as the immediate path for live listeners.
+      if (isGuessWhoRoom(room)) {
+        emitGuessWhoFilterOptions(room);
       }
       const snapshot = resyncSnapshot(room, player.name);
       if (!snapshot) {

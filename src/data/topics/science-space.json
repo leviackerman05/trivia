@@ -1,0 +1,44 @@
+[
+  {
+    "topic": "science-space",
+    "difficulty": 1,
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Venus", "Mars", "Jupiter", "Mercury"],
+    "answer": 1
+  },
+  {
+    "topic": "science-space",
+    "difficulty": 1,
+    "question": "What is the closest star to Earth?",
+    "options": ["Proxima Centauri", "Polaris", "The Sun", "Sirius"],
+    "answer": 2
+  },
+  {
+    "topic": "science-space",
+    "difficulty": 2,
+    "question": "Which space agency launched the Hubble Space Telescope?",
+    "options": ["ESA", "NASA", "ISRO", "JAXA"],
+    "answer": 1
+  },
+  {
+    "topic": "science-space",
+    "difficulty": 2,
+    "question": "How long does sunlight take to reach Earth?",
+    "options": ["About 8 minutes", "About 8 seconds", "About 8 hours", "About 8 days"],
+    "answer": 0
+  },
+  {
+    "topic": "science-space",
+    "difficulty": 3,
+    "question": "Which mission first landed humans on the Moon in 1969?",
+    "options": ["Apollo 11", "Apollo 13", "Gemini 4", "Vostok 1"],
+    "answer": 0
+  },
+  {
+    "topic": "science-space",
+    "difficulty": 2,
+    "question": "Which planet has the most moons in our solar system?",
+    "options": ["Jupiter", "Saturn", "Uranus", "Neptune"],
+    "answer": 1
+  }
+]

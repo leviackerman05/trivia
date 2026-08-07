@@ -22,6 +22,14 @@ for virtual parties, classrooms, and remote teams.
 | Shadow Sketch       |                   | Genre Swap      |                              |
 |                     |                   | Genre-Bender    |                              |
 
+## Third-party engine licenses
+
+- **chess.js** (MIT) powers move legality and rules in the Chess vs CPU game.
+- **Stockfish** (GPLv3) is the CPU opponent, compiled to WebAssembly and
+  self-hosted in `public/stockfish/` (loaded only when a game starts). Its
+  license and source are at <https://github.com/official-stockfish>; the game
+  page credits the engine under the board.
+
 ## Tech Stack (per PRD §2, DO NOT DEVIATE)
 
 - **Frontend:** Astro v5 (MPA, static export) + React islands + Tailwind CSS v4

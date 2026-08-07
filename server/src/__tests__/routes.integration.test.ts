@@ -189,6 +189,25 @@ describe('REST API (PRD §8.1), DB-backed integration', () => {
       expect(other.body.challenges).toHaveLength(1);
       expect(other.body.challenges[0].data.questions).toHaveLength(10);
     });
+
+    it('never serves the demoted games, even when stale rows exist (R18)', async () => {
+      const today = new Date().toISOString().slice(0, 10);
+      // A stale dailyChallenge row for a demoted game (data-inert by design:
+      // rows stay in the DB, they are just never served or scored again).
+      await getPrisma().dailyChallenge.create({
+        data: {
+          gameId: 'drawing',
+          date: new Date(`${today}T00:00:00.000Z`),
+          data: { promptIndex: 1, prompt: 'stale' } as unknown as object,
+        },
+      });
+      const response = await request(app).get('/api/daily-challenge');
+      const gameIds = response.body.challenges.map(
+        (challenge: { gameId: string }) => challenge.gameId
+      );
+      expect(gameIds).toEqual(['trivia']);
+      expect(gameIds).not.toContain('drawing');
+    });
   });
 
   describe('POST /api/room/create + GET /api/room/:roomCode', () => {

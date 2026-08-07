@@ -1,0 +1,1217 @@
+[
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "In which city do the six main characters of this sitcom live?",
+    "options": ["Boston", "Los Angeles", "Chicago", "New York"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What kind of television show is Friends?",
+    "options": ["Game show", "Reality show", "Sitcom", "Crime drama"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which of the six friends works as a professional chef?",
+    "options": ["Rachel", "Janice", "Phoebe", "Monica"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is Joey's profession for most of the series?",
+    "options": ["Actor", "Lawyer", "Chef", "Doctor"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which friend's work involves dinosaur fossils and paleontology?",
+    "options": ["Joey", "Chandler", "Ross", "Gunther"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which friend plays the guitar and writes her own songs?",
+    "options": ["Monica", "Rachel", "Phoebe", "Ursula"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which friend begins the series working as a waitress at the coffeehouse?",
+    "options": ["Monica", "Carol", "Rachel", "Phoebe"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which two of the six friends are brother and sister?",
+    "options": ["Chandler and Joey", "Ross and Monica", "Phoebe and Ross", "Rachel and Monica"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Who is Ross's sister?",
+    "options": ["Phoebe", "Rachel", "Emily", "Monica"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which two friends live across the hall from Chandler and Joey?",
+    "options": ["Monica and Rachel", "Monica alone", "Rachel and Phoebe", "Ross and Phoebe"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which character manages the coffeehouse where the friends gather?",
+    "options": ["Marcel", "Barry", "Gunther", "Estelle"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which friend is known for the pickup line 'How you doin'?'",
+    "options": ["Mike", "Chandler", "Joey", "Ross"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which character keeps insisting that he and Rachel were on a break?",
+    "options": ["Tag", "Chandler", "Ross", "Gunther"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which friend is famously neat, organized, and extremely competitive?",
+    "options": ["Rachel", "Phoebe", "Monica", "Judy"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of Chandler's on-again, off-again girlfriend with a very loud voice?",
+    "options": ["Erica", "Janice", "Alice", "Estelle"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of Ross's pet monkey?",
+    "options": ["Gunther", "Marcel", "Frank", "Ben"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of Phoebe's identical twin sister?",
+    "options": ["Ursula", "Judy", "Alice", "Carol"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which of the six friends is the youngest of the group?",
+    "options": ["Phoebe", "Monica", "Rachel", "Chandler"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which of the six friends is the oldest of the group?",
+    "options": ["Ross", "Chandler", "Phoebe", "Joey"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What surname do Ross and Monica share?",
+    "options": ["Geller", "Buffay", "Green", "Tribbiani"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is Rachel's surname?",
+    "options": ["Bing", "Buffay", "Green", "Geller"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is Joey's surname?",
+    "options": ["Geller", "Tribbiani", "Bing", "Buffay"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is Chandler's surname?",
+    "options": ["Bing", "Geller", "Tribbiani", "Green"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is Phoebe's surname?",
+    "options": ["Green", "Buffay", "Tribbiani", "Bing"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which of the six friends has the surname Bing?",
+    "options": ["Ross", "Mike", "Joey", "Chandler"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which actress plays Rachel Green?",
+    "options": ["Jennifer Aniston", "Lisa Kudrow", "Courteney Cox", "Reese Witherspoon"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which actress plays Monica Geller?",
+    "options": ["Lisa Kudrow", "Christina Applegate", "Jennifer Aniston", "Courteney Cox"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which actress plays Phoebe Buffay?",
+    "options": ["Lisa Kudrow", "Courteney Cox", "Aisha Tyler", "Jennifer Aniston"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which actor plays Ross Geller?",
+    "options": ["Matthew Perry", "Matt LeBlanc", "David Schwimmer", "Tom Selleck"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which actor plays Chandler Bing?",
+    "options": ["Matthew Perry", "David Schwimmer", "Matt LeBlanc", "Paul Rudd"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which actor plays Joey Tribbiani?",
+    "options": ["James Michael Tyler", "Matt LeBlanc", "Matthew Perry", "David Schwimmer"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which US television network broadcast Friends?",
+    "options": ["NBC", "ABC", "Fox", "CBS"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "In which decade did Friends first air?",
+    "options": ["2000s", "1970s", "1990s", "1980s"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "How many people make up the show's core group of friends?",
+    "options": ["Four", "Five", "Seven", "Six"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Who does Rachel leave at the altar in the pilot episode?",
+    "options": ["Paul", "Gunther", "Ross", "Barry"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of Ross's young son with his first wife Carol?",
+    "options": ["Mike", "Ben", "Frank", "Tag"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of Ross and Rachel's daughter?",
+    "options": ["Emma", "Erica", "Emily", "Alice"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Phoebe's famous original song 'Smelly Cat' is about which kind of animal?",
+    "options": ["A bird", "A cat", "A fish", "A dog"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of Phoebe's original song about a cat?",
+    "options": ["Stinky Dog", "Smelly Cat", "Lonely Fish", "Crazy Bird"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Rachel and which friend were best friends back in high school?",
+    "options": ["Phoebe", "Monica", "Ursula", "Janice"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which of the six friends was very overweight as a child?",
+    "options": ["Ross", "Monica", "Chandler", "Joey"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Chandler's vaguely defined office job deals mainly with what kind of work?",
+    "options": ["Law", "Advertising", "Medicine", "Numbers and statistics"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which two of the friends were college roommates?",
+    "options": ["Ross and Chandler", "Monica and Rachel", "Joey and Chandler", "Ross and Joey"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of Phoebe's half-brother?",
+    "options": ["Mike", "Ben", "Frank Jr.", "Tag"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of the soap opera character Joey plays on 'Days of Our Lives'?",
+    "options": ["Dr. Richard Burke", "Dr. Drake Ramoray", "Dr. Ross Geller", "Dr. Mike Hannigan"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of Joey's talent agent?",
+    "options": ["Judy", "Estelle", "Erica", "Alice"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which of the six friends gets married in London in season 4?",
+    "options": ["Mike", "Ross", "Joey", "Chandler"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of the woman Ross marries in London?",
+    "options": ["Emily", "Rachel", "Mona", "Carol"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which couple is the first of the group to get engaged?",
+    "options": ["Joey and Janice", "Monica and Chandler", "Phoebe and Mike", "Ross and Rachel"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which couple gets married in season 7?",
+    "options": ["Ross and Rachel", "Phoebe and Mike", "Chandler and Janice", "Monica and Chandler"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which of the six friends never gets married during the series?",
+    "options": ["Phoebe", "Ross", "Joey", "Chandler"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the number of the show's final season?",
+    "options": ["Season 12", "Season 8", "Season 10", "Season 9"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "About how many episodes does the entire series have?",
+    "options": ["About 150", "About 100", "About 236", "About 300"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "In which year did Friends premiere?",
+    "options": ["1996", "2000", "1992", "1994"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "In which year did Friends end?",
+    "options": ["2006", "2002", "2004", "2010"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What is the name of the show's theme song?",
+    "options": [
+      "Lean on Me",
+      "I'll Be There for You",
+      "You've Got a Friend",
+      "That's What Friends Are For"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which band performs the show's theme song?",
+    "options": ["The Beach Boys", "The Rembrandts", "The Eagles", "R.E.M."],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What do the six friends do together in the show's opening credits?",
+    "options": ["Sing in a studio", "Dance in a fountain", "Ride a subway", "Walk on a beach"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "What piece of furniture do the friends usually occupy at the coffeehouse?",
+    "options": ["A wooden bench", "A pair of stools", "A leather armchair", "A large orange couch"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 1,
+    "question": "Which friend is known for shouting the excited catchphrase 'I know!'?",
+    "options": ["Janice", "Phoebe", "Rachel", "Monica"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Who created Friends?",
+    "options": [
+      "Larry David and Jerry Seinfeld",
+      "Chuck Lorre and Bill Prady",
+      "Ricky Gervais and Stephen Merchant",
+      "David Crane and Marta Kauffman"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which of these was a reported early working title for Friends?",
+    "options": ["Six Friends", "Park Bench", "Insomnia Cafe", "The Coffee Club"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the name of the show's pilot episode?",
+    "options": [
+      "The One That Started It All",
+      "The One With the Apartment",
+      "The One With the Pilot",
+      "The One Where Monica Gets a Roommate"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which episode features the group's quiz game that ends in an apartment swap?",
+    "options": [
+      "The One With the Game",
+      "The One With the Embryos",
+      "The One With the Quiz",
+      "The One With the Bet"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What do Monica and Rachel lose to Chandler and Joey in the apartment bet?",
+    "options": ["Their savings", "Their furniture", "Their car", "Their apartment"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What does Phoebe bring as a surprise gift at the end of the apartment-swap episode?",
+    "options": ["A rabbit", "A parrot", "A chick and a duck", "Two puppies"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "In which city do Ross and Emily get married?",
+    "options": ["London", "Paris", "Rome", "New York"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Whose name does Ross accidentally say at his wedding to Emily?",
+    "options": ["Janice", "Rachel", "Carol", "Monica"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What does Ross repeatedly shout while trying to move a couch up the stairs?",
+    "options": ["Turn!", "Push!", "Pivot!", "Lift!"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actor plays Richard, Monica's much older boyfriend?",
+    "options": ["Tom Selleck", "George Clooney", "Hugh Laurie", "Bruce Willis"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actress plays Rachel's younger sister Jill?",
+    "options": ["Christina Applegate", "Aisha Tyler", "Reese Witherspoon", "Selma Blair"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actress plays Rachel's sister Amy?",
+    "options": ["Christina Applegate", "Courteney Cox", "Winona Ryder", "Reese Witherspoon"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actor plays Mike Hannigan, who becomes Phoebe's husband?",
+    "options": ["Hank Azaria", "Paul Rudd", "Brad Pitt", "Ben Stiller"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actor plays Frank Jr., Phoebe's half-brother?",
+    "options": ["Dermot Mulroney", "Eddie Cahill", "Giovanni Ribisi", "Adam Goldberg"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which famous actor plays Paul, the father of Ross's student girlfriend Elizabeth?",
+    "options": ["Robin Williams", "Brad Pitt", "Bruce Willis", "Sean Penn"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which famous actor plays Will in the Thanksgiving episode about a high school rumor?",
+    "options": ["Billy Crystal", "Brad Pitt", "George Clooney", "Bruce Willis"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actress plays Carol, Ross's ex-wife?",
+    "options": ["Jane Sibbett", "Laura Linney", "Helen Hunt", "Jessica Hecht"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actress plays Susan, Carol's partner?",
+    "options": ["Jane Sibbett", "Judy Greer", "Jessica Hecht", "Rachael Harris"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "On which other sitcom does Lisa Kudrow's character Ursula also appear?",
+    "options": ["Mad About You", "Frasier", "Will & Grace", "Seinfeld"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "In which season does Rachel give birth to Emma?",
+    "options": ["Season 10", "Season 8", "Season 6", "Season 9"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the name of the episode where Ross dresses up to teach Ben about Hanukkah?",
+    "options": [
+      "The One With the Costume",
+      "The One With the Eight Days",
+      "The One With the Holiday Armadillo",
+      "The One With the Hanukkah Story"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What does the prom video reveal about young Ross?",
+    "options": [
+      "He was prom king",
+      "He tried to take Rachel to the prom",
+      "He danced badly at the prom",
+      "He skipped the prom entirely"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "In which city do Ross and Rachel end up drunkenly married?",
+    "options": ["Miami", "Atlantic City", "Reno", "Las Vegas"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the name of the episode where the group discovers Monica and Chandler are together?",
+    "options": [
+      "The One Where It Comes Out",
+      "The One With the Secret",
+      "The One With the Reveal",
+      "The One Where Everybody Finds Out"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which friend develops romantic feelings for Rachel while she is pregnant?",
+    "options": ["Ross", "Mike", "Chandler", "Joey"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the name of the birth mother who chooses Monica and Chandler to adopt her babies?",
+    "options": ["Nora", "Judy", "Erica", "Alice"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "How does the series end for Monica and Chandler?",
+    "options": [
+      "They travel the world",
+      "They adopt twins and move to the suburbs",
+      "They open a restaurant",
+      "They move to Paris"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actor plays Gunther, the coffeehouse manager?",
+    "options": ["James Michael Tyler", "Eddie Cahill", "Hank Azaria", "Adam Goldberg"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "The exterior of the friends' apartment building is associated with which New York neighborhood?",
+    "options": ["Greenwich Village", "SoHo", "Tribeca", "Harlem"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Who is Chandler's roommate for most of the series?",
+    "options": ["Eddie", "Ross", "Joey", "Gunther"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which friend works as a buyer at the department store Bloomingdale's?",
+    "options": ["Monica", "Joey", "Rachel", "Phoebe"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which friend works as a masseuse in addition to playing music?",
+    "options": ["Monica", "Rachel", "Phoebe", "Janice"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Who does Phoebe carry triplets for as a surrogate?",
+    "options": [
+      "Her twin sister Ursula",
+      "Her half-brother Frank Jr. and his wife Alice",
+      "Her mother",
+      "Ross and Rachel"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the name of the episode in which the friends watch a tape of Ross and Rachel's first time together?",
+    "options": [
+      "The One With the First Time",
+      "The One With the Videotape",
+      "The One With the Reel",
+      "The One With the Home Movie"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which episode reveals that Ross is Emma's father through a red sweater?",
+    "options": [
+      "The One With the Secret Father",
+      "The One With the Paternity Test",
+      "The One With the Red Sweater",
+      "The One With the Reveal"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What does the group traditionally do together every Thanksgiving?",
+    "options": [
+      "Watch a parade",
+      "Play football in the park",
+      "Have dinner together",
+      "Go on a trip"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "In which season did Friends win the Emmy for Outstanding Comedy Series?",
+    "options": ["Season 9", "Season 8", "Season 6", "Season 4"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actress won an Emmy for Outstanding Supporting Actress for playing Phoebe?",
+    "options": ["Jennifer Aniston", "Christina Applegate", "Courteney Cox", "Lisa Kudrow"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which of these guest stars won an Emmy for a Friends appearance?",
+    "options": ["Bruce Willis", "Hugh Laurie", "Ben Stiller", "George Clooney"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the name of the 2021 cast reunion special?",
+    "options": [
+      "Friends: The Special",
+      "Friends: The Reunion",
+      "Friends: One More Time",
+      "Friends: Together Again"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which streaming platform hosted the 2021 Friends reunion special?",
+    "options": ["Hulu", "Netflix", "HBO Max", "Disney+"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which acclaimed actress plays Chandler's father Charles?",
+    "options": ["Joan Collins", "Bette Midler", "Kathleen Turner", "Angela Lansbury"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which two friends live in the apartment with the purple walls?",
+    "options": ["Monica and Rachel", "Ross and Chandler", "Chandler and Joey", "Phoebe and Rachel"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "By the series finale, how many times has Ross been divorced?",
+    "options": ["Two times", "Once", "Four times", "Three times"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the first name of Ross and Monica's mother?",
+    "options": ["Sandra", "Nora", "Judy", "Lily"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the first name of Ross and Monica's father?",
+    "options": ["Leonard", "Jack", "Barry", "Frank"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the name of the episode where Ross and Monica perform a dance on a New Year's Eve television show?",
+    "options": [
+      "The One With the Performance",
+      "The One With the Routine",
+      "The One With New Year's Eve",
+      "The One With the Dance"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which episode features Ross's disastrous spray tan?",
+    "options": [
+      "The One With the Sunburn",
+      "The One With the Bronzer",
+      "The One With Ross's Tan",
+      "The One With the Spray Tan"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What happens to Marcel the monkey over the course of the series?",
+    "options": [
+      "He runs away",
+      "He stays with Ross forever",
+      "He is given to Joey",
+      "He is sent to live at a zoo"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the apartment number of Chandler and Joey's place?",
+    "options": ["22", "19", "20", "21"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is Monica's apartment number?",
+    "options": ["20", "19", "18", "21"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What is the 'Miss Chanandler Bong' joke about?",
+    "options": [
+      "A TV Guide misprint of Chandler's name",
+      "A mail mix-up",
+      "A typo on the apartment door",
+      "A wrong number phone call"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Who is Ross's third wife over the course of the series?",
+    "options": ["Rachel", "Carol", "Emily", "Mona"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "How many sisters does Joey have?",
+    "options": ["Three", "Five", "Two", "Seven"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "In which season does Phoebe marry Mike?",
+    "options": ["Season 8", "Season 9", "Season 7", "Season 10"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Where do Phoebe and Mike hold their wedding ceremony?",
+    "options": ["Outdoors in the snow", "On a beach", "At Central Perk", "In a church"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which friend is the first of the group to discover Monica and Chandler are together?",
+    "options": ["Phoebe", "Joey", "Ross", "Rachel"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "What new career path does Chandler take in the final seasons?",
+    "options": ["Medicine", "Advertising", "Law", "Teaching"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "In which month and year did the series finale air?",
+    "options": ["December 2004", "April 2004", "May 2004", "May 2003"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "How many episodes are in the show's final season?",
+    "options": ["20", "24", "18", "22"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "Roughly how many US viewers watched the series finale?",
+    "options": ["About 32 million", "About 42 million", "About 62 million", "About 52 million"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "How many episodes did season 3 of the show have?",
+    "options": ["24", "26", "22", "25"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "In which season are Frank Jr. and Alice's triplets born?",
+    "options": ["Season 7", "Season 6", "Season 5", "Season 4"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "Which of the six main actors also directed episodes of the series?",
+    "options": ["Courteney Cox", "David Schwimmer", "Matthew Perry", "Matt LeBlanc"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "At which studio complex was Friends filmed?",
+    "options": [
+      "Warner Bros. Studios",
+      "Sony Pictures Studios",
+      "Universal Studios",
+      "Paramount Studios"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "In what format was Friends produced?",
+    "options": [
+      "Multi-camera with a live studio audience",
+      "Documentary style",
+      "Animated",
+      "Single-camera without an audience"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What street address appears on the exterior of the friends' apartment building?",
+    "options": [
+      "120 Christopher Street",
+      "90 Bedford Street",
+      "30 Grove Street",
+      "45 Bleecker Street"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "Which actor who played Ross's son Ben later starred as Jughead in Riverdale?",
+    "options": ["Cole Sprouse", "Macaulay Culkin", "Josh Hutcherson", "Dylan Sprouse"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "In the final scene of the series, what do the friends leave behind as they walk out of the apartment?",
+    "options": ["A coffee mug", "A hat", "Their keys", "A photo album"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "Which actress won an Emmy for her guest role as Rachel's sister Amy?",
+    "options": ["Reese Witherspoon", "Christina Applegate", "Winona Ryder", "Susan Sarandon"],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "In the apartment-swap quiz, what made-up word does Monica use for Chandler's job?",
+    "options": ["Transponster", "Transfixer", "Transformer", "Transporter"],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "Which actress plays Chandler's father, who performs in a Las Vegas show?",
+    "options": ["Stockard Channing", "Liza Minnelli", "Angela Lansbury", "Kathleen Turner"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "Which powder does Ross use in his attempt to free himself from too-tight leather pants?",
+    "options": ["Cornstarch", "Baking soda", "Baby powder", "Talcum-free flour"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What is the name of the episode where Ross is furious after someone eats his sandwich?",
+    "options": [
+      "The One With Ross's Sandwich",
+      "The One With the Revenge",
+      "The One With the Lunch Thief",
+      "The One With the Office Food"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "Which episode shows the friends remembering events from before the series began?",
+    "options": [
+      "The One With the Old Days",
+      "The One With the Past",
+      "The One With the Flashback",
+      "The One With the Memories"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What do the characters call the man they can see through the window across the street?",
+    "options": ["The Naked Neighbor", "The Window Man", "The Ugly Naked Guy", "The Mystery Man"],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What is the name of the episode where Joey takes French lessons from Phoebe?",
+    "options": [
+      "The One Where Joey Learns a Language",
+      "The One Where Joey Speaks French",
+      "The One With the Lessons",
+      "The One With the French Class"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What is the name of the episode where the group learns how Monica and Chandler got together in London?",
+    "options": [
+      "The One With the London Secret",
+      "The One With the Truth About London",
+      "The One With the Story",
+      "The One With the Hookup"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What are the season 5 finale episodes called?",
+    "options": ["The One in LA", "The One in Atlantic City", "The One in Reno", "The One in Vegas"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What are the season 6 finale episodes called?",
+    "options": [
+      "The One With the Ring",
+      "The One With the Engagement",
+      "The One With the Proposal",
+      "The One With the Question"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What are the season 7 finale episodes called?",
+    "options": [
+      "The One With the Big Day",
+      "The One With Monica and Chandler's Wedding",
+      "The One With the Honeymoon",
+      "The One With the Vows"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What are the season 8 finale episodes called?",
+    "options": [
+      "The One With the Hospital",
+      "The One Where Rachel Has a Baby",
+      "The One With the Arrival",
+      "The One With the Birth"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What are the season 9 finale episodes called?",
+    "options": [
+      "The One With the Trip",
+      "The One in the Caribbean",
+      "The One in Barbados",
+      "The One at the Resort"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What is the season 10 premiere called?",
+    "options": [
+      "The One With the Kiss",
+      "The One With the Morning After",
+      "The One After the Breakup",
+      "The One After Joey and Rachel Kiss"
+    ],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What is the season 1 finale called?",
+    "options": [
+      "The One With the Monkey",
+      "The One With the Airport",
+      "The One With the Plane",
+      "The One With the Party"
+    ],
+    "answer": 0
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What is the season 2 finale called?",
+    "options": [
+      "The One With the Ceremony",
+      "The One With Barry and Mindy's Wedding",
+      "The One With the Reception",
+      "The One With Rachel's Wedding"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What is the season 3 finale called?",
+    "options": [
+      "The One With the Vacation",
+      "The One at the Beach",
+      "The One With the Ocean",
+      "The One With the Summer House"
+    ],
+    "answer": 1
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 3,
+    "question": "What is the name of the season 10 episode in which the group first meets the birth mother?",
+    "options": [
+      "The One With the Meeting",
+      "The One With the Expectant Mother",
+      "The One With the Birth Mother",
+      "The One With the Adoption"
+    ],
+    "answer": 2
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actor plays Tag, the young assistant Rachel briefly dates at work?",
+    "options": ["Hank Azaria", "Dermot Mulroney", "Paul Rudd", "Eddie Cahill"],
+    "answer": 3
+  },
+  {
+    "topic": "tv-friends",
+    "difficulty": 2,
+    "question": "Which actor plays Eddie, the strange roommate who briefly moves in with Chandler and Joey?",
+    "options": ["Adam Goldberg", "Eddie Cahill", "Jon Favreau", "Hank Azaria"],
+    "answer": 0
+  }
+]

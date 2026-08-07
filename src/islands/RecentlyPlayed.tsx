@@ -28,7 +28,7 @@ export default function RecentlyPlayed() {
   if (recentGames.length === 0) {
     return (
       <p className="text-body text-ink-muted">
-        Nothing played yet. Finish a solo or daily game and it shows up here.
+        Nothing played yet. Play a game and it shows up here.
       </p>
     );
   }

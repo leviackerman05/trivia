@@ -1,0 +1,58 @@
+[
+  {
+    "topic": "sports-cricket",
+    "difficulty": 1,
+    "question": "Which nation won the first Cricket World Cup in 1975?",
+    "options": ["Australia", "England", "West Indies", "India"],
+    "answer": 2
+  },
+  {
+    "topic": "sports-cricket",
+    "difficulty": 1,
+    "question": "How many players are on a cricket team on the field?",
+    "options": ["10", "11", "12", "9"],
+    "answer": 1
+  },
+  {
+    "topic": "sports-cricket",
+    "difficulty": 2,
+    "question": "Who holds the record for the most Test centuries in cricket history?",
+    "options": ["Virat Kohli", "Brian Lara", "Sachin Tendulkar", "Ricky Ponting"],
+    "answer": 2
+  },
+  {
+    "topic": "sports-cricket",
+    "difficulty": 2,
+    "question": "In which city is the iconic Eden Gardens stadium located?",
+    "options": ["Mumbai", "Kolkata", "Chennai", "Delhi"],
+    "answer": 1
+  },
+  {
+    "topic": "sports-cricket",
+    "difficulty": 1,
+    "question": "What is the term for a bowler dismissing all three stumps with one delivery?",
+    "options": ["Run out", "Caught", "Bowled", "LBW"],
+    "answer": 2
+  },
+  {
+    "topic": "sports-cricket",
+    "difficulty": 3,
+    "question": "Which player scored 281 runs in a famous Test innings at Eden Gardens in 2001?",
+    "options": ["VVS Laxman", "Rahul Dravid", "Sourav Ganguly", "Sachin Tendulkar"],
+    "answer": 0
+  },
+  {
+    "topic": "sports-cricket",
+    "difficulty": 2,
+    "question": "How many balls are bowled in a standard T20 innings?",
+    "options": ["90", "100", "110", "120"],
+    "answer": 3
+  },
+  {
+    "topic": "sports-cricket",
+    "difficulty": 1,
+    "question": "Which format of the game lasts up to five days?",
+    "options": ["T20", "One Day International", "Test cricket", "The Hundred"],
+    "answer": 2
+  }
+]

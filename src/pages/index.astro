@@ -18,7 +18,7 @@ const familySections: { family: GameFamily; label: string; icon: string }[] = [
 ];
 
 const liveDaily = getLiveDailyGames();
-const trending = [...games].sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0)).slice(0, 6);
+const trending = [...games].sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0)).slice(0, 4);
 const newGames = games.filter((game) => game.isNew);
 const multiplayerGames = games.filter((game) => game.type !== 'solo');
 
@@ -27,32 +27,33 @@ const multiplayerGames = games.filter((game) => game.type !== 'solo');
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: globalFaqs.slice(0, 5).map((faq) => ({
+  // The homepage only needs a summary answer; /faq carries the full text.
+  mainEntity: globalFaqs.slice(0, 1).map((faq) => ({
     '@type': 'Question',
     name: faq.question,
-    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: `${faq.answer.split('.')[0]}.`,
+    },
   })),
 });
 ---
 
 <BaseLayout
   title="Trivia & Games: Free Party Games, Daily Trivia and Multiplayer Fun"
-  description="Play 20 free online party games with friends, no downloads and no accounts. Daily trivia and sudoku, drawing games, party classics, and multiplayer rooms. Start playing in seconds!"
+  description="Play 21 free online party games: daily trivia, sudoku, and wordle, drawing games, party classics, and multiplayer rooms. No downloads, no accounts."
   canonicalPath="/"
   ogImage="/og/home.png"
   jsonLd={jsonLd}
   activeNav="home"
 >
   <section class="mb-14 text-center">
-    <Chip variant="status" status="success" class="mb-6"
-      >20 free games · daily challenges · play in seconds</Chip
-    >
+    <Chip variant="status" status="success" class="mb-6">21 free games · daily challenges</Chip>
     <h1 class="mx-auto max-w-4xl font-display text-h1 font-bold tracking-tight text-ink">
       Best daily trivia and party games
     </h1>
     <p class="mx-auto mt-4 max-w-2xl text-body text-ink-muted">
-      Play the same daily trivia as everyone else, race friends in drawing and voting rooms, and
-      build a streak worth protecting. Free, in your browser.
+      Play the same daily trivia, race friends in drawing and voting rooms, and protect a streak.
     </p>
     <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
       <Button variant="primary" size="large" href="/daily">Play today's daily</Button>
@@ -98,12 +99,7 @@ const jsonLd = JSON.stringify({
 
   <section id="multiplayer" aria-label="Multiplayer games" class="mb-14 scroll-mt-24">
     <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
-      <div>
-        <h2 class="font-display text-h2 text-ink">Multiplayer rooms</h2>
-        <p class="mt-2 max-w-2xl text-body text-ink-muted">
-          Create a room, share the code, friends jump in from any device, up to 24 players.
-        </p>
-      </div>
+      <h2 class="font-display text-h2 text-ink">Multiplayer rooms</h2>
       <a href="/#games" class="text-small font-semibold text-primary-strong hover:underline">
         All games →
       </a>
@@ -129,7 +125,7 @@ const jsonLd = JSON.stringify({
     {
       newGames.length > 0 ? (
         <ul class="flex flex-wrap gap-3">
-          {newGames.map((game) => (
+          {newGames.slice(0, 2).map((game) => (
             <li>
               <a href={`/game/${game.slug}`} class="pb-chip-link">
                 {game.name} →
@@ -168,25 +164,24 @@ const jsonLd = JSON.stringify({
     }
   </section>
 
-  <!-- PRD §6.1, ~600-word keyword-rich content with internal links. -->
+  <!-- PRD §6.1, keyword-rich content with internal links (kept compact for
+       the PRD §10 homepage weight gate; /faq and game pages carry the depth). -->
   <section aria-label="About Trivia & Games games" class="flex flex-col gap-4 sm:gap-6">
     <h2 class="font-display text-h2 text-ink">
       The best free online party games, right in your browser
     </h2>
     <p class="max-w-3xl text-body text-ink-muted">
-      Trivia & Games is a collection of 20 free online party games designed for the way people play
-      today: across devices, across time zones, and without any setup. Every game runs in the
-      browser, no downloads, no accounts. If you can open a link, you can play, which makes it the
-      easiest <strong>browser party games</strong> destination for virtual parties, classrooms, remote
-      teams, and family game nights.
+      Trivia & Games has 22 free online party games that run in your browser, no downloads, no
+      accounts. If you can open a link, you can play, which makes it the easiest{' '}
+      <strong>browser party games</strong> destination for parties, classrooms, remote teams, and family
+      game nights.
     </p>
     <p class="max-w-3xl text-body text-ink-muted">
       The heart of the site is the drawing room. Looking to <strong>play pictionary online</strong>?
       Start with{' '}
       <a href="/game/skribbl-arena" class="font-semibold text-primary-strong underline"
         >Skribbl Arena</a
-      >, a fast multiplayer drawing game where one player sketches and everyone races to guess. The
-      drawing family continues with{' '}
+      >, where one player sketches and the room races to guess, then try{' '}
       <a href="/game/copycat-challenge" class="font-semibold text-primary-strong underline"
         >Copycat Challenge</a
       >,{' '}
@@ -201,57 +196,54 @@ const jsonLd = JSON.stringify({
       >.
     </p>
     <p class="max-w-3xl text-body text-ink-muted">
-      Not a drawer? Party games are built for big rooms and loud arguments.{' '}
+      Not a drawer? Party games are built for big rooms.{' '}
       <a href="/game/would-you-rather" class="font-semibold text-primary-strong underline"
         >Would You Rather online</a
-      >{' '}
-      turns wild dilemmas into live percentage battles,{' '}
+      > turns wild dilemmas into live percentages,{' '}
       <a href="/game/most-likely-to" class="font-semibold text-primary-strong underline"
         >Most Likely To</a
-      >{' '}
-      crowns the most likely culprit,{' '}
+      > crowns the culprit,{' '}
       <a href="/game/never-have-i-ever" class="font-semibold text-primary-strong underline"
         >Never Have I Ever</a
-      >{' '}
-      scores the room's wildness, and{' '}
-      <a href="/game/this-or-that" class="font-semibold text-primary-strong underline"
-        >This or That</a
-      >{' '}
-      delivers rapid-fire taste battles, with{' '}
-      <a href="/game/charades" class="font-semibold text-primary-strong underline">Charades</a>{' '}
-      and{' '}
+      > scores the room's wildness, <a
+        href="/game/this-or-that"
+        class="font-semibold text-primary-strong underline">This or That</a
+      > serves rapid-fire battles, and{' '}
+      <a href="/game/charades" class="font-semibold text-primary-strong underline">Charades</a> and{
+        ' '
+      }
       <a href="/game/guess-who" class="font-semibold text-primary-strong underline"
         >Guess Who? Celebrity Edition</a
-      >{' '}
-      rounding out the classics.
+      > round out the list.
     </p>
     <p class="max-w-3xl text-body text-ink-muted">
       For trivia nights, our <strong>online trivia games</strong> cover General, Science, History, Pop
       Culture, and Sports. Play the daily challenge solo or race the room in{' '}
       <a href="/game/trivia" class="font-semibold text-primary-strong underline">Trivia</a>. Solo
-      players can test their word skills in{' '}
-      <a href="/game/rhyme-or-crime" class="font-semibold text-primary-strong underline"
-        >Rhyme or Crime</a
-      >, decode movie plots in{' '}
-      <a href="/game/emoji-plot" class="font-semibold text-primary-strong underline">Emoji Plot</a>,
-      order history in{' '}
-      <a href="/game/timeline-tussle" class="font-semibold text-primary-strong underline"
-        >Timeline Tussle</a
-      >, guess real prices in{' '}
-      <a href="/game/price-is-right" class="font-semibold text-primary-strong underline"
-        >Price Is Right</a
-      >, swap genres in{' '}
-      <a href="/game/genre-swap" class="font-semibold text-primary-strong underline">Genre Swap</a>,
-      and test their geography instincts in{' '}
-      <a href="/game/placeguessr" class="font-semibold text-primary-strong underline">Placeguessr</a
+      players can try <a
+        href="/game/rhyme-or-crime"
+        class="font-semibold text-primary-strong underline">Rhyme or Crime</a
+      >, decode movie plots in <a
+        href="/game/emoji-plot"
+        class="font-semibold text-primary-strong underline">Emoji Plot</a
+      >, order history in <a
+        href="/game/timeline-tussle"
+        class="font-semibold text-primary-strong underline">Timeline Tussle</a
+      >, guess prices in <a
+        href="/game/price-is-right"
+        class="font-semibold text-primary-strong underline">Price Is Right</a
+      >, swap genres in <a
+        href="/game/genre-swap"
+        class="font-semibold text-primary-strong underline">Genre Swap</a
+      >, and test their geography instincts in <a
+        href="/game/placeguessr"
+        class="font-semibold text-primary-strong underline">Placeguessr</a
       >.
     </p>
     <p class="max-w-3xl text-body text-ink-muted">
-      Every multiplayer game uses a simple room system: create a room, share the code or link, and
-      play. Rooms hold up to 24 players on phones, tablets, and desktops. And when the night is
-      over, tomorrow's <a href="/daily" class="font-semibold text-primary-strong underline"
-        >daily games</a
-      > are already waiting.
+      Every multiplayer game uses a simple room system: create a room, share the code, and play.
+      Rooms hold up to 24 players, and tomorrow's{' '}
+      <a href="/daily" class="font-semibold text-primary-strong underline">daily games</a> are waiting.
     </p>
   </section>
 
@@ -261,9 +253,6 @@ const jsonLd = JSON.stringify({
   >
     <div class="min-w-0">
       <h2 class="text-lg font-bold tracking-tight text-ink">Frequently Asked Questions</h2>
-      <p class="mt-1 text-small text-ink-muted">
-        How to host, join, score, and play every game, answered.
-      </p>
     </div>
     <a
       href="/faq"

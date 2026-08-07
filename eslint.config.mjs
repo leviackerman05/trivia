@@ -14,6 +14,10 @@ export default tseslint.config(
       'coverage/**',
       'server/node_modules/**',
       'server/dist/**',
+      // [D067] vendored Stockfish engine (GPLv3): third-party minified worker.
+      'public/stockfish/**',
+      // Designer's chess QA fixture — not part of the shipped product.
+      '.chess-qa/**',
     ],
   },
   js.configs.recommended,

@@ -44,7 +44,15 @@ export type IconName =
   | 'snowflake'
   | 'tools'
   | 'x'
-  | 'expand';
+  | 'expand'
+  | 'chat'
+  | 'ball'
+  | 'car'
+  | 'fork-spoon'
+  | 'desk'
+  | 'star'
+  | 'leaf'
+  | 'landmark';
 
 /** Inner SVG markup per icon (stroke currentColor, 32×32 viewBox). */
 export const ICON_PATHS: Record<IconName, string> = {
@@ -104,6 +112,18 @@ export const ICON_PATHS: Record<IconName, string> = {
     '<path d="M13.5 5.5a7 7 0 0 0 9.7 9.7l3.3 3.3-3 3-3.3-3.3a7 7 0 0 0-9.7-9.7l3.2 3.2 3-3Z"/>',
   x: '<path d="M8 8l16 16M24 8 8 24"/>',
   expand: '<path d="M6 10V6h4M18 6h4v4M6 22v-4h4M18 22h4v-4"/>',
+  // [M-T1] Topic-hub glyphs (house stroke style): speech bubble, sports
+  // ball, car, cutlery, desk, star, leaf, landmark.
+  chat: '<path d="M5 7.5h22v14H12.5L8 25.5v-4H5Z"/>',
+  ball: '<circle cx="16" cy="16" r="10"/><path d="M16 6v20M9.4 10.6 22.6 21.4M22.6 10.6 9.4 21.4"/>',
+  car: '<path d="M6 17.5 8.8 11.5h14.4L26 17.5"/><rect x="4.5" y="17.5" width="23" height="6" rx="2"/><circle cx="10.5" cy="23.5" r="2.2"/><circle cx="21.5" cy="23.5" r="2.2"/>',
+  'fork-spoon':
+    '<path d="M8.5 5v9.5"/><path d="M5.5 5v6a3 3 0 0 0 6 0V5"/><path d="M8.5 14.5V28"/><circle cx="23" cy="10" r="4.5"/><path d="M23 14.5V28"/>',
+  desk: '<rect x="9.5" y="9.5" width="13" height="8" rx="1.5"/><path d="M13.5 17.5v3h5v-3"/><rect x="5" y="20.5" width="22" height="2.5" rx="1.2"/><path d="M8.5 23v4.5M16 23v4.5M23.5 23v4.5"/>',
+  star: '<path d="M16 5l3.3 6.6 7.2 1-5.2 5.1 1.2 7.2L16 21.7l-6.5 3.2 1.2-7.2-5.2-5.1 7.2-1Z"/>',
+  leaf: '<path d="M6 26C6 13 14 5.5 26 5.5 26 17.5 18 26 6 26Z"/><path d="M6 26C11 19.5 17 13.5 23.5 8.5"/>',
+  landmark:
+    '<path d="M16 4.5 26 9.5H6Z"/><path d="M6.5 11.5h19"/><path d="M9 11.5V23M16 11.5V23M23 11.5V23M5 25.5h22"/>',
 };
 
 /** [R3] Game-family chrome icons: drawing, party (voting+special merged), solo, quiz. */

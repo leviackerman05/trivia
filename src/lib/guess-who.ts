@@ -13,10 +13,13 @@ export type GuessWhoView = 'questioning' | 'revealed' | 'game-end';
 /** D064, market-of-fame region (the design's closed union, mirror of the server). */
 export type CelebrityRegion = 'bollywood' | 'hollywood' | 'row';
 
-/** D064, the closed 12-genre fame taxonomy (the server's enum gate freezes it). */
+/** D064, the closed 12-genre fame taxonomy + owner 2026-08-06 cinema split
+ * (cinema-bollywood / cinema-hollywood). */
 export type CelebrityGenre =
   | 'music'
   | 'cinema'
+  | 'cinema-bollywood'
+  | 'cinema-hollywood'
   | 'television'
   | 'sports'
   | 'politics'
@@ -59,7 +62,9 @@ export const REGION_LABELS: Record<string, string> = {
 export const GENRE_LABELS: Record<string, string> = {
   all: 'All',
   music: 'Music',
-  cinema: 'Cinema',
+  cinema: 'Cinema (World)',
+  'cinema-bollywood': 'Bollywood',
+  'cinema-hollywood': 'Hollywood',
   television: 'Television',
   sports: 'Sports',
   politics: 'Politics',

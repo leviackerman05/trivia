@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRoom } from './room/useRoom';
 import RoomLobbyPanel from './room/RoomLobbyPanel';
+import RoomRejoining from './room/RoomRejoining';
 import { useTriviaGame } from './useTriviaGame';
 import { getGame } from '../lib/games';
 import type { TriviaGameState, TriviaMode } from '../lib/trivia-room';
@@ -19,7 +20,15 @@ interface Props {
 
 export default function TriviaArena({ gameSlug }: Props) {
   const game = getGame(gameSlug);
-  const { status, error, room, messages, actions: roomActions, myName } = useRoom();
+  const {
+    status,
+    error,
+    room,
+    messages,
+    actions: roomActions,
+    myName,
+    rejoining,
+  } = useRoom(gameSlug);
   const { game: trivia, actions: gameActions } = useTriviaGame(room?.code ?? null, myName ?? null);
 
   const [now, setNow] = useState(() => Date.now());
@@ -43,6 +52,9 @@ export default function TriviaArena({ gameSlug }: Props) {
       : 0;
 
   if (!room) {
+    if (rejoining) {
+      return <RoomRejoining />;
+    }
     return (
       <RoomLobbyPanel
         game={game}

@@ -38,6 +38,10 @@ interface SoloShellProps {
    * when defined; default undefined keeps existing islands unchanged. */
   correctCount?: number;
   totalCount?: number;
+  /** [R20] Daily Wordle has no leaderboard (scores are per-attempt, not a
+   * comparable race): hides the nickname/save form and the top-5 board.
+   * Streak, member progress, and the share card stay. */
+  hideLeaderboard?: boolean;
   onPlayAgain: () => void;
 }
 
@@ -53,6 +57,7 @@ export default function SoloShell({
   resultSummary,
   correctCount,
   totalCount,
+  hideLeaderboard = false,
   onPlayAgain,
 }: SoloShellProps) {
   const [streak, setStreak] = useState(() => readStreak(slug).count);
@@ -97,10 +102,12 @@ export default function SoloShell({
         // The run is best-effort; the leaderboard save is the source of truth.
       });
     }
-    void fetchLeaderboard(slug, 'daily', 5)
-      .then((response) => setLeaderboard(response.entries))
-      .catch(() => setLeaderboard([]));
-  }, [phase, slug, dateKey, score, correctCount, totalCount]);
+    if (!hideLeaderboard) {
+      void fetchLeaderboard(slug, 'daily', 5)
+        .then((response) => setLeaderboard(response.entries))
+        .catch(() => setLeaderboard([]));
+    }
+  }, [phase, slug, dateKey, score, correctCount, totalCount, hideLeaderboard]);
 
   const saveScore = useCallback(async () => {
     const trimmed = nickname.trim();
@@ -189,7 +196,7 @@ export default function SoloShell({
           </p>
           {resultSummary}
 
-          {submitState !== 'saved' ? (
+          {!hideLeaderboard && submitState !== 'saved' ? (
             <form
               onSubmit={(event) => {
                 event.preventDefault();
@@ -221,7 +228,7 @@ export default function SoloShell({
               Score saved to the daily leaderboard!
             </p>
           )}
-          {submitState === 'failed' && (
+          {!hideLeaderboard && submitState === 'failed' && (
             <p role="alert" className="text-small font-semibold text-danger-strong">
               Couldn't save right now, check the server and try again.
             </p>
@@ -253,7 +260,7 @@ export default function SoloShell({
             </p>
           )}
 
-          {leaderboard.length > 0 && (
+          {!hideLeaderboard && leaderboard.length > 0 && (
             <div className="rounded-lg border border-border p-4">
               <h3 className="mb-2 text-lg font-bold tracking-tight text-ink">Today's top scores</h3>
               <ol className="flex flex-col divide-y divide-border">

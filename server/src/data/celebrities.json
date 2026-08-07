@@ -284,7 +284,7 @@
       "Starred in Titanic, one of the highest-grossing films ever"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -302,7 +302,7 @@
       "Flew an F-18 fighter jet in Top Gun: Maverick"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -320,7 +320,7 @@
       "Co-founded the production company Plan B Entertainment"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -338,7 +338,7 @@
       "Directed the film First They Killed My Father"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -356,7 +356,7 @@
       "Grew up in Kentucky and was discovered in New York"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -374,7 +374,7 @@
       "Began acting in films as a child"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -392,7 +392,7 @@
       "Played Sherlock Holmes in two Guy Ritchie films"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -410,7 +410,7 @@
       "Is the middle of three brothers, all actors"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -428,7 +428,7 @@
       "His wrestling name The Rock came from his father and grandfather"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -446,7 +446,7 @@
       "Won his first Oscar for King Richard in 2022"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -464,7 +464,7 @@
       "Started his career in television before films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1
   },
   {
@@ -482,7 +482,7 @@
       "Made his acting debut as a child in Yaadon Ki Baaraat"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1
   },
   {
@@ -500,7 +500,7 @@
       "His debut film Biwi Ho To Aisi released in 1988"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1
   },
   {
@@ -518,7 +518,7 @@
       "Has been a global UNICEF goodwill ambassador"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1
   },
   {
@@ -536,7 +536,7 @@
       "Made her acting debut in the film Om Shanti Om"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1
   },
   {
@@ -554,7 +554,7 @@
       "Won the Filmfare Critics Award for Gangubai Kathiawadi"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1
   },
   {
@@ -572,7 +572,7 @@
       "His debut film Saawariya released in 2007"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1
   },
   {
@@ -806,7 +806,7 @@
       "Was born Norma Jeane Mortenson"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -1436,7 +1436,7 @@
       "Directed Jaws, which launched the summer blockbuster era"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -1472,7 +1472,7 @@
       "Is known for frequent collaborations with Robert De Niro"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -1490,7 +1490,7 @@
       "Worked at a video rental store before becoming a director"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -1508,7 +1508,7 @@
       "Lived in England for most of his career"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -2660,7 +2660,7 @@
       "Starred in Edward Scissorhands and Charlie and the Chocolate Factory"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -2678,7 +2678,7 @@
       "Studied at the Yale School of Drama"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -2696,7 +2696,7 @@
       "Voiced Woody in the Toy Story films"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -2714,7 +2714,7 @@
       "Is from Smyrna, Georgia"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -2732,7 +2732,7 @@
       "Was born in Arlington, Virginia"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -2750,7 +2750,7 @@
       "Also works as a director"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -2768,7 +2768,7 @@
       "Studied at Harvard before acting"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -2786,7 +2786,7 @@
       "Is from Cambridge, Massachusetts"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -2876,7 +2876,7 @@
       "Is Australian and began his career in theater"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -2894,7 +2894,7 @@
       "Is from Vancouver, Canada"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -2912,7 +2912,7 @@
       "Was a substitute teacher before acting"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -2984,7 +2984,7 @@
       "Is from Toronto, Canada"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -3002,7 +3002,7 @@
       "Was born in Jerusalem and raised in New York"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -3020,7 +3020,7 @@
       "Is Australian and has won two Oscars"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -3038,7 +3038,7 @@
       "Was born in Hawaii and raised in Australia"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -3056,7 +3056,7 @@
       "Is one of the highest-grossing actors of all time"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -3074,7 +3074,7 @@
       "Did not begin acting full time until his 40s"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -3092,7 +3092,7 @@
       "Won his first Oscar for Glory in 1990"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -3110,7 +3110,7 @@
       "Is the first Black actress to win the triple crown of acting"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -3146,7 +3146,7 @@
       "Is from New York City"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -3164,7 +3164,7 @@
       "Is from Australia and moved to Hollywood in her early 20s"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -3182,7 +3182,7 @@
       "Was a child star on The Mickey Mouse Club"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -3200,7 +3200,7 @@
       "Was born in Puerto Rico"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -3218,7 +3218,7 @@
       "Was a cast member on Saturday Night Live"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -3236,7 +3236,7 @@
       "Is Canadian and began as a stand-up comedian"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -3254,7 +3254,7 @@
       "Was a cast member on Saturday Night Live in the 1980s"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1
   },
   {
@@ -3290,7 +3290,7 @@
       "Was a bodybuilder before acting"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -3308,7 +3308,7 @@
       "Wrote the script for Rocky"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2
   },
   {
@@ -3614,7 +3614,7 @@
       "Hosted the Indian version of Who Wants to Be a Millionaire"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1
   },
   {
@@ -3632,7 +3632,7 @@
       "Made his film debut in Kaho Naa... Pyaar Hai"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1
   },
   {
@@ -3645,7 +3645,7 @@
     "hairColor": "black",
     "famousFor": "Uri, Masaan",
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "facts": [
       "Made his film debut in Masaan (2015)",
@@ -3663,7 +3663,7 @@
     "hairColor": "black",
     "famousFor": "Sonu Ke Titu Ki Sweety",
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "facts": [
       "Rose to fame with the Pyaar Ka Punchnama monologue",
@@ -4663,7 +4663,7 @@
     "hairColor": "blonde",
     "famousFor": "The Dark Knight",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": [
       "Won a posthumous Oscar for The Dark Knight",
@@ -4681,7 +4681,7 @@
     "hairColor": "black",
     "famousFor": "Black Panther",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": [
       "Played Black Panther in the Marvel films",
@@ -4699,7 +4699,7 @@
     "hairColor": "brown",
     "famousFor": "Ant-Man, Friends",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": [
       "Plays Ant-Man in the Marvel films",
@@ -4717,7 +4717,7 @@
     "hairColor": "brown",
     "famousFor": "Venom, Mad Max",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": [
       "Played Venom and Bane in superhero films",
@@ -4735,7 +4735,7 @@
     "hairColor": "brown",
     "famousFor": "The Devil Wears Prada, Les Misérables",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": [
       "Won an Oscar for Les Misérables",
@@ -4753,7 +4753,7 @@
     "hairColor": "blonde",
     "famousFor": "Mad Max, Monster",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": ["Won an Oscar for Monster", "Was born in South Africa", "Is fluent in Afrikaans"]
   },
@@ -5249,7 +5249,7 @@
     "hairColor": "black",
     "famousFor": "Singham, Golmaal",
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "facts": [
       "Directs action comedies with large star casts",
@@ -5285,7 +5285,7 @@
     "hairColor": "brown",
     "famousFor": "Titanic, Avatar",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "facts": [
       "Directed Titanic and Avatar",
@@ -5303,7 +5303,7 @@
     "hairColor": "brown",
     "famousFor": "Ocean's Eleven, Erin Brockovich",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": [
       "Won the Palme d'Or at 26 for sex, lies, and videotape",
@@ -5321,7 +5321,7 @@
     "hairColor": "gray",
     "famousFor": "Star Wars, Indiana Jones",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "facts": [
       "Played Han Solo and Indiana Jones",
@@ -5339,7 +5339,7 @@
     "hairColor": "brown",
     "famousFor": "Alien, Avatar",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": [
       "Played Ellen Ripley in the Alien films",
@@ -5357,7 +5357,7 @@
     "hairColor": "blonde",
     "famousFor": "The Silence of the Lambs, Taxi Driver",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": [
       "Won two Oscars for best actress",
@@ -5375,7 +5375,7 @@
     "hairColor": "black",
     "famousFor": "Kill Bill, Charlie's Angels",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": [
       "Starred in Kill Bill and Charlie's Angels",
@@ -5645,7 +5645,7 @@
     "hairColor": "black",
     "famousFor": "Pushpa, Animal",
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "facts": [
       "Acts in Kannada, Telugu, Tamil, and Hindi films",
@@ -5663,7 +5663,7 @@
     "hairColor": "black",
     "famousFor": "Dum Laga Ke Haisha, Toilet: Ek Prem Katha",
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "facts": [
       "Made her debut in Dum Laga Ke Haisha",
@@ -5681,7 +5681,7 @@
     "hairColor": "black",
     "famousFor": "Dhadak, Gunjan Saxena",
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "facts": [
       "Is the daughter of actress Sridevi",
@@ -5699,7 +5699,7 @@
     "hairColor": "black",
     "famousFor": "Bangalore Days, Sita Ramam",
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "facts": [
       "Is a leading actor in Malayalam cinema",
@@ -5717,7 +5717,7 @@
     "hairColor": "brown",
     "famousFor": "Knocked Up, Superbad",
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "facts": [
       "Directed and produced comedy films",
@@ -5831,7 +5831,7 @@
       "Appeared in Indian and international cinema productions"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 116
   },
@@ -5850,7 +5850,7 @@
       "Born in Shillong and raised in Kerala"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 95
   },
@@ -5869,7 +5869,7 @@
       "Starred in the films Jab We Met and 3 Idiots"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 94
   },
@@ -5888,7 +5888,7 @@
       "Received the Dadasaheb Phalke Award in 2013"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 91
   },
@@ -5907,7 +5907,7 @@
       "Returned to lead roles with the Mardaani films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 86
   },
@@ -5926,7 +5926,7 @@
       "Co-owns the Indian Premier League team Punjab Kings"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 85
   },
@@ -5945,7 +5945,7 @@
       "Received the Padma Shri in 2009"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 81
   },
@@ -5964,7 +5964,7 @@
       "Won several Filmfare Awards for Best Actress"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 79
   },
@@ -5983,7 +5983,7 @@
       "Belonged to the founding Kapoor acting family"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 78
   },
@@ -6002,7 +6002,7 @@
       "Owns the Pro Kabaddi League team Jaipur Pink Panthers"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 77
   },
@@ -6021,7 +6021,7 @@
       "Received the Padma Shri in 2008"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 77
   },
@@ -6040,7 +6040,7 @@
       "Sang playback songs for several of her films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 76
   },
@@ -6059,7 +6059,7 @@
       "Received the Padma Shri in 2013"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 75
   },
@@ -6078,7 +6078,7 @@
       "Appeared in Hindi films like Khalnayak and Rangeela"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 74
   },
@@ -6097,7 +6097,7 @@
       "Worked in Hollywood films and television series"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 73
   },
@@ -6116,7 +6116,7 @@
       "Starred in the films PK and Sultan"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 71
   },
@@ -6135,7 +6135,7 @@
       "Served as a Member of Parliament from Mathura"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 69
   },
@@ -6154,7 +6154,7 @@
       "Born in London and raised in the United States"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 69
   },
@@ -6173,7 +6173,7 @@
       "Known for twist endings in his films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 66
   },
@@ -6192,7 +6192,7 @@
       "Received the Padma Vibhushan in 2010"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 66
   },
@@ -6211,7 +6211,7 @@
       "Starred in Paan Singh Tomar and The Lunchbox"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 66
   },
@@ -6230,7 +6230,7 @@
       "Played the lead in the series Sacred Games"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 66
   },
@@ -6249,7 +6249,7 @@
       "Appeared in the films Jism and Ajnabee"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 64
   },
@@ -6268,7 +6268,7 @@
       "Released yoga fitness videos in India"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 64
   },
@@ -6287,7 +6287,7 @@
       "Starred in the films Andaaz and No Entry"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 63
   },
@@ -6306,7 +6306,7 @@
       "Received the Padma Shri in 2016"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 62
   },
@@ -6325,7 +6325,7 @@
       "Starred in the comedy Pyaar Ke Side Effects"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 62
   },
@@ -6344,7 +6344,7 @@
       "Belongs to the Kapoor acting family"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 62
   },
@@ -6363,7 +6363,7 @@
       "Received the Dadasaheb Phalke Award in 2021"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 61
   },
@@ -6382,7 +6382,7 @@
       "Belongs to the Kapoor acting family"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 61
   },
@@ -6401,7 +6401,7 @@
       "Starred in the films Main Hoon Na and Aankhen"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 61
   },
@@ -6420,7 +6420,7 @@
       "Starred in the films Arundhati and Rudhramadevi"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -6439,7 +6439,7 @@
       "Starred in the films Rowdy Rathore and Lootera"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -6477,7 +6477,7 @@
       "Won the Filmfare Award for Best Actress multiple times"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 58
   },
@@ -6496,7 +6496,7 @@
       "Is the son of actor Pankaj Kapur"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 58
   },
@@ -6515,7 +6515,7 @@
       "Father of actors Sunny and Bobby Deol"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 58
   },
@@ -6534,7 +6534,7 @@
       "Won multiple Filmfare Awards for playback singing"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 58
   },
@@ -6553,7 +6553,7 @@
       "Co-owns the IPL team Kolkata Knight Riders"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 57
   },
@@ -6572,7 +6572,7 @@
       "Is the mother of actor Abhishek Bachchan"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 57
   },
@@ -6591,7 +6591,7 @@
       "Starred in Chandni and Kapoor and Sons"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 57
   },
@@ -6610,7 +6610,7 @@
       "Studied sociology at the University of Mumbai"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 56
   },
@@ -6629,7 +6629,7 @@
       "Married actor Sunil Dutt in 1958"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 55
   },
@@ -6648,7 +6648,7 @@
       "Known for his deep voice and villain roles"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 55
   },
@@ -6667,7 +6667,7 @@
       "Received the Dadasaheb Phalke Award in 1994"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 55
   },
@@ -6686,7 +6686,7 @@
       "Appeared in the films Saaho and Radhe Shyam"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 55
   },
@@ -6705,7 +6705,7 @@
       "Was born in Mumbai and started acting as a teenager"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 54
   },
@@ -6724,7 +6724,7 @@
       "Received the Padma Shri in 1967"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 54
   },
@@ -6743,7 +6743,7 @@
       "Starred in Gabbar Singh and 7aum Arivu"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 54
   },
@@ -6762,7 +6762,7 @@
       "Received the Padma Shri and Padma Bhushan"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 54
   },
@@ -6781,7 +6781,7 @@
       "Worked in Hindi films during the 1940s and 1950s"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 53
   },
@@ -6800,7 +6800,7 @@
       "Worked in Indian and international films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 53
   },
@@ -6819,7 +6819,7 @@
       "Won a Filmfare Award for Gully Boy"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 53
   },
@@ -6838,7 +6838,7 @@
       "Worked as a model before acting"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 53
   },
@@ -6857,7 +6857,7 @@
       "Works as a model and actress"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 53
   },
@@ -6895,7 +6895,7 @@
       "Received the Padma Shri in 1990"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 52
   },
@@ -6914,7 +6914,7 @@
       "Received the Padma Bhushan in 2024"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 52
   },
@@ -6933,7 +6933,7 @@
       "Received a special mention at the National Film Awards for Neerja"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 52
   },
@@ -6952,7 +6952,7 @@
       "Founded the production company Manikarnika Films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 52
   },
@@ -6971,7 +6971,7 @@
       "Starred in the films Barfi! and Rustom"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 52
   },
@@ -6990,7 +6990,7 @@
       "Appeared in the films Chhichhore and Kedarnath"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 52
   },
@@ -7009,7 +7009,7 @@
       "Starred in Bareilly Ki Barfi and Crew"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 52
   },
@@ -7028,7 +7028,7 @@
       "Was born in Mumbai in 1991"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 52
   },
@@ -7047,7 +7047,7 @@
       "Trained in martial arts and dance"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 52
   },
@@ -7066,7 +7066,7 @@
       "Was born in Mumbai in 1985"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 51
   },
@@ -7085,7 +7085,7 @@
       "Served as leader of the AIADMK political party"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 51
   },
@@ -7104,7 +7104,7 @@
       "Received the Padma Shri and Padma Bhushan"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 51
   },
@@ -7123,7 +7123,7 @@
       "Founded the production company Dharma Productions"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 51
   },
@@ -7142,7 +7142,7 @@
       "Works as a goodwill ambassador for the United Nations"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 50
   },
@@ -7161,7 +7161,7 @@
       "Appeared in the 2012 film Agneepath"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 49
   },
@@ -7180,7 +7180,7 @@
       "Won four Filmfare Awards for Best Actress"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 49
   },
@@ -7199,7 +7199,7 @@
       "Founded the production company Mirabai Films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 49
   },
@@ -7218,7 +7218,7 @@
       "Received the Dadasaheb Phalke Award in 2015"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 49
   },
@@ -7237,7 +7237,7 @@
       "Starred in Badrinath Ki Dulhania and Jugjugg Jeeyo"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 49
   },
@@ -7256,7 +7256,7 @@
       "Starred in the action films Baaghi and War"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 49
   },
@@ -7275,7 +7275,7 @@
       "Worked in Hindi films in the 2000s"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 48
   },
@@ -7294,7 +7294,7 @@
       "Co-owns the football club NorthEast United"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 48
   },
@@ -7313,7 +7313,7 @@
       "Received the Dadasaheb Phalke Award in 2012"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 48
   },
@@ -7332,7 +7332,7 @@
       "Worked as an actor, director, and screenwriter"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 48
   },
@@ -7351,7 +7351,7 @@
       "Appeared in the thriller film Humraaz"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 48
   },
@@ -7370,7 +7370,7 @@
       "Received the Padma Shri award for her film career"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 48
   },
@@ -7389,7 +7389,7 @@
       "Starred in Shuddh Desi Romance and Hasee Toh Phasee"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 48
   },
@@ -7408,7 +7408,7 @@
       "Entered politics with the Congress party"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 47
   },
@@ -7427,7 +7427,7 @@
       "Worked in Hindi films in the 2000s"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 47
   },
@@ -7446,7 +7446,7 @@
       "Worked as a model before acting"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 47
   },
@@ -7465,7 +7465,7 @@
       "Worked as a model before acting"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 47
   },
@@ -7484,7 +7484,7 @@
       "Started acting as a child artist"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 47
   },
@@ -7503,7 +7503,7 @@
       "Appeared in the comedy film Duplicate"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 46
   },
@@ -7522,7 +7522,7 @@
       "Appeared in the Telugu film Bommarillu"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 46
   },
@@ -7541,7 +7541,7 @@
       "Appeared in Satyajit Ray's film Abhijan"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 46
   },
@@ -7560,7 +7560,7 @@
       "Worked as an actor, director, and producer"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 46
   },
@@ -7579,7 +7579,7 @@
       "Appeared in the Hollywood film Silver Linings Playbook"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 46
   },
@@ -7598,7 +7598,7 @@
       "Appeared in the series The Family Man"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 46
   },
@@ -7617,7 +7617,7 @@
       "Hosted the game show Kannadada Kotyadhipati"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 46
   },
@@ -7636,7 +7636,7 @@
       "Wrote screenplays for many Hindi films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 46
   },
@@ -7655,7 +7655,7 @@
       "Appeared in the fantasy film Brahmastra"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 46
   },
@@ -7693,7 +7693,7 @@
       "Received the Padma Shri in 2022"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 45
   },
@@ -7712,7 +7712,7 @@
       "Worked as a model and video jockey"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 45
   },
@@ -7731,7 +7731,7 @@
       "Founded the theatre group Motley Productions"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 45
   },
@@ -7750,7 +7750,7 @@
       "Starred in the comedy film Chalti Ka Naam Gaadi"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 45
   },
@@ -7769,7 +7769,7 @@
       "Wrote the humour book Mrs Funnybones"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 45
   },
@@ -7788,7 +7788,7 @@
       "Appeared in the comedy film Bala"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 45
   },
@@ -7807,7 +7807,7 @@
       "Won several Indian Television Academy Awards"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 45
   },
@@ -7826,7 +7826,7 @@
       "Appeared in the crime film Qurbani"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 44
   },
@@ -7845,7 +7845,7 @@
       "Worked in Indian, Italian, and American productions"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 44
   },
@@ -7864,7 +7864,7 @@
       "Worked in Indian and international films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 44
   },
@@ -7883,7 +7883,7 @@
       "Directed the film Happy New Year"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 44
   },
@@ -7902,7 +7902,7 @@
       "Appeared in more than seventy-five films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 44
   },
@@ -7921,7 +7921,7 @@
       "Belongs to the Allu-Konidela film family"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 44
   },
@@ -7940,7 +7940,7 @@
       "Starred in Gehraiyaan and Dream Girl 2"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 44
   },
@@ -7959,7 +7959,7 @@
       "Received the Padma Shri in 1974"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 43
   },
@@ -7978,7 +7978,7 @@
       "Acted in the films Henna and Dilwale Dulhania Le Jayenge"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 43
   },
@@ -7997,7 +7997,7 @@
       "Also known as a Bharatanatyam dancer"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 43
   },
@@ -8016,7 +8016,7 @@
       "Is the father of actor Sanjay Dutt"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 43
   },
@@ -8035,7 +8035,7 @@
       "Appeared in the Malayalam film Drishyam"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 43
   },
@@ -8054,7 +8054,7 @@
       "Is the son of writer Javed Akhtar"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 43
   },
@@ -8073,7 +8073,7 @@
       "Is the son of actor Dharmendra"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 43
   },
@@ -8092,7 +8092,7 @@
       "Appeared in the series Sacred Games"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 43
   },
@@ -8111,7 +8111,7 @@
       "Is the son of actor Chiranjeevi"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 43
   },
@@ -8130,7 +8130,7 @@
       "Worked in Hindi, Tamil, and Telugu films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 43
   },
@@ -8149,7 +8149,7 @@
       "Appeared in American Horror Story: Freak Show"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 42
   },
@@ -8168,7 +8168,7 @@
       "Worked as a model before acting"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 42
   },
@@ -8206,7 +8206,7 @@
       "Worked in Hindi films during the 1970s and 1980s"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 42
   },
@@ -8225,7 +8225,7 @@
       "Received the Dadasaheb Phalke Award in 2011"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 42
   },
@@ -8244,7 +8244,7 @@
       "Worked as a model before acting"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 42
   },
@@ -8263,7 +8263,7 @@
       "Hosted reality singing shows like Indian Idol"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 42
   },
@@ -8282,7 +8282,7 @@
       "Appeared in Once Upon a Time in Mumbaai"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 42
   },
@@ -8301,7 +8301,7 @@
       "Retired from acting in the 1970s"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 42
   },
@@ -8358,7 +8358,7 @@
       "Starred in Delhi Belly and Mere Brother Ki Dulhan"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 41
   },
@@ -8377,7 +8377,7 @@
       "Received the Padma Shri in 2009"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 41
   },
@@ -8396,7 +8396,7 @@
       "Won Filmfare Awards for her Tamil performances"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 41
   },
@@ -8415,7 +8415,7 @@
       "Co-founded the football club Bengaluru FC"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 41
   },
@@ -8434,7 +8434,7 @@
       "Served as a Member of Parliament for Congress"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 1,
     "sitelinks": 41
   },
@@ -8453,7 +8453,7 @@
       "Worked in Hindi cinema since the 1990s"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 41
   },
@@ -8472,7 +8472,7 @@
       "Worked as an actor and film producer"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 41
   },
@@ -8491,7 +8491,7 @@
       "Acted in Indian and international cinema"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 41
   },
@@ -8510,7 +8510,7 @@
       "Worked in Tamil, Hindi, and English films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 41
   },
@@ -8529,7 +8529,7 @@
       "Acted in Marathi and Hindi films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 41
   },
@@ -8548,7 +8548,7 @@
       "Won a Filmfare Award for Best Female Debut"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 41
   },
@@ -8586,7 +8586,7 @@
       "Directed Bhuvan Shome and Ek Din Pratidin"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 38
   },
@@ -8624,7 +8624,7 @@
       "Wrote books in Kannada and English"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 33
   },
@@ -8643,7 +8643,7 @@
       "Was born in Mainpuri in Uttar Pradesh"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 28
   },
@@ -8662,7 +8662,7 @@
       "Worked as an assistant director on Lagaan"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 28
   },
@@ -8700,7 +8700,7 @@
       "Led the movement for Telangana statehood"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 23
   },
@@ -8719,7 +8719,7 @@
       "Received the Dadasaheb Phalke Award in 2010"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 23
   },
@@ -8738,7 +8738,7 @@
       "Writes on Indian history and politics"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 23
   },
@@ -8757,7 +8757,7 @@
       "Worked as an assistant to director Shyam Benegal"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 23
   },
@@ -8776,7 +8776,7 @@
       "Reported from conflict zones for Indian television"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 23
   },
@@ -8795,7 +8795,7 @@
       "Entered the India Book of Records for composing music for short Telugu films"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 23
   },
@@ -8814,7 +8814,7 @@
       "Wrote many books on Indian aesthetics"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 3,
     "sitelinks": 22
   },
@@ -8833,7 +8833,7 @@
       "Worked in advertising before entering filmmaking"
     ],
     "region": "bollywood",
-    "genre": "cinema",
+    "genre": "cinema-bollywood",
     "difficulty": 2,
     "sitelinks": 22
   },
@@ -12728,7 +12728,7 @@
       "Served two terms as governor of California."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 304
   },
@@ -12747,7 +12747,7 @@
       "Attended the Los Angeles County High School for the Arts."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 225
   },
@@ -12766,7 +12766,7 @@
       "Received an Academy Award nomination for Morocco."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 199
   },
@@ -12785,7 +12785,7 @@
       "Born Robert Allen Zimmerman in Minnesota."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 184
   },
@@ -12804,7 +12804,7 @@
       "Famous for silkscreen portraits of celebrities."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 178
   },
@@ -12823,7 +12823,7 @@
       "Starred in the films Pennies from Heaven and High Society."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 177
   },
@@ -12842,7 +12842,7 @@
       "Born Marshall Mathers in St. Joseph, Missouri."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 175
   },
@@ -12861,7 +12861,7 @@
       "Released the album Rare in 2020."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 175
   },
@@ -12880,7 +12880,7 @@
       "Starred in the sitcom Mork & Mindy."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 161
   },
@@ -12899,7 +12899,7 @@
       "Contributed the song Young and Beautiful to The Great Gatsby."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 159
   },
@@ -12918,7 +12918,7 @@
       "Born Allan Stewart Konigsberg in Brooklyn, New York."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 157
   },
@@ -12937,7 +12937,7 @@
       "Refused his Best Actor Oscar for The Godfather."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 157
   },
@@ -12956,7 +12956,7 @@
       "Won a Grammy for the live album Judy at Carnegie Hall."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 151
   },
@@ -12975,7 +12975,7 @@
       "Studied film at the University of California, Los Angeles."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 149
   },
@@ -12994,7 +12994,7 @@
       "Performed at the MTV Video Music Awards multiple times."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 146
   },
@@ -13013,7 +13013,7 @@
       "Received the Presidential Medal of Freedom in 2010."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 144
   },
@@ -13032,7 +13032,7 @@
       "Co-founded amfAR to support AIDS research."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 143
   },
@@ -13051,7 +13051,7 @@
       "Co-founded the Tribeca Film Festival in New York."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 137
   },
@@ -13070,7 +13070,7 @@
       "Performed with the Rat Pack in Las Vegas."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 135
   },
@@ -13089,7 +13089,7 @@
       "Directed and starred in A Star Is Born."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 135
   },
@@ -13108,7 +13108,7 @@
       "Served as mayor of Carmel-by-the-Sea, California."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 134
   },
@@ -13127,7 +13127,7 @@
       "Released the album Me Against the World in 1995."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 133
   },
@@ -13146,7 +13146,7 @@
       "Co-wrote the Indiana Jones film series."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 133
   },
@@ -13165,7 +13165,7 @@
       "Starred alongside Robert De Niro in Heat."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 133
   },
@@ -13184,7 +13184,7 @@
       "Born Katheryn Hudson in Santa Barbara, California."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 133
   },
@@ -13203,7 +13203,7 @@
       "Known for the single Genie in a Bottle."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 130
   },
@@ -13222,7 +13222,7 @@
       "Performed in hundreds of concerts across the Soviet Union."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 129
   },
@@ -13241,7 +13241,7 @@
       "Founded the lifestyle company Goop in 2008."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 129
   },
@@ -13260,7 +13260,7 @@
       "Played opposite Spencer Tracy in nine films."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 128
   },
@@ -13279,7 +13279,7 @@
       "Played the Joker in the 1989 film Batman."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 127
   },
@@ -13298,7 +13298,7 @@
       "Performed his own stunts in many action films."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 127
   },
@@ -13317,7 +13317,7 @@
       "Starred in the film Wind River."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 126
   },
@@ -13336,7 +13336,7 @@
       "Wrote the autobiography Living My Life."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 125
   },
@@ -13355,7 +13355,7 @@
       "Born in Lachine, Quebec, to Russian-Jewish parents."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 120
   },
@@ -13374,7 +13374,7 @@
       "Took office as Vice President of the United States in 2025."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 111
   },
@@ -13393,7 +13393,7 @@
       "Won the National Book Award for The Sea Around Us."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 109
   },
@@ -13412,7 +13412,7 @@
       "Father of actress and activist Jane Fonda."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 99
   },
@@ -13431,7 +13431,7 @@
       "Starred in American Psycho as Patrick Bateman."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 99
   },
@@ -13450,7 +13450,7 @@
       "Fled Austria for Hollywood during the 1930s."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 99
   },
@@ -13469,7 +13469,7 @@
       "Recorded with the Miles Davis Quintet."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 99
   },
@@ -13488,7 +13488,7 @@
       "Played the title role in Girl, Interrupted."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 99
   },
@@ -13507,7 +13507,7 @@
       "Son of the actor Kirk Douglas."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 99
   },
@@ -13526,7 +13526,7 @@
       "Began his career as rapper Marky Mark."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 99
   },
@@ -13545,7 +13545,7 @@
       "Born in Boston, Massachusetts, in 1981."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 99
   },
@@ -13564,7 +13564,7 @@
       "Served as editor of Marvel Comics for decades."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 99
   },
@@ -13583,7 +13583,7 @@
       "Played Walter Sobchak in The Big Lebowski."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 99
   },
@@ -13602,7 +13602,7 @@
       "Released the album Songs in the Key of Life."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 98
   },
@@ -13621,7 +13621,7 @@
       "Born in Ballymena, Northern Ireland, in 1952."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 98
   },
@@ -13640,7 +13640,7 @@
       "Known by the nickname The Great Stone Face."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 98
   },
@@ -13659,7 +13659,7 @@
       "Known for roles in romantic comedies of the 1930s and 1940s."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 98
   },
@@ -13678,7 +13678,7 @@
       "Known for her distinctive fashion sense."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 98
   },
@@ -13697,7 +13697,7 @@
       "Born in Kyiv, Ukraine, and raised in Los Angeles."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 98
   },
@@ -13716,7 +13716,7 @@
       "Performed the song Numb with Linkin Park."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 97
   },
@@ -13735,7 +13735,7 @@
       "Born Calvin Cordozar Broadus Jr. in Long Beach, California."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 97
   },
@@ -13754,7 +13754,7 @@
       "Founded the Sundance Film Festival in Utah."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 97
   },
@@ -13773,7 +13773,7 @@
       "Known for tough-guy roles in westerns and action films."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 97
   },
@@ -13792,7 +13792,7 @@
       "Won a Golden Globe for Casino in 1996."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 97
   },
@@ -13811,7 +13811,7 @@
       "Appeared in the films Smokin' Aces and The Nanny Diaries."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 97
   },
@@ -13830,7 +13830,7 @@
       "Starred opposite Audrey Hepburn in Roman Holiday."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 97
   },
@@ -13849,7 +13849,7 @@
       "Played Lois Lane in the DC films."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 97
   },
@@ -13868,7 +13868,7 @@
       "Frequently collaborated with actor Johnny Depp."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 96
   },
@@ -13887,7 +13887,7 @@
       "Trained in the Metropolitan Opera's children's chorus."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 96
   },
@@ -13906,7 +13906,7 @@
       "Played the title role in Sergeant York."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 96
   },
@@ -13925,7 +13925,7 @@
       "Sister of actor and director Warren Beatty."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 96
   },
@@ -13944,7 +13944,7 @@
       "Served as a brigadier general in the United States Air Force."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 96
   },
@@ -13963,7 +13963,7 @@
       "Served as president of the Society of American Magicians."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 96
   },
@@ -13982,7 +13982,7 @@
       "Worked for the French Resistance during World War II."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 96
   },
@@ -14001,7 +14001,7 @@
       "Appeared in the series Sons of Anarchy."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 96
   },
@@ -14020,7 +14020,7 @@
       "Worked as an executive chef in New York City."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 96
   },
@@ -14039,7 +14039,7 @@
       "Studied at the Pacific Conservatory of the Performing Arts."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 95
   },
@@ -14058,7 +14058,7 @@
       "Hosted the television quiz show You Bet Your Life."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 95
   },
@@ -14077,7 +14077,7 @@
       "Received an honorary Academy Award in 1971."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 95
   },
@@ -14096,7 +14096,7 @@
       "Wrote essays collected in In Search of Our Mothers' Gardens."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 95
   },
@@ -14115,7 +14115,7 @@
       "Won a Screen Actors Guild Award for Oppenheimer."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 95
   },
@@ -14134,7 +14134,7 @@
       "Wrote the children's book The Bench."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 95
   },
@@ -14153,7 +14153,7 @@
       "Began acting in Disney films as a child."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 94
   },
@@ -14172,7 +14172,7 @@
       "Served as United States ambassador to Ghana."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 94
   },
@@ -14191,7 +14191,7 @@
       "Co-founded the headphones company Beats Electronics."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 93
   },
@@ -14210,7 +14210,7 @@
       "Wrote and starred in the film UHF."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 93
   },
@@ -14229,7 +14229,7 @@
       "Won a Tony Award for the special Liza with a Z."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 93
   },
@@ -14248,7 +14248,7 @@
       "Starred in the science fiction film Planet of the Apes."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 93
   },
@@ -14267,7 +14267,7 @@
       "Starred in the film Freedom Writers."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 93
   },
@@ -14286,7 +14286,7 @@
       "Won a Golden Globe for the musical Chicago."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 93
   },
@@ -14305,7 +14305,7 @@
       "Played Colonel Kilgore in Apocalypse Now."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 93
   },
@@ -14324,7 +14324,7 @@
       "Spoke the line alright, alright, alright in Dazed and Confused."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 93
   },
@@ -14343,7 +14343,7 @@
       "Played Deep Throat in All the President's Men."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 93
   },
@@ -14362,7 +14362,7 @@
       "Born Maria Kalogeropoulos in New York City."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 92
   },
@@ -14381,7 +14381,7 @@
       "Appeared in the film The Whole Nine Yards."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 92
   },
@@ -14400,7 +14400,7 @@
       "Frequently worked with director Paul Thomas Anderson."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 92
   },
@@ -14419,7 +14419,7 @@
       "Born in Westwood, New Jersey, in 1961."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 1,
     "sitelinks": 92
   },
@@ -14438,7 +14438,7 @@
       "His work influenced conceptual art movements."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 91
   },
@@ -14457,7 +14457,7 @@
       "Played Frank Underwood in the series House of Cards."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 91
   },
@@ -14476,7 +14476,7 @@
       "Known for the line Top of the world, Ma!"
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 91
   },
@@ -14495,7 +14495,7 @@
       "Starred opposite Mickey Rourke in 9½ Weeks."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 91
   },
@@ -14514,7 +14514,7 @@
       "Co-hosted the comedy series The Man Show."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14533,7 +14533,7 @@
       "Directed My Own Private Idaho with River Phoenix."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14552,7 +14552,7 @@
       "Born Paul Michael Levesque in Nashua, New Hampshire."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14571,7 +14571,7 @@
       "Directed the comic adaptation Sin City."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14590,7 +14590,7 @@
       "Danced with Fred Astaire in several films."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 59
   },
@@ -14609,7 +14609,7 @@
       "Starred in Mortal Kombat as Raiden."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 59
   },
@@ -14628,7 +14628,7 @@
       "Received an Emmy Award for the film Onassis."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14647,7 +14647,7 @@
       "Composed the jazz standard Watermelon Man."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14666,7 +14666,7 @@
       "Appeared in the film Walk the Line as Vivian Cash."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 59
   },
@@ -14685,7 +14685,7 @@
       "Starred in the series Mozart in the Jungle."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14704,7 +14704,7 @@
       "Born in Carmichael, California, in 1988."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 59
   },
@@ -14723,7 +14723,7 @@
       "Won two Olympic gold medals with the United States."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 59
   },
@@ -14742,7 +14742,7 @@
       "Starred in the horror series Scream Queens."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 59
   },
@@ -14761,7 +14761,7 @@
       "Starred in Sergio Leone's For a Few Dollars More."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 59
   },
@@ -14780,7 +14780,7 @@
       "Founded the new wave band Oingo Boingo."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 59
   },
@@ -14799,7 +14799,7 @@
       "Born in Oslo, Norway, in 1912."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 59
   },
@@ -14818,7 +14818,7 @@
       "Appeared in the film Nick & Norah's Infinite Playlist."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14837,7 +14837,7 @@
       "Played the title role in the film Jim Thorpe, All-American."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 3,
     "sitelinks": 59
   },
@@ -14856,7 +14856,7 @@
       "Appeared in the television series Yellowjackets."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14875,7 +14875,7 @@
       "Appeared in the comedy The Hangover."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14894,7 +14894,7 @@
       "Appeared in Christopher Guest mockumentary films."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14913,7 +14913,7 @@
       "Appeared in Wild Things with Neve Campbell."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -14932,7 +14932,7 @@
       "Appeared in the comedy John Tucker Must Die."
     ],
     "region": "hollywood",
-    "genre": "cinema",
+    "genre": "cinema-hollywood",
     "difficulty": 2,
     "sitelinks": 59
   },
@@ -18716,5 +18716,221 @@
     "genre": "literature",
     "difficulty": 2,
     "sitelinks": 205
+  },
+  {
+    "name": "Benedict Cumberbatch",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "British",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Sherlock, Doctor Strange",
+    "facts": [
+      "Plays Doctor Strange in the Marvel films",
+      "Starred as Sherlock Holmes on TV",
+      "Was born in London"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 2
+  },
+  {
+    "name": "Tom Hiddleston",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "British",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "Loki",
+    "facts": [
+      "Plays Loki in the Marvel films",
+      "Studied at the Royal Academy of Dramatic Art",
+      "Was in the cast of the series The Night Manager"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 2
+  },
+  {
+    "name": "Daniel Craig",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "British",
+    "ageRange": "50s",
+    "hairColor": "blonde",
+    "famousFor": "James Bond",
+    "facts": [
+      "Played James Bond in five films",
+      "Was born in Chester, England",
+      "Also starred in Knives Out"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 2
+  },
+  {
+    "name": "Ralph Fiennes",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "British",
+    "ageRange": "60s",
+    "hairColor": "gray",
+    "famousFor": "Voldemort, Schindler's List",
+    "facts": [
+      "Played Voldemort in the Harry Potter films",
+      "Was nominated for an Oscar for Schindler's List",
+      "Is from Suffolk, England"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 3
+  },
+  {
+    "name": "Colin Firth",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "British",
+    "ageRange": "60s",
+    "hairColor": "gray",
+    "famousFor": "The King's Speech",
+    "facts": [
+      "Won an Oscar for The King's Speech",
+      "Played Mr. Darcy in Pride and Prejudice",
+      "Is from Hampshire, England"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 3
+  },
+  {
+    "name": "Judi Dench",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "British",
+    "ageRange": "90s",
+    "hairColor": "gray",
+    "famousFor": "M in James Bond",
+    "facts": [
+      "Played M in the James Bond films",
+      "Won an Oscar for Shakespeare in Love",
+      "Is a Dame of the British Empire"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 2
+  },
+  {
+    "name": "Helena Bonham Carter",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "British",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "Harry Potter, The Crown",
+    "facts": [
+      "Played Bellatrix Lestrange in Harry Potter",
+      "Was nominated for two Oscars",
+      "Appeared in the series The Crown"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 3
+  },
+  {
+    "name": "Ian McKellen",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "British",
+    "ageRange": "80s",
+    "hairColor": "white",
+    "famousFor": "Gandalf, Magneto",
+    "facts": [
+      "Played Gandalf in The Lord of the Rings",
+      "Also plays Magneto in the X-Men films",
+      "Is a leading stage actor in Britain"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 1
+  },
+  {
+    "name": "Javier Bardem",
+    "gender": "m",
+    "alive": true,
+    "profession": "Actor",
+    "nationality": "Spanish",
+    "ageRange": "50s",
+    "hairColor": "brown",
+    "famousFor": "No Country for Old Men",
+    "facts": [
+      "Won an Oscar for No Country for Old Men",
+      "Is from Las Palmas, Spain",
+      "Is married to actress Penélope Cruz"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 3
+  },
+  {
+    "name": "Penélope Cruz",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "Spanish",
+    "ageRange": "50s",
+    "hairColor": "black",
+    "famousFor": "Vicky Cristina Barcelona",
+    "facts": [
+      "Won an Oscar for Vicky Cristina Barcelona",
+      "Was the first Spanish actress to win an Oscar",
+      "Is from Madrid, Spain"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 3
+  },
+  {
+    "name": "Marion Cotillard",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "French",
+    "ageRange": "40s",
+    "hairColor": "brown",
+    "famousFor": "La Vie en Rose",
+    "facts": [
+      "Won an Oscar for La Vie en Rose",
+      "Is from Paris, France",
+      "Also starred in Inception"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 3
+  },
+  {
+    "name": "Gong Li",
+    "gender": "f",
+    "alive": true,
+    "profession": "Actress",
+    "nationality": "Chinese",
+    "ageRange": "60s",
+    "hairColor": "black",
+    "famousFor": "Memoirs of a Geisha, Raise the Red Lantern",
+    "facts": [
+      "Is one of the most famous Chinese actresses",
+      "Starred in Memoirs of a Geisha",
+      "Was a regular in director Zhang Yimou's films"
+    ],
+    "region": "row",
+    "genre": "cinema",
+    "difficulty": 3
   }
 ]

@@ -4,10 +4,12 @@ import Badge from './ui/Badge.astro';
 
 /**
  * GameCard: catalog tile with discovery metadata (players, duration,
- * energy), family chip, and New/Featured badges. One accessible link.
+ * energy) and New/Featured badges. One accessible link.
  * [§5.3] Airbnb hover: 1px hairline border + the single hover-float shadow
  * (no translate, no border-color shift); title 16/600 ink. Chrome icons
- * are in-repo SVGs, never emojis.
+ * are in-repo SVGs, never emojis. The family chip is omitted: both
+ * consumers (homepage, /games) render cards inside family-grouped sections,
+ * so the chip would only repeat the heading ([D067] PRD §10 weight gate).
  */
 interface Props {
   game: Game;
@@ -52,10 +54,5 @@ const badges = [
       )
     }
     <span class="inline-flex items-center gap-1">{energyLabel}</span>
-  </span>
-  <span
-    class="w-fit rounded-md border border-primary/40 bg-primary/15 px-3 py-1 text-xs font-semibold uppercase text-primary-strong"
-  >
-    {game.family} game
   </span>
 </a>

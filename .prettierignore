@@ -6,3 +6,7 @@ coverage/
 node_modules/
 # M18 — generated puzzle data (400×81 digits); keep compact
 src/data/sudoku-puzzles.json
+# D067 — vendored Stockfish engine (GPLv3), third-party minified worker
+public/stockfish/
+# Designer QA — scratch fixtures, not shipped
+.chess-qa/

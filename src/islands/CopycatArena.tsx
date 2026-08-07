@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type SyntheticEvent } from 'react';
 import { useRoom } from './room/useRoom';
 import RoomLobbyPanel from './room/RoomLobbyPanel';
+import RoomRejoining from './room/RoomRejoining';
 import { useCopycatGame } from './useCopycatGame';
 import DrawingCanvas, { type DrawingCanvasHandle } from '../components/DrawingCanvas';
 import { getGame } from '../lib/games';
@@ -22,7 +23,15 @@ const BRUSH_SIZES = [2, 6, 12, 24] as const;
 
 export default function CopycatArena({ gameSlug }: Props) {
   const game = getGame(gameSlug);
-  const { status, error, room, messages, actions: roomActions, myName } = useRoom();
+  const {
+    status,
+    error,
+    room,
+    messages,
+    actions: roomActions,
+    myName,
+    rejoining,
+  } = useRoom(gameSlug);
   const { game: copycat, actions: gameActions } = useCopycatGame(
     room?.code ?? null,
     myName ?? null
@@ -71,6 +80,9 @@ export default function CopycatArena({ gameSlug }: Props) {
   };
 
   if (!room) {
+    if (rejoining) {
+      return <RoomRejoining />;
+    }
     return (
       <RoomLobbyPanel
         game={game}

@@ -28,14 +28,15 @@ Open Question #2 in `PROJECT_STATE.md` (Draw the Lyric licensing) set the
 repo precedent: **default = paraphrased / original / public-domain only**,
 and the M5 datasets (`genre-benders.json`) ship original paraphrase text.
 
-| Source type                                     | Allowed                                                  | Attribution                          | Repo precedent                                            |
-| ----------------------------------------------- | -------------------------------------------------------- | ------------------------------------ | --------------------------------------------------------- |
-| Facts (dates, BPM, plot facts, titles)          | Yes — facts are not copyrightable (Feist v. Rural, 1991) | None needed                          | `emoji-plots.json` ships film titles + years              |
-| Photos: PD / CC0                                | Yes                                                      | None required (good practice anyway) | `copycat-images.json` (Wikimedia `Special:FilePath` URLs) |
-| Photos: CC-BY / CC-BY-SA                        | Yes                                                      | **Visible credit on reveal**         | `price-products.json` `credit: {creator, license}`        |
-| Photos: CC-BY-NC/ND, fair-use, "found on web"   | **No**                                                   | —                                    | —                                                         |
-| Original prose (synopses, prompts, emoji clues) | Yes — write it ourselves                                 | None                                 | `genre-benders.json`, `genre-swaps.json`, `rhymes.json`   |
-| Lyrics, audio, album art, studio/IMDb synopses  | **No**                                                   | —                                    | Open question #2                                          |
+| Source type                                      | Allowed                                                  | Attribution                                      | Repo precedent                                                                                                       |
+| ------------------------------------------------ | -------------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| Facts (dates, BPM, plot facts, titles)           | Yes — facts are not copyrightable (Feist v. Rural, 1991) | None needed                                      | `emoji-plots.json` ships film titles + years                                                                         |
+| Photos: PD / CC0                                 | Yes                                                      | None required (good practice anyway)             | `copycat-images.json` (Wikimedia `Special:FilePath` URLs)                                                            |
+| Photos: CC-BY / CC-BY-SA                         | Yes                                                      | **Visible credit on reveal**                     | `price-products.json` `credit: {creator, license}`                                                                   |
+| Vector art: CC-BY-SA / GFDL (Cburnett chess set) | Yes                                                      | **Visible footer credit** + comment in each file | `public/images/chess/pieces/*.svg` → footer line "Chess piece set by Colin M.L. Burnett (GFDL / CC BY-SA 3.0 / GPL)" |
+| Photos: CC-BY-NC/ND, fair-use, "found on web"    | **No**                                                   | —                                                | —                                                                                                                    |
+| Original prose (synopses, prompts, emoji clues)  | Yes — write it ourselves                                 | None                                             | `genre-benders.json`, `genre-swaps.json`, `rhymes.json`                                                              |
+| Lyrics, audio, album art, studio/IMDb synopses   | **No**                                                   | —                                                | Open question #2                                                                                                     |
 
 ---
 

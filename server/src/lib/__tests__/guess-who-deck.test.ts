@@ -174,9 +174,11 @@ describe('buildGuessWhoDeck (D064, GUESS-WHO-DESIGN §3.2)', () => {
     expect(deck).toHaveLength(2); // min(5, 2) — pool-edge
   });
 
-  it('exported enums match the closed taxonomy', () => {
+  it('exported enums match the closed taxonomy (14 genres — owner 2026-08-06 cinema split)', () => {
     expect(GUESS_WHO_REGIONS).toEqual(['bollywood', 'hollywood', 'row']);
-    expect(GUESS_WHO_GENRES).toHaveLength(12);
+    expect(GUESS_WHO_GENRES).toHaveLength(14);
+    expect(GUESS_WHO_GENRES).toContain('cinema-bollywood');
+    expect(GUESS_WHO_GENRES).toContain('cinema-hollywood');
     expect(GUESS_WHO_DEFAULT_FILTER).toEqual({ region: 'all', genre: 'all' });
   });
 });

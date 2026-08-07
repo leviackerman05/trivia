@@ -7,6 +7,7 @@ import DrawingGameArena from '../../islands/DrawingGameArena.tsx';
 import CopycatArena from '../../islands/CopycatArena.tsx';
 import VotingArena from '../../islands/VotingArena.tsx';
 import TriviaSolo from '../../islands/TriviaSolo.tsx';
+import TopicHub from '../../islands/trivia/TopicHub.tsx';
 import Sudoku from '../../islands/solo/Sudoku.tsx';
 import TriviaArena from '../../islands/TriviaArena.tsx';
 import CharadesArena from '../../islands/CharadesArena.tsx';
@@ -19,6 +20,7 @@ import PriceIsRight from '../../islands/solo/PriceIsRight.tsx';
 import GenreSwap from '../../islands/solo/GenreSwap.tsx';
 import GenreBender from '../../islands/solo/GenreBender.tsx';
 import Placeguessr from '../../islands/solo/Placeguessr.tsx';
+import Chess from '../../islands/solo/Chess.tsx';
 import FAQSection from '../../components/FAQSection.astro';
 import { games, getGame, getRelatedGames } from '../../lib/games';
 import { gameContent } from '../../data/game-content';
@@ -86,10 +88,12 @@ const SHIPPED_SOLO = new Set([
   'genre-swap',
   'genre-bender',
   'placeguessr',
+  // [D067] chess vs CPU (Stockfish WASM, GPLv3).
+  'chess',
 ]);
 const soloShipped = SHIPPED_SOLO.has(game.slug);
-/** Daily-page link for games with a live daily variant (Phase 0/1). */
-const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku';
+/** Daily-page link for games with a live daily variant (Phase 0/1 + R20). */
+const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku' || game.slug === 'wordle';
 ---
 
 <BaseLayout
@@ -102,7 +106,8 @@ const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku';
 >
   <article class="flex flex-col gap-8">
     <header>
-      <Chip class="mb-4">{game.family} game</Chip>
+      {/* [Chess] hide the family/status pill on the chess page (per Designer spec). */}
+      {game.slug !== 'chess' && <Chip class="mb-4">{game.family} game</Chip>}
       <h1 class="font-display text-h1 text-ink">{game.name}</h1>
       <p class="mt-3 max-w-2xl text-body text-ink-muted">{game.tagline}</p>
       {
@@ -111,7 +116,7 @@ const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku';
             href={`/daily/${game.slug}`}
             class="mt-4 inline-flex min-h-11 items-center justify-center rounded-pill border border-primary px-6 py-2.5 text-small font-semibold text-primary-strong transition-colors hover:bg-primary/15"
           >
-            Play today's daily {game.name} →
+            Play today's {game.name} →
           </a>
         )
       }
@@ -125,7 +130,7 @@ const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku';
     -->
     <section aria-label={`Play ${game.name}`} class="flex flex-col gap-8">
       {
-        game.instantPlay && (
+        game.instantPlay && game.slug !== 'trivia' && (
           <div class="flex flex-col gap-4">
             <div class="flex items-center gap-3">
               <Chip>Instant play</Chip>
@@ -139,6 +144,12 @@ const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku';
           </div>
         )
       }
+      {
+        /* M-T3: /game/trivia is the topic hub. The daily block renders FIRST
+          inside the hub (zero changes to TriviaSolo) and is hidden while a
+          topic is being played; the topic grid renders below it. */
+      }
+      {game.slug === 'trivia' && <TopicHub client:load />}
       {
         isMultiplayer && (
           <div class="flex flex-col gap-4">
@@ -185,7 +196,22 @@ const hasDailyPage = game.slug === 'trivia' || game.slug === 'sudoku';
               {game.slug === 'genre-swap' && <GenreSwap client:load />}
               {game.slug === 'genre-bender' && <GenreBender client:load />}
               {game.slug === 'placeguessr' && <Placeguessr client:load />}
-              {!soloShipped && (
+              {game.slug === 'chess' && <Chess client:load />}
+              {!soloShipped && hasDailyPage && (
+                <div class="flex flex-col items-start gap-3">
+                  <p class="max-w-2xl text-body text-ink-muted">
+                    {game.name} is a daily-only game: the same seeded challenge for everyone,
+                    refreshed at midnight UTC.
+                  </p>
+                  <a
+                    href={`/daily/${game.slug}`}
+                    class="inline-flex min-h-12 items-center justify-center rounded-pill bg-primary px-7 py-3 text-lg font-semibold text-white transition-colors hover:bg-primary-hover"
+                  >
+                    Play today's {game.name}
+                  </a>
+                </div>
+              )}
+              {!soloShipped && !hasDailyPage && (
                 <p class="max-w-2xl text-body text-ink-muted">
                   {game.name} is being built right now, this is where it will live.
                 </p>

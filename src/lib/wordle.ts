@@ -15,6 +15,16 @@ import { dailyGameSeed } from './daily';
 export const WORDLE_WORD_LENGTH = 5;
 export const WORDLE_MAX_GUESSES = 6;
 
+/**
+ * [D066] Wordle scoring by attempt (owner 2026-08-07): solve in 1-6 guesses
+ * = 100/85/70/55/40/25, a failed solve = 0.
+ */
+const WORDLE_SCORE_BY_ATTEMPT = [0, 100, 85, 70, 55, 40, 25];
+
+export function wordleScore(attempts: number): number {
+  return WORDLE_SCORE_BY_ATTEMPT[attempts] ?? 0;
+}
+
 export type LetterState = 'correct' | 'wrong-position' | 'absent';
 
 export interface GuessFeedback {

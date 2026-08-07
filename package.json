@@ -34,6 +34,7 @@
     "@fontsource/inter": "^5.2.5",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.1.6",
+    "chess.js": "^1.4.0",
     "leaflet": "^1.9.4",
     "mapillary-js": "^4.1.2",
     "react": "^19.2.8",

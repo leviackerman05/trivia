@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Icon from '../../components/icons/Icon';
 import { dailyGames, readDailyHistory, type DailyHistory } from '../../lib/daily';
 import { fetchMemberMe, readMemberKey, type MemberMe } from '../../lib/member';
 
@@ -67,8 +68,9 @@ export default function DailyArchive() {
               .sort((a, b) => b.dateKey.localeCompare(a.dateKey));
         return (
           <section key={game.slug} aria-label={`${game.name} history`}>
-            <h2 className="mb-3 text-lg font-bold tracking-tight text-ink">
-              {game.emoji} {game.name}
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold tracking-tight text-ink">
+              <Icon name={game.emoji} size={18} className="text-ink-muted" />
+              {game.name}
             </h2>
             <table className="w-full max-w-xl text-left text-small">
               <thead>
